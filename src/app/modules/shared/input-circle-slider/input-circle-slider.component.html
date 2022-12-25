@@ -1,0 +1,25 @@
+<div class="input-circle-slider__container"
+     [style.width.px]="size"
+     [style.height.px]="size"
+>
+  <div #circle class="input-circle-slider__circle">
+    <div class="input-circle-slider__circle__inner">
+
+    </div>
+
+    <div class="input-circle-slider__circle__track-bar"
+         [style.-webkit-mask]="trackBarMask"
+    >
+
+    </div>
+
+    <div class="input-circle-slider__circle__track-handle"
+      [style.transform]="handleTransform"
+      >
+      <div class="handler" (mousedown)="startDrag()"></div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="isDragging === true" (mouseup)="stopDrag()"
+     class="input-circle-slider__ol"></div>

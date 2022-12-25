@@ -2,7 +2,7 @@ import { create } from '@storybook/theming/create';
 export default create({
   base: 'dark',
   brandTitle: 'Storybook CV Soheil Saheb-Jamii',
-  brandUrl: 'https://www.anymbook.com',
+  //brandUrl: 'https://www.anymbook.com',
   brandTarget: '_self',
 
   colorPrimary: '#ed3957',
@@ -23,7 +23,7 @@ export default create({
   textInverseColor: 'rgba(0,0,0,0.9)',
 
   // Toolbar default and active colors
-  barTextColor: '#291b7d',
+  barTextColor: '#6451d6',
   barSelectedColor: '#ed3957',
   barBg: '#1b172e',
 

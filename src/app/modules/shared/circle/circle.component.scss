@@ -1,0 +1,53 @@
+
+
+
+:host {
+  --track-bar-color: conic-gradient(orange 0deg, red 360deg);
+  .circle {
+    &__container {
+      position: relative;
+    }
+
+    &__inner {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      border-radius: 50%;
+    }
+
+    &__track {
+      &-bar {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        border-radius: 50%;
+
+        &--inner {
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          top: 0;
+          left: 0;
+          border-radius: 50%;
+          background: conic-gradient(transparent 250deg, red 250deg);
+        }
+
+        &--bg {
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          top: 0;
+          left: 0;
+          border-radius: 50%;
+
+          // Can be overridden
+          background: var(--track-bar-color);
+        }
+      }
+    }
+  }
+}

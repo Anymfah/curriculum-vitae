@@ -269,6 +269,122 @@
             "stylesData": ""
         },
         {
+            "name": "InputCircleSliderComponent",
+            "id": "component-InputCircleSliderComponent-af6b52f9dd3c7784807dc68a0737eca2cc2a44a1cbe29b390b466f9ee3a78beaaf1117d7c01467b04d4e14ab88ba78fa001e482932087fb9b4cefeb568dc135c",
+            "file": "src/app/modules/shared/input-circle-slider/input-circle-slider.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "cv-input-circle-slider",
+            "styleUrls": [
+                "./input-circle-slider.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./input-circle-slider.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "_handleTransformValue",
+                    "defaultValue": "0",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": false,
+                    "description": "<p>The transform value as number of the rotation for the handle.</p>\n",
+                    "line": 13,
+                    "rawdescription": "\n\nThe transform value as number of the rotation for the handle.\n",
+                    "modifierKind": [
+                        121
+                    ]
+                },
+                {
+                    "name": "handleTransform",
+                    "defaultValue": "'rotate(0deg)'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "<p>The transform value as string of the rotation for the handle.</p>\n",
+                    "line": 18,
+                    "rawdescription": "\n\nThe transform value as string of the rotation for the handle.\n",
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "isDragging",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "<p>User is currently dragging the handle.</p>\n",
+                    "line": 23,
+                    "rawdescription": "\n\nUser is currently dragging the handle.\n",
+                    "modifierKind": [
+                        123
+                    ]
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 35,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\n",
+                    "description": "",
+                    "modifierKind": [
+                        123
+                    ],
+                    "jsdoctags": []
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\n\n@Component({\n  selector: 'cv-input-circle-slider',\n  templateUrl: './input-circle-slider.component.html',\n  styleUrls: ['./input-circle-slider.component.scss']\n})\nexport class InputCircleSliderComponent implements OnInit {\n\n  /**\n   * The transform value as number of the rotation for the handle.\n   */\n  private _handleTransformValue = 0;\n\n  /**\n   * The transform value as string of the rotation for the handle.\n   */\n  public handleTransform = 'rotate(0deg)';\n\n  /**\n   * User is currently dragging the handle.\n   */\n  public isDragging = false;\n\n\n\n  /**\n   * @constructor\n   */\n  public constructor() { }\n\n  /**\n   * @inheritDoc\n   */\n  public ngOnInit(): void {\n  }\n\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "\r\n:host {\r\n  display: flex;\r\n  width: 300px;\r\n  height: 300px;\r\n  border: 1px solid rgba(255, 255, 255, 0.2);\r\n}\r\n\r\n.input-circle-slider {\r\n  &__container {\r\n    width: 100%;\r\n    height: 100%;\r\n    position: relative;\r\n  }\r\n\r\n  &__ol {\r\n    height: 100vh;\r\n    width: 100%;\r\n    position: fixed;\r\n    top: 0;\r\n    left: 0;\r\n    z-index: 999999;\r\n    display: flex;\r\n    background: red;\r\n  }\r\n\r\n  &__circle {\r\n    width: 100%;\r\n    height: 100%;\r\n    position: absolute;\r\n    top: 0;\r\n    left: 0;\r\n    border-radius: 50%;\r\n    background: rgba(255, 0, 0, 0.2);\r\n\r\n    &__inner {\r\n    }\r\n\r\n    &__track {\r\n      &-bar {\r\n        width: 100%;\r\n        height: 100%;\r\n        position: absolute;\r\n        top: 0;\r\n        left: 0;\r\n        border-radius: 50%;\r\n        background: rgba(0, 255, 0, 0.8);\r\n\r\n        // Create a 10px width circle using mask\r\n        // Formula: ((width of circle) / 2 ) - (width of circle border)\r\n        mask: radial-gradient(\r\n          circle at center,\r\n          transparent 0,\r\n          transparent 140px,\r\n          black 140px\r\n        );\r\n      }\r\n\r\n      &-handle {\r\n        position: absolute;\r\n        top: 0%;\r\n        left: 50%;\r\n        width: 1px;\r\n        background: blue;\r\n        height: 50%;\r\n\r\n        display: flex;\r\n        align-items: flex-start;\r\n        justify-content: center;\r\n        transform-origin: center bottom;\r\n\r\n        .handler {\r\n          cursor: pointer;\r\n          position: absolute;\r\n          bottom: calc(100% - 20px);\r\n          left: calc(50% - 15px);\r\n          width: 30px;\r\n          height: 30px;\r\n          border-radius: 50%;\r\n          background: rgba(0, 0, 255, 0.8);\r\n          display: flex;\r\n          z-index: 30;\r\n        }\r\n      }\r\n    }\r\n  }\r\n}\r\n",
+                    "styleUrl": "./input-circle-slider.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [],
+                "line": 23,
+                "rawdescription": "\n\n",
+                "modifierKind": [
+                    123
+                ],
+                "jsdoctags": []
+            },
+            "implements": [
+                "OnInit"
+            ],
+            "templateData": "<div class=\"input-circle-slider__container\">\n  <div class=\"input-circle-slider__circle\">\n    <div class=\"input-circle-slider__circle__inner\">\n\n    </div>\n\n    <div class=\"input-circle-slider__circle__track-bar\">\n\n    </div>\n\n    <div class=\"input-circle-slider__circle__track-handle\"\n      [style.transform]=\"handleTransform\"\n      >\n      <div class=\"handler\"></div>\n    </div>\n  </div>\n</div>\n\n<div *ngIf=\"isDragging !== false\" class=\"input-circle-slider__ol\"></div>\n"
+        },
+        {
             "name": "LayoutComponent",
             "id": "component-LayoutComponent-0463f620f9ff58494ccca607bc2e485be2c381c85c6bee0d9f6e22323b371c78a885e8827982766e9bea42c1236219a94b2ff20d628bc186396eb721db6de1ca",
             "file": "src/app/modules/main/components/layout/layout.component.ts",
@@ -476,13 +592,13 @@
     "modules": [
         {
             "name": "AppModule",
-            "id": "module-AppModule-317d01f61e7013092809e72be009ee28c59623fdda61c919a556d01b3c9a83db3e178a9392bc6da2e425207b4fe52a7dbb349a3d34346bcec9e2006817b0dc6c",
+            "id": "module-AppModule-b350eac63af11f2d280cef9ca2429fad5de4de3777360985c60ef4a0eca94927ce15395778876b43ade18946d3e3ae2047e4e7bf45348295f0497b67d5a99340",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "src/app/app.module.ts",
             "methods": [],
-            "sourceCode": "import { NgModule } from '@angular/core';\nimport { BrowserModule } from '@angular/platform-browser';\n\nimport { AppRoutingModule } from './app-routing.module';\nimport { AppComponent } from './app.component';\nimport { MainModule } from './modules/main/main.module';\n\n@NgModule({\n  declarations: [\n    AppComponent,\n  ],\n  imports: [\n    BrowserModule,\n    AppRoutingModule,\n    MainModule,\n  ],\n  providers: [],\n  bootstrap: [AppComponent]\n})\nexport class AppModule { }\n",
+            "sourceCode": "import { NgModule } from '@angular/core';\nimport { BrowserModule } from '@angular/platform-browser';\n\nimport { AppRoutingModule } from './app-routing.module';\nimport { AppComponent } from './app.component';\nimport { MainModule } from './modules/main/main.module';\nimport { BrowserAnimationsModule } from '@angular/platform-browser/animations';\n\n@NgModule({\n  declarations: [\n    AppComponent,\n  ],\n  imports: [\n    BrowserModule,\n    AppRoutingModule,\n    MainModule,\n    BrowserAnimationsModule,\n  ],\n  providers: [],\n  bootstrap: [AppComponent]\n})\nexport class AppModule { }\n",
             "children": [
                 {
                     "type": "providers",
@@ -562,6 +678,50 @@
             ]
         },
         {
+            "name": "InputCircleSliderModule",
+            "id": "module-InputCircleSliderModule-fb9ea4c316fe687f04f42d060665a733c7ea72eabe0f8216adf905c6522160d4822d4e73735ee6c7ad05bfcb5794e71009415944a511be806f739408cd8fc28a",
+            "description": "<p>Module for the InputCircleSliderComponent.</p>\n",
+            "deprecationMessage": "",
+            "deprecated": false,
+            "file": "src/app/modules/shared/input-circle-slider/input-circle-slider.module.ts",
+            "methods": [],
+            "sourceCode": "import { NgModule } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { InputCircleSliderComponent } from './input-circle-slider.component';\nimport { OverlayModule } from '@angular/cdk/overlay';\n\n/**\n * Module for the InputCircleSliderComponent.\n */\n@NgModule({\n  declarations: [\n    InputCircleSliderComponent\n  ],\n  imports: [\n    CommonModule,\n    OverlayModule\n  ],\n  exports: [\n    InputCircleSliderComponent\n  ],\n})\nexport class InputCircleSliderModule { }\n",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": [
+                        {
+                            "name": "InputCircleSliderComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "imports",
+                    "elements": []
+                },
+                {
+                    "type": "exports",
+                    "elements": [
+                        {
+                            "name": "InputCircleSliderComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        },
+        {
             "name": "MainModule",
             "id": "module-MainModule-96d912f0eb4e0954305a9cdaaf192e4f500f952aae0d2b480c07a807e7c80229b267f845c8dbf1a0c4ced30e3ed26f8b4a574e19d115b37bb76925d0e5e9b6e9",
             "description": "",
@@ -608,6 +768,16 @@
     ],
     "miscellaneous": {
         "variables": [
+            {
+                "name": "CircleSlider",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/modules/shared/input-circle-slider/input-circle-slider.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
             {
                 "name": "context",
                 "ctype": "miscellaneous",
@@ -689,6 +859,16 @@
                 "defaultValue": "Template.bind({})"
             },
             {
+                "name": "Main",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/modules/main/components/main/main.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
                 "name": "Primary",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -756,12 +936,60 @@
                 "deprecationMessage": "",
                 "type": "Story<Page>",
                 "defaultValue": "(args: Page) => ({\n  props: args,\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/modules/shared/input-circle-slider/input-circle-slider.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<InputCircleSliderComponent>",
+                "defaultValue": "(args: InputCircleSliderComponent) => ({\r\n  props: args,\r\n})",
+                "rawdescription": "Template of the component.",
+                "description": "<p>Template of the component.</p>\n"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/modules/main/components/main/main.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<MainComponent>",
+                "defaultValue": "(args: MainComponent) => ({\r\n  props: args,\r\n})",
+                "rawdescription": "Template of the component.",
+                "description": "<p>Template of the component.</p>\n"
             }
         ],
         "functions": [],
         "typealiases": [],
         "enumerations": [],
         "groupedVariables": {
+            "src/app/modules/shared/input-circle-slider/input-circle-slider.stories.ts": [
+                {
+                    "name": "CircleSlider",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/modules/shared/input-circle-slider/input-circle-slider.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/modules/shared/input-circle-slider/input-circle-slider.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<InputCircleSliderComponent>",
+                    "defaultValue": "(args: InputCircleSliderComponent) => ({\r\n  props: args,\r\n})",
+                    "rawdescription": "Template of the component.",
+                    "description": "<p>Template of the component.</p>\n"
+                }
+            ],
             "src/test.ts": [
                 {
                     "name": "context",
@@ -922,6 +1150,30 @@
                     "type": "Story<Page>",
                     "defaultValue": "(args: Page) => ({\n  props: args,\n})"
                 }
+            ],
+            "src/app/modules/main/components/main/main.stories.ts": [
+                {
+                    "name": "Main",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/modules/main/components/main/main.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/modules/main/components/main/main.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<MainComponent>",
+                    "defaultValue": "(args: MainComponent) => ({\r\n  props: args,\r\n})",
+                    "rawdescription": "Template of the component.",
+                    "description": "<p>Template of the component.</p>\n"
+                }
             ]
         },
         "groupedFunctions": {},
@@ -943,7 +1195,7 @@
         ]
     },
     "coverage": {
-        "count": 3,
+        "count": 12,
         "status": "low",
         "files": [
             {
@@ -972,6 +1224,55 @@
                 "coveragePercent": 0,
                 "coverageCount": "0/3",
                 "status": "low"
+            },
+            {
+                "filePath": "src/app/modules/main/components/main/main.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Main",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/modules/main/components/main/main.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 100,
+                "coverageCount": "1/1",
+                "status": "very-good"
+            },
+            {
+                "filePath": "src/app/modules/shared/input-circle-slider/input-circle-slider.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "InputCircleSliderComponent",
+                "coveragePercent": 50,
+                "coverageCount": "3/6",
+                "status": "medium"
+            },
+            {
+                "filePath": "src/app/modules/shared/input-circle-slider/input-circle-slider.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "CircleSlider",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/modules/shared/input-circle-slider/input-circle-slider.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 100,
+                "coverageCount": "1/1",
+                "status": "very-good"
             },
             {
                 "filePath": "src/environments/environment.prod.ts",

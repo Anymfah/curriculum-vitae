@@ -1,0 +1,14 @@
+<div class="circle__container" [style.width.px]="size"
+     [style.height.px]="size">
+  <div #circle class="circle__inner">
+
+    <div class="circle__track-bar"
+         [style.-webkit-mask]="trackBarMask"
+    >
+      <div class="circle__track-bar--inner"
+           [style.-webkit-mask]="trackBarMaskInner">
+        <div class="circle__track-bar--bg bg-cone"></div>
+      </div>
+    </div>
+  </div>
+</div>
