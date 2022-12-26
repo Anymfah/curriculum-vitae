@@ -1,1 +1,19 @@
-<p>layout works!</p>
+<nav mat-tab-nav-bar [tabPanel]="tabPanel">
+  <a mat-tab-link *ngFor="let link of links"
+     (click)="activeLink = link"
+     [active]="activeLink == link"> {{link}} </a>
+  <a mat-tab-link disabled>Disabled Link</a>
+</nav>
+<mat-tab-nav-panel #tabPanel>qusako?</mat-tab-nav-panel>
+
+
+
+<mat-tab-group>
+  <mat-tab label="Présentation"> Content de présentation </mat-tab>
+  <mat-tab label="Parcours Professionnel"> Content parcours pro </mat-tab>
+  <mat-tab label="Stacks"> Content Stacks </mat-tab>
+  <mat-tab label="Compétences"> Content Compétences </mat-tab>
+  <mat-tab label="Diplômes"> Content Diplomes </mat-tab>
+  <mat-tab label="Centres d'intérêts"> Content Centres d'intérets </mat-tab>
+  <mat-tab label="Contact"> Content contact </mat-tab>
+</mat-tab-group>

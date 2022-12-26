@@ -7,9 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LayoutComponent implements OnInit {
 
-  constructor() { }
+  links = ['First', 'Second', 'Third'];
+  activeLink = this.links[0];
 
-  ngOnInit(): void {
+  public constructor() { }
+
+  public ngOnInit(): void {
   }
 
 }

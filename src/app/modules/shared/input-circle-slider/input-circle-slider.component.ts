@@ -35,9 +35,20 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 export class InputCircleSliderComponent implements OnInit, AfterViewInit, OnChanges, ControlValueAccessor {
 
   /**
+   * @access ControlValueAccessor
+   *        or ngModel directive
+   *        or [(ngModel)]="value"
+   *        or [ngModel]="value"
+   *        or [value]="value"
+   * @default Value is 0
    * Main value of the slider.
    */
-  public value: number = 25;
+  @Input() public value: number = 0;
+
+  /**
+   * Unit
+   */
+  @Input() public unit: string = '';
 
   /**
    * Circle Dom element.
@@ -75,6 +86,36 @@ export class InputCircleSliderComponent implements OnInit, AfterViewInit, OnChan
   @Input() public allowCross: boolean = false;
 
   /**
+   * Allow drag.
+   */
+  @Input() public draggable: boolean = true;
+
+  /**
+   * Animate the value
+   */
+  @Input() public animate: boolean = true;
+
+  /**
+   * Animation time
+   */
+  @Input() public animationTime: number = 1000;
+
+  /**
+   * Animation curve
+   */
+  @Input() public animationCurve = [.43, .02, .04, 1];
+
+  /**
+   * Show value
+   */
+  @Input() public showValue: boolean = true;
+
+  /**
+   * Value digits after the decimal point.
+   */
+  @Input() public valueDigits = 0;
+
+  /**
    * Value as percentage.
    */
   public get valuePercentage(): number {
@@ -82,12 +123,24 @@ export class InputCircleSliderComponent implements OnInit, AfterViewInit, OnChan
   }
 
   /**
+   * Formatted value.
+   */
+  public get formattedValue(): string {
+    const digits = this.valueDigits > 0 ? this.valueDigits : 0;
+    return this.value.toFixed(digits);
+  }
+
+  /**
    * Invoked method when the slider is dragged.
    */
-  private _activeQuarters = {
-    0: false,
-    1: false,
-    2: false,
+  private _activeQuarters: {
+    first: boolean,
+    middle: boolean,
+    last: boolean
+  } = {
+    first: false,
+    middle: false,
+    last: false,
   }
 
   /**
@@ -103,21 +156,9 @@ export class InputCircleSliderComponent implements OnInit, AfterViewInit, OnChan
   public isDragging = false;
 
   /**
-   * track bar mask for the circle.
-   */
-  public trackBarMask = `radial-gradient(circle at center, transparent 0, transparent 98px, black 98px)`;
-
-  /**
    * Circle Rect
    */
   private _circleRect: DOMRect = new DOMRect();
-
-  /**
-   * Temporary variable to store last changed value
-   * used only with allowCross at false to prevent jumps from max to min and vice versa
-   * @see allowCross
-   */
-  private _lastValue?: number;
 
   /**
    * @constructor
@@ -128,6 +169,43 @@ export class InputCircleSliderComponent implements OnInit, AfterViewInit, OnChan
    * @inheritDoc
    */
   public ngOnInit(): void {
+    this._updateQuarters();
+    if (this.animate) {
+      // Animate the value from 0 to the current value in 1 second.
+      this._animateValue(0, this.value, 1000, [.43, .02, .04, 1]);
+    }
+  }
+
+  /**
+   * Animate value from start to end in duration with easing.
+   * @param start Start value
+   * @param end End value
+   * @param duration Duration in ms
+   * @param ease Cubic bezier easing
+   */
+  private _animateValue(start: number, end: number, duration: number, ease: [number, number, number, number]): void {
+    let startTimestamp: number | null = null;
+    const step = (timestamp: number) => {
+      if (!startTimestamp) startTimestamp = timestamp;
+      const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+      //this.value = start + progress * (end - start);
+
+      this.value = start + this._easeInOutCubic(progress, ease) * (end - start);
+      if (progress < 1) {
+        window.requestAnimationFrame(step);
+      }
+    };
+    window.requestAnimationFrame(step);
+  }
+
+  /**
+   * Ease in out cubic function.
+   * @param t Time
+   * @param ease Cubic bezier easing
+   * @returns {number} Value
+   */
+  private _easeInOutCubic(t: number, ease: number[]): number {
+    return t<.5 ? 4*t*t*t : (t-1)*(2*t-2)*(2*t-2)+1;
   }
 
   /**
@@ -149,8 +227,10 @@ export class InputCircleSliderComponent implements OnInit, AfterViewInit, OnChan
    * Start dragging the handle.
    */
   public startDrag(): void {
-    this.isDragging = true;
-    this._updateQuarters();
+    if (this.draggable) {
+      this.isDragging = true;
+      this._updateQuarters();
+    }
   }
 
   /**
@@ -161,9 +241,12 @@ export class InputCircleSliderComponent implements OnInit, AfterViewInit, OnChan
    * When sliding, update activated quarters.
    */
   private _updateQuarters(): void {
-    this._activeQuarters[0] = this.value >= this.max / 4;
-    this._activeQuarters[1] = this.value > this.max / 2;
-    this._activeQuarters[2] = this.value > this.max * 3 / 4;
+    this._activeQuarters = {
+      first: this.value >= this.max / 4,
+      // Can also be middle: this.value >= this.max / 2;
+      middle: this.value >= this.max / 4 && this.value <= (this.max / 4) * 3,
+      last: this.value > (this.max / 4) * 3,
+    }
   }
 
   /**
@@ -186,16 +269,15 @@ export class InputCircleSliderComponent implements OnInit, AfterViewInit, OnChan
       const x = event.clientX - this._circleRect.left;
       const y = event.clientY - this._circleRect.top;
       const angle = this._calculateAngle(x, y);
-      this._updateQuarters();
       let value = this._calculateValueFromAngle(angle);
 
       /**
        * If the cross is not allowed, we need to prevent the handle to go over the min and max values.
        * Need to check where the handle comes from.
        * The value should never jump from min to max or max to min.
-       * Offset of 30 is added to prevent the handle to go over the min and max values.
        */
       if (!this.allowCross) {
+        this._updateQuarters();
         value = this._preventCross(value);
       }
 
@@ -215,12 +297,12 @@ export class InputCircleSliderComponent implements OnInit, AfterViewInit, OnChan
   private _preventCross(value: number): number {
 
     // Can't pass from max to min
-    if (this._activeQuarters[2] && value < (this.max / 4) * 3) {
+    if (this._activeQuarters.last && value < (this.max / 4) * 3) {
       value = this.max;
     }
 
     // Can't pass from min to max
-    else if (!this._activeQuarters[0] && value > this.max / 4) {
+    else if (!this._activeQuarters.first && value > this.max / 4) {
       value = this.min;
     }
     return  value;
@@ -273,7 +355,6 @@ export class InputCircleSliderComponent implements OnInit, AfterViewInit, OnChan
    */
   public writeValue(value: number): void {
     this.value = value;
-    console.log('writeValue', value);
   }
 
 }

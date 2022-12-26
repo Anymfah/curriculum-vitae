@@ -1,0 +1,7 @@
+@use 'functions' as fn;
+
+:host {
+  background: fn.get-color(contrast, 600);
+  display: block;
+  height: 100%;
+}

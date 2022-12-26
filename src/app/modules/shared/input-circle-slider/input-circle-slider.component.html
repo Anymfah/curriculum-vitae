@@ -4,11 +4,18 @@
 >
   <div #circle class="input-circle-slider__circle">
     <cv-circle [size]="size" [weight]="weight" [fillPercentage]="valuePercentage"></cv-circle>
-
+    <div *ngIf="showValue" class="input-circle-slider__circle__value">
+      <span class="value">{{formattedValue}}</span>
+      <span *ngIf="unit != null" class="unit">{{unit}}</span>
+    </div>
     <div class="input-circle-slider__circle__track-handle"
       [style.transform]="handleTransform"
       >
-      <div class="handler" (mousedown)="startDrag()"></div>
+      <div class="handler" (mousedown)="startDrag()">
+
+        <!--Insert content for custom handle here-->
+        <ng-content></ng-content>
+      </div>
     </div>
   </div>
 </div>

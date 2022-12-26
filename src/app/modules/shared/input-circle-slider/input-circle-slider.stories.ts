@@ -9,6 +9,20 @@ import { InputCircleSliderModule } from './input-circle-slider.module';
 export default {
   title: 'Inputs/Circle Slider',
   component: InputCircleSliderComponent,
+  argTypes: {
+    value: { control: 'number' },
+    unit: { control: 'text' },
+    size: { control: 'number' },
+    weight: { control: 'number' },
+    min: { control: 'number' },
+    max: { control: 'number' },
+    step: { control: 'number' },
+    allowCross: { control: 'boolean' },
+    draggable: { control: 'boolean' },
+    animate: { control: 'boolean' },
+    showValue: { control: 'boolean' },
+    valueDigits: { control: 'number' },
+  },
   decorators: [
     moduleMetadata({
       imports: [
@@ -33,6 +47,6 @@ CircleSlider.args = {
   weight: 10,
   min: 0,
   max: 100,
-  step: 1,
-
+  step: 0.1,
+  animate: true,
 }

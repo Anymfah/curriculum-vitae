@@ -1,0 +1,17 @@
+@use '@angular/material' as mat;
+@use '../palettes/primary';
+@use '../palettes/contrast';
+
+/// Get color from palette
+/// @param {String} $palette [primary] - Palette name
+/// @param {String} $hue [500] - Hue name
+/// @param {String} $opacity [1] - Opacity
+@function get-color($palette: primary, $hue: '500', $opacity: 1) {
+  $selected-palette:  primary.$curriculum-vitae-primary;
+
+  @if ($palette == contrast) {
+    $selected-palette: contrast.$curriculum-vitae-contrast;
+  }
+
+  @return mat.get-color-from-palette($selected-palette, $hue, $opacity);
+}

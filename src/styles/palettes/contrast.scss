@@ -1,0 +1,36 @@
+@use '@angular/material' as mat;
+
+$cv-contrast-palette: (
+  50 : #e6e6e7,
+  100 : #b8bed1,
+  200 : #8d92af,
+  300 : #52587d,
+  400 : #404a6d,
+  500 : #242b4b,
+  600 : #171e3d,
+  700 : #12172b,
+  800 : #0b1122,
+  900 : #04060f,
+  A100 : #5353b9,
+  A200 : #28288a,
+  A400 : #0c0c5a,
+  A700 : #00003b,
+  contrast: (
+    50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #ffffff,
+    400 : #ffffff,
+    500 : #ffffff,
+    600 : #ffffff,
+    700 : #ffffff,
+    800 : #ffffff,
+    900 : #ffffff,
+    A100 : #ffffff,
+    A200 : #ffffff,
+    A400 : #ffffff,
+    A700 : #ffffff,
+  )
+);
+
+$curriculum-vitae-contrast: mat.define-palette($cv-contrast-palette);
