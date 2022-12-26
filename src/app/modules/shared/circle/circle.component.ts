@@ -6,8 +6,11 @@ import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core'
  * @description This component is used to display a circle.
  * The circle can be displayed in different sizes, also it can be filled with a percentage.
  *
- * @exception You can change color of the track circle from css by
- *   overriding the --track-bar-color variable.
+ * @exception
+ *    - You can change color of the track circle from css by
+ *      overriding the --track-bar-color variable.
+ *    - You can change color of the track bar from css by
+ *      overriding the --track-bar-bg-color variable.
  * @example
  * <cv-circle [size]="200" [weight]="10"></cv-circle>
  */

@@ -27,3 +27,12 @@ const Template: Story<InputCircleSliderComponent> = (args: InputCircleSliderComp
 });
 
 export const CircleSlider = Template.bind({});
+
+CircleSlider.args = {
+  size: 200,
+  weight: 10,
+  min: 0,
+  max: 100,
+  step: 1,
+
+}

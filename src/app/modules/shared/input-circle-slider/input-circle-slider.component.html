@@ -3,15 +3,7 @@
      [style.height.px]="size"
 >
   <div #circle class="input-circle-slider__circle">
-    <div class="input-circle-slider__circle__inner">
-
-    </div>
-
-    <div class="input-circle-slider__circle__track-bar"
-         [style.-webkit-mask]="trackBarMask"
-    >
-
-    </div>
+    <cv-circle [size]="size" [weight]="weight" [fillPercentage]="valuePercentage"></cv-circle>
 
     <div class="input-circle-slider__circle__track-handle"
       [style.transform]="handleTransform"
@@ -21,5 +13,5 @@
   </div>
 </div>
 
-<div *ngIf="isDragging === true" (mouseup)="stopDrag()"
+<div *ngIf="isDragging === true" (mouseup)="stopDrag()" (mousemove)="drag($event)"
      class="input-circle-slider__ol"></div>
