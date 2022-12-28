@@ -1,0 +1,9 @@
+<nav mat-tab-nav-bar [tabPanel]="tabPanel">
+  <div mat-tab-link *ngFor="let item of items"
+       [id]="'mat-tab-link-' + item.index"
+       (click)="onClicked(item)"
+       [routerLink]="item.link"
+       [active]="item.active">
+    <span>{{item.label}}</span>
+  </div>
+</nav>

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     [attr.viewBox]="'00 00 ' + viewBoxSize + ' ' + viewBoxSize" preserveAspectRatio="xMidYMid" class="circleContainer"
+     [style.width.px]="size" [style.height.px]="size">
+  <path class="circle"
+        [attr.d]="'M ' +leftArc.x+', ' + leftArc.y +
+        ' A 50 50 0 ' + (arcPercentage > 50 ? 1 : 0) + ' 0 ' + rightArc.x + ', ' + rightArc.y"
+  >
+  </path>
+
+  <circle [attr.cx]="60" [attr.cy]="60" [attr.r]="54" class="inCircle">
+  </circle>
+</svg>

@@ -1,0 +1,20 @@
+<div class="profile__container">
+  <div class="profile__circle">
+    <div class="circle-outer__thin circle-wrapper">
+      <cv-circle [size]="240" [fillPercentage]="outerCircleVal" [startAt]="9"></cv-circle>
+    </div>
+    <div class="circle-outer__tools circle-wrapper">
+      <cv-circle [size]="300" [weight]="40" [fillPercentage]="outerCircleVal" [startAt]="9"></cv-circle>
+    </div>
+    <div class="circle-outer__input circle-wrapper">
+      <cv-input-circle-slider class="circle-input" [showValue]="false"
+                              [value]="90"
+                              [size]="210"
+                              [animationTime]="2800"
+                              [allowCross]="true"
+                              [weight]="2">
+        <cv-circle class="handler" [startAt]="88" [size]="210" [weight]="30" [fillPercentage]="25"></cv-circle>
+      </cv-input-circle-slider>
+    </div>
+  </div>
+</div>
