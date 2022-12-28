@@ -1,0 +1,5 @@
+
+/// Transition
+@mixin transition($time: 0.3s, $ease: cubic-bezier(.28,0,0,1), $delay: 0s) {
+  transition: all $time $ease $delay;
+}

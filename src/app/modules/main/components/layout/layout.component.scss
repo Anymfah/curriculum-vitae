@@ -2,6 +2,19 @@
 
 :host {
   background: fn.get-color(contrast, 600);
-  display: block;
+  display: flex;
+  flex-direction: column;
   height: 100%;
+
+  > mat-tab-nav-panel {
+    height: 100%;
+    width: 100%;
+    display: flex;
+
+    > main {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+  }
 }

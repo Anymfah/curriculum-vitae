@@ -1,4 +1,3 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MainComponent } from './components/main/main.component';
 import {LayoutComponent} from "./components/layout/layout.component";
@@ -7,27 +6,30 @@ import { PageContactComponent } from './components/page-contact/page-contact.com
 import {RouterLink, RouterModule} from "@angular/router";
 import {MatTabsModule} from "@angular/material/tabs";
 import { HeaderComponent } from './components/header/header.component';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {appRouting} from "../../app-routing.module";
 import {MatIconModule} from "@angular/material/icon";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatButtonModule} from "@angular/material/button";
-import { MenuComponent } from './components/menu/menu.component';
-import { ProfileComponent } from './components/profile/profile.component';
+import {ProfileComponent} from "./components/profile/profile.component";
 import {CircleModule} from "../shared/circle/circle.module";
 import {InputCircleSliderModule} from "../shared/input-circle-slider/input-circle-slider.module";
 
 
 
-@NgModule({
-    declarations: [
-        MainComponent,
-        LayoutComponent,
-        PageHomeComponent,
-        PageContactComponent,
-        HeaderComponent,
-        MenuComponent,
-        ProfileComponent,
-    ],
+export const MainStorybookModuleConstant ={
+  declarations: [
+      MainComponent,
+      LayoutComponent,
+      PageHomeComponent,
+      PageContactComponent,
+      HeaderComponent,
+      ProfileComponent
+  ],
   imports: [
+    appRouting,
+    BrowserAnimationsModule,
+    CircleModule,
     CommonModule,
     RouterLink,
     RouterModule,
@@ -35,12 +37,12 @@ import {InputCircleSliderModule} from "../shared/input-circle-slider/input-circl
     MatIconModule,
     MatToolbarModule,
     MatButtonModule,
-    CircleModule,
-    InputCircleSliderModule
+    InputCircleSliderModule,
   ],
   exports: [
     MainComponent,
-    LayoutComponent
+    LayoutComponent,
+    HeaderComponent,
+    ProfileComponent
   ],
-})
-export class MainModule { }
+};

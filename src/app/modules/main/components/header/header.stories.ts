@@ -1,14 +1,15 @@
 import { moduleMetadata } from '@storybook/angular';
 import { Story, Meta } from '@storybook/angular/types-6-0';
-import {LayoutComponent} from "./layout.component";
+import {HeaderComponent} from "./header.component";
 import {MainStorybookModuleConstant} from "../../main-storybook-module.constant";
+import {appRouting} from "../../../../app-routing.module";
 
 /**
  * Story for the Input Circle Slider Component.
  */
 export default {
-  title: 'Main/Layout',
-  component: LayoutComponent,
+  title: 'Main/Header',
+  component: HeaderComponent,
   argTypes: {
   },
   decorators: [
@@ -20,11 +21,11 @@ export default {
  * Template of the component.
  * @param args Component arguments.
  */
-const Template: Story<LayoutComponent> = (args: LayoutComponent) => ({
+const Template: Story<HeaderComponent> = (args: HeaderComponent) => ({
   props: args,
 });
 
-export const Layout = Template.bind({});
+export const Header = Template.bind({});
 
-Layout.args = {
+Header.args = {
 }

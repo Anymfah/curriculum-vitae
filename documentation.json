@@ -2,6 +2,56 @@
     "pipes": [],
     "interfaces": [
         {
+            "name": "MenuItem",
+            "id": "interface-MenuItem-8bf66f0501ede8df9df726ff1aad7a370c45bf8b8e8e84aa285fa2f768c0cded10adfd8b5f4715aa0eb0d672bab540351cac3d9b31070150acd96248cc6d0d98",
+            "file": "src/app/modules/main/components/menu/menu.interface.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "export interface MenuItem {\n  label: string;\n  link: string;\n  index: number;\n  active?: boolean;\n}\n",
+            "properties": [
+                {
+                    "name": "active",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "boolean",
+                    "optional": true,
+                    "description": "",
+                    "line": 5
+                },
+                {
+                    "name": "index",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": false,
+                    "description": "",
+                    "line": 4
+                },
+                {
+                    "name": "label",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 2
+                },
+                {
+                    "name": "link",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 3
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 165,
+            "methods": []
+        },
+        {
             "name": "User",
             "id": "interface-User-9c7e5f1bbbab702cb032307d130876cb68969b0cd4eedef32a0c8cad8081a54e5f8f577ed6ad4539c1b99a1d246cb34031d198c2ea8eba440e64e91b14f01fdc",
             "file": "src/stories/User.ts",
@@ -14,7 +64,186 @@
             "methods": []
         }
     ],
-    "injectables": [],
+    "injectables": [
+        {
+            "name": "PageService",
+            "id": "injectable-PageService-b77c3e3ae42789fc1398e1a53f24aa151b773cfaa4f79f590214f2dabbf927a71df64ac90871b1ae1e814bc08ea15ccbda8871b4c2984c428d72edd71a00ce98",
+            "file": "src/app/services/page.service.ts",
+            "properties": [
+                {
+                    "name": "_pageDirection",
+                    "defaultValue": "new BehaviorSubject<boolean>(false)",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "<p>The page direction</p>\n",
+                    "line": 23,
+                    "rawdescription": "\n\nThe page direction\n",
+                    "modifierKind": [
+                        121
+                    ]
+                },
+                {
+                    "name": "_pagePanel",
+                    "defaultValue": "new BehaviorSubject<MatTabNavPanel | null>(null)",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "<p>The tab panel to show the pages as BehaviorSubject.</p>\n",
+                    "line": 13,
+                    "rawdescription": "\n\nThe tab panel to show the pages as BehaviorSubject.\n",
+                    "modifierKind": [
+                        121
+                    ]
+                },
+                {
+                    "name": "pageDirection$",
+                    "defaultValue": "this._pageDirection.asObservable()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "<p>The page direction as Observable.</p>\n",
+                    "line": 28,
+                    "rawdescription": "\n\nThe page direction as Observable.\n",
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "pagePanel$",
+                    "defaultValue": "this._pagePanel.asObservable()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "<p>The tab panel to show the pages as Observable.</p>\n",
+                    "line": 18,
+                    "rawdescription": "\n\nThe tab panel to show the pages as Observable.\n",
+                    "modifierKind": [
+                        123
+                    ]
+                }
+            ],
+            "methods": [
+                {
+                    "name": "setPageDirection",
+                    "args": [
+                        {
+                            "name": "pageDirection",
+                            "type": "boolean",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 45,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nSets the page direction.\n",
+                    "description": "<p>Sets the page direction.</p>\n",
+                    "modifierKind": [
+                        123
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": {
+                                "pos": 941,
+                                "end": 954,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "pageDirection"
+                            },
+                            "type": "boolean",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "pos": 935,
+                                "end": 940,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "param"
+                            },
+                            "comment": "<p>true = the clicked item is after the current item.</p>\n"
+                        }
+                    ]
+                },
+                {
+                    "name": "setPagePanel",
+                    "args": [
+                        {
+                            "name": "pagePanel",
+                            "type": "MatTabNavPanel | null",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 37,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nSets the tab panel to show the pages.\n",
+                    "description": "<p>Sets the tab panel to show the pages.</p>\n",
+                    "modifierKind": [
+                        123
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": {
+                                "pos": 771,
+                                "end": 780,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "pagePanel"
+                            },
+                            "type": "MatTabNavPanel | null",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "pos": 765,
+                                "end": 770,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "param"
+                            },
+                            "comment": ""
+                        }
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "description": "",
+            "rawdescription": "\n",
+            "sourceCode": "import { Injectable } from '@angular/core';\nimport {MatTabNavPanel} from \"@angular/material/tabs\";\nimport {BehaviorSubject} from \"rxjs\";\n\n@Injectable({\n  providedIn: 'root'\n})\nexport class PageService {\n\n  /**\n   * The tab panel to show the pages as BehaviorSubject.\n   */\n  private _pagePanel = new BehaviorSubject<MatTabNavPanel | null>(null);\n\n  /**\n   * The tab panel to show the pages as Observable.\n   */\n  public pagePanel$ = this._pagePanel.asObservable();\n\n  /**\n   * The page direction\n   */\n  private _pageDirection = new BehaviorSubject<boolean>(false);\n\n  /**\n   * The page direction as Observable.\n   */\n  public pageDirection$ = this._pageDirection.asObservable();\n\n\n  public constructor() { }\n\n  /**\n   * Sets the tab panel to show the pages.\n   * @param pagePanel\n   */\n  public setPagePanel(pagePanel: MatTabNavPanel | null): void {\n    this._pagePanel.next(pagePanel);\n  }\n\n  /**\n   * Sets the page direction.\n   * @param pageDirection true = the clicked item is after the current item.\n   */\n  public setPageDirection(pageDirection: boolean): void {\n    this._pageDirection.next(pageDirection);\n  }\n}\n",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [],
+                "line": 28,
+                "modifierKind": [
+                    123
+                ]
+            },
+            "type": "injectable"
+        }
+    ],
     "guards": [],
     "interceptors": [],
     "classes": [],
@@ -22,7 +251,7 @@
     "components": [
         {
             "name": "AppComponent",
-            "id": "component-AppComponent-e034e4d5efe920174d1c8574f7ccc90e2f7b82833edfa7c513ba4e1209c98e0644dd7209cd38b83682fcbb297aa89308d1c56d99648b90c2329521b89124fb28",
+            "id": "component-AppComponent-99123493909ec051af4c5b257e26d80d5859a0ea90161d0176a8fa0b01c7c8353b14fa5bb7ce587e2897be37d06d0aee3399f608eea7571861a10c68a96bc6f9",
             "file": "src/app/app.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -49,7 +278,10 @@
                     "type": "string",
                     "optional": false,
                     "description": "",
-                    "line": 9
+                    "line": 9,
+                    "modifierKind": [
+                        123
+                    ]
                 }
             ],
             "methodsClass": [],
@@ -60,7 +292,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'app-root',\n  templateUrl: './app.component.html',\n  styleUrls: ['./app.component.scss']\n})\nexport class AppComponent {\n  title = 'curriculum-vitae';\n}\n",
+            "sourceCode": "import {Component} from '@angular/core';\n\n@Component({\n  selector: 'app-root',\n  templateUrl: './app.component.html',\n  styleUrls: ['./app.component.scss']\n})\nexport class AppComponent {\n  public title = 'curriculum-vitae';\n  constructor() {\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -69,7 +301,15 @@
                 }
             ],
             "stylesData": "",
-            "templateData": "<cv-main></cv-main>\n<router-outlet></router-outlet>\n"
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [],
+                "line": 9
+            },
+            "templateData": "<cv-layout></cv-layout>\n\n"
         },
         {
             "name": "ButtonComponent",
@@ -592,6 +832,49 @@
                 }
             ],
             "stylesData": ""
+        },
+        {
+            "name": "HeaderComponent",
+            "id": "component-HeaderComponent-d198456e0fa300c1299f6cf45f8dffa776d51b6d77bc66e60cec2fa8dafd2e5b57b9b5a2ff8fdadaab840c941d650ef482e280517456ef0dd9e06a4ab2575883-1",
+            "file": "src/app/modules/main/components/header/header.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "cv-header",
+            "styleUrls": [
+                "./header.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./header.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'cv-header',\n  templateUrl: './header.component.html',\n  styleUrls: ['./header.component.scss']\n})\nexport class HeaderComponent {\n\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ":host {\r\n  > mat-toolbar {\r\n    padding: 0;\r\n  }\r\n}\r\n",
+                    "styleUrl": "./header.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "isDuplicate": true,
+            "duplicateId": 1,
+            "duplicateName": "HeaderComponent-1",
+            "templateData": "<mat-toolbar class=\"bg-transparent\">\n  <cv-menu></cv-menu>\n  <button mat-icon-button class=\"example-icon favorite-icon\" aria-label=\"Example icon-button with heart icon\">\n    <mat-icon>favorite</mat-icon>\n  </button>\n  <button mat-icon-button class=\"example-icon\" aria-label=\"Example icon-button with share icon\">\n    <mat-icon>share</mat-icon>\n  </button>\n</mat-toolbar>\n"
         },
         {
             "name": "InputCircleSliderComponent",
@@ -1589,7 +1872,7 @@
         },
         {
             "name": "LayoutComponent",
-            "id": "component-LayoutComponent-962110b1f7a2587d83229469569c8f6fe596edee8e3a4618a95a458f62f38833ecb641fdaac867b7dd17c0cff84d06ff29db0f979d7d59266fe566706cd02dde",
+            "id": "component-LayoutComponent-c37d79de777512a38552859d3df4702974aaa8bb5a7a1e395a53e48932a5847eac315d6779cf10b8eba2e976d2c995753fcf6ede6841587ccd73d2838a682cea",
             "file": "src/app/modules/main/components/layout/layout.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1607,7 +1890,108 @@
             "viewProviders": [],
             "inputsClass": [],
             "outputsClass": [],
-            "propertiesClass": [],
+            "propertiesClass": [
+                {
+                    "name": "ltrState",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "<p>Left to right state (for animation).</p>\n",
+                    "line": 30,
+                    "rawdescription": "\nLeft to right state (for animation).",
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "menu",
+                    "defaultValue": "[\n    {\n      label: 'Home',\n      link: '/',\n      index: 0,\n    },\n    {\n      label: 'About me',\n      link: '/about-me',\n      index: 1,\n    },\n    {\n      label: 'Contact',\n      link: '/contact',\n      index: 2,\n    },\n  ]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "MenuItem[]",
+                    "optional": false,
+                    "description": "<p>Menu items</p>\n",
+                    "line": 39,
+                    "rawdescription": "\n\nMenu items\n",
+                    "modifierKind": [
+                        123
+                    ],
+                    "jsdoctags": [
+                        {
+                            "pos": 1047,
+                            "end": 1080,
+                            "flags": 4227072,
+                            "modifierFlagsCache": 0,
+                            "transformFlags": 0,
+                            "kind": 325,
+                            "tagName": {
+                                "pos": 1048,
+                                "end": 1052,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "todo"
+                            },
+                            "comment": "<p>: Move to routing module</p>\n"
+                        }
+                    ]
+                },
+                {
+                    "name": "routerOutlet",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "RouterOutlet",
+                    "optional": true,
+                    "description": "<p>Router outlet DOM Element.</p>\n",
+                    "line": 22,
+                    "rawdescription": "\n\nRouter outlet DOM Element.\n",
+                    "decorators": [
+                        {
+                            "name": "ViewChild",
+                            "stringifiedArguments": "RouterOutlet"
+                        }
+                    ],
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "rtlState",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "<p>Right to left state (for animation).</p>\n",
+                    "line": 33,
+                    "rawdescription": "\nRight to left state (for animation).",
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "tabPanel",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "MatTabNavPanel",
+                    "optional": true,
+                    "description": "<p>Tab panel DOM Element.</p>\n",
+                    "line": 27,
+                    "rawdescription": "\n\nTab panel DOM Element.\n",
+                    "decorators": [
+                        {
+                            "name": "ViewChild",
+                            "stringifiedArguments": "'tabPanel'"
+                        }
+                    ],
+                    "modifierKind": [
+                        123
+                    ]
+                }
+            ],
             "methodsClass": [
                 {
                     "name": "ngOnInit",
@@ -1615,12 +1999,15 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 12,
+                    "line": 68,
                     "deprecated": false,
                     "deprecationMessage": "",
+                    "rawdescription": "\n\n",
+                    "description": "",
                     "modifierKind": [
                         123
-                    ]
+                    ],
+                    "jsdoctags": []
                 }
             ],
             "deprecated": false,
@@ -1630,11 +2017,11 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, OnInit } from '@angular/core';\n\n@Component({\n  selector: 'cv-layout',\n  templateUrl: './layout.component.html',\n  styleUrls: ['./layout.component.scss']\n})\nexport class LayoutComponent implements OnInit {\n\n  public constructor() { }\n\n  public ngOnInit(): void {\n  }\n\n}\n",
+            "sourceCode": "import {Component, OnInit, ViewChild} from '@angular/core';\nimport {RouterOutlet} from \"@angular/router\";\nimport {\n  ROUTER_LTR_TRANSITION_CONSTANT,\n  ROUTER_RTL_TRANSITION_CONSTANT,\n} from \"../../../../constants/router-transition.constant\";\nimport {PageService} from \"../../../../services/page.service\";\nimport {MatTabNavPanel} from \"@angular/material/tabs\";\nimport {MenuItem} from \"../menu/menu.interface\";\n\n@Component({\n  selector: 'cv-layout',\n  templateUrl: './layout.component.html',\n  styleUrls: ['./layout.component.scss'],\n  animations: [ROUTER_RTL_TRANSITION_CONSTANT, ROUTER_LTR_TRANSITION_CONSTANT]\n})\nexport class LayoutComponent implements OnInit {\n\n  /**\n   * Router outlet DOM Element.\n   */\n  @ViewChild(RouterOutlet) public routerOutlet?: RouterOutlet;\n\n  /**\n   * Tab panel DOM Element.\n   */\n  @ViewChild('tabPanel') public tabPanel?: MatTabNavPanel;\n\n  /** Left to right state (for animation). */\n  public ltrState = false;\n\n  /** Right to left state (for animation). */\n  public rtlState = false;\n\n  /**\n   * Menu items\n   * @todo: Move to routing module\n   */\n  public menu: MenuItem[] = [\n    {\n      label: 'Home',\n      link: '/',\n      index: 0,\n    },\n    {\n      label: 'About me',\n      link: '/about-me',\n      index: 1,\n    },\n    {\n      label: 'Contact',\n      link: '/contact',\n      index: 2,\n    },\n  ];\n\n  /**\n   * @constructor\n   * @param _pageService\n   */\n  public constructor(\n    private readonly _pageService: PageService,\n  ) {}\n\n  /**\n   * @inheritDoc\n   */\n  public ngOnInit(): void {\n    /** Set the tab panel to show the pages. */\n    if (this.tabPanel != null) {\n      this._pageService.setPagePanel(this.tabPanel);\n    }\n\n    /** Get the direction of page change. */\n    this._pageService.pageDirection$.subscribe(direction => {\n      direction ? this.ltrState = !this.ltrState : this.rtlState = !this.rtlState;\n    });\n  }\n\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "@use 'functions' as fn;\r\n\r\n:host {\r\n  background: fn.get-color(contrast, 600);\r\n  display: block;\r\n  height: 100%;\r\n}\r\n",
+                    "data": "@use 'functions' as fn;\r\n\r\n:host {\r\n  background: fn.get-color(contrast, 600);\r\n  display: flex;\r\n  flex-direction: column;\r\n  height: 100%;\r\n\r\n  > mat-tab-nav-panel {\r\n    height: 100%;\r\n    width: 100%;\r\n    display: flex;\r\n\r\n    > main {\r\n      display: flex;\r\n      flex-direction: column;\r\n      width: 100%;\r\n    }\r\n  }\r\n}\r\n",
                     "styleUrl": "./layout.component.scss"
                 }
             ],
@@ -1644,16 +2031,50 @@
                 "description": "",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "args": [],
-                "line": 8,
+                "args": [
+                    {
+                        "name": "_pageService",
+                        "type": "PageService",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 55,
+                "rawdescription": "\n\n",
                 "modifierKind": [
                     123
+                ],
+                "jsdoctags": [
+                    {
+                        "name": {
+                            "pos": 1378,
+                            "end": 1390,
+                            "flags": 4227072,
+                            "modifierFlagsCache": 0,
+                            "transformFlags": 0,
+                            "kind": 79,
+                            "escapedText": "_pageService"
+                        },
+                        "type": "PageService",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "pos": 1372,
+                            "end": 1377,
+                            "flags": 4227072,
+                            "modifierFlagsCache": 0,
+                            "transformFlags": 0,
+                            "kind": 79,
+                            "escapedText": "param"
+                        },
+                        "comment": ""
+                    }
                 ]
             },
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<mat-tab-group>\n  <mat-tab label=\"Présentation\"> Content de présentation </mat-tab>\n  <mat-tab label=\"Parcours Professionnel\"> Content parcours pro </mat-tab>\n  <mat-tab label=\"Stacks\"> Content Stacks </mat-tab>\n  <mat-tab label=\"Compétences\"> Content Compétences </mat-tab>\n  <mat-tab label=\"Diplômes\"> Content Diplomes </mat-tab>\n  <mat-tab label=\"Centres d'intérêts\"> Content Centres d'intérets </mat-tab>\n  <mat-tab label=\"Contact\"> Content contact </mat-tab>\n</mat-tab-group>\n"
+            "templateData": "<cv-header></cv-header>\n<mat-tab-nav-panel #tabPanel>\n  <main [@routerTransitionRtL]=\"rtlState\"\n        [@routerTransitionLtR]=\"ltrState\">\n    <router-outlet #o=\"outlet\"></router-outlet>\n  </main>\n</mat-tab-nav-panel>\n\n"
         },
         {
             "name": "MainComponent",
@@ -1716,6 +2137,371 @@
                 "OnInit"
             ],
             "templateData": "<cv-layout></cv-layout>\n"
+        },
+        {
+            "name": "MenuComponent",
+            "id": "component-MenuComponent-abc1834c7cc299cd978275d46f20f112c740f039dd8ae9dc1ab451dcbe10f8d83ca227a493cc8b221ade27a0dc0496dc1ba60f9fd1c8e52b74737db25cfbe4bb",
+            "file": "src/app/modules/main/components/menu/menu.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "cv-menu",
+            "styleUrls": [
+                "./menu.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./menu.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "activeItem",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "MenuItem",
+                    "optional": true,
+                    "description": "<p>Current active menu item.</p>\n",
+                    "line": 27,
+                    "rawdescription": "\n\nCurrent active menu item.\n",
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "items",
+                    "defaultValue": "[]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "MenuItem[]",
+                    "optional": false,
+                    "description": "<p>Reference to the menu items to be displayed.</p>\n",
+                    "line": 22,
+                    "rawdescription": "\n\nReference to the menu items to be displayed.\n",
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "tabPanel",
+                    "defaultValue": "new MatTabNavPanel()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "<p>Content Panel DOM Element.</p>\n",
+                    "line": 17,
+                    "rawdescription": "\n\nContent Panel DOM Element.\n",
+                    "modifierKind": [
+                        123
+                    ]
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "_activateItem",
+                    "args": [
+                        {
+                            "name": "item",
+                            "type": "MenuItem",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 106,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nActivate the given item. Deactivate all other items.\n",
+                    "description": "<p>Activate the given item. Deactivate all other items.</p>\n",
+                    "modifierKind": [
+                        121
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": {
+                                "pos": 2489,
+                                "end": 2493,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "item"
+                            },
+                            "type": "MenuItem",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "pos": 2483,
+                                "end": 2488,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "param"
+                            },
+                            "comment": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "_setItemsFromRoutes",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 64,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nGet Menu items from app routing.\n",
+                    "description": "<p>Get Menu items from app routing.</p>\n",
+                    "modifierKind": [
+                        121
+                    ]
+                },
+                {
+                    "name": "ngAfterContentChecked",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 82,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\n",
+                    "description": "",
+                    "modifierKind": [
+                        123
+                    ],
+                    "jsdoctags": []
+                },
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 48,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\n",
+                    "description": "",
+                    "modifierKind": [
+                        123
+                    ],
+                    "jsdoctags": []
+                },
+                {
+                    "name": "onClicked",
+                    "args": [
+                        {
+                            "name": "item",
+                            "type": "MenuItem",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 95,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nNavigate to the given link.\n",
+                    "description": "<p>Navigate to the given link.</p>\n",
+                    "modifierKind": [
+                        123
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": {
+                                "pos": 2194,
+                                "end": 2198,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "item"
+                            },
+                            "type": "MenuItem",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "pos": 2188,
+                                "end": 2193,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "param"
+                            },
+                            "comment": ""
+                        }
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import {AfterContentChecked, ChangeDetectorRef, Component, Input, NgZone, OnInit} from '@angular/core';\nimport {MatTabNavPanel} from \"@angular/material/tabs\";\nimport {PageService} from \"../../../../services/page.service\";\nimport {Route, Router} from \"@angular/router\";\nimport {MenuItem} from \"./menu.interface\";\n\n@Component({\n  selector: 'cv-menu',\n  templateUrl: './menu.component.html',\n  styleUrls: ['./menu.component.scss']\n})\nexport class MenuComponent implements OnInit, AfterContentChecked {\n\n  /**\n   * Content Panel DOM Element.\n   */\n  public tabPanel = new MatTabNavPanel();\n\n  /**\n   * Reference to the menu items to be displayed.\n   */\n  public items: MenuItem[] = [];\n\n  /**\n   * Current active menu item.\n   */\n  public activeItem?: MenuItem;\n\n  /**\n   * @constructor\n   * @param _pageService\n   * @param _router\n   * @param _ngZone\n   * @param _changeDetectorRef\n   */\n  public constructor(\n    private readonly _pageService: PageService,\n    private readonly _router: Router,\n    private readonly _ngZone: NgZone,\n    private _changeDetectorRef: ChangeDetectorRef\n  ) {\n\n  }\n\n  /**\n   * @inheritDoc\n   */\n  public ngOnInit(): void {\n    /**\n     * Get the tab panel to show the pages.\n     */\n    this._pageService.pagePanel$.subscribe(pagePanel => {\n      if (pagePanel != null) {\n        this.tabPanel = pagePanel;\n      }\n    });\n\n    this._setItemsFromRoutes();\n  }\n\n  /**\n   * Get Menu items from app routing.\n   */\n  private _setItemsFromRoutes(): void {\n    const items: MenuItem[] = [];\n    this._router.config.forEach(route => {\n\n      if (route.data != null && route.data['menuItem'] != null) {\n        items.push({\n          label: route.data['menuItem'].label,\n          link: '/' + route.path,\n          index: route.data['menuItem'].index,\n        });\n      }\n    });\n    this.items = items;\n  }\n\n  /**\n   * @inheritDoc\n   */\n  public ngAfterContentChecked(): void {\n    this.activeItem = this.items.find(item => item.link ===  this._router.url);\n    if (this.activeItem != null) {\n      this._activateItem(this.activeItem);\n    }\n    this._changeDetectorRef.detectChanges();\n  }\n\n  /**\n   * @event click on menu item\n   * Navigate to the given link.\n   * @param item\n   */\n  public onClicked(item: MenuItem): void {\n    if (this.activeItem !== undefined) {\n      const direction = this.activeItem.index > item.index;\n      this._pageService.setPageDirection(direction);\n    }\n  }\n\n  /**\n   * Activate the given item. Deactivate all other items.\n   * @param item\n   */\n  private _activateItem(item: MenuItem): void {\n    this.items.filter(menuItem => menuItem !== item).forEach(menuItem => menuItem.active = false);\n    item.active = true;\n  }\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "",
+                    "styleUrl": "./menu.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "_pageService",
+                        "type": "PageService",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    },
+                    {
+                        "name": "_router",
+                        "type": "Router",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    },
+                    {
+                        "name": "_ngZone",
+                        "type": "NgZone",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    },
+                    {
+                        "name": "_changeDetectorRef",
+                        "type": "ChangeDetectorRef",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 27,
+                "rawdescription": "\n\n",
+                "modifierKind": [
+                    123
+                ],
+                "jsdoctags": [
+                    {
+                        "name": {
+                            "pos": 795,
+                            "end": 807,
+                            "flags": 4227072,
+                            "modifierFlagsCache": 0,
+                            "transformFlags": 0,
+                            "kind": 79,
+                            "escapedText": "_pageService"
+                        },
+                        "type": "PageService",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "pos": 789,
+                            "end": 794,
+                            "flags": 4227072,
+                            "modifierFlagsCache": 0,
+                            "transformFlags": 0,
+                            "kind": 79,
+                            "escapedText": "param"
+                        },
+                        "comment": ""
+                    },
+                    {
+                        "name": {
+                            "pos": 820,
+                            "end": 827,
+                            "flags": 4227072,
+                            "modifierFlagsCache": 0,
+                            "transformFlags": 0,
+                            "kind": 79,
+                            "escapedText": "_router"
+                        },
+                        "type": "Router",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "pos": 814,
+                            "end": 819,
+                            "flags": 4227072,
+                            "modifierFlagsCache": 0,
+                            "transformFlags": 0,
+                            "kind": 79,
+                            "escapedText": "param"
+                        },
+                        "comment": ""
+                    },
+                    {
+                        "name": {
+                            "pos": 840,
+                            "end": 847,
+                            "flags": 4227072,
+                            "modifierFlagsCache": 0,
+                            "transformFlags": 0,
+                            "kind": 79,
+                            "escapedText": "_ngZone"
+                        },
+                        "type": "NgZone",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "pos": 834,
+                            "end": 839,
+                            "flags": 4227072,
+                            "modifierFlagsCache": 0,
+                            "transformFlags": 0,
+                            "kind": 79,
+                            "escapedText": "param"
+                        },
+                        "comment": ""
+                    },
+                    {
+                        "name": {
+                            "pos": 860,
+                            "end": 878,
+                            "flags": 4227072,
+                            "modifierFlagsCache": 0,
+                            "transformFlags": 0,
+                            "kind": 79,
+                            "escapedText": "_changeDetectorRef"
+                        },
+                        "type": "ChangeDetectorRef",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "pos": 854,
+                            "end": 859,
+                            "flags": 4227072,
+                            "modifierFlagsCache": 0,
+                            "transformFlags": 0,
+                            "kind": 79,
+                            "escapedText": "param"
+                        },
+                        "comment": ""
+                    }
+                ]
+            },
+            "implements": [
+                "OnInit",
+                "AfterContentChecked"
+            ],
+            "templateData": "<nav mat-tab-nav-bar [tabPanel]=\"tabPanel\">\n  <div mat-tab-link *ngFor=\"let item of items\"\n       [id]=\"'mat-tab-link-' + item.index\"\n       (click)=\"onClicked(item)\"\n       [routerLink]=\"item.link\"\n       [active]=\"item.active\">\n    <span>{{item.label}}</span>\n  </div>\n</nav>\n"
         },
         {
             "name": "PageComponent",
@@ -1796,18 +2582,138 @@
                 }
             ],
             "stylesData": ""
+        },
+        {
+            "name": "PageContactComponent",
+            "id": "component-PageContactComponent-c7d365c18e55aadca33cc99ab823ef15ce16d3da4a445cb7df2c9d946269d775b0596de22bd2308a258dfd2cdaecf248052406720eac0a51c2bf0bde79ef65c7",
+            "file": "src/app/modules/main/components/page-contact/page-contact.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "cv-page-contact",
+            "styleUrls": [
+                "./page-contact.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./page-contact.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'cv-page-contact',\n  templateUrl: './page-contact.component.html',\n  styleUrls: ['./page-contact.component.scss']\n})\nexport class PageContactComponent {\n\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "",
+                    "styleUrl": "./page-contact.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "templateData": "<p>page-contact works!</p>\n"
+        },
+        {
+            "name": "PageHomeComponent",
+            "id": "component-PageHomeComponent-fbda510d1bc78702e400bf1db8402ca4112ad600f8e77ad86b7c2e52e468beec84c16f4effa62b6185cc87f15212af6a4984822a0855da48757e606c7adbe1ec",
+            "file": "src/app/modules/main/components/page-home/page-home.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "cv-page-home",
+            "styleUrls": [
+                "./page-home.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./page-home.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'cv-page-home',\n  templateUrl: './page-home.component.html',\n  styleUrls: ['./page-home.component.scss']\n})\nexport class PageHomeComponent {\n\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "",
+                    "styleUrl": "./page-home.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "templateData": "<p>page-home works!</p>\n"
+        },
+        {
+            "name": "ProfileComponent",
+            "id": "component-ProfileComponent-b091b422e2dfd0f791b14d817a26287ee60e2fcf2bf001f04ce2ddb38dbf7d0bb883cfefefc8a4c82feddfa899425eae5035c9d4fb344ba36b4e070c6de8c976",
+            "file": "src/app/modules/main/components/profile/profile.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "cv-profile",
+            "styleUrls": [
+                "./profile.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./profile.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'cv-profile',\n  templateUrl: './profile.component.html',\n  styleUrls: ['./profile.component.scss']\n})\nexport class ProfileComponent {\n\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "",
+                    "styleUrl": "./profile.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "templateData": "<p>profile works!</p>\n"
         }
     ],
     "modules": [
         {
             "name": "AppModule",
-            "id": "module-AppModule-47bb1d3775bd8ccd0b51ee6e4569dda0f16c2a6685d80b08c2a350da50b96a98be6d25d5727b426849ef3812e73db7d65c5244d9213e396e6a34aeeea0df2684",
+            "id": "module-AppModule-3357d854d458196d642e7f0da2c0faa6327af528a7f5831d31b8a32427db80d00ec8bbb0261209e6089f9cc2f18d2feeec21a1332901d45e271a8ed70a17cac2",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "src/app/app.module.ts",
             "methods": [],
-            "sourceCode": "// TODO: Uncomment all lines when https://github.com/ngx-translate/core/pull/1399 is merged\nimport { NgModule } from '@angular/core';\nimport { BrowserModule } from '@angular/platform-browser';\n\nimport { AppRoutingModule } from './app-routing.module';\nimport { AppComponent } from './app.component';\nimport { MainModule } from './modules/main/main.module';\nimport { BrowserAnimationsModule } from '@angular/platform-browser/animations';\n/*\nimport {TranslateLoader, TranslateModule} from \"@ngx-translate/core\";\nimport {HttpClient} from \"@angular/common/http\";\nimport {TranslateHttpLoader} from \"@ngx-translate/http-loader\";\n\nexport function HttpLoaderFactory(http: HttpClient) {\n  return new TranslateHttpLoader(http, './assets/i18n/', '.json');\n}\n*/\n\n@NgModule({\n  declarations: [\n    AppComponent,\n  ],\n  imports: [\n    BrowserModule,\n    AppRoutingModule,\n    MainModule,\n    BrowserAnimationsModule,\n    /*TranslateModule.forRoot({\n      loader: {\n        provide: TranslateLoader,\n        useFactory: HttpLoaderFactory,\n        deps: [HttpClient]\n      }\n    }),*/\n  ],\n  exports: [\n    //TranslateModule\n  ],\n  providers: [],\n  bootstrap: [AppComponent]\n})\nexport class AppModule { }\n",
+            "sourceCode": "// TODO: Uncomment all lines when https://github.com/ngx-translate/core/pull/1399 is merged\nimport { NgModule } from '@angular/core';\nimport { BrowserModule } from '@angular/platform-browser';\n\nimport { AppRoutingModule } from './app-routing.module';\nimport { AppComponent } from './app.component';\nimport { MainModule } from './modules/main/main.module';\nimport { BrowserAnimationsModule } from '@angular/platform-browser/animations';\nimport {RouterModule} from \"@angular/router\";\nimport {MatTabsModule} from \"@angular/material/tabs\";\n/*\nimport {TranslateLoader, TranslateModule} from \"@ngx-translate/core\";\nimport {HttpClient} from \"@angular/common/http\";\nimport {TranslateHttpLoader} from \"@ngx-translate/http-loader\";\n\nexport function HttpLoaderFactory(http: HttpClient) {\n  return new TranslateHttpLoader(http, './assets/i18n/', '.json');\n}\n*/\n\n@NgModule({\n  declarations: [\n    AppComponent,\n  ],\n  imports: [\n    BrowserModule,\n    AppRoutingModule,\n    MainModule,\n    BrowserAnimationsModule,\n    MatTabsModule,\n    /*TranslateModule.forRoot({\n      loader: {\n        provide: TranslateLoader,\n        useFactory: HttpLoaderFactory,\n        deps: [HttpClient]\n      }\n    }),*/\n  ],\n  exports: [\n    //TranslateModule\n  ],\n  providers: [],\n  bootstrap: [AppComponent]\n})\nexport class AppModule { }\n",
             "children": [
                 {
                     "type": "providers",
@@ -1852,13 +2758,13 @@
         },
         {
             "name": "AppRoutingModule",
-            "id": "module-AppRoutingModule-78922b3ae99d2c5249b333980bd5afde1b120b2cc6fedfd41b8b2cc90f279797cb4b22e183bf7e1d1dfab8c6100e77e7812c110234d81f866f544f28a3e18b15",
+            "id": "module-AppRoutingModule-3d72550b69a194935138085a767eea1b9f579abf12ca06f71a8975c9e6a11a3bda8c0080c8a820dfe24a69398e99f35df09c3f85aec52111f604ecf1c165bef0",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "src/app/app-routing.module.ts",
             "methods": [],
-            "sourceCode": "import { NgModule } from '@angular/core';\nimport { RouterModule, Routes } from '@angular/router';\n\nconst routes: Routes = [];\n\n@NgModule({\n  imports: [RouterModule.forRoot(routes)],\n  exports: [RouterModule]\n})\nexport class AppRoutingModule { }\n",
+            "sourceCode": "import { NgModule } from '@angular/core';\nimport { RouterModule, Routes } from '@angular/router';\nimport {PageHomeComponent} from \"./modules/main/components/page-home/page-home.component\";\nimport {PageContactComponent} from \"./modules/main/components/page-contact/page-contact.component\";\n\nconst routes: Routes = [\n  {\n    path: '',\n    component: PageHomeComponent,\n    data: {\n      state: 'home',\n      menuItem: {\n        label: 'Soheil Saheb-Jamii',\n        index: 0\n      }\n    }\n  },\n  {\n    path: 'contact',\n    component: PageContactComponent,\n    data: {\n      state: 'contact',\n      menuItem: {\n        label: 'Contact',\n        index: 1\n      }\n    }\n  },\n  {\n    path: '**',\n    redirectTo: '',\n  }\n];\n\nexport const appRouting = RouterModule.forRoot(routes);\n\n@NgModule({\n  imports: [RouterModule.forRoot(routes)],\n  exports: [RouterModule]\n})\nexport class AppRoutingModule { }\n",
             "children": [
                 {
                     "type": "providers",
@@ -1980,13 +2886,13 @@
         },
         {
             "name": "MainModule",
-            "id": "module-MainModule-ca55acbfd58eb27220065e86ce707aeee4aae81ff3bb8f88d98d7b0c3636b709d861540ddad5bc4ba215b7fe55ea1fa78a6ce09ebcfcaff4fbcf5932a6295c66",
+            "id": "module-MainModule-6b79f6e85484b0bd318d78086f6421d028c1341f3158ddb1ff9715356cfdc292962e101093e60c678616f8a1a39f25df61c3443f95493dabdf6bbbecec977825",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "src/app/modules/main/main.module.ts",
             "methods": [],
-            "sourceCode": "import { NgModule } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { MainComponent } from './components/main/main.component';\nimport {LayoutComponent} from \"./components/layout/layout.component\";\nimport {MatTabsModule} from \"@angular/material/tabs\";\n\n\n\n@NgModule({\n    declarations: [\n        MainComponent,\n        LayoutComponent,\n    ],\n  imports: [\n    CommonModule,\n    MatTabsModule\n  ],\n  exports: [\n    MainComponent,\n    LayoutComponent\n  ],\n})\nexport class MainModule { }\n",
+            "sourceCode": "import { NgModule } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { MainComponent } from './components/main/main.component';\nimport {LayoutComponent} from \"./components/layout/layout.component\";\nimport { PageHomeComponent } from './components/page-home/page-home.component';\nimport { PageContactComponent } from './components/page-contact/page-contact.component';\nimport {RouterLink, RouterModule} from \"@angular/router\";\nimport {MatTabsModule} from \"@angular/material/tabs\";\nimport { HeaderComponent } from './components/header/header.component';\nimport {MatIconModule} from \"@angular/material/icon\";\nimport {MatToolbarModule} from \"@angular/material/toolbar\";\nimport {MatButtonModule} from \"@angular/material/button\";\nimport { MenuComponent } from './components/menu/menu.component';\nimport { ProfileComponent } from './components/profile/profile.component';\n\n\n\n@NgModule({\n    declarations: [\n        MainComponent,\n        LayoutComponent,\n        PageHomeComponent,\n        PageContactComponent,\n        HeaderComponent,\n        MenuComponent,\n        ProfileComponent,\n    ],\n  imports: [\n    CommonModule,\n    RouterLink,\n    RouterModule,\n    MatTabsModule,\n    MatIconModule,\n    MatToolbarModule,\n    MatButtonModule\n  ],\n  exports: [\n    MainComponent,\n    LayoutComponent\n  ],\n})\nexport class MainModule { }\n",
             "children": [
                 {
                     "type": "providers",
@@ -1996,16 +2902,35 @@
                     "type": "declarations",
                     "elements": [
                         {
+                            "name": "HeaderComponent"
+                        },
+                        {
                             "name": "LayoutComponent"
                         },
                         {
                             "name": "MainComponent"
+                        },
+                        {
+                            "name": "MenuComponent"
+                        },
+                        {
+                            "name": "PageContactComponent"
+                        },
+                        {
+                            "name": "PageHomeComponent"
+                        },
+                        {
+                            "name": "ProfileComponent"
                         }
                     ]
                 },
                 {
                     "type": "imports",
-                    "elements": []
+                    "elements": [
+                        {
+                            "name": "RouterLink"
+                        }
+                    ]
                 },
                 {
                     "type": "exports",
@@ -2032,6 +2957,16 @@
     "miscellaneous": {
         "variables": [
             {
+                "name": "appRouting",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/app-routing.module.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "RouterModule.forRoot(routes)"
+            },
+            {
                 "name": "Circle",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -2052,14 +2987,14 @@
                 "defaultValue": "Template.bind({})"
             },
             {
-                "name": "context",
+                "name": "environment",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/test.ts",
+                "file": "src/environments/environment.prod.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "",
-                "defaultValue": "require.context('./', true, /\\.spec\\.ts$/)"
+                "type": "object",
+                "defaultValue": "{\n  production: true\n}"
             },
             {
                 "name": "environment",
@@ -2072,14 +3007,14 @@
                 "defaultValue": "{\n  production: false\n}"
             },
             {
-                "name": "environment",
+                "name": "Header",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/environments/environment.prod.ts",
+                "file": "src/app/modules/main/components/header/header.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "object",
-                "defaultValue": "{\n  production: true\n}"
+                "type": "",
+                "defaultValue": "Template.bind({})"
             },
             {
                 "name": "Large",
@@ -2152,6 +3087,26 @@
                 "defaultValue": "Template.bind({})"
             },
             {
+                "name": "MainStorybookModuleConstant",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/modules/main/main-storybook-module.constant.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "object",
+                "defaultValue": "{\n  declarations: [\n      MainComponent,\n      LayoutComponent,\n      PageHomeComponent,\n      PageContactComponent,\n      HeaderComponent,\n      ProfileComponent\n  ],\n  imports: [\n    appRouting,\n    BrowserAnimationsModule,\n    CommonModule,\n    RouterLink,\n    RouterModule,\n    MatTabsModule,\n    MatIconModule,\n    MatToolbarModule,\n    MatButtonModule,\n    ProfileComponent\n  ],\n  exports: [\n    MainComponent,\n    LayoutComponent,\n    HeaderComponent,\n    ProfileComponent\n  ],\n}"
+            },
+            {
+                "name": "Menu",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/modules/main/components/menu/menu.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
                 "name": "Primary",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -2162,13 +3117,38 @@
                 "defaultValue": "Template.bind({})"
             },
             {
-                "name": "require",
+                "name": "Profile",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/test.ts",
+                "file": "src/app/modules/main/components/profile/profile.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "literal type"
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "ROUTER_LTR_TRANSITION_CONSTANT",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/constants/router-transition.constant.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "trigger('routerTransitionLtR', [\r\n  transition('* <=> *', [\r\n    /* order */\r\n    /* 1 */\r\n    query(':enter, :leave', style({ position: 'fixed', width:'100%' })\r\n      , { optional: true }),\r\n    /* 2 */\r\n    group([  // block executes in parallel\r\n      query(':enter', [\r\n        style({ transform: 'translateX(-100%)' }),\r\n        animate('.5s ease-in-out', style({ transform: 'translateX(0%)' }))\r\n      ], { optional: true }),\r\n      query(':leave', [\r\n        style({ transform: 'translateX(0%)' }),\r\n        animate('.5s ease-in-out', style({ transform: 'translateX(100%)' }))\r\n      ], { optional: true }),\r\n    ])\r\n  ])\r\n])",
+                "rawdescription": "Router transition constant.\r\nLeft to right.",
+                "description": "<p>Router transition constant.\nLeft to right.</p>\n"
+            },
+            {
+                "name": "ROUTER_RTL_TRANSITION_CONSTANT",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/constants/router-transition.constant.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "trigger('routerTransitionRtL', [\r\n  transition('* <=> *', [\r\n    /* order */\r\n    /* 1 */\r\n    query(':enter, :leave', style({ position: 'fixed', width:'100%' })\r\n      , { optional: true }),\r\n    /* 2 */\r\n    group([  // block executes in parallel\r\n      query(':enter', [\r\n        style({ transform: 'translateX(100%)' }),\r\n        animate('.5s ease-in-out', style({ transform: 'translateX(0%)' }))\r\n      ], { optional: true }),\r\n      query(':leave', [\r\n        style({ transform: 'translateX(0%)' }),\r\n        animate('.5s ease-in-out', style({ transform: 'translateX(-100%)' }))\r\n      ], { optional: true }),\r\n    ])\r\n  ])\r\n])",
+                "rawdescription": "Router transition constant.\r\nRight to left.",
+                "description": "<p>Router transition constant.\nRight to left.</p>\n"
             },
             {
                 "name": "Secondary",
@@ -2248,11 +3228,11 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/modules/main/components/main/main.stories.ts",
+                "file": "src/app/modules/main/components/header/header.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Story<MainComponent>",
-                "defaultValue": "(args: MainComponent) => ({\r\n  props: args,\r\n})",
+                "type": "Story<HeaderComponent>",
+                "defaultValue": "(args: HeaderComponent) => ({\r\n  props: args,\r\n})",
                 "rawdescription": "Template of the component.",
                 "description": "<p>Template of the component.</p>\n"
             },
@@ -2267,12 +3247,60 @@
                 "defaultValue": "(args: LayoutComponent) => ({\r\n  props: args,\r\n})",
                 "rawdescription": "Template of the component.",
                 "description": "<p>Template of the component.</p>\n"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/modules/main/components/main/main.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<MainComponent>",
+                "defaultValue": "(args: MainComponent) => ({\r\n  props: args,\r\n})",
+                "rawdescription": "Template of the component.",
+                "description": "<p>Template of the component.</p>\n"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/modules/main/components/menu/menu.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<MenuComponent>",
+                "defaultValue": "(args: MenuComponent) => ({\r\n  props: args,\r\n})",
+                "rawdescription": "Template of the component.",
+                "description": "<p>Template of the component.</p>\n"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/modules/main/components/profile/profile.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<ProfileComponent>",
+                "defaultValue": "(args: ProfileComponent) => ({\r\n  props: args,\r\n})",
+                "rawdescription": "Template of the component.",
+                "description": "<p>Template of the component.</p>\n"
             }
         ],
         "functions": [],
         "typealiases": [],
         "enumerations": [],
         "groupedVariables": {
+            "src/app/app-routing.module.ts": [
+                {
+                    "name": "appRouting",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/app-routing.module.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "RouterModule.forRoot(routes)"
+                }
+            ],
             "src/app/modules/shared/circle/circle.stories.ts": [
                 {
                     "name": "Circle",
@@ -2321,25 +3349,16 @@
                     "description": "<p>Template of the component.</p>\n"
                 }
             ],
-            "src/test.ts": [
+            "src/environments/environment.prod.ts": [
                 {
-                    "name": "context",
+                    "name": "environment",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "src/test.ts",
+                    "file": "src/environments/environment.prod.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "",
-                    "defaultValue": "require.context('./', true, /\\.spec\\.ts$/)"
-                },
-                {
-                    "name": "require",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/test.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "literal type"
+                    "type": "object",
+                    "defaultValue": "{\n  production: true\n}"
                 }
             ],
             "src/environments/environment.ts": [
@@ -2354,16 +3373,28 @@
                     "defaultValue": "{\n  production: false\n}"
                 }
             ],
-            "src/environments/environment.prod.ts": [
+            "src/app/modules/main/components/header/header.stories.ts": [
                 {
-                    "name": "environment",
+                    "name": "Header",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "src/environments/environment.prod.ts",
+                    "file": "src/app/modules/main/components/header/header.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "object",
-                    "defaultValue": "{\n  production: true\n}"
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/modules/main/components/header/header.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<HeaderComponent>",
+                    "defaultValue": "(args: HeaderComponent) => ({\r\n  props: args,\r\n})",
+                    "rawdescription": "Template of the component.",
+                    "description": "<p>Template of the component.</p>\n"
                 }
             ],
             "src/stories/Button.stories.ts": [
@@ -2529,6 +3560,92 @@
                     "rawdescription": "Template of the component.",
                     "description": "<p>Template of the component.</p>\n"
                 }
+            ],
+            "src/app/modules/main/main-storybook-module.constant.ts": [
+                {
+                    "name": "MainStorybookModuleConstant",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/modules/main/main-storybook-module.constant.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "object",
+                    "defaultValue": "{\n  declarations: [\n      MainComponent,\n      LayoutComponent,\n      PageHomeComponent,\n      PageContactComponent,\n      HeaderComponent,\n      ProfileComponent\n  ],\n  imports: [\n    appRouting,\n    BrowserAnimationsModule,\n    CommonModule,\n    RouterLink,\n    RouterModule,\n    MatTabsModule,\n    MatIconModule,\n    MatToolbarModule,\n    MatButtonModule,\n    ProfileComponent\n  ],\n  exports: [\n    MainComponent,\n    LayoutComponent,\n    HeaderComponent,\n    ProfileComponent\n  ],\n}"
+                }
+            ],
+            "src/app/modules/main/components/menu/menu.stories.ts": [
+                {
+                    "name": "Menu",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/modules/main/components/menu/menu.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/modules/main/components/menu/menu.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<MenuComponent>",
+                    "defaultValue": "(args: MenuComponent) => ({\r\n  props: args,\r\n})",
+                    "rawdescription": "Template of the component.",
+                    "description": "<p>Template of the component.</p>\n"
+                }
+            ],
+            "src/app/modules/main/components/profile/profile.stories.ts": [
+                {
+                    "name": "Profile",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/modules/main/components/profile/profile.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/modules/main/components/profile/profile.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<ProfileComponent>",
+                    "defaultValue": "(args: ProfileComponent) => ({\r\n  props: args,\r\n})",
+                    "rawdescription": "Template of the component.",
+                    "description": "<p>Template of the component.</p>\n"
+                }
+            ],
+            "src/app/constants/router-transition.constant.ts": [
+                {
+                    "name": "ROUTER_LTR_TRANSITION_CONSTANT",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/constants/router-transition.constant.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "trigger('routerTransitionLtR', [\r\n  transition('* <=> *', [\r\n    /* order */\r\n    /* 1 */\r\n    query(':enter, :leave', style({ position: 'fixed', width:'100%' })\r\n      , { optional: true }),\r\n    /* 2 */\r\n    group([  // block executes in parallel\r\n      query(':enter', [\r\n        style({ transform: 'translateX(-100%)' }),\r\n        animate('.5s ease-in-out', style({ transform: 'translateX(0%)' }))\r\n      ], { optional: true }),\r\n      query(':leave', [\r\n        style({ transform: 'translateX(0%)' }),\r\n        animate('.5s ease-in-out', style({ transform: 'translateX(100%)' }))\r\n      ], { optional: true }),\r\n    ])\r\n  ])\r\n])",
+                    "rawdescription": "Router transition constant.\r\nLeft to right.",
+                    "description": "<p>Router transition constant.\nLeft to right.</p>\n"
+                },
+                {
+                    "name": "ROUTER_RTL_TRANSITION_CONSTANT",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/constants/router-transition.constant.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "trigger('routerTransitionRtL', [\r\n  transition('* <=> *', [\r\n    /* order */\r\n    /* 1 */\r\n    query(':enter, :leave', style({ position: 'fixed', width:'100%' })\r\n      , { optional: true }),\r\n    /* 2 */\r\n    group([  // block executes in parallel\r\n      query(':enter', [\r\n        style({ transform: 'translateX(100%)' }),\r\n        animate('.5s ease-in-out', style({ transform: 'translateX(0%)' }))\r\n      ], { optional: true }),\r\n      query(':leave', [\r\n        style({ transform: 'translateX(0%)' }),\r\n        animate('.5s ease-in-out', style({ transform: 'translateX(-100%)' }))\r\n      ], { optional: true }),\r\n    ])\r\n  ])\r\n])",
+                    "rawdescription": "Router transition constant.\r\nRight to left.",
+                    "description": "<p>Router transition constant.\nRight to left.</p>\n"
+                }
             ]
         },
         "groupedFunctions": {},
@@ -2544,32 +3661,118 @@
                 "name": "routes",
                 "filename": "src/app/app-routing.module.ts",
                 "module": "AppRoutingModule",
-                "children": [],
+                "children": [
+                    {
+                        "path": "",
+                        "component": "PageHomeComponent",
+                        "data": {
+                            "state": "home",
+                            "menuItem": {
+                                "label": "SoheilSaheb-Jamii",
+                                "index": "0"
+                            }
+                        }
+                    },
+                    {
+                        "path": "contact",
+                        "component": "PageContactComponent",
+                        "data": {
+                            "state": "contact",
+                            "menuItem": {
+                                "label": "Contact",
+                                "index": "1"
+                            }
+                        }
+                    },
+                    {
+                        "path": "**",
+                        "redirectTo": ""
+                    }
+                ],
                 "kind": "module"
             }
         ]
     },
     "coverage": {
-        "count": 20,
-        "status": "low",
+        "count": 28,
+        "status": "medium",
         "files": [
+            {
+                "filePath": "src/app/app-routing.module.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "appRouting",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
             {
                 "filePath": "src/app/app.component.ts",
                 "type": "component",
                 "linktype": "component",
                 "name": "AppComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/2",
+                "coverageCount": "0/3",
                 "status": "low"
+            },
+            {
+                "filePath": "src/app/constants/router-transition.constant.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "ROUTER_LTR_TRANSITION_CONSTANT",
+                "coveragePercent": 100,
+                "coverageCount": "1/1",
+                "status": "very-good"
+            },
+            {
+                "filePath": "src/app/constants/router-transition.constant.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "ROUTER_RTL_TRANSITION_CONSTANT",
+                "coveragePercent": 100,
+                "coverageCount": "1/1",
+                "status": "very-good"
+            },
+            {
+                "filePath": "src/app/modules/main/components/header/header.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "HeaderComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/modules/main/components/header/header.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Header",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/modules/main/components/header/header.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 100,
+                "coverageCount": "1/1",
+                "status": "very-good"
             },
             {
                 "filePath": "src/app/modules/main/components/layout/layout.component.ts",
                 "type": "component",
                 "linktype": "component",
                 "name": "LayoutComponent",
-                "coveragePercent": 0,
-                "coverageCount": "0/3",
-                "status": "low"
+                "coveragePercent": 62,
+                "coverageCount": "5/8",
+                "status": "good"
             },
             {
                 "filePath": "src/app/modules/main/components/layout/layout.stories.ts",
@@ -2619,6 +3822,101 @@
                 "coveragePercent": 100,
                 "coverageCount": "1/1",
                 "status": "very-good"
+            },
+            {
+                "filePath": "src/app/modules/main/components/menu/menu.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "MenuComponent",
+                "coveragePercent": 60,
+                "coverageCount": "6/10",
+                "status": "good"
+            },
+            {
+                "filePath": "src/app/modules/main/components/menu/menu.interface.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "MenuItem",
+                "coveragePercent": 0,
+                "coverageCount": "0/5",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/modules/main/components/menu/menu.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Menu",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/modules/main/components/menu/menu.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 100,
+                "coverageCount": "1/1",
+                "status": "very-good"
+            },
+            {
+                "filePath": "src/app/modules/main/components/page-contact/page-contact.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "PageContactComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/modules/main/components/page-home/page-home.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "PageHomeComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/modules/main/components/profile/profile.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "ProfileComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/modules/main/components/profile/profile.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Profile",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/modules/main/components/profile/profile.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 100,
+                "coverageCount": "1/1",
+                "status": "very-good"
+            },
+            {
+                "filePath": "src/app/modules/main/main-storybook-module.constant.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "MainStorybookModuleConstant",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
             },
             {
                 "filePath": "src/app/modules/shared/circle/circle.component.ts",
@@ -2677,6 +3975,15 @@
                 "coveragePercent": 100,
                 "coverageCount": "1/1",
                 "status": "very-good"
+            },
+            {
+                "filePath": "src/app/services/page.service.ts",
+                "type": "injectable",
+                "linktype": "injectable",
+                "name": "PageService",
+                "coveragePercent": 75,
+                "coverageCount": "6/8",
+                "status": "good"
             },
             {
                 "filePath": "src/environments/environment.prod.ts",
@@ -2842,26 +4149,6 @@
                 "name": "PageComponent",
                 "coveragePercent": 0,
                 "coverageCount": "0/5",
-                "status": "low"
-            },
-            {
-                "filePath": "src/test.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "context",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/test.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "require",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
                 "status": "low"
             }
         ]

@@ -6,6 +6,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MainModule } from './modules/main/main.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {RouterModule} from "@angular/router";
+import {MatTabsModule} from "@angular/material/tabs";
 /*
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {HttpClient} from "@angular/common/http";
@@ -25,6 +27,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppRoutingModule,
     MainModule,
     BrowserAnimationsModule,
+    MatTabsModule,
     /*TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

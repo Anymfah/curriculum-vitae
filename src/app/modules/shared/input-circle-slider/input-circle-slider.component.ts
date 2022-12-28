@@ -10,6 +10,7 @@ import {
   ViewChild
 } from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
+import {animateValueUtil} from "../../../utils/animate-value.util";
 
 /**
  * Input Circle Slider Component
@@ -103,7 +104,7 @@ export class InputCircleSliderComponent implements OnInit, AfterViewInit, OnChan
   /**
    * Animation curve
    */
-  @Input() public animationCurve = [.43, .02, .04, 1];
+  @Input() public animationCurve: [number, number, number, number] = [.43, .02, .04, 1];
 
   /**
    * Show value
@@ -172,40 +173,10 @@ export class InputCircleSliderComponent implements OnInit, AfterViewInit, OnChan
     this._updateQuarters();
     if (this.animate) {
       // Animate the value from 0 to the current value in 1 second.
-      this._animateValue(0, this.value, 1000, [.43, .02, .04, 1]);
+      animateValueUtil((value) => {
+        this.value = value;
+      },0, this.value, this.animationTime, this.animationCurve);
     }
-  }
-
-  /**
-   * Animate value from start to end in duration with easing.
-   * @param start Start value
-   * @param end End value
-   * @param duration Duration in ms
-   * @param ease Cubic bezier easing
-   */
-  private _animateValue(start: number, end: number, duration: number, ease: [number, number, number, number]): void {
-    let startTimestamp: number | null = null;
-    const step = (timestamp: number) => {
-      if (!startTimestamp) startTimestamp = timestamp;
-      const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-      //this.value = start + progress * (end - start);
-
-      this.value = start + this._easeInOutCubic(progress, ease) * (end - start);
-      if (progress < 1) {
-        window.requestAnimationFrame(step);
-      }
-    };
-    window.requestAnimationFrame(step);
-  }
-
-  /**
-   * Ease in out cubic function.
-   * @param t Time
-   * @param ease Cubic bezier easing
-   * @returns {number} Value
-   */
-  private _easeInOutCubic(t: number, ease: number[]): number {
-    return t<.5 ? 4*t*t*t : (t-1)*(2*t-2)*(2*t-2)+1;
   }
 
   /**

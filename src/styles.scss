@@ -1,5 +1,9 @@
 @use './styles/config/material';
+@use './styles/utils/colors';
+@use './styles/variables';
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+* { box-sizing: border-box; }

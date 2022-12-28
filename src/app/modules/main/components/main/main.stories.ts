@@ -1,5 +1,7 @@
 import { Story, Meta } from '@storybook/angular/types-6-0';
 import { MainComponent } from './main.component';
+import {moduleMetadata} from "@storybook/angular";
+import {MainStorybookModuleConstant} from "../../main-storybook-module.constant";
 
 /**
  * Story for the MainComponent.
@@ -7,6 +9,9 @@ import { MainComponent } from './main.component';
 export default {
   title: 'Main/Main',
   component: MainComponent,
+  decorators: [
+    moduleMetadata(MainStorybookModuleConstant),
+  ],
 } as Meta;
 
 /**
