@@ -2,6 +2,38 @@
     "pipes": [],
     "interfaces": [
         {
+            "name": "DrawCircleCoordinates",
+            "id": "interface-DrawCircleCoordinates-0aa8e69dc843091cfd9ae4618641129dd9cf39c6723f3d763337c15ebc26882fc6bbbbe5465502de914cb9e609400f40e3aa8b4db0464c44d8b0361c064d60b1",
+            "file": "src/app/modules/shared/draw-circle/draw-circle.interface.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "export interface DrawCircleCoordinates {\n  x: number;\n  y: number;\n}\n",
+            "properties": [
+                {
+                    "name": "x",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": false,
+                    "description": "",
+                    "line": 2
+                },
+                {
+                    "name": "y",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": false,
+                    "description": "",
+                    "line": 3
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 165,
+            "methods": []
+        },
+        {
             "name": "MenuItem",
             "id": "interface-MenuItem-8bf66f0501ede8df9df726ff1aad7a370c45bf8b8e8e84aa285fa2f768c0cded10adfd8b5f4715aa0eb0d672bab540351cac3d9b31070150acd96248cc6d0d98",
             "file": "src/app/modules/main/components/menu/menu.interface.ts",
@@ -749,7 +781,7 @@
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "\r\n\r\n\r\n:host {\r\n  --track-bar-color: conic-gradient(orange 0deg, red 360deg);\r\n  --track-bar-bg-color: transparent;\r\n  .circle {\r\n    &__container {\r\n      position: relative;\r\n    }\r\n\r\n    &__inner {\r\n      width: 100%;\r\n      height: 100%;\r\n      position: absolute;\r\n      top: 0;\r\n      left: 0;\r\n      border-radius: 50%;\r\n    }\r\n\r\n    &__track {\r\n      &-bar {\r\n        width: 100%;\r\n        height: 100%;\r\n        position: absolute;\r\n        top: 0;\r\n        left: 0;\r\n        border-radius: 50%;\r\n        background: var(--track-bar-bg-color);\r\n\r\n        &--inner {\r\n          width: 100%;\r\n          height: 100%;\r\n          position: absolute;\r\n          top: 0;\r\n          left: 0;\r\n          border-radius: 50%;\r\n          background: conic-gradient(transparent 250deg, red 250deg);\r\n        }\r\n\r\n        &--bg {\r\n          width: 100%;\r\n          height: 100%;\r\n          position: absolute;\r\n          top: 0;\r\n          left: 0;\r\n          border-radius: 50%;\r\n\r\n          // Can be overridden\r\n          background: var(--track-bar-color);\r\n        }\r\n      }\r\n    }\r\n  }\r\n}\r\n",
+                    "data": "@use 'mixins';\r\n\r\n:host {\r\n  .circle {\r\n    &__container {\r\n      position: relative;\r\n    }\r\n\r\n    &__inner {\r\n      width: 100%;\r\n      height: 100%;\r\n      position: absolute;\r\n      top: 0;\r\n      left: 0;\r\n      border-radius: 50%;\r\n    }\r\n\r\n    &__track {\r\n      &-bar {\r\n        @include mixins.transition;\r\n\r\n        width: 100%;\r\n        height: 100%;\r\n        position: absolute;\r\n        top: 0;\r\n        left: 0;\r\n        border-radius: 50%;\r\n        background: var(--circle--track-bar-bg-color);\r\n\r\n        &--inner {\r\n          width: 100%;\r\n          height: 100%;\r\n          position: absolute;\r\n          top: 0;\r\n          left: 0;\r\n          border-radius: 50%;\r\n        }\r\n\r\n        &--bg {\r\n          @include mixins.transition;\r\n\r\n          width: 100%;\r\n          height: 100%;\r\n          position: absolute;\r\n          top: 0;\r\n          left: 0;\r\n          border-radius: 50%;\r\n\r\n          // Can be overridden\r\n          background: var(--circle--track-bar-color);\r\n        }\r\n      }\r\n    }\r\n  }\r\n}\r\n",
                     "styleUrl": "./circle.component.scss"
                 }
             ],
@@ -759,6 +791,329 @@
                 "OnInit"
             ],
             "templateData": "<div class=\"circle__container\" [style.width.px]=\"size\"\n     [style.height.px]=\"size\">\n  <div #circle class=\"circle__inner\">\n\n    <div class=\"circle__track-bar\"\n         [style.-webkit-mask]=\"trackBarMask\"\n    >\n      <div class=\"circle__track-bar--inner\"\n           [style.-webkit-mask]=\"trackBarMaskInner\">\n        <div class=\"circle__track-bar--bg bg-cone\"></div>\n      </div>\n    </div>\n  </div>\n</div>\n"
+        },
+        {
+            "name": "DrawCircleComponent",
+            "id": "component-DrawCircleComponent-b9f0ce999227be627e561dfffc21b3959e423ccc378afd8819e6e818ddff10cc1807bf6f9347edb2de3bb767fe452c374f4cbf1ad146024c5638cb2fc3c5d974",
+            "file": "src/app/modules/shared/draw-circle/draw-circle.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "cv-draw-circle",
+            "styleUrls": [
+                "./draw-circle.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./draw-circle.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [
+                {
+                    "name": "arcDegree",
+                    "defaultValue": "120",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nDegree of the circle.\n360 is a full circle.\n",
+                    "description": "<p>Degree of the circle.\n360 is a full circle.</p>\n",
+                    "line": 15,
+                    "type": "number",
+                    "decorators": []
+                },
+                {
+                    "name": "size",
+                    "defaultValue": "300",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nSize of the circle.\n",
+                    "description": "<p>Size of the circle.</p>\n",
+                    "line": 20,
+                    "type": "number",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "leftArc",
+                    "defaultValue": "{x: 0, y: 0}",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "DrawCircleCoordinates",
+                    "optional": false,
+                    "description": "",
+                    "line": 32,
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "rightArc",
+                    "defaultValue": "{x: 0, y: 0}",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "DrawCircleCoordinates",
+                    "optional": false,
+                    "description": "",
+                    "line": 34,
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "viewBoxSize",
+                    "defaultValue": "120",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": false,
+                    "description": "",
+                    "line": 22,
+                    "modifierKind": [
+                        123
+                    ]
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "_draw",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 55,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nDraw or update the arc.\n",
+                    "description": "<p>Draw or update the arc.</p>\n",
+                    "modifierKind": [
+                        121
+                    ]
+                },
+                {
+                    "name": "_polarToCartesian",
+                    "args": [
+                        {
+                            "name": "centerX",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "centerY",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "radius",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "angleInDegrees",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "DrawCircleCoordinates",
+                    "typeParameters": [],
+                    "line": 82,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nCalculate the Cartesian coordinates of the point on the circle\nwith the given angle and radius from the center.\n",
+                    "description": "<p>Calculate the Cartesian coordinates of the point on the circle\nwith the given angle and radius from the center.</p>\n",
+                    "modifierKind": [
+                        121
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": {
+                                "pos": 1878,
+                                "end": 1885,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "centerX"
+                            },
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "pos": 1872,
+                                "end": 1877,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "param"
+                            },
+                            "comment": "<p>X coordinate of the center of the circle.</p>\n"
+                        },
+                        {
+                            "name": {
+                                "pos": 1940,
+                                "end": 1947,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "centerY"
+                            },
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "pos": 1934,
+                                "end": 1939,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "param"
+                            },
+                            "comment": "<p>Y coordinate of the center of the circle.</p>\n"
+                        },
+                        {
+                            "name": {
+                                "pos": 2002,
+                                "end": 2008,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "radius"
+                            },
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "pos": 1996,
+                                "end": 2001,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "param"
+                            },
+                            "comment": "<p>Radius of the circle.</p>\n"
+                        },
+                        {
+                            "name": {
+                                "pos": 2043,
+                                "end": 2057,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "angleInDegrees"
+                            },
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "pos": 2037,
+                                "end": 2042,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "param"
+                            },
+                            "comment": "<p>Angle in degrees.</p>\n"
+                        }
+                    ]
+                },
+                {
+                    "name": "ngOnChanges",
+                    "args": [
+                        {
+                            "name": "changes",
+                            "type": "SimpleChanges",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 46,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\n",
+                    "description": "",
+                    "modifierKind": [
+                        123
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "changes",
+                            "type": "SimpleChanges",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 39,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\n",
+                    "description": "",
+                    "modifierKind": [
+                        123
+                    ],
+                    "jsdoctags": []
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';\nimport {DrawCircleCoordinates} from \"./draw-circle.interface\";\n\n@Component({\n  selector: 'cv-draw-circle',\n  templateUrl: './draw-circle.component.html',\n  styleUrls: ['./draw-circle.component.scss']\n})\nexport class DrawCircleComponent implements OnInit, OnChanges {\n\n  /**\n   * Degree of the circle.\n   * 360 is a full circle.\n   */\n  @Input() public arcDegree: number = 120;\n\n  /**\n   * Size of the circle.\n   */\n  @Input() public size: number = 300;\n\n  public viewBoxSize = 120;\n\n  /**\n   * Percentage of the circle.\n   * 100 is a full circle.\n   */\n  public get arcPercentage(): number {\n    return this.arcDegree / 360 * 100;\n  }\n\n  public leftArc: DrawCircleCoordinates = {x: 0, y: 0};\n\n  public rightArc: DrawCircleCoordinates = {x: 0, y: 0};\n\n  /**\n   * @inheritDoc\n   */\n  public ngOnInit() {\n    this._draw();\n  }\n\n  /**\n   * @inheritDoc\n   */\n  public ngOnChanges(changes: SimpleChanges) {\n    if ('size' in changes || 'arcDegree' in changes) {\n      this._draw();\n    }\n  }\n\n  /**\n   * Draw or update the arc.\n   */\n  private _draw() {\n    if (this.arcDegree >= 360) {\n      this.arcDegree = 359.999;\n    }\n    //const center = this.size / 2;\n    const center = 60;\n    const radius = 50;\n    const arcSize = ((100 - this.arcPercentage) / 100) * 180;\n    const startAngle = -arcSize - 90;\n    const endAngle = arcSize - 90;\n\n    /*const startAngle = this.arcDegree - 90;\n    const endAngle = 270 - this.arcDegree;*/\n    console.log('startAngle', startAngle, 'endAngle', endAngle);\n\n    this.leftArc = this._polarToCartesian(center, center, radius, startAngle);\n    this.rightArc = this._polarToCartesian(center, center, radius, endAngle);\n  }\n\n  /**\n   * Calculate the Cartesian coordinates of the point on the circle\n   * with the given angle and radius from the center.\n   * @param centerX X coordinate of the center of the circle.\n   * @param centerY Y coordinate of the center of the circle.\n   * @param radius Radius of the circle.\n   * @param angleInDegrees Angle in degrees.\n   */\n  private _polarToCartesian(centerX: number, centerY: number, radius: number, angleInDegrees: number): DrawCircleCoordinates {\n    const angleInRadians = angleInDegrees * Math.PI / 180.0;\n\n    return {\n      x: centerX + radius * Math.cos(angleInRadians),\n      y: centerY + radius * Math.sin(angleInRadians)\n    };\n  }\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "\r\n.circle {\r\n  fill: transparent;\r\n  stroke: #87CEEB;\r\n  stroke-width: 20;\r\n  &:hover {\r\n    stroke: #fa87cc;\r\n  }\r\n}\r\n.inCircle {\r\n  fill: transparent;\r\n  stroke: #43C1F5;\r\n  stroke-width: 1;\r\n  pointer-events: none;\r\n}\r\n.circleContainer {\r\n}\r\n",
+                    "styleUrl": "./draw-circle.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "implements": [
+                "OnInit",
+                "OnChanges"
+            ],
+            "accessors": {
+                "arcPercentage": {
+                    "name": "arcPercentage",
+                    "getSignature": {
+                        "name": "arcPercentage",
+                        "type": "number",
+                        "returnType": "number",
+                        "line": 28,
+                        "rawdescription": "\n\nPercentage of the circle.\n100 is a full circle.\n",
+                        "description": "<p>Percentage of the circle.\n100 is a full circle.</p>\n"
+                    }
+                }
+            },
+            "templateData": "<svg xmlns=\"http://www.w3.org/2000/svg\"\n     [attr.viewBox]=\"'00 00 ' + viewBoxSize + ' ' + viewBoxSize\" preserveAspectRatio=\"xMidYMid\" class=\"circleContainer\"\n     [style.width.px]=\"size\" [style.height.px]=\"size\">\n  <circle [attr.cx]=\"60\" [attr.cy]=\"60\" [attr.r]=\"54\" class=\"inCircle\">\n  </circle>\n  <path class=\"circle\"\n        [attr.d]=\"'M ' +leftArc.x+', ' + leftArc.y +\n        ' A 50 50 0 ' + (arcPercentage > 50 ? 1 : 0) + ' 0 ' + rightArc.x + ', ' + rightArc.y\"\n  >\n  </path>\n</svg>\n"
         },
         {
             "name": "HeaderComponent",
@@ -878,7 +1233,7 @@
         },
         {
             "name": "InputCircleSliderComponent",
-            "id": "component-InputCircleSliderComponent-90891d6b3d5a25f24e0bebaf39e1e2daba628c0f5a3b6245d62dc453a92a40a20101a8f016c01893630edb78d24893f88742a80f16c67b4e20c13d45ee2590a6",
+            "id": "component-InputCircleSliderComponent-ec97fb133704fd5b85f1832a8fab2d63d33e079b63fc64fd511d94f4de806c1b88a934f6ea639d953f02dc2ab6ba60793f3d93ff72508a5343aee950c0590084",
             "file": "src/app/modules/shared/input-circle-slider/input-circle-slider.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -907,7 +1262,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nAllow to drag the handle through the min and max values.\n",
                     "description": "<p>Allow to drag the handle through the min and max values.</p>\n",
-                    "line": 86,
+                    "line": 87,
                     "type": "boolean",
                     "decorators": []
                 },
@@ -918,7 +1273,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nAnimate the value\n",
                     "description": "<p>Animate the value</p>\n",
-                    "line": 96,
+                    "line": 97,
                     "type": "boolean",
                     "decorators": []
                 },
@@ -929,8 +1284,8 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nAnimation curve\n",
                     "description": "<p>Animation curve</p>\n",
-                    "line": 106,
-                    "type": "{}",
+                    "line": 107,
+                    "type": "[number, number, number, number]",
                     "decorators": []
                 },
                 {
@@ -940,7 +1295,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nAnimation time\n",
                     "description": "<p>Animation time</p>\n",
-                    "line": 101,
+                    "line": 102,
                     "type": "number",
                     "decorators": []
                 },
@@ -951,7 +1306,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nAllow drag.\n",
                     "description": "<p>Allow drag.</p>\n",
-                    "line": 91,
+                    "line": 92,
                     "type": "boolean",
                     "decorators": []
                 },
@@ -962,7 +1317,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nMaximum value of the slider.\n",
                     "description": "<p>Maximum value of the slider.</p>\n",
-                    "line": 76,
+                    "line": 77,
                     "type": "number",
                     "decorators": []
                 },
@@ -973,7 +1328,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nMinimum value of the slider.\n",
                     "description": "<p>Minimum value of the slider.</p>\n",
-                    "line": 71,
+                    "line": 72,
                     "type": "number",
                     "decorators": []
                 },
@@ -984,7 +1339,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nShow value\n",
                     "description": "<p>Show value</p>\n",
-                    "line": 111,
+                    "line": 112,
                     "type": "boolean",
                     "decorators": []
                 },
@@ -995,7 +1350,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nSize of the circle.\n",
                     "description": "<p>Size of the circle.</p>\n",
-                    "line": 61,
+                    "line": 62,
                     "type": "number",
                     "decorators": []
                 },
@@ -1006,7 +1361,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nStep value.\n",
                     "description": "<p>Step value.</p>\n",
-                    "line": 81,
+                    "line": 82,
                     "type": "number",
                     "decorators": []
                 },
@@ -1017,7 +1372,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nUnit\n",
                     "description": "<p>Unit</p>\n",
-                    "line": 51,
+                    "line": 52,
                     "type": "string",
                     "decorators": []
                 },
@@ -1028,15 +1383,15 @@
                     "deprecationMessage": "",
                     "jsdoctags": [
                         {
-                            "pos": 1003,
-                            "end": 1169,
+                            "pos": 1071,
+                            "end": 1237,
                             "flags": 4227072,
                             "modifierFlagsCache": 0,
                             "transformFlags": 0,
                             "kind": 325,
                             "tagName": {
-                                "pos": 1004,
-                                "end": 1010,
+                                "pos": 1072,
+                                "end": 1078,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -1046,15 +1401,15 @@
                             "comment": "<p>ControlValueAccessor\nor ngModel directive\nor [(ngModel)]=&quot;value&quot;\nor [ngModel]=&quot;value&quot;\nor [value]=&quot;value&quot;</p>\n"
                         },
                         {
-                            "pos": 1169,
-                            "end": 1223,
+                            "pos": 1237,
+                            "end": 1291,
                             "flags": 4227072,
                             "modifierFlagsCache": 0,
                             "transformFlags": 0,
                             "kind": 325,
                             "tagName": {
-                                "pos": 1170,
-                                "end": 1177,
+                                "pos": 1238,
+                                "end": 1245,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -1065,7 +1420,7 @@
                             "comment": "<p>Value is 0\nMain value of the slider.</p>\n"
                         }
                     ],
-                    "line": 46,
+                    "line": 47,
                     "type": "number",
                     "decorators": []
                 },
@@ -1076,7 +1431,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nValue digits after the decimal point.\n",
                     "description": "<p>Value digits after the decimal point.</p>\n",
-                    "line": 116,
+                    "line": 117,
                     "type": "number",
                     "decorators": []
                 },
@@ -1087,7 +1442,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nWeight of the circle line.\n",
                     "description": "<p>Weight of the circle line.</p>\n",
-                    "line": 66,
+                    "line": 67,
                     "type": "number",
                     "decorators": []
                 }
@@ -1102,7 +1457,7 @@
                     "type": "literal type",
                     "optional": false,
                     "description": "<p>Invoked method when the slider is dragged.</p>\n",
-                    "line": 136,
+                    "line": 137,
                     "rawdescription": "\n\nInvoked method when the slider is dragged.\n",
                     "modifierKind": [
                         121
@@ -1116,7 +1471,7 @@
                     "type": "DOMRect",
                     "optional": false,
                     "description": "<p>Circle Rect</p>\n",
-                    "line": 161,
+                    "line": 162,
                     "rawdescription": "\n\nCircle Rect\n",
                     "modifierKind": [
                         121
@@ -1129,7 +1484,7 @@
                     "type": "ElementRef | undefined",
                     "optional": false,
                     "description": "<p>Circle Dom element.</p>\n",
-                    "line": 56,
+                    "line": 57,
                     "rawdescription": "\n\nCircle Dom element.\n",
                     "decorators": [
                         {
@@ -1146,7 +1501,7 @@
                     "type": "",
                     "optional": false,
                     "description": "<p>User is currently dragging the handle.</p>\n",
-                    "line": 156,
+                    "line": 157,
                     "rawdescription": "\n\nUser is currently dragging the handle.\n",
                     "modifierKind": [
                         123
@@ -1160,7 +1515,7 @@
                     "type": "function",
                     "optional": false,
                     "description": "<p>Invoked when the model has been changed</p>\n",
-                    "line": 334,
+                    "line": 305,
                     "rawdescription": "\n\nInvoked when the model has been changed\n",
                     "modifierKind": [
                         123
@@ -1168,144 +1523,6 @@
                 }
             ],
             "methodsClass": [
-                {
-                    "name": "_animateValue",
-                    "args": [
-                        {
-                            "name": "start",
-                            "type": "number",
-                            "deprecated": false,
-                            "deprecationMessage": ""
-                        },
-                        {
-                            "name": "end",
-                            "type": "number",
-                            "deprecated": false,
-                            "deprecationMessage": ""
-                        },
-                        {
-                            "name": "duration",
-                            "type": "number",
-                            "deprecated": false,
-                            "deprecationMessage": ""
-                        },
-                        {
-                            "name": "ease",
-                            "type": "[number, number, number, number]",
-                            "deprecated": false,
-                            "deprecationMessage": ""
-                        }
-                    ],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 186,
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "rawdescription": "\n\nAnimate value from start to end in duration with easing.\n",
-                    "description": "<p>Animate value from start to end in duration with easing.</p>\n",
-                    "modifierKind": [
-                        121
-                    ],
-                    "jsdoctags": [
-                        {
-                            "name": {
-                                "pos": 3679,
-                                "end": 3684,
-                                "flags": 4227072,
-                                "modifierFlagsCache": 0,
-                                "transformFlags": 0,
-                                "kind": 79,
-                                "escapedText": "start"
-                            },
-                            "type": "number",
-                            "deprecated": false,
-                            "deprecationMessage": "",
-                            "tagName": {
-                                "pos": 3673,
-                                "end": 3678,
-                                "flags": 4227072,
-                                "modifierFlagsCache": 0,
-                                "transformFlags": 0,
-                                "kind": 79,
-                                "escapedText": "param"
-                            },
-                            "comment": "<p>Start value</p>\n"
-                        },
-                        {
-                            "name": {
-                                "pos": 3709,
-                                "end": 3712,
-                                "flags": 4227072,
-                                "modifierFlagsCache": 0,
-                                "transformFlags": 0,
-                                "kind": 79,
-                                "escapedText": "end"
-                            },
-                            "type": "number",
-                            "deprecated": false,
-                            "deprecationMessage": "",
-                            "tagName": {
-                                "pos": 3703,
-                                "end": 3708,
-                                "flags": 4227072,
-                                "modifierFlagsCache": 0,
-                                "transformFlags": 0,
-                                "kind": 79,
-                                "escapedText": "param"
-                            },
-                            "comment": "<p>End value</p>\n"
-                        },
-                        {
-                            "name": {
-                                "pos": 3735,
-                                "end": 3743,
-                                "flags": 4227072,
-                                "modifierFlagsCache": 0,
-                                "transformFlags": 0,
-                                "kind": 79,
-                                "escapedText": "duration"
-                            },
-                            "type": "number",
-                            "deprecated": false,
-                            "deprecationMessage": "",
-                            "tagName": {
-                                "pos": 3729,
-                                "end": 3734,
-                                "flags": 4227072,
-                                "modifierFlagsCache": 0,
-                                "transformFlags": 0,
-                                "kind": 79,
-                                "escapedText": "param"
-                            },
-                            "comment": "<p>Duration in ms</p>\n"
-                        },
-                        {
-                            "name": {
-                                "pos": 3771,
-                                "end": 3775,
-                                "flags": 4227072,
-                                "modifierFlagsCache": 0,
-                                "transformFlags": 0,
-                                "kind": 79,
-                                "escapedText": "ease"
-                            },
-                            "type": "[number, number, number, number]",
-                            "deprecated": false,
-                            "deprecationMessage": "",
-                            "tagName": {
-                                "pos": 3765,
-                                "end": 3770,
-                                "flags": 4227072,
-                                "modifierFlagsCache": 0,
-                                "transformFlags": 0,
-                                "kind": 79,
-                                "escapedText": "param"
-                            },
-                            "comment": "<p>Cubic bezier easing</p>\n"
-                        }
-                    ]
-                },
                 {
                     "name": "_calculateAngle",
                     "args": [
@@ -1325,7 +1542,7 @@
                     "optional": false,
                     "returnType": "number",
                     "typeParameters": [],
-                    "line": 314,
+                    "line": 285,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nCalculate the angle of the handle.\n",
@@ -1367,7 +1584,7 @@
                     "optional": false,
                     "returnType": "number",
                     "typeParameters": [],
-                    "line": 327,
+                    "line": 298,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nCalculate value from angle.\n",
@@ -1388,97 +1605,6 @@
                     ]
                 },
                 {
-                    "name": "_easeInOutCubic",
-                    "args": [
-                        {
-                            "name": "t",
-                            "type": "number",
-                            "deprecated": false,
-                            "deprecationMessage": ""
-                        },
-                        {
-                            "name": "ease",
-                            "type": "number[]",
-                            "deprecated": false,
-                            "deprecationMessage": ""
-                        }
-                    ],
-                    "optional": false,
-                    "returnType": "number",
-                    "typeParameters": [],
-                    "line": 207,
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "rawdescription": "\n\nEase in out cubic function.\n",
-                    "description": "<p>Ease in out cubic function.</p>\n",
-                    "modifierKind": [
-                        121
-                    ],
-                    "jsdoctags": [
-                        {
-                            "name": {
-                                "pos": 4458,
-                                "end": 4459,
-                                "flags": 4227072,
-                                "modifierFlagsCache": 0,
-                                "transformFlags": 0,
-                                "kind": 79,
-                                "escapedText": "t"
-                            },
-                            "type": "number",
-                            "deprecated": false,
-                            "deprecationMessage": "",
-                            "tagName": {
-                                "pos": 4452,
-                                "end": 4457,
-                                "flags": 4227072,
-                                "modifierFlagsCache": 0,
-                                "transformFlags": 0,
-                                "kind": 79,
-                                "escapedText": "param"
-                            },
-                            "comment": "<p>Time</p>\n"
-                        },
-                        {
-                            "name": {
-                                "pos": 4477,
-                                "end": 4481,
-                                "flags": 4227072,
-                                "modifierFlagsCache": 0,
-                                "transformFlags": 0,
-                                "kind": 79,
-                                "escapedText": "ease"
-                            },
-                            "type": "number[]",
-                            "deprecated": false,
-                            "deprecationMessage": "",
-                            "tagName": {
-                                "pos": 4471,
-                                "end": 4476,
-                                "flags": 4227072,
-                                "modifierFlagsCache": 0,
-                                "transformFlags": 0,
-                                "kind": 79,
-                                "escapedText": "param"
-                            },
-                            "comment": "<p>Cubic bezier easing</p>\n"
-                        },
-                        {
-                            "tagName": {
-                                "pos": 4508,
-                                "end": 4515,
-                                "flags": 4227072,
-                                "modifierFlagsCache": 0,
-                                "transformFlags": 0,
-                                "kind": 79,
-                                "escapedText": "returns"
-                            },
-                            "comment": "<p>Value</p>\n",
-                            "returnType": "number"
-                        }
-                    ]
-                },
-                {
                     "name": "_preventCross",
                     "args": [
                         {
@@ -1491,7 +1617,7 @@
                     "optional": false,
                     "returnType": "number",
                     "typeParameters": [],
-                    "line": 297,
+                    "line": 268,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nPrevent the handle to go over the min and max values.\nListen to the activated quarters to know where the handle comes from.\n",
@@ -1502,8 +1628,8 @@
                     "jsdoctags": [
                         {
                             "name": {
-                                "pos": 6858,
-                                "end": 6863,
+                                "pos": 5963,
+                                "end": 5968,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -1514,8 +1640,8 @@
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "pos": 6852,
-                                "end": 6857,
+                                "pos": 5957,
+                                "end": 5962,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -1532,7 +1658,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 243,
+                    "line": 214,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nCalculate the active quarters from current value.\nThis is needed to constraint the handle to pass through all quarters of the circle.\nSee allowCross\n\nWhen sliding, update activated quarters.\n",
@@ -1555,7 +1681,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 264,
+                    "line": 235,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nMoving the handle.\n",
@@ -1581,7 +1707,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 222,
+                    "line": 193,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\n",
@@ -1604,7 +1730,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 214,
+                    "line": 185,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\n",
@@ -1630,7 +1756,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 171,
+                    "line": 172,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\n",
@@ -1653,7 +1779,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 345,
+                    "line": 316,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -1684,7 +1810,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 349,
+                    "line": 320,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -1708,7 +1834,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 229,
+                    "line": 200,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nStart dragging the handle.\n",
@@ -1724,7 +1850,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 256,
+                    "line": 227,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nStop dragging the handle.\n",
@@ -1740,7 +1866,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 339,
+                    "line": 310,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nInvoked method when value changes.\n",
@@ -1762,7 +1888,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 356,
+                    "line": 327,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\n",
@@ -1773,8 +1899,8 @@
                     "jsdoctags": [
                         {
                             "name": {
-                                "pos": 8141,
-                                "end": 8146,
+                                "pos": 7246,
+                                "end": 7251,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -1785,8 +1911,8 @@
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "pos": 8135,
-                                "end": 8140,
+                                "pos": 7240,
+                                "end": 7245,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -1805,11 +1931,11 @@
             "description": "<p>Input Circle Slider Component\nWorks with the ngModel directive\nUses the controlValueAccessor interface to work with the ngModel directive</p>\n<div><pre class=\"line-numbers\"><code class=\"language-html\">&lt;input-circle-slider [(ngModel)]=&quot;value&quot;&gt;&lt;/input-circle-slider&gt;\n```html\n&lt;input-circle-slider [(ngModel)]=&quot;value&quot; [min]=&quot;0&quot; [max]=&quot;100&quot; [step]=&quot;1&quot;&gt;&lt;/input-circle-slider&gt;</code></pre></div>",
             "rawdescription": "\n\nInput Circle Slider Component\nWorks with the ngModel directive\nUses the controlValueAccessor interface to work with the ngModel directive\n```html\n<input-circle-slider [(ngModel)]=\"value\"></input-circle-slider>\n```html\n<input-circle-slider [(ngModel)]=\"value\" [min]=\"0\" [max]=\"100\" [step]=\"1\"></input-circle-slider>\n```",
             "type": "component",
-            "sourceCode": "import {\n  AfterViewInit,\n  Component,\n  ElementRef,\n  forwardRef,\n  Input,\n  OnChanges,\n  OnInit,\n  SimpleChanges,\n  ViewChild\n} from '@angular/core';\nimport {ControlValueAccessor, NG_VALUE_ACCESSOR} from \"@angular/forms\";\n\n/**\n * Input Circle Slider Component\n * Works with the ngModel directive\n * Uses the controlValueAccessor interface to work with the ngModel directive\n * @example\n * <input-circle-slider [(ngModel)]=\"value\"></input-circle-slider>\n * @example\n * <input-circle-slider [(ngModel)]=\"value\" [min]=\"0\" [max]=\"100\" [step]=\"1\"></input-circle-slider>\n */\n@Component({\n  selector: 'cv-input-circle-slider',\n  templateUrl: './input-circle-slider.component.html',\n  styleUrls: ['./input-circle-slider.component.scss'],\n  providers: [\n    {\n      provide: NG_VALUE_ACCESSOR,\n      useExisting: forwardRef(() => InputCircleSliderComponent),\n      multi: true\n    }\n  ]\n})\nexport class InputCircleSliderComponent implements OnInit, AfterViewInit, OnChanges, ControlValueAccessor {\n\n  /**\n   * @access ControlValueAccessor\n   *        or ngModel directive\n   *        or [(ngModel)]=\"value\"\n   *        or [ngModel]=\"value\"\n   *        or [value]=\"value\"\n   * @default Value is 0\n   * Main value of the slider.\n   */\n  @Input() public value: number = 0;\n\n  /**\n   * Unit\n   */\n  @Input() public unit: string = '';\n\n  /**\n   * Circle Dom element.\n   */\n  @ViewChild('circle') circle: ElementRef | undefined;\n\n  /**\n   * Size of the circle.\n   */\n  @Input() public size: number = 200;\n\n  /**\n   * Weight of the circle line.\n   */\n  @Input() public weight: number = 10;\n\n  /**\n   * Minimum value of the slider.\n   */\n  @Input() public min: number = 0;\n\n  /**\n   * Maximum value of the slider.\n   */\n  @Input() public max: number = 100;\n\n  /**\n   * Step value.\n   */\n  @Input() public step: number = 0.1;\n\n  /**\n   * Allow to drag the handle through the min and max values.\n   */\n  @Input() public allowCross: boolean = false;\n\n  /**\n   * Allow drag.\n   */\n  @Input() public draggable: boolean = true;\n\n  /**\n   * Animate the value\n   */\n  @Input() public animate: boolean = true;\n\n  /**\n   * Animation time\n   */\n  @Input() public animationTime: number = 1000;\n\n  /**\n   * Animation curve\n   */\n  @Input() public animationCurve = [.43, .02, .04, 1];\n\n  /**\n   * Show value\n   */\n  @Input() public showValue: boolean = true;\n\n  /**\n   * Value digits after the decimal point.\n   */\n  @Input() public valueDigits = 0;\n\n  /**\n   * Value as percentage.\n   */\n  public get valuePercentage(): number {\n    return this.value * 100 / this.max;\n  }\n\n  /**\n   * Formatted value.\n   */\n  public get formattedValue(): string {\n    const digits = this.valueDigits > 0 ? this.valueDigits : 0;\n    return this.value.toFixed(digits);\n  }\n\n  /**\n   * Invoked method when the slider is dragged.\n   */\n  private _activeQuarters: {\n    first: boolean,\n    middle: boolean,\n    last: boolean\n  } = {\n    first: false,\n    middle: false,\n    last: false,\n  }\n\n  /**\n   * The transform value as string of the rotation for the handle.\n   */\n\n  public get handleTransform(): string {\n    return `rotate(${this.valuePercentage * 3.6}deg)`;\n  }\n  /**\n   * User is currently dragging the handle.\n   */\n  public isDragging = false;\n\n  /**\n   * Circle Rect\n   */\n  private _circleRect: DOMRect = new DOMRect();\n\n  /**\n   * @constructor\n   */\n  public constructor() {}\n\n  /**\n   * @inheritDoc\n   */\n  public ngOnInit(): void {\n    this._updateQuarters();\n    if (this.animate) {\n      // Animate the value from 0 to the current value in 1 second.\n      this._animateValue(0, this.value, 1000, [.43, .02, .04, 1]);\n    }\n  }\n\n  /**\n   * Animate value from start to end in duration with easing.\n   * @param start Start value\n   * @param end End value\n   * @param duration Duration in ms\n   * @param ease Cubic bezier easing\n   */\n  private _animateValue(start: number, end: number, duration: number, ease: [number, number, number, number]): void {\n    let startTimestamp: number | null = null;\n    const step = (timestamp: number) => {\n      if (!startTimestamp) startTimestamp = timestamp;\n      const progress = Math.min((timestamp - startTimestamp) / duration, 1);\n      //this.value = start + progress * (end - start);\n\n      this.value = start + this._easeInOutCubic(progress, ease) * (end - start);\n      if (progress < 1) {\n        window.requestAnimationFrame(step);\n      }\n    };\n    window.requestAnimationFrame(step);\n  }\n\n  /**\n   * Ease in out cubic function.\n   * @param t Time\n   * @param ease Cubic bezier easing\n   * @returns {number} Value\n   */\n  private _easeInOutCubic(t: number, ease: number[]): number {\n    return t<.5 ? 4*t*t*t : (t-1)*(2*t-2)*(2*t-2)+1;\n  }\n\n  /**\n   * @inheritDoc\n   */\n  public ngOnChanges(changes: SimpleChanges) {\n    if ('size' in changes || 'weight' in changes) {\n    }\n  }\n\n  /**\n   * @inheritDoc\n   */\n  public ngAfterViewInit(): void {\n  }\n\n  /**\n   * @event mousedown\n   * Start dragging the handle.\n   */\n  public startDrag(): void {\n    if (this.draggable) {\n      this.isDragging = true;\n      this._updateQuarters();\n    }\n  }\n\n  /**\n   * Calculate the active quarters from current value.\n   * This is needed to constraint the handle to pass through all quarters of the circle.\n   * @see allowCross\n   *\n   * When sliding, update activated quarters.\n   */\n  private _updateQuarters(): void {\n    this._activeQuarters = {\n      first: this.value >= this.max / 4,\n      // Can also be middle: this.value >= this.max / 2;\n      middle: this.value >= this.max / 4 && this.value <= (this.max / 4) * 3,\n      last: this.value > (this.max / 4) * 3,\n    }\n  }\n\n  /**\n   * @event mouseup\n   * Stop dragging the handle.\n   */\n  public stopDrag(): void {\n    this.isDragging = false;\n  }\n\n  /**\n   * @event mousemove\n   * Moving the handle.\n   */\n  public drag(event: MouseEvent): void {\n    if (this.isDragging && this.circle != null) {\n      const circle = this.circle.nativeElement;\n      this._circleRect = circle.getBoundingClientRect();\n\n      const x = event.clientX - this._circleRect.left;\n      const y = event.clientY - this._circleRect.top;\n      const angle = this._calculateAngle(x, y);\n      let value = this._calculateValueFromAngle(angle);\n\n      /**\n       * If the cross is not allowed, we need to prevent the handle to go over the min and max values.\n       * Need to check where the handle comes from.\n       * The value should never jump from min to max or max to min.\n       */\n      if (!this.allowCross) {\n        this._updateQuarters();\n        value = this._preventCross(value);\n      }\n\n      // Round the value to the nearest step\n      value = Math.round(value / this.step) * this.step;\n\n      this.writeValue(value);\n      this.updateChanges();\n    }\n  }\n\n  /**\n   * Prevent the handle to go over the min and max values.\n   * Listen to the activated quarters to know where the handle comes from.\n   * @param value\n   */\n  private _preventCross(value: number): number {\n\n    // Can't pass from max to min\n    if (this._activeQuarters.last && value < (this.max / 4) * 3) {\n      value = this.max;\n    }\n\n    // Can't pass from min to max\n    else if (!this._activeQuarters.first && value > this.max / 4) {\n      value = this.min;\n    }\n    return  value;\n  }\n\n  /**\n   * Calculate the angle of the handle.\n   */\n  private _calculateAngle(x: number, y: number): number {\n    let angle = Math.atan2(y - this.size / 2, x - this.size / 2) * 180 / Math.PI + 90;\n    // Prevent the handle to go over the 0°\n    if (angle < 0) {\n      angle = 360 + angle;\n    }\n\n    return angle;\n  }\n\n  /**\n   * Calculate value from angle.\n   */\n  private _calculateValueFromAngle(angle: number): number {\n    return angle * (this.max - this.min) / 360 + this.min;\n  }\n\n  /**\n   * Invoked when the model has been changed\n   */\n  public onChange: (_: any) => void = (_: any) => {};\n\n  /**\n   * Invoked method when value changes.\n   */\n  public updateChanges(): void {\n    if (typeof this.onChange === 'function') {\n      this.onChange(this.value);\n    }\n  }\n\n  public registerOnChange(fn: any): void {\n    this.onChange = fn;\n  }\n\n  public registerOnTouched(fn: any): void {\n  }\n\n  /**\n   * @event input\n   * @param value\n   */\n  public writeValue(value: number): void {\n    this.value = value;\n  }\n\n}\n",
+            "sourceCode": "import {\n  AfterViewInit,\n  Component,\n  ElementRef,\n  forwardRef,\n  Input,\n  OnChanges,\n  OnInit,\n  SimpleChanges,\n  ViewChild\n} from '@angular/core';\nimport {ControlValueAccessor, NG_VALUE_ACCESSOR} from \"@angular/forms\";\nimport {animateValueUtil} from \"../../../utils/animate-value.util\";\n\n/**\n * Input Circle Slider Component\n * Works with the ngModel directive\n * Uses the controlValueAccessor interface to work with the ngModel directive\n * @example\n * <input-circle-slider [(ngModel)]=\"value\"></input-circle-slider>\n * @example\n * <input-circle-slider [(ngModel)]=\"value\" [min]=\"0\" [max]=\"100\" [step]=\"1\"></input-circle-slider>\n */\n@Component({\n  selector: 'cv-input-circle-slider',\n  templateUrl: './input-circle-slider.component.html',\n  styleUrls: ['./input-circle-slider.component.scss'],\n  providers: [\n    {\n      provide: NG_VALUE_ACCESSOR,\n      useExisting: forwardRef(() => InputCircleSliderComponent),\n      multi: true\n    }\n  ]\n})\nexport class InputCircleSliderComponent implements OnInit, AfterViewInit, OnChanges, ControlValueAccessor {\n\n  /**\n   * @access ControlValueAccessor\n   *        or ngModel directive\n   *        or [(ngModel)]=\"value\"\n   *        or [ngModel]=\"value\"\n   *        or [value]=\"value\"\n   * @default Value is 0\n   * Main value of the slider.\n   */\n  @Input() public value: number = 0;\n\n  /**\n   * Unit\n   */\n  @Input() public unit: string = '';\n\n  /**\n   * Circle Dom element.\n   */\n  @ViewChild('circle') circle: ElementRef | undefined;\n\n  /**\n   * Size of the circle.\n   */\n  @Input() public size: number = 200;\n\n  /**\n   * Weight of the circle line.\n   */\n  @Input() public weight: number = 10;\n\n  /**\n   * Minimum value of the slider.\n   */\n  @Input() public min: number = 0;\n\n  /**\n   * Maximum value of the slider.\n   */\n  @Input() public max: number = 100;\n\n  /**\n   * Step value.\n   */\n  @Input() public step: number = 0.1;\n\n  /**\n   * Allow to drag the handle through the min and max values.\n   */\n  @Input() public allowCross: boolean = false;\n\n  /**\n   * Allow drag.\n   */\n  @Input() public draggable: boolean = true;\n\n  /**\n   * Animate the value\n   */\n  @Input() public animate: boolean = true;\n\n  /**\n   * Animation time\n   */\n  @Input() public animationTime: number = 1000;\n\n  /**\n   * Animation curve\n   */\n  @Input() public animationCurve: [number, number, number, number] = [.43, .02, .04, 1];\n\n  /**\n   * Show value\n   */\n  @Input() public showValue: boolean = true;\n\n  /**\n   * Value digits after the decimal point.\n   */\n  @Input() public valueDigits = 0;\n\n  /**\n   * Value as percentage.\n   */\n  public get valuePercentage(): number {\n    return this.value * 100 / this.max;\n  }\n\n  /**\n   * Formatted value.\n   */\n  public get formattedValue(): string {\n    const digits = this.valueDigits > 0 ? this.valueDigits : 0;\n    return this.value.toFixed(digits);\n  }\n\n  /**\n   * Invoked method when the slider is dragged.\n   */\n  private _activeQuarters: {\n    first: boolean,\n    middle: boolean,\n    last: boolean\n  } = {\n    first: false,\n    middle: false,\n    last: false,\n  }\n\n  /**\n   * The transform value as string of the rotation for the handle.\n   */\n\n  public get handleTransform(): string {\n    return `rotate(${this.valuePercentage * 3.6}deg)`;\n  }\n  /**\n   * User is currently dragging the handle.\n   */\n  public isDragging = false;\n\n  /**\n   * Circle Rect\n   */\n  private _circleRect: DOMRect = new DOMRect();\n\n  /**\n   * @constructor\n   */\n  public constructor() {}\n\n  /**\n   * @inheritDoc\n   */\n  public ngOnInit(): void {\n    this._updateQuarters();\n    if (this.animate) {\n      // Animate the value from 0 to the current value in 1 second.\n      animateValueUtil((value) => {\n        this.value = value;\n      },0, this.value, this.animationTime, this.animationCurve);\n    }\n  }\n\n  /**\n   * @inheritDoc\n   */\n  public ngOnChanges(changes: SimpleChanges) {\n    if ('size' in changes || 'weight' in changes) {\n    }\n  }\n\n  /**\n   * @inheritDoc\n   */\n  public ngAfterViewInit(): void {\n  }\n\n  /**\n   * @event mousedown\n   * Start dragging the handle.\n   */\n  public startDrag(): void {\n    if (this.draggable) {\n      this.isDragging = true;\n      this._updateQuarters();\n    }\n  }\n\n  /**\n   * Calculate the active quarters from current value.\n   * This is needed to constraint the handle to pass through all quarters of the circle.\n   * @see allowCross\n   *\n   * When sliding, update activated quarters.\n   */\n  private _updateQuarters(): void {\n    this._activeQuarters = {\n      first: this.value >= this.max / 4,\n      // Can also be middle: this.value >= this.max / 2;\n      middle: this.value >= this.max / 4 && this.value <= (this.max / 4) * 3,\n      last: this.value > (this.max / 4) * 3,\n    }\n  }\n\n  /**\n   * @event mouseup\n   * Stop dragging the handle.\n   */\n  public stopDrag(): void {\n    this.isDragging = false;\n  }\n\n  /**\n   * @event mousemove\n   * Moving the handle.\n   */\n  public drag(event: MouseEvent): void {\n    if (this.isDragging && this.circle != null) {\n      const circle = this.circle.nativeElement;\n      this._circleRect = circle.getBoundingClientRect();\n\n      const x = event.clientX - this._circleRect.left;\n      const y = event.clientY - this._circleRect.top;\n      const angle = this._calculateAngle(x, y);\n      let value = this._calculateValueFromAngle(angle);\n\n      /**\n       * If the cross is not allowed, we need to prevent the handle to go over the min and max values.\n       * Need to check where the handle comes from.\n       * The value should never jump from min to max or max to min.\n       */\n      if (!this.allowCross) {\n        this._updateQuarters();\n        value = this._preventCross(value);\n      }\n\n      // Round the value to the nearest step\n      value = Math.round(value / this.step) * this.step;\n\n      this.writeValue(value);\n      this.updateChanges();\n    }\n  }\n\n  /**\n   * Prevent the handle to go over the min and max values.\n   * Listen to the activated quarters to know where the handle comes from.\n   * @param value\n   */\n  private _preventCross(value: number): number {\n\n    // Can't pass from max to min\n    if (this._activeQuarters.last && value < (this.max / 4) * 3) {\n      value = this.max;\n    }\n\n    // Can't pass from min to max\n    else if (!this._activeQuarters.first && value > this.max / 4) {\n      value = this.min;\n    }\n    return  value;\n  }\n\n  /**\n   * Calculate the angle of the handle.\n   */\n  private _calculateAngle(x: number, y: number): number {\n    let angle = Math.atan2(y - this.size / 2, x - this.size / 2) * 180 / Math.PI + 90;\n    // Prevent the handle to go over the 0°\n    if (angle < 0) {\n      angle = 360 + angle;\n    }\n\n    return angle;\n  }\n\n  /**\n   * Calculate value from angle.\n   */\n  private _calculateValueFromAngle(angle: number): number {\n    return angle * (this.max - this.min) / 360 + this.min;\n  }\n\n  /**\n   * Invoked when the model has been changed\n   */\n  public onChange: (_: any) => void = (_: any) => {};\n\n  /**\n   * Invoked method when value changes.\n   */\n  public updateChanges(): void {\n    if (typeof this.onChange === 'function') {\n      this.onChange(this.value);\n    }\n  }\n\n  public registerOnChange(fn: any): void {\n    this.onChange = fn;\n  }\n\n  public registerOnTouched(fn: any): void {\n  }\n\n  /**\n   * @event input\n   * @param value\n   */\n  public writeValue(value: number): void {\n    this.value = value;\n  }\n\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "\r\n:host {\r\n  display: flex;\r\n}\r\n\r\n.input-circle-slider {\r\n  &__container {\r\n    position: relative;\r\n  }\r\n\r\n  &__ol {\r\n    height: 100vh;\r\n    width: 100%;\r\n    position: fixed;\r\n    top: 0;\r\n    left: 0;\r\n    z-index: 999999;\r\n    display: flex;\r\n  }\r\n\r\n  &__circle {\r\n    width: 100%;\r\n    height: 100%;\r\n    position: absolute;\r\n    top: 0;\r\n    left: 0;\r\n    border-radius: 50%;\r\n\r\n    &__value {\r\n      position: absolute;\r\n      top: 50%;\r\n      left: 50%;\r\n      transform: translate(-50%, -50%);\r\n      color: #fff;\r\n\r\n      .value {\r\n        font-size: 2rem;\r\n        font-weight: 700;\r\n      }\r\n\r\n      .unit {\r\n        font-size: 1rem;\r\n        font-weight: 400;\r\n        margin-left: 0.2rem;\r\n      }\r\n    }\r\n\r\n    &__track {\r\n      &-handle {\r\n        position: absolute;\r\n        top: 0;\r\n        left: 50%;\r\n        width: 0;\r\n        height: 50%;\r\n\r\n        display: flex;\r\n        align-items: flex-start;\r\n        justify-content: center;\r\n        transform-origin: center bottom;\r\n\r\n        .handler {\r\n          cursor: pointer;\r\n          position: absolute;\r\n          bottom: calc(100% - 20px);\r\n          left: calc(50% - 15px);\r\n          width: 30px;\r\n          height: 30px;\r\n          border-radius: 50%;\r\n          background: rgba(0, 0, 255, 1);\r\n          display: flex;\r\n          z-index: 30;\r\n        }\r\n      }\r\n    }\r\n  }\r\n}\r\n",
+                    "data": "\r\n:host {\r\n  display: flex;\r\n}\r\n\r\n.input-circle-slider {\r\n  &__container {\r\n    position: relative;\r\n  }\r\n\r\n  &__ol {\r\n    height: 100vh;\r\n    width: 100%;\r\n    position: fixed;\r\n    top: 0;\r\n    left: 0;\r\n    z-index: 999999;\r\n    display: flex;\r\n  }\r\n\r\n  &__circle {\r\n    width: 100%;\r\n    height: 100%;\r\n    position: absolute;\r\n    top: 0;\r\n    left: 0;\r\n    border-radius: 50%;\r\n\r\n    &__value {\r\n      position: absolute;\r\n      top: 50%;\r\n      left: 50%;\r\n      transform: translate(-50%, -50%);\r\n      color: #fff;\r\n\r\n      .value {\r\n        font-size: 2rem;\r\n        font-weight: 700;\r\n      }\r\n\r\n      .unit {\r\n        font-size: 1rem;\r\n        font-weight: 400;\r\n        margin-left: 0.2rem;\r\n      }\r\n    }\r\n\r\n    &__track {\r\n      &-handle {\r\n        position: absolute;\r\n        top: 0;\r\n        left: 50%;\r\n        width: 0;\r\n        height: 50%;\r\n\r\n        display: flex;\r\n        align-items: flex-start;\r\n        justify-content: center;\r\n        transform-origin: center bottom;\r\n\r\n        .handler {\r\n          cursor: pointer;\r\n          position: absolute;\r\n          bottom: calc(100% - 20px);\r\n          left: calc(50% - 15px);\r\n          width: 30px;\r\n          height: 30px;\r\n          border-radius: 50%;\r\n          background: var(--input-circle-slider--handler-color);\r\n          display: flex;\r\n          z-index: 30;\r\n        }\r\n      }\r\n    }\r\n  }\r\n}\r\n",
                     "styleUrl": "./input-circle-slider.component.scss"
                 }
             ],
@@ -1820,7 +1946,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "args": [],
-                "line": 161,
+                "line": 162,
                 "rawdescription": "\n\n",
                 "modifierKind": [
                     123
@@ -1840,7 +1966,7 @@
                         "name": "valuePercentage",
                         "type": "number",
                         "returnType": "number",
-                        "line": 121,
+                        "line": 122,
                         "rawdescription": "\n\nValue as percentage.\n",
                         "description": "<p>Value as percentage.</p>\n"
                     }
@@ -1851,7 +1977,7 @@
                         "name": "formattedValue",
                         "type": "string",
                         "returnType": "string",
-                        "line": 128,
+                        "line": 129,
                         "rawdescription": "\n\nFormatted value.\n",
                         "description": "<p>Formatted value.</p>\n"
                     }
@@ -1862,7 +1988,7 @@
                         "name": "handleTransform",
                         "type": "string",
                         "returnType": "string",
-                        "line": 150,
+                        "line": 151,
                         "rawdescription": "\n\nThe transform value as string of the rotation for the handle.\n",
                         "description": "<p>The transform value as string of the rotation for the handle.</p>\n"
                     }
@@ -2665,7 +2791,7 @@
         },
         {
             "name": "ProfileComponent",
-            "id": "component-ProfileComponent-b091b422e2dfd0f791b14d817a26287ee60e2fcf2bf001f04ce2ddb38dbf7d0bb883cfefefc8a4c82feddfa899425eae5035c9d4fb344ba36b4e070c6de8c976",
+            "id": "component-ProfileComponent-9918f130571068e1d7218637da3a9ef562da19f5d58df68a9c8db052ab315647d5be2e97ababc0798a22c1757a3437bf14ef345f2ecf81d7537ceacbccdc70f9",
             "file": "src/app/modules/main/components/profile/profile.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -2683,8 +2809,40 @@
             "viewProviders": [],
             "inputsClass": [],
             "outputsClass": [],
-            "propertiesClass": [],
-            "methodsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "outerCircleVal",
+                    "defaultValue": "100",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": false,
+                    "description": "<p>Outer circle fill percentage.\nUsefully for animations.</p>\n",
+                    "line": 15,
+                    "rawdescription": "\n\nOuter circle fill percentage.\nUsefully for animations.\n",
+                    "modifierKind": [
+                        123
+                    ]
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 26,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\n",
+                    "description": "",
+                    "modifierKind": [
+                        123
+                    ],
+                    "jsdoctags": []
+                }
+            ],
             "deprecated": false,
             "deprecationMessage": "",
             "hostBindings": [],
@@ -2692,16 +2850,32 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'cv-profile',\n  templateUrl: './profile.component.html',\n  styleUrls: ['./profile.component.scss']\n})\nexport class ProfileComponent {\n\n}\n",
+            "sourceCode": "import {Component, OnInit} from '@angular/core';\nimport {animateValueUtil} from \"../../../../utils/animate-value.util\";\n\n@Component({\n  selector: 'cv-profile',\n  templateUrl: './profile.component.html',\n  styleUrls: ['./profile.component.scss']\n})\nexport class ProfileComponent implements OnInit {\n\n  /**\n   * Outer circle fill percentage.\n   * Usefully for animations.\n   */\n  public outerCircleVal = 100;\n\n  /**\n   * @constructor\n   */\n  public constructor() {\n  }\n\n  /**\n   * @inheritDoc\n    */\n  public ngOnInit() {\n    animateValueUtil((val) => {\n      this.outerCircleVal = val;\n    }, 0, this.outerCircleVal, 2000, [.77, 0, 0, 1.06])\n  }\n\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "",
+                    "data": "@use 'functions' as fn;\r\n@use \"sass:math\";\r\n\r\n.profile {\r\n  &__container {\r\n    position: relative;\r\n    width: 300px;\r\n    height: 300px;\r\n  }\r\n\r\n  &__circle {\r\n    .circle-wrapper {\r\n      width: 100%;\r\n      height: 100%;\r\n      position: absolute;\r\n      top: 0;\r\n      left: 0;\r\n      border-radius: 50%;\r\n    }\r\n    .circle-outer {\r\n      &__thin {\r\n        $size: 240px;\r\n        $offset: 300px - $size;\r\n        width: calc(100% - #{$offset});\r\n        height: calc(100% - #{$offset});\r\n        top: math.div($offset, 2);\r\n        left: math.div($offset, 2);\r\n        mask: conic-gradient(from 30deg,\r\n          transparent 60deg,\r\n          black 60deg, black 89deg,\r\n          transparent 89deg, transparent 91.5deg,\r\n          black 92deg, black 120deg,\r\n          transparent 120deg, transparent 300deg,\r\n          black 300deg, black 329deg,\r\n          transparent 329deg, transparent 331deg,\r\n          black 331deg\r\n        );\r\n        --circle--track-bar-color: conic-gradient(from 60deg,\r\n          #{fn.get-color(primary, 600)} 30deg,\r\n          #{fn.get-color(primary, 900)} 180deg,\r\n          #{fn.get-color(primary, 600, 0.2)}  330deg);\r\n      }\r\n\r\n      &__tools {\r\n        mask: conic-gradient(from 30deg,\r\n          transparent 122deg,\r\n          black 122.5deg, black 148deg,\r\n          transparent 148.5deg, transparent 150deg,\r\n          black 150deg, black 298deg,\r\n          transparent 298.5deg\r\n        );\r\n        --circle--track-bar-color: conic-gradient(from 120deg,\r\n          #{fn.get-color(primary, 800, 1)} 0deg,\r\n          #{fn.get-color(primary, 300, 0.1)}  360deg);\r\n      }\r\n\r\n      &__input {\r\n        $size: 210px;\r\n        $offset: 300px - $size;\r\n        width: calc(100% - #{$offset});\r\n        height: calc(100% - #{$offset});\r\n        top: math.div($offset, 2);\r\n        left: math.div($offset, 2);\r\n        --circle--track-bar-color: conic-gradient(from 0deg,\r\n          #{fn.get-color(primary, 600, 0.4)} 30deg,\r\n          #{fn.get-color(primary, 900)} 180deg,\r\n          #{fn.get-color(primary, 600, 0.4)} 330deg);\r\n\r\n        --input-circle-slider--handler-color: transparent;\r\n\r\n        .handler {\r\n          position: relative;\r\n          left: -90px;\r\n          top: 10px;\r\n          --circle--track-bar-color: #{fn.get-color(primary, 900)};\r\n\r\n          &:hover {\r\n            --circle--track-bar-color: #{fn.get-color(primary, 600)};\r\n          }\r\n        }\r\n      }\r\n    }\r\n  }\r\n}\r\n",
                     "styleUrl": "./profile.component.scss"
                 }
             ],
             "stylesData": "",
-            "templateData": "<p>profile works!</p>\n"
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [],
+                "line": 15,
+                "rawdescription": "\n\n",
+                "modifierKind": [
+                    123
+                ],
+                "jsdoctags": []
+            },
+            "implements": [
+                "OnInit"
+            ],
+            "templateData": "<div class=\"profile__container\">\n  <div class=\"profile__circle\">\n    <div class=\"circle-outer__thin circle-wrapper\">\n      <cv-circle [size]=\"240\" [fillPercentage]=\"outerCircleVal\" [startAt]=\"9\"></cv-circle>\n    </div>\n    <div class=\"circle-outer__tools circle-wrapper\">\n      <cv-circle [size]=\"300\" [weight]=\"40\" [fillPercentage]=\"outerCircleVal\" [startAt]=\"9\"></cv-circle>\n    </div>\n    <div class=\"circle-outer__input circle-wrapper\">\n      <cv-input-circle-slider class=\"circle-input\" [showValue]=\"false\"\n                              [value]=\"90\"\n                              [size]=\"210\"\n                              [animationTime]=\"2800\"\n                              [allowCross]=\"true\"\n                              [weight]=\"2\">\n        <cv-circle class=\"handler\" [startAt]=\"88\" [size]=\"210\" [weight]=\"30\" [fillPercentage]=\"25\"></cv-circle>\n      </cv-input-circle-slider>\n    </div>\n  </div>\n</div>\n"
         }
     ],
     "modules": [
@@ -2837,6 +3011,50 @@
             ]
         },
         {
+            "name": "DrawCircleModule",
+            "id": "module-DrawCircleModule-539855a34251786f5abac6c15232e624ce8fd1d553f27b0a9b1b308fe3d17fddb1d034575deb2a45626ddaffd286b2150e70eea6e5e08613b8cd1492dd961f71",
+            "description": "",
+            "deprecationMessage": "",
+            "deprecated": false,
+            "file": "src/app/modules/shared/draw-circle/draw-circle.module.ts",
+            "methods": [],
+            "sourceCode": "import { NgModule } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { DrawCircleComponent } from './draw-circle.component';\n\n\n\n@NgModule({\n  declarations: [\n    DrawCircleComponent\n  ],\n  imports: [\n    CommonModule\n  ],\n  exports: [\n    DrawCircleComponent\n  ]\n})\nexport class DrawCircleModule { }\n",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": [
+                        {
+                            "name": "DrawCircleComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "imports",
+                    "elements": []
+                },
+                {
+                    "type": "exports",
+                    "elements": [
+                        {
+                            "name": "DrawCircleComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        },
+        {
             "name": "InputCircleSliderModule",
             "id": "module-InputCircleSliderModule-e25daeffbc6e41bd80d250d90245dc4f9a99ce7efdd5ae58540c26418e18583025a73765d138cafde26ebf99a881d4aa61e2b384df2c15499390bfac524c80ce",
             "description": "<p>Module for the InputCircleSliderComponent.</p>\n",
@@ -2886,13 +3104,13 @@
         },
         {
             "name": "MainModule",
-            "id": "module-MainModule-6b79f6e85484b0bd318d78086f6421d028c1341f3158ddb1ff9715356cfdc292962e101093e60c678616f8a1a39f25df61c3443f95493dabdf6bbbecec977825",
+            "id": "module-MainModule-f5b9ec6604b1cbdcf8452b16c6981d6092cc72f681edb641b1e8fe5c61ac601f47878730905548012eabf1010dfd80222b10e872cfbfeb586f477b06c33d6c66",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "src/app/modules/main/main.module.ts",
             "methods": [],
-            "sourceCode": "import { NgModule } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { MainComponent } from './components/main/main.component';\nimport {LayoutComponent} from \"./components/layout/layout.component\";\nimport { PageHomeComponent } from './components/page-home/page-home.component';\nimport { PageContactComponent } from './components/page-contact/page-contact.component';\nimport {RouterLink, RouterModule} from \"@angular/router\";\nimport {MatTabsModule} from \"@angular/material/tabs\";\nimport { HeaderComponent } from './components/header/header.component';\nimport {MatIconModule} from \"@angular/material/icon\";\nimport {MatToolbarModule} from \"@angular/material/toolbar\";\nimport {MatButtonModule} from \"@angular/material/button\";\nimport { MenuComponent } from './components/menu/menu.component';\nimport { ProfileComponent } from './components/profile/profile.component';\n\n\n\n@NgModule({\n    declarations: [\n        MainComponent,\n        LayoutComponent,\n        PageHomeComponent,\n        PageContactComponent,\n        HeaderComponent,\n        MenuComponent,\n        ProfileComponent,\n    ],\n  imports: [\n    CommonModule,\n    RouterLink,\n    RouterModule,\n    MatTabsModule,\n    MatIconModule,\n    MatToolbarModule,\n    MatButtonModule\n  ],\n  exports: [\n    MainComponent,\n    LayoutComponent\n  ],\n})\nexport class MainModule { }\n",
+            "sourceCode": "import { NgModule } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { MainComponent } from './components/main/main.component';\nimport {LayoutComponent} from \"./components/layout/layout.component\";\nimport { PageHomeComponent } from './components/page-home/page-home.component';\nimport { PageContactComponent } from './components/page-contact/page-contact.component';\nimport {RouterLink, RouterModule} from \"@angular/router\";\nimport {MatTabsModule} from \"@angular/material/tabs\";\nimport { HeaderComponent } from './components/header/header.component';\nimport {MatIconModule} from \"@angular/material/icon\";\nimport {MatToolbarModule} from \"@angular/material/toolbar\";\nimport {MatButtonModule} from \"@angular/material/button\";\nimport { MenuComponent } from './components/menu/menu.component';\nimport { ProfileComponent } from './components/profile/profile.component';\nimport {CircleModule} from \"../shared/circle/circle.module\";\nimport {InputCircleSliderModule} from \"../shared/input-circle-slider/input-circle-slider.module\";\n\n\n\n@NgModule({\n    declarations: [\n        MainComponent,\n        LayoutComponent,\n        PageHomeComponent,\n        PageContactComponent,\n        HeaderComponent,\n        MenuComponent,\n        ProfileComponent,\n    ],\n  imports: [\n    CommonModule,\n    RouterLink,\n    RouterModule,\n    MatTabsModule,\n    MatIconModule,\n    MatToolbarModule,\n    MatButtonModule,\n    CircleModule,\n    InputCircleSliderModule\n  ],\n  exports: [\n    MainComponent,\n    LayoutComponent\n  ],\n})\nexport class MainModule { }\n",
             "children": [
                 {
                     "type": "providers",
@@ -2928,6 +3146,12 @@
                     "type": "imports",
                     "elements": [
                         {
+                            "name": "CircleModule"
+                        },
+                        {
+                            "name": "InputCircleSliderModule"
+                        },
+                        {
                             "name": "RouterLink"
                         }
                     ]
@@ -2957,6 +3181,18 @@
     "miscellaneous": {
         "variables": [
             {
+                "name": "animateValueUtil",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/utils/animate-value.util.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "(\r\n  cb: (value: number) => void,\r\n  start: number,\r\n  end: number,\r\n  duration: number = 1000,\r\n  ease: [number, number, number, number] = [.43, .02, .04, 1]\r\n): void => {\r\n  let startTimestamp: number | null = null;\r\n  const step = (timestamp: number) => {\r\n    if (!startTimestamp) startTimestamp = timestamp;\r\n    const progress = Math.min((timestamp - startTimestamp) / duration, 1);\r\n    //this.value = start + progress * (end - start);\r\n\r\n    const value = start + easeInOutCubicUtil(progress, ease) * (end - start);\r\n    cb(value);\r\n    if (progress < 1) {\r\n      window.requestAnimationFrame(step);\r\n    }\r\n  };\r\n  window.requestAnimationFrame(step);\r\n}",
+                "rawdescription": "Animate number value.",
+                "description": "<p>Animate number value.</p>\n"
+            },
+            {
                 "name": "appRouting",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -2985,6 +3221,28 @@
                 "deprecationMessage": "",
                 "type": "",
                 "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "DrawCircle",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/modules/shared/draw-circle/draw-circle.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "easeInOutCubicUtil",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/utils/ease-in-out-cubic.util.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "(t: number, ease: [number, number, number, number]): number => {\r\n  return t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;\r\n}",
+                "rawdescription": "Ease in out cubic function.",
+                "description": "<p>Ease in out cubic function.</p>\n"
             },
             {
                 "name": "environment",
@@ -3094,7 +3352,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "object",
-                "defaultValue": "{\n  declarations: [\n      MainComponent,\n      LayoutComponent,\n      PageHomeComponent,\n      PageContactComponent,\n      HeaderComponent,\n      ProfileComponent\n  ],\n  imports: [\n    appRouting,\n    BrowserAnimationsModule,\n    CommonModule,\n    RouterLink,\n    RouterModule,\n    MatTabsModule,\n    MatIconModule,\n    MatToolbarModule,\n    MatButtonModule,\n    ProfileComponent\n  ],\n  exports: [\n    MainComponent,\n    LayoutComponent,\n    HeaderComponent,\n    ProfileComponent\n  ],\n}"
+                "defaultValue": "{\n  declarations: [\n      MainComponent,\n      LayoutComponent,\n      PageHomeComponent,\n      PageContactComponent,\n      HeaderComponent,\n      MenuComponent,\n      ProfileComponent\n  ],\n  imports: [\n    appRouting,\n    BrowserAnimationsModule,\n    CircleModule,\n    CommonModule,\n    RouterLink,\n    RouterModule,\n    MatTabsModule,\n    MatIconModule,\n    MatToolbarModule,\n    MatButtonModule,\n    InputCircleSliderModule,\n  ],\n  exports: [\n    MainComponent,\n    LayoutComponent,\n    HeaderComponent,\n    ProfileComponent\n  ],\n}"
             },
             {
                 "name": "Menu",
@@ -3204,6 +3462,18 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "src/app/modules/shared/draw-circle/draw-circle.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<DrawCircleComponent>",
+                "defaultValue": "(args: DrawCircleComponent) => ({\r\n  props: args,\r\n})",
+                "rawdescription": "Template of the component.",
+                "description": "<p>Template of the component.</p>\n"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "src/app/modules/shared/circle/circle.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -3240,11 +3510,11 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/modules/main/components/layout/layout.stories.ts",
+                "file": "src/app/modules/main/components/main/main.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Story<LayoutComponent>",
-                "defaultValue": "(args: LayoutComponent) => ({\r\n  props: args,\r\n})",
+                "type": "Story<MainComponent>",
+                "defaultValue": "(args: MainComponent) => ({\r\n  props: args,\r\n})",
                 "rawdescription": "Template of the component.",
                 "description": "<p>Template of the component.</p>\n"
             },
@@ -3252,11 +3522,11 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/modules/main/components/main/main.stories.ts",
+                "file": "src/app/modules/main/components/layout/layout.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Story<MainComponent>",
-                "defaultValue": "(args: MainComponent) => ({\r\n  props: args,\r\n})",
+                "type": "Story<LayoutComponent>",
+                "defaultValue": "(args: LayoutComponent) => ({\r\n  props: args,\r\n})",
                 "rawdescription": "Template of the component.",
                 "description": "<p>Template of the component.</p>\n"
             },
@@ -3289,6 +3559,20 @@
         "typealiases": [],
         "enumerations": [],
         "groupedVariables": {
+            "src/app/utils/animate-value.util.ts": [
+                {
+                    "name": "animateValueUtil",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/utils/animate-value.util.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "(\r\n  cb: (value: number) => void,\r\n  start: number,\r\n  end: number,\r\n  duration: number = 1000,\r\n  ease: [number, number, number, number] = [.43, .02, .04, 1]\r\n): void => {\r\n  let startTimestamp: number | null = null;\r\n  const step = (timestamp: number) => {\r\n    if (!startTimestamp) startTimestamp = timestamp;\r\n    const progress = Math.min((timestamp - startTimestamp) / duration, 1);\r\n    //this.value = start + progress * (end - start);\r\n\r\n    const value = start + easeInOutCubicUtil(progress, ease) * (end - start);\r\n    cb(value);\r\n    if (progress < 1) {\r\n      window.requestAnimationFrame(step);\r\n    }\r\n  };\r\n  window.requestAnimationFrame(step);\r\n}",
+                    "rawdescription": "Animate number value.",
+                    "description": "<p>Animate number value.</p>\n"
+                }
+            ],
             "src/app/app-routing.module.ts": [
                 {
                     "name": "appRouting",
@@ -3347,6 +3631,44 @@
                     "defaultValue": "(args: InputCircleSliderComponent) => ({\r\n  props: args,\r\n})",
                     "rawdescription": "Template of the component.",
                     "description": "<p>Template of the component.</p>\n"
+                }
+            ],
+            "src/app/modules/shared/draw-circle/draw-circle.stories.ts": [
+                {
+                    "name": "DrawCircle",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/modules/shared/draw-circle/draw-circle.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/modules/shared/draw-circle/draw-circle.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<DrawCircleComponent>",
+                    "defaultValue": "(args: DrawCircleComponent) => ({\r\n  props: args,\r\n})",
+                    "rawdescription": "Template of the component.",
+                    "description": "<p>Template of the component.</p>\n"
+                }
+            ],
+            "src/app/utils/ease-in-out-cubic.util.ts": [
+                {
+                    "name": "easeInOutCubicUtil",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/utils/ease-in-out-cubic.util.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "(t: number, ease: [number, number, number, number]): number => {\r\n  return t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;\r\n}",
+                    "rawdescription": "Ease in out cubic function.",
+                    "description": "<p>Ease in out cubic function.</p>\n"
                 }
             ],
             "src/environments/environment.prod.ts": [
@@ -3570,7 +3892,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "object",
-                    "defaultValue": "{\n  declarations: [\n      MainComponent,\n      LayoutComponent,\n      PageHomeComponent,\n      PageContactComponent,\n      HeaderComponent,\n      ProfileComponent\n  ],\n  imports: [\n    appRouting,\n    BrowserAnimationsModule,\n    CommonModule,\n    RouterLink,\n    RouterModule,\n    MatTabsModule,\n    MatIconModule,\n    MatToolbarModule,\n    MatButtonModule,\n    ProfileComponent\n  ],\n  exports: [\n    MainComponent,\n    LayoutComponent,\n    HeaderComponent,\n    ProfileComponent\n  ],\n}"
+                    "defaultValue": "{\n  declarations: [\n      MainComponent,\n      LayoutComponent,\n      PageHomeComponent,\n      PageContactComponent,\n      HeaderComponent,\n      MenuComponent,\n      ProfileComponent\n  ],\n  imports: [\n    appRouting,\n    BrowserAnimationsModule,\n    CircleModule,\n    CommonModule,\n    RouterLink,\n    RouterModule,\n    MatTabsModule,\n    MatIconModule,\n    MatToolbarModule,\n    MatButtonModule,\n    InputCircleSliderModule,\n  ],\n  exports: [\n    MainComponent,\n    LayoutComponent,\n    HeaderComponent,\n    ProfileComponent\n  ],\n}"
                 }
             ],
             "src/app/modules/main/components/menu/menu.stories.ts": [
@@ -3694,7 +4016,7 @@
         ]
     },
     "coverage": {
-        "count": 28,
+        "count": 32,
         "status": "medium",
         "files": [
             {
@@ -3884,8 +4206,8 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "ProfileComponent",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
+                "coveragePercent": 25,
+                "coverageCount": "1/4",
                 "status": "low"
             },
             {
@@ -3948,12 +4270,50 @@
                 "status": "very-good"
             },
             {
+                "filePath": "src/app/modules/shared/draw-circle/draw-circle.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "DrawCircleComponent",
+                "coveragePercent": 40,
+                "coverageCount": "4/10",
+                "status": "medium"
+            },
+            {
+                "filePath": "src/app/modules/shared/draw-circle/draw-circle.interface.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "DrawCircleCoordinates",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/modules/shared/draw-circle/draw-circle.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "DrawCircle",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/modules/shared/draw-circle/draw-circle.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 100,
+                "coverageCount": "1/1",
+                "status": "very-good"
+            },
+            {
                 "filePath": "src/app/modules/shared/input-circle-slider/input-circle-slider.component.ts",
                 "type": "component",
                 "linktype": "component",
                 "name": "InputCircleSliderComponent",
-                "coveragePercent": 78,
-                "coverageCount": "29/37",
+                "coveragePercent": 77,
+                "coverageCount": "27/35",
                 "status": "very-good"
             },
             {
@@ -3984,6 +4344,26 @@
                 "coveragePercent": 75,
                 "coverageCount": "6/8",
                 "status": "good"
+            },
+            {
+                "filePath": "src/app/utils/animate-value.util.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "animateValueUtil",
+                "coveragePercent": 100,
+                "coverageCount": "1/1",
+                "status": "very-good"
+            },
+            {
+                "filePath": "src/app/utils/ease-in-out-cubic.util.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "easeInOutCubicUtil",
+                "coveragePercent": 100,
+                "coverageCount": "1/1",
+                "status": "very-good"
             },
             {
                 "filePath": "src/environments/environment.prod.ts",

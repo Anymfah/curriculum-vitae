@@ -8,7 +8,65 @@ export default {
   title: 'Kits/Draw Circle',
   component: DrawCircleComponent,
   argTypes: {
-  }
+    size: {
+      control: {
+          type: 'range',
+          min: 0,
+          max: 500,
+          step: 1
+      },
+      defaultValue: 300
+    },
+    weight: {
+      control: {
+        type: 'number',
+        min: 0,
+        step: 1,
+      },
+      defaultValue: 10
+    },
+    circleWeight: {
+      control: {
+        type: 'number',
+        min: 0,
+      },
+      defaultValue: 1
+    },
+    arcDegree: {
+      control: {
+        type: 'range',
+        min: 0,
+        max: 360,
+        step: 1
+      },
+      defaultValue: 120
+    },
+    positionDegree: {
+      control: {
+        type: 'range',
+        min: 0,
+        max: 360,
+        step: 1,
+      },
+      defaultValue: 0,
+    },
+    anchorPoint: {
+      control: {
+        type: 'select',
+        options: ['start', 'middle', 'end']
+      },
+      defaultValue: 'middle',
+    },
+    showRefCircle: {
+      control: {
+        type: 'boolean'
+      },
+      defaultValue: false,
+    }
+  },
+  parameters: {
+    //docs: false,
+  },
 } as Meta;
 
 /**
@@ -20,7 +78,3 @@ const Template: Story<DrawCircleComponent> = (args: DrawCircleComponent) => ({
 });
 
 export const DrawCircle = Template.bind({});
-DrawCircle.args = {
-  size: 300,
-  arcDegree: 27.77
-}

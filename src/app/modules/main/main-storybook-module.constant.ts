@@ -14,6 +14,7 @@ import {MatButtonModule} from "@angular/material/button";
 import {ProfileComponent} from "./components/profile/profile.component";
 import {CircleModule} from "../shared/circle/circle.module";
 import {InputCircleSliderModule} from "../shared/input-circle-slider/input-circle-slider.module";
+import {MenuComponent} from "./components/menu/menu.component";
 
 
 
@@ -24,6 +25,7 @@ export const MainStorybookModuleConstant ={
       PageHomeComponent,
       PageContactComponent,
       HeaderComponent,
+      MenuComponent,
       ProfileComponent
   ],
   imports: [

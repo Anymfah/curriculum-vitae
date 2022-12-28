@@ -6,7 +6,7 @@ import {DrawCircleCoordinates} from "./draw-circle.interface";
   templateUrl: './draw-circle.component.html',
   styleUrls: ['./draw-circle.component.scss']
 })
-export class DrawCircleComponent implements OnChanges {
+export class DrawCircleComponent implements OnInit, OnChanges {
 
   /**
    * Degree of the circle.
@@ -19,7 +19,33 @@ export class DrawCircleComponent implements OnChanges {
    */
   @Input() public size: number = 300;
 
-  public viewBoxSize: number = this.size + 10;
+  /**
+   * Weight of the arc.
+   */
+  @Input() public weight: number = 10;
+
+  /**
+   * Weight of the circle
+   */
+  @Input() public circleWeight: number = 1;
+
+  /**
+   * Position of the center the arc.
+   * 0 = top, 90 = right, 180 = bottom, 270 = left.
+   */
+  @Input() public positionDegree: number = 0;
+
+  /**
+   * Position of anchor point of the arc.
+   */
+  @Input() public anchorPoint: 'start' | 'middle' | 'end' = 'middle';
+
+  /**
+   * Show full circle.
+   */
+  @Input() public showRefCircle: boolean = false;
+
+  public viewBoxSize = 120;
 
   /**
    * Percentage of the circle.
@@ -36,12 +62,18 @@ export class DrawCircleComponent implements OnChanges {
   /**
    * @inheritDoc
    */
+  public ngOnInit() {
+    this._draw();
+  }
+
+  /**
+   * @inheritDoc
+   */
   public ngOnChanges(changes: SimpleChanges) {
-    if ('size' in changes || 'arcDegree' in changes) {
-      if (this.arcDegree >= 360) {
-        this.arcDegree = 359.999;
-      }
-      this.viewBoxSize = 120;
+    if ('size' in changes
+      || 'arcDegree' in changes
+      || 'positionDegree' in changes
+      || 'anchorPoint' in changes) {
       this._draw();
     }
   }
@@ -50,16 +82,25 @@ export class DrawCircleComponent implements OnChanges {
    * Draw or update the arc.
    */
   private _draw() {
-    //const center = this.size / 2;
-    const center = 60;
-    const radius = 50;
+    if (this.arcDegree >= 360) {
+      this.arcDegree = 359.999;
+    }
+    let center = 60;
+    let radius = 50;
     const arcSize = ((100 - this.arcPercentage) / 100) * 180;
-    const startAngle = -arcSize - 90;
-    const endAngle = arcSize - 90;
+    // Calculate the position of the arc.
+    let position = this.positionDegree;
+    if (this.anchorPoint === 'middle') {
+      position += 90;
+    } else if (this.anchorPoint === 'start') {
+      position -= 90 + arcSize;
+    } else if (this.anchorPoint === 'end') {
+      position -= 90 - arcSize;
+    }
 
-    /*const startAngle = this.arcDegree - 90;
-    const endAngle = 270 - this.arcDegree;*/
-    console.log('startAngle', startAngle, 'endAngle', endAngle);
+    const startAngle = -arcSize + position;
+    const endAngle = arcSize + position;
+
 
     this.leftArc = this._polarToCartesian(center, center, radius, startAngle);
     this.rightArc = this._polarToCartesian(center, center, radius, endAngle);
