@@ -1,11 +1,11 @@
 import {
   AfterViewInit,
   Component,
-  ElementRef,
+  ElementRef, EventEmitter,
   forwardRef,
   Input,
   OnChanges,
-  OnInit,
+  OnInit, Output,
   SimpleChanges,
   ViewChild
 } from '@angular/core';
@@ -115,6 +115,11 @@ export class InputCircleSliderComponent implements OnInit, AfterViewInit, OnChan
    * Value digits after the decimal point.
    */
   @Input() public valueDigits = 0;
+
+  /**
+   * User is dragging the handle.
+   */
+  @Output() public triggerDragging = new EventEmitter<number>;
 
   /**
    * Value as percentage.
@@ -256,6 +261,7 @@ export class InputCircleSliderComponent implements OnInit, AfterViewInit, OnChan
       value = Math.round(value / this.step) * this.step;
 
       this.writeValue(value);
+      this.triggerDragging.emit(value);
       this.updateChanges();
     }
   }

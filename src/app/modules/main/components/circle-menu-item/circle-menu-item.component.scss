@@ -1,0 +1,104 @@
+@use 'functions' as fn;
+@use 'mixins';
+
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  --circle--track-bar-color: conic-gradient(from 0deg,
+    #{fn.get-color(primary, 600, 0.4)} 30deg,
+    #{fn.get-color(primary, 900)} 180deg,
+    #{fn.get-color(primary, 600, 0.4)} 330deg);
+}
+
+.circle-menu-item {
+  &__content {
+    width: 0;
+    height: 0;
+    position: absolute;
+    &-wrapper {
+      color: fn.get-color(primary, 50);
+      width: 200px;
+      position: absolute;
+      text-align: left;
+      top: 0;
+
+      &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        width: 0;
+        height: 1px;
+        background: fn.get-color(primary, 600, 0.4);
+        @include mixins.transition(.07s, $delay: 0s);
+
+        @at-root :host.active & {
+          @include mixins.transition(.4s, $delay: .2s);
+          width: 100%;
+        }
+      }
+
+      &.left {
+        right: 0;
+        &:before {
+          right: 0;
+        }
+
+        .title, .description {
+          padding-right: 25px;
+          transform: translateX(25px);
+        }
+      }
+
+      &.right {
+        left: 0;
+        &:before {
+          left: 0;
+        }
+
+        .title, .description {
+          padding-left: 10px;
+          transform: translateX(-25px);
+        }
+      }
+    }
+
+      .title, .description {
+        @include mixins.transition(.1s, $delay: 0s);
+        opacity: 0;
+
+        @at-root :host.active & {
+          @include mixins.transition(.5s, $delay: .2s);
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      .description {
+        @at-root :host.active & {
+          transition-delay: .35s;
+        }
+      }
+
+    &__title {
+      margin-top: -35px;
+    }
+  }
+
+  &__svg-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 1px;
+    width: 0;
+    background: fn.get-color(primary, 600, 0.4);
+    transform-origin: left center;
+    transform: rotate(30deg);
+    @include mixins.transition(.07s, width, $delay: .03s);
+
+    @at-root :host.active & {
+      @include mixins.transition(.2s, width, $delay: 0s);
+      width: 75px;
+    }
+  }
+}

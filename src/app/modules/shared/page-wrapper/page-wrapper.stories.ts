@@ -1,14 +1,15 @@
 import {componentWrapperDecorator, moduleMetadata} from '@storybook/angular';
 import { Story, Meta } from '@storybook/angular/types-6-0';
-import {LayoutComponent} from "./layout.component";
-import {MainStorybookModuleConstant} from "../../main-storybook-module.constant";
+import {PageWrapperComponent} from "./page-wrapper.component";
+import {PageWrapperModule} from "./page-wrapper.module";
+import {StorybookWrapperModule} from "../storybook-wrapper/storybook-wrapper.module";
 
 /**
- * Story for the Input Circle Slider Component.
+ * Story for Page Wrapper Component.
  */
 export default {
-  title: 'Main/Layout',
-  component: LayoutComponent,
+  title: 'Reusable/Page Wrapper',
+  component: PageWrapperComponent,
   parameters: {
     controls: { hideNoControlsWarning: true },
     layout: 'fullscreen',
@@ -16,7 +17,12 @@ export default {
   argTypes: {
   },
   decorators: [
-    moduleMetadata(MainStorybookModuleConstant),
+    moduleMetadata({
+      imports: [
+        StorybookWrapperModule,
+        PageWrapperModule
+      ]
+    }),
     componentWrapperDecorator((story) => {
       return `<cv-storybook-wrapper
                 width="100%"
@@ -30,11 +36,8 @@ export default {
  * Template of the component.
  * @param args Component arguments.
  */
-const Template: Story<LayoutComponent> = (args: LayoutComponent) => ({
+const Template: Story<PageWrapperComponent> = (args: PageWrapperComponent) => ({
   props: args,
 });
 
-export const Layout = Template.bind({});
-
-Layout.args = {
-}
+export const PageWrapper = Template.bind({});

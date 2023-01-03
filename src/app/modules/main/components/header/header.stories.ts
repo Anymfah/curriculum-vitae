@@ -2,7 +2,6 @@ import { moduleMetadata } from '@storybook/angular';
 import { Story, Meta } from '@storybook/angular/types-6-0';
 import {HeaderComponent} from "./header.component";
 import {MainStorybookModuleConstant} from "../../main-storybook-module.constant";
-import {appRouting} from "../../../../app-routing.module";
 
 /**
  * Story for the Input Circle Slider Component.

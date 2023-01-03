@@ -27,9 +27,33 @@ export class CircleComponent implements OnChanges, OnInit {
   @Input() public size: number = 200;
 
   /**
-   * Weight of the circle line.
+   * Base Weight of the circle line.
+   */
+  @Input() public baseWeight: number = 10;
+
+  /**
+   * Size render of the circle
+   */
+  public get sizeRender(): number {
+    return this.weightDirection === 'out' ? this.size + this.weight : this.size;
+  }
+
+  /**
+   * Size render of the container of the circle.
+   */
+  public get containerSizeRender(): number {
+    return this.weightDirection === 'out' ? this.size + this.baseWeight : this.size;
+  }
+
+  /**
+   * Weight of the circle line (can be animated).
    */
   @Input() public weight: number = 10;
+
+  /**
+   * Weight direction.
+   */
+  @Input() public weightDirection: 'in' | 'out' = 'in';
 
   /**
    * Fill percentage of the track bar.
@@ -40,10 +64,27 @@ export class CircleComponent implements OnChanges, OnInit {
   @Input() public fillPercentage: number = 100;
 
   /**
-   * Start point of the track bar.
+   * Start point of the track bar as percentage.
    * @description 0% is the top of the circle and 50% the bottom.
    */
-  @Input() public startAt: number = 0;
+  @Input() public startAt?: number;
+
+  /**
+   * Start point of the track bar as degree.
+   * @description 0deg is the top of the circle and 180deg the bottom.
+   */
+  @Input() public startAtDegree: number = 0;
+
+  /**
+   * Get start point of the track bar as degree.
+   */
+  private get _startAtDegree(): number {
+    if (this.startAt != null) {
+      return this.startAt * 3.6;
+    } else {
+      return this.startAtDegree;
+    }
+  }
 
   /**
    * Reversed direction of the track bar.
@@ -68,12 +109,14 @@ export class CircleComponent implements OnChanges, OnInit {
   public ngOnChanges(changes: SimpleChanges) {
     if ('fillPercentage' in changes
       || 'startAt' in changes
+      || 'startAtDegree' in changes
       || 'reverse' in changes) {
       this._drawTrackCircle();
     }
 
     if ('size' in changes
-      || 'weight' in changes) {
+      || 'weight' in changes
+      || 'weightDirection' in changes) {
       this._drawSize();
     }
   }
@@ -93,19 +136,16 @@ export class CircleComponent implements OnChanges, OnInit {
    */
   private _drawTrackCircle() {
     if (!this.reverse) {
-      const startAtDegree = this.startAt * 3.6;
       this.trackBarMaskInner = `conic-gradient(
-        from ${startAtDegree}deg,
+        from ${this._startAtDegree}deg,
         black ${this.fillPercentage}%,
         transparent ${this.fillPercentage}%
         )`;
     } else {
       // Reverse the direction (will start with empty to filled)
       const emptyPercentage = 100 - this.fillPercentage;
-      const startPercentage = 100 - this.startAt;
-      const startAtDegree = startPercentage * 3.6;
       this.trackBarMaskInner = `conic-gradient(
-        from ${startAtDegree}deg,
+        from ${360 - this._startAtDegree}deg,
         transparent ${emptyPercentage}%,
         black ${emptyPercentage}%
         )`;
@@ -119,7 +159,8 @@ export class CircleComponent implements OnChanges, OnInit {
    */
   private _drawSize() {
     const radius = this.size / 2;
-    this.trackBarMask = `radial-gradient(circle at center, transparent 0, transparent ${radius - this.weight}px, black ${radius - this.weight}px)`;
+    const weight = this.weightDirection === 'in' ? this.weight : 0;
+    this.trackBarMask = `radial-gradient(circle at center, transparent 0, transparent ${radius - weight}px, black ${radius - this.weight}px)`;
   }
 
 }

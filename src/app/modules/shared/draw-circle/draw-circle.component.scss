@@ -1,11 +1,11 @@
+@use 'mixins';
 
 .circle {
+  @include mixins.transition;
   fill: transparent;
-  stroke: #87CEEB;
+  stroke: var(--draw-circle--track-bar-color);
   stroke-width: 1;
-  &:hover {
-    stroke: #fa87cc;
-  }
+  pointer-events: var(--draw-circle--arc-pointer-events);
 }
 .inCircle {
   fill: transparent;

@@ -1,4 +1,7 @@
 :root {
   /// Background color of the handle
   --input-circle-slider--handler-color: rgba(0, 0, 255, 1);
+
+  // Pointer events active on the handle
+  --input-circle-slider--handler-pointer-events: auto;
 }

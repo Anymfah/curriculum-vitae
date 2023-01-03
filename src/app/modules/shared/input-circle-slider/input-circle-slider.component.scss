@@ -57,6 +57,7 @@
         align-items: flex-start;
         justify-content: center;
         transform-origin: center bottom;
+        pointer-events: none;
 
         .handler {
           cursor: pointer;
@@ -69,6 +70,7 @@
           background: var(--input-circle-slider--handler-color);
           display: flex;
           z-index: 30;
+          pointer-events: var(--input-circle-slider--handler-pointer-events);
         }
       }
     }

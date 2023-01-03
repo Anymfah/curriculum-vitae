@@ -15,6 +15,10 @@ import {ProfileComponent} from "./components/profile/profile.component";
 import {CircleModule} from "../shared/circle/circle.module";
 import {InputCircleSliderModule} from "../shared/input-circle-slider/input-circle-slider.module";
 import {MenuComponent} from "./components/menu/menu.component";
+import {DrawCircleModule} from "../shared/draw-circle/draw-circle.module";
+import {StorybookWrapperModule} from "../shared/storybook-wrapper/storybook-wrapper.module";
+import {CircleMenuItemComponent} from "./components/circle-menu-item/circle-menu-item.component";
+import {PageWrapperModule} from "../shared/page-wrapper/page-wrapper.module";
 
 
 
@@ -26,7 +30,8 @@ export const MainStorybookModuleConstant ={
       PageContactComponent,
       HeaderComponent,
       MenuComponent,
-      ProfileComponent
+      ProfileComponent,
+      CircleMenuItemComponent
   ],
   imports: [
     appRouting,
@@ -40,11 +45,15 @@ export const MainStorybookModuleConstant ={
     MatToolbarModule,
     MatButtonModule,
     InputCircleSliderModule,
+    DrawCircleModule,
+    StorybookWrapperModule,
+    PageWrapperModule,
   ],
   exports: [
     MainComponent,
     LayoutComponent,
     HeaderComponent,
-    ProfileComponent
+    ProfileComponent,
+    CircleMenuItemComponent
   ],
 };

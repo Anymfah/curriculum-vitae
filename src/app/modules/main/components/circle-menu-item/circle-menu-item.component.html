@@ -1,0 +1,29 @@
+<div class="cicle-menu-item__container">
+  <cv-circle [size]="size"
+             [weight]="weightValue"
+             [baseWeight]="80"
+             [fillPercentage]="fillPercentage"
+             [startAtDegree]="positionDegree"
+             [reverse]="true"
+             weightDirection="out">
+    <div class="circle-menu-item__svg-wrapper"
+         [style.width.px]="contentOffset"
+         [style.transform]="svgWrapperRotate"
+         [style.left.%]="svgWrapperPosition.x"
+         [style.top.%]="svgWrapperPosition.y">
+    </div>
+    <div class="circle-menu-item__content"
+         [style.top.%]="contentPosition.y"
+         [style.left.%]="contentPosition.x"
+    >
+      <div class="circle-menu-item__content-wrapper" [ngClass]="contentSide">
+        <div class="circle-menu-item__content__title title mat-h2">{{title}}</div>
+        <div class="circle-menu-item__content__description description mat-small">
+          {{description}}
+        </div>
+      </div>
+
+    </div>
+  </cv-circle>
+</div>
+

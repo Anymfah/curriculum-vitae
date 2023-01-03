@@ -75,6 +75,7 @@ export class DrawCircleComponent implements OnInit, OnChanges {
       || 'positionDegree' in changes
       || 'anchorPoint' in changes) {
       this._draw();
+      console.log('this: ', this);
     }
   }
 

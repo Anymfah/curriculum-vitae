@@ -6,14 +6,33 @@
     <div class="circle-outer__tools circle-wrapper">
       <cv-circle [size]="300" [weight]="40" [fillPercentage]="outerCircleVal" [startAt]="9"></cv-circle>
     </div>
+
+    <!--Profile-->
+    <div class="circle-outer__menu">
+      <cv-circle-menu-item *ngFor="let item of menuItems"
+                           [size]="item.size"
+                           [weight]="item.weight"
+                           [torque]="item.torque"
+                           [contentOffset]="item.contentOffset"
+                           [title]="item.title"
+                           [description]="item.description"
+                           [fillPercentage]="item.fillPercentage"
+                           [positionDegree]="item.positionDegree" [active]="item.active">
+      </cv-circle-menu-item>
+    </div>
     <div class="circle-outer__input circle-wrapper">
       <cv-input-circle-slider class="circle-input" [showValue]="false"
-                              [value]="90"
+                              [min]="0"
+                              [max]="360"
+                              (triggerDragging)="onTriggerDragging($event)"
+                              [value]="value"
                               [size]="210"
                               [animationTime]="2800"
                               [allowCross]="true"
                               [weight]="2">
-        <cv-circle class="handler" [startAt]="88" [size]="210" [weight]="30" [fillPercentage]="25"></cv-circle>
+        <cv-draw-circle class="handler" [positionDegree]="0"
+                        [size]="210" [weight]="15"
+                        [arcDegree]="90"></cv-draw-circle>
       </cv-input-circle-slider>
     </div>
   </div>

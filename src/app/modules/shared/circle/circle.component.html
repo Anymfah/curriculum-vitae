@@ -1,14 +1,22 @@
-<div class="circle__container" [style.width.px]="size"
-     [style.height.px]="size">
-  <div #circle class="circle__inner">
+<div class="circle__container"
+     [style.width.px]="containerSizeRender"
+     [style.height.px]="containerSizeRender">
+  <div class="circle__wrapper" [style.width.px]="sizeRender"
+       [style.height.px]="sizeRender">
+    <div #circle class="circle__inner">
 
-    <div class="circle__track-bar"
-         [style.-webkit-mask]="trackBarMask"
-    >
-      <div class="circle__track-bar--inner"
-           [style.-webkit-mask]="trackBarMaskInner">
-        <div class="circle__track-bar--bg bg-cone"></div>
+      <div class="circle__track-bar"
+           [style.-webkit-mask]="trackBarMask"
+      >
+        <div class="circle__track-bar--inner"
+             [style.-webkit-mask]="trackBarMaskInner">
+          <div class="circle__track-bar--bg bg-cone"></div>
+        </div>
       </div>
+    </div>
+    <div class="circle__content">
+      <ng-content></ng-content>
     </div>
   </div>
 </div>
+

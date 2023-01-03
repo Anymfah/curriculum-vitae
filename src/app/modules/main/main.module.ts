@@ -14,6 +14,9 @@ import { MenuComponent } from './components/menu/menu.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import {CircleModule} from "../shared/circle/circle.module";
 import {InputCircleSliderModule} from "../shared/input-circle-slider/input-circle-slider.module";
+import {DrawCircleModule} from "../shared/draw-circle/draw-circle.module";
+import { CircleMenuItemComponent } from './components/circle-menu-item/circle-menu-item.component';
+import {PageWrapperModule} from "../shared/page-wrapper/page-wrapper.module";
 
 
 
@@ -26,6 +29,7 @@ import {InputCircleSliderModule} from "../shared/input-circle-slider/input-circl
         HeaderComponent,
         MenuComponent,
         ProfileComponent,
+        CircleMenuItemComponent,
     ],
   imports: [
     CommonModule,
@@ -36,7 +40,9 @@ import {InputCircleSliderModule} from "../shared/input-circle-slider/input-circl
     MatToolbarModule,
     MatButtonModule,
     CircleModule,
-    InputCircleSliderModule
+    InputCircleSliderModule,
+    DrawCircleModule,
+    PageWrapperModule
   ],
   exports: [
     MainComponent,
