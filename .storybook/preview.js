@@ -9,6 +9,7 @@ export const parameters = {
       color: /(background|color)$/i,
       date: /Date$/,
     },
+    hideNoControlsWarning: true
   },
   docs: false
   //docs: { inlineStories: true },

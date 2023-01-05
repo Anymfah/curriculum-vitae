@@ -1,4 +1,4 @@
-import {easeInOutCubicUtil} from "./ease-in-out-cubic.util";
+import {easeCubicBezierUtil, easeInOutCubicUtil} from "./ease-in-out-cubic.util";
 
 /**
  * Animate number value.
@@ -21,7 +21,7 @@ export const animateValueUtil = (
     const progress = Math.min((timestamp - startTimestamp) / duration, 1);
     //this.value = start + progress * (end - start);
 
-    const value = start + easeInOutCubicUtil(progress, ease) * (end - start);
+    const value = start + easeCubicBezierUtil(progress, ease) * (end - start);
     cb(value);
     if (progress < 1) {
       window.requestAnimationFrame(step);

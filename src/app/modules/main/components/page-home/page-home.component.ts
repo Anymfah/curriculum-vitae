@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, HostBinding} from '@angular/core';
 
 @Component({
   selector: 'cv-page-home',
@@ -6,5 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./page-home.component.scss']
 })
 export class PageHomeComponent {
+
+  @HostBinding('class.cv-page') public readonly cvPageClass = true;
 
 }

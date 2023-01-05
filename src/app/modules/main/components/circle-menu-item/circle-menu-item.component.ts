@@ -1,10 +1,29 @@
 import {Component, HostBinding, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {animateValueUtil} from "../../../../utils/animate-value.util";
+import {animate, state, style, transition, trigger} from "@angular/animations";
+import {delay} from "rxjs";
 
 @Component({
   selector: 'cv-circle-menu-item',
   templateUrl: './circle-menu-item.component.html',
-  styleUrls: ['./circle-menu-item.component.scss']
+  styleUrls: ['./circle-menu-item.component.scss'],
+  animations: [
+    trigger('activeWidthAnimation',[
+      state('active',
+        style({
+        width: '{{width}}',
+        }),
+        {params: {width: '100px'}}
+      ),
+      state('inactive',
+        style({
+          width: 0,
+        }),
+      ),
+      transition('inactive => active', animate('200ms cubic-bezier(.28,0,0,1)')),
+      transition('active => inactive', animate('70ms 30ms cubic-bezier(.28,0,0,1)')),
+    ])
+  ]
 })
 export class CircleMenuItemComponent implements OnChanges, OnInit {
 
@@ -112,19 +131,6 @@ export class CircleMenuItemComponent implements OnChanges, OnInit {
 
     // Reverse x and add 50% to x and y to get the position
     this.svgWrapperPosition = {x:100 - (x + 50), y: y + 50};
-
-    // Set the content position (same as svgWrapperPosition but with 100px more radius)
-    // Todo: Calc offset (should be something like (this.size + this.weight) * 100 / offsetRadius + 50)
-    /*const offset = 69.28;
-    const contentX = Math.cos(arcCenterAngle * Math.PI / 180) * offset;
-    const contentY = Math.sin(arcCenterAngle * Math.PI / 180) * offset;
-    this.contentPosition = {
-      x: 100 - (contentX + 50),
-      y: contentY + 50
-    }*/
-
-    // Set the content position (same as svgWrapperPosition but with contentOffset more radius)
-    // Calculate the offset radius
 
     /**
      * Must calculate the offset radius to get the correct position of the content box.

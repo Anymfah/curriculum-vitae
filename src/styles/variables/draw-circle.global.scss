@@ -1,10 +1,18 @@
+@use 'functions' as fn;
+
 :root {
   /// Color of the filled circle
-  --draw-circle--track-bar-color: conic-gradient(orange 0deg, red 360deg);
+  --draw-circle--track-bar-color: #{fn.get-color(primary, 500)};
 
   /// Color fo the empty circle
   --draw-circle--track-bar-bg-color: transparent;
 
   /// Pointer events active on the circle
   --draw-circle--arc-pointer-events: auto;
+
+  /// Color of the full circle
+  --draw-circle--full-color: #{fn.get-color(primary, 800)};
+
+  /// Color of bg full circle
+  --draw-circle--full-bg-color: transparent;
 }

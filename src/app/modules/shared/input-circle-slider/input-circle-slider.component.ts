@@ -117,6 +117,11 @@ export class InputCircleSliderComponent implements OnInit, AfterViewInit, OnChan
   @Input() public valueDigits = 0;
 
   /**
+   * User started dragging the handle.
+   */
+  @Output() public triggerDragStart = new EventEmitter<number>();
+
+  /**
    * User is dragging the handle.
    */
   @Output() public triggerDragging = new EventEmitter<number>;
@@ -204,6 +209,7 @@ export class InputCircleSliderComponent implements OnInit, AfterViewInit, OnChan
    */
   public startDrag(): void {
     if (this.draggable) {
+      this.triggerDragStart.emit(this.value);
       this.isDragging = true;
       this._updateQuarters();
     }

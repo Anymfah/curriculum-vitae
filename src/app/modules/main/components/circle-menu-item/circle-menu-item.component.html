@@ -7,6 +7,7 @@
              [reverse]="true"
              weightDirection="out">
     <div class="circle-menu-item__svg-wrapper"
+         [@activeWidthAnimation]="active ? {value: 'active', params: {width: contentOffset + 'px'}} : {value: 'inactive'}"
          [style.width.px]="contentOffset"
          [style.transform]="svgWrapperRotate"
          [style.left.%]="svgWrapperPosition.x"

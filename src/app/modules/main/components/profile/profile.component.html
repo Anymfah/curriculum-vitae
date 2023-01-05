@@ -1,23 +1,35 @@
 <div class="profile__container">
   <div class="profile__circle">
-    <div class="circle-outer__thin circle-wrapper">
-      <cv-circle [size]="240" [fillPercentage]="outerCircleVal" [startAt]="9"></cv-circle>
-    </div>
-    <div class="circle-outer__tools circle-wrapper">
-      <cv-circle [size]="300" [weight]="40" [fillPercentage]="outerCircleVal" [startAt]="9"></cv-circle>
+    <img class="profile-img" src="assets/img/soheil.png" alt="Soheil Saheb-Jamii"
+         [class.show]="showImage">
+    <div class="circle-outer__mask circle-wrapper">
+      <cv-circle class="mask-circle" [size]="300" [weight]="40" [fillPercentage]="outerCircleVal" [startAt]="9">
+        <!--Contact-->
+        <cv-draw-circle *ngFor="let item of menuItems" mask-inner anchorPoint="start"
+                        (click)="onClickMenuItem(item)"
+                        [class.active]="item.active"
+                        [size]="item.drawCircleItem.size ?? 0"
+                        [positionDegree]="item.drawCircleItem.positionDegree ?? 0"
+                        [arcDegree]="item.drawCircleItem.arcDegree ?? 0"
+                        [weight]="item.drawCircleItem.weight ?? 0"></cv-draw-circle>
+
+        <!--Empty-->
+        <cv-draw-circle mask-inner anchorPoint="start"
+                        [size]="276"  [positionDegree]="362" [arcDegree]="29" [weight]="4"></cv-draw-circle>
+      </cv-circle>
     </div>
 
     <!--Profile-->
     <div class="circle-outer__menu">
       <cv-circle-menu-item *ngFor="let item of menuItems"
-                           [size]="item.size"
-                           [weight]="item.weight"
-                           [torque]="item.torque"
-                           [contentOffset]="item.contentOffset"
-                           [title]="item.title"
-                           [description]="item.description"
-                           [fillPercentage]="item.fillPercentage"
-                           [positionDegree]="item.positionDegree" [active]="item.active">
+                           [size]="item.circleMenuItem.size ?? 0"
+                           [weight]="item.circleMenuItem.weight ?? 0"
+                           [torque]="item.circleMenuItem.torque ?? 0"
+                           [contentOffset]="item.circleMenuItem.contentOffset ?? 0"
+                           [title]="item.circleMenuItem.title ?? ''"
+                           [description]="item.circleMenuItem.description ?? ''"
+                           [fillPercentage]="item.circleMenuItem.fillPercentage ?? 0"
+                           [positionDegree]="item.circleMenuItem.positionDegree ?? 0" [active]="item.active">
       </cv-circle-menu-item>
     </div>
     <div class="circle-outer__input circle-wrapper">
@@ -25,9 +37,10 @@
                               [min]="0"
                               [max]="360"
                               (triggerDragging)="onTriggerDragging($event)"
+                              (triggerDragStart)="onDragStart($event)"
                               [value]="value"
                               [size]="210"
-                              [animationTime]="2800"
+                              [animate]="false"
                               [allowCross]="true"
                               [weight]="2">
         <cv-draw-circle class="handler" [positionDegree]="0"

@@ -84,6 +84,103 @@
             "methods": []
         },
         {
+            "name": "ProfileMenuItemData",
+            "id": "interface-ProfileMenuItemData-ee3cf21d45c23cb012227b7ac978b3144139353963668827f0032efcd2dbdc05c5ed0c958b5080d6f80c6052b4783d97e33f225525a4994ef23a338a3164a976",
+            "file": "src/app/modules/main/components/profile/profile.interface.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "export interface ProfileMenuItemData {\r\n  title: string;\r\n  description: string;\r\n  importance: number;\r\n  size?: number;\r\n  weight?: number;\r\n  torque?: number;\r\n  contentOffset?: number;\r\n  icon?: string;\r\n  route?: string;\r\n}\r\n",
+            "properties": [
+                {
+                    "name": "contentOffset",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": true,
+                    "description": "",
+                    "line": 13
+                },
+                {
+                    "name": "description",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 8
+                },
+                {
+                    "name": "icon",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": true,
+                    "description": "",
+                    "line": 14
+                },
+                {
+                    "name": "importance",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": false,
+                    "description": "",
+                    "line": 9
+                },
+                {
+                    "name": "route",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": true,
+                    "description": "",
+                    "line": 15
+                },
+                {
+                    "name": "size",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": true,
+                    "description": "",
+                    "line": 10
+                },
+                {
+                    "name": "title",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 7
+                },
+                {
+                    "name": "torque",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": true,
+                    "description": "",
+                    "line": 12
+                },
+                {
+                    "name": "weight",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": true,
+                    "description": "",
+                    "line": 11
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 165,
+            "description": "<p>Interface of a profile menu item data.\nUsed by ProfileMenuItem Model.\nSee ProfileMenuItem</p>\n",
+            "rawdescription": "\n\nInterface of a profile menu item data.\nUsed by ProfileMenuItem Model.\nSee ProfileMenuItem\n",
+            "methods": []
+        },
+        {
             "name": "User",
             "id": "interface-User-9c7e5f1bbbab702cb032307d130876cb68969b0cd4eedef32a0c8cad8081a54e5f8f577ed6ad4539c1b99a1d246cb34031d198c2ea8eba440e64e91b14f01fdc",
             "file": "src/stories/User.ts",
@@ -281,12 +378,12 @@
     "classes": [
         {
             "name": "ProfileMenuItem",
-            "id": "class-ProfileMenuItem-b1061adf7cacef40f98356fe622ae836a5d5fd990e54e9f0943771a83a0028e6c77ea28df04f640ba09b25addc672f98a1472c515c37a01664fb036a065e3318",
+            "id": "class-ProfileMenuItem-140ebc439920f0ba8829e8bdd048dca17c396d4b5c958431f800db704b58ef56f92fcf3732873dc8176f718816f96422aa3f68bfeae2f4a32f4c774a7d39a33f",
             "file": "src/app/modules/main/components/profile/profile.component.model.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "class",
-            "sourceCode": "export class ProfileMenuItem {\r\n  /**\r\n   * Title of the menu item.\r\n   */\r\n  public title: string = '';\r\n\r\n  /**\r\n   * Description of the menu item.\r\n   */\r\n  public description: string = '';\r\n\r\n  /**\r\n   * Icon of the menu item.\r\n   */\r\n  public icon?: string;\r\n\r\n  /**\r\n   * Route of the menu item.\r\n   */\r\n  public route?: string;\r\n\r\n  /**\r\n   * Fill percentage of the circle arc\r\n   */\r\n  public fillPercentage: number = 0;\r\n\r\n  /**\r\n   * Position of the circle arc in degree.\r\n   */\r\n  public positionDegree: number = 0;\r\n\r\n  /**\r\n   * Range of degrees of the menu item.\r\n   */\r\n  private _activeRange: { start: number, end: number } = { start: 0, end: 0 };\r\n\r\n  /**\r\n   * Is the menu item active.\r\n   */\r\n  public active = false;\r\n\r\n  /**\r\n   * End in degree of the last menu item.\r\n   */\r\n  public static lastEndDegree: number = 0;\r\n\r\n  /**\r\n   * @constructor\r\n   */\r\n  public constructor(\r\n    title: string,\r\n    description: string,\r\n    fillPercentage: number,\r\n    icon?: string,\r\n    route?: string,\r\n  ) {\r\n    this.title = title;\r\n    this.description = description;\r\n    this.fillPercentage = fillPercentage;\r\n    this.icon = icon;\r\n    this.route = route;\r\n    this._init();\r\n  }\r\n\r\n  /**\r\n   * Init the menu item.\r\n   */\r\n  private _init() {\r\n    this.positionDegree = ProfileMenuItem.lastEndDegree;\r\n\r\n    /** Add the fill percentage (to deg) + 2deg (gap) */\r\n    ProfileMenuItem.lastEndDegree += this.fillPercentage * 3.6 + 2;\r\n\r\n    this._activeRange = {\r\n      start: this.positionDegree,\r\n      end: ProfileMenuItem.lastEndDegree,\r\n    }\r\n  }\r\n\r\n  /**\r\n   * Check if value is in the active range.\r\n   */\r\n  public isActive(value: number): void {\r\n    this.active = value >= this._activeRange.start && value <= this._activeRange.end;\r\n  }\r\n}\r\n",
+            "sourceCode": "import {ProfileMenuItemData} from \"./profile.interface\";\r\n\r\nexport class ProfileMenuItem {\r\n  /**\r\n   * Title of the menu item.\r\n   */\r\n  public title: string = '';\r\n\r\n  /**\r\n   * Description of the menu item.\r\n   */\r\n  public description: string = '';\r\n\r\n  /**\r\n   * Icon of the menu item.\r\n   */\r\n  public icon?: string;\r\n\r\n  /**\r\n   * Route of the menu item.\r\n   */\r\n  public route?: string;\r\n\r\n  /**\r\n   * Fill percentage of the circle arc\r\n   */\r\n  public fillPercentage: number = 0;\r\n\r\n  /**\r\n   * Position of the circle arc in degree.\r\n   */\r\n  public positionDegree: number = 0;\r\n\r\n  /**\r\n   * Size of the circle arc.\r\n   */\r\n  public size: number = 310;\r\n\r\n  /**\r\n   * Weight of the menu item.\r\n   */\r\n  public weight: number = 80;\r\n\r\n  /**\r\n   * Torque of the menu item.\r\n   */\r\n  public torque: number = 0;\r\n\r\n  /**\r\n   * Distance of the menu item box.\r\n   */\r\n  public contentOffset: number = 75;\r\n\r\n  /**\r\n   * Range of degrees of the menu item.\r\n   */\r\n  private _activeRange: { start: number, end: number } = { start: 0, end: 0 };\r\n\r\n  /**\r\n   * Is the menu item active.\r\n   */\r\n  public active = true;\r\n\r\n  /**\r\n   * End in degree of the last menu item.\r\n   */\r\n  public static lastEndDegree: number = 0;\r\n\r\n  /**\r\n   * @constructor\r\n   */\r\n  public constructor(\r\n    data: ProfileMenuItemData,\r\n    fillPercentage: number,\r\n  ) {\r\n    this.title = data.title;\r\n    this.description = data.description;\r\n    this.fillPercentage = fillPercentage;\r\n    this.icon = data.icon;\r\n    this.route = data.route;\r\n    this.size = data.size ?? this.size;\r\n    this.weight = data.weight ?? this.weight;\r\n    this.torque = data.torque ?? this.torque;\r\n    this.contentOffset = data.contentOffset ?? this.contentOffset;\r\n    this._init();\r\n  }\r\n\r\n  /**\r\n   * Init the menu item.\r\n   */\r\n  private _init() {\r\n    this.positionDegree = ProfileMenuItem.lastEndDegree;\r\n\r\n    /** Add the fill percentage (to deg) + 2deg (gap) */\r\n    ProfileMenuItem.lastEndDegree += this.fillPercentage * 3.6 + 2;\r\n\r\n    this._activeRange = {\r\n      start: this.positionDegree,\r\n      end: ProfileMenuItem.lastEndDegree,\r\n    }\r\n  }\r\n\r\n  /**\r\n   * Check if value is in the active range.\r\n   */\r\n  public isActive(value: number): void {\r\n    this.active = value >= this._activeRange.start && value <= this._activeRange.end;\r\n  }\r\n}\r\n",
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
@@ -294,14 +391,8 @@
                 "deprecationMessage": "",
                 "args": [
                     {
-                        "name": "title",
-                        "type": "string",
-                        "deprecated": false,
-                        "deprecationMessage": ""
-                    },
-                    {
-                        "name": "description",
-                        "type": "string",
+                        "name": "data",
+                        "type": "ProfileMenuItemData",
                         "deprecated": false,
                         "deprecationMessage": ""
                     },
@@ -310,40 +401,17 @@
                         "type": "number",
                         "deprecated": false,
                         "deprecationMessage": ""
-                    },
-                    {
-                        "name": "icon",
-                        "type": "string",
-                        "deprecated": false,
-                        "deprecationMessage": "",
-                        "optional": true
-                    },
-                    {
-                        "name": "route",
-                        "type": "string",
-                        "deprecated": false,
-                        "deprecationMessage": "",
-                        "optional": true
                     }
                 ],
-                "line": 45,
+                "line": 67,
                 "rawdescription": "\n\n",
                 "modifierKind": [
                     123
                 ],
                 "jsdoctags": [
                     {
-                        "name": "title",
-                        "type": "string",
-                        "deprecated": false,
-                        "deprecationMessage": "",
-                        "tagName": {
-                            "text": "param"
-                        }
-                    },
-                    {
-                        "name": "description",
-                        "type": "string",
+                        "name": "data",
+                        "type": "ProfileMenuItemData",
                         "deprecated": false,
                         "deprecationMessage": "",
                         "tagName": {
@@ -355,26 +423,6 @@
                         "type": "number",
                         "deprecated": false,
                         "deprecationMessage": "",
-                        "tagName": {
-                            "text": "param"
-                        }
-                    },
-                    {
-                        "name": "icon",
-                        "type": "string",
-                        "deprecated": false,
-                        "deprecationMessage": "",
-                        "optional": true,
-                        "tagName": {
-                            "text": "param"
-                        }
-                    },
-                    {
-                        "name": "route",
-                        "type": "string",
-                        "deprecated": false,
-                        "deprecationMessage": "",
-                        "optional": true,
                         "tagName": {
                             "text": "param"
                         }
@@ -390,7 +438,7 @@
                     "type": "literal type",
                     "optional": false,
                     "description": "<p>Range of degrees of the menu item.</p>\n",
-                    "line": 35,
+                    "line": 57,
                     "rawdescription": "\n\nRange of degrees of the menu item.\n",
                     "modifierKind": [
                         121
@@ -398,14 +446,28 @@
                 },
                 {
                     "name": "active",
-                    "defaultValue": "false",
+                    "defaultValue": "true",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
                     "optional": false,
                     "description": "<p>Is the menu item active.</p>\n",
-                    "line": 40,
+                    "line": 62,
                     "rawdescription": "\n\nIs the menu item active.\n",
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "contentOffset",
+                    "defaultValue": "75",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": false,
+                    "description": "<p>Distance of the menu item box.</p>\n",
+                    "line": 52,
+                    "rawdescription": "\n\nDistance of the menu item box.\n",
                     "modifierKind": [
                         123
                     ]
@@ -418,7 +480,7 @@
                     "type": "string",
                     "optional": false,
                     "description": "<p>Description of the menu item.</p>\n",
-                    "line": 10,
+                    "line": 12,
                     "rawdescription": "\n\nDescription of the menu item.\n",
                     "modifierKind": [
                         123
@@ -432,7 +494,7 @@
                     "type": "number",
                     "optional": false,
                     "description": "<p>Fill percentage of the circle arc</p>\n",
-                    "line": 25,
+                    "line": 27,
                     "rawdescription": "\n\nFill percentage of the circle arc\n",
                     "modifierKind": [
                         123
@@ -445,7 +507,7 @@
                     "type": "string",
                     "optional": true,
                     "description": "<p>Icon of the menu item.</p>\n",
-                    "line": 15,
+                    "line": 17,
                     "rawdescription": "\n\nIcon of the menu item.\n",
                     "modifierKind": [
                         123
@@ -459,7 +521,7 @@
                     "type": "number",
                     "optional": false,
                     "description": "<p>End in degree of the last menu item.</p>\n",
-                    "line": 45,
+                    "line": 67,
                     "rawdescription": "\n\nEnd in degree of the last menu item.\n",
                     "modifierKind": [
                         124
@@ -473,7 +535,7 @@
                     "type": "number",
                     "optional": false,
                     "description": "<p>Position of the circle arc in degree.</p>\n",
-                    "line": 30,
+                    "line": 32,
                     "rawdescription": "\n\nPosition of the circle arc in degree.\n",
                     "modifierKind": [
                         123
@@ -486,8 +548,22 @@
                     "type": "string",
                     "optional": true,
                     "description": "<p>Route of the menu item.</p>\n",
-                    "line": 20,
+                    "line": 22,
                     "rawdescription": "\n\nRoute of the menu item.\n",
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "size",
+                    "defaultValue": "310",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": false,
+                    "description": "<p>Size of the circle arc.</p>\n",
+                    "line": 37,
+                    "rawdescription": "\n\nSize of the circle arc.\n",
                     "modifierKind": [
                         123
                     ]
@@ -500,8 +576,36 @@
                     "type": "string",
                     "optional": false,
                     "description": "<p>Title of the menu item.</p>\n",
-                    "line": 5,
+                    "line": 7,
                     "rawdescription": "\n\nTitle of the menu item.\n",
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "torque",
+                    "defaultValue": "0",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": false,
+                    "description": "<p>Torque of the menu item.</p>\n",
+                    "line": 47,
+                    "rawdescription": "\n\nTorque of the menu item.\n",
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "weight",
+                    "defaultValue": "80",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": false,
+                    "description": "<p>Weight of the menu item.</p>\n",
+                    "line": 42,
+                    "rawdescription": "\n\nWeight of the menu item.\n",
                     "modifierKind": [
                         123
                     ]
@@ -514,7 +618,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 68,
+                    "line": 91,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nInit the menu item.\n",
@@ -536,7 +640,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 83,
+                    "line": 106,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nCheck if value is in the active range.\n",
@@ -754,7 +858,7 @@
         },
         {
             "name": "CircleComponent",
-            "id": "component-CircleComponent-bb5cdcf0e1869fa763596d99f0291b0b5d88d7914dc25d62ffeb60791bd26c5fbeda3e039ed194385cbeeda2d938483c20944fd6a2ceb046cf093570ec42a831",
+            "id": "component-CircleComponent-f41ba0ab58200befaa8fe2111dbcc8ae20b83fbaec535a3cee778cfb76f0680a72404930c952a390d30808289cfa9f5d89226755fd00b0fa3d0190f52e3e68dc",
             "file": "src/app/modules/shared/circle/circle.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -789,15 +893,15 @@
                     "deprecationMessage": "",
                     "jsdoctags": [
                         {
-                            "pos": 1387,
-                            "end": 1555,
+                            "pos": 1579,
+                            "end": 1747,
                             "flags": 4227072,
                             "modifierFlagsCache": 0,
                             "transformFlags": 0,
                             "kind": 325,
                             "tagName": {
-                                "pos": 1388,
-                                "end": 1399,
+                                "pos": 1580,
+                                "end": 1591,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -809,7 +913,7 @@
                     ],
                     "rawdescription": "\n\nFill percentage of the track bar.\nYou can change the start point with the [startAt] input.\nYou can reverse the direction with the [reverse] input.\n",
                     "description": "<p>Fill percentage of the track bar.\nYou can change the start point with the [startAt] input.\nYou can reverse the direction with the [reverse] input.</p>\n",
-                    "line": 57,
+                    "line": 64,
                     "type": "number",
                     "decorators": []
                 },
@@ -820,7 +924,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nReversed direction of the track bar.\n",
                     "description": "<p>Reversed direction of the track bar.</p>\n",
-                    "line": 85,
+                    "line": 92,
                     "type": "boolean",
                     "decorators": []
                 },
@@ -841,15 +945,15 @@
                     "deprecationMessage": "",
                     "jsdoctags": [
                         {
-                            "pos": 1667,
-                            "end": 1731,
+                            "pos": 1859,
+                            "end": 1923,
                             "flags": 4227072,
                             "modifierFlagsCache": 0,
                             "transformFlags": 0,
                             "kind": 325,
                             "tagName": {
-                                "pos": 1668,
-                                "end": 1679,
+                                "pos": 1860,
+                                "end": 1871,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -861,7 +965,7 @@
                     ],
                     "rawdescription": "\n\nStart point of the track bar as percentage.\n",
                     "description": "<p>Start point of the track bar as percentage.</p>\n",
-                    "line": 63,
+                    "line": 70,
                     "type": "number",
                     "decorators": []
                 },
@@ -872,15 +976,15 @@
                     "deprecationMessage": "",
                     "jsdoctags": [
                         {
-                            "pos": 1827,
-                            "end": 1896,
+                            "pos": 2019,
+                            "end": 2088,
                             "flags": 4227072,
                             "modifierFlagsCache": 0,
                             "transformFlags": 0,
                             "kind": 325,
                             "tagName": {
-                                "pos": 1828,
-                                "end": 1839,
+                                "pos": 2020,
+                                "end": 2031,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -892,7 +996,7 @@
                     ],
                     "rawdescription": "\n\nStart point of the track bar as degree.\n",
                     "description": "<p>Start point of the track bar as degree.</p>\n",
-                    "line": 69,
+                    "line": 76,
                     "type": "number",
                     "decorators": []
                 },
@@ -903,7 +1007,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nWeight of the circle line (can be animated).\n",
                     "description": "<p>Weight of the circle line (can be animated).</p>\n",
-                    "line": 44,
+                    "line": 51,
                     "type": "number",
                     "decorators": []
                 },
@@ -914,7 +1018,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nWeight direction.\n",
                     "description": "<p>Weight direction.</p>\n",
-                    "line": 49,
+                    "line": 56,
                     "type": "\"in\" | \"out\"",
                     "decorators": []
                 }
@@ -929,22 +1033,22 @@
                     "type": "",
                     "optional": false,
                     "description": "<p>track bar mask for the circle.\nSee _drawSize()</p>\n",
-                    "line": 91,
+                    "line": 98,
                     "rawdescription": "\n\ntrack bar mask for the circle.\nSee _drawSize()\n",
                     "modifierKind": [
                         123
                     ],
                     "jsdoctags": [
                         {
-                            "pos": 2306,
-                            "end": 2326,
+                            "pos": 2498,
+                            "end": 2518,
                             "flags": 4227072,
                             "modifierFlagsCache": 0,
                             "transformFlags": 0,
                             "kind": 344,
                             "tagName": {
-                                "pos": 2307,
-                                "end": 2310,
+                                "pos": 2499,
+                                "end": 2502,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -953,15 +1057,15 @@
                             },
                             "comment": "<p>()</p>\n",
                             "name": {
-                                "pos": 2311,
-                                "end": 2320,
+                                "pos": 2503,
+                                "end": 2512,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
                                 "kind": 308,
                                 "name": {
-                                    "pos": 2311,
-                                    "end": 2320,
+                                    "pos": 2503,
+                                    "end": 2512,
                                     "flags": 4227072,
                                     "modifierFlagsCache": 0,
                                     "transformFlags": 0,
@@ -980,22 +1084,22 @@
                     "type": "string",
                     "optional": false,
                     "description": "<p>track bar fill for the circle.\nSee _drawTrackCircle()</p>\n",
-                    "line": 97,
+                    "line": 104,
                     "rawdescription": "\n\ntrack bar fill for the circle.\nSee _drawTrackCircle()\n",
                     "modifierKind": [
                         123
                     ],
                     "jsdoctags": [
                         {
-                            "pos": 2483,
-                            "end": 2510,
+                            "pos": 2675,
+                            "end": 2702,
                             "flags": 4227072,
                             "modifierFlagsCache": 0,
                             "transformFlags": 0,
                             "kind": 344,
                             "tagName": {
-                                "pos": 2484,
-                                "end": 2487,
+                                "pos": 2676,
+                                "end": 2679,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -1004,15 +1108,15 @@
                             },
                             "comment": "<p>()</p>\n",
                             "name": {
-                                "pos": 2488,
-                                "end": 2504,
+                                "pos": 2680,
+                                "end": 2696,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
                                 "kind": 308,
                                 "name": {
-                                    "pos": 2488,
-                                    "end": 2504,
+                                    "pos": 2680,
+                                    "end": 2696,
                                     "flags": 4227072,
                                     "modifierFlagsCache": 0,
                                     "transformFlags": 0,
@@ -1031,7 +1135,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 153,
+                    "line": 160,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nDraw the size of the circle.\n",
@@ -1047,7 +1151,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 130,
+                    "line": 137,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nDraw the inner track bar.\n",
@@ -1070,7 +1174,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 102,
+                    "line": 109,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\n",
@@ -1096,7 +1200,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 120,
+                    "line": 127,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\n",
@@ -1114,11 +1218,11 @@
             "description": "<p>Circle Component\nThe circle can be displayed in different sizes, also it can be filled with a percentage.</p>\n<ul>\n<li>You can change color of the track circle from css by\noverriding the --track-bar-color variable.</li>\n<li>You can change color of the track bar from css by\noverriding the --track-bar-bg-color variable.</li>\n</ul>\n<div><pre class=\"line-numbers\"><code class=\"language-html\">&lt;cv-circle [size]=&quot;200&quot; [weight]=&quot;10&quot;&gt;&lt;/cv-circle&gt;</code></pre></div>",
             "rawdescription": "\n\nCircle Component\nThe circle can be displayed in different sizes, also it can be filled with a percentage.\n\n   - You can change color of the track circle from css by\n     overriding the --track-bar-color variable.\n   - You can change color of the track bar from css by\n     overriding the --track-bar-bg-color variable.\n```html\n<cv-circle [size]=\"200\" [weight]=\"10\"></cv-circle>\n```",
             "type": "component",
-            "sourceCode": "import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';\n/**\n * @author Soheil Saheb-Jamii\n * @since 2022-12-25\n * Circle Component\n * @description This component is used to display a circle.\n * The circle can be displayed in different sizes, also it can be filled with a percentage.\n *\n * @exception\n *    - You can change color of the track circle from css by\n *      overriding the --track-bar-color variable.\n *    - You can change color of the track bar from css by\n *      overriding the --track-bar-bg-color variable.\n * @example\n * <cv-circle [size]=\"200\" [weight]=\"10\"></cv-circle>\n */\n@Component({\n  selector: 'cv-circle',\n  templateUrl: './circle.component.html',\n  styleUrls: ['./circle.component.scss']\n})\nexport class CircleComponent implements OnChanges, OnInit {\n\n  /**\n   * Size of the circle.\n   */\n  @Input() public size: number = 200;\n\n  /**\n   * Base Weight of the circle line.\n   */\n  @Input() public baseWeight: number = 10;\n\n  /**\n   * Size render of the circle\n   */\n  public get sizeRender(): number {\n    return this.weightDirection === 'out' ? this.size + this.baseWeight : this.size;\n  }\n\n  /**\n   * Weight of the circle line (can be animated).\n   */\n  @Input() public weight: number = 10;\n\n  /**\n   * Weight direction.\n   */\n  @Input() public weightDirection: 'in' | 'out' = 'in';\n\n  /**\n   * Fill percentage of the track bar.\n   * @description 0% is the top of the circle.\n   * You can change the start point with the [startAt] input.\n   * You can reverse the direction with the [reverse] input.\n   */\n  @Input() public fillPercentage: number = 100;\n\n  /**\n   * Start point of the track bar as percentage.\n   * @description 0% is the top of the circle and 50% the bottom.\n   */\n  @Input() public startAt?: number;\n\n  /**\n   * Start point of the track bar as degree.\n   * @description 0deg is the top of the circle and 180deg the bottom.\n   */\n  @Input() public startAtDegree: number = 0;\n\n  /**\n   * Get start point of the track bar as degree.\n   */\n  private get _startAtDegree(): number {\n    if (this.startAt != null) {\n      return this.startAt * 3.6;\n    } else {\n      return this.startAtDegree;\n    }\n  }\n\n  /**\n   * Reversed direction of the track bar.\n   */\n  @Input() public reverse = false;\n\n  /**\n   * track bar mask for the circle.\n   * @see _drawSize()\n   */\n  public trackBarMask = `radial-gradient(circle at center, transparent 0, transparent 98px, black 98px)`;\n\n  /**\n   * track bar fill for the circle.\n   * @see _drawTrackCircle()\n   */\n  public trackBarMaskInner = '';\n\n  /**\n   * @inheritDoc\n   */\n  public ngOnChanges(changes: SimpleChanges) {\n    if ('fillPercentage' in changes\n      || 'startAt' in changes\n      || 'startAtDegree' in changes\n      || 'reverse' in changes) {\n      this._drawTrackCircle();\n    }\n\n    if ('size' in changes\n      || 'weight' in changes\n      || 'weightDirection' in changes) {\n      this._drawSize();\n    }\n  }\n\n  /**\n   * @inheritDoc\n   */\n  public ngOnInit() {\n    this._drawSize();\n    this._drawTrackCircle();\n  }\n\n  /**\n   * @event ngOnChanges\n   * @event ngOnInit\n   * Draw the inner track bar.\n   */\n  private _drawTrackCircle() {\n    if (!this.reverse) {\n      this.trackBarMaskInner = `conic-gradient(\n        from ${this._startAtDegree}deg,\n        black ${this.fillPercentage}%,\n        transparent ${this.fillPercentage}%\n        )`;\n    } else {\n      // Reverse the direction (will start with empty to filled)\n      const emptyPercentage = 100 - this.fillPercentage;\n      this.trackBarMaskInner = `conic-gradient(\n        from ${360 - this._startAtDegree}deg,\n        transparent ${emptyPercentage}%,\n        black ${emptyPercentage}%\n        )`;\n    }\n  }\n\n  /**\n   * @event ngOnChanges\n   * @event ngOnInit\n   * Draw the size of the circle.\n   */\n  private _drawSize() {\n    const radius = this.size / 2;\n    const weight = this.weightDirection === 'in' ? this.weight : 0;\n    this.trackBarMask = `radial-gradient(circle at center, transparent 0, transparent ${radius - weight}px, black ${radius - this.weight}px)`;\n  }\n\n}\n",
+            "sourceCode": "import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';\n/**\n * @author Soheil Saheb-Jamii\n * @since 2022-12-25\n * Circle Component\n * @description This component is used to display a circle.\n * The circle can be displayed in different sizes, also it can be filled with a percentage.\n *\n * @exception\n *    - You can change color of the track circle from css by\n *      overriding the --track-bar-color variable.\n *    - You can change color of the track bar from css by\n *      overriding the --track-bar-bg-color variable.\n * @example\n * <cv-circle [size]=\"200\" [weight]=\"10\"></cv-circle>\n */\n@Component({\n  selector: 'cv-circle',\n  templateUrl: './circle.component.html',\n  styleUrls: ['./circle.component.scss']\n})\nexport class CircleComponent implements OnChanges, OnInit {\n\n  /**\n   * Size of the circle.\n   */\n  @Input() public size: number = 200;\n\n  /**\n   * Base Weight of the circle line.\n   */\n  @Input() public baseWeight: number = 10;\n\n  /**\n   * Size render of the circle\n   */\n  public get sizeRender(): number {\n    return this.weightDirection === 'out' ? this.size + this.weight : this.size;\n  }\n\n  /**\n   * Size render of the container of the circle.\n   */\n  public get containerSizeRender(): number {\n    return this.weightDirection === 'out' ? this.size + this.baseWeight : this.size;\n  }\n\n  /**\n   * Weight of the circle line (can be animated).\n   */\n  @Input() public weight: number = 10;\n\n  /**\n   * Weight direction.\n   */\n  @Input() public weightDirection: 'in' | 'out' = 'in';\n\n  /**\n   * Fill percentage of the track bar.\n   * @description 0% is the top of the circle.\n   * You can change the start point with the [startAt] input.\n   * You can reverse the direction with the [reverse] input.\n   */\n  @Input() public fillPercentage: number = 100;\n\n  /**\n   * Start point of the track bar as percentage.\n   * @description 0% is the top of the circle and 50% the bottom.\n   */\n  @Input() public startAt?: number;\n\n  /**\n   * Start point of the track bar as degree.\n   * @description 0deg is the top of the circle and 180deg the bottom.\n   */\n  @Input() public startAtDegree: number = 0;\n\n  /**\n   * Get start point of the track bar as degree.\n   */\n  private get _startAtDegree(): number {\n    if (this.startAt != null) {\n      return this.startAt * 3.6;\n    } else {\n      return this.startAtDegree;\n    }\n  }\n\n  /**\n   * Reversed direction of the track bar.\n   */\n  @Input() public reverse = false;\n\n  /**\n   * track bar mask for the circle.\n   * @see _drawSize()\n   */\n  public trackBarMask = `radial-gradient(circle at center, transparent 0, transparent 98px, black 98px)`;\n\n  /**\n   * track bar fill for the circle.\n   * @see _drawTrackCircle()\n   */\n  public trackBarMaskInner = '';\n\n  /**\n   * @inheritDoc\n   */\n  public ngOnChanges(changes: SimpleChanges) {\n    if ('fillPercentage' in changes\n      || 'startAt' in changes\n      || 'startAtDegree' in changes\n      || 'reverse' in changes) {\n      this._drawTrackCircle();\n    }\n\n    if ('size' in changes\n      || 'weight' in changes\n      || 'weightDirection' in changes) {\n      this._drawSize();\n    }\n  }\n\n  /**\n   * @inheritDoc\n   */\n  public ngOnInit() {\n    this._drawSize();\n    this._drawTrackCircle();\n  }\n\n  /**\n   * @event ngOnChanges\n   * @event ngOnInit\n   * Draw the inner track bar.\n   */\n  private _drawTrackCircle() {\n    if (!this.reverse) {\n      this.trackBarMaskInner = `conic-gradient(\n        from ${this._startAtDegree}deg,\n        black ${this.fillPercentage}%,\n        transparent ${this.fillPercentage}%\n        )`;\n    } else {\n      // Reverse the direction (will start with empty to filled)\n      const emptyPercentage = 100 - this.fillPercentage;\n      this.trackBarMaskInner = `conic-gradient(\n        from ${360 - this._startAtDegree}deg,\n        transparent ${emptyPercentage}%,\n        black ${emptyPercentage}%\n        )`;\n    }\n  }\n\n  /**\n   * @event ngOnChanges\n   * @event ngOnInit\n   * Draw the size of the circle.\n   */\n  private _drawSize() {\n    const radius = this.size / 2;\n    const weight = this.weightDirection === 'in' ? this.weight : 0;\n    this.trackBarMask = `radial-gradient(circle at center, transparent 0, transparent ${radius - weight}px, black ${radius - this.weight}px)`;\n  }\n\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "@use 'mixins';\r\n\r\n:host {\r\n  .circle {\r\n    &__container {\r\n      position: relative;\r\n    }\r\n\r\n    &__inner {\r\n      width: 100%;\r\n      height: 100%;\r\n      position: absolute;\r\n      top: 0;\r\n      left: 0;\r\n      border-radius: 50%;\r\n    }\r\n\r\n    &__content {\r\n      width: 100%;\r\n      height: 100%;\r\n      position: relative;\r\n      display: flex;\r\n      align-items: center;\r\n      justify-content: center;\r\n    }\r\n\r\n    &__track {\r\n      &-bar {\r\n        @include mixins.transition;\r\n\r\n        width: 100%;\r\n        height: 100%;\r\n        position: absolute;\r\n        top: 0;\r\n        left: 0;\r\n        border-radius: 50%;\r\n        background: var(--circle--track-bar-bg-color);\r\n\r\n        &--inner {\r\n          width: 100%;\r\n          height: 100%;\r\n          position: absolute;\r\n          top: 0;\r\n          left: 0;\r\n          border-radius: 50%;\r\n        }\r\n\r\n        &--bg {\r\n          @include mixins.transition;\r\n\r\n          width: 100%;\r\n          height: 100%;\r\n          position: absolute;\r\n          top: 0;\r\n          left: 0;\r\n          border-radius: 50%;\r\n\r\n          // Can be overridden\r\n          background: var(--circle--track-bar-color);\r\n        }\r\n      }\r\n    }\r\n  }\r\n}\r\n",
+                    "data": "@use 'mixins';\r\n\r\n:host {\r\n  .circle {\r\n    &__container {\r\n      position: relative;\r\n      display: flex;\r\n      justify-content: center;\r\n      align-items: center;\r\n    }\r\n    &__wrapper {\r\n      position: relative;\r\n    }\r\n\r\n    &__inner {\r\n      width: 100%;\r\n      height: 100%;\r\n      position: absolute;\r\n      top: 0;\r\n      left: 0;\r\n      border-radius: 50%;\r\n    }\r\n\r\n    &__content {\r\n      width: 100%;\r\n      height: 100%;\r\n      position: relative;\r\n      display: flex;\r\n      align-items: center;\r\n      justify-content: center;\r\n    }\r\n\r\n    &__track {\r\n      &-bar {\r\n        @include mixins.transition;\r\n\r\n        width: 100%;\r\n        height: 100%;\r\n        position: absolute;\r\n        top: 0;\r\n        left: 0;\r\n        border-radius: 50%;\r\n        background: var(--circle--track-bar-bg-color);\r\n\r\n        &--inner {\r\n          width: 100%;\r\n          height: 100%;\r\n          position: absolute;\r\n          top: 0;\r\n          left: 0;\r\n          border-radius: 50%;\r\n        }\r\n\r\n        &--bg {\r\n          @include mixins.transition;\r\n\r\n          width: 100%;\r\n          height: 100%;\r\n          position: absolute;\r\n          top: 0;\r\n          left: 0;\r\n          border-radius: 50%;\r\n\r\n          // Can be overridden\r\n          background: var(--circle--track-bar-color);\r\n        }\r\n      }\r\n    }\r\n  }\r\n}\r\n",
                     "styleUrl": "./circle.component.scss"
                 }
             ],
@@ -1139,23 +1243,34 @@
                         "description": "<p>Size render of the circle</p>\n"
                     }
                 },
+                "containerSizeRender": {
+                    "name": "containerSizeRender",
+                    "getSignature": {
+                        "name": "containerSizeRender",
+                        "type": "number",
+                        "returnType": "number",
+                        "line": 44,
+                        "rawdescription": "\n\nSize render of the container of the circle.\n",
+                        "description": "<p>Size render of the container of the circle.</p>\n"
+                    }
+                },
                 "_startAtDegree": {
                     "name": "_startAtDegree",
                     "getSignature": {
                         "name": "_startAtDegree",
                         "type": "number",
                         "returnType": "number",
-                        "line": 74,
+                        "line": 81,
                         "rawdescription": "\n\nGet start point of the track bar as degree.\n",
                         "description": "<p>Get start point of the track bar as degree.</p>\n"
                     }
                 }
             },
-            "templateData": "<div class=\"circle__container\" [style.width.px]=\"sizeRender\"\n     [style.height.px]=\"sizeRender\">\n  <div #circle class=\"circle__inner\">\n\n    <div class=\"circle__track-bar\"\n         [style.-webkit-mask]=\"trackBarMask\"\n    >\n      <div class=\"circle__track-bar--inner\"\n           [style.-webkit-mask]=\"trackBarMaskInner\">\n        <div class=\"circle__track-bar--bg bg-cone\"></div>\n      </div>\n    </div>\n  </div>\n  <div class=\"circle__content\">\n    <ng-content></ng-content>\n  </div>\n</div>\n"
+            "templateData": "<div class=\"circle__container\"\n     [style.width.px]=\"containerSizeRender\"\n     [style.height.px]=\"containerSizeRender\">\n  <div class=\"circle__wrapper\" [style.width.px]=\"sizeRender\"\n       [style.height.px]=\"sizeRender\">\n    <div #circle class=\"circle__inner\">\n\n      <div class=\"circle__track-bar\"\n           [style.-webkit-mask]=\"trackBarMask\"\n      >\n        <div class=\"circle__track-bar--inner\"\n             [style.-webkit-mask]=\"trackBarMaskInner\">\n          <div class=\"circle__track-bar--bg bg-cone\"></div>\n        </div>\n      </div>\n    </div>\n    <div class=\"circle__content\">\n      <ng-content></ng-content>\n    </div>\n  </div>\n</div>\n\n"
         },
         {
             "name": "CircleMenuItemComponent",
-            "id": "component-CircleMenuItemComponent-6085eed519b2136e3ca0d0b4e4a487a9de6a1f0b50f4c647e82ebe40736f7b3cf126be3caa424d057bbd2ed7f894c200d4535201bbc4634336926823283ce466",
+            "id": "component-CircleMenuItemComponent-3ec037117d5d5ed37f2f1c5dcceb8a4b0344f5cab03ff2d56b13a2a7fb4b6b9543ff05f0964399471c98a8c37d663619305fbde05089ba945b93ca89906dd97e",
             "file": "src/app/modules/main/components/circle-menu-item/circle-menu-item.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1179,8 +1294,19 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nActivate the circle menu item\nadd active class.\n",
                     "description": "<p>Activate the circle menu item\nadd active class.</p>\n",
-                    "line": 58,
+                    "line": 70,
                     "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "contentOffset",
+                    "defaultValue": "75",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nDistance of the content box from the edge of the circle arc.\n",
+                    "description": "<p>Distance of the content box from the edge of the circle arc.</p>\n",
+                    "line": 53,
+                    "type": "number",
                     "decorators": []
                 },
                 {
@@ -1239,6 +1365,17 @@
                     "decorators": []
                 },
                 {
+                    "name": "torque",
+                    "defaultValue": "0",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nTorque in degrees of the starting point for the\ncontent box position.\nDefault is 0. Range is -180 to 180.\n",
+                    "description": "<p>Torque in degrees of the starting point for the\ncontent box position.\nDefault is 0. Range is -180 to 180.</p>\n",
+                    "line": 48,
+                    "type": "number",
+                    "decorators": []
+                },
+                {
                     "name": "weight",
                     "defaultValue": "80",
                     "deprecated": false,
@@ -1260,7 +1397,7 @@
                     "type": "literal type",
                     "optional": false,
                     "description": "<p>Position of the content box.\nSame as swgWrapperPosition but with 50px offset.</p>\n",
-                    "line": 64,
+                    "line": 76,
                     "rawdescription": "\n\nPosition of the content box.\nSame as swgWrapperPosition but with 50px offset.\n",
                     "modifierKind": [
                         123
@@ -1274,7 +1411,7 @@
                     "type": "\"left\" | \"right\"",
                     "optional": false,
                     "description": "<p>Add left or right class to the content box.\nleft if the content box is on the left side of the circle arc.\nright if the content box is on the right side of the circle arc.</p>\n",
-                    "line": 71,
+                    "line": 83,
                     "rawdescription": "\n\nAdd left or right class to the content box.\nleft if the content box is on the left side of the circle arc.\nright if the content box is on the right side of the circle arc.\n",
                     "modifierKind": [
                         123
@@ -1288,7 +1425,7 @@
                     "type": "literal type",
                     "optional": false,
                     "description": "<p>Position in percentage from top left corner of the\ncircle wrapper.</p>\n",
-                    "line": 47,
+                    "line": 59,
                     "rawdescription": "\n\nPosition in percentage from top left corner of the\ncircle wrapper.\n",
                     "modifierKind": [
                         123
@@ -1302,7 +1439,7 @@
                     "type": "string",
                     "optional": false,
                     "description": "<p>Rotate angle of the svg wrapper.</p>\n",
-                    "line": 52,
+                    "line": 64,
                     "rawdescription": "\n\nRotate angle of the svg wrapper.\n",
                     "modifierKind": [
                         123
@@ -1329,7 +1466,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 135,
+                    "line": 167,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -1342,7 +1479,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 84,
+                    "line": 96,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nCalculate the position points of the stroke\nline of the circle arc to the content box.\n",
@@ -1364,7 +1501,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 121,
+                    "line": 152,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\n",
@@ -1390,7 +1527,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 76,
+                    "line": 88,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\n",
@@ -1408,11 +1545,11 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import {Component, HostBinding, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';\nimport {animateValueUtil} from \"../../../../utils/animate-value.util\";\n\n@Component({\n  selector: 'cv-circle-menu-item',\n  templateUrl: './circle-menu-item.component.html',\n  styleUrls: ['./circle-menu-item.component.scss']\n})\nexport class CircleMenuItemComponent implements OnChanges, OnInit {\n\n  /**\n   * Title of the menu item.\n   */\n  @Input() public title: string = 'Some Title';\n\n  /**\n   * Description of the menu item.\n   */\n  @Input() public description: string = 'Lorem ipsum dolor sit amet';\n\n  public weightValue = 0;\n\n  /**\n   * Size of the circle diameter.\n   */\n  @Input() public size = 310;\n\n  /**\n   * Fill percentage of the circle arc\n   */\n  @Input() public fillPercentage: number = 30;\n\n  /**\n   * Position of the circle arc.\n   */\n  @Input() public positionDegree: number = 0;\n\n  /**\n   * Max Weight\n   */\n  @Input() public weight: number = 80;\n\n  /**\n   * Position in percentage from top left corner of the\n   * circle wrapper.\n   */\n  public svgWrapperPosition: { x: number, y: number } = {x: 0, y: 0};\n\n  /**\n   * Rotate angle of the svg wrapper.\n   */\n  public svgWrapperRotate: string = 'rotate(0deg)';\n\n  /**\n   * Activate the circle menu item\n   * add active class.\n   */\n  @HostBinding('class.active') @Input() public active = true;\n\n  /**\n   * Position of the content box.\n   * Same as swgWrapperPosition but with 50px offset.\n   */\n  public contentPosition : { x: number, y: number } = {x: 0, y: 0};\n\n  /**\n   * Add left or right class to the content box.\n   * left if the content box is on the left side of the circle arc.\n   * right if the content box is on the right side of the circle arc.\n   */\n  public contentSide: 'left' | 'right' = 'left';\n\n  /**\n   * @inheritDoc\n   */\n  public ngOnInit(): void {\n    this._calculateStrokesPoints();\n  }\n\n  /**\n   * Calculate the position points of the stroke\n   * line of the circle arc to the content box.\n   */\n  private _calculateStrokesPoints(): void {\n    const fillDegree = this.fillPercentage / 100 * 360;\n    const arcCenterAngle = (this.positionDegree + fillDegree / 2) - 90;\n    this.svgWrapperRotate = `rotate(${-arcCenterAngle - 180}deg)`;\n\n    /**\n     * Calculate svgWrapperPosition\n     * x is the distance in % between the left side of the\n     * circle wrapper and center of the circle arc.\n     * y is the distance in % between the top side of the\n     * circle wrapper and center of the circle arc.\n     */\n    /** Formula: x = cos(angle) * radius */\n    const x = Math.cos(arcCenterAngle * Math.PI / 180) * 50;\n    /** Formula: y = sin(angle) * radius */\n    const y = Math.sin(arcCenterAngle * Math.PI / 180) * 50;\n\n    // Reverse x and add 50% to x and y to get the position\n    this.svgWrapperPosition = {x:100 - (x + 50), y: y + 50};\n\n    // Set the content position (same as svgWrapperPosition but with 100px more radius)\n    // Todo: Calc offset (should be something like (this.size + this.weight) * 100 / offsetRadius + 50)\n    const offset = 69.28;\n    const contentX = Math.cos(arcCenterAngle * Math.PI / 180) * offset;\n    const contentY = Math.sin(arcCenterAngle * Math.PI / 180) * offset;\n    this.contentPosition = {\n      x: 100 - (contentX + 50),\n      y: contentY + 50\n    }\n\n    /** Set the content side class. */\n    this.contentSide = arcCenterAngle > 90 && arcCenterAngle <= 270 ? 'right' : 'left';\n  }\n\n  /**\n   * @inheritDoc\n   */\n  public ngOnChanges(changes: SimpleChanges): void {\n    if ('active' in changes) {\n      this._animateWeight();\n    }\n\n    if ('maxWeight' in changes) {\n      this.weightValue = this.active ? this.weight : 0;\n    }\n\n    if ('positionDegree' in changes || 'fillPercentage' in changes) {\n      this._calculateStrokesPoints();\n    }\n  }\n\n  private _animateWeight(): void {\n    const from = this.active ? 0 : this.weight;\n    const to = this.active ? this.weight : 0;\n    animateValueUtil((value: number) => {\n      this.weightValue = value;\n    }, from, to, 300);\n  }\n}\n",
+            "sourceCode": "import {Component, HostBinding, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';\nimport {animateValueUtil} from \"../../../../utils/animate-value.util\";\n\n@Component({\n  selector: 'cv-circle-menu-item',\n  templateUrl: './circle-menu-item.component.html',\n  styleUrls: ['./circle-menu-item.component.scss']\n})\nexport class CircleMenuItemComponent implements OnChanges, OnInit {\n\n  /**\n   * Title of the menu item.\n   */\n  @Input() public title: string = 'Some Title';\n\n  /**\n   * Description of the menu item.\n   */\n  @Input() public description: string = 'Lorem ipsum dolor sit amet';\n\n  public weightValue = 0;\n\n  /**\n   * Size of the circle diameter.\n   */\n  @Input() public size = 310;\n\n  /**\n   * Fill percentage of the circle arc\n   */\n  @Input() public fillPercentage: number = 30;\n\n  /**\n   * Position of the circle arc.\n   */\n  @Input() public positionDegree: number = 0;\n\n  /**\n   * Max Weight\n   */\n  @Input() public weight: number = 80;\n\n  /**\n   * Torque in degrees of the starting point for the\n   * content box position.\n   * Default is 0. Range is -180 to 180.\n   */\n  @Input() public torque = 0;\n\n  /**\n   * Distance of the content box from the edge of the circle arc.\n   */\n  @Input() public contentOffset = 75;\n\n  /**\n   * Position in percentage from top left corner of the\n   * circle wrapper.\n   */\n  public svgWrapperPosition: { x: number, y: number } = {x: 0, y: 0};\n\n  /**\n   * Rotate angle of the svg wrapper.\n   */\n  public svgWrapperRotate: string = 'rotate(0deg)';\n\n  /**\n   * Activate the circle menu item\n   * add active class.\n   */\n  @HostBinding('class.active') @Input() public active = true;\n\n  /**\n   * Position of the content box.\n   * Same as swgWrapperPosition but with 50px offset.\n   */\n  public contentPosition : { x: number, y: number } = {x: 0, y: 0};\n\n  /**\n   * Add left or right class to the content box.\n   * left if the content box is on the left side of the circle arc.\n   * right if the content box is on the right side of the circle arc.\n   */\n  public contentSide: 'left' | 'right' = 'left';\n\n  /**\n   * @inheritDoc\n   */\n  public ngOnInit(): void {\n    this._calculateStrokesPoints();\n  }\n\n  /**\n   * Calculate the position points of the stroke\n   * line of the circle arc to the content box.\n   */\n  private _calculateStrokesPoints(): void {\n    const fillDegree = this.fillPercentage / 100 * 360;\n    const arcCenterAngle = (this.positionDegree + fillDegree / 2) - 90 + this.torque;\n    this.svgWrapperRotate = `rotate(${-arcCenterAngle - 180}deg)`;\n\n    /**\n     * Calculate svgWrapperPosition\n     * x is the distance in % between the left side of the\n     * circle wrapper and center of the circle arc.\n     * y is the distance in % between the top side of the\n     * circle wrapper and center of the circle arc.\n     */\n    /** Formula: x = cos(angle) * radius */\n    const x = Math.cos(arcCenterAngle * Math.PI / 180) * 50;\n    /** Formula: y = sin(angle) * radius */\n    const y = Math.sin(arcCenterAngle * Math.PI / 180) * 50;\n\n    // Reverse x and add 50% to x and y to get the position\n    this.svgWrapperPosition = {x:100 - (x + 50), y: y + 50};\n\n    // Set the content position (same as svgWrapperPosition but with 100px more radius)\n    // Todo: Calc offset (should be something like (this.size + this.weight) * 100 / offsetRadius + 50)\n    /*const offset = 69.28;\n    const contentX = Math.cos(arcCenterAngle * Math.PI / 180) * offset;\n    const contentY = Math.sin(arcCenterAngle * Math.PI / 180) * offset;\n    this.contentPosition = {\n      x: 100 - (contentX + 50),\n      y: contentY + 50\n    }*/\n\n    // Set the content position (same as svgWrapperPosition but with contentOffset more radius)\n    // Calculate the offset radius\n\n    /**\n     * Must calculate the offset radius to get the correct position of the content box.\n     * The size of the circle is in px and the contentOffset is in px.\n     * But the position of the content box is in %.\n     * So we need to calculate the offset radius in %.\n     * The offset radius is the radius of the circle arc + the contentOffset.\n     */\n    const halfSize = (this.size + this.weight) / 2;\n    const offsetRadius = (halfSize + this.contentOffset) / halfSize * 50;\n    const contentX = Math.cos(arcCenterAngle * Math.PI / 180) * offsetRadius;\n    const contentY = Math.sin(arcCenterAngle * Math.PI / 180) * offsetRadius;\n    this.contentPosition = {\n      x: 100 - (contentX + 50),\n      y: contentY + 50\n    }\n\n    /** Set the content side class. */\n    this.contentSide = arcCenterAngle > 90 && arcCenterAngle <= 270 ? 'right' : 'left';\n  }\n\n  /**\n   * @inheritDoc\n   */\n  public ngOnChanges(changes: SimpleChanges): void {\n    if ('active' in changes) {\n      this._animateWeight();\n    }\n\n    if ('maxWeight' in changes) {\n      this.weightValue = this.active ? this.weight : 0;\n    }\n\n    if ('positionDegree' in changes || 'fillPercentage' in changes\n      || 'torque' in changes  ||'contentOffset' in changes) {\n      this._calculateStrokesPoints();\n    }\n  }\n\n  private _animateWeight(): void {\n    const from = this.active ? 0 : this.weight;\n    const to = this.active ? this.weight : 0;\n    animateValueUtil((value: number) => {\n      this.weightValue = value;\n    }, from, to, 300);\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "@use 'functions' as fn;\r\n@use 'mixins';\r\n\r\n:host {\r\n  --circle--track-bar-color: conic-gradient(from 0deg,\r\n    #{fn.get-color(primary, 600, 0.4)} 30deg,\r\n    #{fn.get-color(primary, 900)} 180deg,\r\n    #{fn.get-color(primary, 600, 0.4)} 330deg);\r\n}\r\n\r\n.circle-menu-item {\r\n  &__content {\r\n    width: 0;\r\n    height: 0;\r\n    position: absolute;\r\n    &-wrapper {\r\n      color: fn.get-color(primary, 50);\r\n      width: 200px;\r\n      position: absolute;\r\n      text-align: left;\r\n      top: 0;\r\n\r\n      &:before {\r\n        content: '';\r\n        position: absolute;\r\n        top: 0;\r\n        width: 0;\r\n        height: 1px;\r\n        background: fn.get-color(primary, 600, 0.4);\r\n        @include mixins.transition(.07s, $delay: 0s);\r\n\r\n        @at-root :host.active & {\r\n          @include mixins.transition(.4s, $delay: .2s);\r\n          width: 100%;\r\n        }\r\n      }\r\n\r\n      &.left {\r\n        right: 0;\r\n        &:before {\r\n          right: 0;\r\n        }\r\n\r\n        .title, .description {\r\n          padding-right: 25px;\r\n          transform: translateX(25px);\r\n        }\r\n      }\r\n\r\n      &.right {\r\n        left: 0;\r\n        &:before {\r\n          left: 0;\r\n        }\r\n\r\n        .title, .description {\r\n          padding-left: 10px;\r\n          transform: translateX(-25px);\r\n        }\r\n      }\r\n    }\r\n\r\n      .title, .description {\r\n        @include mixins.transition(.1s, $delay: 0s);\r\n        opacity: 0;\r\n\r\n        @at-root :host.active & {\r\n          @include mixins.transition(.5s, $delay: .2s);\r\n          opacity: 1;\r\n          transform: translateX(0);\r\n        }\r\n      }\r\n\r\n      .description {\r\n        @at-root :host.active & {\r\n          transition-delay: .35s;\r\n        }\r\n      }\r\n\r\n    &__title {\r\n      margin-top: -35px;\r\n    }\r\n  }\r\n\r\n  &__svg-wrapper {\r\n    position: absolute;\r\n    top: 0;\r\n    left: 0;\r\n    height: 1px;\r\n    width: 0;\r\n    background: fn.get-color(primary, 600, 0.4);\r\n    transform-origin: left center;\r\n    transform: rotate(30deg);\r\n    @include mixins.transition(.07s, width, $delay: .03s);\r\n\r\n    @at-root :host.active & {\r\n      @include mixins.transition(.2s, width, $delay: 0s);\r\n      width: 75px;\r\n    }\r\n  }\r\n}\r\n",
+                    "data": "@use 'functions' as fn;\r\n@use 'mixins';\r\n\r\n:host {\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  --circle--track-bar-color: conic-gradient(from 0deg,\r\n    #{fn.get-color(primary, 600, 0.4)} 30deg,\r\n    #{fn.get-color(primary, 900)} 180deg,\r\n    #{fn.get-color(primary, 600, 0.4)} 330deg);\r\n}\r\n\r\n.circle-menu-item {\r\n  &__content {\r\n    width: 0;\r\n    height: 0;\r\n    position: absolute;\r\n    &-wrapper {\r\n      color: fn.get-color(primary, 50);\r\n      width: 200px;\r\n      position: absolute;\r\n      text-align: left;\r\n      top: 0;\r\n\r\n      &:before {\r\n        content: '';\r\n        position: absolute;\r\n        top: 0;\r\n        width: 0;\r\n        height: 1px;\r\n        background: fn.get-color(primary, 600, 0.4);\r\n        @include mixins.transition(.07s, $delay: 0s);\r\n\r\n        @at-root :host.active & {\r\n          @include mixins.transition(.4s, $delay: .2s);\r\n          width: 100%;\r\n        }\r\n      }\r\n\r\n      &.left {\r\n        right: 0;\r\n        &:before {\r\n          right: 0;\r\n        }\r\n\r\n        .title, .description {\r\n          padding-right: 25px;\r\n          transform: translateX(25px);\r\n        }\r\n      }\r\n\r\n      &.right {\r\n        left: 0;\r\n        &:before {\r\n          left: 0;\r\n        }\r\n\r\n        .title, .description {\r\n          padding-left: 10px;\r\n          transform: translateX(-25px);\r\n        }\r\n      }\r\n    }\r\n\r\n      .title, .description {\r\n        @include mixins.transition(.1s, $delay: 0s);\r\n        opacity: 0;\r\n\r\n        @at-root :host.active & {\r\n          @include mixins.transition(.5s, $delay: .2s);\r\n          opacity: 1;\r\n          transform: translateX(0);\r\n        }\r\n      }\r\n\r\n      .description {\r\n        @at-root :host.active & {\r\n          transition-delay: .35s;\r\n        }\r\n      }\r\n\r\n    &__title {\r\n      margin-top: -35px;\r\n    }\r\n  }\r\n\r\n  &__svg-wrapper {\r\n    position: absolute;\r\n    top: 0;\r\n    left: 0;\r\n    height: 1px;\r\n    width: 0;\r\n    background: fn.get-color(primary, 600, 0.4);\r\n    transform-origin: left center;\r\n    transform: rotate(30deg);\r\n    @include mixins.transition(.07s, width, $delay: .03s);\r\n\r\n    @at-root :host.active & {\r\n      @include mixins.transition(.2s, width, $delay: 0s);\r\n      width: 75px;\r\n    }\r\n  }\r\n}\r\n",
                     "styleUrl": "./circle-menu-item.component.scss"
                 }
             ],
@@ -1421,7 +1558,7 @@
                 "OnChanges",
                 "OnInit"
             ],
-            "templateData": "<div class=\"cicle-menu-item__container\">\n  <cv-circle [size]=\"size\"\n             [weight]=\"weightValue\"\n             [baseWeight]=\"80\"\n             [fillPercentage]=\"fillPercentage\"\n             [startAtDegree]=\"positionDegree\"\n             [reverse]=\"true\"\n             weightDirection=\"out\">\n    <div class=\"circle-menu-item__svg-wrapper\"\n         [style.transform]=\"svgWrapperRotate\"\n         [style.left.%]=\"svgWrapperPosition.x\"\n         [style.top.%]=\"svgWrapperPosition.y\">\n    </div>\n    <div class=\"circle-menu-item__content\"\n         [style.top.%]=\"contentPosition.y\"\n         [style.left.%]=\"contentPosition.x\"\n    >\n      <div class=\"circle-menu-item__content-wrapper\" [ngClass]=\"contentSide\">\n        <div class=\"circle-menu-item__content__title title mat-h2\">{{title}}</div>\n        <div class=\"circle-menu-item__content__description description mat-small\">\n          {{description}}\n        </div>\n      </div>\n\n    </div>\n  </cv-circle>\n</div>\n\n"
+            "templateData": "<div class=\"cicle-menu-item__container\">\n  <cv-circle [size]=\"size\"\n             [weight]=\"weightValue\"\n             [baseWeight]=\"80\"\n             [fillPercentage]=\"fillPercentage\"\n             [startAtDegree]=\"positionDegree\"\n             [reverse]=\"true\"\n             weightDirection=\"out\">\n    <div class=\"circle-menu-item__svg-wrapper\"\n         [style.width.px]=\"contentOffset\"\n         [style.transform]=\"svgWrapperRotate\"\n         [style.left.%]=\"svgWrapperPosition.x\"\n         [style.top.%]=\"svgWrapperPosition.y\">\n    </div>\n    <div class=\"circle-menu-item__content\"\n         [style.top.%]=\"contentPosition.y\"\n         [style.left.%]=\"contentPosition.x\"\n    >\n      <div class=\"circle-menu-item__content-wrapper\" [ngClass]=\"contentSide\">\n        <div class=\"circle-menu-item__content__title title mat-h2\">{{title}}</div>\n        <div class=\"circle-menu-item__content__description description mat-small\">\n          {{description}}\n        </div>\n      </div>\n\n    </div>\n  </cv-circle>\n</div>\n\n"
         },
         {
             "name": "DrawCircleComponent",
@@ -1907,7 +2044,7 @@
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": ":host {\r\n  > mat-toolbar {\r\n    padding: 0;\r\n  }\r\n}\r\n",
+                    "data": "@use 'config';\r\n:host {\r\n  height: config.$top-header--height;\r\n  > mat-toolbar {\r\n    padding: 0;\r\n    height: 100%;\r\n  }\r\n}\r\n",
                     "styleUrl": "./header.component.scss"
                 }
             ],
@@ -2844,7 +2981,7 @@
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "@use 'functions' as fn;\r\n\r\n:host {\r\n  background: fn.get-color(contrast, 600);\r\n  display: flex;\r\n  flex-direction: column;\r\n  height: 100%;\r\n\r\n  > mat-tab-nav-panel {\r\n    height: 100%;\r\n    width: 100%;\r\n    display: flex;\r\n\r\n    > main {\r\n      display: flex;\r\n      flex-direction: column;\r\n      width: 100%;\r\n    }\r\n  }\r\n}\r\n",
+                    "data": "@use 'functions' as fn;\r\n\r\n:host {\r\n  background: fn.get-color(contrast, 800);\r\n  display: flex;\r\n  flex-direction: column;\r\n  height: 100%;\r\n  width: 100%;\r\n\r\n  > mat-tab-nav-panel {\r\n    height: 100%;\r\n    width: 100%;\r\n    display: flex;\r\n\r\n    > main {\r\n      display: flex;\r\n      flex-direction: column;\r\n      width: 100%;\r\n    }\r\n  }\r\n}\r\n",
                     "styleUrl": "./layout.component.scss"
                 }
             ],
@@ -3448,7 +3585,7 @@
         },
         {
             "name": "PageHomeComponent",
-            "id": "component-PageHomeComponent-fbda510d1bc78702e400bf1db8402ca4112ad600f8e77ad86b7c2e52e468beec84c16f4effa62b6185cc87f15212af6a4984822a0855da48757e606c7adbe1ec",
+            "id": "component-PageHomeComponent-f7f6486b0ae7c6a7c32596bb38aeddeaf6e204598c92e83479c17e3545e46cbe0e57e45e3f235c34f331115fc6e6cd72f520e38d242e291d8bc6543892b507d5",
             "file": "src/app/modules/main/components/page-home/page-home.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -3466,6 +3603,77 @@
             "viewProviders": [],
             "inputsClass": [],
             "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "cvPageClass",
+                    "defaultValue": "true",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 10,
+                    "decorators": [
+                        {
+                            "name": "HostBinding",
+                            "stringifiedArguments": "'class.cv-page'"
+                        }
+                    ],
+                    "modifierKind": [
+                        123,
+                        144
+                    ]
+                }
+            ],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [
+                {
+                    "name": "class.cv-page",
+                    "defaultValue": "true",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 10,
+                    "type": "true",
+                    "decorators": []
+                }
+            ],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import {Component, HostBinding} from '@angular/core';\n\n@Component({\n  selector: 'cv-page-home',\n  templateUrl: './page-home.component.html',\n  styleUrls: ['./page-home.component.scss']\n})\nexport class PageHomeComponent {\n\n  @HostBinding('class.cv-page') public readonly cvPageClass = true;\n\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "\r\n\r\n.profile-menu-container {\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  height: 100%;\r\n}\r\n",
+                    "styleUrl": "./page-home.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "templateData": "<cv-page-wrapper>\n  <div class=\"profile-menu-container\">\n    <cv-profile></cv-profile>\n  </div>\n</cv-page-wrapper>\n"
+        },
+        {
+            "name": "PageWrapperComponent",
+            "id": "component-PageWrapperComponent-132027ae2ec285d4a137d86bd0f7f8c3c9415960c0aaebbf126ab60f4ed2160fd9a3581599c97f114d858935bfebbba50ff5a67fe92ea2e61936979db9836dff",
+            "file": "src/app/modules/shared/page-wrapper/page-wrapper.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "cv-page-wrapper",
+            "styleUrls": [
+                "./page-wrapper.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./page-wrapper.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
             "propertiesClass": [],
             "methodsClass": [],
             "deprecated": false,
@@ -3475,20 +3683,20 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'cv-page-home',\n  templateUrl: './page-home.component.html',\n  styleUrls: ['./page-home.component.scss']\n})\nexport class PageHomeComponent {\n\n}\n",
+            "sourceCode": "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'cv-page-wrapper',\n  templateUrl: './page-wrapper.component.html',\n  styleUrls: ['./page-wrapper.component.scss']\n})\nexport class PageWrapperComponent {\n\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "",
-                    "styleUrl": "./page-home.component.scss"
+                    "data": "\r\n:host {\r\n  display: flex;\r\n  flex-direction: column;\r\n  height: 100%;\r\n}\r\n",
+                    "styleUrl": "./page-wrapper.component.scss"
                 }
             ],
             "stylesData": "",
-            "templateData": "<p>page-home works!</p>\n"
+            "templateData": "<ng-content></ng-content>\n"
         },
         {
             "name": "ProfileComponent",
-            "id": "component-ProfileComponent-738c04d42977ff603a9fc74bdb50d2949e2539afe253c2a7a428145c56a05406efc0e32826d06ee38360d4cb04b1ae4e68403284bdd6f3d3cb50202aeac9b070",
+            "id": "component-ProfileComponent-912b0b5a6e7b80a46ba5efd22ef8e45174f57c5cec415b65861edfe5d75d0ad6e4dbea652bc4b4eca0211566c9689988a2e246def1e957e1e212b7aaa6d60cf2",
             "file": "src/app/modules/main/components/profile/profile.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -3515,7 +3723,7 @@
                     "type": "ProfileMenuItem[]",
                     "optional": false,
                     "description": "<p>Get the menu items.</p>\n",
-                    "line": 58,
+                    "line": 33,
                     "rawdescription": "\n\nGet the menu items.\n",
                     "modifierKind": [
                         123
@@ -3523,36 +3731,16 @@
                 },
                 {
                     "name": "menuItemsData",
-                    "defaultValue": "[\n    {\n      title: 'About',\n      description: 'Lorem ipsum dolor sit amet',\n      importance: 20,\n    },\n    {\n      title: 'Skills',\n      description: 'Lorem ipsum dolor sit amet',\n      importance: 30,\n    },\n    {\n      title: 'Experience',\n      description: 'Lorem ipsum dolor sit amet',\n      importance: 40,\n    },\n    {\n      title: 'Education',\n      description: 'Lorem ipsum dolor sit amet',\n      importance: 20,\n    },\n    {\n      title: 'Contact',\n      description: 'Lorem ipsum dolor sit amet',\n      importance: 10,\n    }\n  ]",
+                    "defaultValue": "PROFILE_CONSTANT.MENU_DATA",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "[]",
+                    "type": "ProfileMenuItemData[]",
                     "optional": false,
                     "description": "<p>Data Of the menu items</p>\n",
-                    "line": 27,
+                    "line": 28,
                     "rawdescription": "\n\nData Of the menu items\n",
                     "modifierKind": [
                         121
-                    ],
-                    "jsdoctags": [
-                        {
-                            "pos": 571,
-                            "end": 620,
-                            "flags": 4227072,
-                            "modifierFlagsCache": 0,
-                            "transformFlags": 0,
-                            "kind": 325,
-                            "tagName": {
-                                "pos": 572,
-                                "end": 576,
-                                "flags": 4227072,
-                                "modifierFlagsCache": 0,
-                                "transformFlags": 0,
-                                "kind": 79,
-                                "escapedText": "todo"
-                            },
-                            "comment": "<p>move into JSON file or listen to routes</p>\n"
-                        }
                     ]
                 },
                 {
@@ -3563,7 +3751,7 @@
                     "type": "number",
                     "optional": false,
                     "description": "<p>Outer circle fill percentage.\nUsefully for animations.</p>\n",
-                    "line": 21,
+                    "line": 23,
                     "rawdescription": "\n\nOuter circle fill percentage.\nUsefully for animations.\n",
                     "modifierKind": [
                         123
@@ -3577,7 +3765,7 @@
                     "type": "number",
                     "optional": false,
                     "description": "<p>Value between 0 and 360.</p>\n",
-                    "line": 15,
+                    "line": 17,
                     "rawdescription": "\n\nValue between 0 and 360.\n",
                     "modifierKind": [
                         123
@@ -3598,7 +3786,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 106,
+                    "line": 74,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nSet the active menu item.\n",
@@ -3624,7 +3812,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 79,
+                    "line": 48,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nSet the menu items.\n",
@@ -3639,7 +3827,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 69,
+                    "line": 38,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\n",
@@ -3662,7 +3850,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 96,
+                    "line": 66,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\n",
@@ -3673,8 +3861,8 @@
                     "jsdoctags": [
                         {
                             "name": {
-                                "pos": 2150,
-                                "end": 2156,
+                                "pos": 1758,
+                                "end": 1764,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -3685,8 +3873,8 @@
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "pos": 2144,
-                                "end": 2149,
+                                "pos": 1752,
+                                "end": 1757,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -3705,7 +3893,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import {Component, OnInit} from '@angular/core';\nimport {animateValueUtil} from \"../../../../utils/animate-value.util\";\nimport {ProfileMenuItem} from \"./profile.component.model\";\n\n@Component({\n  selector: 'cv-profile',\n  templateUrl: './profile.component.html',\n  styleUrls: ['./profile.component.scss']\n})\nexport class ProfileComponent implements OnInit {\n\n  /**\n   * Value between 0 and 360.\n   */\n  public value = 340;\n\n  /**\n   * Outer circle fill percentage.\n   * Usefully for animations.\n   */\n  public outerCircleVal = 100;\n\n  /**\n   * Data Of the menu items\n   * @todo move into JSON file or listen to routes\n   */\n  private menuItemsData = [\n    {\n      title: 'About',\n      description: 'Lorem ipsum dolor sit amet',\n      importance: 20,\n    },\n    {\n      title: 'Skills',\n      description: 'Lorem ipsum dolor sit amet',\n      importance: 30,\n    },\n    {\n      title: 'Experience',\n      description: 'Lorem ipsum dolor sit amet',\n      importance: 40,\n    },\n    {\n      title: 'Education',\n      description: 'Lorem ipsum dolor sit amet',\n      importance: 20,\n    },\n    {\n      title: 'Contact',\n      description: 'Lorem ipsum dolor sit amet',\n      importance: 10,\n    }\n  ];\n\n  /**\n   * Get the menu items.\n   */\n  public menuItems: ProfileMenuItem[] = [];\n\n  /**\n   * @constructor\n   */\n  public constructor() {\n  }\n\n  /**\n   * @inheritDoc\n    */\n  public ngOnInit() {\n    this._calculateMenuItems();\n    animateValueUtil((val) => {\n      this.outerCircleVal = val;\n    }, 0, this.outerCircleVal, 2000, [.77, 0, 0, 1.06])\n  }\n\n  /**\n   * Set the menu items.\n   */\n  private _calculateMenuItems(): void {\n    let totalImportance = 0;\n    ProfileMenuItem.lastEndDegree = 0;\n    this.menuItemsData.forEach((item) => {\n      totalImportance += item.importance;\n    });\n    this.menuItemsData.forEach((item) => {\n      // 72.9 = 100 - 25 - 2.1 = 100% - quarter circle - 2.1% (is the gap between the menu items)\n      const fillPercentage = (item.importance / totalImportance) * 72.9;\n      this.menuItems.push(new ProfileMenuItem(item.title, item.description, fillPercentage));\n    });\n  }\n\n  /**\n   * @event onDragging\n   * @param $event Value of the dragging.\n   */\n  public onTriggerDragging($event: number): void {\n\n    this.value = $event;\n    console.log(this.value);\n    this._calculateActiveMenuItem($event)\n  }\n\n  /**\n   * Set the active menu item.\n   */\n  private _calculateActiveMenuItem(value: number): void {\n    this.menuItems.forEach((item) => {\n      item.isActive(360 - value);\n    });\n  }\n}\n",
+            "sourceCode": "import {Component, OnInit} from '@angular/core';\nimport {animateValueUtil} from \"../../../../utils/animate-value.util\";\nimport {ProfileMenuItem} from \"./profile.component.model\";\nimport {PROFILE_CONSTANT} from \"./profile.constant\";\nimport {ProfileMenuItemData} from \"./profile.interface\";\n\n@Component({\n  selector: 'cv-profile',\n  templateUrl: './profile.component.html',\n  styleUrls: ['./profile.component.scss']\n})\nexport class ProfileComponent implements OnInit {\n\n  /**\n   * Value between 0 and 360.\n   */\n  public value = 340;\n\n  /**\n   * Outer circle fill percentage.\n   * Usefully for animations.\n   */\n  public outerCircleVal = 100;\n\n  /**\n   * Data Of the menu items\n   */\n  private menuItemsData: ProfileMenuItemData[] = PROFILE_CONSTANT.MENU_DATA;\n\n  /**\n   * Get the menu items.\n   */\n  public menuItems: ProfileMenuItem[] = [];\n\n  /**\n   * @inheritDoc\n    */\n  public ngOnInit() {\n    this._calculateMenuItems();\n    animateValueUtil((val) => {\n      this.outerCircleVal = val;\n    }, 0, this.outerCircleVal, 2000, [.77, 0, 0, 1.06])\n  }\n\n  /**\n   * Set the menu items.\n   */\n  private _calculateMenuItems(): void {\n    let totalImportance = 0;\n    ProfileMenuItem.lastEndDegree = PROFILE_CONSTANT.MENU_DEGREE_START;\n    this.menuItemsData.forEach((item) => {\n      totalImportance += item.importance;\n    });\n    this.menuItemsData.forEach((item) => {\n      // 72.9 = 100 - 25 - 2.1 = 100% - quarter circle - 2.1% (is the gap between the menu items)\n      const maxFillPercentage = 100 - PROFILE_CONSTANT.MENU_DEGREE_END / 3.6 - 2.1;\n      const fillPercentage = (item.importance / totalImportance) * maxFillPercentage;\n      this.menuItems.push(new ProfileMenuItem(item, fillPercentage));\n    });\n  }\n\n  /**\n   * @event onDragging\n   * @param $event Value of the dragging.\n   */\n  public onTriggerDragging($event: number): void {\n    this.value = $event;\n    this._calculateActiveMenuItem($event)\n  }\n\n  /**\n   * Set the active menu item.\n   */\n  private _calculateActiveMenuItem(value: number): void {\n    this.menuItems.forEach((item) => {\n      //todo: comment\n      item.active = true;\n      //todo: Uncomment\n      //item.isActive(360 - value);\n    });\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -3714,23 +3902,10 @@
                 }
             ],
             "stylesData": "",
-            "constructorObj": {
-                "name": "constructor",
-                "description": "",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "args": [],
-                "line": 58,
-                "rawdescription": "\n\n",
-                "modifierKind": [
-                    123
-                ],
-                "jsdoctags": []
-            },
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<div class=\"profile__container\">\n  <div class=\"profile__circle\">\n    <div class=\"circle-outer__thin circle-wrapper\">\n      <cv-circle [size]=\"240\" [fillPercentage]=\"outerCircleVal\" [startAt]=\"9\"></cv-circle>\n    </div>\n    <div class=\"circle-outer__tools circle-wrapper\">\n      <cv-circle [size]=\"300\" [weight]=\"40\" [fillPercentage]=\"outerCircleVal\" [startAt]=\"9\"></cv-circle>\n    </div>\n\n    <!--Profile-->\n    <div class=\"circle-outer__menu\">\n      <cv-circle-menu-item *ngFor=\"let item of menuItems\"\n                           [title]=\"item.title\"\n                           [description]=\"item.description\"\n                           [fillPercentage]=\"item.fillPercentage\"\n                           [positionDegree]=\"item.positionDegree\" [active]=\"item.active\">\n      </cv-circle-menu-item>\n    </div>\n    <div class=\"circle-outer__input circle-wrapper\">\n      <cv-input-circle-slider class=\"circle-input\" [showValue]=\"false\"\n                              [min]=\"0\"\n                              [max]=\"360\"\n                              (triggerDragging)=\"onTriggerDragging($event)\"\n                              [value]=\"value\"\n                              [size]=\"210\"\n                              [animationTime]=\"2800\"\n                              [allowCross]=\"true\"\n                              [weight]=\"2\">\n        <cv-draw-circle class=\"handler\" [positionDegree]=\"0\"\n                        [size]=\"210\" [weight]=\"15\"\n                        [arcDegree]=\"90\"></cv-draw-circle>\n      </cv-input-circle-slider>\n    </div>\n  </div>\n</div>\n"
+            "templateData": "<div class=\"profile__container\">\n  <div class=\"profile__circle\">\n    <div class=\"circle-outer__thin circle-wrapper\">\n      <cv-circle [size]=\"240\" [fillPercentage]=\"outerCircleVal\" [startAt]=\"9\"></cv-circle>\n    </div>\n    <div class=\"circle-outer__tools circle-wrapper\">\n      <cv-circle [size]=\"300\" [weight]=\"40\" [fillPercentage]=\"outerCircleVal\" [startAt]=\"9\"></cv-circle>\n    </div>\n\n    <!--Profile-->\n    <div class=\"circle-outer__menu\">\n      <cv-circle-menu-item *ngFor=\"let item of menuItems\"\n                           [size]=\"item.size\"\n                           [weight]=\"item.weight\"\n                           [torque]=\"item.torque\"\n                           [contentOffset]=\"item.contentOffset\"\n                           [title]=\"item.title\"\n                           [description]=\"item.description\"\n                           [fillPercentage]=\"item.fillPercentage\"\n                           [positionDegree]=\"item.positionDegree\" [active]=\"item.active\">\n      </cv-circle-menu-item>\n    </div>\n    <div class=\"circle-outer__input circle-wrapper\">\n      <cv-input-circle-slider class=\"circle-input\" [showValue]=\"false\"\n                              [min]=\"0\"\n                              [max]=\"360\"\n                              (triggerDragging)=\"onTriggerDragging($event)\"\n                              [value]=\"value\"\n                              [size]=\"210\"\n                              [animationTime]=\"2800\"\n                              [allowCross]=\"true\"\n                              [weight]=\"2\">\n        <cv-draw-circle class=\"handler\" [positionDegree]=\"0\"\n                        [size]=\"210\" [weight]=\"15\"\n                        [arcDegree]=\"90\"></cv-draw-circle>\n      </cv-input-circle-slider>\n    </div>\n  </div>\n</div>\n"
         },
         {
             "name": "StorybookWrapperComponent",
@@ -4027,13 +4202,13 @@
         },
         {
             "name": "MainModule",
-            "id": "module-MainModule-7e68797208de9663636636e2564a65d1b7960a806a1003376e740d501a444cd179fa408c240c057338e17a79f7cdb50eda4d5fa52a3bc900b6781b2d17d9596f",
+            "id": "module-MainModule-be28cb59a640d178971ea6e0909648c82da59b9ea5efa32d4f54c10763f3671fa9e113c7ae09debf6e04b16b94f2fd7c08feb713c4ca55618665f08ad4c80ce0",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "src/app/modules/main/main.module.ts",
             "methods": [],
-            "sourceCode": "import { NgModule } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { MainComponent } from './components/main/main.component';\nimport {LayoutComponent} from \"./components/layout/layout.component\";\nimport { PageHomeComponent } from './components/page-home/page-home.component';\nimport { PageContactComponent } from './components/page-contact/page-contact.component';\nimport {RouterLink, RouterModule} from \"@angular/router\";\nimport {MatTabsModule} from \"@angular/material/tabs\";\nimport { HeaderComponent } from './components/header/header.component';\nimport {MatIconModule} from \"@angular/material/icon\";\nimport {MatToolbarModule} from \"@angular/material/toolbar\";\nimport {MatButtonModule} from \"@angular/material/button\";\nimport { MenuComponent } from './components/menu/menu.component';\nimport { ProfileComponent } from './components/profile/profile.component';\nimport {CircleModule} from \"../shared/circle/circle.module\";\nimport {InputCircleSliderModule} from \"../shared/input-circle-slider/input-circle-slider.module\";\nimport {DrawCircleModule} from \"../shared/draw-circle/draw-circle.module\";\nimport { CircleMenuItemComponent } from './components/circle-menu-item/circle-menu-item.component';\n\n\n\n@NgModule({\n    declarations: [\n        MainComponent,\n        LayoutComponent,\n        PageHomeComponent,\n        PageContactComponent,\n        HeaderComponent,\n        MenuComponent,\n        ProfileComponent,\n        CircleMenuItemComponent,\n    ],\n    imports: [\n        CommonModule,\n        RouterLink,\n        RouterModule,\n        MatTabsModule,\n        MatIconModule,\n        MatToolbarModule,\n        MatButtonModule,\n        CircleModule,\n        InputCircleSliderModule,\n        DrawCircleModule\n    ],\n  exports: [\n    MainComponent,\n    LayoutComponent\n  ],\n})\nexport class MainModule { }\n",
+            "sourceCode": "import { NgModule } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { MainComponent } from './components/main/main.component';\nimport {LayoutComponent} from \"./components/layout/layout.component\";\nimport { PageHomeComponent } from './components/page-home/page-home.component';\nimport { PageContactComponent } from './components/page-contact/page-contact.component';\nimport {RouterLink, RouterModule} from \"@angular/router\";\nimport {MatTabsModule} from \"@angular/material/tabs\";\nimport { HeaderComponent } from './components/header/header.component';\nimport {MatIconModule} from \"@angular/material/icon\";\nimport {MatToolbarModule} from \"@angular/material/toolbar\";\nimport {MatButtonModule} from \"@angular/material/button\";\nimport { MenuComponent } from './components/menu/menu.component';\nimport { ProfileComponent } from './components/profile/profile.component';\nimport {CircleModule} from \"../shared/circle/circle.module\";\nimport {InputCircleSliderModule} from \"../shared/input-circle-slider/input-circle-slider.module\";\nimport {DrawCircleModule} from \"../shared/draw-circle/draw-circle.module\";\nimport { CircleMenuItemComponent } from './components/circle-menu-item/circle-menu-item.component';\nimport {PageWrapperModule} from \"../shared/page-wrapper/page-wrapper.module\";\n\n\n\n@NgModule({\n    declarations: [\n        MainComponent,\n        LayoutComponent,\n        PageHomeComponent,\n        PageContactComponent,\n        HeaderComponent,\n        MenuComponent,\n        ProfileComponent,\n        CircleMenuItemComponent,\n    ],\n  imports: [\n    CommonModule,\n    RouterLink,\n    RouterModule,\n    MatTabsModule,\n    MatIconModule,\n    MatToolbarModule,\n    MatButtonModule,\n    CircleModule,\n    InputCircleSliderModule,\n    DrawCircleModule,\n    PageWrapperModule\n  ],\n  exports: [\n    MainComponent,\n    LayoutComponent\n  ],\n})\nexport class MainModule { }\n",
             "children": [
                 {
                     "type": "providers",
@@ -4081,6 +4256,9 @@
                             "name": "InputCircleSliderModule"
                         },
                         {
+                            "name": "PageWrapperModule"
+                        },
+                        {
                             "name": "RouterLink"
                         }
                     ]
@@ -4093,6 +4271,50 @@
                         },
                         {
                             "name": "MainComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        },
+        {
+            "name": "PageWrapperModule",
+            "id": "module-PageWrapperModule-1e4cfa59f644ba5633d5066eaa3d565b4d4a88710d21ea7a34bee5068ff5199e0936a12e942b5225381bcc5a247378399f0e5baefaaf34dc32fedaa929feffe2",
+            "description": "",
+            "deprecationMessage": "",
+            "deprecated": false,
+            "file": "src/app/modules/shared/page-wrapper/page-wrapper.module.ts",
+            "methods": [],
+            "sourceCode": "import { NgModule } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { PageWrapperComponent } from './page-wrapper.component';\n\n\n\n@NgModule({\n  declarations: [\n    PageWrapperComponent\n  ],\n  imports: [\n    CommonModule\n  ],\n  exports: [\n    PageWrapperComponent\n  ]\n})\nexport class PageWrapperModule { }\n",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": [
+                        {
+                            "name": "PageWrapperComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "imports",
+                    "elements": []
+                },
+                {
+                    "type": "exports",
+                    "elements": [
+                        {
+                            "name": "PageWrapperComponent"
                         }
                     ]
                 },
@@ -4231,16 +4453,6 @@
                 "name": "environment",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/environments/environment.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "object",
-                "defaultValue": "{\n  production: false\n}"
-            },
-            {
-                "name": "environment",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "src/environments/environment.prod.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -4248,10 +4460,30 @@
                 "defaultValue": "{\n  production: true\n}"
             },
             {
+                "name": "environment",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/environments/environment.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "object",
+                "defaultValue": "{\n  production: false\n}"
+            },
+            {
                 "name": "Header",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
                 "file": "src/app/modules/main/components/header/header.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "Home",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/modules/main/components/page-home/page-home.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -4335,13 +4567,23 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "object",
-                "defaultValue": "{\n  declarations: [\n      MainComponent,\n      LayoutComponent,\n      PageHomeComponent,\n      PageContactComponent,\n      HeaderComponent,\n      MenuComponent,\n      ProfileComponent,\n      CircleMenuItemComponent\n  ],\n  imports: [\n    appRouting,\n    BrowserAnimationsModule,\n    CircleModule,\n    CommonModule,\n    RouterLink,\n    RouterModule,\n    MatTabsModule,\n    MatIconModule,\n    MatToolbarModule,\n    MatButtonModule,\n    InputCircleSliderModule,\n    DrawCircleModule,\n    StorybookWrapperModule\n  ],\n  exports: [\n    MainComponent,\n    LayoutComponent,\n    HeaderComponent,\n    ProfileComponent,\n    CircleMenuItemComponent\n  ],\n}"
+                "defaultValue": "{\n  declarations: [\n      MainComponent,\n      LayoutComponent,\n      PageHomeComponent,\n      PageContactComponent,\n      HeaderComponent,\n      MenuComponent,\n      ProfileComponent,\n      CircleMenuItemComponent\n  ],\n  imports: [\n    appRouting,\n    BrowserAnimationsModule,\n    CircleModule,\n    CommonModule,\n    RouterLink,\n    RouterModule,\n    MatTabsModule,\n    MatIconModule,\n    MatToolbarModule,\n    MatButtonModule,\n    InputCircleSliderModule,\n    DrawCircleModule,\n    StorybookWrapperModule,\n    PageWrapperModule,\n  ],\n  exports: [\n    MainComponent,\n    LayoutComponent,\n    HeaderComponent,\n    ProfileComponent,\n    CircleMenuItemComponent\n  ],\n}"
             },
             {
                 "name": "Menu",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
                 "file": "src/app/modules/main/components/menu/menu.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "PageWrapper",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/modules/shared/page-wrapper/page-wrapper.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -4366,6 +4608,16 @@
                 "deprecationMessage": "",
                 "type": "",
                 "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "PROFILE_CONSTANT",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/modules/main/components/profile/profile.constant.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "object",
+                "defaultValue": "{\r\n  /**\r\n   * Graphical menu degree start.\r\n   */\r\n  MENU_DEGREE_START: 0,\r\n\r\n  /**\r\n   * Graphical menu degree end. (from 0 to 360)\r\n   * 0 = 12 o'clock\r\n   * 90 = 3 o'clock\r\n   * 180 = 6 o'clock\r\n   *\r\n   * Will be relative to the MENU_DEGREE_START.\r\n   */\r\n  MENU_DEGREE_END: 90,\r\n\r\n  /**\r\n   * MENU_DATA\r\n   */\r\n  MENU_DATA: [\r\n      {\r\n        title: 'About',\r\n        description: 'Lorem ipsum dolor sit amet',\r\n        importance: 10,\r\n        size: 250,\r\n        weight: 50,\r\n        torque: 10,\r\n        contentOffset: 50\r\n      },\r\n      {\r\n        title: 'Skills',\r\n        description: 'Lorem ipsum dolor sit amet',\r\n        importance: 40,\r\n        weight: 55,\r\n        torque: -30,\r\n        contentOffset: 35\r\n      },\r\n      {\r\n        title: 'Experience',\r\n        description: 'Lorem ipsum dolor sit amet',\r\n        importance: 20,\r\n        torque: -25,\r\n        contentOffset: 10\r\n      },\r\n      {\r\n        title: 'Education',\r\n        description: 'Lorem ipsum dolor sit amet',\r\n        importance: 10,\r\n        size: 250,\r\n        contentOffset: 50\r\n      },\r\n      {\r\n        title: 'Contact',\r\n        description: 'Lorem ipsum dolor sit amet',\r\n        importance: 10,\r\n        size: 250,\r\n        weight: 20,\r\n      }\r\n    ] as ProfileMenuItemData[]\r\n  }"
             },
             {
                 "name": "ROUTER_LTR_TRANSITION_CONSTANT",
@@ -4467,11 +4719,11 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/modules/shared/circle/circle.stories.ts",
+                "file": "src/app/modules/shared/page-wrapper/page-wrapper.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Story<CircleComponent>",
-                "defaultValue": "(args: CircleComponent) => ({\r\n  props: args,\r\n})",
+                "type": "Story<PageWrapperComponent>",
+                "defaultValue": "(args: PageWrapperComponent) => ({\r\n  props: args,\r\n})",
                 "rawdescription": "Template of the component.",
                 "description": "<p>Template of the component.</p>\n"
             },
@@ -4479,11 +4731,11 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/modules/shared/input-circle-slider/input-circle-slider.stories.ts",
+                "file": "src/app/modules/shared/circle/circle.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Story<InputCircleSliderComponent>",
-                "defaultValue": "(args: InputCircleSliderComponent) => ({\r\n  props: args,\r\n})",
+                "type": "Story<CircleComponent>",
+                "defaultValue": "(args: CircleComponent) => ({\r\n  props: args,\r\n})",
                 "rawdescription": "Template of the component.",
                 "description": "<p>Template of the component.</p>\n"
             },
@@ -4503,11 +4755,13 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/modules/main/components/circle-menu-item/circle-menu-item.stories.ts",
+                "file": "src/app/modules/shared/input-circle-slider/input-circle-slider.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Story<CircleMenuItemComponent>",
-                "defaultValue": "(args: CircleMenuItemComponent) => ({\n  props: args,\n})"
+                "type": "Story<InputCircleSliderComponent>",
+                "defaultValue": "(args: InputCircleSliderComponent) => ({\r\n  props: args,\r\n})",
+                "rawdescription": "Template of the component.",
+                "description": "<p>Template of the component.</p>\n"
             },
             {
                 "name": "Template",
@@ -4518,6 +4772,28 @@
                 "deprecationMessage": "",
                 "type": "Story<HeaderComponent>",
                 "defaultValue": "(args: HeaderComponent) => ({\r\n  props: args,\r\n})",
+                "rawdescription": "Template of the component.",
+                "description": "<p>Template of the component.</p>\n"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/modules/main/components/circle-menu-item/circle-menu-item.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<CircleMenuItemComponent>",
+                "defaultValue": "(args: CircleMenuItemComponent) => ({\n  props: args,\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/modules/main/components/layout/layout.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<LayoutComponent>",
+                "defaultValue": "(args: LayoutComponent) => ({\r\n  props: args,\r\n})",
                 "rawdescription": "Template of the component.",
                 "description": "<p>Template of the component.</p>\n"
             },
@@ -4537,11 +4813,11 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/modules/main/components/layout/layout.stories.ts",
+                "file": "src/app/modules/main/components/menu/menu.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Story<LayoutComponent>",
-                "defaultValue": "(args: LayoutComponent) => ({\r\n  props: args,\r\n})",
+                "type": "Story<MenuComponent>",
+                "defaultValue": "(args: MenuComponent) => ({\r\n  props: args,\r\n})",
                 "rawdescription": "Template of the component.",
                 "description": "<p>Template of the component.</p>\n"
             },
@@ -4549,11 +4825,11 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/modules/main/components/menu/menu.stories.ts",
+                "file": "src/app/modules/main/components/page-home/page-home.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Story<MenuComponent>",
-                "defaultValue": "(args: MenuComponent) => ({\r\n  props: args,\r\n})",
+                "type": "Story<PageHomeComponent>",
+                "defaultValue": "(args: PageHomeComponent) => ({\r\n  props: args,\r\n})",
                 "rawdescription": "Template of the component.",
                 "description": "<p>Template of the component.</p>\n"
             },
@@ -4708,18 +4984,6 @@
                     "description": "<p>Ease in out cubic function.</p>\n"
                 }
             ],
-            "src/environments/environment.ts": [
-                {
-                    "name": "environment",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/environments/environment.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "object",
-                    "defaultValue": "{\n  production: false\n}"
-                }
-            ],
             "src/environments/environment.prod.ts": [
                 {
                     "name": "environment",
@@ -4730,6 +4994,18 @@
                     "deprecationMessage": "",
                     "type": "object",
                     "defaultValue": "{\n  production: true\n}"
+                }
+            ],
+            "src/environments/environment.ts": [
+                {
+                    "name": "environment",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/environments/environment.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "object",
+                    "defaultValue": "{\n  production: false\n}"
                 }
             ],
             "src/app/modules/main/components/header/header.stories.ts": [
@@ -4752,6 +5028,30 @@
                     "deprecationMessage": "",
                     "type": "Story<HeaderComponent>",
                     "defaultValue": "(args: HeaderComponent) => ({\r\n  props: args,\r\n})",
+                    "rawdescription": "Template of the component.",
+                    "description": "<p>Template of the component.</p>\n"
+                }
+            ],
+            "src/app/modules/main/components/page-home/page-home.stories.ts": [
+                {
+                    "name": "Home",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/modules/main/components/page-home/page-home.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/modules/main/components/page-home/page-home.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<PageHomeComponent>",
+                    "defaultValue": "(args: PageHomeComponent) => ({\r\n  props: args,\r\n})",
                     "rawdescription": "Template of the component.",
                     "description": "<p>Template of the component.</p>\n"
                 }
@@ -4929,7 +5229,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "object",
-                    "defaultValue": "{\n  declarations: [\n      MainComponent,\n      LayoutComponent,\n      PageHomeComponent,\n      PageContactComponent,\n      HeaderComponent,\n      MenuComponent,\n      ProfileComponent,\n      CircleMenuItemComponent\n  ],\n  imports: [\n    appRouting,\n    BrowserAnimationsModule,\n    CircleModule,\n    CommonModule,\n    RouterLink,\n    RouterModule,\n    MatTabsModule,\n    MatIconModule,\n    MatToolbarModule,\n    MatButtonModule,\n    InputCircleSliderModule,\n    DrawCircleModule,\n    StorybookWrapperModule\n  ],\n  exports: [\n    MainComponent,\n    LayoutComponent,\n    HeaderComponent,\n    ProfileComponent,\n    CircleMenuItemComponent\n  ],\n}"
+                    "defaultValue": "{\n  declarations: [\n      MainComponent,\n      LayoutComponent,\n      PageHomeComponent,\n      PageContactComponent,\n      HeaderComponent,\n      MenuComponent,\n      ProfileComponent,\n      CircleMenuItemComponent\n  ],\n  imports: [\n    appRouting,\n    BrowserAnimationsModule,\n    CircleModule,\n    CommonModule,\n    RouterLink,\n    RouterModule,\n    MatTabsModule,\n    MatIconModule,\n    MatToolbarModule,\n    MatButtonModule,\n    InputCircleSliderModule,\n    DrawCircleModule,\n    StorybookWrapperModule,\n    PageWrapperModule,\n  ],\n  exports: [\n    MainComponent,\n    LayoutComponent,\n    HeaderComponent,\n    ProfileComponent,\n    CircleMenuItemComponent\n  ],\n}"
                 }
             ],
             "src/app/modules/main/components/menu/menu.stories.ts": [
@@ -4956,6 +5256,30 @@
                     "description": "<p>Template of the component.</p>\n"
                 }
             ],
+            "src/app/modules/shared/page-wrapper/page-wrapper.stories.ts": [
+                {
+                    "name": "PageWrapper",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/modules/shared/page-wrapper/page-wrapper.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/modules/shared/page-wrapper/page-wrapper.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<PageWrapperComponent>",
+                    "defaultValue": "(args: PageWrapperComponent) => ({\r\n  props: args,\r\n})",
+                    "rawdescription": "Template of the component.",
+                    "description": "<p>Template of the component.</p>\n"
+                }
+            ],
             "src/app/modules/main/components/profile/profile.stories.ts": [
                 {
                     "name": "Profile",
@@ -4978,6 +5302,18 @@
                     "defaultValue": "(args: ProfileComponent) => ({\r\n  props: args,\r\n})",
                     "rawdescription": "Template of the component.",
                     "description": "<p>Template of the component.</p>\n"
+                }
+            ],
+            "src/app/modules/main/components/profile/profile.constant.ts": [
+                {
+                    "name": "PROFILE_CONSTANT",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/modules/main/components/profile/profile.constant.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "object",
+                    "defaultValue": "{\r\n  /**\r\n   * Graphical menu degree start.\r\n   */\r\n  MENU_DEGREE_START: 0,\r\n\r\n  /**\r\n   * Graphical menu degree end. (from 0 to 360)\r\n   * 0 = 12 o'clock\r\n   * 90 = 3 o'clock\r\n   * 180 = 6 o'clock\r\n   *\r\n   * Will be relative to the MENU_DEGREE_START.\r\n   */\r\n  MENU_DEGREE_END: 90,\r\n\r\n  /**\r\n   * MENU_DATA\r\n   */\r\n  MENU_DATA: [\r\n      {\r\n        title: 'About',\r\n        description: 'Lorem ipsum dolor sit amet',\r\n        importance: 10,\r\n        size: 250,\r\n        weight: 50,\r\n        torque: 10,\r\n        contentOffset: 50\r\n      },\r\n      {\r\n        title: 'Skills',\r\n        description: 'Lorem ipsum dolor sit amet',\r\n        importance: 40,\r\n        weight: 55,\r\n        torque: -30,\r\n        contentOffset: 35\r\n      },\r\n      {\r\n        title: 'Experience',\r\n        description: 'Lorem ipsum dolor sit amet',\r\n        importance: 20,\r\n        torque: -25,\r\n        contentOffset: 10\r\n      },\r\n      {\r\n        title: 'Education',\r\n        description: 'Lorem ipsum dolor sit amet',\r\n        importance: 10,\r\n        size: 250,\r\n        contentOffset: 50\r\n      },\r\n      {\r\n        title: 'Contact',\r\n        description: 'Lorem ipsum dolor sit amet',\r\n        importance: 10,\r\n        size: 250,\r\n        weight: 20,\r\n      }\r\n    ] as ProfileMenuItemData[]\r\n  }"
                 }
             ],
             "src/app/constants/router-transition.constant.ts": [
@@ -5144,8 +5480,8 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "CircleMenuItemComponent",
-                "coveragePercent": 70,
-                "coverageCount": "12/17",
+                "coveragePercent": 73,
+                "coverageCount": "14/19",
                 "status": "good"
             },
             {
@@ -5308,16 +5644,36 @@
                 "linktype": "component",
                 "name": "PageHomeComponent",
                 "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/modules/main/components/page-home/page-home.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Home",
+                "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
+            },
+            {
+                "filePath": "src/app/modules/main/components/page-home/page-home.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 100,
+                "coverageCount": "1/1",
+                "status": "very-good"
             },
             {
                 "filePath": "src/app/modules/main/components/profile/profile.component.model.ts",
                 "type": "class",
                 "linktype": "classe",
                 "name": "ProfileMenuItem",
-                "coveragePercent": 84,
-                "coverageCount": "11/13",
+                "coveragePercent": 88,
+                "coverageCount": "15/17",
                 "status": "very-good"
             },
             {
@@ -5325,9 +5681,28 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "ProfileComponent",
-                "coveragePercent": 60,
-                "coverageCount": "6/10",
+                "coveragePercent": 66,
+                "coverageCount": "6/9",
                 "status": "good"
+            },
+            {
+                "filePath": "src/app/modules/main/components/profile/profile.constant.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "PROFILE_CONSTANT",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/modules/main/components/profile/profile.interface.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "ProfileMenuItemData",
+                "coveragePercent": 10,
+                "coverageCount": "1/10",
+                "status": "low"
             },
             {
                 "filePath": "src/app/modules/main/components/profile/profile.stories.ts",
@@ -5447,6 +5822,35 @@
             },
             {
                 "filePath": "src/app/modules/shared/input-circle-slider/input-circle-slider.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 100,
+                "coverageCount": "1/1",
+                "status": "very-good"
+            },
+            {
+                "filePath": "src/app/modules/shared/page-wrapper/page-wrapper.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "PageWrapperComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/modules/shared/page-wrapper/page-wrapper.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "PageWrapper",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/modules/shared/page-wrapper/page-wrapper.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",

@@ -1,7 +1,7 @@
 @use 'functions' as fn;
 
 :host {
-  background: fn.get-color(contrast, 600);
+  background: fn.get-color(contrast, 800);
   display: flex;
   flex-direction: column;
   height: 100%;

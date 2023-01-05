@@ -10,7 +10,6 @@ export default {
   title: 'Main/Layout',
   component: LayoutComponent,
   parameters: {
-    controls: { hideNoControlsWarning: true },
     layout: 'fullscreen',
   },
   argTypes: {

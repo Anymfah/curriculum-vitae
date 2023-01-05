@@ -16,6 +16,7 @@
     left: 0;
     z-index: 999999;
     display: flex;
+    pointer-events: auto;
   }
 
   &__circle {

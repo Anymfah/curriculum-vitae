@@ -1,5 +1,8 @@
+@use 'config';
 :host {
+  height: config.$top-header--height;
   > mat-toolbar {
     padding: 0;
+    height: 100%;
   }
 }

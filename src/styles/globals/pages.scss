@@ -1,0 +1,7 @@
+@use 'config';
+
+.cv-page {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - #{config.$top-header--height});
+}

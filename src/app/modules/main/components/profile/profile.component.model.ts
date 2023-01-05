@@ -1,16 +1,8 @@
 import {ProfileMenuItemData} from "./profile.interface";
+import {iCircleMenuItem} from "../circle-menu-item/circle-menu-item.interface";
+import {iDrawCircle} from "../../../shared/draw-circle/draw-circle.interface";
 
 export class ProfileMenuItem {
-  /**
-   * Title of the menu item.
-   */
-  public title: string = '';
-
-  /**
-   * Description of the menu item.
-   */
-  public description: string = '';
-
   /**
    * Icon of the menu item.
    */
@@ -22,34 +14,24 @@ export class ProfileMenuItem {
   public route?: string;
 
   /**
-   * Fill percentage of the circle arc
+   * @default Size of the circle arc.
    */
-  public fillPercentage: number = 0;
+  public defaultSize: number = 310;
 
   /**
-   * Position of the circle arc in degree.
+   * @default Weight of the menu item.
    */
-  public positionDegree: number = 0;
+  public defaultWeight: number = 80;
 
   /**
-   * Size of the circle arc.
+   * @default Torque of the menu item.
    */
-  public size: number = 310;
+  public defaultTorque: number = 0;
 
   /**
-   * Weight of the menu item.
+   * @default Distance of the menu item box.
    */
-  public weight: number = 80;
-
-  /**
-   * Torque of the menu item.
-   */
-  public torque: number = 0;
-
-  /**
-   * Distance of the menu item box.
-   */
-  public contentOffset: number = 75;
+  public defaultContentOffset: number = 75;
 
   /**
    * Range of degrees of the menu item.
@@ -57,14 +39,31 @@ export class ProfileMenuItem {
   private _activeRange: { start: number, end: number } = { start: 0, end: 0 };
 
   /**
+   * Get middle degree of the menu item.
+   */
+  public get degreeItem(): number {
+    return (this._activeRange.start + this._activeRange.end) / 2;
+  }
+
+  /**
    * Is the menu item active.
    */
-  public active = true;
+  public active = false;
 
   /**
    * End in degree of the last menu item.
    */
   public static lastEndDegree: number = 0;
+
+  /**
+   * Get the menu item as circle menu item.
+   */
+  public circleMenuItem: iCircleMenuItem;
+
+  /**
+   * Get the menu item as drawn circle. (used for button)
+   */
+  public drawCircleItem: iDrawCircle;
 
   /**
    * @constructor
@@ -73,15 +72,18 @@ export class ProfileMenuItem {
     data: ProfileMenuItemData,
     fillPercentage: number,
   ) {
-    this.title = data.title;
-    this.description = data.description;
-    this.fillPercentage = fillPercentage;
+    this.circleMenuItem = {
+      title: data.title,
+      description: data.description,
+      size: data.circleMenuItem.size ?? this.defaultSize,
+      fillPercentage,
+      weight: data.circleMenuItem.weight ?? this.defaultWeight,
+      torque: data.circleMenuItem.torque ?? this.defaultTorque,
+      contentOffset: data.circleMenuItem.contentOffset ?? this.defaultContentOffset,
+    }
+    this.drawCircleItem = data.drawCircleItem;
     this.icon = data.icon;
     this.route = data.route;
-    this.size = data.size ?? this.size;
-    this.weight = data.weight ?? this.weight;
-    this.torque = data.torque ?? this.torque;
-    this.contentOffset = data.contentOffset ?? this.contentOffset;
     this._init();
   }
 
@@ -89,13 +91,16 @@ export class ProfileMenuItem {
    * Init the menu item.
    */
   private _init() {
-    this.positionDegree = ProfileMenuItem.lastEndDegree;
+    this.circleMenuItem.positionDegree = ProfileMenuItem.lastEndDegree;
 
     /** Add the fill percentage (to deg) + 2deg (gap) */
-    ProfileMenuItem.lastEndDegree += this.fillPercentage * 3.6 + 2;
+    if (this.circleMenuItem.fillPercentage != null) {
+      ProfileMenuItem.lastEndDegree += this.circleMenuItem.fillPercentage * 3.6 + 2;
+    }
+
 
     this._activeRange = {
-      start: this.positionDegree,
+      start: this.circleMenuItem.positionDegree,
       end: ProfileMenuItem.lastEndDegree,
     }
   }

@@ -1,17 +1,20 @@
 @use 'mixins';
 
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .circle {
   @include mixins.transition;
-  fill: transparent;
+  fill: var(--draw-circle--track-bar-bg-color);
   stroke: var(--draw-circle--track-bar-color);
   stroke-width: 1;
   pointer-events: var(--draw-circle--arc-pointer-events);
 }
 .inCircle {
-  fill: transparent;
-  stroke: #43C1F5;
+  fill: var(--draw-circle--full-bg-color);
+  stroke: var(--draw-circle--full-color);
   stroke-width: 1;
   pointer-events: none;
-}
-.circleContainer {
 }
