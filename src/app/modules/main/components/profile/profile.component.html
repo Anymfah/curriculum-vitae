@@ -6,26 +6,24 @@
       <cv-circle class="mask-circle" [size]="300" [weight]="40" [fillPercentage]="outerCircleVal" [startAt]="9">
         <!--Contact-->
         <cv-draw-circle *ngFor="let item of menuItems" mask-inner anchorPoint="start"
+                        [routerLink]="item.routerLink"
                         (click)="onClickMenuItem(item)"
+                        [reverse]="true"
                         [class.active]="item.active"
                         [size]="item.drawCircleItem.size ?? 0"
                         [positionDegree]="item.drawCircleItem.positionDegree ?? 0"
                         [arcDegree]="item.drawCircleItem.arcDegree ?? 0"
                         [weight]="item.drawCircleItem.weight ?? 0"></cv-draw-circle>
-
-        <!--Empty-->
-        <cv-draw-circle mask-inner anchorPoint="start"
-                        [size]="276"  [positionDegree]="362" [arcDegree]="29" [weight]="4"></cv-draw-circle>
       </cv-circle>
     </div>
 
     <!--Profile-->
     <div class="circle-outer__menu">
       <cv-circle-menu-item *ngFor="let item of menuItems"
-                           [size]="item.circleMenuItem.size ?? 0"
-                           [weight]="item.circleMenuItem.weight ?? 0"
+                           [size]="item.circleMenuItem.size ?? 310"
+                           [weight]="item.circleMenuItem.weight ?? 80"
                            [torque]="item.circleMenuItem.torque ?? 0"
-                           [contentOffset]="item.circleMenuItem.contentOffset ?? 0"
+                           [contentOffset]="item.circleMenuItem.contentOffset ?? 75"
                            [title]="item.circleMenuItem.title ?? ''"
                            [description]="item.circleMenuItem.description ?? ''"
                            [fillPercentage]="item.circleMenuItem.fillPercentage ?? 0"

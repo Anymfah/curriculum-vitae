@@ -45,6 +45,11 @@ export class DrawCircleComponent implements OnInit, OnChanges {
    */
   @Input() public showRefCircle: boolean = false;
 
+  /**
+   * Reverse the position degree calculation.
+   */
+  @Input() public reverse: boolean = false;
+
   public viewBoxSize = 120;
 
   /**
@@ -71,11 +76,11 @@ export class DrawCircleComponent implements OnInit, OnChanges {
    */
   public ngOnChanges(changes: SimpleChanges) {
     if ('size' in changes
+      || 'reverse' in changes
       || 'arcDegree' in changes
       || 'positionDegree' in changes
       || 'anchorPoint' in changes) {
       this._draw();
-      console.log('this: ', this);
     }
   }
 
@@ -97,6 +102,10 @@ export class DrawCircleComponent implements OnInit, OnChanges {
       position -= 90 + arcSize;
     } else if (this.anchorPoint === 'end') {
       position -= 90 - arcSize;
+    }
+
+    if (this.reverse) {
+      position = 180 - position;
     }
 
     const startAngle = -arcSize + position;

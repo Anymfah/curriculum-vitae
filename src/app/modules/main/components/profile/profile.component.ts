@@ -1,15 +1,30 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges
+} from '@angular/core';
 import {animateValueUtil} from "../../../../utils/animate-value.util";
 import {ProfileMenuItem} from "./profile.component.model";
 import {PROFILE_CONSTANT} from "./profile.constant";
 import {ProfileMenuItemData} from "./profile.interface";
+import {ProfileMode} from "./profile.enum";
+import {PageService} from "../../../../services/page.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'cv-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent implements OnInit, AfterViewInit {
+export class ProfileComponent implements OnInit, AfterViewInit, OnChanges {
+
+  /**
+   * ViewMode : Large or Small
+   */
+  @Input() public viewMode: ProfileMode = ProfileMode.LARGE;
 
   /**
    * Value between 0 and 360.
@@ -25,7 +40,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   /**
    * Data Of the menu items
    */
-  private menuItemsData: ProfileMenuItemData[] = PROFILE_CONSTANT.MENU_DATA;
+  private readonly menuItemsData: ProfileMenuItemData[] = PROFILE_CONSTANT.MENU_DATA;
 
   /**
    * Show profile image
@@ -40,11 +55,47 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   private _stopAnimation = false;
 
   /**
+   * @constructor
+   * @param _pageService
+   * @param _router
+   */
+  public constructor(
+    private readonly _pageService: PageService,
+    private readonly _router: Router,
+  ) {
+
+  }
+
+  /**
+   * @inheritDoc
+   */
+  public ngOnChanges(changes: SimpleChanges): void {
+    if ('viewMode' in changes) {
+      this._updateMode();
+    }
+  }
+
+  /**
    * @inheritDoc
     */
   public ngOnInit() {
-    this._calculateMenuItems();
+    this._updateMode();
+    this._animateLoad();
+  }
 
+  /**
+   * @inheritDoc
+   */
+  public ngAfterViewInit(): void {
+    setTimeout(() => {
+      this.showImage = true;
+    }, 2500);
+  }
+
+  /**
+   * Animate the Input value and circles at first load.
+   */
+  private _animateLoad(): void {
     // Animate the Input value
     animateValueUtil((val) => {
       /**
@@ -64,28 +115,68 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   }
 
   /**
-   * @inheritDoc
+   * Change the mode of the profile.
    */
-  public ngAfterViewInit(): void {
-    setTimeout(() => {
-      this.showImage = true;
-    }, 2500);
+  private _updateMode(): void {
+    this._calculateMenuItems(this.menuItems.length > 0 ? 'update' : 'create');
   }
 
   /**
-   * Set the menu items.
+   * Get total importance of the menu items.
+   * We need this to calculate the fill percentage of the menu items.
    */
-  private _calculateMenuItems(): void {
+  private _getTotalImportance(): number {
     let totalImportance = 0;
-    ProfileMenuItem.lastEndDegree = PROFILE_CONSTANT.MENU_DEGREE_START;
     this.menuItemsData.forEach((item) => {
       totalImportance += item.importance;
     });
-    this.menuItemsData.forEach((item) => {
-      // 72.9 = 100 - 25 - 2.1 = 100% - quarter circle - 2.1% (is the gap between the menu items)
-      const maxFillPercentage = 100 - PROFILE_CONSTANT.MENU_DEGREE_END / 3.6 - 2.1;
-      const fillPercentage = (item.importance / totalImportance) * maxFillPercentage;
-      this.menuItems.push(new ProfileMenuItem(item, fillPercentage));
+    return totalImportance;
+  }
+
+  /**
+   * Get Max fill percentage for mode.
+   * @formula
+   * 100%
+   * - (360° - (dead arc circle is (start + end) / 3.6))
+   * - (2.1 % gap between items)
+   */
+  private _getMaxFillPercentage(): number {
+    return 100
+      - (360 - PROFILE_CONSTANT.MENU_DEGREE_END[this.viewMode]
+        + PROFILE_CONSTANT.MENU_DEGREE_START[this.viewMode]) / 3.6
+      - 2.1;
+  }
+
+  /**
+   * Calculate the menu items to get the fill percentages
+   * and the degree of the menu items for the current mode.
+   */
+  private _calculateMenuItems(mode: 'create' | 'update' = 'create'): void {
+    const totalImportance = this._getTotalImportance();
+    const startDegree = PROFILE_CONSTANT.MENU_DEGREE_START[this.viewMode];
+    ProfileMenuItem.setLastEndDegree(startDegree);
+    const maxFillPercentage = this._getMaxFillPercentage();
+    this.menuItemsData.forEach((dataItem, index) => {
+      // Deep clone to not modify the original data.
+      const item: ProfileMenuItemData = structuredClone(dataItem);
+      const fillPercentage = (dataItem.importance / totalImportance) * maxFillPercentage;
+      if (item.drawCircleItem.positionDegree != null && dataItem.drawCircleItem.positionDegree != null) {
+        item.drawCircleItem.positionDegree = dataItem.drawCircleItem.positionDegree - startDegree;
+      }
+
+      if (mode === 'create') {
+        /** Create New instance of ProfileMenuItem */
+        const menuItem = new ProfileMenuItem(index.toString());
+        menuItem.setData(item, fillPercentage);
+        /** Draw the menu item */
+        this.menuItems.push(menuItem);
+      } else {
+        /** Update the existing menu item */
+        const menuItem = this.menuItems.find((menuItem) => menuItem.id === index.toString());
+        if (menuItem) {
+          menuItem.setData(item, fillPercentage);
+        }
+      }
     });
   }
 
@@ -121,6 +212,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
    */
   public onClickMenuItem(item: ProfileMenuItem): void {
     this._stopAnimation = true;
+    this._pageService.setPageDirection(true);
     this.menuItems.forEach((menuItem) => {
       if (menuItem !== item) {
         menuItem.active = false;

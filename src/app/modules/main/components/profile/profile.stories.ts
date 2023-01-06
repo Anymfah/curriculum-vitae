@@ -10,6 +10,12 @@ export default {
   title: 'Components/Profile',
   component: ProfileComponent,
   argTypes: {
+    viewMode: {
+      control: {
+        type: 'inline-radio',
+        options: ['large', 'small']
+      },
+    }
   },
   decorators: [
     moduleMetadata(MainStorybookModuleConstant),

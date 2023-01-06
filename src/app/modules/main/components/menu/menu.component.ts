@@ -1,7 +1,7 @@
-import {AfterContentChecked, ChangeDetectorRef, Component, Input, NgZone, OnInit} from '@angular/core';
+import {Component, NgZone, OnInit} from '@angular/core';
 import {MatTabNavPanel} from "@angular/material/tabs";
 import {PageService} from "../../../../services/page.service";
-import {Route, Router} from "@angular/router";
+import {Router} from "@angular/router";
 import {MenuItem} from "./menu.interface";
 
 @Component({
@@ -9,7 +9,7 @@ import {MenuItem} from "./menu.interface";
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss']
 })
-export class MenuComponent implements OnInit, AfterContentChecked {
+export class MenuComponent implements OnInit {
 
   /**
    * Content Panel DOM Element.
@@ -31,13 +31,11 @@ export class MenuComponent implements OnInit, AfterContentChecked {
    * @param _pageService
    * @param _router
    * @param _ngZone
-   * @param _changeDetectorRef
    */
   public constructor(
     private readonly _pageService: PageService,
     private readonly _router: Router,
     private readonly _ngZone: NgZone,
-    private _changeDetectorRef: ChangeDetectorRef
   ) {
 
   }
@@ -55,36 +53,36 @@ export class MenuComponent implements OnInit, AfterContentChecked {
       }
     });
 
-    this._setItemsFromRoutes();
+    this._setItemsFromPageService();
+    this._setActiveItemFromPageService();
   }
 
   /**
-   * Get Menu items from app routing.
+   * Listen to page service items$ and set the items.
    */
-  private _setItemsFromRoutes(): void {
-    const items: MenuItem[] = [];
-    this._router.config.forEach(route => {
+  private _setItemsFromPageService(): void {
+    this._pageService.items$.subscribe(items => {
+      this.items = items;
+      this._ngZone.run(() => {
+        this.activeItem = this.items.find(item => item.link ===  this._router.url);
+        if (this.activeItem != null) {
+          this._activateItem(this.activeItem);
+        }
+      });
+    });
+  }
 
-      if (route.data != null && route.data['menuItem'] != null) {
-        items.push({
-          label: route.data['menuItem'].label,
-          link: '/' + route.path,
-          index: route.data['menuItem'].index,
-        });
+  /**
+   * Listen to page service activeItem$ and set the active item.
+   */
+  private _setActiveItemFromPageService(): void {
+    this._pageService.activeItem$.subscribe(item => {
+      if (item != null) {
+        this.activeItem = item;
+        this._activateItem(item);
+        this.items = this._pageService.getItems();
       }
     });
-    this.items = items;
-  }
-
-  /**
-   * @inheritDoc
-   */
-  public ngAfterContentChecked(): void {
-    this.activeItem = this.items.find(item => item.link ===  this._router.url);
-    if (this.activeItem != null) {
-      this._activateItem(this.activeItem);
-    }
-    this._changeDetectorRef.detectChanges();
   }
 
   /**
@@ -93,10 +91,7 @@ export class MenuComponent implements OnInit, AfterContentChecked {
    * @param item
    */
   public onClicked(item: MenuItem): void {
-    if (this.activeItem !== undefined) {
-      const direction = this.activeItem.index > item.index;
-      this._pageService.setPageDirection(direction);
-    }
+    this._pageService.navigate(item);
   }
 
   /**

@@ -62,6 +62,12 @@ export default {
         type: 'boolean'
       },
       defaultValue: false,
+    },
+    reverse: {
+      control: {
+        type: 'boolean'
+      },
+      defaultValue: false,
     }
   },
   parameters: {

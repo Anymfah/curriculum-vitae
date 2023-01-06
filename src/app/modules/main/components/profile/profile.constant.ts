@@ -1,105 +1,108 @@
 import {ProfileMenuItemData} from "./profile.interface";
-import {iDrawCircle} from "../../../shared/draw-circle/draw-circle.interface";
+import {ProfileMode} from "./profile.enum";
 
 export const PROFILE_CONSTANT = {
   /**
    * Graphical menu degree start.
    */
-  MENU_DEGREE_START: 0,
+  MENU_DEGREE_START: {
+    [ProfileMode.SMALL]: -90,
+    [ProfileMode.LARGE]: 0,
+  },
 
   /**
    * Graphical menu degree end. (from 0 to 360)
-   * 0 = 12 o'clock
-   * 90 = 3 o'clock
-   * 180 = 6 o'clock
    *
    * Will be relative to the MENU_DEGREE_START.
    */
-  MENU_DEGREE_END: 90,
+  MENU_DEGREE_END: {
+    [ProfileMode.SMALL]: 90,
+    [ProfileMode.LARGE]: 270,
+  },
 
   /**
    * MENU_DATA
    */
   MENU_DATA: [
-      {
+    { // * About
+      routerLink: '',
+      importance: 10,
+      circleMenuItem: {
         title: 'About',
         description: 'Lorem ipsum dolor sit amet',
-        importance: 10,
-
-        circleMenuItem: {
-          size: 250,
-          weight: 50,
-          torque: 10,
-          contentOffset: 50,
-        },
-        drawCircleItem: {
-          size: 276,
-          positionDegree: 331,
-          arcDegree: 29,
-          weight: 4
-        },
+        size: 250,
+        weight: 50,
+        torque: 10,
+        contentOffset: 50,
       },
-      {
+      drawCircleItem: {
+        size: 276,
+        weight: 4
+      },
+    },
+    // * Skills
+    {
+      importance: 40,
+      offset: 20,
+
+      circleMenuItem: {
         title: 'Skills',
         description: 'Lorem ipsum dolor sit amet',
-        importance: 40,
-
-        circleMenuItem: {
-          weight: 55,
-          torque: -30,
-          contentOffset: 35,
-        },
-        drawCircleItem: {
-          size: 310,
-          positionDegree: 181,
-          arcDegree: 148,
-          weight: 17
-        },
+        size: 310,
+        weight: 55,
+        torque: -30,
+        contentOffset: 35,
       },
-      {
+      drawCircleItem: {
+        size: 310,
+        weight: 17
+      },
+    },
+    // * Experience
+    {
+      importance: 20,
+      circleMenuItem: {
         title: 'Experience',
         description: 'Lorem ipsum dolor sit amet',
-        importance: 20,
-        circleMenuItem: {
-          torque: -25,
-          contentOffset: 10,
-        },
-        drawCircleItem: {
-          size: 310,
-          positionDegree: 152,
-          arcDegree: 27,
-          weight: 17
-        },
+        size: 310,
+        weight: 80,
+        torque: -25,
+        contentOffset: 10,
       },
-      {
+      drawCircleItem: {
+        size: 310,
+        weight: 17
+      },
+    },
+    // * Education
+    {
+      importance: 10,
+      circleMenuItem: {
         title: 'Education',
         description: 'Lorem ipsum dolor sit amet',
-        importance: 10,
-        circleMenuItem: {
-          size: 250,
-          contentOffset: 50,
-        },
-        drawCircleItem: {
-          size: 276,
-          positionDegree: 121,
-          arcDegree: 29,
-          weight: 4
-        },
+        size: 250,
+        contentOffset: 50,
+        weight: 80,
       },
-      {
+      drawCircleItem: {
+        size: 276,
+        weight: 4
+      },
+    },
+    // * Contact
+    {
+      routerLink: '/contact',
+      importance: 10,
+      circleMenuItem: {
         title: 'Contact',
         description: 'Lorem ipsum dolor sit amet',
-        importance: 10,
-        circleMenuItem: {
-          size: 250,
-          weight: 20,
-        },
-        drawCircleItem: {
-          size: 276,
-          positionDegree: 89,
-          arcDegree: 30,
-          weight: 4
-        },
-      }
+        size: 250,
+        weight: 20,
+      },
+      drawCircleItem: {
+        size: 276,
+        weight: 4
+      },
+    },
     ] as ProfileMenuItemData[]
   }
