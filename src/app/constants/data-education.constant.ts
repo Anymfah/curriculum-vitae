@@ -1,0 +1,58 @@
+import {EducationDataInterface} from "../interfaces/data.interface";
+
+export const DATA_EDUCATION: EducationDataInterface[] = [
+  {
+    title: 'Brevet des collèges',
+    subtitle: 'Fin du collège',
+    startDate: '2000-09-01',
+    endDate: '2001-06-01',
+    location: 'Lisieux, France',
+    school: 'Lycée Frémont',
+    happiness: 25,
+  },
+  {
+    title: 'BEP M.I.G',
+    subtitle: 'Métiers de l\'industrie graphique',
+    startDate: '2001-09-01',
+    endDate: '2003-06-01',
+    location: 'Lisieux, France',
+    school: 'Lycée Paul Cornu',
+    happiness: 65,
+  },
+  {
+    title: 'CAP D.E.C.G',
+    subtitle: 'Dessin en communication et exécution graphique',
+    startDate: '2003-09-01',
+    endDate: '2005-06-01',
+    location: 'Lisieux, France',
+    school: 'Lycée Paul Cornu',
+    happiness: 95,
+  },
+  {
+    title: 'Arts Graphiques',
+    subtitle: 'Arts Appliqués, Communication Visuelle, Design Graphique',
+    startDate: '2005-09-01',
+    endDate: '2007-06-01',
+    location: 'Lisieux, France',
+    school: 'Lycée Paul Cornu',
+    happiness: 88,
+  },
+  {
+    title: 'Animation 2D',
+    subtitle: 'Animation 2D, Motion Design, Infographie',
+    startDate: '2007-09-01',
+    endDate: '2007-12-31',
+    location: 'Angoulême, France',
+    school: 'Éléphorm',
+    happiness: 90,
+  },
+  {
+    title: 'Animation 3D',
+    subtitle: 'Animation 3D, Motion Design, Infographie',
+    startDate: '2008-01-01',
+    endDate: '2008-06-01',
+    location: 'Angoulême, France',
+    school: 'EMCA',
+    happiness: 90,
+  },
+];
