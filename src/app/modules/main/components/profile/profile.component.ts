@@ -29,7 +29,7 @@ export class ProfileComponent implements OnInit, AfterViewInit, OnChanges {
   /**
    * Value between 0 and 360.
    */
-  public value = 340;
+  public value = -360;
 
   /**
    * Outer circle fill percentage.
@@ -53,6 +53,11 @@ export class ProfileComponent implements OnInit, AfterViewInit, OnChanges {
 
   /** Stop the animation of the Input value */
   private _stopAnimation = false;
+
+  /**
+   * Initialized ?
+   */
+  private _isInitialized: boolean = false;
 
   /**
    * @constructor
@@ -80,7 +85,17 @@ export class ProfileComponent implements OnInit, AfterViewInit, OnChanges {
     */
   public ngOnInit() {
     this._updateMode();
-    this._animateLoad();
+    this._pageService.activeItem$.subscribe((activeItem) => {
+      if (activeItem) {
+        const item = this._getMenuItemByRouterLink(activeItem.link);
+        if (item != null && this._isInitialized) {
+          this._moveMenuCursorToItem(item);
+        } else if (!this._isInitialized) {
+          this._isInitialized = true;
+          this._animateLoad(item ?? this.menuItems[0]);
+        }
+      }
+    });
   }
 
   /**
@@ -93,9 +108,18 @@ export class ProfileComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   /**
-   * Animate the Input value and circles at first load.
+   * Get Menu item by router link.
    */
-  private _animateLoad(): void {
+  private _getMenuItemByRouterLink(routerLink: string): ProfileMenuItem | undefined {
+    return this.menuItems.find((item) => item.routerLink === routerLink);
+  }
+
+  /**
+   * Animate the Input value and circles at first load.
+   * @param item The menu item for moving the cursor to.
+   */
+  private _animateLoad(item: ProfileMenuItem): void {
+    const value = 360 - item.degreeItem;
     // Animate the Input value
     animateValueUtil((val) => {
       /**
@@ -106,7 +130,7 @@ export class ProfileComponent implements OnInit, AfterViewInit, OnChanges {
         this.value = val;
         this._calculateActiveMenuItem(this.value);
       }
-    }, 0, this.value, 4000, [.5, 0, .2, 1]);
+    }, value - 360, value, 4000, [.5, 0, .2, 1]);
 
     // Animate the outer circle.
     animateValueUtil((val) => {
@@ -212,15 +236,35 @@ export class ProfileComponent implements OnInit, AfterViewInit, OnChanges {
    */
   public onClickMenuItem(item: ProfileMenuItem): void {
     this._stopAnimation = true;
-    this._pageService.setPageDirection(true);
+    //this._pageService.setPageDirection(true);
+    if (item.routerLink != null) {
+      this._pageService.navigate(item.routerLink);
+    } else {
+      this._moveMenuCursorToItem(item);
+    }
+  }
+
+  /**
+   * Move the menu cursor to the clicked menu item.
+   * @param item The clicked menu item.
+   */
+  private _moveMenuCursorToItem(item: ProfileMenuItem): void {
+    this._stopAnimation = true;
+    this._toggleActiveMenuItem(item);
+    animateValueUtil((val) => {
+      this.value = val;
+    }, this.value, 360 - item.degreeItem, 700, [.02, .55, .32, 1]);
+  }
+
+  /**
+   * Toggle active menu item.
+   */
+  private _toggleActiveMenuItem(item: ProfileMenuItem): void {
     this.menuItems.forEach((menuItem) => {
       if (menuItem !== item) {
         menuItem.active = false;
       }
     });
     item.active = true;
-    animateValueUtil((val) => {
-      this.value = val;
-    }, this.value, 360 - item.degreeItem, 700, [.02, .55, .32, 1]);
   }
 }

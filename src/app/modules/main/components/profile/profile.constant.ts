@@ -25,7 +25,7 @@ export const PROFILE_CONSTANT = {
    */
   MENU_DATA: [
     { // * About
-      routerLink: '',
+      routerLink: '/',
       importance: 10,
       circleMenuItem: {
         title: 'About',

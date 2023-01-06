@@ -6,7 +6,6 @@
       <cv-circle class="mask-circle" [size]="300" [weight]="40" [fillPercentage]="outerCircleVal" [startAt]="9">
         <!--Contact-->
         <cv-draw-circle *ngFor="let item of menuItems" mask-inner anchorPoint="start"
-                        [routerLink]="item.routerLink"
                         (click)="onClickMenuItem(item)"
                         [reverse]="true"
                         [class.active]="item.active"

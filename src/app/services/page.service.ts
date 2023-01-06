@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {MatTabNavPanel} from "@angular/material/tabs";
 import {BehaviorSubject} from "rxjs";
 import {MenuItem} from "../modules/main/components/menu/menu.interface";
-import {Route, Router} from "@angular/router";
+import {NavigationEnd, Route, Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -49,21 +49,36 @@ export class PageService {
    */
   public activeItem$ = this._activeItem.asObservable();
 
+  /**
+   * Current active menu item but as MenuItem.
+   */
+  public activeItem?: MenuItem;
+
 
   /**
    * @constructor
    * @param _router
    */
-  public constructor(private readonly _router: Router,) {
-    this._setActiveItemFromUrl();
+  public constructor(
+    private readonly _router: Router,
+    ) {
     this._setItemsFromRoutes();
+    /**
+     * Get route
+     */
+    const routerSub = this._router.events.subscribe((route: unknown) => {
+      const navigation = route as NavigationEnd;
+      this._setActiveItemFromUrl(navigation.url);
+      routerSub.unsubscribe();
+    });
   }
 
   /**
    * Sets the active item from the current url.
+   * @param url If not given, the current url is used.
    */
-  private _setActiveItemFromUrl(): void {
-    const currentUrl = this._router.url;
+  private _setActiveItemFromUrl(url: string | undefined): void {
+    const currentUrl = url ?? this._router.url;
     const items = this._items.getValue();
     items.forEach(item => {
       if (currentUrl === item.link) {
@@ -98,6 +113,7 @@ export class PageService {
       menuItem.active = menuItem === item;
     });
     this._activeItem.next(item);
+    this.activeItem = item;
   }
 
   /**
@@ -126,13 +142,21 @@ export class PageService {
   /**
    * @event click on menu item
    * @method navigate - Page Change
-   * @param item menu item
+   * @param page menu item or link to navigate to
    */
-  public navigate(item: MenuItem): void {
-    const activeItemIndex = this._activeItem.getValue()?.index ?? 0;
-    this.activateItem(item);
-    const direction = item.index > activeItemIndex;
-    this.setPageDirection(direction);
-    this._router.navigate([item.link]).then();
+  public navigate(page: MenuItem | string): void {
+    let item: MenuItem | undefined;
+    if (typeof page === 'string') {
+      item = this._items.getValue().find(menuItem => menuItem.link === page);
+    } else {
+      item = page;
+    }
+    if (item != null) {
+      const activeItemIndex = this._activeItem.getValue()?.index ?? 0;
+      this.activateItem(item);
+      const direction = item.index > activeItemIndex;
+      this.setPageDirection(direction);
+      this._router.navigate([item.link]).then();
+    }
   }
 }
