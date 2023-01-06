@@ -1,0 +1,26 @@
+@use 'functions' as fn;
+@use '../config/typography' as typo;
+@use '@angular/material' as mat;
+@use '../config/material' as material;
+
+/// Declares the utility classes for the typography.
+/// @access public
+.small {
+  @include mat.typography-level(typo.$curriculum-vitae-typo, caption);
+}
+@for $i from 1 through 6 {
+  .h#{$i} {
+    @include mat.typography-level(typo.$curriculum-vitae-typo, headline-#{$i});
+  }
+}
+
+.body-2 {
+  @include mat.typography-level(typo.$curriculum-vitae-typo, body-2);
+}
+
+/// Global typography styles.
+body {
+  color: fn.get-color(contrast, 200);
+  font-family: 'Rajdhani', 'Helvetica Neue', sans-serif;
+  @include mat.typography-level(typo.$curriculum-vitae-typo, body-1);
+}

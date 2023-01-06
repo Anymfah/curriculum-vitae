@@ -1,11 +1,11 @@
-import { CommonModule } from '@angular/common';
-import { MainComponent } from './components/main/main.component';
+import {CommonModule} from '@angular/common';
+import {MainComponent} from './components/main/main.component';
 import {LayoutComponent} from "./components/layout/layout.component";
-import { PageHomeComponent } from './components/page-home/page-home.component';
-import { PageContactComponent } from './components/page-contact/page-contact.component';
+import {PageHomeComponent} from './components/page-home/page-home.component';
+import {PageContactComponent} from './components/page-contact/page-contact.component';
 import {RouterLink, RouterModule} from "@angular/router";
 import {MatTabsModule} from "@angular/material/tabs";
-import { HeaderComponent } from './components/header/header.component';
+import {HeaderComponent} from './components/header/header.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {appRouting} from "../../app-routing.module";
 import {MatIconModule} from "@angular/material/icon";
@@ -19,19 +19,20 @@ import {DrawCircleModule} from "../shared/draw-circle/draw-circle.module";
 import {StorybookWrapperModule} from "../shared/storybook-wrapper/storybook-wrapper.module";
 import {CircleMenuItemComponent} from "./components/circle-menu-item/circle-menu-item.component";
 import {PageWrapperModule} from "../shared/page-wrapper/page-wrapper.module";
-
+import {BlockComponent} from "./components/block/block.component";
 
 
 export const MainStorybookModuleConstant ={
   declarations: [
-      MainComponent,
-      LayoutComponent,
-      PageHomeComponent,
-      PageContactComponent,
-      HeaderComponent,
-      MenuComponent,
-      ProfileComponent,
-      CircleMenuItemComponent
+    MainComponent,
+    LayoutComponent,
+    PageHomeComponent,
+    PageContactComponent,
+    HeaderComponent,
+    MenuComponent,
+    ProfileComponent,
+    CircleMenuItemComponent,
+    BlockComponent,
   ],
   imports: [
     appRouting,
@@ -54,6 +55,7 @@ export const MainStorybookModuleConstant ={
     LayoutComponent,
     HeaderComponent,
     ProfileComponent,
-    CircleMenuItemComponent
+    CircleMenuItemComponent,
+    BlockComponent,
   ],
 };

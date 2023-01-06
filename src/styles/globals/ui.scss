@@ -1,0 +1,5 @@
+@use 'mixins';
+
+.scroll-bar {
+  @include mixins.scroll-bar();
+}

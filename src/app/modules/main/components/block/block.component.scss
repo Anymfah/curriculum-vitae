@@ -1,0 +1,74 @@
+@use 'functions' as fn;
+
+:host {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+}
+
+.block {
+  &__container {
+    clip-path: polygon(
+        0 0,
+        80px 0%,
+        85px 5px,
+        calc(100% - 10px) 5px,
+        100% 16px,
+        100% 100%,
+        10px 100%,
+        0 calc(100% - 10px),
+    );
+    background: fn.get-color(contrast, 600, 0.5);
+  }
+  &__header {
+    position: relative;
+
+    &-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 16px 8px;
+    }
+
+    &-title {
+      color: fn.get-color(contrast, 100);
+    }
+
+    &-line {
+      position: absolute;
+      bottom: 0;
+      left: 16px;
+      width: calc(100% - 16px);
+      height: 1px;
+      background-color: fn.get-color(contrast, 500);
+
+      &:after, &:before {
+        content: '';
+        position: absolute;
+        left: 0;
+      }
+
+      &:after {
+        top: 1px;
+        width: 50px;
+        height: 6px;
+        background-color: fn.get-color(contrast, 500);
+        clip-path: polygon(0 0, 100% 0, calc(100% - 6px) 100%, 3px 100%);
+      }
+
+      &:before {
+        bottom: 0;
+        width: 80px;
+        height: 3px;
+        background-color: fn.get-color(contrast, 400);
+        clip-path: polygon(3px 0, calc(100% - 3px) 0, 100% 100%, 0% 100%);
+      }
+    }
+  }
+
+  &__content {
+    margin-top: 3px;
+    padding: 5px 1rem 0.5rem;
+    overflow: auto;
+  }
+}

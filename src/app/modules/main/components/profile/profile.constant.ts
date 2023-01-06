@@ -28,8 +28,8 @@ export const PROFILE_CONSTANT = {
       routerLink: '/',
       importance: 10,
       circleMenuItem: {
-        title: 'About',
-        description: 'Lorem ipsum dolor sit amet',
+        title: 'À Propos',
+        description: '<p>Développeur Web Front-End</p><p>35 ans</p><p>Vit à Angoulême</p>',
         size: 250,
         weight: 50,
         torque: 10,

@@ -18,9 +18,8 @@
          [style.left.%]="contentPosition.x"
     >
       <div class="circle-menu-item__content-wrapper" [ngClass]="contentSide">
-        <div class="circle-menu-item__content__title title mat-h2">{{title}}</div>
-        <div class="circle-menu-item__content__description description mat-small">
-          {{description}}
+        <div class="circle-menu-item__content__title title h4">{{title}}</div>
+        <div class="circle-menu-item__content__description description small" [innerHTML]="description">
         </div>
       </div>
 

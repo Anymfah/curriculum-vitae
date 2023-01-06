@@ -212,7 +212,7 @@
                     "type": "boolean",
                     "optional": true,
                     "description": "",
-                    "line": 5
+                    "line": 8
                 },
                 {
                     "name": "index",
@@ -221,7 +221,7 @@
                     "type": "number",
                     "optional": false,
                     "description": "",
-                    "line": 4
+                    "line": 7
                 },
                 {
                     "name": "label",
@@ -230,7 +230,7 @@
                     "type": "string",
                     "optional": false,
                     "description": "",
-                    "line": 2
+                    "line": 5
                 },
                 {
                     "name": "link",
@@ -239,11 +239,13 @@
                     "type": "string",
                     "optional": false,
                     "description": "",
-                    "line": 3
+                    "line": 6
                 }
             ],
             "indexSignatures": [],
             "kind": 165,
+            "description": "<p>Interface of Menu item</p>\n",
+            "rawdescription": "\n\nInterface of Menu item\n",
             "methods": []
         },
         {
@@ -313,7 +315,7 @@
     "injectables": [
         {
             "name": "PageService",
-            "id": "injectable-PageService-f5c7e644505ffc29ebd8605576d7085e6c1af937409f86b96b8ccae2ba303ecb6297d3e740561bd65269d2ed21f11546670377ce1d430d52672a3b075aac388f",
+            "id": "injectable-PageService-3d146ed78b92c05a5abbb8ec44d0ac34b5ce56829017afac6389d77f6e65e05ec3a1a561450296fa21f91a5f14b3891972aac52c3f3c0d26c6120ca5a35f9b7a",
             "file": "src/app/services/page.service.ts",
             "properties": [
                 {
@@ -370,6 +372,19 @@
                     "rawdescription": "\n\nThe tab panel to show the pages as BehaviorSubject.\n",
                     "modifierKind": [
                         121
+                    ]
+                },
+                {
+                    "name": "activeItem",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "MenuItem",
+                    "optional": true,
+                    "description": "<p>Current active menu item but as MenuItem.</p>\n",
+                    "line": 55,
+                    "rawdescription": "\n\nCurrent active menu item but as MenuItem.\n",
+                    "modifierKind": [
+                        123
                     ]
                 },
                 {
@@ -432,17 +447,50 @@
             "methods": [
                 {
                     "name": "_setActiveItemFromUrl",
-                    "args": [],
+                    "args": [
+                        {
+                            "name": "url",
+                            "type": "string | undefined",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 65,
+                    "line": 80,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nSets the active item from the current url.\n",
                     "description": "<p>Sets the active item from the current url.</p>\n",
                     "modifierKind": [
                         121
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": {
+                                "pos": 1895,
+                                "end": 1898,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "url"
+                            },
+                            "type": "string | undefined",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "pos": 1889,
+                                "end": 1894,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "param"
+                            },
+                            "comment": "<p>If not given, the current url is used.</p>\n"
+                        }
                     ]
                 },
                 {
@@ -451,7 +499,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 78,
+                    "line": 93,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nSet Menu items from app routing\n",
@@ -473,7 +521,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 96,
+                    "line": 111,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\n",
@@ -484,8 +532,8 @@
                     "jsdoctags": [
                         {
                             "name": {
-                                "pos": 2352,
-                                "end": 2356,
+                                "pos": 2765,
+                                "end": 2769,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -496,8 +544,8 @@
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "pos": 2346,
-                                "end": 2351,
+                                "pos": 2759,
+                                "end": 2764,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -514,7 +562,7 @@
                     "optional": false,
                     "returnType": "MenuItem[]",
                     "typeParameters": [],
-                    "line": 122,
+                    "line": 138,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\n",
@@ -528,8 +576,8 @@
                     "name": "navigate",
                     "args": [
                         {
-                            "name": "item",
-                            "type": "MenuItem",
+                            "name": "page",
+                            "type": "MenuItem | string",
                             "deprecated": false,
                             "deprecationMessage": ""
                         }
@@ -537,7 +585,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 131,
+                    "line": 147,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\n",
@@ -548,27 +596,27 @@
                     "jsdoctags": [
                         {
                             "name": {
-                                "pos": 3151,
-                                "end": 3155,
+                                "pos": 3592,
+                                "end": 3596,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
                                 "kind": 79,
-                                "escapedText": "item"
+                                "escapedText": "page"
                             },
-                            "type": "MenuItem",
+                            "type": "MenuItem | string",
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "pos": 3145,
-                                "end": 3150,
+                                "pos": 3586,
+                                "end": 3591,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
                                 "kind": 79,
                                 "escapedText": "param"
                             },
-                            "comment": "<p>menu item</p>\n"
+                            "comment": "<p>menu item or link to navigate to</p>\n"
                         }
                     ]
                 },
@@ -585,7 +633,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 115,
+                    "line": 131,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nSets the page direction.\n",
@@ -596,8 +644,8 @@
                     "jsdoctags": [
                         {
                             "name": {
-                                "pos": 2778,
-                                "end": 2791,
+                                "pos": 3219,
+                                "end": 3232,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -608,8 +656,8 @@
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "pos": 2772,
-                                "end": 2777,
+                                "pos": 3213,
+                                "end": 3218,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -633,7 +681,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 107,
+                    "line": 123,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nSets the tab panel to show the pages.\n",
@@ -644,8 +692,8 @@
                     "jsdoctags": [
                         {
                             "name": {
-                                "pos": 2608,
-                                "end": 2617,
+                                "pos": 3049,
+                                "end": 3058,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -656,8 +704,8 @@
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "pos": 2602,
-                                "end": 2607,
+                                "pos": 3043,
+                                "end": 3048,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -673,7 +721,7 @@
             "deprecationMessage": "",
             "description": "",
             "rawdescription": "\n",
-            "sourceCode": "import { Injectable } from '@angular/core';\nimport {MatTabNavPanel} from \"@angular/material/tabs\";\nimport {BehaviorSubject} from \"rxjs\";\nimport {MenuItem} from \"../modules/main/components/menu/menu.interface\";\nimport {Route, Router} from \"@angular/router\";\n\n@Injectable({\n  providedIn: 'root'\n})\nexport class PageService {\n\n  /**\n   * The tab panel to show the pages as BehaviorSubject.\n   */\n  private _pagePanel = new BehaviorSubject<MatTabNavPanel | null>(null);\n\n  /**\n   * The tab panel to show the pages as Observable.\n   */\n  public pagePanel$ = this._pagePanel.asObservable();\n\n  /**\n   * The page direction\n   */\n  private _pageDirection = new BehaviorSubject<boolean>(false);\n\n  /**\n   * The page direction as Observable.\n   */\n  public pageDirection$ = this._pageDirection.asObservable();\n\n  /**\n   * Reference to the menu items to be displayed. as BehaviorSubject.\n   */\n  private _items = new BehaviorSubject<MenuItem[]>([]);\n\n  /**\n   * Reference to the menu items to be displayed. as Observable.\n   */\n  public items$ = this._items.asObservable();\n\n  /**\n   * Current active menu item. as BehaviorSubject.\n   */\n  private _activeItem = new BehaviorSubject<MenuItem | undefined>(undefined);\n\n  /**\n   * Current active menu item. as Observable.\n   */\n  public activeItem$ = this._activeItem.asObservable();\n\n\n  /**\n   * @constructor\n   * @param _router\n   */\n  public constructor(private readonly _router: Router,) {\n    this._setActiveItemFromUrl();\n    this._setItemsFromRoutes();\n  }\n\n  /**\n   * Sets the active item from the current url.\n   */\n  private _setActiveItemFromUrl(): void {\n    const currentUrl = this._router.url;\n    const items = this._items.getValue();\n    items.forEach(item => {\n      if (currentUrl === item.link) {\n        this.activateItem(item);\n      }\n    });\n  }\n\n  /**\n   * Set Menu items from app routing\n   */\n  private _setItemsFromRoutes(): void {\n    const items: MenuItem[] = [];\n    this._router.config.forEach((route: Route) => {\n      if (route.data != null && route.data['menuItem'] != null) {\n        items.push({\n          label: route.data['menuItem'].label,\n          link: '/' + route.path,\n          index: route.data['menuItem'].index,\n        });\n      }\n    });\n    this._items.next(items);\n  }\n\n  /**\n   * @method Activate the given menu item. Deactivate all other menu items.\n   * @param item\n   */\n  public activateItem(item: MenuItem): void {\n    this._items.getValue().forEach(menuItem => {\n      menuItem.active = menuItem === item;\n    });\n    this._activeItem.next(item);\n  }\n\n  /**\n   * Sets the tab panel to show the pages.\n   * @param pagePanel\n   */\n  public setPagePanel(pagePanel: MatTabNavPanel | null): void {\n    this._pagePanel.next(pagePanel);\n  }\n\n  /**\n   * Sets the page direction.\n   * @param pageDirection true = the clicked item is after the current item.\n   */\n  public setPageDirection(pageDirection: boolean): void {\n    this._pageDirection.next(pageDirection);\n  }\n\n  /**\n   * @method Get Items\n   */\n  public getItems(): MenuItem[] {\n    return this._items.getValue();\n  }\n\n  /**\n   * @event click on menu item\n   * @method navigate - Page Change\n   * @param item menu item\n   */\n  public navigate(item: MenuItem): void {\n    const activeItemIndex = this._activeItem.getValue()?.index ?? 0;\n    this.activateItem(item);\n    const direction = item.index > activeItemIndex;\n    this.setPageDirection(direction);\n    this._router.navigate([item.link]).then();\n  }\n}\n",
+            "sourceCode": "import { Injectable } from '@angular/core';\nimport {MatTabNavPanel} from \"@angular/material/tabs\";\nimport {BehaviorSubject} from \"rxjs\";\nimport {MenuItem} from \"../modules/main/components/menu/menu.interface\";\nimport {NavigationEnd, Route, Router} from \"@angular/router\";\n\n@Injectable({\n  providedIn: 'root'\n})\nexport class PageService {\n\n  /**\n   * The tab panel to show the pages as BehaviorSubject.\n   */\n  private _pagePanel = new BehaviorSubject<MatTabNavPanel | null>(null);\n\n  /**\n   * The tab panel to show the pages as Observable.\n   */\n  public pagePanel$ = this._pagePanel.asObservable();\n\n  /**\n   * The page direction\n   */\n  private _pageDirection = new BehaviorSubject<boolean>(false);\n\n  /**\n   * The page direction as Observable.\n   */\n  public pageDirection$ = this._pageDirection.asObservable();\n\n  /**\n   * Reference to the menu items to be displayed. as BehaviorSubject.\n   */\n  private _items = new BehaviorSubject<MenuItem[]>([]);\n\n  /**\n   * Reference to the menu items to be displayed. as Observable.\n   */\n  public items$ = this._items.asObservable();\n\n  /**\n   * Current active menu item. as BehaviorSubject.\n   */\n  private _activeItem = new BehaviorSubject<MenuItem | undefined>(undefined);\n\n  /**\n   * Current active menu item. as Observable.\n   */\n  public activeItem$ = this._activeItem.asObservable();\n\n  /**\n   * Current active menu item but as MenuItem.\n   */\n  public activeItem?: MenuItem;\n\n\n  /**\n   * @constructor\n   * @param _router\n   */\n  public constructor(\n    private readonly _router: Router,\n    ) {\n    this._setItemsFromRoutes();\n    /**\n     * Get route\n     */\n    const routerSub = this._router.events.subscribe((route: unknown) => {\n      const navigation = route as NavigationEnd;\n      this._setActiveItemFromUrl(navigation.url);\n      routerSub.unsubscribe();\n    });\n  }\n\n  /**\n   * Sets the active item from the current url.\n   * @param url If not given, the current url is used.\n   */\n  private _setActiveItemFromUrl(url: string | undefined): void {\n    const currentUrl = url ?? this._router.url;\n    const items = this._items.getValue();\n    items.forEach(item => {\n      if (currentUrl === item.link) {\n        this.activateItem(item);\n      }\n    });\n  }\n\n  /**\n   * Set Menu items from app routing\n   */\n  private _setItemsFromRoutes(): void {\n    const items: MenuItem[] = [];\n    this._router.config.forEach((route: Route) => {\n      if (route.data != null && route.data['menuItem'] != null) {\n        items.push({\n          label: route.data['menuItem'].label,\n          link: '/' + route.path,\n          index: route.data['menuItem'].index,\n        });\n      }\n    });\n    this._items.next(items);\n  }\n\n  /**\n   * @method Activate the given menu item. Deactivate all other menu items.\n   * @param item\n   */\n  public activateItem(item: MenuItem): void {\n    this._items.getValue().forEach(menuItem => {\n      menuItem.active = menuItem === item;\n    });\n    this._activeItem.next(item);\n    this.activeItem = item;\n  }\n\n  /**\n   * Sets the tab panel to show the pages.\n   * @param pagePanel\n   */\n  public setPagePanel(pagePanel: MatTabNavPanel | null): void {\n    this._pagePanel.next(pagePanel);\n  }\n\n  /**\n   * Sets the page direction.\n   * @param pageDirection true = the clicked item is after the current item.\n   */\n  public setPageDirection(pageDirection: boolean): void {\n    this._pageDirection.next(pageDirection);\n  }\n\n  /**\n   * @method Get Items\n   */\n  public getItems(): MenuItem[] {\n    return this._items.getValue();\n  }\n\n  /**\n   * @event click on menu item\n   * @method navigate - Page Change\n   * @param page menu item or link to navigate to\n   */\n  public navigate(page: MenuItem | string): void {\n    let item: MenuItem | undefined;\n    if (typeof page === 'string') {\n      item = this._items.getValue().find(menuItem => menuItem.link === page);\n    } else {\n      item = page;\n    }\n    if (item != null) {\n      const activeItemIndex = this._activeItem.getValue()?.index ?? 0;\n      this.activateItem(item);\n      const direction = item.index > activeItemIndex;\n      this.setPageDirection(direction);\n      this._router.navigate([item.link]).then();\n    }\n  }\n}\n",
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
@@ -687,7 +735,7 @@
                         "deprecationMessage": ""
                     }
                 ],
-                "line": 50,
+                "line": 55,
                 "rawdescription": "\n\n",
                 "modifierKind": [
                     123
@@ -695,8 +743,8 @@
                 "jsdoctags": [
                     {
                         "name": {
-                            "pos": 1358,
-                            "end": 1365,
+                            "pos": 1465,
+                            "end": 1472,
                             "flags": 4227072,
                             "modifierFlagsCache": 0,
                             "transformFlags": 0,
@@ -707,8 +755,8 @@
                         "deprecated": false,
                         "deprecationMessage": "",
                         "tagName": {
-                            "pos": 1352,
-                            "end": 1357,
+                            "pos": 1459,
+                            "end": 1464,
                             "flags": 4227072,
                             "modifierFlagsCache": 0,
                             "transformFlags": 0,
@@ -1176,6 +1224,46 @@
                 "line": 9
             },
             "templateData": "<cv-layout></cv-layout>\n\n"
+        },
+        {
+            "name": "BlockComponent",
+            "id": "component-BlockComponent-9a9feb82923d525937def9c502c00e15807ccd457d534b797c76da67ff04d3cf85ffd3764c7c9eb0d046ae744d22fc89e7bd63be2b3e70770df88fef948ba5ed",
+            "file": "src/app/modules/main/components/block/block.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "cv-block",
+            "styleUrls": [
+                "./block.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./block.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'cv-block',\n  templateUrl: './block.component.html',\n  styleUrls: ['./block.component.scss']\n})\nexport class BlockComponent {\n\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "@use 'functions' as fn;\r\n\r\n:host {\r\n  display: flex;\r\n  flex-direction: column;\r\n}\r\n\r\n.block {\r\n  &__header {\r\n\r\n  }\r\n}\r\n",
+                    "styleUrl": "./block.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "templateData": "\n<div class=\"block__header\">Titre du block</div>\n<div class=\"block__content\">\n  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid animi dolorem minima mollitia repellendus totam, voluptatum? Assumenda, cumque debitis, facilis molestias nam nulla pariatur possimus quos rem sequi temporibus, voluptate.\n</div>\n"
         },
         {
             "name": "CircleComponent",
@@ -1892,7 +1980,7 @@
                 "OnChanges",
                 "OnInit"
             ],
-            "templateData": "<div class=\"cicle-menu-item__container\">\n  <cv-circle [size]=\"size\"\n             [weight]=\"weightValue\"\n             [baseWeight]=\"80\"\n             [fillPercentage]=\"fillPercentage\"\n             [startAtDegree]=\"positionDegree\"\n             [reverse]=\"true\"\n             weightDirection=\"out\">\n    <div class=\"circle-menu-item__svg-wrapper\"\n         [@activeWidthAnimation]=\"active ? {value: 'active', params: {width: contentOffset + 'px'}} : {value: 'inactive'}\"\n         [style.width.px]=\"contentOffset\"\n         [style.transform]=\"svgWrapperRotate\"\n         [style.left.%]=\"svgWrapperPosition.x\"\n         [style.top.%]=\"svgWrapperPosition.y\">\n    </div>\n    <div class=\"circle-menu-item__content\"\n         [style.top.%]=\"contentPosition.y\"\n         [style.left.%]=\"contentPosition.x\"\n    >\n      <div class=\"circle-menu-item__content-wrapper\" [ngClass]=\"contentSide\">\n        <div class=\"circle-menu-item__content__title title mat-h2\">{{title}}</div>\n        <div class=\"circle-menu-item__content__description description mat-small\">\n          {{description}}\n        </div>\n      </div>\n\n    </div>\n  </cv-circle>\n</div>\n\n"
+            "templateData": "<div class=\"cicle-menu-item__container\">\n  <cv-circle [size]=\"size\"\n             [weight]=\"weightValue\"\n             [baseWeight]=\"80\"\n             [fillPercentage]=\"fillPercentage\"\n             [startAtDegree]=\"positionDegree\"\n             [reverse]=\"true\"\n             weightDirection=\"out\">\n    <div class=\"circle-menu-item__svg-wrapper\"\n         [@activeWidthAnimation]=\"active ? {value: 'active', params: {width: contentOffset + 'px'}} : {value: 'inactive'}\"\n         [style.width.px]=\"contentOffset\"\n         [style.transform]=\"svgWrapperRotate\"\n         [style.left.%]=\"svgWrapperPosition.x\"\n         [style.top.%]=\"svgWrapperPosition.y\">\n    </div>\n    <div class=\"circle-menu-item__content\"\n         [style.top.%]=\"contentPosition.y\"\n         [style.left.%]=\"contentPosition.x\"\n    >\n      <div class=\"circle-menu-item__content-wrapper\" [ngClass]=\"contentSide\">\n        <div class=\"circle-menu-item__content__title title h4\">{{title}}</div>\n        <div class=\"circle-menu-item__content__description description cv-small mat-caption\">\n          {{description}}\n        </div>\n      </div>\n\n    </div>\n  </cv-circle>\n</div>\n\n"
         },
         {
             "name": "DrawCircleComponent",
@@ -3854,7 +3942,7 @@
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "@use 'functions' as fn;\r\n\r\n:host {\r\n  display: flex;\r\n  flex-direction: column;\r\n  height: 100%;\r\n\r\n  color: fn.get-color(primary, 50);\r\n}\r\n",
+                    "data": "@use 'functions' as fn;\r\n\r\n:host {\r\n  display: flex;\r\n  flex-direction: column;\r\n  height: 100%;\r\n}\r\n",
                     "styleUrl": "./page-wrapper.component.scss"
                 }
             ],
@@ -3863,7 +3951,7 @@
         },
         {
             "name": "ProfileComponent",
-            "id": "component-ProfileComponent-435919ca4658fb825e20205031c9ad1871cc8e2ec117f2b6330efd3df9914ab4d3430cba9bbb92d5f46ac11c1e29569124fcdd6198a4a88c7e862d869844e384",
+            "id": "component-ProfileComponent-369685a486c0c52556ff011eae0768635cfa63e852e6aa3411f7e22976dfef0aba3c1a18f1d2d519874d01816dd01fb8941da4a794e7ebb3795d03343101014f",
             "file": "src/app/modules/main/components/profile/profile.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -3894,6 +3982,20 @@
             ],
             "outputsClass": [],
             "propertiesClass": [
+                {
+                    "name": "_isInitialized",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "boolean",
+                    "optional": false,
+                    "description": "<p>Initialized ?</p>\n",
+                    "line": 60,
+                    "rawdescription": "\n\nInitialized ?\n",
+                    "modifierKind": [
+                        121
+                    ]
+                },
                 {
                     "name": "_stopAnimation",
                     "defaultValue": "false",
@@ -3967,10 +4069,10 @@
                 },
                 {
                     "name": "value",
-                    "defaultValue": "340",
+                    "defaultValue": "-360",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "number",
+                    "type": "",
                     "optional": false,
                     "description": "<p>Value between 0 and 360.</p>\n",
                     "line": 32,
@@ -3983,17 +4085,50 @@
             "methodsClass": [
                 {
                     "name": "_animateLoad",
-                    "args": [],
+                    "args": [
+                        {
+                            "name": "item",
+                            "type": "ProfileMenuItem",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 98,
+                    "line": 121,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nAnimate the Input value and circles at first load.\n",
                     "description": "<p>Animate the Input value and circles at first load.</p>\n",
                     "modifierKind": [
                         121
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": {
+                                "pos": 2675,
+                                "end": 2679,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "item"
+                            },
+                            "type": "ProfileMenuItem",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "pos": 2669,
+                                "end": 2674,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "param"
+                            },
+                            "comment": "<p>The menu item for moving the cursor to.</p>\n"
+                        }
                     ]
                 },
                 {
@@ -4009,7 +4144,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 203,
+                    "line": 227,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nSet the active menu item.\n",
@@ -4043,7 +4178,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 154,
+                    "line": 178,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nCalculate the menu items to get the fill percentages\nand the degree of the menu items for the current mode.\n",
@@ -4070,7 +4205,7 @@
                     "optional": false,
                     "returnType": "number",
                     "typeParameters": [],
-                    "line": 143,
+                    "line": 167,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nGet Max fill percentage for mode.\n100%\n- (360° - (dead arc circle is (start + end) / 3.6))\n- (2.1 % gap between items)\n",
@@ -4081,12 +4216,45 @@
                     "jsdoctags": []
                 },
                 {
+                    "name": "_getMenuItemByRouterLink",
+                    "args": [
+                        {
+                            "name": "routerLink",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "ProfileMenuItem | undefined",
+                    "typeParameters": [],
+                    "line": 113,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nGet Menu item by router link.\n",
+                    "description": "<p>Get Menu item by router link.</p>\n",
+                    "modifierKind": [
+                        121
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "routerLink",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
                     "name": "_getTotalImportance",
                     "args": [],
                     "optional": false,
                     "returnType": "number",
                     "typeParameters": [],
-                    "line": 128,
+                    "line": 152,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nGet total importance of the menu items.\nWe need this to calculate the fill percentage of the menu items.\n",
@@ -4096,12 +4264,93 @@
                     ]
                 },
                 {
+                    "name": "_moveMenuCursorToItem",
+                    "args": [
+                        {
+                            "name": "item",
+                            "type": "ProfileMenuItem",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 251,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nMove the menu cursor to the clicked menu item.\n",
+                    "description": "<p>Move the menu cursor to the clicked menu item.</p>\n",
+                    "modifierKind": [
+                        121
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": {
+                                "pos": 6630,
+                                "end": 6634,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "item"
+                            },
+                            "type": "ProfileMenuItem",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "pos": 6624,
+                                "end": 6629,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "param"
+                            },
+                            "comment": "<p>The clicked menu item.</p>\n"
+                        }
+                    ]
+                },
+                {
+                    "name": "_toggleActiveMenuItem",
+                    "args": [
+                        {
+                            "name": "item",
+                            "type": "ProfileMenuItem",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 262,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nToggle active menu item.\n",
+                    "description": "<p>Toggle active menu item.</p>\n",
+                    "modifierKind": [
+                        121
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "item",
+                            "type": "ProfileMenuItem",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
                     "name": "_updateMode",
                     "args": [],
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 120,
+                    "line": 144,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nChange the mode of the profile.\n",
@@ -4116,7 +4365,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 89,
+                    "line": 104,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\n",
@@ -4139,7 +4388,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 72,
+                    "line": 77,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\n",
@@ -4165,7 +4414,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 81,
+                    "line": 86,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\n",
@@ -4188,7 +4437,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 213,
+                    "line": 237,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nActivate the menu item.\n",
@@ -4221,7 +4470,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 187,
+                    "line": 211,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\n",
@@ -4232,8 +4481,8 @@
                     "jsdoctags": [
                         {
                             "name": {
-                                "pos": 4908,
-                                "end": 4914,
+                                "pos": 5708,
+                                "end": 5714,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -4244,8 +4493,8 @@
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "pos": 4902,
-                                "end": 4907,
+                                "pos": 5702,
+                                "end": 5707,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -4269,7 +4518,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 195,
+                    "line": 219,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\n",
@@ -4280,8 +4529,8 @@
                     "jsdoctags": [
                         {
                             "name": {
-                                "pos": 5067,
-                                "end": 5073,
+                                "pos": 5867,
+                                "end": 5873,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -4292,8 +4541,8 @@
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "pos": 5061,
-                                "end": 5066,
+                                "pos": 5861,
+                                "end": 5866,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -4312,7 +4561,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import {\n  AfterViewInit,\n  Component,\n  Input,\n  OnChanges,\n  OnInit,\n  SimpleChanges\n} from '@angular/core';\nimport {animateValueUtil} from \"../../../../utils/animate-value.util\";\nimport {ProfileMenuItem} from \"./profile.component.model\";\nimport {PROFILE_CONSTANT} from \"./profile.constant\";\nimport {ProfileMenuItemData} from \"./profile.interface\";\nimport {ProfileMode} from \"./profile.enum\";\nimport {PageService} from \"../../../../services/page.service\";\nimport {Router} from \"@angular/router\";\n\n@Component({\n  selector: 'cv-profile',\n  templateUrl: './profile.component.html',\n  styleUrls: ['./profile.component.scss']\n})\nexport class ProfileComponent implements OnInit, AfterViewInit, OnChanges {\n\n  /**\n   * ViewMode : Large or Small\n   */\n  @Input() public viewMode: ProfileMode = ProfileMode.LARGE;\n\n  /**\n   * Value between 0 and 360.\n   */\n  public value = 340;\n\n  /**\n   * Outer circle fill percentage.\n   * Usefully for animations.\n   */\n  public outerCircleVal = 100;\n\n  /**\n   * Data Of the menu items\n   */\n  private readonly menuItemsData: ProfileMenuItemData[] = PROFILE_CONSTANT.MENU_DATA;\n\n  /**\n   * Show profile image\n   */\n  public showImage = false;\n  /**\n   * Get the menu items.\n   */\n  public menuItems: ProfileMenuItem[] = [];\n\n  /** Stop the animation of the Input value */\n  private _stopAnimation = false;\n\n  /**\n   * @constructor\n   * @param _pageService\n   * @param _router\n   */\n  public constructor(\n    private readonly _pageService: PageService,\n    private readonly _router: Router,\n  ) {\n\n  }\n\n  /**\n   * @inheritDoc\n   */\n  public ngOnChanges(changes: SimpleChanges): void {\n    if ('viewMode' in changes) {\n      this._updateMode();\n    }\n  }\n\n  /**\n   * @inheritDoc\n    */\n  public ngOnInit() {\n    this._updateMode();\n    this._animateLoad();\n  }\n\n  /**\n   * @inheritDoc\n   */\n  public ngAfterViewInit(): void {\n    setTimeout(() => {\n      this.showImage = true;\n    }, 2500);\n  }\n\n  /**\n   * Animate the Input value and circles at first load.\n   */\n  private _animateLoad(): void {\n    // Animate the Input value\n    animateValueUtil((val) => {\n      /**\n       * Stop the animation of the Input value\n       * if the user is dragging the Input or clicked on a menu item.\n       */\n      if (!this._stopAnimation) {\n        this.value = val;\n        this._calculateActiveMenuItem(this.value);\n      }\n    }, 0, this.value, 4000, [.5, 0, .2, 1]);\n\n    // Animate the outer circle.\n    animateValueUtil((val) => {\n      this.outerCircleVal = val;\n    }, 0, this.outerCircleVal, 2000, [.77, 0, 0, 1.06])\n  }\n\n  /**\n   * Change the mode of the profile.\n   */\n  private _updateMode(): void {\n    this._calculateMenuItems(this.menuItems.length > 0 ? 'update' : 'create');\n  }\n\n  /**\n   * Get total importance of the menu items.\n   * We need this to calculate the fill percentage of the menu items.\n   */\n  private _getTotalImportance(): number {\n    let totalImportance = 0;\n    this.menuItemsData.forEach((item) => {\n      totalImportance += item.importance;\n    });\n    return totalImportance;\n  }\n\n  /**\n   * Get Max fill percentage for mode.\n   * @formula\n   * 100%\n   * - (360° - (dead arc circle is (start + end) / 3.6))\n   * - (2.1 % gap between items)\n   */\n  private _getMaxFillPercentage(): number {\n    return 100\n      - (360 - PROFILE_CONSTANT.MENU_DEGREE_END[this.viewMode]\n        + PROFILE_CONSTANT.MENU_DEGREE_START[this.viewMode]) / 3.6\n      - 2.1;\n  }\n\n  /**\n   * Calculate the menu items to get the fill percentages\n   * and the degree of the menu items for the current mode.\n   */\n  private _calculateMenuItems(mode: 'create' | 'update' = 'create'): void {\n    const totalImportance = this._getTotalImportance();\n    const startDegree = PROFILE_CONSTANT.MENU_DEGREE_START[this.viewMode];\n    ProfileMenuItem.setLastEndDegree(startDegree);\n    const maxFillPercentage = this._getMaxFillPercentage();\n    this.menuItemsData.forEach((dataItem, index) => {\n      // Deep clone to not modify the original data.\n      const item: ProfileMenuItemData = structuredClone(dataItem);\n      const fillPercentage = (dataItem.importance / totalImportance) * maxFillPercentage;\n      if (item.drawCircleItem.positionDegree != null && dataItem.drawCircleItem.positionDegree != null) {\n        item.drawCircleItem.positionDegree = dataItem.drawCircleItem.positionDegree - startDegree;\n      }\n\n      if (mode === 'create') {\n        /** Create New instance of ProfileMenuItem */\n        const menuItem = new ProfileMenuItem(index.toString());\n        menuItem.setData(item, fillPercentage);\n        /** Draw the menu item */\n        this.menuItems.push(menuItem);\n      } else {\n        /** Update the existing menu item */\n        const menuItem = this.menuItems.find((menuItem) => menuItem.id === index.toString());\n        if (menuItem) {\n          menuItem.setData(item, fillPercentage);\n        }\n      }\n    });\n  }\n\n  /**\n   * @event onDragStart\n   * @param $event Value of the dragging.\n   */\n  public onDragStart($event: number): void {\n    this._stopAnimation = true;\n  }\n\n  /**\n   * @event onDragging\n   * @param $event Value of the dragging.\n   */\n  public onTriggerDragging($event: number): void {\n    this.value = $event;\n    this._calculateActiveMenuItem($event)\n  }\n\n  /**\n   * Set the active menu item.\n   */\n  private _calculateActiveMenuItem(value: number): void {\n    this.menuItems.forEach((item) => {\n      item.isActive(360 - value);\n    });\n  }\n\n  /**\n   * @event onclick\n   * Activate the menu item.\n   */\n  public onClickMenuItem(item: ProfileMenuItem): void {\n    this._stopAnimation = true;\n    this._pageService.setPageDirection(true);\n    this.menuItems.forEach((menuItem) => {\n      if (menuItem !== item) {\n        menuItem.active = false;\n      }\n    });\n    item.active = true;\n    animateValueUtil((val) => {\n      this.value = val;\n    }, this.value, 360 - item.degreeItem, 700, [.02, .55, .32, 1]);\n  }\n}\n",
+            "sourceCode": "import {\n  AfterViewInit,\n  Component,\n  Input,\n  OnChanges,\n  OnInit,\n  SimpleChanges\n} from '@angular/core';\nimport {animateValueUtil} from \"../../../../utils/animate-value.util\";\nimport {ProfileMenuItem} from \"./profile.component.model\";\nimport {PROFILE_CONSTANT} from \"./profile.constant\";\nimport {ProfileMenuItemData} from \"./profile.interface\";\nimport {ProfileMode} from \"./profile.enum\";\nimport {PageService} from \"../../../../services/page.service\";\nimport {Router} from \"@angular/router\";\n\n@Component({\n  selector: 'cv-profile',\n  templateUrl: './profile.component.html',\n  styleUrls: ['./profile.component.scss']\n})\nexport class ProfileComponent implements OnInit, AfterViewInit, OnChanges {\n\n  /**\n   * ViewMode : Large or Small\n   */\n  @Input() public viewMode: ProfileMode = ProfileMode.LARGE;\n\n  /**\n   * Value between 0 and 360.\n   */\n  public value = -360;\n\n  /**\n   * Outer circle fill percentage.\n   * Usefully for animations.\n   */\n  public outerCircleVal = 100;\n\n  /**\n   * Data Of the menu items\n   */\n  private readonly menuItemsData: ProfileMenuItemData[] = PROFILE_CONSTANT.MENU_DATA;\n\n  /**\n   * Show profile image\n   */\n  public showImage = false;\n  /**\n   * Get the menu items.\n   */\n  public menuItems: ProfileMenuItem[] = [];\n\n  /** Stop the animation of the Input value */\n  private _stopAnimation = false;\n\n  /**\n   * Initialized ?\n   */\n  private _isInitialized: boolean = false;\n\n  /**\n   * @constructor\n   * @param _pageService\n   * @param _router\n   */\n  public constructor(\n    private readonly _pageService: PageService,\n    private readonly _router: Router,\n  ) {\n\n  }\n\n  /**\n   * @inheritDoc\n   */\n  public ngOnChanges(changes: SimpleChanges): void {\n    if ('viewMode' in changes) {\n      this._updateMode();\n    }\n  }\n\n  /**\n   * @inheritDoc\n    */\n  public ngOnInit() {\n    this._updateMode();\n    this._pageService.activeItem$.subscribe((activeItem) => {\n      if (activeItem) {\n        const item = this._getMenuItemByRouterLink(activeItem.link);\n        if (item != null && this._isInitialized) {\n          this._moveMenuCursorToItem(item);\n        } else if (!this._isInitialized) {\n          this._isInitialized = true;\n          this._animateLoad(item ?? this.menuItems[0]);\n        }\n      }\n    });\n  }\n\n  /**\n   * @inheritDoc\n   */\n  public ngAfterViewInit(): void {\n    setTimeout(() => {\n      this.showImage = true;\n    }, 2500);\n  }\n\n  /**\n   * Get Menu item by router link.\n   */\n  private _getMenuItemByRouterLink(routerLink: string): ProfileMenuItem | undefined {\n    return this.menuItems.find((item) => item.routerLink === routerLink);\n  }\n\n  /**\n   * Animate the Input value and circles at first load.\n   * @param item The menu item for moving the cursor to.\n   */\n  private _animateLoad(item: ProfileMenuItem): void {\n    const value = 360 - item.degreeItem;\n    // Animate the Input value\n    animateValueUtil((val) => {\n      /**\n       * Stop the animation of the Input value\n       * if the user is dragging the Input or clicked on a menu item.\n       */\n      if (!this._stopAnimation) {\n        this.value = val;\n        this._calculateActiveMenuItem(this.value);\n      }\n    }, value - 360, value, 4000, [.5, 0, .2, 1]);\n\n    // Animate the outer circle.\n    animateValueUtil((val) => {\n      this.outerCircleVal = val;\n    }, 0, this.outerCircleVal, 2000, [.77, 0, 0, 1.06])\n  }\n\n  /**\n   * Change the mode of the profile.\n   */\n  private _updateMode(): void {\n    this._calculateMenuItems(this.menuItems.length > 0 ? 'update' : 'create');\n  }\n\n  /**\n   * Get total importance of the menu items.\n   * We need this to calculate the fill percentage of the menu items.\n   */\n  private _getTotalImportance(): number {\n    let totalImportance = 0;\n    this.menuItemsData.forEach((item) => {\n      totalImportance += item.importance;\n    });\n    return totalImportance;\n  }\n\n  /**\n   * Get Max fill percentage for mode.\n   * @formula\n   * 100%\n   * - (360° - (dead arc circle is (start + end) / 3.6))\n   * - (2.1 % gap between items)\n   */\n  private _getMaxFillPercentage(): number {\n    return 100\n      - (360 - PROFILE_CONSTANT.MENU_DEGREE_END[this.viewMode]\n        + PROFILE_CONSTANT.MENU_DEGREE_START[this.viewMode]) / 3.6\n      - 2.1;\n  }\n\n  /**\n   * Calculate the menu items to get the fill percentages\n   * and the degree of the menu items for the current mode.\n   */\n  private _calculateMenuItems(mode: 'create' | 'update' = 'create'): void {\n    const totalImportance = this._getTotalImportance();\n    const startDegree = PROFILE_CONSTANT.MENU_DEGREE_START[this.viewMode];\n    ProfileMenuItem.setLastEndDegree(startDegree);\n    const maxFillPercentage = this._getMaxFillPercentage();\n    this.menuItemsData.forEach((dataItem, index) => {\n      // Deep clone to not modify the original data.\n      const item: ProfileMenuItemData = structuredClone(dataItem);\n      const fillPercentage = (dataItem.importance / totalImportance) * maxFillPercentage;\n      if (item.drawCircleItem.positionDegree != null && dataItem.drawCircleItem.positionDegree != null) {\n        item.drawCircleItem.positionDegree = dataItem.drawCircleItem.positionDegree - startDegree;\n      }\n\n      if (mode === 'create') {\n        /** Create New instance of ProfileMenuItem */\n        const menuItem = new ProfileMenuItem(index.toString());\n        menuItem.setData(item, fillPercentage);\n        /** Draw the menu item */\n        this.menuItems.push(menuItem);\n      } else {\n        /** Update the existing menu item */\n        const menuItem = this.menuItems.find((menuItem) => menuItem.id === index.toString());\n        if (menuItem) {\n          menuItem.setData(item, fillPercentage);\n        }\n      }\n    });\n  }\n\n  /**\n   * @event onDragStart\n   * @param $event Value of the dragging.\n   */\n  public onDragStart($event: number): void {\n    this._stopAnimation = true;\n  }\n\n  /**\n   * @event onDragging\n   * @param $event Value of the dragging.\n   */\n  public onTriggerDragging($event: number): void {\n    this.value = $event;\n    this._calculateActiveMenuItem($event)\n  }\n\n  /**\n   * Set the active menu item.\n   */\n  private _calculateActiveMenuItem(value: number): void {\n    this.menuItems.forEach((item) => {\n      item.isActive(360 - value);\n    });\n  }\n\n  /**\n   * @event onclick\n   * Activate the menu item.\n   */\n  public onClickMenuItem(item: ProfileMenuItem): void {\n    this._stopAnimation = true;\n    //this._pageService.setPageDirection(true);\n    if (item.routerLink != null) {\n      this._pageService.navigate(item.routerLink);\n    } else {\n      this._moveMenuCursorToItem(item);\n    }\n  }\n\n  /**\n   * Move the menu cursor to the clicked menu item.\n   * @param item The clicked menu item.\n   */\n  private _moveMenuCursorToItem(item: ProfileMenuItem): void {\n    this._stopAnimation = true;\n    this._toggleActiveMenuItem(item);\n    animateValueUtil((val) => {\n      this.value = val;\n    }, this.value, 360 - item.degreeItem, 700, [.02, .55, .32, 1]);\n  }\n\n  /**\n   * Toggle active menu item.\n   */\n  private _toggleActiveMenuItem(item: ProfileMenuItem): void {\n    this.menuItems.forEach((menuItem) => {\n      if (menuItem !== item) {\n        menuItem.active = false;\n      }\n    });\n    item.active = true;\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -4340,7 +4589,7 @@
                         "deprecationMessage": ""
                     }
                 ],
-                "line": 55,
+                "line": 60,
                 "rawdescription": "\n\n",
                 "modifierKind": [
                     123
@@ -4348,8 +4597,8 @@
                 "jsdoctags": [
                     {
                         "name": {
-                            "pos": 1373,
-                            "end": 1385,
+                            "pos": 1449,
+                            "end": 1461,
                             "flags": 4227072,
                             "modifierFlagsCache": 0,
                             "transformFlags": 0,
@@ -4360,8 +4609,8 @@
                         "deprecated": false,
                         "deprecationMessage": "",
                         "tagName": {
-                            "pos": 1367,
-                            "end": 1372,
+                            "pos": 1443,
+                            "end": 1448,
                             "flags": 4227072,
                             "modifierFlagsCache": 0,
                             "transformFlags": 0,
@@ -4372,8 +4621,8 @@
                     },
                     {
                         "name": {
-                            "pos": 1398,
-                            "end": 1405,
+                            "pos": 1474,
+                            "end": 1481,
                             "flags": 4227072,
                             "modifierFlagsCache": 0,
                             "transformFlags": 0,
@@ -4384,8 +4633,8 @@
                         "deprecated": false,
                         "deprecationMessage": "",
                         "tagName": {
-                            "pos": 1392,
-                            "end": 1397,
+                            "pos": 1468,
+                            "end": 1473,
                             "flags": 4227072,
                             "modifierFlagsCache": 0,
                             "transformFlags": 0,
@@ -4401,7 +4650,7 @@
                 "AfterViewInit",
                 "OnChanges"
             ],
-            "templateData": "<div class=\"profile__container\">\n  <div class=\"profile__circle\">\n    <img class=\"profile-img\" src=\"assets/img/soheil.png\" alt=\"Soheil Saheb-Jamii\"\n         [class.show]=\"showImage\">\n    <div class=\"circle-outer__mask circle-wrapper\">\n      <cv-circle class=\"mask-circle\" [size]=\"300\" [weight]=\"40\" [fillPercentage]=\"outerCircleVal\" [startAt]=\"9\">\n        <!--Contact-->\n        <cv-draw-circle *ngFor=\"let item of menuItems\" mask-inner anchorPoint=\"start\"\n                        [routerLink]=\"item.routerLink\"\n                        (click)=\"onClickMenuItem(item)\"\n                        [reverse]=\"true\"\n                        [class.active]=\"item.active\"\n                        [size]=\"item.drawCircleItem.size ?? 0\"\n                        [positionDegree]=\"item.drawCircleItem.positionDegree ?? 0\"\n                        [arcDegree]=\"item.drawCircleItem.arcDegree ?? 0\"\n                        [weight]=\"item.drawCircleItem.weight ?? 0\"></cv-draw-circle>\n      </cv-circle>\n    </div>\n\n    <!--Profile-->\n    <div class=\"circle-outer__menu\">\n      <cv-circle-menu-item *ngFor=\"let item of menuItems\"\n                           [size]=\"item.circleMenuItem.size ?? 310\"\n                           [weight]=\"item.circleMenuItem.weight ?? 80\"\n                           [torque]=\"item.circleMenuItem.torque ?? 0\"\n                           [contentOffset]=\"item.circleMenuItem.contentOffset ?? 75\"\n                           [title]=\"item.circleMenuItem.title ?? ''\"\n                           [description]=\"item.circleMenuItem.description ?? ''\"\n                           [fillPercentage]=\"item.circleMenuItem.fillPercentage ?? 0\"\n                           [positionDegree]=\"item.circleMenuItem.positionDegree ?? 0\" [active]=\"item.active\">\n      </cv-circle-menu-item>\n    </div>\n    <div class=\"circle-outer__input circle-wrapper\">\n      <cv-input-circle-slider class=\"circle-input\" [showValue]=\"false\"\n                              [min]=\"0\"\n                              [max]=\"360\"\n                              (triggerDragging)=\"onTriggerDragging($event)\"\n                              (triggerDragStart)=\"onDragStart($event)\"\n                              [value]=\"value\"\n                              [size]=\"210\"\n                              [animate]=\"false\"\n                              [allowCross]=\"true\"\n                              [weight]=\"2\">\n        <cv-draw-circle class=\"handler\" [positionDegree]=\"0\"\n                        [size]=\"210\" [weight]=\"15\"\n                        [arcDegree]=\"90\"></cv-draw-circle>\n      </cv-input-circle-slider>\n    </div>\n  </div>\n</div>\n"
+            "templateData": "<div class=\"profile__container\">\n  <div class=\"profile__circle\">\n    <img class=\"profile-img\" src=\"assets/img/soheil.png\" alt=\"Soheil Saheb-Jamii\"\n         [class.show]=\"showImage\">\n    <div class=\"circle-outer__mask circle-wrapper\">\n      <cv-circle class=\"mask-circle\" [size]=\"300\" [weight]=\"40\" [fillPercentage]=\"outerCircleVal\" [startAt]=\"9\">\n        <!--Contact-->\n        <cv-draw-circle *ngFor=\"let item of menuItems\" mask-inner anchorPoint=\"start\"\n                        (click)=\"onClickMenuItem(item)\"\n                        [reverse]=\"true\"\n                        [class.active]=\"item.active\"\n                        [size]=\"item.drawCircleItem.size ?? 0\"\n                        [positionDegree]=\"item.drawCircleItem.positionDegree ?? 0\"\n                        [arcDegree]=\"item.drawCircleItem.arcDegree ?? 0\"\n                        [weight]=\"item.drawCircleItem.weight ?? 0\"></cv-draw-circle>\n      </cv-circle>\n    </div>\n\n    <!--Profile-->\n    <div class=\"circle-outer__menu\">\n      <cv-circle-menu-item *ngFor=\"let item of menuItems\"\n                           [size]=\"item.circleMenuItem.size ?? 310\"\n                           [weight]=\"item.circleMenuItem.weight ?? 80\"\n                           [torque]=\"item.circleMenuItem.torque ?? 0\"\n                           [contentOffset]=\"item.circleMenuItem.contentOffset ?? 75\"\n                           [title]=\"item.circleMenuItem.title ?? ''\"\n                           [description]=\"item.circleMenuItem.description ?? ''\"\n                           [fillPercentage]=\"item.circleMenuItem.fillPercentage ?? 0\"\n                           [positionDegree]=\"item.circleMenuItem.positionDegree ?? 0\" [active]=\"item.active\">\n      </cv-circle-menu-item>\n    </div>\n    <div class=\"circle-outer__input circle-wrapper\">\n      <cv-input-circle-slider class=\"circle-input\" [showValue]=\"false\"\n                              [min]=\"0\"\n                              [max]=\"360\"\n                              (triggerDragging)=\"onTriggerDragging($event)\"\n                              (triggerDragStart)=\"onDragStart($event)\"\n                              [value]=\"value\"\n                              [size]=\"210\"\n                              [animate]=\"false\"\n                              [allowCross]=\"true\"\n                              [weight]=\"2\">\n        <cv-draw-circle class=\"handler\" [positionDegree]=\"0\"\n                        [size]=\"210\" [weight]=\"15\"\n                        [arcDegree]=\"90\"></cv-draw-circle>\n      </cv-input-circle-slider>\n    </div>\n  </div>\n</div>\n"
         },
         {
             "name": "StorybookWrapperComponent",
@@ -4698,13 +4947,13 @@
         },
         {
             "name": "MainModule",
-            "id": "module-MainModule-be28cb59a640d178971ea6e0909648c82da59b9ea5efa32d4f54c10763f3671fa9e113c7ae09debf6e04b16b94f2fd7c08feb713c4ca55618665f08ad4c80ce0",
+            "id": "module-MainModule-8aafbfa672f112464c3e08d2ea9718d90e0ef19f2200c13d43631fac994887494777aefb036c7de18f3a43f139d865e6188e0c8fa1e9f61e8813905e76528aab",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "src/app/modules/main/main.module.ts",
             "methods": [],
-            "sourceCode": "import { NgModule } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { MainComponent } from './components/main/main.component';\nimport {LayoutComponent} from \"./components/layout/layout.component\";\nimport { PageHomeComponent } from './components/page-home/page-home.component';\nimport { PageContactComponent } from './components/page-contact/page-contact.component';\nimport {RouterLink, RouterModule} from \"@angular/router\";\nimport {MatTabsModule} from \"@angular/material/tabs\";\nimport { HeaderComponent } from './components/header/header.component';\nimport {MatIconModule} from \"@angular/material/icon\";\nimport {MatToolbarModule} from \"@angular/material/toolbar\";\nimport {MatButtonModule} from \"@angular/material/button\";\nimport { MenuComponent } from './components/menu/menu.component';\nimport { ProfileComponent } from './components/profile/profile.component';\nimport {CircleModule} from \"../shared/circle/circle.module\";\nimport {InputCircleSliderModule} from \"../shared/input-circle-slider/input-circle-slider.module\";\nimport {DrawCircleModule} from \"../shared/draw-circle/draw-circle.module\";\nimport { CircleMenuItemComponent } from './components/circle-menu-item/circle-menu-item.component';\nimport {PageWrapperModule} from \"../shared/page-wrapper/page-wrapper.module\";\n\n\n\n@NgModule({\n    declarations: [\n        MainComponent,\n        LayoutComponent,\n        PageHomeComponent,\n        PageContactComponent,\n        HeaderComponent,\n        MenuComponent,\n        ProfileComponent,\n        CircleMenuItemComponent,\n    ],\n  imports: [\n    CommonModule,\n    RouterLink,\n    RouterModule,\n    MatTabsModule,\n    MatIconModule,\n    MatToolbarModule,\n    MatButtonModule,\n    CircleModule,\n    InputCircleSliderModule,\n    DrawCircleModule,\n    PageWrapperModule\n  ],\n  exports: [\n    MainComponent,\n    LayoutComponent\n  ],\n})\nexport class MainModule { }\n",
+            "sourceCode": "import { NgModule } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { MainComponent } from './components/main/main.component';\nimport {LayoutComponent} from \"./components/layout/layout.component\";\nimport { PageHomeComponent } from './components/page-home/page-home.component';\nimport { PageContactComponent } from './components/page-contact/page-contact.component';\nimport {RouterLink, RouterModule} from \"@angular/router\";\nimport {MatTabsModule} from \"@angular/material/tabs\";\nimport { HeaderComponent } from './components/header/header.component';\nimport {MatIconModule} from \"@angular/material/icon\";\nimport {MatToolbarModule} from \"@angular/material/toolbar\";\nimport {MatButtonModule} from \"@angular/material/button\";\nimport { MenuComponent } from './components/menu/menu.component';\nimport { ProfileComponent } from './components/profile/profile.component';\nimport {CircleModule} from \"../shared/circle/circle.module\";\nimport {InputCircleSliderModule} from \"../shared/input-circle-slider/input-circle-slider.module\";\nimport {DrawCircleModule} from \"../shared/draw-circle/draw-circle.module\";\nimport { CircleMenuItemComponent } from './components/circle-menu-item/circle-menu-item.component';\nimport {PageWrapperModule} from \"../shared/page-wrapper/page-wrapper.module\";\nimport { BlockComponent } from './components/block/block.component';\n\n\n\n@NgModule({\n    declarations: [\n        MainComponent,\n        LayoutComponent,\n        PageHomeComponent,\n        PageContactComponent,\n        HeaderComponent,\n        MenuComponent,\n        ProfileComponent,\n        CircleMenuItemComponent,\n        BlockComponent,\n    ],\n  imports: [\n    CommonModule,\n    RouterLink,\n    RouterModule,\n    MatTabsModule,\n    MatIconModule,\n    MatToolbarModule,\n    MatButtonModule,\n    CircleModule,\n    InputCircleSliderModule,\n    DrawCircleModule,\n    PageWrapperModule\n  ],\n  exports: [\n    MainComponent,\n    LayoutComponent\n  ],\n})\nexport class MainModule { }\n",
             "children": [
                 {
                     "type": "providers",
@@ -4713,6 +4962,9 @@
                 {
                     "type": "declarations",
                     "elements": [
+                        {
+                            "name": "BlockComponent"
+                        },
                         {
                             "name": "CircleMenuItemComponent"
                         },
@@ -4894,6 +5146,16 @@
                 "defaultValue": "RouterModule.forRoot(routes)"
             },
             {
+                "name": "Block",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/modules/main/components/block/block.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
                 "name": "Circle",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -5045,7 +5307,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "object",
-                "defaultValue": "{\n  declarations: [\n      MainComponent,\n      LayoutComponent,\n      PageHomeComponent,\n      PageContactComponent,\n      HeaderComponent,\n      MenuComponent,\n      ProfileComponent,\n      CircleMenuItemComponent\n  ],\n  imports: [\n    appRouting,\n    BrowserAnimationsModule,\n    CircleModule,\n    CommonModule,\n    RouterLink,\n    RouterModule,\n    MatTabsModule,\n    MatIconModule,\n    MatToolbarModule,\n    MatButtonModule,\n    InputCircleSliderModule,\n    DrawCircleModule,\n    StorybookWrapperModule,\n    PageWrapperModule,\n  ],\n  exports: [\n    MainComponent,\n    LayoutComponent,\n    HeaderComponent,\n    ProfileComponent,\n    CircleMenuItemComponent\n  ],\n}"
+                "defaultValue": "{\n  declarations: [\n    MainComponent,\n    LayoutComponent,\n    PageHomeComponent,\n    PageContactComponent,\n    HeaderComponent,\n    MenuComponent,\n    ProfileComponent,\n    CircleMenuItemComponent,\n    BlockComponent,\n  ],\n  imports: [\n    appRouting,\n    BrowserAnimationsModule,\n    CircleModule,\n    CommonModule,\n    RouterLink,\n    RouterModule,\n    MatTabsModule,\n    MatIconModule,\n    MatToolbarModule,\n    MatButtonModule,\n    InputCircleSliderModule,\n    DrawCircleModule,\n    StorybookWrapperModule,\n    PageWrapperModule,\n  ],\n  exports: [\n    MainComponent,\n    LayoutComponent,\n    HeaderComponent,\n    ProfileComponent,\n    CircleMenuItemComponent,\n    BlockComponent,\n  ],\n}"
             },
             {
                 "name": "Menu",
@@ -5085,7 +5347,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "object",
-                "defaultValue": "{\r\n  /**\r\n   * Graphical menu degree start.\r\n   */\r\n  MENU_DEGREE_START: {\r\n    [ProfileMode.SMALL]: -90,\r\n    [ProfileMode.LARGE]: 0,\r\n  },\r\n\r\n  /**\r\n   * Graphical menu degree end. (from 0 to 360)\r\n   *\r\n   * Will be relative to the MENU_DEGREE_START.\r\n   */\r\n  MENU_DEGREE_END: {\r\n    [ProfileMode.SMALL]: 90,\r\n    [ProfileMode.LARGE]: 270,\r\n  },\r\n\r\n  /**\r\n   * MENU_DATA\r\n   */\r\n  MENU_DATA: [\r\n    { // * About\r\n      routerLink: '',\r\n      importance: 10,\r\n      circleMenuItem: {\r\n        title: 'About',\r\n        description: 'Lorem ipsum dolor sit amet',\r\n        size: 250,\r\n        weight: 50,\r\n        torque: 10,\r\n        contentOffset: 50,\r\n      },\r\n      drawCircleItem: {\r\n        size: 276,\r\n        weight: 4\r\n      },\r\n    },\r\n    // * Skills\r\n    {\r\n      importance: 40,\r\n      offset: 20,\r\n\r\n      circleMenuItem: {\r\n        title: 'Skills',\r\n        description: 'Lorem ipsum dolor sit amet',\r\n        size: 310,\r\n        weight: 55,\r\n        torque: -30,\r\n        contentOffset: 35,\r\n      },\r\n      drawCircleItem: {\r\n        size: 310,\r\n        weight: 17\r\n      },\r\n    },\r\n    // * Experience\r\n    {\r\n      importance: 20,\r\n      circleMenuItem: {\r\n        title: 'Experience',\r\n        description: 'Lorem ipsum dolor sit amet',\r\n        size: 310,\r\n        weight: 80,\r\n        torque: -25,\r\n        contentOffset: 10,\r\n      },\r\n      drawCircleItem: {\r\n        size: 310,\r\n        weight: 17\r\n      },\r\n    },\r\n    // * Education\r\n    {\r\n      importance: 10,\r\n      circleMenuItem: {\r\n        title: 'Education',\r\n        description: 'Lorem ipsum dolor sit amet',\r\n        size: 250,\r\n        contentOffset: 50,\r\n        weight: 80,\r\n      },\r\n      drawCircleItem: {\r\n        size: 276,\r\n        weight: 4\r\n      },\r\n    },\r\n    // * Contact\r\n    {\r\n      routerLink: '/contact',\r\n      importance: 10,\r\n      circleMenuItem: {\r\n        title: 'Contact',\r\n        description: 'Lorem ipsum dolor sit amet',\r\n        size: 250,\r\n        weight: 20,\r\n      },\r\n      drawCircleItem: {\r\n        size: 276,\r\n        weight: 4\r\n      },\r\n    },\r\n    ] as ProfileMenuItemData[]\r\n  }"
+                "defaultValue": "{\r\n  /**\r\n   * Graphical menu degree start.\r\n   */\r\n  MENU_DEGREE_START: {\r\n    [ProfileMode.SMALL]: -90,\r\n    [ProfileMode.LARGE]: 0,\r\n  },\r\n\r\n  /**\r\n   * Graphical menu degree end. (from 0 to 360)\r\n   *\r\n   * Will be relative to the MENU_DEGREE_START.\r\n   */\r\n  MENU_DEGREE_END: {\r\n    [ProfileMode.SMALL]: 90,\r\n    [ProfileMode.LARGE]: 270,\r\n  },\r\n\r\n  /**\r\n   * MENU_DATA\r\n   */\r\n  MENU_DATA: [\r\n    { // * About\r\n      routerLink: '/',\r\n      importance: 10,\r\n      circleMenuItem: {\r\n        title: 'About',\r\n        description: 'Lorem ipsum dolor sit amet',\r\n        size: 250,\r\n        weight: 50,\r\n        torque: 10,\r\n        contentOffset: 50,\r\n      },\r\n      drawCircleItem: {\r\n        size: 276,\r\n        weight: 4\r\n      },\r\n    },\r\n    // * Skills\r\n    {\r\n      importance: 40,\r\n      offset: 20,\r\n\r\n      circleMenuItem: {\r\n        title: 'Skills',\r\n        description: 'Lorem ipsum dolor sit amet',\r\n        size: 310,\r\n        weight: 55,\r\n        torque: -30,\r\n        contentOffset: 35,\r\n      },\r\n      drawCircleItem: {\r\n        size: 310,\r\n        weight: 17\r\n      },\r\n    },\r\n    // * Experience\r\n    {\r\n      importance: 20,\r\n      circleMenuItem: {\r\n        title: 'Experience',\r\n        description: 'Lorem ipsum dolor sit amet',\r\n        size: 310,\r\n        weight: 80,\r\n        torque: -25,\r\n        contentOffset: 10,\r\n      },\r\n      drawCircleItem: {\r\n        size: 310,\r\n        weight: 17\r\n      },\r\n    },\r\n    // * Education\r\n    {\r\n      importance: 10,\r\n      circleMenuItem: {\r\n        title: 'Education',\r\n        description: 'Lorem ipsum dolor sit amet',\r\n        size: 250,\r\n        contentOffset: 50,\r\n        weight: 80,\r\n      },\r\n      drawCircleItem: {\r\n        size: 276,\r\n        weight: 4\r\n      },\r\n    },\r\n    // * Contact\r\n    {\r\n      routerLink: '/contact',\r\n      importance: 10,\r\n      circleMenuItem: {\r\n        title: 'Contact',\r\n        description: 'Lorem ipsum dolor sit amet',\r\n        size: 250,\r\n        weight: 20,\r\n      },\r\n      drawCircleItem: {\r\n        size: 276,\r\n        weight: 4\r\n      },\r\n    },\r\n    ] as ProfileMenuItemData[]\r\n  }"
             },
             {
                 "name": "ROUTER_LTR_TRANSITION_CONSTANT",
@@ -5149,6 +5411,18 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "src/app/modules/shared/draw-circle/draw-circle.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<DrawCircleComponent>",
+                "defaultValue": "(args: DrawCircleComponent) => ({\r\n  props: args,\r\n})",
+                "rawdescription": "Template of the component.",
+                "description": "<p>Template of the component.</p>\n"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "src/app/modules/shared/input-circle-slider/input-circle-slider.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -5173,25 +5447,11 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/modules/shared/draw-circle/draw-circle.stories.ts",
+                "file": "src/app/modules/main/components/block/block.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Story<DrawCircleComponent>",
-                "defaultValue": "(args: DrawCircleComponent) => ({\r\n  props: args,\r\n})",
-                "rawdescription": "Template of the component.",
-                "description": "<p>Template of the component.</p>\n"
-            },
-            {
-                "name": "Template",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/modules/main/components/header/header.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story<HeaderComponent>",
-                "defaultValue": "(args: HeaderComponent) => ({\r\n  props: args,\r\n})",
-                "rawdescription": "Template of the component.",
-                "description": "<p>Template of the component.</p>\n"
+                "type": "Story<BlockComponent>",
+                "defaultValue": "(args: BlockComponent) => ({\n  props: args,\n})"
             },
             {
                 "name": "Template",
@@ -5207,11 +5467,11 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/modules/main/components/main/main.stories.ts",
+                "file": "src/app/modules/main/components/header/header.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Story<MainComponent>",
-                "defaultValue": "(args: MainComponent) => ({\r\n  props: args,\r\n})",
+                "type": "Story<HeaderComponent>",
+                "defaultValue": "(args: HeaderComponent) => ({\r\n  props: args,\r\n})",
                 "rawdescription": "Template of the component.",
                 "description": "<p>Template of the component.</p>\n"
             },
@@ -5236,6 +5496,18 @@
                 "deprecationMessage": "",
                 "type": "Story<MenuComponent>",
                 "defaultValue": "(args: MenuComponent) => ({\r\n  props: args,\r\n})",
+                "rawdescription": "Template of the component.",
+                "description": "<p>Template of the component.</p>\n"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/modules/main/components/main/main.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<MainComponent>",
+                "defaultValue": "(args: MainComponent) => ({\r\n  props: args,\r\n})",
                 "rawdescription": "Template of the component.",
                 "description": "<p>Template of the component.</p>\n"
             },
@@ -5316,6 +5588,28 @@
                     "deprecationMessage": "",
                     "type": "",
                     "defaultValue": "RouterModule.forRoot(routes)"
+                }
+            ],
+            "src/app/modules/main/components/block/block.stories.ts": [
+                {
+                    "name": "Block",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/modules/main/components/block/block.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/modules/main/components/block/block.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<BlockComponent>",
+                    "defaultValue": "(args: BlockComponent) => ({\n  props: args,\n})"
                 }
             ],
             "src/app/modules/shared/circle/circle.stories.ts": [
@@ -5587,7 +5881,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "object",
-                    "defaultValue": "{\n  declarations: [\n      MainComponent,\n      LayoutComponent,\n      PageHomeComponent,\n      PageContactComponent,\n      HeaderComponent,\n      MenuComponent,\n      ProfileComponent,\n      CircleMenuItemComponent\n  ],\n  imports: [\n    appRouting,\n    BrowserAnimationsModule,\n    CircleModule,\n    CommonModule,\n    RouterLink,\n    RouterModule,\n    MatTabsModule,\n    MatIconModule,\n    MatToolbarModule,\n    MatButtonModule,\n    InputCircleSliderModule,\n    DrawCircleModule,\n    StorybookWrapperModule,\n    PageWrapperModule,\n  ],\n  exports: [\n    MainComponent,\n    LayoutComponent,\n    HeaderComponent,\n    ProfileComponent,\n    CircleMenuItemComponent\n  ],\n}"
+                    "defaultValue": "{\n  declarations: [\n    MainComponent,\n    LayoutComponent,\n    PageHomeComponent,\n    PageContactComponent,\n    HeaderComponent,\n    MenuComponent,\n    ProfileComponent,\n    CircleMenuItemComponent,\n    BlockComponent,\n  ],\n  imports: [\n    appRouting,\n    BrowserAnimationsModule,\n    CircleModule,\n    CommonModule,\n    RouterLink,\n    RouterModule,\n    MatTabsModule,\n    MatIconModule,\n    MatToolbarModule,\n    MatButtonModule,\n    InputCircleSliderModule,\n    DrawCircleModule,\n    StorybookWrapperModule,\n    PageWrapperModule,\n  ],\n  exports: [\n    MainComponent,\n    LayoutComponent,\n    HeaderComponent,\n    ProfileComponent,\n    CircleMenuItemComponent,\n    BlockComponent,\n  ],\n}"
                 }
             ],
             "src/app/modules/main/components/menu/menu.stories.ts": [
@@ -5671,7 +5965,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "object",
-                    "defaultValue": "{\r\n  /**\r\n   * Graphical menu degree start.\r\n   */\r\n  MENU_DEGREE_START: {\r\n    [ProfileMode.SMALL]: -90,\r\n    [ProfileMode.LARGE]: 0,\r\n  },\r\n\r\n  /**\r\n   * Graphical menu degree end. (from 0 to 360)\r\n   *\r\n   * Will be relative to the MENU_DEGREE_START.\r\n   */\r\n  MENU_DEGREE_END: {\r\n    [ProfileMode.SMALL]: 90,\r\n    [ProfileMode.LARGE]: 270,\r\n  },\r\n\r\n  /**\r\n   * MENU_DATA\r\n   */\r\n  MENU_DATA: [\r\n    { // * About\r\n      routerLink: '',\r\n      importance: 10,\r\n      circleMenuItem: {\r\n        title: 'About',\r\n        description: 'Lorem ipsum dolor sit amet',\r\n        size: 250,\r\n        weight: 50,\r\n        torque: 10,\r\n        contentOffset: 50,\r\n      },\r\n      drawCircleItem: {\r\n        size: 276,\r\n        weight: 4\r\n      },\r\n    },\r\n    // * Skills\r\n    {\r\n      importance: 40,\r\n      offset: 20,\r\n\r\n      circleMenuItem: {\r\n        title: 'Skills',\r\n        description: 'Lorem ipsum dolor sit amet',\r\n        size: 310,\r\n        weight: 55,\r\n        torque: -30,\r\n        contentOffset: 35,\r\n      },\r\n      drawCircleItem: {\r\n        size: 310,\r\n        weight: 17\r\n      },\r\n    },\r\n    // * Experience\r\n    {\r\n      importance: 20,\r\n      circleMenuItem: {\r\n        title: 'Experience',\r\n        description: 'Lorem ipsum dolor sit amet',\r\n        size: 310,\r\n        weight: 80,\r\n        torque: -25,\r\n        contentOffset: 10,\r\n      },\r\n      drawCircleItem: {\r\n        size: 310,\r\n        weight: 17\r\n      },\r\n    },\r\n    // * Education\r\n    {\r\n      importance: 10,\r\n      circleMenuItem: {\r\n        title: 'Education',\r\n        description: 'Lorem ipsum dolor sit amet',\r\n        size: 250,\r\n        contentOffset: 50,\r\n        weight: 80,\r\n      },\r\n      drawCircleItem: {\r\n        size: 276,\r\n        weight: 4\r\n      },\r\n    },\r\n    // * Contact\r\n    {\r\n      routerLink: '/contact',\r\n      importance: 10,\r\n      circleMenuItem: {\r\n        title: 'Contact',\r\n        description: 'Lorem ipsum dolor sit amet',\r\n        size: 250,\r\n        weight: 20,\r\n      },\r\n      drawCircleItem: {\r\n        size: 276,\r\n        weight: 4\r\n      },\r\n    },\r\n    ] as ProfileMenuItemData[]\r\n  }"
+                    "defaultValue": "{\r\n  /**\r\n   * Graphical menu degree start.\r\n   */\r\n  MENU_DEGREE_START: {\r\n    [ProfileMode.SMALL]: -90,\r\n    [ProfileMode.LARGE]: 0,\r\n  },\r\n\r\n  /**\r\n   * Graphical menu degree end. (from 0 to 360)\r\n   *\r\n   * Will be relative to the MENU_DEGREE_START.\r\n   */\r\n  MENU_DEGREE_END: {\r\n    [ProfileMode.SMALL]: 90,\r\n    [ProfileMode.LARGE]: 270,\r\n  },\r\n\r\n  /**\r\n   * MENU_DATA\r\n   */\r\n  MENU_DATA: [\r\n    { // * About\r\n      routerLink: '/',\r\n      importance: 10,\r\n      circleMenuItem: {\r\n        title: 'About',\r\n        description: 'Lorem ipsum dolor sit amet',\r\n        size: 250,\r\n        weight: 50,\r\n        torque: 10,\r\n        contentOffset: 50,\r\n      },\r\n      drawCircleItem: {\r\n        size: 276,\r\n        weight: 4\r\n      },\r\n    },\r\n    // * Skills\r\n    {\r\n      importance: 40,\r\n      offset: 20,\r\n\r\n      circleMenuItem: {\r\n        title: 'Skills',\r\n        description: 'Lorem ipsum dolor sit amet',\r\n        size: 310,\r\n        weight: 55,\r\n        torque: -30,\r\n        contentOffset: 35,\r\n      },\r\n      drawCircleItem: {\r\n        size: 310,\r\n        weight: 17\r\n      },\r\n    },\r\n    // * Experience\r\n    {\r\n      importance: 20,\r\n      circleMenuItem: {\r\n        title: 'Experience',\r\n        description: 'Lorem ipsum dolor sit amet',\r\n        size: 310,\r\n        weight: 80,\r\n        torque: -25,\r\n        contentOffset: 10,\r\n      },\r\n      drawCircleItem: {\r\n        size: 310,\r\n        weight: 17\r\n      },\r\n    },\r\n    // * Education\r\n    {\r\n      importance: 10,\r\n      circleMenuItem: {\r\n        title: 'Education',\r\n        description: 'Lorem ipsum dolor sit amet',\r\n        size: 250,\r\n        contentOffset: 50,\r\n        weight: 80,\r\n      },\r\n      drawCircleItem: {\r\n        size: 276,\r\n        weight: 4\r\n      },\r\n    },\r\n    // * Contact\r\n    {\r\n      routerLink: '/contact',\r\n      importance: 10,\r\n      circleMenuItem: {\r\n        title: 'Contact',\r\n        description: 'Lorem ipsum dolor sit amet',\r\n        size: 250,\r\n        weight: 20,\r\n      },\r\n      drawCircleItem: {\r\n        size: 276,\r\n        weight: 4\r\n      },\r\n    },\r\n    ] as ProfileMenuItemData[]\r\n  }"
                 }
             ],
             "src/app/constants/router-transition.constant.ts": [
@@ -5797,7 +6091,7 @@
         ]
     },
     "coverage": {
-        "count": 40,
+        "count": 38,
         "status": "medium",
         "files": [
             {
@@ -5855,6 +6149,35 @@
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
                 "name": "StorybookRangeControlFn",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/modules/main/components/block/block.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "BlockComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/modules/main/components/block/block.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Block",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/modules/main/components/block/block.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
@@ -5998,8 +6321,8 @@
                 "type": "interface",
                 "linktype": "interface",
                 "name": "MenuItem",
-                "coveragePercent": 0,
-                "coverageCount": "0/5",
+                "coveragePercent": 20,
+                "coverageCount": "1/5",
                 "status": "low"
             },
             {
@@ -6074,8 +6397,8 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "ProfileComponent",
-                "coveragePercent": 66,
-                "coverageCount": "14/21",
+                "coveragePercent": 72,
+                "coverageCount": "18/25",
                 "status": "good"
             },
             {
@@ -6275,8 +6598,8 @@
                 "type": "injectable",
                 "linktype": "injectable",
                 "name": "PageService",
-                "coveragePercent": 70,
-                "coverageCount": "12/17",
+                "coveragePercent": 72,
+                "coverageCount": "13/18",
                 "status": "good"
             },
             {

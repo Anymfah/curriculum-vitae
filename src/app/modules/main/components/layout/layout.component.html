@@ -1,9 +1,9 @@
 <cv-header></cv-header>
 <mat-tab-nav-panel #tabPanel>
-  <cv-profile></cv-profile>
   <main [@routerTransitionRtL]="rtlState"
         [@routerTransitionLtR]="ltrState">
     <router-outlet #o="outlet"></router-outlet>
   </main>
+  <cv-profile></cv-profile>
 </mat-tab-nav-panel>
 
