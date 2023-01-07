@@ -2,7 +2,18 @@
 
 :host {
   display: flex;
-  flex-direction: column;
   height: 100%;
   padding: 30px;
+  gap: 10px;
+}
+
+
+
+.zone {
+  &__left, &__right {
+    max-width: 300px;
+  }
+  &__center {
+    flex-grow: 1;
+  }
 }

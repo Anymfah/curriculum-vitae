@@ -9,7 +9,7 @@ export class BlockComponent {
   /**
    * Title of the block
    */
-  @Input() public title = '';
+  @Input() public cvTitle = '';
 
   /**
    * Max height of the block

@@ -1,4 +1,4 @@
-import {SKILL_CATEGORY, SKILL_TITLE} from "../enums/data.enum";
+import {SKILL_CATEGORY, SKILL_TITLE, WORK_CATEGORY} from "../enums/data.enum";
 
 export interface SkillDataInterface {
   title: SKILL_TITLE;
@@ -29,6 +29,7 @@ export interface WorkDataInterface {
   company: string;
   happiness: number;
   skills: SKILL_TITLE[];
+  projects?: ProjectDataInterface[];
 }
 
 export interface ProjectDataInterface {
@@ -38,6 +39,8 @@ export interface ProjectDataInterface {
   endDate: string;
   happiness: number;
   skills: SKILL_TITLE[];
+  category: WORK_CATEGORY[];
+  favorite?: boolean;
 }
 
 export interface ProjectDataAlias {

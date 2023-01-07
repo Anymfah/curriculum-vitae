@@ -20,6 +20,7 @@ import {StorybookWrapperModule} from "../shared/storybook-wrapper/storybook-wrap
 import {CircleMenuItemComponent} from "./components/circle-menu-item/circle-menu-item.component";
 import {PageWrapperModule} from "../shared/page-wrapper/page-wrapper.module";
 import {BlockComponent} from "./components/block/block.component";
+import {ListComponent} from './components/list/list.component';
 
 
 export const MainStorybookModuleConstant ={
@@ -33,6 +34,7 @@ export const MainStorybookModuleConstant ={
     ProfileComponent,
     CircleMenuItemComponent,
     BlockComponent,
+    ListComponent
   ],
   imports: [
     appRouting,
@@ -57,5 +59,6 @@ export const MainStorybookModuleConstant ={
     ProfileComponent,
     CircleMenuItemComponent,
     BlockComponent,
+    ListComponent
   ],
 };

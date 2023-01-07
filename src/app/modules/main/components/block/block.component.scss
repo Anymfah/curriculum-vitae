@@ -3,7 +3,7 @@
 :host {
   display: flex;
   flex-direction: column;
-  width: 300px;
+  width: 100%;
 }
 
 .block {
@@ -15,10 +15,13 @@
         calc(100% - 10px) 5px,
         100% 16px,
         100% 100%,
-        10px 100%,
-        0 calc(100% - 10px),
+        87px 100%,
+        82px calc(100% - 5px),
+        10px calc(100% - 5px),
+        0 calc(100% - 15px),
     );
     background: fn.get-color(contrast, 600, 0.5);
+    margin-bottom: 2px;
   }
   &__header {
     position: relative;
@@ -68,7 +71,7 @@
 
   &__content {
     margin-top: 3px;
-    padding: 5px 1rem 0.5rem;
+    padding: 5px 16px 12px;
     overflow: auto;
   }
 }

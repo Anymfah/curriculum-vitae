@@ -7,19 +7,21 @@
 
 /// Scroll bar
 @mixin scroll-bar($color: fn.get-color(contrast, 500), $width: 5px) {
+  // Chromium
   &::-webkit-scrollbar {
     width: $width;
+    &-track {
+      background: fn.get-color(contrast, 300, 0.1);
+    }
+    &-thumb {
+      background: $color;
+      :hover {
+        background: $color;
+      }
+    }
   }
 
-  &::-webkit-scrollbar-track {
-    background: fn.get-color(contrast, 300, 0.1);
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: $color;
-  }
-
-  &::-webkit-scrollbar-thumb:hover {
-    background: $color;
-  }
+  // Firefox
+  scrollbar-color: $color fn.get-color(contrast, 300, 0.1);
+  scrollbar-width: thin;
 }

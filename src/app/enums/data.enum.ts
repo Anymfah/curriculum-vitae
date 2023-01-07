@@ -20,7 +20,7 @@ export enum SKILL_CATEGORY {
   E2E = 'End to End',
 
   /** Application */
-  APPLICATION = 'Application',
+  APPLICATION = 'Logiciel',
 
   /** Library */
   LIBRARY = 'Library',
@@ -38,10 +38,16 @@ export enum SKILL_CATEGORY {
   IDE = 'IDE',
 
   /** Tools */
-  TOOL = 'TOOL',
+  TOOL = 'Outils',
+
+  /** Music */
+  MUSIC = 'Musique',
+
+  /** Design */
+  DESIGN = 'Design',
 
   /** Others */
-  OTHERS = 'Others',
+  OTHERS = 'Autres',
 }
 
 export enum SKILL_TITLE {
@@ -119,6 +125,7 @@ export enum SKILL_TITLE {
   AFTER_EFFECTS = 'After Effects',
   INDESIGN = 'InDesign',
   CUBASE = 'Cubase',
+  REAPER = 'Reaper',
   PRO_TOOLS = 'Pro Tools',
   ABLETON_LIVE = 'Ableton Live',
   WORDPRESS = 'WordPress',
@@ -145,4 +152,26 @@ export enum SKILL_TITLE {
   TECHNICAL_ENGLISH = 'Anglais technique',
   FRENCH = 'Français',
   AGILE = 'Agile',
+  MASTERING = 'Mastering',
+  MIXING = 'Mixing',
+  RECORDING = 'Enregistrement',
+  MUSIC_THEORY = 'Théorie musicale',
+  MAO = 'MAO',
+  COMPOSITION = 'Composition',
+  VIOLIN = 'Violon',
+  PIANO = 'Piano',
+  GUITAR = 'Guitare',
+}
+
+export enum WORK_CATEGORY {
+  WEBSITE_DEVELOPMENT = 'Développement Web',
+  WEBSITE_DESIGN = 'Design Web',
+  WEB_APPLICATION = 'Application Web',
+  MOBILE_APPLICATION = 'Application Mobile',
+  EMAILING = 'Emailing',
+  MAILING = 'Mailing postal',
+  GRAPHIC_DESIGN = 'Design Graphique',
+  MUSIC_PRODUCTION = 'Production musicale',
+  VIDEO_PRODUCTION = 'Production vidéo',
+  OTHERS = 'Autres',
 }

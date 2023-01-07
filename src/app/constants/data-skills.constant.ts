@@ -17,7 +17,11 @@ export const DATA_SKILLS: SkillDataInterface[] = [
     title: SKILL_TITLE.CSS,
     level: 100,
     color: '#1572B6',
-    category: [SKILL_CATEGORY.FRONT_END, SKILL_CATEGORY.CODE_LANGUAGE],
+    category: [
+      SKILL_CATEGORY.FRONT_END,
+      SKILL_CATEGORY.CODE_LANGUAGE,
+      SKILL_CATEGORY.DESIGN,
+    ],
     happiness: 80,
     experience: 100,
   },
@@ -25,7 +29,11 @@ export const DATA_SKILLS: SkillDataInterface[] = [
     title: SKILL_TITLE.SCSS,
     level: 100,
     color: '#CC6699',
-    category: [SKILL_CATEGORY.FRONT_END, SKILL_CATEGORY.CODE_LANGUAGE],
+    category: [
+      SKILL_CATEGORY.FRONT_END,
+      SKILL_CATEGORY.CODE_LANGUAGE,
+      SKILL_CATEGORY.DESIGN,
+    ],
     happiness: 95,
     experience: 100,
     favorite: true,
@@ -34,16 +42,23 @@ export const DATA_SKILLS: SkillDataInterface[] = [
     title: SKILL_TITLE.DART_SASS,
     level: 100,
     color: '#CC6699',
-    category: [SKILL_CATEGORY.FRONT_END, SKILL_CATEGORY.CODE_LANGUAGE],
+    category: [
+      SKILL_CATEGORY.FRONT_END,
+      SKILL_CATEGORY.CODE_LANGUAGE,
+      SKILL_CATEGORY.DESIGN,
+    ],
     happiness: 100,
     experience: 100,
-    favorite: true,
   },
   {
     title: SKILL_TITLE.LESS,
     level: 90,
     color: '#1D365D',
-    category: [SKILL_CATEGORY.FRONT_END, SKILL_CATEGORY.CODE_LANGUAGE],
+    category: [
+      SKILL_CATEGORY.FRONT_END,
+      SKILL_CATEGORY.CODE_LANGUAGE,
+      SKILL_CATEGORY.DESIGN,
+    ],
     happiness: 80,
     experience: 20,
   },
@@ -51,7 +66,11 @@ export const DATA_SKILLS: SkillDataInterface[] = [
     title: SKILL_TITLE.JAVASCRIPT,
     level: 100,
     color: '#F7DF1E',
-    category: [SKILL_CATEGORY.FRONT_END, SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.CODE_LANGUAGE],
+    category: [
+      SKILL_CATEGORY.FRONT_END,
+      SKILL_CATEGORY.BACK_END,
+      SKILL_CATEGORY.CODE_LANGUAGE,
+    ],
     happiness: 100,
     experience: 100,
     favorite: true,
@@ -149,9 +168,12 @@ export const DATA_SKILLS: SkillDataInterface[] = [
     category: [SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.CODE_LANGUAGE],
   },
   {
+    level: 20,
     title: SKILL_TITLE.PYTHON,
     color: '#3776AB',
     category: [SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.CODE_LANGUAGE],
+    happiness: 50,
+    experience: 10,
   },
   {
     title: SKILL_TITLE.TWIG,
@@ -494,7 +516,10 @@ export const DATA_SKILLS: SkillDataInterface[] = [
     title: SKILL_TITLE.PHOTOSHOP,
     level: 100,
     color: '#31A8FF',
-    category: [SKILL_CATEGORY.APPLICATION],
+    category: [
+      SKILL_CATEGORY.APPLICATION,
+      SKILL_CATEGORY.DESIGN
+    ],
     happiness: 100,
     experience: 100,
   },
@@ -502,25 +527,37 @@ export const DATA_SKILLS: SkillDataInterface[] = [
     title: SKILL_TITLE.ILLUSTRATOR,
     level: 90,
     color: '#FF9A00',
-    category: [SKILL_CATEGORY.APPLICATION],
+    category: [
+      SKILL_CATEGORY.APPLICATION,
+      SKILL_CATEGORY.DESIGN
+    ],
     happiness: 100,
     experience: 90,
   },
   {
     title: SKILL_TITLE.FIGMA,
     color: '#F24E1E',
-    category: [SKILL_CATEGORY.APPLICATION],
+    category: [
+      SKILL_CATEGORY.APPLICATION,
+      SKILL_CATEGORY.DESIGN
+    ],
   },
   {
     title: SKILL_TITLE.XD,
     color: '#FF61F6',
-    category: [SKILL_CATEGORY.APPLICATION],
+    category: [
+      SKILL_CATEGORY.APPLICATION,
+      SKILL_CATEGORY.DESIGN
+    ],
   },
   {
     title: SKILL_TITLE.PREMIERE_PRO,
     level: 100,
     color: '#100d6a',
-    category: [SKILL_CATEGORY.APPLICATION],
+    category: [
+      SKILL_CATEGORY.APPLICATION,
+      SKILL_CATEGORY.DESIGN
+    ],
     happiness: 90,
     experience: 80,
   },
@@ -528,7 +565,10 @@ export const DATA_SKILLS: SkillDataInterface[] = [
     title: SKILL_TITLE.AFTER_EFFECTS,
     level: 90,
     color: '#100d6a',
-    category: [SKILL_CATEGORY.APPLICATION],
+    category: [
+      SKILL_CATEGORY.APPLICATION,
+      SKILL_CATEGORY.DESIGN
+    ],
     happiness: 90,
     experience: 80,
   },
@@ -536,7 +576,10 @@ export const DATA_SKILLS: SkillDataInterface[] = [
     title: SKILL_TITLE.INDESIGN,
     level: 90,
     color: '#820821',
-    category: [SKILL_CATEGORY.APPLICATION],
+    category: [
+      SKILL_CATEGORY.APPLICATION,
+      SKILL_CATEGORY.DESIGN
+    ],
     happiness: 90,
     experience: 80,
   },
@@ -544,15 +587,32 @@ export const DATA_SKILLS: SkillDataInterface[] = [
     title: SKILL_TITLE.CUBASE,
     level: 100,
     color: '#970d0d',
-    category: [SKILL_CATEGORY.APPLICATION],
+    category: [
+      SKILL_CATEGORY.APPLICATION,
+      SKILL_CATEGORY.MUSIC
+    ],
     happiness: 100,
     experience: 100,
+  },
+  {
+    title: SKILL_TITLE.REAPER,
+    level: 80,
+    color: '#19da8a',
+    category: [
+      SKILL_CATEGORY.APPLICATION,
+      SKILL_CATEGORY.MUSIC
+    ],
+    happiness: 70,
+    experience: 60,
   },
   {
     title: SKILL_TITLE.PRO_TOOLS,
     level: 70,
     color: '#6018bc',
-    category: [SKILL_CATEGORY.APPLICATION],
+    category: [
+      SKILL_CATEGORY.APPLICATION,
+      SKILL_CATEGORY.MUSIC
+    ],
     happiness: 60,
     experience: 40,
   },
@@ -560,7 +620,10 @@ export const DATA_SKILLS: SkillDataInterface[] = [
     title: SKILL_TITLE.ABLETON_LIVE,
     level: 65,
     color: '#000000',
-    category: [SKILL_CATEGORY.APPLICATION],
+    category: [
+      SKILL_CATEGORY.APPLICATION,
+      SKILL_CATEGORY.MUSIC
+    ],
     happiness: 70,
     experience: 80,
   },
@@ -738,5 +801,77 @@ export const DATA_SKILLS: SkillDataInterface[] = [
     category: [SKILL_CATEGORY.OTHERS],
     happiness: 100,
     experience: 75,
+  },
+  {
+    title: SKILL_TITLE.MASTERING,
+    level: 85,
+    color: '#e84910',
+    category: [SKILL_CATEGORY.MUSIC],
+    happiness: 100,
+    experience: 70,
+  },
+  {
+    title: SKILL_TITLE.MIXING,
+    level: 90,
+    color: '#e89c10',
+    category: [SKILL_CATEGORY.MUSIC],
+    happiness: 100,
+    experience: 80,
+  },
+  {
+    title: SKILL_TITLE.RECORDING,
+    level: 95,
+    color: '#e8e310',
+    category: [SKILL_CATEGORY.MUSIC],
+    happiness: 100,
+    experience: 80,
+  },
+  {
+    title: SKILL_TITLE.MUSIC_THEORY,
+    level: 100,
+    color: '#10e8e3',
+    category: [SKILL_CATEGORY.MUSIC],
+    happiness: 100,
+    experience: 100,
+  },
+  {
+    title: SKILL_TITLE.MAO,
+    level: 80,
+    color: '#e81010',
+    category: [SKILL_CATEGORY.MUSIC],
+    happiness: 100,
+    experience: 70,
+  },
+  {
+    title: SKILL_TITLE.COMPOSITION,
+    level: 85,
+    color: '#10e8e3',
+    category: [SKILL_CATEGORY.MUSIC],
+    happiness: 90,
+    experience: 70,
+  },
+  {
+    title: SKILL_TITLE.VIOLIN,
+    level: 95,
+    color: '#e8e310',
+    category: [SKILL_CATEGORY.MUSIC],
+    happiness: 100,
+    experience: 100,
+  },
+  {
+    title: SKILL_TITLE.PIANO,
+    level: 40,
+    color: '#e8e310',
+    category: [SKILL_CATEGORY.MUSIC],
+    happiness: 80,
+    experience: 60,
+  },
+  {
+    title: SKILL_TITLE.GUITAR,
+    level: 30,
+    color: '#e8e310',
+    category: [SKILL_CATEGORY.MUSIC],
+    happiness: 70,
+    experience: 20,
   }
 ];

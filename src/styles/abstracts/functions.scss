@@ -1,4 +1,5 @@
 @use '@angular/material' as mat;
+@use 'sass:color';
 @use '../palettes/primary';
 @use '../palettes/contrast';
 
@@ -14,4 +15,11 @@
   }
 
   @return mat.get-color-from-palette($selected-palette, $hue, $opacity);
+}
+
+/// Ligthen color
+/// @param {String} $color - Color
+/// @param {String} $amount [10%] - Amount
+@function lighten($color, $amount: 10%) {
+  @return color.adjust($color, $lightness: $amount);
 }

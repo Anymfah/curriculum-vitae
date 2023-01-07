@@ -18,6 +18,7 @@ import {DrawCircleModule} from "../shared/draw-circle/draw-circle.module";
 import { CircleMenuItemComponent } from './components/circle-menu-item/circle-menu-item.component';
 import {PageWrapperModule} from "../shared/page-wrapper/page-wrapper.module";
 import { BlockComponent } from './components/block/block.component';
+import { ListComponent } from './components/list/list.component';
 
 
 
@@ -32,6 +33,7 @@ import { BlockComponent } from './components/block/block.component';
         ProfileComponent,
         CircleMenuItemComponent,
         BlockComponent,
+        ListComponent,
     ],
   imports: [
     CommonModule,
