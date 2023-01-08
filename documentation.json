@@ -35,12 +35,12 @@
         },
         {
             "name": "EducationDataInterface",
-            "id": "interface-EducationDataInterface-a53395e5cae6315a68e70718cf0588e31225f977dfcd0e958e4483d6c6020287abb5f1398c43a4d4e71a04c8e67bd976a346dd9ca005240fb4757df2c5785c54",
+            "id": "interface-EducationDataInterface-75b9fd3c6aa843a0dc0da9a6bcae1178bd7d3cb63198f17449e7740441b317e649c5c27c1e04c9a2ee1374ba923b356ebaae3a7ece7684522f33bf242a7f3732",
             "file": "src/app/interfaces/data.interface.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "interface",
-            "sourceCode": "import {SKILL_CATEGORY, SKILL_TITLE, WORK_CATEGORY} from \"../enums/data.enum\";\r\n\r\nexport interface SkillDataInterface {\r\n  title: SKILL_TITLE;\r\n  level?: number;\r\n  color: string;\r\n  category: SKILL_CATEGORY[];\r\n  happiness?: number;\r\n  experience?: number;\r\n  favorite?: boolean;\r\n}\r\n\r\nexport interface EducationDataInterface {\r\n  title: string;\r\n  subtitle: string;\r\n  startDate: string;\r\n  endDate: string;\r\n  location: string;\r\n  school: string;\r\n  happiness: number;\r\n}\r\n\r\nexport interface WorkDataInterface {\r\n  title: string;\r\n  subtitle: string;\r\n  startDate: string;\r\n  endDate: string;\r\n  location: string;\r\n  company: string;\r\n  happiness: number;\r\n  skills: SKILL_TITLE[];\r\n  projects?: ProjectDataInterface[];\r\n}\r\n\r\nexport interface ProjectDataInterface {\r\n  title: string;\r\n  subtitle: string;\r\n  startDate: string;\r\n  endDate: string;\r\n  happiness: number;\r\n  skills: SKILL_TITLE[];\r\n  category: WORK_CATEGORY[];\r\n  favorite?: boolean;\r\n}\r\n\r\nexport interface ProjectDataAlias {\r\n  [key: string]: ProjectDataInterface;\r\n}\r\n",
+            "sourceCode": "import {SKILL_CATEGORY, SKILL_TITLE, WORK_CATEGORY} from \"../enums/data.enum\";\r\n\r\nexport interface GenericData {\r\n  title: SKILL_TITLE | string;\r\n  subtitle?: string;\r\n  happiness?: number;\r\n}\r\n\r\nexport interface SkillDataInterface extends GenericData {\r\n  level?: number;\r\n  color: string;\r\n  category: SKILL_CATEGORY[];\r\n  experience?: number;\r\n  favorite?: boolean;\r\n}\r\n\r\nexport interface EducationDataInterface extends GenericData {\r\n  startDate: string;\r\n  endDate: string;\r\n  location: string;\r\n  school: string;\r\n}\r\n\r\nexport interface WorkDataInterface extends GenericData {\r\n  startDate: string;\r\n  endDate: string;\r\n  location: string;\r\n  company: string;\r\n  skills: SKILL_TITLE[];\r\n  projects?: ProjectDataInterface[];\r\n}\r\n\r\nexport interface ProjectDataInterface extends GenericData {\r\n  startDate: string;\r\n  endDate: string;\r\n  skills: SKILL_TITLE[];\r\n  category: WORK_CATEGORY[];\r\n  favorite?: boolean;\r\n}\r\n\r\nexport interface ProjectDataAlias {\r\n  [key: string]: ProjectDataInterface;\r\n}\r\n",
             "properties": [
                 {
                     "name": "endDate",
@@ -49,16 +49,7 @@
                     "type": "string",
                     "optional": false,
                     "description": "",
-                    "line": 17
-                },
-                {
-                    "name": "happiness",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "number",
-                    "optional": false,
-                    "description": "",
-                    "line": 20
+                    "line": 19
                 },
                 {
                     "name": "location",
@@ -67,7 +58,7 @@
                     "type": "string",
                     "optional": false,
                     "description": "",
-                    "line": 18
+                    "line": 20
                 },
                 {
                     "name": "school",
@@ -76,7 +67,7 @@
                     "type": "string",
                     "optional": false,
                     "description": "",
-                    "line": 19
+                    "line": 21
                 },
                 {
                     "name": "startDate",
@@ -85,25 +76,49 @@
                     "type": "string",
                     "optional": false,
                     "description": "",
-                    "line": 16
+                    "line": 18
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 165,
+            "methods": [],
+            "extends": "GenericData"
+        },
+        {
+            "name": "GenericData",
+            "id": "interface-GenericData-75b9fd3c6aa843a0dc0da9a6bcae1178bd7d3cb63198f17449e7740441b317e649c5c27c1e04c9a2ee1374ba923b356ebaae3a7ece7684522f33bf242a7f3732",
+            "file": "src/app/interfaces/data.interface.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "import {SKILL_CATEGORY, SKILL_TITLE, WORK_CATEGORY} from \"../enums/data.enum\";\r\n\r\nexport interface GenericData {\r\n  title: SKILL_TITLE | string;\r\n  subtitle?: string;\r\n  happiness?: number;\r\n}\r\n\r\nexport interface SkillDataInterface extends GenericData {\r\n  level?: number;\r\n  color: string;\r\n  category: SKILL_CATEGORY[];\r\n  experience?: number;\r\n  favorite?: boolean;\r\n}\r\n\r\nexport interface EducationDataInterface extends GenericData {\r\n  startDate: string;\r\n  endDate: string;\r\n  location: string;\r\n  school: string;\r\n}\r\n\r\nexport interface WorkDataInterface extends GenericData {\r\n  startDate: string;\r\n  endDate: string;\r\n  location: string;\r\n  company: string;\r\n  skills: SKILL_TITLE[];\r\n  projects?: ProjectDataInterface[];\r\n}\r\n\r\nexport interface ProjectDataInterface extends GenericData {\r\n  startDate: string;\r\n  endDate: string;\r\n  skills: SKILL_TITLE[];\r\n  category: WORK_CATEGORY[];\r\n  favorite?: boolean;\r\n}\r\n\r\nexport interface ProjectDataAlias {\r\n  [key: string]: ProjectDataInterface;\r\n}\r\n",
+            "properties": [
+                {
+                    "name": "happiness",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": true,
+                    "description": "",
+                    "line": 6
                 },
                 {
                     "name": "subtitle",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "string",
-                    "optional": false,
+                    "optional": true,
                     "description": "",
-                    "line": 15
+                    "line": 5
                 },
                 {
                     "name": "title",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "string",
+                    "type": "SKILL_TITLE | string",
                     "optional": false,
                     "description": "",
-                    "line": 14
+                    "line": 4
                 }
             ],
             "indexSignatures": [],
@@ -444,16 +459,16 @@
         },
         {
             "name": "ProjectDataAlias",
-            "id": "interface-ProjectDataAlias-a53395e5cae6315a68e70718cf0588e31225f977dfcd0e958e4483d6c6020287abb5f1398c43a4d4e71a04c8e67bd976a346dd9ca005240fb4757df2c5785c54",
+            "id": "interface-ProjectDataAlias-75b9fd3c6aa843a0dc0da9a6bcae1178bd7d3cb63198f17449e7740441b317e649c5c27c1e04c9a2ee1374ba923b356ebaae3a7ece7684522f33bf242a7f3732",
             "file": "src/app/interfaces/data.interface.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "interface",
-            "sourceCode": "import {SKILL_CATEGORY, SKILL_TITLE, WORK_CATEGORY} from \"../enums/data.enum\";\r\n\r\nexport interface SkillDataInterface {\r\n  title: SKILL_TITLE;\r\n  level?: number;\r\n  color: string;\r\n  category: SKILL_CATEGORY[];\r\n  happiness?: number;\r\n  experience?: number;\r\n  favorite?: boolean;\r\n}\r\n\r\nexport interface EducationDataInterface {\r\n  title: string;\r\n  subtitle: string;\r\n  startDate: string;\r\n  endDate: string;\r\n  location: string;\r\n  school: string;\r\n  happiness: number;\r\n}\r\n\r\nexport interface WorkDataInterface {\r\n  title: string;\r\n  subtitle: string;\r\n  startDate: string;\r\n  endDate: string;\r\n  location: string;\r\n  company: string;\r\n  happiness: number;\r\n  skills: SKILL_TITLE[];\r\n  projects?: ProjectDataInterface[];\r\n}\r\n\r\nexport interface ProjectDataInterface {\r\n  title: string;\r\n  subtitle: string;\r\n  startDate: string;\r\n  endDate: string;\r\n  happiness: number;\r\n  skills: SKILL_TITLE[];\r\n  category: WORK_CATEGORY[];\r\n  favorite?: boolean;\r\n}\r\n\r\nexport interface ProjectDataAlias {\r\n  [key: string]: ProjectDataInterface;\r\n}\r\n",
+            "sourceCode": "import {SKILL_CATEGORY, SKILL_TITLE, WORK_CATEGORY} from \"../enums/data.enum\";\r\n\r\nexport interface GenericData {\r\n  title: SKILL_TITLE | string;\r\n  subtitle?: string;\r\n  happiness?: number;\r\n}\r\n\r\nexport interface SkillDataInterface extends GenericData {\r\n  level?: number;\r\n  color: string;\r\n  category: SKILL_CATEGORY[];\r\n  experience?: number;\r\n  favorite?: boolean;\r\n}\r\n\r\nexport interface EducationDataInterface extends GenericData {\r\n  startDate: string;\r\n  endDate: string;\r\n  location: string;\r\n  school: string;\r\n}\r\n\r\nexport interface WorkDataInterface extends GenericData {\r\n  startDate: string;\r\n  endDate: string;\r\n  location: string;\r\n  company: string;\r\n  skills: SKILL_TITLE[];\r\n  projects?: ProjectDataInterface[];\r\n}\r\n\r\nexport interface ProjectDataInterface extends GenericData {\r\n  startDate: string;\r\n  endDate: string;\r\n  skills: SKILL_TITLE[];\r\n  category: WORK_CATEGORY[];\r\n  favorite?: boolean;\r\n}\r\n\r\nexport interface ProjectDataAlias {\r\n  [key: string]: ProjectDataInterface;\r\n}\r\n",
             "properties": [],
             "indexSignatures": [
                 {
-                    "id": "index-declaration-a53395e5cae6315a68e70718cf0588e31225f977dfcd0e958e4483d6c6020287abb5f1398c43a4d4e71a04c8e67bd976a346dd9ca005240fb4757df2c5785c54",
+                    "id": "index-declaration-75b9fd3c6aa843a0dc0da9a6bcae1178bd7d3cb63198f17449e7740441b317e649c5c27c1e04c9a2ee1374ba923b356ebaae3a7ece7684522f33bf242a7f3732",
                     "args": [
                         {
                             "name": "key",
@@ -463,7 +478,7 @@
                         }
                     ],
                     "returnType": "ProjectDataInterface",
-                    "line": 46,
+                    "line": 41,
                     "deprecated": false,
                     "deprecationMessage": ""
                 }
@@ -473,12 +488,12 @@
         },
         {
             "name": "ProjectDataInterface",
-            "id": "interface-ProjectDataInterface-a53395e5cae6315a68e70718cf0588e31225f977dfcd0e958e4483d6c6020287abb5f1398c43a4d4e71a04c8e67bd976a346dd9ca005240fb4757df2c5785c54",
+            "id": "interface-ProjectDataInterface-75b9fd3c6aa843a0dc0da9a6bcae1178bd7d3cb63198f17449e7740441b317e649c5c27c1e04c9a2ee1374ba923b356ebaae3a7ece7684522f33bf242a7f3732",
             "file": "src/app/interfaces/data.interface.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "interface",
-            "sourceCode": "import {SKILL_CATEGORY, SKILL_TITLE, WORK_CATEGORY} from \"../enums/data.enum\";\r\n\r\nexport interface SkillDataInterface {\r\n  title: SKILL_TITLE;\r\n  level?: number;\r\n  color: string;\r\n  category: SKILL_CATEGORY[];\r\n  happiness?: number;\r\n  experience?: number;\r\n  favorite?: boolean;\r\n}\r\n\r\nexport interface EducationDataInterface {\r\n  title: string;\r\n  subtitle: string;\r\n  startDate: string;\r\n  endDate: string;\r\n  location: string;\r\n  school: string;\r\n  happiness: number;\r\n}\r\n\r\nexport interface WorkDataInterface {\r\n  title: string;\r\n  subtitle: string;\r\n  startDate: string;\r\n  endDate: string;\r\n  location: string;\r\n  company: string;\r\n  happiness: number;\r\n  skills: SKILL_TITLE[];\r\n  projects?: ProjectDataInterface[];\r\n}\r\n\r\nexport interface ProjectDataInterface {\r\n  title: string;\r\n  subtitle: string;\r\n  startDate: string;\r\n  endDate: string;\r\n  happiness: number;\r\n  skills: SKILL_TITLE[];\r\n  category: WORK_CATEGORY[];\r\n  favorite?: boolean;\r\n}\r\n\r\nexport interface ProjectDataAlias {\r\n  [key: string]: ProjectDataInterface;\r\n}\r\n",
+            "sourceCode": "import {SKILL_CATEGORY, SKILL_TITLE, WORK_CATEGORY} from \"../enums/data.enum\";\r\n\r\nexport interface GenericData {\r\n  title: SKILL_TITLE | string;\r\n  subtitle?: string;\r\n  happiness?: number;\r\n}\r\n\r\nexport interface SkillDataInterface extends GenericData {\r\n  level?: number;\r\n  color: string;\r\n  category: SKILL_CATEGORY[];\r\n  experience?: number;\r\n  favorite?: boolean;\r\n}\r\n\r\nexport interface EducationDataInterface extends GenericData {\r\n  startDate: string;\r\n  endDate: string;\r\n  location: string;\r\n  school: string;\r\n}\r\n\r\nexport interface WorkDataInterface extends GenericData {\r\n  startDate: string;\r\n  endDate: string;\r\n  location: string;\r\n  company: string;\r\n  skills: SKILL_TITLE[];\r\n  projects?: ProjectDataInterface[];\r\n}\r\n\r\nexport interface ProjectDataInterface extends GenericData {\r\n  startDate: string;\r\n  endDate: string;\r\n  skills: SKILL_TITLE[];\r\n  category: WORK_CATEGORY[];\r\n  favorite?: boolean;\r\n}\r\n\r\nexport interface ProjectDataAlias {\r\n  [key: string]: ProjectDataInterface;\r\n}\r\n",
             "properties": [
                 {
                     "name": "category",
@@ -487,7 +502,7 @@
                     "type": "WORK_CATEGORY[]",
                     "optional": false,
                     "description": "",
-                    "line": 42
+                    "line": 37
                 },
                 {
                     "name": "endDate",
@@ -496,7 +511,7 @@
                     "type": "string",
                     "optional": false,
                     "description": "",
-                    "line": 39
+                    "line": 35
                 },
                 {
                     "name": "favorite",
@@ -505,16 +520,7 @@
                     "type": "boolean",
                     "optional": true,
                     "description": "",
-                    "line": 43
-                },
-                {
-                    "name": "happiness",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "number",
-                    "optional": false,
-                    "description": "",
-                    "line": 40
+                    "line": 38
                 },
                 {
                     "name": "skills",
@@ -523,7 +529,7 @@
                     "type": "SKILL_TITLE[]",
                     "optional": false,
                     "description": "",
-                    "line": 41
+                    "line": 36
                 },
                 {
                     "name": "startDate",
@@ -532,39 +538,22 @@
                     "type": "string",
                     "optional": false,
                     "description": "",
-                    "line": 38
-                },
-                {
-                    "name": "subtitle",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "string",
-                    "optional": false,
-                    "description": "",
-                    "line": 37
-                },
-                {
-                    "name": "title",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "string",
-                    "optional": false,
-                    "description": "",
-                    "line": 36
+                    "line": 34
                 }
             ],
             "indexSignatures": [],
             "kind": 165,
-            "methods": []
+            "methods": [],
+            "extends": "GenericData"
         },
         {
             "name": "SkillDataInterface",
-            "id": "interface-SkillDataInterface-a53395e5cae6315a68e70718cf0588e31225f977dfcd0e958e4483d6c6020287abb5f1398c43a4d4e71a04c8e67bd976a346dd9ca005240fb4757df2c5785c54",
+            "id": "interface-SkillDataInterface-75b9fd3c6aa843a0dc0da9a6bcae1178bd7d3cb63198f17449e7740441b317e649c5c27c1e04c9a2ee1374ba923b356ebaae3a7ece7684522f33bf242a7f3732",
             "file": "src/app/interfaces/data.interface.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "interface",
-            "sourceCode": "import {SKILL_CATEGORY, SKILL_TITLE, WORK_CATEGORY} from \"../enums/data.enum\";\r\n\r\nexport interface SkillDataInterface {\r\n  title: SKILL_TITLE;\r\n  level?: number;\r\n  color: string;\r\n  category: SKILL_CATEGORY[];\r\n  happiness?: number;\r\n  experience?: number;\r\n  favorite?: boolean;\r\n}\r\n\r\nexport interface EducationDataInterface {\r\n  title: string;\r\n  subtitle: string;\r\n  startDate: string;\r\n  endDate: string;\r\n  location: string;\r\n  school: string;\r\n  happiness: number;\r\n}\r\n\r\nexport interface WorkDataInterface {\r\n  title: string;\r\n  subtitle: string;\r\n  startDate: string;\r\n  endDate: string;\r\n  location: string;\r\n  company: string;\r\n  happiness: number;\r\n  skills: SKILL_TITLE[];\r\n  projects?: ProjectDataInterface[];\r\n}\r\n\r\nexport interface ProjectDataInterface {\r\n  title: string;\r\n  subtitle: string;\r\n  startDate: string;\r\n  endDate: string;\r\n  happiness: number;\r\n  skills: SKILL_TITLE[];\r\n  category: WORK_CATEGORY[];\r\n  favorite?: boolean;\r\n}\r\n\r\nexport interface ProjectDataAlias {\r\n  [key: string]: ProjectDataInterface;\r\n}\r\n",
+            "sourceCode": "import {SKILL_CATEGORY, SKILL_TITLE, WORK_CATEGORY} from \"../enums/data.enum\";\r\n\r\nexport interface GenericData {\r\n  title: SKILL_TITLE | string;\r\n  subtitle?: string;\r\n  happiness?: number;\r\n}\r\n\r\nexport interface SkillDataInterface extends GenericData {\r\n  level?: number;\r\n  color: string;\r\n  category: SKILL_CATEGORY[];\r\n  experience?: number;\r\n  favorite?: boolean;\r\n}\r\n\r\nexport interface EducationDataInterface extends GenericData {\r\n  startDate: string;\r\n  endDate: string;\r\n  location: string;\r\n  school: string;\r\n}\r\n\r\nexport interface WorkDataInterface extends GenericData {\r\n  startDate: string;\r\n  endDate: string;\r\n  location: string;\r\n  company: string;\r\n  skills: SKILL_TITLE[];\r\n  projects?: ProjectDataInterface[];\r\n}\r\n\r\nexport interface ProjectDataInterface extends GenericData {\r\n  startDate: string;\r\n  endDate: string;\r\n  skills: SKILL_TITLE[];\r\n  category: WORK_CATEGORY[];\r\n  favorite?: boolean;\r\n}\r\n\r\nexport interface ProjectDataAlias {\r\n  [key: string]: ProjectDataInterface;\r\n}\r\n",
             "properties": [
                 {
                     "name": "category",
@@ -573,7 +562,7 @@
                     "type": "SKILL_CATEGORY[]",
                     "optional": false,
                     "description": "",
-                    "line": 7
+                    "line": 12
                 },
                 {
                     "name": "color",
@@ -582,7 +571,7 @@
                     "type": "string",
                     "optional": false,
                     "description": "",
-                    "line": 6
+                    "line": 11
                 },
                 {
                     "name": "experience",
@@ -591,7 +580,7 @@
                     "type": "number",
                     "optional": true,
                     "description": "",
-                    "line": 9
+                    "line": 13
                 },
                 {
                     "name": "favorite",
@@ -600,16 +589,7 @@
                     "type": "boolean",
                     "optional": true,
                     "description": "",
-                    "line": 10
-                },
-                {
-                    "name": "happiness",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "number",
-                    "optional": true,
-                    "description": "",
-                    "line": 8
+                    "line": 14
                 },
                 {
                     "name": "level",
@@ -618,30 +598,22 @@
                     "type": "number",
                     "optional": true,
                     "description": "",
-                    "line": 5
-                },
-                {
-                    "name": "title",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "SKILL_TITLE",
-                    "optional": false,
-                    "description": "",
-                    "line": 4
+                    "line": 10
                 }
             ],
             "indexSignatures": [],
             "kind": 165,
-            "methods": []
+            "methods": [],
+            "extends": "GenericData"
         },
         {
             "name": "WorkDataInterface",
-            "id": "interface-WorkDataInterface-a53395e5cae6315a68e70718cf0588e31225f977dfcd0e958e4483d6c6020287abb5f1398c43a4d4e71a04c8e67bd976a346dd9ca005240fb4757df2c5785c54",
+            "id": "interface-WorkDataInterface-75b9fd3c6aa843a0dc0da9a6bcae1178bd7d3cb63198f17449e7740441b317e649c5c27c1e04c9a2ee1374ba923b356ebaae3a7ece7684522f33bf242a7f3732",
             "file": "src/app/interfaces/data.interface.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "interface",
-            "sourceCode": "import {SKILL_CATEGORY, SKILL_TITLE, WORK_CATEGORY} from \"../enums/data.enum\";\r\n\r\nexport interface SkillDataInterface {\r\n  title: SKILL_TITLE;\r\n  level?: number;\r\n  color: string;\r\n  category: SKILL_CATEGORY[];\r\n  happiness?: number;\r\n  experience?: number;\r\n  favorite?: boolean;\r\n}\r\n\r\nexport interface EducationDataInterface {\r\n  title: string;\r\n  subtitle: string;\r\n  startDate: string;\r\n  endDate: string;\r\n  location: string;\r\n  school: string;\r\n  happiness: number;\r\n}\r\n\r\nexport interface WorkDataInterface {\r\n  title: string;\r\n  subtitle: string;\r\n  startDate: string;\r\n  endDate: string;\r\n  location: string;\r\n  company: string;\r\n  happiness: number;\r\n  skills: SKILL_TITLE[];\r\n  projects?: ProjectDataInterface[];\r\n}\r\n\r\nexport interface ProjectDataInterface {\r\n  title: string;\r\n  subtitle: string;\r\n  startDate: string;\r\n  endDate: string;\r\n  happiness: number;\r\n  skills: SKILL_TITLE[];\r\n  category: WORK_CATEGORY[];\r\n  favorite?: boolean;\r\n}\r\n\r\nexport interface ProjectDataAlias {\r\n  [key: string]: ProjectDataInterface;\r\n}\r\n",
+            "sourceCode": "import {SKILL_CATEGORY, SKILL_TITLE, WORK_CATEGORY} from \"../enums/data.enum\";\r\n\r\nexport interface GenericData {\r\n  title: SKILL_TITLE | string;\r\n  subtitle?: string;\r\n  happiness?: number;\r\n}\r\n\r\nexport interface SkillDataInterface extends GenericData {\r\n  level?: number;\r\n  color: string;\r\n  category: SKILL_CATEGORY[];\r\n  experience?: number;\r\n  favorite?: boolean;\r\n}\r\n\r\nexport interface EducationDataInterface extends GenericData {\r\n  startDate: string;\r\n  endDate: string;\r\n  location: string;\r\n  school: string;\r\n}\r\n\r\nexport interface WorkDataInterface extends GenericData {\r\n  startDate: string;\r\n  endDate: string;\r\n  location: string;\r\n  company: string;\r\n  skills: SKILL_TITLE[];\r\n  projects?: ProjectDataInterface[];\r\n}\r\n\r\nexport interface ProjectDataInterface extends GenericData {\r\n  startDate: string;\r\n  endDate: string;\r\n  skills: SKILL_TITLE[];\r\n  category: WORK_CATEGORY[];\r\n  favorite?: boolean;\r\n}\r\n\r\nexport interface ProjectDataAlias {\r\n  [key: string]: ProjectDataInterface;\r\n}\r\n",
             "properties": [
                 {
                     "name": "company",
@@ -650,7 +622,7 @@
                     "type": "string",
                     "optional": false,
                     "description": "",
-                    "line": 29
+                    "line": 28
                 },
                 {
                     "name": "endDate",
@@ -659,16 +631,7 @@
                     "type": "string",
                     "optional": false,
                     "description": "",
-                    "line": 27
-                },
-                {
-                    "name": "happiness",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "number",
-                    "optional": false,
-                    "description": "",
-                    "line": 30
+                    "line": 26
                 },
                 {
                     "name": "location",
@@ -677,7 +640,7 @@
                     "type": "string",
                     "optional": false,
                     "description": "",
-                    "line": 28
+                    "line": 27
                 },
                 {
                     "name": "projects",
@@ -686,7 +649,7 @@
                     "type": "ProjectDataInterface[]",
                     "optional": true,
                     "description": "",
-                    "line": 32
+                    "line": 30
                 },
                 {
                     "name": "skills",
@@ -695,7 +658,7 @@
                     "type": "SKILL_TITLE[]",
                     "optional": false,
                     "description": "",
-                    "line": 31
+                    "line": 29
                 },
                 {
                     "name": "startDate",
@@ -704,36 +667,393 @@
                     "type": "string",
                     "optional": false,
                     "description": "",
-                    "line": 26
-                },
-                {
-                    "name": "subtitle",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "string",
-                    "optional": false,
-                    "description": "",
                     "line": 25
-                },
-                {
-                    "name": "title",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "string",
-                    "optional": false,
-                    "description": "",
-                    "line": 24
                 }
             ],
             "indexSignatures": [],
             "kind": 165,
-            "methods": []
+            "methods": [],
+            "extends": "GenericData"
         }
     ],
     "injectables": [
         {
+            "name": "EntityListService",
+            "id": "injectable-EntityListService-a568b102db77afa54ba8d45f050e3eb49c9df44539bbc723ea02d99c84309f01738646d3ab904852615d50d0ec9671e0be18d7ba7a703567b15d9b3618d84f88",
+            "file": "src/app/services/entity-list.service.ts",
+            "properties": [
+                {
+                    "name": "_education",
+                    "defaultValue": "new BehaviorSubject<EducationEntity[]>([])",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "<p>Education entity collection as BehaviorSubject.</p>\n",
+                    "line": 56,
+                    "rawdescription": "\n\nEducation entity collection as BehaviorSubject.\n",
+                    "modifierKind": [
+                        121
+                    ]
+                },
+                {
+                    "name": "_entityCollection",
+                    "defaultValue": "new BehaviorSubject<EntityType[]>([])",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "BehaviorSubject<EntityType[]>",
+                    "optional": false,
+                    "description": "<p>Entity collection as a behavior subject.</p>\n",
+                    "line": 31,
+                    "rawdescription": "\n\nEntity collection as a behavior subject.\n",
+                    "modifierKind": [
+                        121
+                    ]
+                },
+                {
+                    "name": "_id",
+                    "defaultValue": "0",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": false,
+                    "description": "<p>ID of the last created entity.</p>\n",
+                    "line": 26,
+                    "rawdescription": "\n\nID of the last created entity.\n",
+                    "modifierKind": [
+                        121
+                    ]
+                },
+                {
+                    "name": "_projects",
+                    "defaultValue": "new BehaviorSubject<ProjectEntity[]>([])",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "<p>Projects entity collection as BehaviorSubject.</p>\n",
+                    "line": 51,
+                    "rawdescription": "\n\nProjects entity collection as BehaviorSubject.\n",
+                    "modifierKind": [
+                        121
+                    ]
+                },
+                {
+                    "name": "_skills",
+                    "defaultValue": "new BehaviorSubject<SkillEntity[]>([])",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "<p>Skills entity collection as BehaviorSubject.</p>\n",
+                    "line": 41,
+                    "rawdescription": "\n\nSkills entity collection as BehaviorSubject.\n",
+                    "modifierKind": [
+                        121
+                    ]
+                },
+                {
+                    "name": "_work",
+                    "defaultValue": "new BehaviorSubject<WorkEntity[]>([])",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "<p>Work entity collection as BehaviorSubject.</p>\n",
+                    "line": 66,
+                    "rawdescription": "\n\nWork entity collection as BehaviorSubject.\n",
+                    "modifierKind": [
+                        121
+                    ]
+                },
+                {
+                    "name": "education$",
+                    "defaultValue": "this._education.asObservable()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "<p>Education entity collection as observable.</p>\n",
+                    "line": 61,
+                    "rawdescription": "\n\nEducation entity collection as observable.\n",
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "entityCollection$",
+                    "defaultValue": "this._entityCollection.asObservable()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "<p>Entity collection as an observable.</p>\n",
+                    "line": 36,
+                    "rawdescription": "\n\nEntity collection as an observable.\n",
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "projects$",
+                    "defaultValue": "this._projects.asObservable()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "<p>Get projects as observable.</p>\n",
+                    "line": 76,
+                    "rawdescription": "\n\nGet projects as observable.\n",
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "skills$",
+                    "defaultValue": "this._skills.asObservable()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "<p>Skills entity collection as observable.</p>\n",
+                    "line": 46,
+                    "rawdescription": "\n\nSkills entity collection as observable.\n",
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "work$",
+                    "defaultValue": "this._work.asObservable()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "<p>Work entity collection as observable.</p>\n",
+                    "line": 71,
+                    "rawdescription": "\n\nWork entity collection as observable.\n",
+                    "modifierKind": [
+                        123
+                    ]
+                }
+            ],
+            "methods": [
+                {
+                    "name": "_getEducationCollection",
+                    "args": [
+                        {
+                            "name": "data",
+                            "type": "EducationDataInterface[]",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "EducationEntity[]",
+                    "typeParameters": [],
+                    "line": 117,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nGet the education collection.\n",
+                    "description": "<p>Get the education collection.</p>\n",
+                    "modifierKind": [
+                        121
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": {
+                                "pos": 3053,
+                                "end": 3057,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "data"
+                            },
+                            "type": "EducationDataInterface[]",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "pos": 3047,
+                                "end": 3052,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "param"
+                            },
+                            "comment": "<p>Data to be used to populate the collection.</p>\n"
+                        }
+                    ]
+                },
+                {
+                    "name": "_getProjectCollection",
+                    "args": [
+                        {
+                            "name": "data",
+                            "type": "ProjectDataInterface[]",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "ProjectEntity[]",
+                    "typeParameters": [],
+                    "line": 148,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nGet the project collection.\n",
+                    "description": "<p>Get the project collection.</p>\n",
+                    "modifierKind": [
+                        121
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": {
+                                "pos": 4035,
+                                "end": 4039,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "data"
+                            },
+                            "type": "ProjectDataInterface[]",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "pos": 4029,
+                                "end": 4034,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "param"
+                            },
+                            "comment": "<p>Data to be used to populate the collection.</p>\n"
+                        }
+                    ]
+                },
+                {
+                    "name": "_getSkillCollection",
+                    "args": [
+                        {
+                            "name": "data",
+                            "type": "SkillDataInterface[]",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "SkillEntity[]",
+                    "typeParameters": [],
+                    "line": 104,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nGet the skill collection.\n",
+                    "description": "<p>Get the skill collection.</p>\n",
+                    "modifierKind": [
+                        121
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": {
+                                "pos": 2699,
+                                "end": 2703,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "data"
+                            },
+                            "type": "SkillDataInterface[]",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "pos": 2693,
+                                "end": 2698,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "param"
+                            },
+                            "comment": "<p>Data to be used to populate the collection.</p>\n"
+                        }
+                    ]
+                },
+                {
+                    "name": "_getWorkCollection",
+                    "args": [
+                        {
+                            "name": "data",
+                            "type": "WorkDataInterface[]",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "WorkEntity[]",
+                    "typeParameters": [],
+                    "line": 130,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nGet the work collection.\n",
+                    "description": "<p>Get the work collection.</p>\n",
+                    "modifierKind": [
+                        121
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": {
+                                "pos": 3447,
+                                "end": 3451,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "data"
+                            },
+                            "type": "WorkDataInterface[]",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "pos": 3441,
+                                "end": 3446,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "param"
+                            },
+                            "comment": "<p>Data to be used to populate the collection.</p>\n"
+                        }
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "description": "",
+            "rawdescription": "\n",
+            "sourceCode": "import {Injectable} from '@angular/core';\nimport {BehaviorSubject} from 'rxjs';\nimport {SkillEntity} from '../models/skill-entity.model';\nimport {ProjectEntity} from '../models/project-entity.model';\nimport {EntityType} from '../types/entity.type';\nimport {EducationEntity} from '../models/education-entity.model';\nimport {WorkEntity} from '../models/work-entity.model';\nimport {DATA_SKILLS} from '../constants/data-skills.constant';\nimport {DATA_EDUCATION} from '../constants/data-education.constant';\nimport {\n  EducationDataInterface,\n  ProjectDataInterface,\n  SkillDataInterface,\n  WorkDataInterface\n} from '../interfaces/data.interface';\nimport {DATA_WORK} from '../constants/data-work.constant';\n\n@Injectable({\n  providedIn: 'root'\n})\nexport class EntityListService {\n\n  /**\n   * ID of the last created entity.\n   */\n  private _id = 0;\n\n  /**\n   * Entity collection as a behavior subject.\n   */\n  private _entityCollection: BehaviorSubject<EntityType[]> = new BehaviorSubject<EntityType[]>([]);\n\n  /**\n   * Entity collection as an observable.\n   */\n  public entityCollection$ = this._entityCollection.asObservable();\n\n  /**\n   * Skills entity collection as BehaviorSubject.\n   */\n  private _skills = new BehaviorSubject<SkillEntity[]>([]);\n\n  /**\n   * Skills entity collection as observable.\n   */\n  public skills$ = this._skills.asObservable();\n\n  /**\n   * Projects entity collection as BehaviorSubject.\n   */\n  private _projects = new BehaviorSubject<ProjectEntity[]>([]);\n\n  /**\n   * Education entity collection as BehaviorSubject.\n   */\n  private _education = new BehaviorSubject<EducationEntity[]>([]);\n\n  /**\n   * Education entity collection as observable.\n   */\n  public education$ = this._education.asObservable();\n\n  /**\n   * Work entity collection as BehaviorSubject.\n   */\n  private _work = new BehaviorSubject<WorkEntity[]>([]);\n\n  /**\n   * Work entity collection as observable.\n   */\n  public work$ = this._work.asObservable();\n\n  /**\n   * Get projects as observable.\n   */\n  public projects$ = this._projects.asObservable();\n\n  /**\n   * @constructor\n   */\n  public constructor() {\n    const skillsCollection = this._getSkillCollection(DATA_SKILLS);\n    this._skills.next(skillsCollection);\n\n    const educationCollection = this._getEducationCollection(DATA_EDUCATION);\n    this._education.next(educationCollection);\n\n    const workCollection = this._getWorkCollection(DATA_WORK);\n    this._work.next(workCollection);\n\n    this._entityCollection.next([\n      ...skillsCollection,\n      ...educationCollection,\n      ...workCollection,\n      ...this._projects.value\n    ]);\n    console.log(this._entityCollection.value, this);\n  }\n\n  /**\n   * Get the skill collection.\n   * @param data Data to be used to populate the collection.\n   */\n  private _getSkillCollection(data: SkillDataInterface[]): SkillEntity[] {\n    const skills: SkillEntity[] = [];\n    data.forEach((skill) => {\n      skills.push(new SkillEntity(this._id, skill));\n      this._id++;\n    });\n    return skills;\n  }\n\n  /**\n   * Get the education collection.\n   * @param data Data to be used to populate the collection.\n   */\n  private _getEducationCollection(data: EducationDataInterface[]): EducationEntity[] {\n    const education: EducationEntity[] = [];\n    data.forEach((educationItem) => {\n      education.push(new EducationEntity(this._id, educationItem));\n      this._id++;\n    });\n    return education;\n  }\n\n  /**\n   * Get the work collection.\n   * @param data Data to be used to populate the collection.\n   */\n  private _getWorkCollection(data: WorkDataInterface[]): WorkEntity[] {\n    const work: WorkEntity[] = [];\n    data.forEach((workItem) => {\n      const workEntity = new WorkEntity(this._id, workItem);\n      if (workItem.projects != null) {\n        workEntity.projects = this._getProjectCollection(workItem.projects);\n        this._projects.next([...this._projects.value, ...workEntity.projects]);\n      }\n      work.push(workEntity);\n      this._id++;\n    });\n    return work;\n  }\n\n  /**\n   * Get the project collection.\n   * @param data Data to be used to populate the collection.\n   */\n  private _getProjectCollection(data: ProjectDataInterface[]): ProjectEntity[] {\n    const projects: ProjectEntity[] = [];\n    data.forEach((project) => {\n      const projectEntity = new ProjectEntity(this._id, project);\n\n      // Insert the skill entities into the project entity collection.\n      if (project.skills != null) {\n        const skills: SkillEntity[] = [];\n        project.skills.forEach((skill) => {\n          this._skills.value.forEach((skillEntity) => {\n            if (skillEntity.name === skill) {\n              skills.push(skillEntity);\n            }\n          });\n        });\n        projectEntity.skills = skills;\n      }\n      projects.push(projectEntity);\n      this._id++;\n    });\n    return projects;\n  }\n}\n",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [],
+                "line": 76,
+                "rawdescription": "\n\n",
+                "modifierKind": [
+                    123
+                ],
+                "jsdoctags": []
+            },
+            "type": "injectable"
+        },
+        {
             "name": "PageService",
-            "id": "injectable-PageService-3d146ed78b92c05a5abbb8ec44d0ac34b5ce56829017afac6389d77f6e65e05ec3a1a561450296fa21f91a5f14b3891972aac52c3f3c0d26c6120ca5a35f9b7a",
+            "id": "injectable-PageService-a1b6ce67995da4ff1461ee0c723a49b45fe98130a8ecbc4b17f59919378708de1dc3aff87ef4187f48a7009ad77d6c117f7fa80054992d6b60bcc9ca2c0ece11",
             "file": "src/app/services/page.service.ts",
             "properties": [
                 {
@@ -887,8 +1207,8 @@
                     "jsdoctags": [
                         {
                             "name": {
-                                "pos": 1895,
-                                "end": 1898,
+                                "pos": 1893,
+                                "end": 1896,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -899,8 +1219,8 @@
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "pos": 1889,
-                                "end": 1894,
+                                "pos": 1887,
+                                "end": 1892,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -950,8 +1270,8 @@
                     "jsdoctags": [
                         {
                             "name": {
-                                "pos": 2765,
-                                "end": 2769,
+                                "pos": 2763,
+                                "end": 2767,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -962,8 +1282,8 @@
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "pos": 2759,
-                                "end": 2764,
+                                "pos": 2757,
+                                "end": 2762,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -1014,8 +1334,8 @@
                     "jsdoctags": [
                         {
                             "name": {
-                                "pos": 3592,
-                                "end": 3596,
+                                "pos": 3590,
+                                "end": 3594,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -1026,8 +1346,8 @@
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "pos": 3586,
-                                "end": 3591,
+                                "pos": 3584,
+                                "end": 3589,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -1062,8 +1382,8 @@
                     "jsdoctags": [
                         {
                             "name": {
-                                "pos": 3219,
-                                "end": 3232,
+                                "pos": 3217,
+                                "end": 3230,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -1074,8 +1394,8 @@
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "pos": 3213,
-                                "end": 3218,
+                                "pos": 3211,
+                                "end": 3216,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -1110,8 +1430,8 @@
                     "jsdoctags": [
                         {
                             "name": {
-                                "pos": 3049,
-                                "end": 3058,
+                                "pos": 3047,
+                                "end": 3056,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -1122,8 +1442,8 @@
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "pos": 3043,
-                                "end": 3048,
+                                "pos": 3041,
+                                "end": 3046,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -1139,7 +1459,7 @@
             "deprecationMessage": "",
             "description": "",
             "rawdescription": "\n",
-            "sourceCode": "import { Injectable } from '@angular/core';\nimport {MatTabNavPanel} from \"@angular/material/tabs\";\nimport {BehaviorSubject} from \"rxjs\";\nimport {MenuItem} from \"../modules/main/components/menu/menu.interface\";\nimport {NavigationEnd, Route, Router} from \"@angular/router\";\n\n@Injectable({\n  providedIn: 'root'\n})\nexport class PageService {\n\n  /**\n   * The tab panel to show the pages as BehaviorSubject.\n   */\n  private _pagePanel = new BehaviorSubject<MatTabNavPanel | null>(null);\n\n  /**\n   * The tab panel to show the pages as Observable.\n   */\n  public pagePanel$ = this._pagePanel.asObservable();\n\n  /**\n   * The page direction\n   */\n  private _pageDirection = new BehaviorSubject<boolean>(false);\n\n  /**\n   * The page direction as Observable.\n   */\n  public pageDirection$ = this._pageDirection.asObservable();\n\n  /**\n   * Reference to the menu items to be displayed. as BehaviorSubject.\n   */\n  private _items = new BehaviorSubject<MenuItem[]>([]);\n\n  /**\n   * Reference to the menu items to be displayed. as Observable.\n   */\n  public items$ = this._items.asObservable();\n\n  /**\n   * Current active menu item. as BehaviorSubject.\n   */\n  private _activeItem = new BehaviorSubject<MenuItem | undefined>(undefined);\n\n  /**\n   * Current active menu item. as Observable.\n   */\n  public activeItem$ = this._activeItem.asObservable();\n\n  /**\n   * Current active menu item but as MenuItem.\n   */\n  public activeItem?: MenuItem;\n\n\n  /**\n   * @constructor\n   * @param _router\n   */\n  public constructor(\n    private readonly _router: Router,\n    ) {\n    this._setItemsFromRoutes();\n    /**\n     * Get route\n     */\n    const routerSub = this._router.events.subscribe((route: unknown) => {\n      const navigation = route as NavigationEnd;\n      this._setActiveItemFromUrl(navigation.url);\n      routerSub.unsubscribe();\n    });\n  }\n\n  /**\n   * Sets the active item from the current url.\n   * @param url If not given, the current url is used.\n   */\n  private _setActiveItemFromUrl(url: string | undefined): void {\n    const currentUrl = url ?? this._router.url;\n    const items = this._items.getValue();\n    items.forEach(item => {\n      if (currentUrl === item.link) {\n        this.activateItem(item);\n      }\n    });\n  }\n\n  /**\n   * Set Menu items from app routing\n   */\n  private _setItemsFromRoutes(): void {\n    const items: MenuItem[] = [];\n    this._router.config.forEach((route: Route) => {\n      if (route.data != null && route.data['menuItem'] != null) {\n        items.push({\n          label: route.data['menuItem'].label,\n          link: '/' + route.path,\n          index: route.data['menuItem'].index,\n        });\n      }\n    });\n    this._items.next(items);\n  }\n\n  /**\n   * @method Activate the given menu item. Deactivate all other menu items.\n   * @param item\n   */\n  public activateItem(item: MenuItem): void {\n    this._items.getValue().forEach(menuItem => {\n      menuItem.active = menuItem === item;\n    });\n    this._activeItem.next(item);\n    this.activeItem = item;\n  }\n\n  /**\n   * Sets the tab panel to show the pages.\n   * @param pagePanel\n   */\n  public setPagePanel(pagePanel: MatTabNavPanel | null): void {\n    this._pagePanel.next(pagePanel);\n  }\n\n  /**\n   * Sets the page direction.\n   * @param pageDirection true = the clicked item is after the current item.\n   */\n  public setPageDirection(pageDirection: boolean): void {\n    this._pageDirection.next(pageDirection);\n  }\n\n  /**\n   * @method Get Items\n   */\n  public getItems(): MenuItem[] {\n    return this._items.getValue();\n  }\n\n  /**\n   * @event click on menu item\n   * @method navigate - Page Change\n   * @param page menu item or link to navigate to\n   */\n  public navigate(page: MenuItem | string): void {\n    let item: MenuItem | undefined;\n    if (typeof page === 'string') {\n      item = this._items.getValue().find(menuItem => menuItem.link === page);\n    } else {\n      item = page;\n    }\n    if (item != null) {\n      const activeItemIndex = this._activeItem.getValue()?.index ?? 0;\n      this.activateItem(item);\n      const direction = item.index > activeItemIndex;\n      this.setPageDirection(direction);\n      this._router.navigate([item.link]).then();\n    }\n  }\n}\n",
+            "sourceCode": "import {Injectable} from '@angular/core';\nimport {MatTabNavPanel} from \"@angular/material/tabs\";\nimport {BehaviorSubject} from \"rxjs\";\nimport {MenuItem} from \"../modules/main/components/menu/menu.interface\";\nimport {NavigationEnd, Route, Router} from \"@angular/router\";\n\n@Injectable({\n  providedIn: 'root'\n})\nexport class PageService {\n\n  /**\n   * The tab panel to show the pages as BehaviorSubject.\n   */\n  private _pagePanel = new BehaviorSubject<MatTabNavPanel | null>(null);\n\n  /**\n   * The tab panel to show the pages as Observable.\n   */\n  public pagePanel$ = this._pagePanel.asObservable();\n\n  /**\n   * The page direction\n   */\n  private _pageDirection = new BehaviorSubject<boolean>(false);\n\n  /**\n   * The page direction as Observable.\n   */\n  public pageDirection$ = this._pageDirection.asObservable();\n\n  /**\n   * Reference to the menu items to be displayed. as BehaviorSubject.\n   */\n  private _items = new BehaviorSubject<MenuItem[]>([]);\n\n  /**\n   * Reference to the menu items to be displayed. as Observable.\n   */\n  public items$ = this._items.asObservable();\n\n  /**\n   * Current active menu item. as BehaviorSubject.\n   */\n  private _activeItem = new BehaviorSubject<MenuItem | undefined>(undefined);\n\n  /**\n   * Current active menu item. as Observable.\n   */\n  public activeItem$ = this._activeItem.asObservable();\n\n  /**\n   * Current active menu item but as MenuItem.\n   */\n  public activeItem?: MenuItem;\n\n\n  /**\n   * @constructor\n   * @param _router\n   */\n  public constructor(\n    private readonly _router: Router,\n    ) {\n    this._setItemsFromRoutes();\n    /**\n     * Get route\n     */\n    const routerSub = this._router.events.subscribe((route: unknown) => {\n      const navigation = route as NavigationEnd;\n      this._setActiveItemFromUrl(navigation.url);\n      routerSub.unsubscribe();\n    });\n  }\n\n  /**\n   * Sets the active item from the current url.\n   * @param url If not given, the current url is used.\n   */\n  private _setActiveItemFromUrl(url: string | undefined): void {\n    const currentUrl = url ?? this._router.url;\n    const items = this._items.getValue();\n    items.forEach(item => {\n      if (currentUrl === item.link) {\n        this.activateItem(item);\n      }\n    });\n  }\n\n  /**\n   * Set Menu items from app routing\n   */\n  private _setItemsFromRoutes(): void {\n    const items: MenuItem[] = [];\n    this._router.config.forEach((route: Route) => {\n      if (route.data != null && route.data['menuItem'] != null) {\n        items.push({\n          label: route.data['menuItem'].label,\n          link: '/' + route.path,\n          index: route.data['menuItem'].index,\n        });\n      }\n    });\n    this._items.next(items);\n  }\n\n  /**\n   * @method Activate the given menu item. Deactivate all other menu items.\n   * @param item\n   */\n  public activateItem(item: MenuItem): void {\n    this._items.getValue().forEach(menuItem => {\n      menuItem.active = menuItem === item;\n    });\n    this._activeItem.next(item);\n    this.activeItem = item;\n  }\n\n  /**\n   * Sets the tab panel to show the pages.\n   * @param pagePanel\n   */\n  public setPagePanel(pagePanel: MatTabNavPanel | null): void {\n    this._pagePanel.next(pagePanel);\n  }\n\n  /**\n   * Sets the page direction.\n   * @param pageDirection true = the clicked item is after the current item.\n   */\n  public setPageDirection(pageDirection: boolean): void {\n    this._pageDirection.next(pageDirection);\n  }\n\n  /**\n   * @method Get Items\n   */\n  public getItems(): MenuItem[] {\n    return this._items.getValue();\n  }\n\n  /**\n   * @event click on menu item\n   * @method navigate - Page Change\n   * @param page menu item or link to navigate to\n   */\n  public navigate(page: MenuItem | string): void {\n    let item: MenuItem | undefined;\n    if (typeof page === 'string') {\n      item = this._items.getValue().find(menuItem => menuItem.link === page);\n    } else {\n      item = page;\n    }\n    if (item != null) {\n      const activeItemIndex = this._activeItem.getValue()?.index ?? 0;\n      this.activateItem(item);\n      const direction = item.index < activeItemIndex;\n      this.setPageDirection(direction);\n      this._router.navigate([item.link]).then();\n    }\n  }\n}\n",
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
@@ -1161,8 +1481,8 @@
                 "jsdoctags": [
                     {
                         "name": {
-                            "pos": 1465,
-                            "end": 1472,
+                            "pos": 1463,
+                            "end": 1470,
                             "flags": 4227072,
                             "modifierFlagsCache": 0,
                             "transformFlags": 0,
@@ -1173,8 +1493,8 @@
                         "deprecated": false,
                         "deprecationMessage": "",
                         "tagName": {
-                            "pos": 1459,
-                            "end": 1464,
+                            "pos": 1457,
+                            "end": 1462,
                             "flags": 4227072,
                             "modifierFlagsCache": 0,
                             "transformFlags": 0,
@@ -1191,6 +1511,361 @@
     "guards": [],
     "interceptors": [],
     "classes": [
+        {
+            "name": "AbstractEntity",
+            "id": "class-AbstractEntity-8573f3d752b3dc33f0bc4b3412f06e1ffaaa477a0758b7d35613c2339f511511a6eef64bf35b5e0ea7994c97478ac779c497b99ec1d40f1b13c73df2faaf80a1",
+            "file": "src/app/models/abstract-entity.model.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "class",
+            "sourceCode": "import {GenericData} from '../interfaces/data.interface';\r\n\r\n/**\r\n * Entity model\r\n */\r\nexport abstract class AbstractEntity<T extends GenericData> {\r\n\r\n  /**\r\n   * Abstract Entity ID.\r\n   */\r\n  public id: number;\r\n\r\n  /**\r\n   * Name of the entity.\r\n   */\r\n  public name: string;\r\n\r\n  /**\r\n   * Subtitle of the entity.\r\n   */\r\n  public subtitle: string;\r\n\r\n  /**\r\n   * Happiness of the entity.\r\n   */\r\n  public happiness: number;\r\n\r\n  /**\r\n   * @constructor\r\n   * @param id Abstract Entity ID.\r\n   * @param data Data to be used to populate the entity.\r\n   */\r\n  public constructor(id: number, data: T) {\r\n    this.id = id;\r\n    this.name = data.title;\r\n    this.subtitle = data.subtitle ?? '';\r\n    this.happiness = data.happiness ?? 0;\r\n  }\r\n}\r\n",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "id",
+                        "type": "number",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    },
+                    {
+                        "name": "data",
+                        "type": "T",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 26,
+                "rawdescription": "\n\n",
+                "modifierKind": [
+                    123
+                ],
+                "jsdoctags": [
+                    {
+                        "name": {
+                            "pos": 471,
+                            "end": 473,
+                            "flags": 4227072,
+                            "modifierFlagsCache": 0,
+                            "transformFlags": 0,
+                            "kind": 79,
+                            "escapedText": "id"
+                        },
+                        "type": "number",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "pos": 465,
+                            "end": 470,
+                            "flags": 4227072,
+                            "modifierFlagsCache": 0,
+                            "transformFlags": 0,
+                            "kind": 79,
+                            "escapedText": "param"
+                        },
+                        "comment": "<p>Abstract Entity ID.</p>\n"
+                    },
+                    {
+                        "name": {
+                            "pos": 507,
+                            "end": 511,
+                            "flags": 4227072,
+                            "modifierFlagsCache": 0,
+                            "transformFlags": 0,
+                            "kind": 79,
+                            "escapedText": "data"
+                        },
+                        "type": "T",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "pos": 501,
+                            "end": 506,
+                            "flags": 4227072,
+                            "modifierFlagsCache": 0,
+                            "transformFlags": 0,
+                            "kind": 79,
+                            "escapedText": "param"
+                        },
+                        "comment": "<p>Data to be used to populate the entity.</p>\n"
+                    }
+                ]
+            },
+            "properties": [
+                {
+                    "name": "happiness",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": false,
+                    "description": "<p>Happiness of the entity.</p>\n",
+                    "line": 26,
+                    "rawdescription": "\n\nHappiness of the entity.\n",
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "id",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": false,
+                    "description": "<p>Abstract Entity ID.</p>\n",
+                    "line": 11,
+                    "rawdescription": "\n\nAbstract Entity ID.\n",
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "name",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "<p>Name of the entity.</p>\n",
+                    "line": 16,
+                    "rawdescription": "\n\nName of the entity.\n",
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "subtitle",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "<p>Subtitle of the entity.</p>\n",
+                    "line": 21,
+                    "rawdescription": "\n\nSubtitle of the entity.\n",
+                    "modifierKind": [
+                        123
+                    ]
+                }
+            ],
+            "description": "<p>Entity model</p>\n",
+            "rawdescription": "\n\nEntity model\n",
+            "methods": [],
+            "indexSignatures": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "hostBindings": [],
+            "hostListeners": []
+        },
+        {
+            "name": "EducationEntity",
+            "id": "class-EducationEntity-b83bbc3d5f5f1aeaf09b2db7361b43cdb8a8bd73c5e890f83f97f71ed8003a53154936fdb5bcf8ae5a0a9c6fb944db4d08adc3f588debe0d1cbff855075a37e5",
+            "file": "src/app/models/education-entity.model.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "class",
+            "sourceCode": "import {AbstractEntity} from './abstract-entity.model';\r\nimport {EducationDataInterface} from '../interfaces/data.interface';\r\n\r\n\r\nexport class EducationEntity extends AbstractEntity<EducationDataInterface> {\r\n\r\n  /**\r\n   * Education entity start date.\r\n   */\r\n  public startDate: Date;\r\n\r\n  /**\r\n   * Education entity end date.\r\n   */\r\n  public endDate: Date;\r\n\r\n  /**\r\n   * Education entity location.\r\n   */\r\n  public location: string;\r\n\r\n  /**\r\n   * Education entity school.\r\n   */\r\n  public school: string;\r\n\r\n  /**\r\n   * @constructor\r\n   * @param id Education Entity ID.\r\n   * @param data Data to be used to populate the entity.\r\n   */\r\n  public constructor(id: number, data: EducationDataInterface) {\r\n    super(id, data);\r\n    this.startDate = new Date(data.startDate);\r\n    this.endDate = new Date(data.endDate);\r\n    this.location = data.location;\r\n    this.school = data.school;\r\n  }\r\n}\r\n",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "id",
+                        "type": "number",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    },
+                    {
+                        "name": "data",
+                        "type": "EducationDataInterface",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 25,
+                "rawdescription": "\n\n",
+                "modifierKind": [
+                    123
+                ],
+                "jsdoctags": [
+                    {
+                        "name": {
+                            "pos": 552,
+                            "end": 554,
+                            "flags": 4227072,
+                            "modifierFlagsCache": 0,
+                            "transformFlags": 0,
+                            "kind": 79,
+                            "escapedText": "id"
+                        },
+                        "type": "number",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "pos": 546,
+                            "end": 551,
+                            "flags": 4227072,
+                            "modifierFlagsCache": 0,
+                            "transformFlags": 0,
+                            "kind": 79,
+                            "escapedText": "param"
+                        },
+                        "comment": "<p>Education Entity ID.</p>\n"
+                    },
+                    {
+                        "name": {
+                            "pos": 589,
+                            "end": 593,
+                            "flags": 4227072,
+                            "modifierFlagsCache": 0,
+                            "transformFlags": 0,
+                            "kind": 79,
+                            "escapedText": "data"
+                        },
+                        "type": "EducationDataInterface",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "pos": 583,
+                            "end": 588,
+                            "flags": 4227072,
+                            "modifierFlagsCache": 0,
+                            "transformFlags": 0,
+                            "kind": 79,
+                            "escapedText": "param"
+                        },
+                        "comment": "<p>Data to be used to populate the entity.</p>\n"
+                    }
+                ]
+            },
+            "properties": [
+                {
+                    "name": "endDate",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Date",
+                    "optional": false,
+                    "description": "<p>Education entity end date.</p>\n",
+                    "line": 15,
+                    "rawdescription": "\n\nEducation entity end date.\n",
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "location",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "<p>Education entity location.</p>\n",
+                    "line": 20,
+                    "rawdescription": "\n\nEducation entity location.\n",
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "school",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "<p>Education entity school.</p>\n",
+                    "line": 25,
+                    "rawdescription": "\n\nEducation entity school.\n",
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "startDate",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Date",
+                    "optional": false,
+                    "description": "<p>Education entity start date.</p>\n",
+                    "line": 10,
+                    "rawdescription": "\n\nEducation entity start date.\n",
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "happiness",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": false,
+                    "description": "<p>Happiness of the entity.</p>\n",
+                    "line": 26,
+                    "rawdescription": "\n\nHappiness of the entity.\n",
+                    "modifierKind": [
+                        123
+                    ],
+                    "inheritance": {
+                        "file": "AbstractEntity"
+                    }
+                },
+                {
+                    "name": "id",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": false,
+                    "description": "<p>Abstract Entity ID.</p>\n",
+                    "line": 11,
+                    "rawdescription": "\n\nAbstract Entity ID.\n",
+                    "modifierKind": [
+                        123
+                    ],
+                    "inheritance": {
+                        "file": "AbstractEntity"
+                    }
+                },
+                {
+                    "name": "name",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "<p>Name of the entity.</p>\n",
+                    "line": 16,
+                    "rawdescription": "\n\nName of the entity.\n",
+                    "modifierKind": [
+                        123
+                    ],
+                    "inheritance": {
+                        "file": "AbstractEntity"
+                    }
+                },
+                {
+                    "name": "subtitle",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "<p>Subtitle of the entity.</p>\n",
+                    "line": 21,
+                    "rawdescription": "\n\nSubtitle of the entity.\n",
+                    "modifierKind": [
+                        123
+                    ],
+                    "inheritance": {
+                        "file": "AbstractEntity"
+                    }
+                }
+            ],
+            "methods": [],
+            "indexSignatures": [],
+            "extends": "AbstractEntity",
+            "inputsClass": [],
+            "outputsClass": [],
+            "hostBindings": [],
+            "hostListeners": []
+        },
         {
             "name": "ProfileMenuItem",
             "id": "class-ProfileMenuItem-5299bc8bc16eafd3cc759f761e6ec30a0877607084895cdf3187805b9ab7606bcc3677493e786475bc81b9ecc4916494affb16861ab440ae6a883d93782fc256",
@@ -1577,6 +2252,687 @@
             "outputsClass": [],
             "hostBindings": [],
             "hostListeners": []
+        },
+        {
+            "name": "ProjectEntity",
+            "id": "class-ProjectEntity-98f036687a4047c9eaf18927001cbc10caf4e40b73809f34e89a939d5ccdd49e59c2361f001461d3d296e4c9a1faaeaca27f02bbdfc1a94b0eb94301b4bb63d2",
+            "file": "src/app/models/project-entity.model.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "class",
+            "sourceCode": "import {ProjectDataInterface} from '../interfaces/data.interface';\r\nimport {AbstractEntity} from './abstract-entity.model';\r\nimport {SkillEntity} from './skill-entity.model';\r\nimport {WORK_CATEGORY} from '../enums/data.enum';\r\n\r\n\r\nexport class ProjectEntity extends AbstractEntity<ProjectDataInterface> {\r\n  /**\r\n   * Project entity start date.\r\n   */\r\n  public startDate: Date;\r\n\r\n  /**\r\n   * Project entity end date.\r\n   */\r\n  public endDate: Date;\r\n\r\n  /**\r\n   * Skills used in the project.\r\n   */\r\n  public skills: SkillEntity[] = [];\r\n\r\n  /**\r\n   * Category of the project.\r\n   */\r\n  public category: WORK_CATEGORY[];\r\n\r\n  /**\r\n   * Project entity favorite.\r\n   */\r\n  favorite: boolean;\r\n\r\n  /**\r\n   * @constructor\r\n   * @param id Project Entity ID.\r\n   * @param data Data to be used to populate the entity.\r\n   */\r\n  public constructor(\r\n    id: number,\r\n    data: ProjectDataInterface\r\n  ) {\r\n    super(id, data);\r\n    this.startDate = new Date(data.startDate);\r\n    this.endDate = new Date(data.endDate);\r\n    this.category = data.category;\r\n    this.favorite = data.favorite ?? false;\r\n  }\r\n}\r\n",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "id",
+                        "type": "number",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    },
+                    {
+                        "name": "data",
+                        "type": "ProjectDataInterface",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 31,
+                "rawdescription": "\n\n",
+                "modifierKind": [
+                    123
+                ],
+                "jsdoctags": [
+                    {
+                        "name": {
+                            "pos": 733,
+                            "end": 735,
+                            "flags": 4227072,
+                            "modifierFlagsCache": 0,
+                            "transformFlags": 0,
+                            "kind": 79,
+                            "escapedText": "id"
+                        },
+                        "type": "number",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "pos": 727,
+                            "end": 732,
+                            "flags": 4227072,
+                            "modifierFlagsCache": 0,
+                            "transformFlags": 0,
+                            "kind": 79,
+                            "escapedText": "param"
+                        },
+                        "comment": "<p>Project Entity ID.</p>\n"
+                    },
+                    {
+                        "name": {
+                            "pos": 768,
+                            "end": 772,
+                            "flags": 4227072,
+                            "modifierFlagsCache": 0,
+                            "transformFlags": 0,
+                            "kind": 79,
+                            "escapedText": "data"
+                        },
+                        "type": "ProjectDataInterface",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "pos": 762,
+                            "end": 767,
+                            "flags": 4227072,
+                            "modifierFlagsCache": 0,
+                            "transformFlags": 0,
+                            "kind": 79,
+                            "escapedText": "param"
+                        },
+                        "comment": "<p>Data to be used to populate the entity.</p>\n"
+                    }
+                ]
+            },
+            "properties": [
+                {
+                    "name": "category",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "WORK_CATEGORY[]",
+                    "optional": false,
+                    "description": "<p>Category of the project.</p>\n",
+                    "line": 26,
+                    "rawdescription": "\n\nCategory of the project.\n",
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "endDate",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Date",
+                    "optional": false,
+                    "description": "<p>Project entity end date.</p>\n",
+                    "line": 16,
+                    "rawdescription": "\n\nProject entity end date.\n",
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "favorite",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "boolean",
+                    "optional": false,
+                    "description": "<p>Project entity favorite.</p>\n",
+                    "line": 31,
+                    "rawdescription": "\n\nProject entity favorite.\n"
+                },
+                {
+                    "name": "skills",
+                    "defaultValue": "[]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "SkillEntity[]",
+                    "optional": false,
+                    "description": "<p>Skills used in the project.</p>\n",
+                    "line": 21,
+                    "rawdescription": "\n\nSkills used in the project.\n",
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "startDate",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Date",
+                    "optional": false,
+                    "description": "<p>Project entity start date.</p>\n",
+                    "line": 11,
+                    "rawdescription": "\n\nProject entity start date.\n",
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "happiness",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": false,
+                    "description": "<p>Happiness of the entity.</p>\n",
+                    "line": 26,
+                    "rawdescription": "\n\nHappiness of the entity.\n",
+                    "modifierKind": [
+                        123
+                    ],
+                    "inheritance": {
+                        "file": "AbstractEntity"
+                    }
+                },
+                {
+                    "name": "id",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": false,
+                    "description": "<p>Abstract Entity ID.</p>\n",
+                    "line": 11,
+                    "rawdescription": "\n\nAbstract Entity ID.\n",
+                    "modifierKind": [
+                        123
+                    ],
+                    "inheritance": {
+                        "file": "AbstractEntity"
+                    }
+                },
+                {
+                    "name": "name",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "<p>Name of the entity.</p>\n",
+                    "line": 16,
+                    "rawdescription": "\n\nName of the entity.\n",
+                    "modifierKind": [
+                        123
+                    ],
+                    "inheritance": {
+                        "file": "AbstractEntity"
+                    }
+                },
+                {
+                    "name": "subtitle",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "<p>Subtitle of the entity.</p>\n",
+                    "line": 21,
+                    "rawdescription": "\n\nSubtitle of the entity.\n",
+                    "modifierKind": [
+                        123
+                    ],
+                    "inheritance": {
+                        "file": "AbstractEntity"
+                    }
+                }
+            ],
+            "methods": [],
+            "indexSignatures": [],
+            "extends": "AbstractEntity",
+            "inputsClass": [],
+            "outputsClass": [],
+            "hostBindings": [],
+            "hostListeners": []
+        },
+        {
+            "name": "SkillEntity",
+            "id": "class-SkillEntity-c6a66ede9348b4287f1d6e8b4ee8442493e97f98055313154545d1a03cd659b6d14ae819d77952720787c7d606bc1c31c9d90f0f4bf1065f268d8a809bf298cf",
+            "file": "src/app/models/skill-entity.model.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "class",
+            "sourceCode": "import {AbstractEntity} from './abstract-entity.model';\r\nimport {SkillDataInterface} from '../interfaces/data.interface';\r\nimport {SKILL_CATEGORY} from '../enums/data.enum';\r\n\r\nexport class SkillEntity extends AbstractEntity<SkillDataInterface> {\r\n\r\n\r\n\r\n  /**\r\n   * Skill entity level.\r\n   */\r\n  public level: number = 0;\r\n\r\n  /**\r\n   * Skill entity color.\r\n   */\r\n  public color: string;\r\n\r\n  /**\r\n   * Skill entity category.\r\n   */\r\n  public category: SKILL_CATEGORY[];\r\n\r\n  /**\r\n   * Skill entity experience.\r\n   */\r\n  public experience: number = 0;\r\n\r\n  /**\r\n   * Skill entity favorite.\r\n   */\r\n  public favorite: boolean = false;\r\n\r\n  /**\r\n   * @constructor\r\n   * @param id Skill Entity ID.\r\n   * @param data Data to be used to populate the entity.\r\n   */\r\n  public constructor(id: number, data: SkillDataInterface) {\r\n    super(id, data);\r\n    this.level = data.level ?? 0;\r\n    this.color = data.color;\r\n    this.category = data.category;\r\n    this.experience = data.experience ?? 0;\r\n    this.favorite = data.favorite ?? false;\r\n  }\r\n}\r\n",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "id",
+                        "type": "number",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    },
+                    {
+                        "name": "data",
+                        "type": "SkillDataInterface",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 32,
+                "rawdescription": "\n\n",
+                "modifierKind": [
+                    123
+                ],
+                "jsdoctags": [
+                    {
+                        "name": {
+                            "pos": 676,
+                            "end": 678,
+                            "flags": 4227072,
+                            "modifierFlagsCache": 0,
+                            "transformFlags": 0,
+                            "kind": 79,
+                            "escapedText": "id"
+                        },
+                        "type": "number",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "pos": 670,
+                            "end": 675,
+                            "flags": 4227072,
+                            "modifierFlagsCache": 0,
+                            "transformFlags": 0,
+                            "kind": 79,
+                            "escapedText": "param"
+                        },
+                        "comment": "<p>Skill Entity ID.</p>\n"
+                    },
+                    {
+                        "name": {
+                            "pos": 709,
+                            "end": 713,
+                            "flags": 4227072,
+                            "modifierFlagsCache": 0,
+                            "transformFlags": 0,
+                            "kind": 79,
+                            "escapedText": "data"
+                        },
+                        "type": "SkillDataInterface",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "pos": 703,
+                            "end": 708,
+                            "flags": 4227072,
+                            "modifierFlagsCache": 0,
+                            "transformFlags": 0,
+                            "kind": 79,
+                            "escapedText": "param"
+                        },
+                        "comment": "<p>Data to be used to populate the entity.</p>\n"
+                    }
+                ]
+            },
+            "properties": [
+                {
+                    "name": "category",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "SKILL_CATEGORY[]",
+                    "optional": false,
+                    "description": "<p>Skill entity category.</p>\n",
+                    "line": 22,
+                    "rawdescription": "\n\nSkill entity category.\n",
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "color",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "<p>Skill entity color.</p>\n",
+                    "line": 17,
+                    "rawdescription": "\n\nSkill entity color.\n",
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "experience",
+                    "defaultValue": "0",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": false,
+                    "description": "<p>Skill entity experience.</p>\n",
+                    "line": 27,
+                    "rawdescription": "\n\nSkill entity experience.\n",
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "favorite",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "boolean",
+                    "optional": false,
+                    "description": "<p>Skill entity favorite.</p>\n",
+                    "line": 32,
+                    "rawdescription": "\n\nSkill entity favorite.\n",
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "level",
+                    "defaultValue": "0",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": false,
+                    "description": "<p>Skill entity level.</p>\n",
+                    "line": 12,
+                    "rawdescription": "\n\nSkill entity level.\n",
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "happiness",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": false,
+                    "description": "<p>Happiness of the entity.</p>\n",
+                    "line": 26,
+                    "rawdescription": "\n\nHappiness of the entity.\n",
+                    "modifierKind": [
+                        123
+                    ],
+                    "inheritance": {
+                        "file": "AbstractEntity"
+                    }
+                },
+                {
+                    "name": "id",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": false,
+                    "description": "<p>Abstract Entity ID.</p>\n",
+                    "line": 11,
+                    "rawdescription": "\n\nAbstract Entity ID.\n",
+                    "modifierKind": [
+                        123
+                    ],
+                    "inheritance": {
+                        "file": "AbstractEntity"
+                    }
+                },
+                {
+                    "name": "name",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "<p>Name of the entity.</p>\n",
+                    "line": 16,
+                    "rawdescription": "\n\nName of the entity.\n",
+                    "modifierKind": [
+                        123
+                    ],
+                    "inheritance": {
+                        "file": "AbstractEntity"
+                    }
+                },
+                {
+                    "name": "subtitle",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "<p>Subtitle of the entity.</p>\n",
+                    "line": 21,
+                    "rawdescription": "\n\nSubtitle of the entity.\n",
+                    "modifierKind": [
+                        123
+                    ],
+                    "inheritance": {
+                        "file": "AbstractEntity"
+                    }
+                }
+            ],
+            "methods": [],
+            "indexSignatures": [],
+            "extends": "AbstractEntity",
+            "inputsClass": [],
+            "outputsClass": [],
+            "hostBindings": [],
+            "hostListeners": []
+        },
+        {
+            "name": "WorkEntity",
+            "id": "class-WorkEntity-22ab37be1d0a8192fdf283712e4cbe93d29ee2d0534b9e47a6fe3a5c4e76b9e25b940bf5c4e992862a07ae372bfd01d735ac20f2708c4817a5c672382e4164fc",
+            "file": "src/app/models/work-entity.model.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "class",
+            "sourceCode": "import {WorkDataInterface} from '../interfaces/data.interface';\r\nimport {AbstractEntity} from './abstract-entity.model';\r\nimport {SKILL_TITLE} from '../enums/data.enum';\r\nimport {ProjectEntity} from './project-entity.model';\r\n\r\n\r\nexport class WorkEntity extends AbstractEntity<WorkDataInterface> {\r\n\r\n  /**\r\n   * Work entity start date.\r\n   */\r\n  public startDate: Date;\r\n\r\n  /**\r\n   * Work entity end date.\r\n   */\r\n  public endDate: Date;\r\n\r\n  /**\r\n   * Work entity location.\r\n   */\r\n  public location: string;\r\n\r\n  /**\r\n   * Work entity company.\r\n   */\r\n  public company: string;\r\n\r\n  /**\r\n   * Work entity skills.\r\n   */\r\n  public skills: SKILL_TITLE[];\r\n\r\n  /**\r\n   * Work entity projects.\r\n   */\r\n  public projects: ProjectEntity[] = [];\r\n\r\n  /**\r\n   * @constructor\r\n   * @param id Work Entity ID.\r\n   * @param data Data to be used to populate the entity.\r\n   */\r\n  public constructor(id: number, data: WorkDataInterface) {\r\n    super(id, data);\r\n    this.startDate = new Date(data.startDate);\r\n    this.endDate = new Date(data.endDate);\r\n    this.location = data.location;\r\n    this.company = data.company;\r\n    this.skills = data.skills;\r\n  }\r\n\r\n}\r\n",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "id",
+                        "type": "number",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    },
+                    {
+                        "name": "data",
+                        "type": "WorkDataInterface",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 37,
+                "rawdescription": "\n\n",
+                "modifierKind": [
+                    123
+                ],
+                "jsdoctags": [
+                    {
+                        "name": {
+                            "pos": 784,
+                            "end": 786,
+                            "flags": 4227072,
+                            "modifierFlagsCache": 0,
+                            "transformFlags": 0,
+                            "kind": 79,
+                            "escapedText": "id"
+                        },
+                        "type": "number",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "pos": 778,
+                            "end": 783,
+                            "flags": 4227072,
+                            "modifierFlagsCache": 0,
+                            "transformFlags": 0,
+                            "kind": 79,
+                            "escapedText": "param"
+                        },
+                        "comment": "<p>Work Entity ID.</p>\n"
+                    },
+                    {
+                        "name": {
+                            "pos": 816,
+                            "end": 820,
+                            "flags": 4227072,
+                            "modifierFlagsCache": 0,
+                            "transformFlags": 0,
+                            "kind": 79,
+                            "escapedText": "data"
+                        },
+                        "type": "WorkDataInterface",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "pos": 810,
+                            "end": 815,
+                            "flags": 4227072,
+                            "modifierFlagsCache": 0,
+                            "transformFlags": 0,
+                            "kind": 79,
+                            "escapedText": "param"
+                        },
+                        "comment": "<p>Data to be used to populate the entity.</p>\n"
+                    }
+                ]
+            },
+            "properties": [
+                {
+                    "name": "company",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "<p>Work entity company.</p>\n",
+                    "line": 27,
+                    "rawdescription": "\n\nWork entity company.\n",
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "endDate",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Date",
+                    "optional": false,
+                    "description": "<p>Work entity end date.</p>\n",
+                    "line": 17,
+                    "rawdescription": "\n\nWork entity end date.\n",
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "location",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "<p>Work entity location.</p>\n",
+                    "line": 22,
+                    "rawdescription": "\n\nWork entity location.\n",
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "projects",
+                    "defaultValue": "[]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "ProjectEntity[]",
+                    "optional": false,
+                    "description": "<p>Work entity projects.</p>\n",
+                    "line": 37,
+                    "rawdescription": "\n\nWork entity projects.\n",
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "skills",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "SKILL_TITLE[]",
+                    "optional": false,
+                    "description": "<p>Work entity skills.</p>\n",
+                    "line": 32,
+                    "rawdescription": "\n\nWork entity skills.\n",
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "startDate",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Date",
+                    "optional": false,
+                    "description": "<p>Work entity start date.</p>\n",
+                    "line": 12,
+                    "rawdescription": "\n\nWork entity start date.\n",
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "happiness",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": false,
+                    "description": "<p>Happiness of the entity.</p>\n",
+                    "line": 26,
+                    "rawdescription": "\n\nHappiness of the entity.\n",
+                    "modifierKind": [
+                        123
+                    ],
+                    "inheritance": {
+                        "file": "AbstractEntity"
+                    }
+                },
+                {
+                    "name": "id",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": false,
+                    "description": "<p>Abstract Entity ID.</p>\n",
+                    "line": 11,
+                    "rawdescription": "\n\nAbstract Entity ID.\n",
+                    "modifierKind": [
+                        123
+                    ],
+                    "inheritance": {
+                        "file": "AbstractEntity"
+                    }
+                },
+                {
+                    "name": "name",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "<p>Name of the entity.</p>\n",
+                    "line": 16,
+                    "rawdescription": "\n\nName of the entity.\n",
+                    "modifierKind": [
+                        123
+                    ],
+                    "inheritance": {
+                        "file": "AbstractEntity"
+                    }
+                },
+                {
+                    "name": "subtitle",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "<p>Subtitle of the entity.</p>\n",
+                    "line": 21,
+                    "rawdescription": "\n\nSubtitle of the entity.\n",
+                    "modifierKind": [
+                        123
+                    ],
+                    "inheritance": {
+                        "file": "AbstractEntity"
+                    }
+                }
+            ],
+            "methods": [],
+            "indexSignatures": [],
+            "extends": "AbstractEntity",
+            "inputsClass": [],
+            "outputsClass": [],
+            "hostBindings": [],
+            "hostListeners": []
         }
     ],
     "directives": [],
@@ -1751,12 +3107,12 @@
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "",
+                    "data": "@use 'functions' as fn;\r\n\r\n:host {\r\n  width: 100%;\r\n}\r\n\r\n.chart-gauge {\r\n  &__container {\r\n    height: 6px;\r\n    width: 100%;\r\n  }\r\n  &__fill {\r\n    height: 100%;\r\n    border-radius: 3px;\r\n    width: 0;\r\n    background-color: fn.get-color(primary, 500);\r\n    position: relative;\r\n  }\r\n\r\n  &__value {\r\n    position: absolute;\r\n    margin-left: 3px;\r\n    top: 0;\r\n    left: 100%;\r\n    line-height: 8px;\r\n    color: fn.get-color(contrast, 50);\r\n  }\r\n}\r\n",
                     "styleUrl": "./chart-gauge.component.scss"
                 }
             ],
             "stylesData": "",
-            "templateData": "<div class=\"chart-gauge__container\">\n  <div class=\"chart-gauge__fill\"></div>\n</div>\n"
+            "templateData": "<div class=\"chart-gauge__container flex\">\n  <div class=\"chart-gauge__fill\" [style.width.%]=\"value\">\n    <div class=\"chart-gauge__value small\">{{value}}%</div>\n  </div>\n</div>\n"
         },
         {
             "name": "CircleComponent",
@@ -4476,7 +5832,7 @@
         },
         {
             "name": "PageHomeComponent",
-            "id": "component-PageHomeComponent-f7f6486b0ae7c6a7c32596bb38aeddeaf6e204598c92e83479c17e3545e46cbe0e57e45e3f235c34f331115fc6e6cd72f520e38d242e291d8bc6543892b507d5",
+            "id": "component-PageHomeComponent-acc31270186d9d54f26d68445700733762b7bf8bd443a7a14ae2786c7122466d6e6bd8c59b912cc7badadd12bfc27eee8603670b6f4d11a7bfba14e33f47e68b",
             "file": "src/app/modules/main/components/page-home/page-home.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -4503,7 +5859,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 10,
+                    "line": 11,
                     "decorators": [
                         {
                             "name": "HostBinding",
@@ -4516,7 +5872,21 @@
                     ]
                 }
             ],
-            "methodsClass": [],
+            "methodsClass": [
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 18,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        123
+                    ]
+                }
+            ],
             "deprecated": false,
             "deprecationMessage": "",
             "hostBindings": [
@@ -4525,7 +5895,7 @@
                     "defaultValue": "true",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 10,
+                    "line": 11,
                     "type": "true",
                     "decorators": []
                 }
@@ -4534,7 +5904,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import {Component, HostBinding} from '@angular/core';\n\n@Component({\n  selector: 'cv-page-home',\n  templateUrl: './page-home.component.html',\n  styleUrls: ['./page-home.component.scss']\n})\nexport class PageHomeComponent {\n\n  @HostBinding('class.cv-page') public readonly cvPageClass = true;\n\n}\n",
+            "sourceCode": "import {Component, HostBinding, OnInit} from '@angular/core';\nimport {EntityListService} from '../../../../services/entity-list.service';\n\n@Component({\n  selector: 'cv-page-home',\n  templateUrl: './page-home.component.html',\n  styleUrls: ['./page-home.component.scss']\n})\nexport class PageHomeComponent implements OnInit {\n\n  @HostBinding('class.cv-page') public readonly cvPageClass = true;\n\n  constructor(\n    private readonly _entityListService: EntityListService,\n  ) {\n  }\n\n  public ngOnInit(): void {\n\n  }\n\n\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -4543,6 +5913,35 @@
                 }
             ],
             "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "_entityListService",
+                        "type": "EntityListService",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 11,
+                "jsdoctags": [
+                    {
+                        "name": "_entityListService",
+                        "type": "EntityListService",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "implements": [
+                "OnInit"
+            ],
             "templateData": "<cv-page-wrapper>\n  <cv-block left cvTitle=\"Qui suis-je ?\" maxHeight=\"150px\">\n    <p>\n      Je suis développeur web, spécialisé en front-end. Passioné par le développement web,\n      j'ai toujours été à la recherche de nouvelles techniques et d'innovations. Je suis un\n      autodidacte et j'aime apprendre sans cesse de nouvelles choses.\n    </p>\n    <p>\n      J'ai entièrement développé ce cv en ligne en utilisant le framework Angular 15. Seule l'utilisation\n      de Material Angular a été nécessaire pour la mise en forme.\n    </p>\n  </cv-block>\n\n  <cv-block right cvTitle=\"Mes 5 Stacks préférées\">\n    Lorem ipsum dolor sit amet, consectetur adipisicing elit. A asperiores cumque ipsum maiores officia ratione similique voluptas voluptate! Accusamus cum eius est exercitationem impedit ipsum iste iure praesentium recusandae suscipit.\n  </cv-block>\n\n  <cv-block right cvTitle=\"Mes qualités\">\n    Lorem ipsum dolor sit amet, consectetur adipisicing elit. A asperiores cumque ipsum maiores officia ratione similique voluptas voluptate! Accusamus cum eius est exercitationem impedit ipsum iste iure praesentium recusandae suscipit.\n  </cv-block>\n\n  <cv-block right cvTitle=\"Mes défauts\">\n    Lorem ipsum dolor sit amet, consectetur adipisicing elit. A asperiores cumque ipsum maiores officia ratione similique voluptas voluptate! Accusamus cum eius est exercitationem impedit ipsum iste iure praesentium recusandae suscipit.\n  </cv-block>\n\n  <cv-block right cvTitle=\"Mes meilleurs projets\">\n    Lorem ipsum dolor sit amet, consectetur adipisicing elit. A asperiores cumque ipsum maiores officia ratione similique voluptas voluptate! Accusamus cum eius est exercitationem impedit ipsum iste iure praesentium recusandae suscipit.\n  </cv-block>\n\n</cv-page-wrapper>\n"
         },
         {
@@ -6012,21 +7411,21 @@
                 "name": "environment",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/environments/environment.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "object",
-                "defaultValue": "{\n  production: false\n}"
-            },
-            {
-                "name": "environment",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "src/environments/environment.prod.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "object",
                 "defaultValue": "{\n  production: true\n}"
+            },
+            {
+                "name": "environment",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/environments/environment.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "object",
+                "defaultValue": "{\n  production: false\n}"
             },
             {
                 "name": "fiveBestSkills",
@@ -6272,18 +7671,6 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/modules/shared/draw-circle/draw-circle.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story<DrawCircleComponent>",
-                "defaultValue": "(args: DrawCircleComponent) => ({\r\n  props: args,\r\n})",
-                "rawdescription": "Template of the component.",
-                "description": "<p>Template of the component.</p>\n"
-            },
-            {
-                "name": "Template",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "src/app/modules/shared/grid/grid.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -6296,11 +7683,11 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/modules/shared/page-wrapper/page-wrapper.stories.ts",
+                "file": "src/app/modules/shared/draw-circle/draw-circle.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Story<PageWrapperComponent>",
-                "defaultValue": "(args: PageWrapperComponent) => ({\r\n  props: args,\r\n})",
+                "type": "Story<DrawCircleComponent>",
+                "defaultValue": "(args: DrawCircleComponent) => ({\r\n  props: args,\r\n})",
                 "rawdescription": "Template of the component.",
                 "description": "<p>Template of the component.</p>\n"
             },
@@ -6320,11 +7707,13 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/modules/main/components/block/block.stories.ts",
+                "file": "src/app/modules/shared/page-wrapper/page-wrapper.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Story<BlockComponent>",
-                "defaultValue": "(args: BlockComponent) => ({\n  props: args,\n})"
+                "type": "Story<PageWrapperComponent>",
+                "defaultValue": "(args: PageWrapperComponent) => ({\r\n  props: args,\r\n})",
+                "rawdescription": "Template of the component.",
+                "description": "<p>Template of the component.</p>\n"
             },
             {
                 "name": "Template",
@@ -6335,6 +7724,16 @@
                 "deprecationMessage": "",
                 "type": "Story<CircleMenuItemComponent>",
                 "defaultValue": "(args: CircleMenuItemComponent) => ({\n  props: args,\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/modules/main/components/block/block.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<BlockComponent>",
+                "defaultValue": "(args: BlockComponent) => ({\n  props: args,\n})"
             },
             {
                 "name": "Template",
@@ -6364,6 +7763,16 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "src/app/modules/main/components/list/list.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<ListComponent>",
+                "defaultValue": "(args: ListComponent) => ({\n  props: args,\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "src/app/modules/main/components/main/main.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -6371,16 +7780,6 @@
                 "defaultValue": "(args: MainComponent) => ({\r\n  props: args,\r\n})",
                 "rawdescription": "Template of the component.",
                 "description": "<p>Template of the component.</p>\n"
-            },
-            {
-                "name": "Template",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/modules/main/components/list/list.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story<ListComponent>",
-                "defaultValue": "(args: ListComponent) => ({\n  props: args,\n})"
             },
             {
                 "name": "Template",
@@ -6420,7 +7819,52 @@
             }
         ],
         "functions": [],
-        "typealiases": [],
+        "typealiases": [
+            {
+                "name": "CollectionDataType",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "SkillDataInterface[] | ProjectDataInterface[] | EducationDataInterface[] | WorkDataInterface[]",
+                "file": "src/app/types/entity.type.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 186
+            },
+            {
+                "name": "CollectionType",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "SkillEntity[] | ProjectEntity[] | EducationEntity[] | WorkEntity[]",
+                "file": "src/app/types/entity.type.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 186
+            },
+            {
+                "name": "DataType",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "SkillDataInterface | ProjectDataInterface | EducationDataInterface | WorkDataInterface",
+                "file": "src/app/types/entity.type.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 186
+            },
+            {
+                "name": "EntityType",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "WorkEntity | ProjectEntity | SkillEntity | EducationEntity",
+                "file": "src/app/types/entity.type.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 186
+            }
+        ],
         "enumerations": [
             {
                 "name": "ProfileMode",
@@ -7574,18 +9018,6 @@
                     "defaultValue": "(t: number, ease: [number, number, number, number]): number => {\r\n  return (--t) * t * t + 1;\r\n}"
                 }
             ],
-            "src/environments/environment.ts": [
-                {
-                    "name": "environment",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/environments/environment.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "object",
-                    "defaultValue": "{\n  production: false\n}"
-                }
-            ],
             "src/environments/environment.prod.ts": [
                 {
                     "name": "environment",
@@ -7596,6 +9028,18 @@
                     "deprecationMessage": "",
                     "type": "object",
                     "defaultValue": "{\n  production: true\n}"
+                }
+            ],
+            "src/environments/environment.ts": [
+                {
+                    "name": "environment",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/environments/environment.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "object",
+                    "defaultValue": "{\n  production: false\n}"
                 }
             ],
             "src/app/modules/main/components/list/list.stories.ts": [
@@ -8800,7 +10244,54 @@
                 }
             ]
         },
-        "groupedTypeAliases": {}
+        "groupedTypeAliases": {
+            "src/app/types/entity.type.ts": [
+                {
+                    "name": "CollectionDataType",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "SkillDataInterface[] | ProjectDataInterface[] | EducationDataInterface[] | WorkDataInterface[]",
+                    "file": "src/app/types/entity.type.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 186
+                },
+                {
+                    "name": "CollectionType",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "SkillEntity[] | ProjectEntity[] | EducationEntity[] | WorkEntity[]",
+                    "file": "src/app/types/entity.type.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 186
+                },
+                {
+                    "name": "DataType",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "SkillDataInterface | ProjectDataInterface | EducationDataInterface | WorkDataInterface",
+                    "file": "src/app/types/entity.type.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 186
+                },
+                {
+                    "name": "EntityType",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "WorkEntity | ProjectEntity | SkillEntity | EducationEntity",
+                    "file": "src/app/types/entity.type.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 186
+                }
+            ]
+        }
     },
     "routes": {
         "name": "<root>",
@@ -8844,7 +10335,7 @@
         ]
     },
     "coverage": {
-        "count": 34,
+        "count": 37,
         "status": "medium",
         "files": [
             {
@@ -8992,7 +10483,16 @@
                 "linktype": "interface",
                 "name": "EducationDataInterface",
                 "coveragePercent": 0,
-                "coverageCount": "0/8",
+                "coverageCount": "0/5",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/interfaces/data.interface.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "GenericData",
+                "coveragePercent": 0,
+                "coverageCount": "0/4",
                 "status": "low"
             },
             {
@@ -9010,7 +10510,7 @@
                 "linktype": "interface",
                 "name": "ProjectDataInterface",
                 "coveragePercent": 0,
-                "coverageCount": "0/9",
+                "coverageCount": "0/6",
                 "status": "low"
             },
             {
@@ -9019,7 +10519,7 @@
                 "linktype": "interface",
                 "name": "SkillDataInterface",
                 "coveragePercent": 0,
-                "coverageCount": "0/8",
+                "coverageCount": "0/6",
                 "status": "low"
             },
             {
@@ -9028,8 +10528,53 @@
                 "linktype": "interface",
                 "name": "WorkDataInterface",
                 "coveragePercent": 0,
-                "coverageCount": "0/10",
+                "coverageCount": "0/7",
                 "status": "low"
+            },
+            {
+                "filePath": "src/app/models/abstract-entity.model.ts",
+                "type": "class",
+                "linktype": "classe",
+                "name": "AbstractEntity",
+                "coveragePercent": 83,
+                "coverageCount": "5/6",
+                "status": "very-good"
+            },
+            {
+                "filePath": "src/app/models/education-entity.model.ts",
+                "type": "class",
+                "linktype": "classe",
+                "name": "EducationEntity",
+                "coveragePercent": 80,
+                "coverageCount": "8/10",
+                "status": "very-good"
+            },
+            {
+                "filePath": "src/app/models/project-entity.model.ts",
+                "type": "class",
+                "linktype": "classe",
+                "name": "ProjectEntity",
+                "coveragePercent": 81,
+                "coverageCount": "9/11",
+                "status": "very-good"
+            },
+            {
+                "filePath": "src/app/models/skill-entity.model.ts",
+                "type": "class",
+                "linktype": "classe",
+                "name": "SkillEntity",
+                "coveragePercent": 81,
+                "coverageCount": "9/11",
+                "status": "very-good"
+            },
+            {
+                "filePath": "src/app/models/work-entity.model.ts",
+                "type": "class",
+                "linktype": "classe",
+                "name": "WorkEntity",
+                "coveragePercent": 83,
+                "coverageCount": "10/12",
+                "status": "very-good"
             },
             {
                 "filePath": "src/app/modules/main/components/block/block.component.ts",
@@ -9286,7 +10831,7 @@
                 "linktype": "component",
                 "name": "PageHomeComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/3",
+                "coverageCount": "0/5",
                 "status": "low"
             },
             {
@@ -9576,6 +11121,15 @@
                 "coveragePercent": 0,
                 "coverageCount": "0/4",
                 "status": "low"
+            },
+            {
+                "filePath": "src/app/services/entity-list.service.ts",
+                "type": "injectable",
+                "linktype": "injectable",
+                "name": "EntityListService",
+                "coveragePercent": 88,
+                "coverageCount": "15/17",
+                "status": "very-good"
             },
             {
                 "filePath": "src/app/services/page.service.ts",

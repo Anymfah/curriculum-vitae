@@ -175,3 +175,55 @@ export enum WORK_CATEGORY {
   VIDEO_PRODUCTION = 'Production vidéo',
   OTHERS = 'Autres',
 }
+
+/**
+ * Data Type of entity extending the AbstractEntity
+ */
+export enum DATA_TYPE {
+  SKILL = 'SKILL',
+  WORK = 'WORK',
+  PROJECT = 'PROJECT',
+  EDUCATION = 'EDUCATION',
+}
+
+/**
+ * Enum Order by
+ * @see QueryInterface
+ */
+export enum ORDER_BY {
+  ASC = 'ASC',
+  DESC = 'DESC',
+}
+
+/**
+ * Data fields of Entities
+ * @see QueryInterface
+ */
+export enum DATA_FIELD {
+  ID = 'id',
+  NAME = 'name',
+  SUBTITLE = 'subtitle',
+  START_DATE = 'startDate',
+  END_DATE = 'endDate',
+  LEVEL = 'level',
+  HAPPINESS = 'happiness',
+  EXPERIENCE = 'experience',
+  FAVORITE = 'favorite',
+  SKILL_CATEGORY = 'skillCategory',
+  SKILL_ENTITY = 'skills',
+  PROJECT_ENTITY = 'projects',
+  WORK_CATEGORY = 'workCategory',
+}
+
+/**
+ * Enum Order by field
+ * @see QueryInterface
+ */
+export enum ORDER_BY_FIELD {
+  START_DATE = 'startDate',
+  NAME = 'name',
+  HAPPINESS = 'happiness',
+  LEVEL = 'level',
+  EXPERIENCE = 'experience',
+}
+

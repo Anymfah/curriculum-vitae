@@ -33,7 +33,7 @@ const fiveBestSkills: ListItem[] = [];
 
 DATA_SKILLS.forEach((skill: SkillDataInterface) => {
   if (skill.favorite) {
-    console.log('skill: ', skill);
+    //console.log('skill: ', skill);
     fiveBestSkills.push({
       title: skill.title,
       subtitle: `${skill.level}%`,
