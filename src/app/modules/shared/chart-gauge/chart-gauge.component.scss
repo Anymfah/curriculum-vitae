@@ -1,0 +1,28 @@
+@use 'functions' as fn;
+
+:host {
+  width: 100%;
+}
+
+.chart-gauge {
+  &__container {
+    height: 6px;
+    width: 100%;
+  }
+  &__fill {
+    height: 100%;
+    border-radius: 3px;
+    width: 0;
+    background-color: fn.get-color(primary, 500);
+    position: relative;
+  }
+
+  &__value {
+    position: absolute;
+    margin-left: 3px;
+    top: 0;
+    left: 100%;
+    line-height: 8px;
+    color: fn.get-color(contrast, 50);
+  }
+}

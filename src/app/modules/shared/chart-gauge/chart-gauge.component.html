@@ -1,3 +1,5 @@
-<div class="chart-gauge__container">
-  <div class="chart-gauge__fill"></div>
+<div class="chart-gauge__container flex">
+  <div class="chart-gauge__fill" [style.width.%]="value">
+    <div class="chart-gauge__value small">{{value}}%</div>
+  </div>
 </div>

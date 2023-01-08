@@ -13,7 +13,7 @@ export default {
   component: ChartGaugeComponent,
   parameters: {
     controls: { hideNoControlsWarning: true },
-    layout: 'fullscreen',
+    layout: 'centered',
   },
   argTypes: {
     value: {
@@ -30,8 +30,8 @@ export default {
     }),
     componentWrapperDecorator((story) => {
       return `<cv-storybook-wrapper
-                width="100%"
-                height="100vh"
+                width="300px"
+                height="200px"
         >${story}</cv-storybook-wrapper>`
     })
   ],

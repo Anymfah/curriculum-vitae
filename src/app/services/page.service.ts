@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {MatTabNavPanel} from "@angular/material/tabs";
 import {BehaviorSubject} from "rxjs";
 import {MenuItem} from "../modules/main/components/menu/menu.interface";
@@ -154,7 +154,7 @@ export class PageService {
     if (item != null) {
       const activeItemIndex = this._activeItem.getValue()?.index ?? 0;
       this.activateItem(item);
-      const direction = item.index > activeItemIndex;
+      const direction = item.index < activeItemIndex;
       this.setPageDirection(direction);
       this._router.navigate([item.link]).then();
     }
