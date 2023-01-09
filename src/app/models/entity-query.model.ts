@@ -1,6 +1,5 @@
 import {EntityType} from '../types/entity.type';
-import {DATA_FIELD, ORDER_BY} from '../enums/data.enum';
-import {QueryInterface} from '../interfaces/query.interface';
+import {OrderByInterface, QueryFilterInterface, QueryInterface} from '../interfaces/query.interface';
 
 export class EntityQueryModel<T = EntityType> {
 
@@ -17,39 +16,36 @@ export class EntityQueryModel<T = EntityType> {
   /**
    * Limit entities to a certain number - 0 for all
    */
-  private _limit: number = 0;
+  private readonly _limitNum?: number;
 
   /**
    * Order By Field
    */
-  private _orderByField?: DATA_FIELD;
+  private readonly _orderBy?: OrderByInterface[];
 
   /**
-   * Direction to order entities by
+   * Search in collection
    */
-  private _orderByDirection?: ORDER_BY;
+  private readonly _searchStr?: string;
 
   /**
    * Arguments to apply to the query
    */
-  private readonly _fields: QueryInterface[] = [];
+  private readonly _filters?: QueryFilterInterface[];
 
   /**
    * @constructor
+   * @param collection Collection to work on
+   * @param args Arguments to apply to the query
    */
-  public constructor(collection: EntityType[], args: {
-    fields?: QueryInterface[],
-    orderBy?: {
-      field: DATA_FIELD,
-      direction: ORDER_BY,
-    },
-    limit?: number,
-  }) {
+  public constructor(collection: EntityType[], args: QueryInterface) {
     this._collectionOrigin = collection;
     this._collection = collection;
 
-    this._limit = args.limit ?? 0;
-    this._fields = args.fields ?? [];
+    this._limitNum = args.limit;
+    this._filters = args.filters;
+    this._orderBy = args.orderBy;
+    this._searchStr = args.search;
 
     this._init();
   }
@@ -58,9 +54,31 @@ export class EntityQueryModel<T = EntityType> {
     /**
      * Start with filter if fields are provided
      */
-    if (this._fields.length > 0) {
-      this._collection = this._filterCollection(this._collection, this._fields);
+    if (this._filters != null && this._filters.length > 0) {
+      this._collection = this._filterCollection(this._collection, this._filters);
     }
+
+    /**
+     * Order by if fields are provided
+     */
+    if (this._orderBy != null && this._orderBy.length > 0) {
+      this._collection = this._orderByCollection(this._collection, this._orderBy);
+    }
+
+    /**
+     * Search if search string is provided
+     */
+    if (this._searchStr != null && this._searchStr.length > 0) {
+      this._collection = this._search(this._collection, this._searchStr);
+    }
+
+    /**
+     * Limit if limit is provided
+     */
+    if (this._limitNum != null && this._limitNum > 0) {
+      this._collection = this._limit(this._collection, this._limitNum);
+    }
+
   }
 
   /**
@@ -68,7 +86,7 @@ export class EntityQueryModel<T = EntityType> {
    * @param collection Collection to filter
    * @param fields Fields to filter by
    */
-  private _filterCollection(collection: EntityType[], fields: QueryInterface[]): EntityType[] {
+  private _filterCollection(collection: EntityType[], fields: QueryFilterInterface[]): EntityType[] {
     fields.forEach((field) => {
       if (collection[0]?.hasOwnProperty(field.name)) {
         collection = collection.filter((entity: EntityType) => {
@@ -80,20 +98,40 @@ export class EntityQueryModel<T = EntityType> {
   }
 
   /**
-   * Order entities by
-   * @param field
-   * @param direction
+   * Order collection by
+   * @param collection Collection to order
+   * @param fields Fields to order by
    */
-  public orderBy(field: string, direction: string): EntityQueryModel {
-    return this;
+  private _orderByCollection(collection: EntityType[], fields: OrderByInterface[]): EntityType[] {
+    fields.forEach((field: OrderByInterface) => {
+
+      if (collection[0]?.hasOwnProperty(field.name)) {
+        collection = collection.sort((a: EntityType, b: EntityType) => {
+          return a.orderByNativeField(field, b);
+        });
+      }
+    });
+    return collection;
+  }
+
+  /**
+   * Search in collection
+   * @param collection Collection to search in
+   * @param search Search string
+   */
+  private _search(collection: EntityType[], search: string): EntityType[]{
+    return collection.filter((entity: EntityType) => {
+      return entity.search(search);
+    });
   }
 
   /**
    * Limit entities to
+   * @param collection
    * @param limit Number of entities to limit to
    */
-  public limit(limit: number): EntityQueryModel {
-    return this;
+  private _limit(collection: EntityType[], limit: number): EntityType[] {
+    return collection.slice(0, limit);
   }
 
   /**

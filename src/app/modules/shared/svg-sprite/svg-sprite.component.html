@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none;">
+  <symbol *ngFor="let icon of icons"
+          id="{{icon.name}}"
+          [attr.viewBox]="icon.viewBox" [innerHTML]="icon.content">
+  </symbol>
+</svg>

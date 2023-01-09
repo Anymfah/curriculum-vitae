@@ -2,9 +2,8 @@ import {componentWrapperDecorator, moduleMetadata} from "@storybook/angular";
 import {MainStorybookModuleConstant} from "../../main-storybook-module.constant";
 import {Meta, Story} from "@storybook/angular/types-6-0";
 import {ListComponent} from './list.component';
-import {ListItem} from './list-item.interface';
-import {DATA_SKILLS} from '../../../../constants/data-skills.constant';
-import {SkillDataInterface} from '../../../../interfaces/data.interface';
+import {QueryInterface} from '../../../../interfaces/query.interface';
+import {DATA_FIELD, ORDER_FIELD} from '../../../../enums/data.enum';
 
 export default {
   title: 'Parts/List',
@@ -29,28 +28,27 @@ const Template: Story<ListComponent> = (args: ListComponent) => ({
 
 export const List = Template.bind({});
 
-const fiveBestSkills: ListItem[] = [];
 
-DATA_SKILLS.forEach((skill: SkillDataInterface) => {
-  if (skill.favorite) {
-    //console.log('skill: ', skill);
-    fiveBestSkills.push({
-      title: skill.title,
-      subtitle: `${skill.level}%`,
-      icon: 'star',
-      color: skill.color,
-    });
-  }
-});
+const queryArgs: QueryInterface = {
+  limit: 15,
+  filters: [
+    {
+      name: DATA_FIELD.FAVORITE,
+      value: true,
+    },
+    {
+      name: DATA_FIELD.HAPPINESS,
+      value: 100,
+    }
+  ],
+  orderBy: [
+    {
+      name: ORDER_FIELD.HAPPINESS,
+    },
 
-// Keep the 5 best skills by level or happiness
-if (fiveBestSkills.length > 5) {
-  fiveBestSkills.sort((a: ListItem, b: ListItem) => {
-    return parseInt(<string>b.subtitle, 10) - parseInt(<string>a.subtitle, 10);
-  });
-  fiveBestSkills.splice(5);
+  ]
 }
 
 List.args = {
-  items: fiveBestSkills,
+  queryArgs: queryArgs,
 }

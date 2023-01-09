@@ -3,6 +3,7 @@ import {ListItem} from './list-item.interface';
 import {DATA_TYPE} from '../../../../enums/data.enum';
 import {EntityListService} from '../../../../services/entity-list.service';
 import {EntityType} from '../../../../types/entity.type';
+import {QueryInterface} from '../../../../interfaces/query.interface';
 
 @Component({
   selector: 'cv-list',
@@ -22,20 +23,14 @@ export class ListComponent implements OnInit {
   public itemsToRender: ListItem[] = [];
 
   /**
-   * Number of items
+   * Query for entities
    */
-  @Input() public numberOfItems: number = 5;
+  @Input() queryArgs?: QueryInterface;
 
   /**
    * Data type - Choose what to display
    */
   @Input() public entityType: DATA_TYPE = DATA_TYPE.SKILL;
-
-  /**
-   * Order entities by
-   */
-  @Input() public orderBy:
-    'name' | 'date' | 'level' | 'happiness' | 'experience' = 'name';
 
   /**
    * Entities to work on
@@ -63,7 +58,8 @@ export class ListComponent implements OnInit {
    * Get entities from service
    */
   private _getEntities() {
-    this._entities = this._entityListService.getCollectionByType(this.entityType);
+    this._entities = this._entityListService
+      .getFilteredCollection(this.entityType, this.queryArgs);
   }
 
   /**
@@ -72,8 +68,19 @@ export class ListComponent implements OnInit {
   private _getItemsToRender(): ListItem[] {
     const itemsToRender: ListItem[] = [];
     this._entities.forEach((entity: EntityType) => {
-
+      itemsToRender.push(this._entityToItem(entity));
     });
     return itemsToRender;
+  }
+
+  /**
+   * EntityType to ListItem
+   */
+  private _entityToItem(entity: EntityType): ListItem {
+    return {
+      id: entity.id,
+      title: entity.name,
+      subtitle: entity.subtitle,
+    };
   }
 }

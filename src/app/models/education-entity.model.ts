@@ -1,8 +1,9 @@
 import {AbstractEntity} from './abstract-entity.model';
 import {EducationDataInterface} from '../interfaces/data.interface';
-import {QueryInterface} from '../interfaces/query.interface';
+import {OrderByInterface, QueryFilterInterface} from '../interfaces/query.interface';
 import {DATA_FIELD} from '../enums/data.enum';
 import {compareValuesUtil} from '../utils/compare-values.util';
+import {EntityType} from '../types/entity.type';
 
 
 export class EducationEntity extends AbstractEntity<EducationDataInterface> {
@@ -44,7 +45,7 @@ export class EducationEntity extends AbstractEntity<EducationDataInterface> {
    * @method filterByField Filter the entity.
    * @param filter Filter to be applied.
    */
-  public filterByField(filter: QueryInterface): boolean {
+  public filterByField(filter: QueryFilterInterface): boolean {
     switch (filter.name) {
       case DATA_FIELD.START_DATE:
         if (typeof filter.value === 'string' || filter.value instanceof Date) {
@@ -64,5 +65,16 @@ export class EducationEntity extends AbstractEntity<EducationDataInterface> {
         }
     }
     return false;
+  }
+
+  /**
+   * @method orderByField Order the entity.
+   * @param order Order to be applied.
+   * @param compareWith Entity to be compared with.
+   */
+  public orderByField(order: OrderByInterface, compareWith: EntityType): number {
+    switch (order.name) {
+    }
+    return 0;
   }
 }

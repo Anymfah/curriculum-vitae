@@ -1,5 +1,6 @@
 import {GenericData} from '../interfaces/data.interface';
-import {QueryInterface} from '../interfaces/query.interface';
+import {OrderByInterface, QueryFilterInterface} from '../interfaces/query.interface';
+import {EntityType} from '../types/entity.type';
 
 /**
  * Entity model
@@ -46,7 +47,29 @@ export abstract class AbstractEntity<T extends GenericData> {
   }
 
   /**
-   * @method filter Filter the entity.
+   * @method Filter the entity.
    */
-  public abstract filterByField(filter: QueryInterface): boolean;
+  public abstract filterByField(filter: QueryFilterInterface): boolean;
+
+  /**
+   * @method Order the entity
+   */
+  public abstract orderByField(order: OrderByInterface, compareWith: EntityType): number;
+
+  /**
+   * @method Order the entity by native field
+   */
+  public orderByNativeField(order: OrderByInterface, compareWith: EntityType): number {
+    const orderName = order.name as keyof EntityType;
+    if (typeof compareWith[orderName] === 'string' && typeof this[orderName] === 'string') {
+      return (compareWith[orderName] as string).localeCompare(this[orderName] as string);
+    } else if (typeof compareWith[orderName] === 'number' && typeof this[orderName] === 'number') {
+      return (compareWith[orderName] as number) - (this[orderName] as number);
+    } else if (compareWith[orderName] instanceof Date && this[orderName] instanceof Date) {
+      return (
+        (compareWith[orderName] as unknown) as Date).getTime()
+        - ((this[orderName] as unknown) as Date).getTime();
+    }
+    return 0;
+  }
 }

@@ -1,0 +1,6 @@
+@use 'functions' as fn;
+
+:root {
+  /// Color of the icon
+  --svg-icon--color: #{fn.get-color(contrast, 50)};
+}

@@ -1,0 +1,6 @@
+
+<svg *ngIf="svgIcon != null && !svgIcon.hasGradient" class="svg-icon-{{svgIcon.name}}">
+  <use [attr.xlink:href]="'#' + svgIcon.name"/>
+</svg>
+
+<img *ngIf="svgIcon != null && svgIcon.hasGradient === true" [src]="'assets/svg-icon/' + svgIcon.name + '.svg'"/>

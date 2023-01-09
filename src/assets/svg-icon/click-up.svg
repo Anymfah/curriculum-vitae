@@ -1,0 +1,22 @@
+<svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+     viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:url(#SVGID_1_CLICKUP);}
+  .st1{fill:url(#SVGID_2_CLICKUP);}
+</style>
+  <g>
+
+		<linearGradient id="SVGID_1_CLICKUP" gradientUnits="userSpaceOnUse" x1="1.354" y1="507.1388" x2="4.5924" y2="507.1388" gradientTransform="matrix(129.03 0 0 -54.12 -127.63 27865.4375)">
+		<stop  offset="0" style="stop-color:#8930FD"/>
+      <stop  offset="1" style="stop-color:#49CCF9"/>
+	</linearGradient>
+    <path class="st0" d="M47.1,390.5l77.1-59.1c41,53.5,84.5,78.1,132.9,78.1c48.2,0,90.5-24.4,129.6-77.4l78.2,57.6
+		c-56.4,76.5-126.6,116.9-207.8,116.9C176.2,506.7,105.3,466.6,47.1,390.5z"/>
+
+    <linearGradient id="SVGID_2_CLICKUP" gradientUnits="userSpaceOnUse" x1="1.4203" y1="511.3267" x2="4.6587" y2="511.3267" gradientTransform="matrix(123.63 0 0 -76.2 -119.42 39091.7578)">
+		<stop  offset="0" style="stop-color:#FF02F0"/>
+      <stop  offset="1" style="stop-color:#FFC800"/>
+	</linearGradient>
+    <path class="st1" d="M256.9,133.8L119.6,252l-63.4-73.6l201-173.2l199.4,173.3l-63.7,73.3L256.9,133.8z"/>
+</g>
+</svg>

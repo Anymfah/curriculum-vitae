@@ -14,7 +14,7 @@ import {
   WorkDataInterface
 } from '../interfaces/data.interface';
 import {DATA_WORK} from '../constants/data-work.constant';
-import {DATA_FIELD, DATA_TYPE, ORDER_BY, ORDER_BY_FIELD, SKILL_CATEGORY} from '../enums/data.enum';
+import {DATA_TYPE, ORDER_DIRECTION, ORDER_FIELD} from '../enums/data.enum';
 import {QueryInterface} from '../interfaces/query.interface';
 import {EntityQueryModel} from '../models/entity-query.model';
 
@@ -98,7 +98,7 @@ export class EntityListService {
       ...this._projects.value
     ]);
 
-    console.log(this.getFilteredCollection(
+    /*console.log(this.getFilteredCollection(
       DATA_TYPE.SKILL,
       [{
         name: DATA_FIELD.HAPPINESS,
@@ -114,6 +114,17 @@ export class EntityListService {
         value: SKILL_CATEGORY.FRONT_END
       }
       ]
+    ))*/
+    console.log(this);
+    console.log(this.getFilteredCollection(
+      DATA_TYPE.PROJECT, {
+        orderBy: [
+          {
+            name: ORDER_FIELD.START_DATE,
+            direction: ORDER_DIRECTION.ASC,
+          }
+        ]
+      } as QueryInterface
     ))
   }
 
@@ -176,6 +187,7 @@ export class EntityListService {
   /**
    * Get the project collection.
    * @param data Data to be used to populate the collection.
+   * TODO: Missing projects, get from personal work or hobby...
    */
   private _getProjectCollection(data: ProjectDataInterface[]): ProjectEntity[] {
     const projects: ProjectEntity[] = [];
@@ -222,50 +234,17 @@ export class EntityListService {
   /**
    * @method Get Filtered Collection
    * @param type Type of collection to get.
-   * @param filter Filter to apply to the collection.
-   * @param orderBy Order to apply to the collection.
-   * @param orderByField Field to order by.
-   * @param limit Limit to apply to the collection.
-   * @param offset Offset to apply to the collection.
-   * @param search Search to apply to the collection.
+   * @param args Filters/Ordering to apply to the collection.
    */
   public getFilteredCollection(
     type: DATA_TYPE,
-    filter: QueryInterface[],
-    orderBy?: {
-      field: DATA_FIELD,
-      direction: ORDER_BY,
-    },
-    orderByField: ORDER_BY_FIELD = ORDER_BY_FIELD.NAME,
-    limit?: number,
-    offset: number = 0,
-    search: string = ''
-  ): EntityType[] {
+    args?: QueryInterface): EntityType[] {
     let collection = this.getCollectionByType(type);
-    if (search != null) {
-      collection = this._searchCollection(collection, search);
-    }
-    if (filter != null || orderBy != null || limit != null || offset > 0) {
-      const query = new EntityQueryModel(collection, {
-        fields: filter,
-        orderBy: orderBy,
-        limit: limit,
-      });
+    if (args != null) {
+      const query = new EntityQueryModel(collection, args);
       collection = query.getCollection();
     }
 
     return collection;
-  }
-
-  /**
-   * @method Search Collection
-   * @param collection Collection to search.
-   * @param search Search to apply to the collection.
-   * @returns Filtered collection.
-   */
-  private _searchCollection(collection: EntityType[], search: string): EntityType[] {
-    return collection.filter((entity) => {
-      return entity.search(search);
-    });
   }
 }

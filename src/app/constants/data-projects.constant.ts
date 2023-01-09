@@ -64,6 +64,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
       SKILL_TITLE.GITLAB,
       SKILL_TITLE.AGILE,
     ],
+    icon: 'app',
   },
   MAJORDOC: {
     title: 'Majordoc',
@@ -93,6 +94,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
       SKILL_TITLE.GITLAB,
       SKILL_TITLE.AGILE,
     ],
+    icon: 'app',
   },
   CLICK_UP_MIGRATION: {
     title: 'Migration de Wrike vers ClickUp',
@@ -112,6 +114,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
       SKILL_TITLE.CLICK_UP,
       SKILL_TITLE.WRIKE,
     ],
+    icon: 'script',
   },
   SOLIVE: {
     title: 'SoLive',
@@ -133,7 +136,8 @@ export const DATA_PROJECTS: ProjectDataAlias = {
       SKILL_TITLE.GITLAB,
       SKILL_TITLE.POSTMAN,
       SKILL_TITLE.TECHNICAL_ENGLISH
-    ]
+    ],
+    icon: 'app',
   },
   VAL_ARLY: {
     title: 'Site de Val d\'Arly',
@@ -143,6 +147,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 95,
     category: [WORK_CATEGORY.WEBSITE_DEVELOPMENT],
     skills: RACCOURCI_WEBSITES_SKILLS,
+    icon: 'globe',
   },
   MEET_IN_HAINAUT: {
     title: 'Site de Meet in Hainaut',
@@ -152,6 +157,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 65,
     category: [WORK_CATEGORY.WEBSITE_DEVELOPMENT],
     skills: RACCOURCI_WEBSITES_SKILLS,
+    icon: 'globe',
   },
   VILLARD_DE_LANS: {
     title: 'Site de Villard de Lans',
@@ -161,6 +167,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 75,
     category: [WORK_CATEGORY.WEBSITE_DEVELOPMENT],
     skills: RACCOURCI_WEBSITES_SKILLS,
+    icon: 'globe',
   },
   ANGERS_DESTINATION: {
     title: 'Site d\'Angers Destination',
@@ -169,6 +176,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     endDate: '2021-06-30',
     happiness: 65,
     category: [WORK_CATEGORY.WEBSITE_DEVELOPMENT],
+    icon: 'globe',
     skills: RACCOURCI_WEBSITES_SKILLS,
   },
   ANGERS_EVENT: {
@@ -178,6 +186,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     endDate: '2021-04-30',
     happiness: 60,
     category: [WORK_CATEGORY.WEBSITE_DEVELOPMENT],
+    icon: 'globe',
     skills: RACCOURCI_WEBSITES_SKILLS,
   },
   VALLESPIR: {
@@ -187,6 +196,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     endDate: '2021-02-28',
     happiness: 90,
     category: [WORK_CATEGORY.WEBSITE_DEVELOPMENT],
+    icon: 'globe',
     skills: RACCOURCI_WEBSITES_SKILLS,
   },
   LEUCATE: {
@@ -196,6 +206,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     endDate: '2020-12-31',
     happiness: 75,
     category: [WORK_CATEGORY.WEBSITE_DEVELOPMENT],
+    icon: 'globe',
     skills: RACCOURCI_WEBSITES_SKILLS,
   },
   SALON_DE_PROVENCE: {
@@ -205,6 +216,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     endDate: '2020-07-31',
     happiness: 70,
     category: [WORK_CATEGORY.WEBSITE_DEVELOPMENT],
+    icon: 'globe',
     skills: RACCOURCI_WEBSITES_SKILLS,
   },
   LES_2_ALPES: {
@@ -214,6 +226,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     endDate: '2020-02-28',
     happiness: 100,
     category: [WORK_CATEGORY.WEBSITE_DEVELOPMENT],
+    icon: 'globe',
     skills: RACCOURCI_WEBSITES_SKILLS,
   },
   SKI_PLAN: {
@@ -224,6 +237,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 95,
     category: [WORK_CATEGORY.WEB_APPLICATION, WORK_CATEGORY.MOBILE_APPLICATION],
     skills: RACCOURCI_WEBSITES_SKILLS,
+    icon: 'app',
   },
   DORDOGNE_PERIGORD: {
     title: 'Site de Dordogne Périgord',
@@ -232,6 +246,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     endDate: '2018-12-31',
     happiness: 90,
     category: [WORK_CATEGORY.WEBSITE_DEVELOPMENT],
+    icon: 'globe',
     skills: RACCOURCI_WEBSITES_SKILLS,
   },
   DEVTOOLS: {
@@ -252,6 +267,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
       SKILL_TITLE.WEBPACK,
       SKILL_TITLE.TECHNICAL_ENGLISH
     ],
+    icon: 'app',
   },
   BRASERO_INDUSTRIE: {
     title: 'Site de Brasero Industrie',
@@ -269,6 +285,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
       SKILL_TITLE.PHOTOSHOP,
       SKILL_TITLE.ILLUSTRATOR,
     ],
+    icon: 'woocommerce',
   },
   MELUSINE: {
     title: 'Site de Melusine',
@@ -285,6 +302,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
       SKILL_TITLE.PHOTOSHOP,
       SKILL_TITLE.ILLUSTRATOR,
     ],
+    icon: 'wordpress',
   },
   CREAREGLE: {
     title: 'Site de Crearegle',
@@ -302,6 +320,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
       SKILL_TITLE.PHOTOSHOP,
       SKILL_TITLE.ILLUSTRATOR,
     ],
+    icon: 'woocommerce',
   },
   SOINS_EQUILIBRE: {
     title: 'Site de Soins d\'Equilibre',
@@ -318,6 +337,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
       SKILL_TITLE.PHOTOSHOP,
       SKILL_TITLE.ILLUSTRATOR,
     ],
+    icon: 'wordpress',
   },
   ANYM_LIVE: {
     title: 'Site d\'Anym Live',
@@ -335,6 +355,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
       SKILL_TITLE.ILLUSTRATOR,
       SKILL_TITLE.WOOCOMMERCE
     ],
+    icon: 'globe',
   },
   ANYM_LIVE_EDITOR: {
     title: 'Plugin WordPress Anym Live Editor',
@@ -353,6 +374,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
       SKILL_TITLE.GITHUB,
       SKILL_TITLE.WEBPACK,
     ],
+    icon: 'app',
   },
   XONAO: {
     title: 'Site eCommerce de Xonao',
@@ -370,6 +392,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
       SKILL_TITLE.ILLUSTRATOR,
       SKILL_TITLE.WOOCOMMERCE
     ],
+    icon: 'woocommerce',
   },
   WANTED_CREW_CD: {
     title: 'Création du CD Wanted Crew',
@@ -390,6 +413,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
       SKILL_TITLE.PHOTOSHOP,
       SKILL_TITLE.VIOLIN
     ],
+    icon: 'mao',
   },
   SOLIALMA_CD: {
     title: 'Création du CD Solialma',
@@ -409,6 +433,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
       SKILL_TITLE.PHOTOSHOP,
       SKILL_TITLE.VIOLIN
     ],
+    icon: 'mao',
   },
   EXTRANET: {
     title: 'Extranet',
@@ -426,6 +451,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
       SKILL_TITLE.GITHUB,
       SKILL_TITLE.WEBPACK,
     ],
+    icon: 'app',
   },
   NETINVESTISSEMENT_WEB: {
     title: 'Site de NetInvestissement',
@@ -447,6 +473,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
       SKILL_TITLE.WEBPACK,
       SKILL_TITLE.BOOTSTRAP,
     ],
+    icon: 'globe',
   },
   SOLOCAL_SIGNORET: {
     title: 'Site web Signoret',
@@ -456,6 +483,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 10,
     category: [WORK_CATEGORY.WEBSITE_DESIGN],
     skills: SOLOCAL_WEBSITES_SKILLS,
+    icon: 'wordpress',
   },
   SOLOCAL_VERANDA_SICARD: {
     title: 'Site web Veranda Sicard',
@@ -465,6 +493,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 20,
     category: [WORK_CATEGORY.WEBSITE_DESIGN],
     skills: SOLOCAL_WEBSITES_SKILLS,
+    icon: 'wordpress',
   },
   SOLOCAL_ASSB: {
     title: 'Site web ASSB Serrurerie',
@@ -474,6 +503,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 40,
     category: [WORK_CATEGORY.WEBSITE_DESIGN],
     skills: SOLOCAL_WEBSITES_SKILLS,
+    icon: 'wordpress',
   },
   SOLOCAL_MARBRERIE_GILLES: {
     title: 'Site web Marbrerie Gilles',
@@ -483,6 +513,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 10,
     category: [WORK_CATEGORY.WEBSITE_DESIGN],
     skills: SOLOCAL_WEBSITES_SKILLS,
+    icon: 'wordpress',
   },
   SOLOCAL_MARBRERIE_GIRARD: {
     title: 'Site web Marbrerie Girard',
@@ -492,6 +523,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 5,
     category: [WORK_CATEGORY.WEBSITE_DESIGN],
     skills: SOLOCAL_WEBSITES_SKILLS,
+    icon: 'wordpress',
   },
   SOLOCAL_MILLE_UN_JARDINS: {
     title: 'Site web Mille et un Jardins',
@@ -501,6 +533,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 40,
     category: [WORK_CATEGORY.WEBSITE_DESIGN],
     skills: SOLOCAL_WEBSITES_SKILLS,
+    icon: 'wordpress',
   },
   SOLOCAL_JDS_RENOVATION: {
     title: 'Site web JDS Rénovation',
@@ -510,6 +543,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 60,
     category: [WORK_CATEGORY.WEBSITE_DESIGN],
     skills: SOLOCAL_WEBSITES_SKILLS,
+    icon: 'wordpress',
   },
   SOLOCAL_ETS_FOUCAULT: {
     title: 'Site web ETS Foucault',
@@ -519,6 +553,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 80,
     category: [WORK_CATEGORY.WEBSITE_DESIGN],
     skills: SOLOCAL_WEBSITES_SKILLS,
+    icon: 'wordpress',
   },
   SOLOCAL_DURAND_EROLES_CASTAGNET: {
     title: 'Site web Durand Eroles Castagnet',
@@ -528,6 +563,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 35,
     category: [WORK_CATEGORY.WEBSITE_DESIGN],
     skills: SOLOCAL_WEBSITES_SKILLS,
+    icon: 'wordpress',
   },
   SOLOCAL_DONNET: {
     title: 'Site web Donnet',
@@ -537,6 +573,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 15,
     category: [WORK_CATEGORY.WEBSITE_DESIGN],
     skills: SOLOCAL_WEBSITES_SKILLS,
+    icon: 'wordpress',
   },
   SOLOCAL_CORDERIE_CLEMENT: {
     title: 'Site web Corderie Clément',
@@ -546,6 +583,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 60,
     category: [WORK_CATEGORY.WEBSITE_DESIGN],
     skills: SOLOCAL_WEBSITES_SKILLS,
+    icon: 'wordpress',
   },
   SOLOCAL_NICE_WOLFF: {
     title: 'Site web Nice Wolff',
@@ -555,6 +593,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 55,
     category: [WORK_CATEGORY.WEBSITE_DESIGN],
     skills: SOLOCAL_WEBSITES_SKILLS,
+    icon: 'wordpress',
   },
   SOLOCAL_ASTRAL: {
     title: 'Site web Astral',
@@ -564,6 +603,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 75,
     category: [WORK_CATEGORY.WEBSITE_DESIGN],
     skills: SOLOCAL_WEBSITES_SKILLS,
+    icon: 'wordpress',
   },
   SOLOCAL_APS: {
     title: 'Site web APS',
@@ -573,6 +613,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 25,
     category: [WORK_CATEGORY.WEBSITE_DESIGN],
     skills: SOLOCAL_WEBSITES_SKILLS,
+    icon: 'wordpress',
   },
   SOLOCAL_ANDEOL_FERMETURES: {
     title: 'Site web Andeol Fermétures',
@@ -582,6 +623,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 35,
     category: [WORK_CATEGORY.WEBSITE_DESIGN],
     skills: SOLOCAL_WEBSITES_SKILLS,
+    icon: 'wordpress',
   },
   SOLOCAL_CATALANO: {
     title: 'Site web Catalano',
@@ -591,6 +633,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 15,
     category: [WORK_CATEGORY.WEBSITE_DESIGN],
     skills: SOLOCAL_WEBSITES_SKILLS,
+    icon: 'wordpress',
   },
   SOLOCAL_POYET: {
     title: 'Site web Poyet',
@@ -600,6 +643,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 10,
     category: [WORK_CATEGORY.WEBSITE_DESIGN],
     skills: SOLOCAL_WEBSITES_SKILLS,
+    icon: 'wordpress',
   },
   SOLOCAL_MIGEON: {
     title: 'Site web Migeon',
@@ -609,6 +653,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 12,
     category: [WORK_CATEGORY.WEBSITE_DESIGN],
     skills: SOLOCAL_WEBSITES_SKILLS,
+    icon: 'wordpress',
   },
   SOLOCAL_LEHOUX: {
     title: 'Site web Lehoux',
@@ -618,6 +663,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 80,
     category: [WORK_CATEGORY.WEBSITE_DESIGN],
     skills: SOLOCAL_WEBSITES_SKILLS,
+    icon: 'wordpress',
   },
   SOLOCAL_ESCANOR: {
     title: 'Site web Escanor',
@@ -627,6 +673,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 35,
     category: [WORK_CATEGORY.WEBSITE_DESIGN],
     skills: SOLOCAL_WEBSITES_SKILLS,
+    icon: 'wordpress',
   },
   SOLOCAL_ABITAL: {
     title: 'Site web Abital',
@@ -636,6 +683,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 65,
     category: [WORK_CATEGORY.WEBSITE_DESIGN],
     skills: SOLOCAL_WEBSITES_SKILLS,
+    icon: 'wordpress',
   },
   SOLOCAL_MARATHON: {
     title: 'Site web Marathon',
@@ -645,6 +693,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 50,
     category: [WORK_CATEGORY.WEBSITE_DESIGN],
     skills: SOLOCAL_WEBSITES_SKILLS,
+    icon: 'wordpress',
   },
   SOLOCAL_SEM_ESPACES_VERTS: {
     title: 'Site web SEM Espaces Verts',
@@ -654,6 +703,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 70,
     category: [WORK_CATEGORY.WEBSITE_DESIGN],
     skills: SOLOCAL_WEBSITES_SKILLS,
+    icon: 'wordpress',
   },
   SOLOCAL_AF62: {
     title: 'Site web AF62',
@@ -663,6 +713,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 20,
     category: [WORK_CATEGORY.WEBSITE_DESIGN],
     skills: SOLOCAL_WEBSITES_SKILLS,
+    icon: 'wordpress',
   },
   SOLOCAL_SAD_LOC: {
     title: 'Site web SAD Loc',
@@ -672,6 +723,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 40,
     category: [WORK_CATEGORY.WEBSITE_DESIGN],
     skills: SOLOCAL_WEBSITES_SKILLS,
+    icon: 'wordpress',
   },
   SOLOCAL_ROADY: {
     title: 'Site web Roady',
@@ -681,6 +733,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 45,
     category: [WORK_CATEGORY.WEBSITE_DESIGN],
     skills: SOLOCAL_WEBSITES_SKILLS,
+    icon: 'wordpress',
   },
   SOLOCAL_CENA: {
     title: 'Site web Maison CENA',
@@ -690,6 +743,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 60,
     category: [WORK_CATEGORY.WEBSITE_DESIGN],
     skills: SOLOCAL_WEBSITES_SKILLS,
+    icon: 'wordpress',
   },
   SOLOCAL_ETS_MARTIN: {
     title: 'Site web ETS Martin',
@@ -699,6 +753,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 55,
     category: [WORK_CATEGORY.WEBSITE_DESIGN],
     skills: SOLOCAL_WEBSITES_SKILLS,
+    icon: 'wordpress',
   },
   SOLOCAL_ASTORE_FERMETURES: {
     title: 'Site web Astore Fermétures',
@@ -708,6 +763,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 70,
     category: [WORK_CATEGORY.WEBSITE_DESIGN],
     skills: SOLOCAL_WEBSITES_SKILLS,
+    icon: 'wordpress',
   },
   SOLOCAL_EM_ADHAP: {
     title: 'eMailing Adhap Services',
@@ -717,6 +773,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 30,
     category: [WORK_CATEGORY.EMAILING],
     skills: SOLOCAL_EMAILING_SKILLS,
+    icon: 'email',
   },
   SOLOCAL_EM_AFRELEC: {
     title: 'eMailing Afrelec',
@@ -726,6 +783,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 40,
     category: [WORK_CATEGORY.EMAILING],
     skills: SOLOCAL_EMAILING_SKILLS,
+    icon: 'email',
   },
   SOLOCAL_EM_AMOURDEFLEURS: {
     title: 'eMailing Amour de Fleurs',
@@ -735,6 +793,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 50,
     category: [WORK_CATEGORY.EMAILING],
     skills: SOLOCAL_EMAILING_SKILLS,
+    icon: 'email',
   },
   SOLOCAL_EM_ARSONNEAU: {
     title: 'eMailing Arsonneau',
@@ -744,6 +803,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 70,
     category: [WORK_CATEGORY.EMAILING],
     skills: SOLOCAL_EMAILING_SKILLS,
+    icon: 'email',
   },
   SOLOCAL_EM_ATRIUM: {
     title: 'eMailing Atrium',
@@ -753,6 +813,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 40,
     category: [WORK_CATEGORY.EMAILING],
     skills: SOLOCAL_EMAILING_SKILLS,
+    icon: 'email',
   },
   SOLOCAL_EM_AVIVA: {
     title: 'eMailing Aviva',
@@ -762,6 +823,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 60,
     category: [WORK_CATEGORY.EMAILING],
     skills: SOLOCAL_EMAILING_SKILLS,
+    icon: 'email',
   },
   SOLOCAL_EM_AVOCAT_SPECIALISTE: {
     title: 'eMailing Avocat Spécialiste',
@@ -771,6 +833,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 30,
     category: [WORK_CATEGORY.EMAILING],
     skills: SOLOCAL_EMAILING_SKILLS,
+    icon: 'email',
   },
   SOLOCAL_EM_BEAU_SEJOUR: {
     title: 'eMailing Beau Séjour',
@@ -780,6 +843,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 50,
     category: [WORK_CATEGORY.EMAILING],
     skills: SOLOCAL_EMAILING_SKILLS,
+    icon: 'email',
   },
   SOLOCAL_EM_BONES_HORES: {
     title: 'eMailing Bones Hôres',
@@ -789,6 +853,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 60,
     category: [WORK_CATEGORY.EMAILING],
     skills: SOLOCAL_EMAILING_SKILLS,
+    icon: 'email',
   },
   SOLOCAL_EM_CANDAS: {
     title: 'eMailing Candas',
@@ -798,6 +863,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 50,
     category: [WORK_CATEGORY.EMAILING],
     skills: SOLOCAL_EMAILING_SKILLS,
+    icon: 'email',
   },
   SOLOCAL_EM_CERAG: {
     title: 'eMailing Cerag',
@@ -807,6 +873,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 70,
     category: [WORK_CATEGORY.EMAILING],
     skills: SOLOCAL_EMAILING_SKILLS,
+    icon: 'email',
   },
   SOLOCAL_EM_CHORALIS: {
     title: 'eMailing Choralis',
@@ -816,6 +883,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 50,
     category: [WORK_CATEGORY.EMAILING],
     skills: SOLOCAL_EMAILING_SKILLS,
+    icon: 'email',
   },
   SOLOCAL_EM_CLERMONT_MUSIQUE: {
     title: 'eMailing Clermont Musique',
@@ -825,6 +893,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 35,
     category: [WORK_CATEGORY.EMAILING],
     skills: SOLOCAL_EMAILING_SKILLS,
+    icon: 'email',
   },
   SOLOCAL_EM_CLUB_DU_CUIR: {
     title: 'eMailing Club du Cuir',
@@ -834,6 +903,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 40,
     category: [WORK_CATEGORY.EMAILING],
     skills: SOLOCAL_EMAILING_SKILLS,
+    icon: 'email',
   },
   SOLOCAL_EM_COMBLESPACE: {
     title: 'eMailing Comblespace',
@@ -843,6 +913,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 10,
     category: [WORK_CATEGORY.EMAILING],
     skills: SOLOCAL_EMAILING_SKILLS,
+    icon: 'email',
   },
   SOLOCAL_EM_COMBLEZ_MOI: {
     title: 'eMailing Comblez Moi',
@@ -852,6 +923,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 40,
     category: [WORK_CATEGORY.EMAILING],
     skills: SOLOCAL_EMAILING_SKILLS,
+    icon: 'email',
   },
   SOLOCAL_EM_CONSEIL_DECORS: {
     title: 'eMailing Conseil Décors',
@@ -861,6 +933,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 3,
     category: [WORK_CATEGORY.EMAILING],
     skills: SOLOCAL_EMAILING_SKILLS,
+    icon: 'email',
   },
   SOLOCAL_EM_CROTZ: {
     title: 'eMailing Crotz',
@@ -870,6 +943,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 10,
     category: [WORK_CATEGORY.EMAILING],
     skills: SOLOCAL_EMAILING_SKILLS,
+    icon: 'email',
   },
   SOLOCAL_EM_CSDESIGN: {
     title: 'eMailing CSDesign',
@@ -879,6 +953,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 20,
     category: [WORK_CATEGORY.EMAILING],
     skills: SOLOCAL_EMAILING_SKILLS,
+    icon: 'email',
   },
   SOLOCAL_EM_ECORIDERS: {
     title: 'eMailing Ecoriders',
@@ -888,6 +963,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 35,
     category: [WORK_CATEGORY.EMAILING],
     skills: SOLOCAL_EMAILING_SKILLS,
+    icon: 'email',
   },
   SOLOCAL_EM_ESPACE_LIBERTE: {
     title: 'eMailing Espace Liberté',
@@ -897,6 +973,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 15,
     category: [WORK_CATEGORY.EMAILING],
     skills: SOLOCAL_EMAILING_SKILLS,
+    icon: 'email',
   },
   SOLOCAL_EM_GODEFROID: {
     title: 'eMailing Godefroid',
@@ -906,6 +983,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 15,
     category: [WORK_CATEGORY.EMAILING],
     skills: SOLOCAL_EMAILING_SKILLS,
+    icon: 'email',
   },
   SOLOCAL_EM_IDEAL_MENUISERIE: {
     title: 'eMailing Idéal Menuiserie',
@@ -915,6 +993,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 15,
     category: [WORK_CATEGORY.EMAILING],
     skills: SOLOCAL_EMAILING_SKILLS,
+    icon: 'email',
   },
   SOLOCAL_EM_JEFFERSON: {
     title: 'eMailing Jefferson',
@@ -924,6 +1003,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 70,
     category: [WORK_CATEGORY.EMAILING],
     skills: SOLOCAL_EMAILING_SKILLS,
+    icon: 'email',
   },
   SOLOCAL_EM_KARUKERA: {
     title: 'eMailing Karukera',
@@ -933,6 +1013,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 55,
     category: [WORK_CATEGORY.EMAILING],
     skills: SOLOCAL_EMAILING_SKILLS,
+    icon: 'email',
   },
   SOLOCAL_EM_KFORM: {
     title: 'eMailing KForm',
@@ -942,6 +1023,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 80,
     category: [WORK_CATEGORY.EMAILING],
     skills: SOLOCAL_EMAILING_SKILLS,
+    icon: 'email',
   },
   SOLOCAL_EM_LYON_REMORQUAGE: {
     title: 'eMailing Lyon Remorquage',
@@ -951,6 +1033,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 1,
     category: [WORK_CATEGORY.EMAILING],
     skills: SOLOCAL_EMAILING_SKILLS,
+    icon: 'email',
   },
   SOLOCAL_EM_MIDIFIOUL: {
     title: 'eMailing Midifioûl',
@@ -960,6 +1043,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 50,
     category: [WORK_CATEGORY.EMAILING],
     skills: SOLOCAL_EMAILING_SKILLS,
+    icon: 'email',
   },
   SOLOCAL_EM_MISE_EN_BOUCHE: {
     title: 'eMailing Mise en Bouche',
@@ -969,6 +1053,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 70,
     category: [WORK_CATEGORY.EMAILING],
     skills: SOLOCAL_EMAILING_SKILLS,
+    icon: 'email',
   },
   SOLOCAL_EM_ORPI: {
     title: 'eMailing Orpi',
@@ -978,6 +1063,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 5,
     category: [WORK_CATEGORY.EMAILING],
     skills: SOLOCAL_EMAILING_SKILLS,
+    icon: 'email',
   },
   SOLOCAL_EM_PANORAMIC: {
     title: 'eMailing Panoramic',
@@ -987,6 +1073,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 5,
     category: [WORK_CATEGORY.EMAILING],
     skills: SOLOCAL_EMAILING_SKILLS,
+    icon: 'email',
   },
   SOLOCAL_EM_RAY_ASSAINISSEMENT: {
     title: 'eMailing Ray Assainissement',
@@ -996,6 +1083,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 50,
     category: [WORK_CATEGORY.EMAILING],
     skills: SOLOCAL_EMAILING_SKILLS,
+    icon: 'email',
   },
   SOLOCAL_EM_REPROCOLOR: {
     title: 'eMailing Reprocolor',
@@ -1005,6 +1093,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 10,
     category: [WORK_CATEGORY.EMAILING],
     skills: SOLOCAL_EMAILING_SKILLS,
+    icon: 'email',
   },
   SOLOCAL_EM_ROCK_THE_HOUSE: {
     title: 'eMailing Rock the House',
@@ -1014,6 +1103,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 70,
     category: [WORK_CATEGORY.EMAILING],
     skills: SOLOCAL_EMAILING_SKILLS,
+    icon: 'email',
   },
   SOLOCAL_EM_SLPRODUCTION: {
     title: 'eMailing SLProduction',
@@ -1023,6 +1113,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 50,
     category: [WORK_CATEGORY.EMAILING],
     skills: SOLOCAL_EMAILING_SKILLS,
+    icon: 'email',
   },
   SOLOCAL_EM_SOMAFRAC: {
     title: 'eMailing Somafraç',
@@ -1032,6 +1123,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 15,
     category: [WORK_CATEGORY.EMAILING],
     skills: SOLOCAL_EMAILING_SKILLS,
+    icon: 'email',
   },
   SOLOCAL_EM_SOMATRANS: {
     title: 'eMailing Somatrans',
@@ -1041,6 +1133,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 65,
     category: [WORK_CATEGORY.EMAILING],
     skills: SOLOCAL_EMAILING_SKILLS,
+    icon: 'email',
   },
   SOLOCAL_EM_STOP_AUTOECOLE: {
     title: 'eMailing Stop Auto-école',
@@ -1050,6 +1143,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 30,
     category: [WORK_CATEGORY.EMAILING],
     skills: SOLOCAL_EMAILING_SKILLS,
+    icon: 'email',
   },
   SOLOCAL_EM_TAXIF1: {
     title: 'eMailing TaxiF1',
@@ -1059,6 +1153,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 10,
     category: [WORK_CATEGORY.EMAILING],
     skills: SOLOCAL_EMAILING_SKILLS,
+    icon: 'email',
   },
   SOLOCAL_EM_TRANSALPSERVICES: {
     title: 'eMailing Transalpservices',
@@ -1068,6 +1163,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 70,
     category: [WORK_CATEGORY.EMAILING],
     skills: SOLOCAL_EMAILING_SKILLS,
+    icon: 'email',
   },
   SOLOCAL_EM_TRAVAUX_HERCULES: {
     title: 'eMailing Travaux Hercule',
@@ -1077,6 +1173,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 45,
     category: [WORK_CATEGORY.EMAILING],
     skills: SOLOCAL_EMAILING_SKILLS,
+    icon: 'email',
   },
   SOLOCAL_EM_TRISPAGE: {
     title: 'eMailing Trispage',
@@ -1086,6 +1183,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 20,
     category: [WORK_CATEGORY.EMAILING],
     skills: SOLOCAL_EMAILING_SKILLS,
+    icon: 'email',
   },
   SOLOCAL_EM_VBL: {
     title: 'eMailing VBL',
@@ -1095,6 +1193,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 45,
     category: [WORK_CATEGORY.EMAILING],
     skills: SOLOCAL_EMAILING_SKILLS,
+    icon: 'email',
   },
   SOLOCAL_EM_VERDIERFUSCO: {
     title: 'eMailing Verdier Fusco',
@@ -1104,6 +1203,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 5,
     category: [WORK_CATEGORY.EMAILING],
     skills: SOLOCAL_EMAILING_SKILLS,
+    icon: 'email',
   },
   SOLOCAL_EM_VILLA_DE_VINCI: {
     title: 'eMailing Villa de Vinci',
@@ -1113,6 +1213,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 45,
     category: [WORK_CATEGORY.EMAILING],
     skills: SOLOCAL_EMAILING_SKILLS,
+    icon: 'email',
   },
   SOLOCAL_EM_VISA_EMPLOI: {
     title: 'eMailing Visa Emploi',
@@ -1122,6 +1223,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 40,
     category: [WORK_CATEGORY.EMAILING],
     skills: SOLOCAL_EMAILING_SKILLS,
+    icon: 'email',
   },
   SOLOCAL_EM_VOILLARD: {
     title: 'eMailing Voillard',
@@ -1131,6 +1233,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 25,
     category: [WORK_CATEGORY.EMAILING],
     skills: SOLOCAL_EMAILING_SKILLS,
+    icon: 'email',
   },
   SOLOCAL_EM_ZEROTAXE: {
     title: 'eMailing Zerotaxe',
@@ -1140,6 +1243,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 60,
     category: [WORK_CATEGORY.EMAILING],
     skills: SOLOCAL_EMAILING_SKILLS,
+    icon: 'email',
   },
   SOLOCAL_M_ACFWILL: {
     title: 'Mailing papier ACFWILL',
@@ -1149,6 +1253,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 10,
     category: [WORK_CATEGORY.MAILING],
     skills: SOLOCAL_MAILING_SKILLS,
+    icon: 'mail',
   },
   SOLOCAL_M_ALU_CONCEPT: {
     title: 'Mailing papier Alu Concept',
@@ -1158,6 +1263,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 10,
     category: [WORK_CATEGORY.MAILING],
     skills: SOLOCAL_MAILING_SKILLS,
+    icon: 'mail',
   },
   SOLOCAL_M_ASR: {
     title: 'Mailing papier ASR',
@@ -1167,6 +1273,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 65,
     category: [WORK_CATEGORY.MAILING],
     skills: SOLOCAL_MAILING_SKILLS,
+    icon: 'mail',
   },
   SOLOCAL_M_BRAVIN: {
     title: 'Mailing papier Bravin',
@@ -1176,6 +1283,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 70,
     category: [WORK_CATEGORY.MAILING],
     skills: SOLOCAL_MAILING_SKILLS,
+    icon: 'mail',
   },
   SOLOCAL_M_CIGAMM: {
     title: 'Mailing papier Cigamm',
@@ -1185,6 +1293,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 60,
     category: [WORK_CATEGORY.MAILING],
     skills: SOLOCAL_MAILING_SKILLS,
+    icon: 'mail',
   },
   SOLOCAL_M_COMBLESPACE: {
     title: 'Mailing papier Comblespace',
@@ -1194,6 +1303,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 10,
     category: [WORK_CATEGORY.MAILING],
     skills: SOLOCAL_MAILING_SKILLS,
+    icon: 'mail',
   },
   SOLOCAL_M_COPYTIME: {
     title: 'Mailing papier Copytime',
@@ -1203,6 +1313,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 10,
     category: [WORK_CATEGORY.MAILING],
     skills: SOLOCAL_MAILING_SKILLS,
+    icon: 'mail',
   },
   SOLOCAL_M_DOORWELL: {
     title: 'Mailing papier Doorwell',
@@ -1212,6 +1323,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 10,
     category: [WORK_CATEGORY.MAILING],
     skills: SOLOCAL_MAILING_SKILLS,
+    icon: 'mail',
   },
   SOLOCAL_M_EDIAC_FORMATION: {
     title: 'Mailing papier Ediac Formation',
@@ -1221,6 +1333,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 2,
     category: [WORK_CATEGORY.MAILING],
     skills: SOLOCAL_MAILING_SKILLS,
+    icon: 'mail',
   },
   SOLOCAL_M_EMPX: {
     title: 'Mailing papier Empx',
@@ -1230,6 +1343,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 5,
     category: [WORK_CATEGORY.MAILING],
     skills: SOLOCAL_MAILING_SKILLS,
+    icon: 'mail',
   },
   SOLOCAL_M_FLOREVER: {
     title: 'Mailing papier Florever',
@@ -1239,6 +1353,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 80,
     category: [WORK_CATEGORY.MAILING],
     skills: SOLOCAL_MAILING_SKILLS,
+    icon: 'mail',
   },
   SOLOCAL_M_GALERIES_VASSEUR: {
     title: 'Mailing papier Galeries Vasseur',
@@ -1248,6 +1363,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 10,
     category: [WORK_CATEGORY.MAILING],
     skills: SOLOCAL_MAILING_SKILLS,
+    icon: 'mail',
   },
   SOLOCAL_M_GOUEDIC: {
     title: 'Mailing papier Gouedic',
@@ -1257,6 +1373,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 10,
     category: [WORK_CATEGORY.MAILING],
     skills: SOLOCAL_MAILING_SKILLS,
+    icon: 'mail',
   },
   SOLOCAL_M_GRANJON: {
     title: 'Mailing papier Granjon',
@@ -1266,6 +1383,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 55,
     category: [WORK_CATEGORY.MAILING],
     skills: SOLOCAL_MAILING_SKILLS,
+    icon: 'mail',
   },
   SOLOCAL_M_GRIFFOIN: {
     title: 'Mailing papier Griffoin',
@@ -1275,6 +1393,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 70,
     category: [WORK_CATEGORY.MAILING],
     skills: SOLOCAL_MAILING_SKILLS,
+    icon: 'mail',
   },
   SOLOCAL_M_INTERMAIDE: {
     title: 'Mailing papier Intermaide',
@@ -1284,6 +1403,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 50,
     category: [WORK_CATEGORY.MAILING],
     skills: SOLOCAL_MAILING_SKILLS,
+    icon: 'mail',
   },
   SOLOCAL_M_JARDINS_DU_SOLEIL: {
     title: 'Mailing papier Jardins du Soleil',
@@ -1293,6 +1413,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 40,
     category: [WORK_CATEGORY.MAILING],
     skills: SOLOCAL_MAILING_SKILLS,
+    icon: 'mail',
   },
   SOLOCAL_M_LES_JARDINS_ST_TROPEZ: {
     title: 'Mailing papier Les Jardins St Tropez',
@@ -1302,6 +1423,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 70,
     category: [WORK_CATEGORY.MAILING],
     skills: SOLOCAL_MAILING_SKILLS,
+    icon: 'mail',
   },
   SOLOCAL_M_LES_MAINS_EN_PLUS: {
     title: 'Mailing papier Les Mains en Plus',
@@ -1311,6 +1433,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 30,
     category: [WORK_CATEGORY.MAILING],
     skills: SOLOCAL_MAILING_SKILLS,
+    icon: 'mail',
   },
   SOLOCAL_M_LORIENTAL: {
     title: 'Mailing papier Loriental',
@@ -1320,6 +1443,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 45,
     category: [WORK_CATEGORY.MAILING],
     skills: SOLOCAL_MAILING_SKILLS,
+    icon: 'mail',
   },
   SOLOCAL_M_MEDIUM_MUSIQUE: {
     title: 'Mailing papier Medium Musique',
@@ -1329,6 +1453,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 30,
     category: [WORK_CATEGORY.MAILING],
     skills: SOLOCAL_MAILING_SKILLS,
+    icon: 'mail',
   },
   SOLOCAL_M_PACEO: {
     title: 'Mailing papier Paceo',
@@ -1338,6 +1463,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 10,
     category: [WORK_CATEGORY.MAILING],
     skills: SOLOCAL_MAILING_SKILLS,
+    icon: 'mail',
   },
   SOLOCAL_M_SASSI: {
     title: 'Mailing papier Sassi',
@@ -1347,6 +1473,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 10,
     category: [WORK_CATEGORY.MAILING],
     skills: SOLOCAL_MAILING_SKILLS,
+    icon: 'mail',
   },
   SOLOCAL_M_SENLISS: {
     title: 'Mailing papier Senliss',
@@ -1356,6 +1483,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 40,
     category: [WORK_CATEGORY.MAILING],
     skills: SOLOCAL_MAILING_SKILLS,
+    icon: 'mail',
   },
   SOLOCAL_M_SPM: {
     title: 'Mailing papier SPM',
@@ -1365,6 +1493,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 15,
     category: [WORK_CATEGORY.MAILING],
     skills: SOLOCAL_MAILING_SKILLS,
+    icon: 'mail',
   },
   SOLOCAL_M_STORES_ROBERT: {
     title: 'Mailing papier Stores Robert',
@@ -1374,6 +1503,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 20,
     category: [WORK_CATEGORY.MAILING],
     skills: SOLOCAL_MAILING_SKILLS,
+    icon: 'mail',
   },
   SOLOCAL_M_VERSAUD: {
     title: 'Mailing papier Versaud',
@@ -1383,6 +1513,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 30,
     category: [WORK_CATEGORY.MAILING],
     skills: SOLOCAL_MAILING_SKILLS,
+    icon: 'mail',
   },
   SOLOCAL_M_VITEL_SPA: {
     title: 'Mailing papier Vitel Spa',
@@ -1392,5 +1523,6 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     happiness: 70,
     category: [WORK_CATEGORY.MAILING],
     skills: SOLOCAL_MAILING_SKILLS,
+    icon: 'mail',
   },
 }

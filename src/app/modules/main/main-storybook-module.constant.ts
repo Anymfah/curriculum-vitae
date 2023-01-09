@@ -21,6 +21,7 @@ import {CircleMenuItemComponent} from "./components/circle-menu-item/circle-menu
 import {PageWrapperModule} from "../shared/page-wrapper/page-wrapper.module";
 import {BlockComponent} from "./components/block/block.component";
 import {ListComponent} from './components/list/list.component';
+import {MatListModule} from '@angular/material/list';
 
 
 export const MainStorybookModuleConstant ={
@@ -51,6 +52,7 @@ export const MainStorybookModuleConstant ={
     DrawCircleModule,
     StorybookWrapperModule,
     PageWrapperModule,
+    MatListModule
   ],
   exports: [
     MainComponent,

@@ -91,7 +91,6 @@ export enum SKILL_TITLE {
   EXPRESS = 'Express',
   JEST = 'Jest',
   MOCHA = 'Mocha',
-  CHAI = 'Chai',
   CYPRUS = 'Cypress',
   JASMINE = 'Jasmine',
   KARMA = 'Karma',
@@ -190,7 +189,7 @@ export enum DATA_TYPE {
  * Enum Order by
  * @see QueryInterface
  */
-export enum ORDER_BY {
+export enum ORDER_DIRECTION {
   ASC = 'ASC',
   DESC = 'DESC',
 }
@@ -219,8 +218,10 @@ export enum DATA_FIELD {
  * Enum Order by field
  * @see QueryInterface
  */
-export enum ORDER_BY_FIELD {
+export enum ORDER_FIELD {
+  ID = 'id',
   START_DATE = 'startDate',
+  END_DATE = 'endDate',
   NAME = 'name',
   HAPPINESS = 'happiness',
   LEVEL = 'level',

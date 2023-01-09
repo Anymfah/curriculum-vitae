@@ -2,6 +2,11 @@
 export interface ListItem {
 
   /**
+   * ID of the list item.
+   */
+  id: number;
+
+  /**
    * The title of the list item.
    */
   title: string;

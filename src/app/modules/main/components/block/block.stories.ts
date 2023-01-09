@@ -7,7 +7,7 @@ export default {
   title: 'Parts/Block',
   component: BlockComponent,
   argTypes: {
-    title: {control: 'text', defaultValue: 'Block title'},
+    cvTitle: {control: 'text', defaultValue: 'Block title'},
   },
   decorators: [
     moduleMetadata(MainStorybookModuleConstant),
