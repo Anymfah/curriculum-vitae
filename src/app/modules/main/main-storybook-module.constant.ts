@@ -22,6 +22,8 @@ import {PageWrapperModule} from "../shared/page-wrapper/page-wrapper.module";
 import {BlockComponent} from "./components/block/block.component";
 import {ListComponent} from './components/list/list.component';
 import {MatListModule} from '@angular/material/list';
+import {SvgIconModule} from '../shared/svg-icon/svg-icon.module';
+import {ChartGaugeModule} from '../shared/chart-gauge/chart-gauge.module';
 
 
 export const MainStorybookModuleConstant ={
@@ -52,7 +54,9 @@ export const MainStorybookModuleConstant ={
     DrawCircleModule,
     StorybookWrapperModule,
     PageWrapperModule,
-    MatListModule
+    MatListModule,
+    SvgIconModule,
+    ChartGaugeModule
   ],
   exports: [
     MainComponent,

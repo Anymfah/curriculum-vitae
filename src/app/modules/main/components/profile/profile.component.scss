@@ -2,6 +2,10 @@
 @use 'mixins';
 @use "sass:math";
 
+:host {
+  pointer-events: none;
+}
+
 .profile {
   &__container {
     position: relative;

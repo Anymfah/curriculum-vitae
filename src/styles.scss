@@ -3,6 +3,9 @@
 @use './styles/variables';
 /* You can add global styles to this file, and also import other style files */
 
+// Add global modules here
+@use './src/app/modules/main/main.global';
+
 html, body { height: 100%; }
 body {
   margin: 0;

@@ -1,13 +1,15 @@
 // TODO: Uncomment all lines when https://github.com/ngx-translate/core/pull/1399 is merged
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { MainModule } from './modules/main/main.module';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {RouterModule} from "@angular/router";
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
+import {MainModule} from './modules/main/main.module';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatTabsModule} from "@angular/material/tabs";
+import {SvgSpriteModule} from './modules/shared/svg-sprite/svg-sprite.module';
+import {HttpClientModule} from '@angular/common/http';
+
 /*
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {HttpClient} from "@angular/common/http";
@@ -22,20 +24,22 @@ export function HttpLoaderFactory(http: HttpClient) {
   declarations: [
     AppComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    MainModule,
-    BrowserAnimationsModule,
-    MatTabsModule,
-    /*TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    }),*/
-  ],
+    imports: [
+      BrowserModule,
+      AppRoutingModule,
+      MainModule,
+      BrowserAnimationsModule,
+      MatTabsModule,
+      SvgSpriteModule,
+      HttpClientModule
+        /*TranslateModule.forRoot({
+          loader: {
+            provide: TranslateLoader,
+            useFactory: HttpLoaderFactory,
+            deps: [HttpClient]
+          }
+        }),*/
+    ],
   exports: [
     //TranslateModule
   ],

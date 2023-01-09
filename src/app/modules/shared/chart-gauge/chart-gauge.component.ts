@@ -10,5 +10,5 @@ export class ChartGaugeComponent {
   /**
    * Value of the gauge.
    */
-  @Input() public value = 0;
+  @Input() public value?: number;
 }

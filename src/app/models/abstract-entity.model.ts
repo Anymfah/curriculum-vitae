@@ -28,6 +28,11 @@ export abstract class AbstractEntity<T extends GenericData> {
   public happiness: number;
 
   /**
+   * Icon of the entity.
+   */
+  public icon?: string;
+
+  /**
    * @constructor
    * @param id Abstract Entity ID.
    * @param data Data to be used to populate the entity.
@@ -35,6 +40,7 @@ export abstract class AbstractEntity<T extends GenericData> {
   protected constructor(id: number, data: T) {
     this.id = id;
     this.name = data.title;
+    this.icon = data.icon;
     this.subtitle = data.subtitle ?? '';
     this.happiness = data.happiness ?? 0;
   }

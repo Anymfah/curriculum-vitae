@@ -26,4 +26,9 @@ export interface ListItem {
    */
   color?: string;
 
+  /**
+   * Value for the list item chart
+   */
+  value?: number;
+
 }

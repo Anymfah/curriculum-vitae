@@ -23,7 +23,7 @@ $curriculum-vitae-dark-theme: mat.define-dark-theme((
   color: (
     primary: primary.$curriculum-vitae-primary,
     contrast: contrast.$curriculum-vitae-contrast,
-    accent: $curriculum-vitae-accent,
+    accent: contrast.$curriculum-vitae-contrast,
     warn: $curriculum-vitae-warn,
   ),
   typography: typography.$curriculum-vitae-typo,

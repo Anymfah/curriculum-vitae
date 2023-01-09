@@ -7,7 +7,9 @@
     </div>
     <div class="block__header-line"></div>
   </div>
-  <div class="block__content scroll-bar" [style.max-height]="maxHeight">
+  <div class="block__content scroll-bar"
+       [class.has-padding]="!disablePadding"
+       [style.max-height]="maxHeight">
     <ng-content></ng-content>
   </div>
 </div>

@@ -4,6 +4,7 @@ export interface GenericData {
   title: SKILL_TITLE | string;
   subtitle?: string;
   happiness?: number;
+  icon?: string;
 }
 
 export interface SkillDataInterface extends GenericData {
@@ -12,7 +13,6 @@ export interface SkillDataInterface extends GenericData {
   category: SKILL_CATEGORY[];
   experience?: number;
   favorite?: boolean;
-  icon?: string;
 }
 
 export interface EducationDataInterface extends GenericData {
@@ -20,7 +20,6 @@ export interface EducationDataInterface extends GenericData {
   endDate: string;
   location: string;
   school: string;
-  icon?: string;
 }
 
 export interface WorkDataInterface extends GenericData {
@@ -30,7 +29,6 @@ export interface WorkDataInterface extends GenericData {
   company: string;
   skills: SKILL_TITLE[];
   projects?: ProjectDataInterface[];
-  icon?: string;
 }
 
 export interface ProjectDataInterface extends GenericData {
@@ -39,7 +37,6 @@ export interface ProjectDataInterface extends GenericData {
   skills: SKILL_TITLE[];
   category: WORK_CATEGORY[];
   favorite?: boolean;
-  icon?: string;
 }
 
 export interface ProjectDataAlias {

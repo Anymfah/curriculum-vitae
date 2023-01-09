@@ -16,8 +16,8 @@ export default {
     componentWrapperDecorator((story) => {
       return `<cv-storybook-wrapper
                 width="500px"
-                height="300px"
-        ><cv-block cvTitle="Liste à afficher">${story}</cv-block></cv-storybook-wrapper>`
+                height="auto"
+        ><cv-block cvTitle="Liste à afficher" [disablePadding]="true">${story}</cv-block></cv-storybook-wrapper>`
     })
   ],
 } as Meta;
@@ -51,4 +51,5 @@ const queryArgs: QueryInterface = {
 
 List.args = {
   queryArgs: queryArgs,
+  valueKey: DATA_FIELD.EXPERIENCE
 }

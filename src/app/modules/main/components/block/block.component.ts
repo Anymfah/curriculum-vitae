@@ -15,4 +15,9 @@ export class BlockComponent {
    * Max height of the block
    */
   @Input() public maxHeight?: string = '100%';
+
+  /**
+   * Disable padding
+   */
+  @Input() public disablePadding?: boolean = false;
 }

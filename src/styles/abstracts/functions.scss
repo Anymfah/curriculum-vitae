@@ -10,7 +10,7 @@
 @function get-color($palette: primary, $hue: 500, $opacity: 1) {
   $selected-palette:  primary.$curriculum-vitae-primary;
 
-  @if ($palette == contrast) {
+  @if ($palette == contrast or $palette == accent) {
     $selected-palette: contrast.$curriculum-vitae-contrast;
   }
 

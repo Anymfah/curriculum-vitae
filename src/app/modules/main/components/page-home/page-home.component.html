@@ -15,6 +15,11 @@
     Lorem ipsum dolor sit amet, consectetur adipisicing elit. A asperiores cumque ipsum maiores officia ratione similique voluptas voluptate! Accusamus cum eius est exercitationem impedit ipsum iste iure praesentium recusandae suscipit.
   </cv-block>
 
+  <cv-block right [cvTitle]="blocks.favoriteStacks.title" [disablePadding]="true">
+    <cv-list [valueKey]="blocks.favoriteStacks.valueKey"
+             [queryArgs]="blocks.favoriteStacks.queryArgs"></cv-list>
+  </cv-block>
+
   <cv-block right cvTitle="Mes qualités">
     Lorem ipsum dolor sit amet, consectetur adipisicing elit. A asperiores cumque ipsum maiores officia ratione similique voluptas voluptate! Accusamus cum eius est exercitationem impedit ipsum iste iure praesentium recusandae suscipit.
   </cv-block>

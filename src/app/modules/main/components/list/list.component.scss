@@ -1,5 +1,34 @@
+@use 'mixins';
+@use 'functions' as fn;
 
 .list {
   &__item {
+    &.mdc-list-item {
+      &--with-one-line#{&}--with-leading-icon {
+        height: 42px;
+      }
+      &--with-leading-icon {
+        .mdc-list-item__start {
+          margin-right: 16px;
+        }
+      }
+    }
+    &:before {
+      background: fn.get-color(accent, 300);
+    }
+    &.mdc-list-item--selected {
+      &:before {
+        background: fn.get-color(accent, 400);
+      }
+      .header {
+        color: fn.get-color(accent, 50);
+      }
+    }
+    &__header {
+      &-title {
+        @include mixins.transition;
+      }
+    }
   }
 }
+

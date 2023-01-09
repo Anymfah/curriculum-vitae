@@ -1,16 +1,19 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import {ListItem} from './list-item.interface';
 import {DATA_TYPE} from '../../../../enums/data.enum';
 import {EntityListService} from '../../../../services/entity-list.service';
 import {EntityType} from '../../../../types/entity.type';
 import {QueryInterface} from '../../../../interfaces/query.interface';
+import {ThemePalette} from '@angular/material/core';
 
 @Component({
   selector: 'cv-list',
   templateUrl: './list.component.html',
-  styleUrls: ['./list.component.scss']
+  styleUrls: ['./list.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class ListComponent implements OnInit {
+  public color: ThemePalette = 'primary';
 
   /**
    * The list items.
@@ -31,6 +34,11 @@ export class ListComponent implements OnInit {
    * Data type - Choose what to display
    */
   @Input() public entityType: DATA_TYPE = DATA_TYPE.SKILL;
+
+  /**
+   * Key for value
+   */
+  @Input() public valueKey?: string;
 
   /**
    * Entities to work on
@@ -81,6 +89,20 @@ export class ListComponent implements OnInit {
       id: entity.id,
       title: entity.name,
       subtitle: entity.subtitle,
+      icon: entity.icon,
+      value: this._getValueFromEntity(entity) ?? undefined,
     };
+  }
+
+  /**
+   * Get Value from entity with given key
+   */
+  private _getValueFromEntity(entity: EntityType): number | null {
+    if (this.valueKey != null) {
+      const entityT = entity as any; //TODO: Fix this
+      return entityT[this.valueKey];
+    } else {
+      return null;
+    }
   }
 }

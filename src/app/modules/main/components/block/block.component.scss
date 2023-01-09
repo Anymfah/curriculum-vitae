@@ -71,7 +71,10 @@
 
   &__content {
     margin-top: 3px;
-    padding: 5px 16px 12px;
     overflow: auto;
+
+    &.has-padding {
+      padding: 5px 16px 12px;
+    }
   }
 }
