@@ -2,7 +2,7 @@
 
 /// Transition
 @mixin transition($time: 0.3s, $property: all, $ease: cubic-bezier(.28,0,0,1), $delay: 0s) {
-  transition: $property $time $ease $delay;
+  transition: unquote($property) $time $ease $delay;
 }
 
 /// Scroll bar

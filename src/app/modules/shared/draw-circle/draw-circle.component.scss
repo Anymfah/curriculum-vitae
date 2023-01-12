@@ -6,7 +6,7 @@
   align-items: center;
 }
 .circle {
-  @include mixins.transition;
+  @include mixins.transition($property:stroke-width);
   fill: var(--draw-circle--track-bar-bg-color);
   stroke: var(--draw-circle--track-bar-color);
   stroke-width: 1;

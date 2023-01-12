@@ -29,6 +29,11 @@ export interface ListItem {
   /**
    * Value for the list item chart
    */
-  value?: number;
+  value: number;
+
+  /**
+   * Delay for the list item chart
+   */
+  delay?: number;
 
 }

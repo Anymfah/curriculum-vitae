@@ -15,11 +15,6 @@ export class SkillEntity extends AbstractEntity<SkillDataInterface> {
   public level: number = 0;
 
   /**
-   * Skill entity color.
-   */
-  public color: string;
-
-  /**
    * Skill entity category.
    */
   public skillCategory: SKILL_CATEGORY[];
@@ -42,7 +37,6 @@ export class SkillEntity extends AbstractEntity<SkillDataInterface> {
   public constructor(id: number, data: SkillDataInterface) {
     super(id, data);
     this.level = data.level ?? 0;
-    this.color = data.color;
     this.skillCategory = data.category;
     this.experience = data.experience ?? 0;
     this.favorite = data.favorite ?? false;

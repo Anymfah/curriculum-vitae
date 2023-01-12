@@ -1,0 +1,52 @@
+
+/// Appear Right
+@keyframes appear-right {
+  0% {
+    opacity: 1;
+    transform: translateX(25px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/// Appear Left
+@keyframes appear-left {
+  0% {
+    opacity: 1;
+    transform: translateX(-25px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/// Disappear Right
+@keyframes disappear-right {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(25px);
+  }
+}
+
+/// Disappear Left
+@keyframes disappear-left {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(-25px);
+  }
+}

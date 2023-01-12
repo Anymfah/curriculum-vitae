@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
 import {DrawCircleCoordinates} from "./draw-circle.interface";
 
 @Component({
@@ -6,7 +6,7 @@ import {DrawCircleCoordinates} from "./draw-circle.interface";
   templateUrl: './draw-circle.component.html',
   styleUrls: ['./draw-circle.component.scss']
 })
-export class DrawCircleComponent implements OnInit, OnChanges {
+export class DrawCircleComponent implements OnChanges {
 
   /**
    * Degree of the circle.
@@ -50,7 +50,30 @@ export class DrawCircleComponent implements OnInit, OnChanges {
    */
   @Input() public reverse: boolean = false;
 
-  public viewBoxSize = 120;
+  /**
+   * Color of the arc.
+   */
+  @Input() public color?: string;
+
+  /**
+   * View box of the SVG.
+   */
+  @Input() public viewBoxSize = 120;
+
+  /**
+   * Adjust the view box alignment of the SVG.
+   */
+  @Input() public viewBoxAlign = false;
+
+  /**
+   * Adjust the viewBox X of the SVG when viewBoxAlign is at true
+   */
+  public viewBoxX = 0;
+
+  /**
+   * Adjust the viewBox Y of the SVG when viewBoxAlign is at true
+   */
+  public viewBoxY = 0;
 
   /**
    * Percentage of the circle.
@@ -67,13 +90,6 @@ export class DrawCircleComponent implements OnInit, OnChanges {
   /**
    * @inheritDoc
    */
-  public ngOnInit() {
-    this._draw();
-  }
-
-  /**
-   * @inheritDoc
-   */
   public ngOnChanges(changes: SimpleChanges) {
     if ('size' in changes
       || 'reverse' in changes
@@ -81,6 +97,12 @@ export class DrawCircleComponent implements OnInit, OnChanges {
       || 'positionDegree' in changes
       || 'anchorPoint' in changes) {
       this._draw();
+    }
+
+    if ('weight' in changes && this.viewBoxAlign) {
+      this.viewBoxY = -this.weight / 2;
+      this.viewBoxX = -this.weight / 2;
+      this.viewBoxSize = 120 + this.weight;
     }
   }
 

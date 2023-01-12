@@ -1,0 +1,20 @@
+<ng-template>
+  <div class="cv-tooltip-component" [ngClass]="currentPosition"
+       [class.active]="active">
+
+    <svg overflow="visible" class="svg-line" width="50" height="30" viewBox="0 0 50 30">
+      <path fill="none" class="line"
+            [attr.d]="pathLine"
+      />
+    </svg>
+    <div class="cv-tooltip__container">
+      <div class="cv-tooltip__header">
+        {{cvTooltip}}
+      </div>
+      <div class="cv-tooltip__content">
+        <ng-content></ng-content>
+      </div>
+    </div>
+
+  </div>
+</ng-template>

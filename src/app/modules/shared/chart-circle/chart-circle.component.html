@@ -1,0 +1,14 @@
+<div class="chart-circle__container"
+     [style.height.px]="size"
+     [style.width.px]="size"
+>
+  <cv-draw-circle class="chart-circle__full" [weight]="weight" [size]="size" anchorPoint="start"
+                  [arcDegree]="360"></cv-draw-circle>
+  <cv-draw-circle [weight]="weight" [size]="size" anchorPoint="start"
+                  [color]="color" [positionDegree]="startDegree"
+                  [arcDegree]="calculatedValue">
+  </cv-draw-circle>
+  <div class="chart-circle__value">
+    {{value}}%
+  </div>
+</div>

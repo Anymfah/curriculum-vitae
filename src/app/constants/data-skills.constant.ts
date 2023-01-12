@@ -83,7 +83,7 @@ export const DATA_SKILLS: SkillDataInterface[] = [
   },
   {
     title: SKILL_TITLE.NODE_JS,
-    level: 100,
+    level: 96,
     color: '#339933',
     category: [SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.CODE_LANGUAGE],
     happiness: 100,
@@ -93,7 +93,7 @@ export const DATA_SKILLS: SkillDataInterface[] = [
   },
   {
     title: SKILL_TITLE.TYPESCRIPT,
-    level: 95,
+    level: 98,
     color: '#007ACC',
     category: [SKILL_CATEGORY.FRONT_END, SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.CODE_LANGUAGE],
     happiness: 100,
@@ -107,13 +107,13 @@ export const DATA_SKILLS: SkillDataInterface[] = [
     color: '#DD0031',
     category: [SKILL_CATEGORY.FRONT_END, SKILL_CATEGORY.FRAMEWORK],
     happiness: 100,
-    experience: 80,
+    experience: 92,
     favorite: true,
     icon: 'angular',
   },
   {
     title: SKILL_TITLE.REACT,
-    level: 15,
+    level: 35,
     color: '#61DAFB',
     category: [SKILL_CATEGORY.FRONT_END, SKILL_CATEGORY.LIBRARY],
     happiness: 92,
@@ -140,7 +140,7 @@ export const DATA_SKILLS: SkillDataInterface[] = [
   },
   {
     title: SKILL_TITLE.ZEND,
-    level: 60,
+    level: 33,
     color: '#40ba2f',
     category: [SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.FRAMEWORK],
     happiness: 15,
@@ -155,7 +155,7 @@ export const DATA_SKILLS: SkillDataInterface[] = [
   },
   {
     title: SKILL_TITLE.PHP,
-    level: 100,
+    level: 96,
     color: '#777BB4',
     category: [SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.CODE_LANGUAGE],
     happiness: 45,
@@ -178,7 +178,7 @@ export const DATA_SKILLS: SkillDataInterface[] = [
     title: SKILL_TITLE.C_PLUS_PLUS,
     color: '#00599C',
     category: [SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.CODE_LANGUAGE],
-    icon: 'c-plus-plus',
+    icon: 'c++',
   },
   {
     title: SKILL_TITLE.C,
@@ -197,7 +197,7 @@ export const DATA_SKILLS: SkillDataInterface[] = [
   },
   {
     title: SKILL_TITLE.TWIG,
-    level: 90,
+    level: 94,
     color: '#40ba2f',
     category: [SKILL_CATEGORY.FRONT_END, SKILL_CATEGORY.CODE_LANGUAGE],
     happiness: 90,
@@ -206,7 +206,7 @@ export const DATA_SKILLS: SkillDataInterface[] = [
   },
   {
     title: SKILL_TITLE.MONGODB,
-    level: 75,
+    level: 73,
     color: '#47A248',
     category: [SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.DATABASE],
     happiness: 80,
@@ -214,7 +214,7 @@ export const DATA_SKILLS: SkillDataInterface[] = [
   },
   {
     title: SKILL_TITLE.MYSQL,
-    level: 90,
+    level: 88,
     color: '#4479A1',
     category: [SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.DATABASE],
     happiness: 65,
@@ -222,7 +222,7 @@ export const DATA_SKILLS: SkillDataInterface[] = [
   },
   {
     title: SKILL_TITLE.POSTGRESQL,
-    level: 60,
+    level: 65,
     color: '#336791',
     category: [SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.DATABASE],
     happiness: 75,
@@ -236,7 +236,7 @@ export const DATA_SKILLS: SkillDataInterface[] = [
   },
   {
     title: SKILL_TITLE.GIT,
-    level: 92,
+    level: 93,
     color: '#F05032',
     category: [SKILL_CATEGORY.DEVOPS, SKILL_CATEGORY.OTHERS],
     happiness: 95,
@@ -264,7 +264,7 @@ export const DATA_SKILLS: SkillDataInterface[] = [
   },
   {
     title: SKILL_TITLE.BOOTSTRAP,
-    level: 80,
+    level: 70,
     color: '#563D7C',
     category: [SKILL_CATEGORY.FRONT_END, SKILL_CATEGORY.FRAMEWORK],
     happiness: 45,
@@ -273,7 +273,7 @@ export const DATA_SKILLS: SkillDataInterface[] = [
   },
   {
     title: SKILL_TITLE.FOUNDATION,
-    level: 95,
+    level: 92,
     color: '#7768AE',
     category: [SKILL_CATEGORY.FRONT_END, SKILL_CATEGORY.FRAMEWORK],
     happiness: 30,
@@ -292,7 +292,7 @@ export const DATA_SKILLS: SkillDataInterface[] = [
   },
   {
     title: SKILL_TITLE.MATERIAL_UI,
-    level: 40,
+    level: 79,
     color: '#0081CB',
     category: [SKILL_CATEGORY.FRONT_END, SKILL_CATEGORY.FRAMEWORK],
     happiness: 70,
@@ -395,7 +395,7 @@ export const DATA_SKILLS: SkillDataInterface[] = [
   },
   {
     title: SKILL_TITLE.STORYBOOK,
-    level: 90,
+    level: 94,
     color: '#FF4785',
     category: [SKILL_CATEGORY.FRONT_END, SKILL_CATEGORY.OTHERS],
     happiness: 95,

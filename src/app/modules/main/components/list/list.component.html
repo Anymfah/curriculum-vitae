@@ -7,6 +7,6 @@
       <div class="list__item__header-title">{{item.title}}</div>
       <cv-chart-gauge [value]="item.value"></cv-chart-gauge>
     </div>
-    <div *ngIf="item.subtitle != null && item.subtitle !== ''" matListItemLine>{{item.subtitle | date}}</div>
+    <div *ngIf="item.subtitle != null && item.subtitle !== ''" matListItemLine>{{item.subtitle}}</div>
   </mat-list-option>
 </mat-selection-list>

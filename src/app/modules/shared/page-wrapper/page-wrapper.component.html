@@ -1,10 +1,19 @@
-<div class="zone__left">
+<div class="zone__left zone">
   <ng-content select="[left]"></ng-content>
 </div>
-<div class="zone__center">
-  <ng-content select="[center]"></ng-content>
+<div class="zone__center zone flex-column">
+  <div class="zone__center__free zone">
+    <ng-content select="[center]"></ng-content>
+  </div>
+  <div class="zone__center__top zone flex-grow">
+    <ng-content select="[center-top]"></ng-content>
+  </div>
+  <div class="zone__center__bottom zone flex-grow">
+    <div class="layout-gap-200"></div>
+    <ng-content select="[center-bottom]"></ng-content>
+  </div>
 </div>
-<div class="zone__right">
+<div class="zone__right zone">
   <ng-content select="[right]"></ng-content>
 </div>
 <ng-content></ng-content>

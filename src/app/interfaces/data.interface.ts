@@ -4,12 +4,12 @@ export interface GenericData {
   title: SKILL_TITLE | string;
   subtitle?: string;
   happiness?: number;
+  color?: string;
   icon?: string;
 }
 
 export interface SkillDataInterface extends GenericData {
   level?: number;
-  color: string;
   category: SKILL_CATEGORY[];
   experience?: number;
   favorite?: boolean;

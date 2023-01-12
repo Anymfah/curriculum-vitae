@@ -1,7 +1,6 @@
 import {Component, HostBinding, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {animateValueUtil} from "../../../../utils/animate-value.util";
 import {animate, state, style, transition, trigger} from "@angular/animations";
-import {delay} from "rxjs";
 
 @Component({
   selector: 'cv-circle-menu-item',
@@ -173,7 +172,7 @@ export class CircleMenuItemComponent implements OnChanges, OnInit {
   private _old_animateWeight(): void {
     const from = this.active ? 0 : this.weight;
     const to = this.active ? this.weight : 0;
-    animateValueUtil((value: number) => {
+    animateValueUtil((value) => {
       this.weightValue = value;
     }, from, to, 300);
   }
@@ -184,7 +183,7 @@ export class CircleMenuItemComponent implements OnChanges, OnInit {
     const ease = this.active ?
       [.29,0,0,1] as [number, number, number, number]
       : [.49,0,.85,.89] as [number, number, number, number];
-    animateValueUtil((value: number) => {
+    animateValueUtil((value) => {
       this.weightValue = value;
     }, from, to, 300, ease);
   }

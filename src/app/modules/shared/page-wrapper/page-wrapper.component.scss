@@ -7,13 +7,22 @@
   gap: 10px;
 }
 
-
+.layout-gap {
+  &-200 {
+    width: 200px;
+  }
+}
 
 .zone {
+  border: 1px dashed fn.get-color(accent, 600);
   &__left, &__right {
     max-width: 300px;
   }
   &__center {
     flex-grow: 1;
+    &__bottom {
+      align-items: flex-end;
+      display: flex;
+    }
   }
 }

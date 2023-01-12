@@ -1,5 +1,28 @@
 @use 'mixins';
+@use 'functions' as fn;
 
 .scroll-bar {
   @include mixins.scroll-bar();
+}
+
+.pointer-events-none {
+  pointer-events: none;
+}
+
+button.base-button.mat-mdc-button-base {
+  border-radius: 0;
+  height: inherit;
+  --mdc-filled-button-container-color: transparent;
+  --mat-mdc-button-ripple-color: #{fn.get-color(accent, 300, .4)};
+  --mat-mdc-button-persistent-ripple-color: #{fn.get-color(accent, 300)};
+  --mdc-typography-button-font-size: 12px;
+  padding: 0;
+
+  & > * {
+    height: 100%;
+  }
+}
+
+.mat-ripple-element {
+  background-color: fn.get-color(accent, 400, 0.2);
 }

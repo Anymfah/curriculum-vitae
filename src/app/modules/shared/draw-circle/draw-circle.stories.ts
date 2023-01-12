@@ -1,4 +1,4 @@
-import { Story, Meta } from '@storybook/angular/types-6-0';
+import {Meta, Story} from '@storybook/angular/types-6-0';
 import {DrawCircleComponent} from "./draw-circle.component";
 
 /**
@@ -68,6 +68,11 @@ export default {
         type: 'boolean'
       },
       defaultValue: false,
+    },
+    color: {
+      control: {
+        type: 'color'
+      }
     }
   },
   parameters: {

@@ -44,7 +44,7 @@ export const DATA_PROJECTS: ProjectDataAlias = {
     subtitle: `Développement d'une application de simulation de théâtre de guerre
     pour la formation des officiers de la Marine Nationale de Naval Group.`,
     startDate: '2022-07-01',
-    endDate: '2017-11-31',
+    endDate: '2022-11-31',
     happiness: 100,
     category: [
       WORK_CATEGORY.WEB_APPLICATION

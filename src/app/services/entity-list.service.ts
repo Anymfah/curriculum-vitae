@@ -14,9 +14,11 @@ import {
   WorkDataInterface
 } from '../interfaces/data.interface';
 import {DATA_WORK} from '../constants/data-work.constant';
-import {DATA_TYPE, ORDER_DIRECTION, ORDER_FIELD} from '../enums/data.enum';
+import {DATA_TYPE} from '../enums/data.enum';
 import {QueryInterface} from '../interfaces/query.interface';
 import {EntityQueryModel} from '../models/entity-query.model';
+import {PRE_MADE_QUERY} from '../enums/premade-query.enum';
+import {PRE_MADE_QUERY_CONSTANT} from '../constants/premade-query.constant';
 
 @Injectable({
   providedIn: 'root'
@@ -97,35 +99,6 @@ export class EntityListService {
       ...workCollection,
       ...this._projects.value
     ]);
-
-    /*console.log(this.getFilteredCollection(
-      DATA_TYPE.SKILL,
-      [{
-        name: DATA_FIELD.HAPPINESS,
-        operator: '>',
-        value: 99
-      }, {
-        name: DATA_FIELD.FAVORITE,
-        operator: '==',
-        value: true
-      }, {
-        name: DATA_FIELD.SKILL_CATEGORY,
-        operator: 'includes',
-        value: SKILL_CATEGORY.FRONT_END
-      }
-      ]
-    ))*/
-    console.log(this);
-    console.log(this.getFilteredCollection(
-      DATA_TYPE.PROJECT, {
-        orderBy: [
-          {
-            name: ORDER_FIELD.START_DATE,
-            direction: ORDER_DIRECTION.ASC,
-          }
-        ]
-      } as QueryInterface
-    ))
   }
 
   /**
@@ -246,5 +219,14 @@ export class EntityListService {
     }
 
     return collection;
+  }
+
+  /**
+   * Get PreMade Query.
+   * @param type Type of collection to get.
+   * @param preMadeQuery PreMade query to apply to the collection.
+   */
+  public getPreMadeQuery(type: DATA_TYPE, preMadeQuery: PRE_MADE_QUERY): EntityType[] {
+    return this.getFilteredCollection(type, PRE_MADE_QUERY_CONSTANT[preMadeQuery]);
   }
 }

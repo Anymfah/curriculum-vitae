@@ -24,3 +24,7 @@ body {
   font-family: 'Rajdhani', 'Helvetica Neue', sans-serif;
   @include mat.typography-level(typo.$curriculum-vitae-typo, body-1);
 }
+
+.subtitle-2 {
+  @include mat.typography-level(typo.$curriculum-vitae-typo, subtitle-2);
+}

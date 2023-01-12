@@ -226,6 +226,10 @@ export const DATA_WORK: WorkDataInterface[] = [
       SKILL_TITLE.BOOTSTRAP,
       SKILL_TITLE.WINDOWS
     ],
+    projects: [
+      DATA_PROJECTS['NETINVESTISSEMENT_WEB'],
+      DATA_PROJECTS['EXTRANET']
+    ],
   },
   {
     title: 'Développeur Web Full Stack',
@@ -259,6 +263,17 @@ export const DATA_WORK: WorkDataInterface[] = [
       SKILL_TITLE.SLACK,
       SKILL_TITLE.TECHNICAL_ENGLISH
     ],
+    projects: [
+      DATA_PROJECTS['SOLIALMA_CD'],
+      DATA_PROJECTS['WANTED_CREW_CD'],
+      DATA_PROJECTS['XONAO'],
+      DATA_PROJECTS['ANYM_LIVE_EDITOR'],
+      DATA_PROJECTS['ANYM_LIVE'],
+      DATA_PROJECTS['SOINS_EQUILIBRE'],
+      DATA_PROJECTS['CREAREGLE'],
+      DATA_PROJECTS['MELUSINE'],
+      DATA_PROJECTS['BRASERO_INDUSTRIE'],
+    ]
   },
   {
     title: 'Développeur Web Full Stack',
@@ -303,6 +318,20 @@ export const DATA_WORK: WorkDataInterface[] = [
       SKILL_TITLE.TECHNICAL_ENGLISH,
       SKILL_TITLE.AGILE
     ],
+    projects: [
+      DATA_PROJECTS['DEVTOOLS'],
+      DATA_PROJECTS['DORDOGNE_PERIGORD'],
+      DATA_PROJECTS['SKI_PLAN'],
+      DATA_PROJECTS['LES_2_ALPES'],
+      DATA_PROJECTS['SALON_DE_PROVENCE'],
+      DATA_PROJECTS['LEUCATE'],
+      DATA_PROJECTS['VALLESPIR'],
+      DATA_PROJECTS['ANGERS_EVENT'],
+      DATA_PROJECTS['ANGERS_DESTINATION'],
+      DATA_PROJECTS['VILLARD_DE_LANS'],
+      DATA_PROJECTS['MEET_IN_HAINAUT'],
+      DATA_PROJECTS['VAL_ARLY'],
+    ]
   },
   {
     title: 'Développeur Web Full Stack',
@@ -347,5 +376,11 @@ export const DATA_WORK: WorkDataInterface[] = [
       SKILL_TITLE.TECHNICAL_ENGLISH,
       SKILL_TITLE.AGILE
     ],
+    projects: [
+      DATA_PROJECTS['SOLIVE'],
+      DATA_PROJECTS['CLICK_UP_MIGRATION'],
+      DATA_PROJECTS['MAJORDOC'],
+      DATA_PROJECTS['NAVAL_GROUP'],
+    ]
   }
 ];

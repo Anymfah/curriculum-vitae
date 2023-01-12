@@ -1,0 +1,51 @@
+@use 'functions' as fn;
+@use 'mixins';
+
+:host {
+  padding: 20px;
+  display: flex;
+}
+
+.list-chart-circle {
+  &__container {
+    display: flex;
+  }
+  &__item {
+
+    &.mat-mdc-list-item.mat-mdc-list-option {
+      width: 90px;
+      height: inherit;
+      padding: 5px;
+
+      .header {
+        display: flex;
+        font-size: 12px;
+        align-items: center;
+        justify-content: center;
+
+        cv-svg-icon {
+          height: 22px;
+          width: 22px;
+          margin-right: 5px;
+        }
+      }
+    }
+
+    &:before {
+      background: fn.get-color(accent, 300);
+    }
+    &.mdc-list-item--selected {
+      &:before {
+        background: fn.get-color(accent, 400);
+      }
+      .header {
+        color: fn.get-color(accent, 50);
+      }
+    }
+    &__header {
+      &-title {
+        @include mixins.transition;
+      }
+    }
+  }
+}

@@ -5,6 +5,8 @@ import {EntityListService} from '../../../../services/entity-list.service';
 import {EntityType} from '../../../../types/entity.type';
 import {QueryInterface} from '../../../../interfaces/query.interface';
 import {ThemePalette} from '@angular/material/core';
+import {BehaviorSubject} from 'rxjs';
+import {PRE_MADE_QUERY} from '../../../../enums/premade-query.enum';
 
 @Component({
   selector: 'cv-list',
@@ -21,6 +23,11 @@ export class ListComponent implements OnInit {
   @Input() items: ListItem[] = [];
 
   /**
+   * Entity items
+   */
+  @Input() entities: EntityType[] = [];
+
+  /**
    * Items to render
    */
   public itemsToRender: ListItem[] = [];
@@ -28,7 +35,7 @@ export class ListComponent implements OnInit {
   /**
    * Query for entities
    */
-  @Input() queryArgs?: QueryInterface;
+  @Input() queryArgs?: QueryInterface | PRE_MADE_QUERY;
 
   /**
    * Data type - Choose what to display
@@ -39,6 +46,28 @@ export class ListComponent implements OnInit {
    * Key for value
    */
   @Input() public valueKey?: string;
+
+  /**
+   * Delay in ms for animation
+   */
+  @Input() public delay = 0;
+
+  /**
+   * Delay increment between items in ms
+   */
+  @Input() public delayIncrement = 150;
+
+  /**
+   * Delay for animation
+   */
+  private _getDelay(index: number): number {
+    return this.delay + index * this.delayIncrement;
+  }
+
+  /**
+   * Behavior subject for items to render ready
+   */
+  protected _entitiesReady = new BehaviorSubject<EntityType[]>([]);
 
   /**
    * Entities to work on
@@ -58,7 +87,12 @@ export class ListComponent implements OnInit {
    * @inheritDoc
    */
   public ngOnInit() {
-    this._getEntities();
+    if (this.entities.length > 0) {
+      this._entities = this.entities;
+      this._entitiesReady.next(this._entities);
+    } else {
+      this._getEntities();
+    }
     this.itemsToRender = this._getItemsToRender();
   }
 
@@ -66,8 +100,14 @@ export class ListComponent implements OnInit {
    * Get entities from service
    */
   private _getEntities() {
-    this._entities = this._entityListService
-      .getFilteredCollection(this.entityType, this.queryArgs);
+    if (typeof this.queryArgs === 'string') {
+      this._entities = this._entityListService
+        .getPreMadeQuery(this.entityType, this.queryArgs)
+    } else {
+      this._entities = this._entityListService
+        .getFilteredCollection(this.entityType, this.queryArgs);
+    }
+    this._entitiesReady.next(this._entities);
   }
 
   /**
@@ -75,8 +115,8 @@ export class ListComponent implements OnInit {
    */
   private _getItemsToRender(): ListItem[] {
     const itemsToRender: ListItem[] = [];
-    this._entities.forEach((entity: EntityType) => {
-      itemsToRender.push(this._entityToItem(entity));
+    this._entities.forEach((entity: EntityType, key: number) => {
+      itemsToRender.push(this._entityToItem(entity, key));
     });
     return itemsToRender;
   }
@@ -84,20 +124,22 @@ export class ListComponent implements OnInit {
   /**
    * EntityType to ListItem
    */
-  private _entityToItem(entity: EntityType): ListItem {
+  private _entityToItem(entity: EntityType, key: number): ListItem {
     return {
       id: entity.id,
       title: entity.name,
       subtitle: entity.subtitle,
       icon: entity.icon,
-      value: this._getValueFromEntity(entity) ?? undefined,
+      value: this._getValueFromEntity(entity) ?? 0,
+      color: entity.color,
+      delay: this._getDelay(key),
     };
   }
 
   /**
    * Get Value from entity with given key
    */
-  private _getValueFromEntity(entity: EntityType): number | null {
+  protected _getValueFromEntity(entity: EntityType): number | null {
     if (this.valueKey != null) {
       const entityT = entity as any; //TODO: Fix this
       return entityT[this.valueKey];

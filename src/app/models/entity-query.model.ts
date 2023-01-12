@@ -87,14 +87,25 @@ export class EntityQueryModel<T = EntityType> {
    * @param fields Fields to filter by
    */
   private _filterCollection(collection: EntityType[], fields: QueryFilterInterface[]): EntityType[] {
-    fields.forEach((field) => {
-      if (collection[0]?.hasOwnProperty(field.name)) {
-        collection = collection.filter((entity: EntityType) => {
-          return entity.filterByField(field);
-        });
-      }
+    const conditionORCollection: EntityType[] = collection;
+    const conditionANDCollection: EntityType[] = [];
+
+    fields.forEach((field: QueryFilterInterface) => {
+
+        if (collection[0]?.hasOwnProperty(field.name)) {
+          const filteredCollection: EntityType[] = collection.filter((entity: EntityType) => {
+            return entity.filterByField(field);
+          });
+
+          if (field.condition === 'OR') {
+            conditionORCollection.push(...filteredCollection);
+          } else {
+            conditionANDCollection.push(...filteredCollection);
+          }
+        }
     });
-    return collection;
+
+    return conditionANDCollection.length > 0 ? conditionANDCollection : conditionORCollection;
   }
 
   /**
@@ -107,7 +118,8 @@ export class EntityQueryModel<T = EntityType> {
 
       if (collection[0]?.hasOwnProperty(field.name)) {
         collection = collection.sort((a: EntityType, b: EntityType) => {
-          return a.orderByNativeField(field, b);
+          const order = field.direction === 'DESC' ? -1 : 1;
+          return a.orderByNativeField(field, b) * order;
         });
       }
     });

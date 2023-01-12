@@ -33,6 +33,12 @@ export class LayoutComponent implements OnInit {
   public rtlState = false;
 
   /**
+   * Direction value of the image
+   * Min : -30 , Max : 30
+   */
+  public imageDirection: number = 0;
+
+  /**
    * Menu items
    * @todo: Move to routing module
    */
@@ -74,7 +80,23 @@ export class LayoutComponent implements OnInit {
     /** Get the direction of page change. */
     this._pageService.pageDirection$.subscribe(direction => {
       direction ? this.ltrState = !this.ltrState : this.rtlState = !this.rtlState;
+      this._animateBgImageDirection(direction);
     });
+  }
+
+  /**
+   * On page change, slide the image.
+   * @param direction
+   * @private
+   */
+  private _animateBgImageDirection(direction: boolean): void {
+    if (direction) {
+      this.imageDirection = this.imageDirection < 20 ? this.imageDirection + 10 :
+        this.imageDirection + (100 - this.imageDirection) / 10;
+    } else {
+      this.imageDirection = this.imageDirection > -20 ? this.imageDirection - 10 :
+        this.imageDirection - (100 + this.imageDirection) / 10;
+    }
   }
 
 }

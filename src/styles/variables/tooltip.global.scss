@@ -1,0 +1,6 @@
+@use 'functions' as fn;
+
+:root {
+  /// Color of the tooltip stroke
+  --tooltip-stroke-color: #{fn.get-color(accent, 400)};
+}

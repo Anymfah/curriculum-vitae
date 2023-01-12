@@ -1,0 +1,18 @@
+<div class="chart-donut__container"
+  [style.height.px]="size"
+  [style.width.px]="size">
+  <cv-draw-circle class="chart-donut__full" [viewBoxAlign]="true" [weight]="weight" [size]="size" anchorPoint="start"
+                  [arcDegree]="360"></cv-draw-circle>
+
+  <cv-draw-circle *ngFor="let part of chartValues"
+                  [weight]="weight"
+                  [size]="size"
+                  [arcDegree]="part.value"
+                  [color]="part.color"
+                  [viewBoxAlign]="true"
+                  anchorPoint="start"
+                  [positionDegree]="part.startAngle"
+                  [cvTooltip]="part.name"
+                  [cvTooltipPosition]="part.tooltipPosition"
+  ></cv-draw-circle>
+</div>

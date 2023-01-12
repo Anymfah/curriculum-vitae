@@ -20,6 +20,12 @@ export interface QueryFilterInterface {
   operator?: OperatorType,
 
   /**
+   * Condition to be used to filter the field.
+   * Default is 'AND'.
+   */
+  condition?: 'AND' | 'OR',
+
+  /**
    * Value to be used to filter the field.
    */
   value: string | number | boolean | Date | SkillEntity | ProjectEntity,

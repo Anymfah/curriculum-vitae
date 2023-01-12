@@ -22,6 +22,12 @@ import {ListComponent} from './components/list/list.component';
 import {MatListModule} from '@angular/material/list';
 import {SvgIconModule} from '../shared/svg-icon/svg-icon.module';
 import {ChartGaugeModule} from '../shared/chart-gauge/chart-gauge.module';
+import {ChartCircleModule} from '../shared/chart-circle/chart-circle.module';
+import {ListChartCirclesComponent} from './components/list-chart-circles/list-chart-circles.component';
+import {ListChartDonutComponent} from './components/list-chart-donut/list-chart-donut.component';
+import {ChartDonutModule} from '../shared/chart-donut/chart-donut.module';
+import {MatRippleModule} from '@angular/material/core';
+import {ActiveSwitchModule} from '../shared/active-switch/active-switch.module';
 
 
 @NgModule({
@@ -36,6 +42,8 @@ import {ChartGaugeModule} from '../shared/chart-gauge/chart-gauge.module';
         CircleMenuItemComponent,
         BlockComponent,
         ListComponent,
+        ListChartCirclesComponent,
+        ListChartDonutComponent,
     ],
   imports: [
     CommonModule,
@@ -51,7 +59,11 @@ import {ChartGaugeModule} from '../shared/chart-gauge/chart-gauge.module';
     PageWrapperModule,
     MatListModule,
     SvgIconModule,
-    ChartGaugeModule
+    ChartGaugeModule,
+    ChartCircleModule,
+    ChartDonutModule,
+    MatRippleModule,
+    ActiveSwitchModule
   ],
   exports: [
     MainComponent,

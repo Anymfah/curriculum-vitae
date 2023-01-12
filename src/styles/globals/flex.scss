@@ -16,6 +16,11 @@
   &-grow {
     flex-grow: 1;
   }
+  &-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 .align-center {
