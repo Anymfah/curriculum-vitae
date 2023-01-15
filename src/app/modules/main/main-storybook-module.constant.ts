@@ -30,6 +30,9 @@ import {ListChartDonutComponent} from './components/list-chart-donut/list-chart-
 import {ChartDonutModule} from '../shared/chart-donut/chart-donut.module';
 import {MatRippleModule} from '@angular/material/core';
 import {ActiveSwitchModule} from '../shared/active-switch/active-switch.module';
+import {ListChartGaugeComponent} from './components/list-chart-gauge/list-chart-gauge.component';
+import {DataDetailsComponent} from './components/data-details/data-details.component';
+import {SelectEntityModule} from '../shared/select-entity/select-entity.module';
 
 
 export const MainStorybookModuleConstant ={
@@ -45,7 +48,9 @@ export const MainStorybookModuleConstant ={
     BlockComponent,
     ListComponent,
     ListChartCirclesComponent,
-    ListChartDonutComponent
+    ListChartDonutComponent,
+    ListChartGaugeComponent,
+    DataDetailsComponent
   ],
   imports: [
     appRouting,
@@ -68,7 +73,8 @@ export const MainStorybookModuleConstant ={
     ChartCircleModule,
     ChartDonutModule,
     MatRippleModule,
-    ActiveSwitchModule
+    ActiveSwitchModule,
+    SelectEntityModule
   ],
   exports: [
     MainComponent,
@@ -79,6 +85,8 @@ export const MainStorybookModuleConstant ={
     BlockComponent,
     ListComponent,
     ListChartCirclesComponent,
-    ListChartDonutComponent
+    ListChartDonutComponent,
+    ListChartGaugeComponent,
+    DataDetailsComponent
   ],
 };

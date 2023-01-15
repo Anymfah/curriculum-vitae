@@ -1,0 +1,17 @@
+<div cvActiveSwitch class="list-chart-gauge__container flex-grow flex-column flex-center flex-wrap">
+  <div matRipple cvActiveSwitchItem *ngFor="let item of itemsToRender"
+       class="list-chart-gauge__item flex"
+       [class.has-subtitle]="item.subtitle"
+  >
+    <cv-svg-icon matListItemIcon *ngIf="item.icon != null" [icon]="item.icon"></cv-svg-icon>
+    <div class="list-chart-donut__item__header header flex-grow flex-column">
+      <div class="list-chart-donut__item__header-title flex">
+        <div class="list-chart-donut__item__header-title header-title subtitle-2">{{item.title}}</div>
+      </div>
+      <div class="list-chart-donut__item__subtitle small" *ngIf="item.subtitle != null && item.subtitle !== ''">{{item.subtitle}}</div>
+      <cv-chart-gauge class="list-chart-circle__content" [animationDelay]="item.delay ?? 0"
+                      [value]="item.value" [color]="item.color">
+      </cv-chart-gauge>
+    </div>
+  </div>
+</div>

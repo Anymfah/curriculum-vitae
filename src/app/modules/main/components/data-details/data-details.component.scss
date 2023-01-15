@@ -1,0 +1,57 @@
+@use 'mixins';
+@use 'functions' as fn;
+
+:host {
+  width: 100%;
+}
+.data-details {
+  &__content {
+    height: 300px;
+    ::ng-deep {
+      .list-chart-donut__wrapper {
+        //height: inherit;
+        //overflow: visible;
+      }
+    }
+
+    &__row {
+      max-height: 50%;
+      overflow: hidden;
+    }
+  }
+  &__blocks {
+    flex-basis: 200px;
+    padding: 15px;
+  }
+
+  &__subtitle {
+    width: 100%;
+  }
+
+  &__list {
+    flex-basis: 200px;
+    position: relative;
+    height: min-content;
+    cv-list-chart-gauge {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &__donut {
+    max-height: 50%;
+  }
+
+  &__list, &__blocks {
+    @include mixins.scroll-bar;
+    height: 100%;
+    overflow: auto;
+    position: relative;
+    border-left: 1px solid fn.get-color(accent, 500);
+    border-bottom: 1px solid fn.get-color(accent, 500);
+    margin-left: -1px;
+  }
+
+}
+
+

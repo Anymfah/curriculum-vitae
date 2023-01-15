@@ -2,44 +2,27 @@
 @use 'mixins';
 
 :host {
-  padding: 20px;
   display: flex;
 }
 
 .list-chart-circle {
   &__container {
-    display: flex;
   }
   &__item {
-
-    &.mat-mdc-list-item.mat-mdc-list-option {
-      width: 90px;
-      height: inherit;
-      padding: 5px;
+    padding: 10px;
+    flex-basis: 100px;
+    &.has-subtitle {
+      flex-basis: 250px;
+      flex-direction: row;
+      align-items: flex-start;
 
       .header {
-        display: flex;
-        font-size: 12px;
-        align-items: center;
-        justify-content: center;
-
-        cv-svg-icon {
-          height: 22px;
-          width: 22px;
-          margin-right: 5px;
-        }
+        align-items: flex-start;
       }
-    }
 
-    &:before {
-      background: fn.get-color(accent, 300);
-    }
-    &.mdc-list-item--selected {
-      &:before {
-        background: fn.get-color(accent, 400);
-      }
-      .header {
-        color: fn.get-color(accent, 50);
+      cv-chart-circle {
+        order: -1;
+        margin-right: 10px;
       }
     }
     &__header {

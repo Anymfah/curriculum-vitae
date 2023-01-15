@@ -28,6 +28,9 @@ import {ListChartDonutComponent} from './components/list-chart-donut/list-chart-
 import {ChartDonutModule} from '../shared/chart-donut/chart-donut.module';
 import {MatRippleModule} from '@angular/material/core';
 import {ActiveSwitchModule} from '../shared/active-switch/active-switch.module';
+import {ListChartGaugeComponent} from './components/list-chart-gauge/list-chart-gauge.component';
+import {DataDetailsComponent} from './components/data-details/data-details.component';
+import {SelectEntityModule} from '../shared/select-entity/select-entity.module';
 
 
 @NgModule({
@@ -44,6 +47,8 @@ import {ActiveSwitchModule} from '../shared/active-switch/active-switch.module';
         ListComponent,
         ListChartCirclesComponent,
         ListChartDonutComponent,
+        ListChartGaugeComponent,
+        DataDetailsComponent,
     ],
   imports: [
     CommonModule,
@@ -63,7 +68,8 @@ import {ActiveSwitchModule} from '../shared/active-switch/active-switch.module';
     ChartCircleModule,
     ChartDonutModule,
     MatRippleModule,
-    ActiveSwitchModule
+    ActiveSwitchModule,
+    SelectEntityModule
   ],
   exports: [
     MainComponent,

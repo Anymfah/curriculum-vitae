@@ -31,6 +31,16 @@ export class EntityListService {
   private _id = 0;
 
   /**
+   * Focus on a specific entity.
+   */
+  private _focused = new BehaviorSubject<EntityType | undefined>(undefined);
+
+  /**
+   * Focus on a specific entity as Observable.
+   */
+  public focused$ = this._focused.asObservable();
+
+  /**
    * Entity collection as a behavior subject.
    */
   private _entityCollection: BehaviorSubject<EntityType[]> = new BehaviorSubject<EntityType[]>([]);
@@ -50,10 +60,26 @@ export class EntityListService {
    */
   public skills$ = this._skills.asObservable();
 
+  /** Skills collection direct access. */
+  public get skills(): SkillEntity[] {
+    return this._skills.value;
+  }
+
   /**
    * Projects entity collection as BehaviorSubject.
    */
   private _projects = new BehaviorSubject<ProjectEntity[]>([]);
+
+  /**
+   * Get projects as observable.
+   */
+  public projects$ = this._projects.asObservable();
+
+  /** Projects collection direct access. */
+  public get projects(): ProjectEntity[] {
+    return this._projects.value;
+  }
+
 
   /**
    * Education entity collection as BehaviorSubject.
@@ -65,6 +91,11 @@ export class EntityListService {
    */
   public education$ = this._education.asObservable();
 
+  /** Education collection direct access. */
+  public get education(): EducationEntity[] {
+    return this._education.value;
+  }
+
   /**
    * Work entity collection as BehaviorSubject.
    */
@@ -75,10 +106,10 @@ export class EntityListService {
    */
   public work$ = this._work.asObservable();
 
-  /**
-   * Get projects as observable.
-   */
-  public projects$ = this._projects.asObservable();
+  /** Work collection direct access. */
+  public get work(): WorkEntity[] {
+    return this._work.value;
+  }
 
   /**
    * @constructor
@@ -99,6 +130,8 @@ export class EntityListService {
       ...workCollection,
       ...this._projects.value
     ]);
+
+    console.log(this)
   }
 
   /**
@@ -165,6 +198,7 @@ export class EntityListService {
   private _getProjectCollection(data: ProjectDataInterface[]): ProjectEntity[] {
     const projects: ProjectEntity[] = [];
     data.forEach((project) => {
+      this._id++;
       const projectEntity = new ProjectEntity(this._id, project);
 
       // Insert the skill entities into the project entity collection.
@@ -180,7 +214,6 @@ export class EntityListService {
         projectEntity.skills = skills;
       }
       projects.push(projectEntity);
-      this._id++;
     });
     return projects;
   }
@@ -228,5 +261,25 @@ export class EntityListService {
    */
   public getPreMadeQuery(type: DATA_TYPE, preMadeQuery: PRE_MADE_QUERY): EntityType[] {
     return this.getFilteredCollection(type, PRE_MADE_QUERY_CONSTANT[preMadeQuery]);
+  }
+
+  /**
+   * Focus on a specific entity.
+   */
+  public focusEntity(entity: number | EntityType | undefined): void {
+    if (typeof entity === 'number') {
+      this._focused.next(this.getEntityById(entity));
+    } else {
+      this._focused.next(entity);
+    }
+    console.log(this._focused.value);
+  }
+
+  /**
+   * @method Get Entity by ID.
+   * @param id
+   */
+  public getEntityById(id: number): EntityType | undefined {
+    return this._entityCollection.value.find((entity) => entity.id === id);
   }
 }

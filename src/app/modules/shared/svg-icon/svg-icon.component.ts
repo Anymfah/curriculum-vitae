@@ -53,7 +53,6 @@ export class SvgIconComponent implements OnInit, OnChanges {
         .subscribe((svgIcon) => {
           if (svgIcon != null) {
             this.svgIcon = svgIcon;
-            sub.unsubscribe();
           }
         });
     }

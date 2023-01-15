@@ -25,15 +25,14 @@ export class ActiveSwitchItemDirective implements OnInit {
   public constructor(
     private readonly _elementRef: ElementRef,
     private readonly _viewContainerRef: ViewContainerRef,
-    private readonly _parentDirective: ActiveSwitchDirective,
-  ) {}
+  private readonly _parentDirective: ActiveSwitchDirective,
+) {}
 
-  /**
-   * @inheritDoc
-   */
+/**
+ * @inheritDoc
+ */
   public ngOnInit(): void {
     this._elementRef.nativeElement.classList.add('active-switch-item');
-    console.log('parent:', this);
   }
 
 }

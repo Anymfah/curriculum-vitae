@@ -16,41 +16,22 @@
   }
   &__item {
     @include mixins.transition(.5s, $property: padding);
-    cursor: pointer;
     padding: 10px 15px 10px 10px;
     position: relative;
-    --svg-icon--color: #{fn.get-color(accent, 300)};
 
     &-badge {
-      @include mixins.transition;
       width: 2px;
       height: calc(100% - 10px);
       position: absolute;
       top: 5px;
       left: 0;
-      opacity: 0.5;
-    }
-
-    &:hover {
-      background: fn.get-color(accent, 400, 0.1);
     }
 
     &.active {
-      background: fn.get-color(accent, 500, 0.2);
-      color: fn.get-color(accent, 100);
-      --svg-icon--color: #{fn.get-color(primary, 500)};
-
       padding: 10px 5px 10px 20px;
       .badge {
-        opacity: 1;
         width: 4px;
       }
-    }
-
-    cv-svg-icon {
-      height: 22px;
-      width: 22px;
-      margin: 0 5px 0 0;
     }
 
     &__header {

@@ -6,6 +6,7 @@ import {OrderByInterface, QueryFilterInterface} from '../interfaces/query.interf
 import {DATA_FIELD} from '../enums/data.enum';
 import {compareValuesUtil} from '../utils/compare-values.util';
 import {EntityType} from '../types/entity.type';
+import {ValueSkillEntityInterface} from '../interfaces/value-skill-entity.interface';
 
 
 export class WorkEntity extends AbstractEntity<WorkDataInterface> {
@@ -39,6 +40,35 @@ export class WorkEntity extends AbstractEntity<WorkDataInterface> {
    * Work entity projects.
    */
   public projects: ProjectEntity[] = [];
+
+  /**
+   * Get Skills ratios of the work entity.
+   * Calculate the number of times each skill is used in the work entity
+   * for each project and return the percentage ratio of each skill.
+   * @see ValueSkillEntityInterface
+   */
+  public get skillRatios(): ValueSkillEntityInterface[] {
+    const skills: {value: number, skill: SkillEntity}[] = [];
+    this.projects.forEach((project: ProjectEntity) => {
+      project.skills.forEach((skill: SkillEntity) => {
+        const exists =
+          skills.find((s: ValueSkillEntityInterface) => s.skill.id === skill.id);
+        if (exists) {
+          exists.value++;
+        } else {
+          skills.push({value: 1, skill});
+        }
+      });
+    });
+
+    const total = skills.reduce((acc: number, curr: ValueSkillEntityInterface) => {
+      return acc + curr.value;
+    }, 0);
+
+    return skills.map((skill: ValueSkillEntityInterface) => {
+      return {value: skill.value, skill: skill.skill};
+    });
+  }
 
   /**
    * @constructor

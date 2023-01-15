@@ -1,5 +1,5 @@
 <div class="chart-gauge__container flex align-center">
-  <div *ngIf="value != null" class="chart-gauge__fill" [style.width.%]="value">
-    <div class="chart-gauge__value small">{{value}}%</div>
-  </div>
+  <div class="chart-gauge__fill" [style.width.%]="calculatedValue"
+       [style.background-color]="color"></div>
+  <div class="chart-gauge__value small" [style.left.%]="calculatedValue">{{shownValue}}%</div>
 </div>

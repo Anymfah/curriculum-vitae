@@ -26,3 +26,35 @@ button.base-button.mat-mdc-button-base {
 .mat-ripple-element {
   background-color: fn.get-color(accent, 400, 0.2);
 }
+
+.active-switch-item {
+  cursor: pointer;
+  user-select: none;
+  padding: 5px 10px;
+  --svg-icon--color: #{fn.get-color(accent, 300)};
+
+  cv-svg-icon {
+    height: 22px;
+    width: 22px;
+    margin: 0 5px 0 0;
+  }
+
+  &:hover {
+    background: fn.get-color(accent, 400, 0.1);
+  }
+
+  .badge {
+    @include mixins.transition;
+    opacity: 0.5;
+  }
+
+  &.active {
+    background: fn.get-color(accent, 500, 0.2);
+    color: fn.get-color(accent, 100);
+    --svg-icon--color: #{fn.get-color(primary, 500)};
+
+    .badge {
+      opacity: 1;
+    }
+  }
+}

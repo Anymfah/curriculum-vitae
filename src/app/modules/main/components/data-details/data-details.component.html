@@ -1,0 +1,43 @@
+<cv-block [cvTitle]="entityName"  maxHeight="100%" [disablePadding]="true">
+  <div class="data-details__container flex flex-wrap">
+    <div class="data-details__content flex-column">
+      <!--Circle charts blocks Container-->
+      <div class="data-details__content__row flex flex-grow">
+        <div class="data-details__blocks chart-circle-blocks flex flex-grow flex-wrap">
+          <div *ngIf="entitySubtitle" class="data-details__subtitle">
+            {{entitySubtitle}}
+          </div>
+          <div *ngFor="let block of circleCharts" class="data-details__block flex-column">
+            <div class="data-details__block__header flex-center">
+              <div class="data-details__block-title h3 flex-center">
+                {{block.label}}
+              </div>
+            </div>
+            <div class="data-details__block__content">
+              <cv-chart-circle [value]="block.value" [animationDelay]="block.delay"
+                               [size]="90" [weight]="5"></cv-chart-circle>
+            </div>
+          </div>
+        </div>
+
+        <!--Gauge charts blocks Container-->
+        <div *ngIf="gaugeCharts" class="data-details__list flex-column flex-grow">
+          <div class="data-details__list__header flex label h3">Stacks utilisées</div>
+          <cv-list-chart-gauge class="data-details__list-chart flex-grow flex-column"
+                               [items]="gaugeCharts.items"
+                               [entityType]="gaugeCharts.entityType"
+                               [entities]="gaugeCharts.entities"
+                               [valueKey]="gaugeCharts.valueKey"
+          ></cv-list-chart-gauge>
+        </div>
+      </div>
+
+      <cv-list-chart-donut class="data-details__donut" *ngIf="donutChart"
+                           [items]="donutChart.items"
+                           [entityType]="donutChart.entityType"
+                           [entities]="donutChart.entities"
+                           [valueKey]="donutChart.valueKey"
+      ></cv-list-chart-donut>
+    </div>
+  </div>
+</cv-block>

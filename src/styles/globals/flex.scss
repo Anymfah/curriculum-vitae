@@ -23,8 +23,13 @@
   }
 }
 
-.align-center {
-  align-items: center;
+.align {
+  &-center {
+    align-items: center;
+  }
+  &-end {
+    align-items: flex-end;
+  }
 }
 
 .justify-center {

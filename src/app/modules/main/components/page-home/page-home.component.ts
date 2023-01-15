@@ -1,5 +1,4 @@
-import {Component, HostBinding, OnInit} from '@angular/core';
-import {EntityListService} from '../../../../services/entity-list.service';
+import {Component, HostBinding} from '@angular/core';
 import {DATA_FIELD, DATA_TYPE} from '../../../../enums/data.enum';
 import {PRE_MADE_QUERY} from '../../../../enums/premade-query.enum';
 
@@ -8,7 +7,7 @@ import {PRE_MADE_QUERY} from '../../../../enums/premade-query.enum';
   templateUrl: './page-home.component.html',
   styleUrls: ['./page-home.component.scss']
 })
-export class PageHomeComponent implements OnInit {
+export class PageHomeComponent {
 
   @HostBinding('class.cv-page') public readonly cvPageClass = true;
 
@@ -29,19 +28,6 @@ export class PageHomeComponent implements OnInit {
     }
 
   };
-
-  /**
-   * @constructor
-   * @param _entityListService
-   */
-  constructor(
-    private readonly _entityListService: EntityListService,
-  ) {
-  }
-
-  public ngOnInit(): void {
-
-  }
 
 
 }

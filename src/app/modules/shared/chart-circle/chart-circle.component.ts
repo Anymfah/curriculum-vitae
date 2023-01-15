@@ -10,16 +10,19 @@ export class ChartCircleComponent implements OnChanges {
 
   /**
    * Value to be displayed in the chart.
+   * @todo put in abstract class
    */
-  @Input() public value: number = 75;
+  @Input() public value: number = 0;
 
   /**
    * Minimum value to be displayed in the chart.
+   * @todo put in abstract class
    */
   @Input() public min: number = 0;
 
   /**
    * Maximum value to be displayed in the chart.
+   * @todo put in abstract class
    */
   @Input() public max: number = 100;
 
@@ -35,11 +38,13 @@ export class ChartCircleComponent implements OnChanges {
 
   /**
    * Color
+   * @todo put in abstract class
    */
   @Input() public color?: string;
 
   /**
    * Delay before the animation starts.
+   * @todo put in abstract class
    */
   @Input() public animationDelay: number = 0;
 
@@ -50,11 +55,13 @@ export class ChartCircleComponent implements OnChanges {
 
   /**
    * Calculated value in degrees from the value, min and max.
+   * @todo put in abstract class
    */
   public calculatedValue: number = 0;
 
   /**
    * @inheritDoc
+   * @todo put in abstract class
    */
   public ngOnChanges(changes: SimpleChanges): void {
     if ('min' in changes || 'max' in changes || 'value' in changes) {
@@ -65,6 +72,8 @@ export class ChartCircleComponent implements OnChanges {
   /**
    * Calculates the value into degrees to be displayed in the chart.
    * @param delay Delay before the animation starts.
+   * @todo put in abstract class
+   * @todo override in child class
    */
   private _calculateValue(delay: number = 0): void {
     setTimeout(_ => {
@@ -76,6 +85,7 @@ export class ChartCircleComponent implements OnChanges {
   /**
    * Animate the Calculated value
    * @param value Value to be animated.
+   * @todo put in abstract class
    */
   private _animateCalculatedValue(value: number): void {
     animateValueUtil((newValue: number) => {
@@ -85,6 +95,7 @@ export class ChartCircleComponent implements OnChanges {
 
   /**
    * Animate the value
+   * @todo put in abstract class
    */
   private _animateValue(): void {
     animateValueUtil((newValue: number) => {

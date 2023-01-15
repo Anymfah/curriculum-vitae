@@ -1,14 +1,18 @@
-<mat-selection-list class="list-chart-circle__container flex flex-grow flex-wrap" [multiple]="false">
-  <mat-list-option *ngFor="let item of itemsToRender" color="accent"
-                   [value]="item"
-                   class="list-chart-circle__item flex align-center">
-    <div matListItemTitle class="list-chart-circle__item__header header">
-      <cv-svg-icon *ngIf="item.icon != null" [icon]="item.icon"></cv-svg-icon>
-      <div class="list-chart-circle__item__header-title">{{item.title}}</div>
+<div cvActiveSwitch class="list-chart-circle__container flex flex-wrap">
+  <div matRipple cvActiveSwitchItem *ngFor="let item of itemsToRender"
+       [cvSelectEntity]="item.id"
+       class="list-chart-circle__item flex-column align-center flex-grow"
+       [class.has-subtitle]="item.subtitle"
+  >
+    <div class="list-chart-circle__item__header header flex-column align-center">
+      <div class="list-chart-circle__item__header-title flex">
+        <cv-svg-icon matListItemIcon *ngIf="item.icon != null" [icon]="item.icon"></cv-svg-icon>
+        <div class="list-chart-circle__item__header-title header-title subtitle-2">{{item.title}}</div>
+      </div>
+      <div class="list-chart-circle__item__subtitle small" *ngIf="item.subtitle != null && item.subtitle !== ''">{{item.subtitle}}</div>
     </div>
-    <cv-chart-circle [size]="70" [animationDelay]="item.delay ?? 0"
+    <cv-chart-circle class="list-chart-circle__content" [size]="70" [animationDelay]="item.delay ?? 0"
                      [value]="item.value" [color]="item.color">
     </cv-chart-circle>
-    <div *ngIf="item.subtitle != null && item.subtitle !== ''" matListItemLine>{{item.subtitle}}</div>
-  </mat-list-option>
-</mat-selection-list>
+  </div>
+</div>

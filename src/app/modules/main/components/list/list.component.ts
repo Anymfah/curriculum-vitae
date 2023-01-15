@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, Input, OnChanges, SimpleChanges, ViewEncapsulation} from '@angular/core';
 import {ListItem} from './list-item.interface';
 import {DATA_TYPE} from '../../../../enums/data.enum';
 import {EntityListService} from '../../../../services/entity-list.service';
@@ -14,18 +14,18 @@ import {PRE_MADE_QUERY} from '../../../../enums/premade-query.enum';
   styleUrls: ['./list.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class ListComponent implements OnInit {
+export class ListComponent implements OnChanges {
   public color: ThemePalette = 'primary';
 
   /**
    * The list items.
    */
-  @Input() items: ListItem[] = [];
+  @Input() items?: ListItem[];
 
   /**
    * Entity items
    */
-  @Input() entities: EntityType[] = [];
+  @Input() entities?: EntityType[];
 
   /**
    * Items to render
@@ -40,7 +40,7 @@ export class ListComponent implements OnInit {
   /**
    * Data type - Choose what to display
    */
-  @Input() public entityType: DATA_TYPE = DATA_TYPE.SKILL;
+  @Input() public entityType?: DATA_TYPE;
 
   /**
    * Key for value
@@ -65,7 +65,8 @@ export class ListComponent implements OnInit {
   }
 
   /**
-   * Behavior subject for items to render ready
+   * Behavior subject for entities to render ready
+   * (not used if {this.items} is set)
    */
   protected _entitiesReady = new BehaviorSubject<EntityType[]>([]);
 
@@ -87,27 +88,53 @@ export class ListComponent implements OnInit {
    * @inheritDoc
    */
   public ngOnInit() {
-    if (this.entities.length > 0) {
-      this._entities = this.entities;
-      this._entitiesReady.next(this._entities);
-    } else {
-      this._getEntities();
+
+  }
+
+  /**
+   * @inheritDoc
+   */
+  public ngOnChanges(changes: SimpleChanges): void {
+    if ('items' in changes ||
+      'entities' in changes ||
+      'queryArgs' in changes ||
+      'entityType' in changes ||
+      'valueKey' in changes) {
+      this._renewItemsToRender();
     }
-    this.itemsToRender = this._getItemsToRender();
+  }
+
+  /**
+   * Renew items to render
+   */
+  private _renewItemsToRender(): void {
+    if (this.items != null && this.items.length > 0) {
+      this._setItemsToRender(this.items);
+    } else {
+      if (this.entities != null && this.entities.length > 0) {
+        this._entities = this.entities;
+        this._entitiesReady.next(this._entities);
+      } else {
+        this._getEntities();
+      }
+      this.itemsToRender = this._getItemsToRender();
+    }
   }
 
   /**
    * Get entities from service
    */
-  private _getEntities() {
-    if (typeof this.queryArgs === 'string') {
-      this._entities = this._entityListService
-        .getPreMadeQuery(this.entityType, this.queryArgs)
-    } else {
-      this._entities = this._entityListService
-        .getFilteredCollection(this.entityType, this.queryArgs);
+  private _getEntities(): void {
+    if (this.entityType != null) {
+      if (typeof this.queryArgs === 'string') {
+        this._entities = this._entityListService
+          .getPreMadeQuery(this.entityType, this.queryArgs)
+      } else {
+        this._entities = this._entityListService
+          .getFilteredCollection(this.entityType, this.queryArgs);
+      }
+      this._entitiesReady.next(this._entities);
     }
-    this._entitiesReady.next(this._entities);
   }
 
   /**
@@ -146,5 +173,12 @@ export class ListComponent implements OnInit {
     } else {
       return null;
     }
+  }
+
+  /**
+   * Set items to render
+   */
+  protected _setItemsToRender(items: ListItem[]): void {
+    this.itemsToRender = items;
   }
 }
