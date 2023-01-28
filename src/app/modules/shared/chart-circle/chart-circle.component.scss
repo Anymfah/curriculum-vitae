@@ -20,4 +20,9 @@ cv-draw-circle {
   &__full {
     --draw-circle--track-bar-color: #{fn.get-color(accent, 600, .8)};
   }
+  &__content {
+    .label {
+      margin-top: -12px;
+    }
+  }
 }

@@ -31,6 +31,7 @@ import {ActiveSwitchModule} from '../shared/active-switch/active-switch.module';
 import {ListChartGaugeComponent} from './components/list-chart-gauge/list-chart-gauge.component';
 import {DataDetailsComponent} from './components/data-details/data-details.component';
 import {SelectEntityModule} from '../shared/select-entity/select-entity.module';
+import { PageSkillsComponent } from './components/page-skills/page-skills.component';
 
 
 @NgModule({
@@ -49,6 +50,7 @@ import {SelectEntityModule} from '../shared/select-entity/select-entity.module';
         ListChartDonutComponent,
         ListChartGaugeComponent,
         DataDetailsComponent,
+        PageSkillsComponent,
     ],
   imports: [
     CommonModule,

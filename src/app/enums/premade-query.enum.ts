@@ -28,4 +28,9 @@ export enum PRE_MADE_QUERY {
    * All stacks
    */
   ALL_STACKS = 'allStacks',
+
+  /**
+   * Others skills
+   */
+  OTHERS_SKILLS = 'othersSkills',
 }

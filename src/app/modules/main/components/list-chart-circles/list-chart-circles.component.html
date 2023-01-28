@@ -6,7 +6,7 @@
   >
     <div class="list-chart-circle__item__header header flex-column align-center">
       <div class="list-chart-circle__item__header-title flex">
-        <cv-svg-icon matListItemIcon *ngIf="item.icon != null" [icon]="item.icon"></cv-svg-icon>
+        <cv-svg-icon *ngIf="item.icon != null" [icon]="item.icon"></cv-svg-icon>
         <div class="list-chart-circle__item__header-title header-title subtitle-2">{{item.title}}</div>
       </div>
       <div class="list-chart-circle__item__subtitle small" *ngIf="item.subtitle != null && item.subtitle !== ''">{{item.subtitle}}</div>

@@ -1,28 +1,44 @@
 @use 'functions' as fn;
 
 :host {
-  display: flex;
+  display: grid;
+  width: 100%;
   height: 100%;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(12, 1fr);
   padding: 30px;
   gap: 10px;
 }
 
-.layout-gap {
-  &-200 {
-    width: 200px;
-  }
-}
-
 .zone {
-  border: 1px dashed fn.get-color(accent, 600);
-  &__left, &__right {
-    max-width: 300px;
+  display: flex;
+  &__left {
+    &-top {
+      grid-column: 1 / span 2;
+      grid-row: 1 / span 4;
+    }
   }
+
   &__center {
-    flex-grow: 1;
-    &__bottom {
-      align-items: flex-end;
-      display: flex;
+    &-top {
+      grid-column: 3 / span 8;
+      grid-row: 1 / span 6;
+    }
+
+    &-bottom {
+      grid-column: 5 / span 6;
+      grid-row: 7 / span 6;
+    }
+  }
+
+  &__right {
+    &-top {
+      grid-column: 11 / span 2;
+      grid-row: 1 / span 5;
+    }
+    &-bottom {
+      grid-column: 11 / span 2;
+      grid-row: 6 / span 7;
     }
   }
 }

@@ -46,6 +46,9 @@ export enum SKILL_CATEGORY {
   /** Design */
   DESIGN = 'Design',
 
+  /** Stack */
+  STACK = 'Stack',
+
   /** Others */
   OTHERS = 'Autres',
 }

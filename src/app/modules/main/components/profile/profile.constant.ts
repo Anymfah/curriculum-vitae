@@ -42,12 +42,13 @@ export const PROFILE_CONSTANT = {
     },
     // * Skills
     {
+      routerLink: '/skills',
       importance: 40,
       offset: 20,
 
       circleMenuItem: {
-        title: 'Skills',
-        description: 'Lorem ipsum dolor sit amet',
+        title: 'Compétences',
+        description: 'Liste de mes compétences',
         size: 310,
         weight: 55,
         torque: -30,

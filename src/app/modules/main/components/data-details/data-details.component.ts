@@ -155,7 +155,6 @@ export class DataDetailsComponent implements OnChanges, OnInit {
         entities: this.entity.skills,
         valueKey: DATA_FIELD.LEVEL
       };
-      console.log('this.gaugeCharts,', this.gaugeCharts);
       this.donutChart = {
         // TODO: continue here (maybe something else than donut chart)
       }

@@ -18,6 +18,7 @@ export class PageHomeComponent {
     favoriteStacks: {
       title: 'Mes Stacks préférées',
       valueKey: DATA_FIELD.EXPERIENCE,
+      type: DATA_TYPE.SKILL,
       query: PRE_MADE_QUERY.STACKS_BEST_FAVORITES
     },
     lastProjects: {

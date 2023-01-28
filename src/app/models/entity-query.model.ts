@@ -4,11 +4,6 @@ import {OrderByInterface, QueryFilterInterface, QueryInterface} from '../interfa
 export class EntityQueryModel<T = EntityType> {
 
   /**
-   * Collection origin
-   */
-  private readonly _collectionOrigin: EntityType[] = [];
-
-  /**
    * Collection to work on
    */
   private _collection: EntityType[] = [];
@@ -39,9 +34,7 @@ export class EntityQueryModel<T = EntityType> {
    * @param args Arguments to apply to the query
    */
   public constructor(collection: EntityType[], args: QueryInterface) {
-    this._collectionOrigin = collection;
     this._collection = collection;
-
     this._limitNum = args.limit;
     this._filters = args.filters;
     this._orderBy = args.orderBy;
@@ -114,15 +107,18 @@ export class EntityQueryModel<T = EntityType> {
    * @param fields Fields to order by
    */
   private _orderByCollection(collection: EntityType[], fields: OrderByInterface[]): EntityType[] {
+    console.log('ORDER BY', fields)
     fields.forEach((field: OrderByInterface) => {
 
       if (collection[0]?.hasOwnProperty(field.name)) {
+        console.log('ORDER BY FIELD', field.name, field.direction, collection)
         collection = collection.sort((a: EntityType, b: EntityType) => {
           const order = field.direction === 'DESC' ? -1 : 1;
           return a.orderByNativeField(field, b) * order;
         });
       }
     });
+    console.log('collection:', collection)
     return collection;
   }
 

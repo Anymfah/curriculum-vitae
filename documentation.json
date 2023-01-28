@@ -1066,7 +1066,7 @@
     "injectables": [
         {
             "name": "EntityListService",
-            "id": "injectable-EntityListService-a8630fbbab737ca72532e7022a9cf57f2878ec1dea76b7265521f7cb97f067d9937ad3d82302a296e3366e6e194f8717cf23f7825931db36d63593f2f46b5e79",
+            "id": "injectable-EntityListService-bb364195fd529aebdab7198b5fe44c97b35a688dfa4206225b9e9193bda5c1e0274febf0d578cb0d9e20848269194edbbee018d1ce2f8a5aa60eb05b2e686cd7",
             "file": "src/app/services/entity-list.service.ts",
             "properties": [
                 {
@@ -1540,7 +1540,7 @@
                     "optional": false,
                     "returnType": "EntityType | undefined",
                     "typeParameters": [],
-                    "line": 281,
+                    "line": 282,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\n",
@@ -1551,8 +1551,8 @@
                     "jsdoctags": [
                         {
                             "name": {
-                                "pos": 7852,
-                                "end": 7854,
+                                "pos": 7890,
+                                "end": 7892,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -1563,8 +1563,8 @@
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "pos": 7846,
-                                "end": 7851,
+                                "pos": 7884,
+                                "end": 7889,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -1740,7 +1740,7 @@
             "deprecationMessage": "",
             "description": "",
             "rawdescription": "\n",
-            "sourceCode": "import {Injectable} from '@angular/core';\nimport {BehaviorSubject} from 'rxjs';\nimport {SkillEntity} from '../models/skill-entity.model';\nimport {ProjectEntity} from '../models/project-entity.model';\nimport {EntityType} from '../types/entity.type';\nimport {EducationEntity} from '../models/education-entity.model';\nimport {WorkEntity} from '../models/work-entity.model';\nimport {DATA_SKILLS} from '../constants/data-skills.constant';\nimport {DATA_EDUCATION} from '../constants/data-education.constant';\nimport {\n  EducationDataInterface,\n  ProjectDataInterface,\n  SkillDataInterface,\n  WorkDataInterface\n} from '../interfaces/data.interface';\nimport {DATA_WORK} from '../constants/data-work.constant';\nimport {DATA_TYPE} from '../enums/data.enum';\nimport {QueryInterface} from '../interfaces/query.interface';\nimport {EntityQueryModel} from '../models/entity-query.model';\nimport {PRE_MADE_QUERY} from '../enums/premade-query.enum';\nimport {PRE_MADE_QUERY_CONSTANT} from '../constants/premade-query.constant';\n\n@Injectable({\n  providedIn: 'root'\n})\nexport class EntityListService {\n\n  /**\n   * ID of the last created entity.\n   */\n  private _id = 0;\n\n  /**\n   * Focus on a specific entity.\n   */\n  private _focused = new BehaviorSubject<EntityType | undefined>(undefined);\n\n  /**\n   * Focus on a specific entity as Observable.\n   */\n  public focused$ = this._focused.asObservable();\n\n  /**\n   * Entity collection as a behavior subject.\n   */\n  private _entityCollection: BehaviorSubject<EntityType[]> = new BehaviorSubject<EntityType[]>([]);\n\n  /**\n   * Entity collection as an observable.\n   */\n  public entityCollection$ = this._entityCollection.asObservable();\n\n  /**\n   * Skills entity collection as BehaviorSubject.\n   */\n  private _skills = new BehaviorSubject<SkillEntity[]>([]);\n\n  /**\n   * Skills entity collection as observable.\n   */\n  public skills$ = this._skills.asObservable();\n\n  /** Skills collection direct access. */\n  public get skills(): SkillEntity[] {\n    return this._skills.value;\n  }\n\n  /**\n   * Projects entity collection as BehaviorSubject.\n   */\n  private _projects = new BehaviorSubject<ProjectEntity[]>([]);\n\n  /**\n   * Get projects as observable.\n   */\n  public projects$ = this._projects.asObservable();\n\n  /** Projects collection direct access. */\n  public get projects(): ProjectEntity[] {\n    return this._projects.value;\n  }\n\n\n  /**\n   * Education entity collection as BehaviorSubject.\n   */\n  private _education = new BehaviorSubject<EducationEntity[]>([]);\n\n  /**\n   * Education entity collection as observable.\n   */\n  public education$ = this._education.asObservable();\n\n  /** Education collection direct access. */\n  public get education(): EducationEntity[] {\n    return this._education.value;\n  }\n\n  /**\n   * Work entity collection as BehaviorSubject.\n   */\n  private _work = new BehaviorSubject<WorkEntity[]>([]);\n\n  /**\n   * Work entity collection as observable.\n   */\n  public work$ = this._work.asObservable();\n\n  /** Work collection direct access. */\n  public get work(): WorkEntity[] {\n    return this._work.value;\n  }\n\n  /**\n   * @constructor\n   */\n  public constructor() {\n    const skillsCollection = this._getSkillCollection(DATA_SKILLS);\n    this._skills.next(skillsCollection);\n\n    const educationCollection = this._getEducationCollection(DATA_EDUCATION);\n    this._education.next(educationCollection);\n\n    const workCollection = this._getWorkCollection(DATA_WORK);\n    this._work.next(workCollection);\n\n    this._entityCollection.next([\n      ...skillsCollection,\n      ...educationCollection,\n      ...workCollection,\n      ...this._projects.value\n    ]);\n\n    console.log(this)\n  }\n\n  /**\n   * Get the skill collection.\n   * @param data Data to be used to populate the collection.\n   */\n  private _getSkillCollection(data: SkillDataInterface[]): SkillEntity[] {\n    const skills: SkillEntity[] = [];\n    data.forEach((skill) => {\n      skills.push(new SkillEntity(this._id, skill));\n      this._id++;\n    });\n    return skills;\n  }\n\n  /**\n   * Get the education collection.\n   * @param data Data to be used to populate the collection.\n   */\n  private _getEducationCollection(data: EducationDataInterface[]): EducationEntity[] {\n    const education: EducationEntity[] = [];\n    data.forEach((educationItem) => {\n      education.push(new EducationEntity(this._id, educationItem));\n      this._id++;\n    });\n    return education;\n  }\n\n  /**\n   * Get the work collection.\n   * @param data Data to be used to populate the collection.\n   */\n  private _getWorkCollection(data: WorkDataInterface[]): WorkEntity[] {\n    const work: WorkEntity[] = [];\n    data.forEach((workItem) => {\n      const workEntity = new WorkEntity(this._id, workItem);\n      if (workItem.projects != null) {\n        // Fill the project entities.\n        workEntity.projects = this._getProjectCollection(workItem.projects);\n        this._projects.next([...this._projects.value, ...workEntity.projects]);\n      }\n      if (workItem.skills != null) {\n        // Fill the skill entities.\n        workEntity.skills = [];\n        workItem.skills.forEach((skill) => {\n          this._skills.value.forEach((skillEntity) => {\n            if (skillEntity.name === skill) {\n              workEntity.skills.push(skillEntity);\n            }\n          });\n        });\n      }\n      work.push(workEntity);\n      this._id++;\n    });\n    return work;\n  }\n\n  /**\n   * Get the project collection.\n   * @param data Data to be used to populate the collection.\n   * TODO: Missing projects, get from personal work or hobby...\n   */\n  private _getProjectCollection(data: ProjectDataInterface[]): ProjectEntity[] {\n    const projects: ProjectEntity[] = [];\n    data.forEach((project) => {\n      this._id++;\n      const projectEntity = new ProjectEntity(this._id, project);\n\n      // Insert the skill entities into the project entity collection.\n      if (project.skills != null) {\n        const skills: SkillEntity[] = [];\n        project.skills.forEach((skill) => {\n          this._skills.value.forEach((skillEntity) => {\n            if (skillEntity.name === skill) {\n              skills.push(skillEntity);\n            }\n          });\n        });\n        projectEntity.skills = skills;\n      }\n      projects.push(projectEntity);\n    });\n    return projects;\n  }\n\n  /**\n   * @method Get collection by type.\n   * @param type Type of collection to get.\n   */\n  public getCollectionByType(type: DATA_TYPE): EntityType[] {\n    switch (type) {\n      case DATA_TYPE.SKILL:\n        return this._skills.value;\n      case DATA_TYPE.EDUCATION:\n        return this._education.value;\n      case DATA_TYPE.WORK:\n        return this._work.value;\n      case DATA_TYPE.PROJECT:\n        return this._projects.value;\n      default:\n        return [];\n    }\n  }\n\n  /**\n   * @method Get Filtered Collection\n   * @param type Type of collection to get.\n   * @param args Filters/Ordering to apply to the collection.\n   */\n  public getFilteredCollection(\n    type: DATA_TYPE,\n    args?: QueryInterface): EntityType[] {\n    let collection = this.getCollectionByType(type);\n    if (args != null) {\n      const query = new EntityQueryModel(collection, args);\n      collection = query.getCollection();\n    }\n\n    return collection;\n  }\n\n  /**\n   * Get PreMade Query.\n   * @param type Type of collection to get.\n   * @param preMadeQuery PreMade query to apply to the collection.\n   */\n  public getPreMadeQuery(type: DATA_TYPE, preMadeQuery: PRE_MADE_QUERY): EntityType[] {\n    return this.getFilteredCollection(type, PRE_MADE_QUERY_CONSTANT[preMadeQuery]);\n  }\n\n  /**\n   * Focus on a specific entity.\n   */\n  public focusEntity(entity: number | EntityType | undefined): void {\n    if (typeof entity === 'number') {\n      this._focused.next(this.getEntityById(entity));\n    } else {\n      this._focused.next(entity);\n    }\n  }\n\n  /**\n   * @method Get Entity by ID.\n   * @param id\n   */\n  public getEntityById(id: number): EntityType | undefined {\n    return this._entityCollection.value.find((entity) => entity.id === id);\n  }\n}\n",
+            "sourceCode": "import {Injectable} from '@angular/core';\nimport {BehaviorSubject} from 'rxjs';\nimport {SkillEntity} from '../models/skill-entity.model';\nimport {ProjectEntity} from '../models/project-entity.model';\nimport {EntityType} from '../types/entity.type';\nimport {EducationEntity} from '../models/education-entity.model';\nimport {WorkEntity} from '../models/work-entity.model';\nimport {DATA_SKILLS} from '../constants/data-skills.constant';\nimport {DATA_EDUCATION} from '../constants/data-education.constant';\nimport {\n  EducationDataInterface,\n  ProjectDataInterface,\n  SkillDataInterface,\n  WorkDataInterface\n} from '../interfaces/data.interface';\nimport {DATA_WORK} from '../constants/data-work.constant';\nimport {DATA_TYPE} from '../enums/data.enum';\nimport {QueryInterface} from '../interfaces/query.interface';\nimport {EntityQueryModel} from '../models/entity-query.model';\nimport {PRE_MADE_QUERY} from '../enums/premade-query.enum';\nimport {PRE_MADE_QUERY_CONSTANT} from '../constants/premade-query.constant';\n\n@Injectable({\n  providedIn: 'root'\n})\nexport class EntityListService {\n\n  /**\n   * ID of the last created entity.\n   */\n  private _id = 0;\n\n  /**\n   * Focus on a specific entity.\n   */\n  private _focused = new BehaviorSubject<EntityType | undefined>(undefined);\n\n  /**\n   * Focus on a specific entity as Observable.\n   */\n  public focused$ = this._focused.asObservable();\n\n  /**\n   * Entity collection as a behavior subject.\n   */\n  private _entityCollection: BehaviorSubject<EntityType[]> = new BehaviorSubject<EntityType[]>([]);\n\n  /**\n   * Entity collection as an observable.\n   */\n  public entityCollection$ = this._entityCollection.asObservable();\n\n  /**\n   * Skills entity collection as BehaviorSubject.\n   */\n  private _skills = new BehaviorSubject<SkillEntity[]>([]);\n\n  /**\n   * Skills entity collection as observable.\n   */\n  public skills$ = this._skills.asObservable();\n\n  /** Skills collection direct access. */\n  public get skills(): SkillEntity[] {\n    return this._skills.value;\n  }\n\n  /**\n   * Projects entity collection as BehaviorSubject.\n   */\n  private _projects = new BehaviorSubject<ProjectEntity[]>([]);\n\n  /**\n   * Get projects as observable.\n   */\n  public projects$ = this._projects.asObservable();\n\n  /** Projects collection direct access. */\n  public get projects(): ProjectEntity[] {\n    return this._projects.value;\n  }\n\n\n  /**\n   * Education entity collection as BehaviorSubject.\n   */\n  private _education = new BehaviorSubject<EducationEntity[]>([]);\n\n  /**\n   * Education entity collection as observable.\n   */\n  public education$ = this._education.asObservable();\n\n  /** Education collection direct access. */\n  public get education(): EducationEntity[] {\n    return this._education.value;\n  }\n\n  /**\n   * Work entity collection as BehaviorSubject.\n   */\n  private _work = new BehaviorSubject<WorkEntity[]>([]);\n\n  /**\n   * Work entity collection as observable.\n   */\n  public work$ = this._work.asObservable();\n\n  /** Work collection direct access. */\n  public get work(): WorkEntity[] {\n    return this._work.value;\n  }\n\n  /**\n   * @constructor\n   */\n  public constructor() {\n    const skillsCollection = this._getSkillCollection(DATA_SKILLS);\n    this._skills.next(skillsCollection);\n\n    const educationCollection = this._getEducationCollection(DATA_EDUCATION);\n    this._education.next(educationCollection);\n\n    const workCollection = this._getWorkCollection(DATA_WORK);\n    this._work.next(workCollection);\n\n    this._entityCollection.next([\n      ...skillsCollection,\n      ...educationCollection,\n      ...workCollection,\n      ...this._projects.value\n    ]);\n\n    console.log(this)\n  }\n\n  /**\n   * Get the skill collection.\n   * @param data Data to be used to populate the collection.\n   */\n  private _getSkillCollection(data: SkillDataInterface[]): SkillEntity[] {\n    const skills: SkillEntity[] = [];\n    data.forEach((skill) => {\n      skills.push(new SkillEntity(this._id, skill));\n      this._id++;\n    });\n    return skills;\n  }\n\n  /**\n   * Get the education collection.\n   * @param data Data to be used to populate the collection.\n   */\n  private _getEducationCollection(data: EducationDataInterface[]): EducationEntity[] {\n    const education: EducationEntity[] = [];\n    data.forEach((educationItem) => {\n      education.push(new EducationEntity(this._id, educationItem));\n      this._id++;\n    });\n    return education;\n  }\n\n  /**\n   * Get the work collection.\n   * @param data Data to be used to populate the collection.\n   */\n  private _getWorkCollection(data: WorkDataInterface[]): WorkEntity[] {\n    const work: WorkEntity[] = [];\n    data.forEach((workItem) => {\n      const workEntity = new WorkEntity(this._id, workItem);\n      if (workItem.projects != null) {\n        // Fill the project entities.\n        workEntity.projects = this._getProjectCollection(workItem.projects);\n        this._projects.next([...this._projects.value, ...workEntity.projects]);\n      }\n      if (workItem.skills != null) {\n        // Fill the skill entities.\n        workEntity.skills = [];\n        workItem.skills.forEach((skill) => {\n          this._skills.value.forEach((skillEntity) => {\n            if (skillEntity.name === skill) {\n              workEntity.skills.push(skillEntity);\n            }\n          });\n        });\n      }\n      work.push(workEntity);\n      this._id++;\n    });\n    return work;\n  }\n\n  /**\n   * Get the project collection.\n   * @param data Data to be used to populate the collection.\n   * TODO: Missing projects, get from personal work or hobby...\n   */\n  private _getProjectCollection(data: ProjectDataInterface[]): ProjectEntity[] {\n    const projects: ProjectEntity[] = [];\n    data.forEach((project) => {\n      this._id++;\n      const projectEntity = new ProjectEntity(this._id, project);\n\n      // Insert the skill entities into the project entity collection.\n      if (project.skills != null) {\n        const skills: SkillEntity[] = [];\n        project.skills.forEach((skill) => {\n          this._skills.value.forEach((skillEntity) => {\n            if (skillEntity.name === skill) {\n              skills.push(skillEntity);\n            }\n          });\n        });\n        projectEntity.skills = skills;\n      }\n      projects.push(projectEntity);\n    });\n    return projects;\n  }\n\n  /**\n   * @method Get collection by type.\n   * @param type Type of collection to get.\n   */\n  public getCollectionByType(type: DATA_TYPE): EntityType[] {\n    switch (type) {\n      case DATA_TYPE.SKILL:\n        return this._skills.value;\n      case DATA_TYPE.EDUCATION:\n        return this._education.value;\n      case DATA_TYPE.WORK:\n        return this._work.value;\n      case DATA_TYPE.PROJECT:\n        return this._projects.value;\n      default:\n        return [];\n    }\n  }\n\n  /**\n   * @method Get Filtered Collection\n   * @param type Type of collection to get.\n   * @param args Filters/Ordering to apply to the collection.\n   */\n  public getFilteredCollection(\n    type: DATA_TYPE,\n    args?: QueryInterface): EntityType[] {\n    let collection = this.getCollectionByType(type);\n    if (args != null) {\n      const query = new EntityQueryModel(collection, args);\n      collection = query.getCollection();\n    }\n\n    return collection;\n  }\n\n  /**\n   * Get PreMade Query.\n   * @param type Type of collection to get.\n   * @param preMadeQuery PreMade query to apply to the collection.\n   */\n  public getPreMadeQuery(type: DATA_TYPE, preMadeQuery: PRE_MADE_QUERY): EntityType[] {\n    return this.getFilteredCollection(type, PRE_MADE_QUERY_CONSTANT[preMadeQuery]);\n  }\n\n  /**\n   * Focus on a specific entity.\n   */\n  public focusEntity(entity: number | EntityType | undefined): void {\n    if (typeof entity === 'number') {\n      this._focused.next(this.getEntityById(entity));\n    } else {\n      this._focused.next(entity);\n    }\n    console.log(this._focused.value);\n  }\n\n  /**\n   * @method Get Entity by ID.\n   * @param id\n   */\n  public getEntityById(id: number): EntityType | undefined {\n    return this._entityCollection.value.find((entity) => entity.id === id);\n  }\n}\n",
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
@@ -6662,7 +6662,7 @@
         },
         {
             "name": "BlockComponent",
-            "id": "component-BlockComponent-1b5d61ae747a65c5bb26e00154aed4a442ed7fa08698c512f287fd2ff856e21a28197ebf747a4bb5166d4dcfd46a0fe95ee01f9cb964ce2ac8bc7abc97567a88",
+            "id": "component-BlockComponent-35793f8e9083280e7af5769bee7935663e0805c2401c654aecf431bc03f83fae0e81767977db0b69ff6d7e5dfcba9cb68d421d532c7220c28dbb56bbacce6e88",
             "file": "src/app/modules/main/components/block/block.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -6679,6 +6679,28 @@
             ],
             "viewProviders": [],
             "inputsClass": [
+                {
+                    "name": "centered",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nCentered content\n",
+                    "description": "<p>Centered content</p>\n",
+                    "line": 27,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "column",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nColumn content\n",
+                    "description": "<p>Column content</p>\n",
+                    "line": 32,
+                    "type": "boolean",
+                    "decorators": []
+                },
                 {
                     "name": "cvTitle",
                     "defaultValue": "''",
@@ -6723,20 +6745,20 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import {Component, Input} from '@angular/core';\n\n@Component({\n  selector: 'cv-block',\n  templateUrl: './block.component.html',\n  styleUrls: ['./block.component.scss']\n})\nexport class BlockComponent {\n  /**\n   * Title of the block\n   */\n  @Input() public cvTitle = '';\n\n  /**\n   * Max height of the block\n   */\n  @Input() public maxHeight?: string = '100%';\n\n  /**\n   * Disable padding\n   */\n  @Input() public disablePadding?: boolean = false;\n}\n",
+            "sourceCode": "import {Component, Input} from '@angular/core';\n\n@Component({\n  selector: 'cv-block',\n  templateUrl: './block.component.html',\n  styleUrls: ['./block.component.scss']\n})\nexport class BlockComponent {\n  /**\n   * Title of the block\n   */\n  @Input() public cvTitle = '';\n\n  /**\n   * Max height of the block\n   */\n  @Input() public maxHeight?: string = '100%';\n\n  /**\n   * Disable padding\n   */\n  @Input() public disablePadding?: boolean = false;\n\n  /**\n   * Centered content\n   */\n  @Input() public centered?: boolean = false;\n\n  /**\n   * Column content\n   */\n  @Input() public column?: boolean = false;\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "@use 'functions' as fn;\r\n\r\n:host {\r\n  display: flex;\r\n  flex-direction: column;\r\n  width: 100%;\r\n}\r\n\r\n.block {\r\n  &__container {\r\n    clip-path: polygon(\r\n        0 0,\r\n        80px 0%,\r\n        85px 5px,\r\n        calc(100% - 10px) 5px,\r\n        100% 16px,\r\n        100% 100%,\r\n        87px 100%,\r\n        82px calc(100% - 5px),\r\n        10px calc(100% - 5px),\r\n        0 calc(100% - 15px),\r\n    );\r\n    background: fn.get-color(contrast, 600, 0.5);\r\n    margin-bottom: 2px;\r\n  }\r\n  &__header {\r\n    position: relative;\r\n\r\n    &-wrapper {\r\n      display: flex;\r\n      align-items: center;\r\n      justify-content: space-between;\r\n      padding: 10px 16px 8px;\r\n    }\r\n\r\n    &-title {\r\n      color: fn.get-color(contrast, 100);\r\n    }\r\n\r\n    &-line {\r\n      position: absolute;\r\n      bottom: 0;\r\n      left: 16px;\r\n      width: calc(100% - 16px);\r\n      height: 1px;\r\n      background-color: fn.get-color(contrast, 500);\r\n\r\n      &:after, &:before {\r\n        content: '';\r\n        position: absolute;\r\n        left: 0;\r\n      }\r\n\r\n      &:after {\r\n        top: 1px;\r\n        width: 50px;\r\n        height: 6px;\r\n        background-color: fn.get-color(contrast, 500);\r\n        clip-path: polygon(0 0, 100% 0, calc(100% - 6px) 100%, 3px 100%);\r\n      }\r\n\r\n      &:before {\r\n        bottom: 0;\r\n        width: 80px;\r\n        height: 3px;\r\n        background-color: fn.get-color(contrast, 400);\r\n        clip-path: polygon(3px 0, calc(100% - 3px) 0, 100% 100%, 0% 100%);\r\n      }\r\n    }\r\n  }\r\n\r\n  &__content {\r\n    overflow: auto;\r\n\r\n    &.has-padding {\r\n      padding: 5px 16px 12px;\r\n    }\r\n  }\r\n}\r\n",
+                    "data": "@use 'functions' as fn;\r\n\r\n:host {\r\n  display: flex;\r\n  flex-direction: column;\r\n  width: 100%;\r\n}\r\n\r\n.block {\r\n  &__container {\r\n    height: 100%;\r\n    width: 100%;\r\n    clip-path: polygon(\r\n        0 0,\r\n        80px 0%,\r\n        85px 5px,\r\n        calc(100% - 10px) 5px,\r\n        100% 16px,\r\n        100% 100%,\r\n        87px 100%,\r\n        82px calc(100% - 5px),\r\n        10px calc(100% - 5px),\r\n        0 calc(100% - 15px),\r\n    );\r\n    //background: fn.get-color(contrast, 600, 0.5);\r\n    background: fn.get-color(contrast, 500, 0.3);\r\n    backdrop-filter: blur(3px);\r\n    margin-bottom: 2px;\r\n  }\r\n  &__header {\r\n    position: relative;\r\n\r\n    &-wrapper {\r\n      display: flex;\r\n      align-items: center;\r\n      justify-content: space-between;\r\n      padding: 10px 16px 8px;\r\n    }\r\n\r\n    &-title {\r\n      color: fn.get-color(contrast, 100);\r\n    }\r\n\r\n    &-line {\r\n      position: absolute;\r\n      bottom: 0;\r\n      left: 16px;\r\n      width: calc(100% - 16px);\r\n      height: 1px;\r\n      background-color: fn.get-color(contrast, 500);\r\n\r\n      &:after, &:before {\r\n        content: '';\r\n        position: absolute;\r\n        left: 0;\r\n      }\r\n\r\n      &:after {\r\n        top: 1px;\r\n        width: 50px;\r\n        height: 6px;\r\n        background-color: fn.get-color(contrast, 500);\r\n        clip-path: polygon(0 0, 100% 0, calc(100% - 6px) 100%, 3px 100%);\r\n      }\r\n\r\n      &:before {\r\n        bottom: 0;\r\n        width: 80px;\r\n        height: 3px;\r\n        background-color: fn.get-color(contrast, 400);\r\n        clip-path: polygon(3px 0, calc(100% - 3px) 0, 100% 100%, 0% 100%);\r\n      }\r\n    }\r\n  }\r\n\r\n  &__content {\r\n    overflow: auto;\r\n\r\n    &.has-padding {\r\n      padding: 5px 16px 12px;\r\n    }\r\n  }\r\n}\r\n",
                     "styleUrl": "./block.component.scss"
                 }
             ],
             "stylesData": "",
-            "templateData": "<div class=\"block__container body-2\">\n  <div class=\"block__header\">\n    <div class=\"block__header-wrapper\">\n      <div class=\"block__header-title h3\">\n        {{ cvTitle }}\n      </div>\n    </div>\n    <div class=\"block__header-line\"></div>\n  </div>\n  <div class=\"block__content scroll-bar\"\n       [class.has-padding]=\"!disablePadding\"\n       [style.max-height]=\"maxHeight\">\n    <ng-content></ng-content>\n  </div>\n</div>\n\n"
+            "templateData": "<div class=\"block__container body-2 flex-column\">\n  <div class=\"block__header\">\n    <div *ngIf=\"cvTitle\" class=\"block__header-wrapper\">\n      <div *ngIf=\"cvTitle\" class=\"block__header-title h3\">\n        {{ cvTitle }}\n      </div>\n    </div>\n    <div *ngIf=\"cvTitle\" class=\"block__header-line\"></div>\n  </div>\n  <div class=\"block__content scroll-bar flex-grow\"\n       [class.flex-center]=\"centered\"\n       [class.flex-column]=\"column\"\n       [class.has-padding]=\"!disablePadding\"\n       [style.max-height]=\"maxHeight\">\n    <ng-content></ng-content>\n  </div>\n</div>\n\n"
         },
         {
             "name": "ChartCircleComponent",
-            "id": "component-ChartCircleComponent-ed70a89e71e360ad9af1285eabd8c69cf0a7786be9f099d0eb5e2f072ea26839022f47343055dcd4ddfd40f33e9ad950bca865a8314a75c8de126677d2dd5418",
+            "id": "component-ChartCircleComponent-15227c396c86adceb2bd6eaad04c6441338d74f7474ebb68ec942315d13ebda1d982a32476f97745b505aab02f10e1ab3a1d7c0c81f4ea60a6fec9a6c374e51e",
             "file": "src/app/modules/shared/chart-circle/chart-circle.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -6811,6 +6833,16 @@
                     "rawdescription": "\n\nColor\n",
                     "description": "<p>Color</p>\n",
                     "line": 43,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "label",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nLabel to be displayed in the chart.\n",
+                    "description": "<p>Label to be displayed in the chart.</p>\n",
+                    "line": 65,
                     "type": "string",
                     "decorators": []
                 },
@@ -6992,7 +7024,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 90,
+                    "line": 95,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nAnimate the Calculated value\n",
@@ -7003,8 +7035,8 @@
                     "jsdoctags": [
                         {
                             "name": {
-                                "pos": 2051,
-                                "end": 2056,
+                                "pos": 2139,
+                                "end": 2144,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -7015,8 +7047,8 @@
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "pos": 2045,
-                                "end": 2050,
+                                "pos": 2133,
+                                "end": 2138,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -7033,7 +7065,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 100,
+                    "line": 105,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nAnimate the value\n",
@@ -7057,7 +7089,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 78,
+                    "line": 83,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nCalculates the value into degrees to be displayed in the chart.\n",
@@ -7068,8 +7100,8 @@
                     "jsdoctags": [
                         {
                             "name": {
-                                "pos": 1670,
-                                "end": 1675,
+                                "pos": 1758,
+                                "end": 1763,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -7081,8 +7113,8 @@
                             "deprecationMessage": "",
                             "defaultValue": "0",
                             "tagName": {
-                                "pos": 1664,
-                                "end": 1669,
+                                "pos": 1752,
+                                "end": 1757,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -7106,7 +7138,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 66,
+                    "line": 71,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\n",
@@ -7134,11 +7166,11 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';\nimport {animateValueUtil} from '../../../utils/animate-value.util';\n\n@Component({\n  selector: 'cv-chart-circle',\n  templateUrl: './chart-circle.component.html',\n  styleUrls: ['./chart-circle.component.scss']\n})\nexport class ChartCircleComponent implements OnChanges {\n\n  /**\n   * Value to be displayed in the chart.\n   * @todo put in abstract class\n   */\n  @Input() public value: number = 0;\n\n  /**\n   * Minimum value to be displayed in the chart.\n   * @todo put in abstract class\n   */\n  @Input() public min: number = 0;\n\n  /**\n   * Maximum value to be displayed in the chart.\n   * @todo put in abstract class\n   */\n  @Input() public max: number = 100;\n\n  /**\n   * Size of the chart.\n   */\n  @Input() public size: number = 200;\n\n  /**\n   * Weight of the chart.\n   */\n  @Input() public weight: number = 5;\n\n  /**\n   * Color\n   * @todo put in abstract class\n   */\n  @Input() public color?: string;\n\n  /**\n   * Delay before the animation starts.\n   * @todo put in abstract class\n   */\n  @Input() public animationDelay: number = 0;\n\n  /**\n   * Start degree of the chart.\n   */\n  @Input() public startDegree: number = 0;\n\n  /**\n   * Calculated value in degrees from the value, min and max.\n   * @todo put in abstract class\n   */\n  public calculatedValue: number = 0;\n\n  /**\n   * @inheritDoc\n   * @todo put in abstract class\n   */\n  public ngOnChanges(changes: SimpleChanges): void {\n    if ('min' in changes || 'max' in changes || 'value' in changes) {\n      this._calculateValue(this.animationDelay);\n    }\n  }\n\n  /**\n   * Calculates the value into degrees to be displayed in the chart.\n   * @param delay Delay before the animation starts.\n   * @todo put in abstract class\n   * @todo override in child class\n   */\n  private _calculateValue(delay: number = 0): void {\n    setTimeout(_ => {\n      this._animateCalculatedValue(360 * (this.value - this.min) / (this.max - this.min));\n      this._animateValue();\n    }, delay);\n  }\n\n  /**\n   * Animate the Calculated value\n   * @param value Value to be animated.\n   * @todo put in abstract class\n   */\n  private _animateCalculatedValue(value: number): void {\n    animateValueUtil((newValue: number) => {\n      this.calculatedValue = newValue;\n    }, this.calculatedValue, value, 1500);\n  }\n\n  /**\n   * Animate the value\n   * @todo put in abstract class\n   */\n  private _animateValue(): void {\n    animateValueUtil((newValue: number) => {\n      this.value = Math.round(newValue);\n    }, this.min, this.value, 1500);\n  }\n\n\n}\n",
+            "sourceCode": "import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';\nimport {animateValueUtil} from '../../../utils/animate-value.util';\n\n@Component({\n  selector: 'cv-chart-circle',\n  templateUrl: './chart-circle.component.html',\n  styleUrls: ['./chart-circle.component.scss']\n})\nexport class ChartCircleComponent implements OnChanges {\n\n  /**\n   * Value to be displayed in the chart.\n   * @todo put in abstract class\n   */\n  @Input() public value: number = 0;\n\n  /**\n   * Minimum value to be displayed in the chart.\n   * @todo put in abstract class\n   */\n  @Input() public min: number = 0;\n\n  /**\n   * Maximum value to be displayed in the chart.\n   * @todo put in abstract class\n   */\n  @Input() public max: number = 100;\n\n  /**\n   * Size of the chart.\n   */\n  @Input() public size: number = 200;\n\n  /**\n   * Weight of the chart.\n   */\n  @Input() public weight: number = 5;\n\n  /**\n   * Color\n   * @todo put in abstract class\n   */\n  @Input() public color?: string;\n\n  /**\n   * Delay before the animation starts.\n   * @todo put in abstract class\n   */\n  @Input() public animationDelay: number = 0;\n\n  /**\n   * Start degree of the chart.\n   */\n  @Input() public startDegree: number = 0;\n\n  /**\n   * Calculated value in degrees from the value, min and max.\n   * @todo put in abstract class\n   */\n  public calculatedValue: number = 0;\n\n  /**\n   * Label to be displayed in the chart.\n   */\n  @Input() public label?: string;\n\n  /**\n   * @inheritDoc\n   * @todo put in abstract class\n   */\n  public ngOnChanges(changes: SimpleChanges): void {\n    if ('min' in changes || 'max' in changes || 'value' in changes) {\n      this._calculateValue(this.animationDelay);\n    }\n  }\n\n  /**\n   * Calculates the value into degrees to be displayed in the chart.\n   * @param delay Delay before the animation starts.\n   * @todo put in abstract class\n   * @todo override in child class\n   */\n  private _calculateValue(delay: number = 0): void {\n    setTimeout(_ => {\n      this._animateCalculatedValue(360 * (this.value - this.min) / (this.max - this.min));\n      this._animateValue();\n    }, delay);\n  }\n\n  /**\n   * Animate the Calculated value\n   * @param value Value to be animated.\n   * @todo put in abstract class\n   */\n  private _animateCalculatedValue(value: number): void {\n    animateValueUtil((newValue: number) => {\n      this.calculatedValue = newValue;\n    }, this.calculatedValue, value, 1500);\n  }\n\n  /**\n   * Animate the value\n   * @todo put in abstract class\n   */\n  private _animateValue(): void {\n    animateValueUtil((newValue: number) => {\n      this.value = Math.round(newValue);\n    }, this.min, this.value, 1500);\n  }\n\n\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "@use 'functions' as fn;\r\n\r\n:host {\r\n  display: flex;\r\n  justify-content: center;\r\n}\r\ncv-draw-circle {\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\r\n}\r\n\r\n.chart-circle {\r\n  &__container {\r\n    position: relative;\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n  }\r\n  &__full {\r\n    --draw-circle--track-bar-color: #{fn.get-color(accent, 600, .8)};\r\n  }\r\n}\r\n",
+                    "data": "@use 'functions' as fn;\r\n\r\n:host {\r\n  display: flex;\r\n  justify-content: center;\r\n}\r\ncv-draw-circle {\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\r\n}\r\n\r\n.chart-circle {\r\n  &__container {\r\n    position: relative;\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n  }\r\n  &__full {\r\n    --draw-circle--track-bar-color: #{fn.get-color(accent, 600, .8)};\r\n  }\r\n  &__content {\r\n    .label {\r\n      margin-top: -12px;\r\n    }\r\n  }\r\n}\r\n",
                     "styleUrl": "./chart-circle.component.scss"
                 }
             ],
@@ -7146,7 +7178,7 @@
             "implements": [
                 "OnChanges"
             ],
-            "templateData": "<div class=\"chart-circle__container\"\n     [style.height.px]=\"size\"\n     [style.width.px]=\"size\"\n>\n  <cv-draw-circle class=\"chart-circle__full\" [weight]=\"weight\" [size]=\"size\" anchorPoint=\"start\"\n                  [arcDegree]=\"360\"></cv-draw-circle>\n  <cv-draw-circle [weight]=\"weight\" [size]=\"size\" anchorPoint=\"start\"\n                  [color]=\"color\" [positionDegree]=\"startDegree\"\n                  [arcDegree]=\"calculatedValue\">\n  </cv-draw-circle>\n  <div class=\"chart-circle__value\">\n    {{value}}%\n  </div>\n</div>\n"
+            "templateData": "<div class=\"chart-circle__container\"\n     [style.height.px]=\"size\"\n     [style.width.px]=\"size\"\n>\n  <cv-draw-circle class=\"chart-circle__full\" [weight]=\"weight\" [size]=\"size\" anchorPoint=\"start\"\n                  [arcDegree]=\"360\"></cv-draw-circle>\n  <cv-draw-circle [weight]=\"weight\" [size]=\"size\" anchorPoint=\"start\"\n                  [color]=\"color\" [positionDegree]=\"startDegree\"\n                  [arcDegree]=\"calculatedValue\">\n  </cv-draw-circle>\n  <div class=\"chart-circle__content flex-column flex-center\">\n    <div *ngIf=\"label\" class=\"label small\">\n      {{label}}\n    </div>\n    <div class=\"value\" [ngClass]=\"size > 100 ? 'h1' : 'h3'\">\n      {{value}}%\n    </div>\n  </div>\n</div>\n"
         },
         {
             "name": "ChartDonutComponent",
@@ -8463,7 +8495,7 @@
         },
         {
             "name": "DataDetailsComponent",
-            "id": "component-DataDetailsComponent-5cb5eb995d29ec25ecd19f09b511c14bd950a0a08e10b78732ea69dfeed057e8bb6e3679e062feb41ae7c50112696e748803556d365bc6d8dfd13a546c04ab70",
+            "id": "component-DataDetailsComponent-18f123facc91788ea3135abd9a2f684e63b2191d6d8954296aeb98b64128b596443a959acdc81970ac9126b13d87e5c76b7f50cad980eb87475cb53e8228a39e",
             "file": "src/app/modules/main/components/data-details/data-details.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -8486,13 +8518,41 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nEntity to be displayed.\n",
                     "description": "<p>Entity to be displayed.</p>\n",
-                    "line": 27,
+                    "line": 28,
                     "type": "EntityType",
                     "decorators": []
                 }
             ],
             "outputsClass": [],
             "propertiesClass": [
+                {
+                    "name": "_circleDelay",
+                    "defaultValue": "0",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": false,
+                    "description": "<p>Circle charts delay.</p>\n",
+                    "line": 43,
+                    "rawdescription": "\nCircle charts delay.",
+                    "modifierKind": [
+                        121
+                    ]
+                },
+                {
+                    "name": "_delayIncrement",
+                    "defaultValue": "150",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": false,
+                    "description": "<p>Global delay increment</p>\n",
+                    "line": 46,
+                    "rawdescription": "\nGlobal delay increment",
+                    "modifierKind": [
+                        121
+                    ]
+                },
                 {
                     "name": "circleCharts",
                     "defaultValue": "[]",
@@ -8501,7 +8561,7 @@
                     "type": "Array<literal type>",
                     "optional": false,
                     "description": "<p>Circle charts to show</p>\n",
-                    "line": 44,
+                    "line": 51,
                     "rawdescription": "\n\nCircle charts to show\n",
                     "modifierKind": [
                         123
@@ -8514,7 +8574,7 @@
                     "type": "ChartEntityList",
                     "optional": true,
                     "description": "<p>Donut chart entities.</p>\n",
-                    "line": 39,
+                    "line": 40,
                     "rawdescription": "\nDonut chart entities.",
                     "modifierKind": [
                         123
@@ -8528,7 +8588,7 @@
                     "type": "string",
                     "optional": false,
                     "description": "<p>Name of the entity.</p>\n",
-                    "line": 30,
+                    "line": 31,
                     "rawdescription": "\nName of the entity.",
                     "modifierKind": [
                         123
@@ -8542,7 +8602,7 @@
                     "type": "string",
                     "optional": false,
                     "description": "<p>Subtitle of the entity.</p>\n",
-                    "line": 33,
+                    "line": 34,
                     "rawdescription": "\nSubtitle of the entity.",
                     "modifierKind": [
                         123
@@ -8555,7 +8615,7 @@
                     "type": "ChartEntityList",
                     "optional": true,
                     "description": "<p>Side entities as gauge charts.</p>\n",
-                    "line": 36,
+                    "line": 37,
                     "rawdescription": "\nSide entities as gauge charts.",
                     "modifierKind": [
                         123
@@ -8564,12 +8624,60 @@
             ],
             "methodsClass": [
                 {
+                    "name": "_circleChartsSkillEntity",
+                    "args": [
+                        {
+                            "name": "entity",
+                            "type": "SkillEntity",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 119,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nUpdate circle chart for SkillEntity.\n",
+                    "description": "<p>Update circle chart for SkillEntity.</p>\n",
+                    "modifierKind": [
+                        121
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "entity",
+                            "type": "SkillEntity",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "_incrementCircleDelay",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 167,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nIncrement circle delay.\n",
+                    "description": "<p>Increment circle delay.</p>\n",
+                    "modifierKind": [
+                        121
+                    ]
+                },
+                {
                     "name": "_updateCircleCharts",
                     "args": [],
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 90,
+                    "line": 97,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nUpdate circle charts.\n",
@@ -8584,7 +8692,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 82,
+                    "line": 89,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nUpdate entity.\n",
@@ -8599,7 +8707,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 124,
+                    "line": 139,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nUpdate gauge charts.\n",
@@ -8621,7 +8729,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 71,
+                    "line": 78,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\n",
@@ -8647,7 +8755,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 57,
+                    "line": 64,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\n",
@@ -8665,11 +8773,11 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';\nimport {EntityType} from '../../../../types/entity.type';\nimport {SkillEntity} from '../../../../models/skill-entity.model';\nimport {WorkEntity} from '../../../../models/work-entity.model';\nimport {DATA_FIELD, DATA_TYPE} from '../../../../enums/data.enum';\nimport {ValueSkillEntitiesToList} from '../../../../transformers/entity-list.transformer';\nimport {ListItem} from '../list/list-item.interface';\nimport {EntityListService} from '../../../../services/entity-list.service';\n\ntype ChartEntityList = {\n  entityType?: DATA_TYPE;\n  entities?: EntityType[];\n  valueKey?: DATA_FIELD;\n  items?: ListItem[];\n}\n\n@Component({\n  selector: 'cv-data-details',\n  templateUrl: './data-details.component.html',\n  styleUrls: ['./data-details.component.scss']\n})\nexport class DataDetailsComponent implements OnChanges, OnInit {\n\n  /**\n   * Entity to be displayed.\n   */\n  @Input() public entity?: EntityType;\n\n  /** Name of the entity. */\n  public entityName: string = '';\n\n  /** Subtitle of the entity. */\n  public entitySubtitle: string = '';\n\n  /** Side entities as gauge charts. */\n  public gaugeCharts?: ChartEntityList;\n\n  /** Donut chart entities. */\n  public donutChart?: ChartEntityList;\n\n  /**\n   * Circle charts to show\n   */\n  public circleCharts: Array<{ label: string, value: number, delay: number }> = [];\n\n  /**\n   * @constructor\n   */\n  public constructor(\n    private readonly _entityListService: EntityListService\n  ) {\n  }\n\n  /**\n   * @inheritDoc\n   */\n  public ngOnInit(): void {\n    if (this.entity == null) {\n      this._entityListService.focused$.subscribe((entity: EntityType | undefined) => {\n        this.entity = entity;\n        this._updateEntity();\n        this._updateCircleCharts();\n        this._updateEntityLists();\n      });\n    }\n  }\n\n  /**\n   * @inheritDoc\n   */\n  public ngOnChanges(changes: SimpleChanges): void {\n    if ('entity' in changes) {\n      this._updateEntity();\n      this._updateCircleCharts();\n      this._updateEntityLists();\n    }\n  }\n\n  /**\n   * Update entity.\n   */\n  private _updateEntity(): void {\n    this.entityName = this.entity?.name ?? '';\n    this.entitySubtitle = this.entity?.subtitle ?? '';\n  }\n\n  /**\n   * Update circle charts.\n   */\n  private _updateCircleCharts(): void {\n    this.circleCharts = [];\n    let delay = 0;\n    const delayIncrement = 150;\n    if (this.entity instanceof SkillEntity) {\n      /** Add Level chart */\n      this.circleCharts.push({\n        label: 'Mon niveau',\n        value: this.entity.level,\n        delay: delay\n      });\n      delay += delayIncrement;\n      /** Add Experience chart */\n      this.circleCharts.push({\n        label: 'Mon expérience globale',\n        value: this.entity.experience,\n        delay: delay\n      });\n      delay += delayIncrement;\n    }\n    if (this.entity != null) {\n      /** Add Happiness chart */\n      this.circleCharts.push({\n        label: 'Ma satisfaction',\n        value: this.entity.happiness,\n        delay: delay\n      });\n      delay += delayIncrement;\n    }\n  }\n\n  /**\n   * Update gauge charts.\n   */\n  private _updateEntityLists(): void {\n    this.gaugeCharts = undefined;\n    this.donutChart = undefined;\n\n    if (this.entity instanceof WorkEntity) {\n      this.gaugeCharts = {\n        entityType: DATA_TYPE.PROJECT,\n        entities: this.entity.projects,\n        valueKey: DATA_FIELD.HAPPINESS\n      };\n      this.donutChart = {\n        items: ValueSkillEntitiesToList(this.entity.skillRatios)\n      };\n    }\n  }\n}\n",
+            "sourceCode": "import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';\nimport {EntityType} from '../../../../types/entity.type';\nimport {SkillEntity} from '../../../../models/skill-entity.model';\nimport {WorkEntity} from '../../../../models/work-entity.model';\nimport {DATA_FIELD, DATA_TYPE} from '../../../../enums/data.enum';\nimport {ValueSkillEntitiesToList} from '../../../../transformers/entity-list.transformer';\nimport {ListItem} from '../list/list-item.interface';\nimport {EntityListService} from '../../../../services/entity-list.service';\nimport {ProjectEntity} from '../../../../models/project-entity.model';\n\ntype ChartEntityList = {\n  entityType?: DATA_TYPE;\n  entities?: EntityType[];\n  valueKey?: DATA_FIELD;\n  items?: ListItem[];\n}\n\n@Component({\n  selector: 'cv-data-details',\n  templateUrl: './data-details.component.html',\n  styleUrls: ['./data-details.component.scss']\n})\nexport class DataDetailsComponent implements OnChanges, OnInit {\n\n  /**\n   * Entity to be displayed.\n   */\n  @Input() public entity?: EntityType;\n\n  /** Name of the entity. */\n  public entityName: string = '';\n\n  /** Subtitle of the entity. */\n  public entitySubtitle: string = '';\n\n  /** Side entities as gauge charts. */\n  public gaugeCharts?: ChartEntityList;\n\n  /** Donut chart entities. */\n  public donutChart?: ChartEntityList;\n\n  /** Circle charts delay. */\n  private _circleDelay = 0;\n\n  /** Global delay increment */\n  private _delayIncrement = 150;\n\n  /**\n   * Circle charts to show\n   */\n  public circleCharts: Array<{ label: string, value: number, delay: number }> = [];\n\n  /**\n   * @constructor\n   */\n  public constructor(\n    private readonly _entityListService: EntityListService\n  ) {\n  }\n\n  /**\n   * @inheritDoc\n   */\n  public ngOnInit(): void {\n    if (this.entity == null) {\n      this._entityListService.focused$.subscribe((entity: EntityType | undefined) => {\n        this.entity = entity;\n        this._updateEntity();\n        this._updateCircleCharts();\n        this._updateEntityLists();\n      });\n    }\n  }\n\n  /**\n   * @inheritDoc\n   */\n  public ngOnChanges(changes: SimpleChanges): void {\n    if ('entity' in changes) {\n      this._updateEntity();\n      this._updateCircleCharts();\n      this._updateEntityLists();\n    }\n  }\n\n  /**\n   * Update entity.\n   */\n  private _updateEntity(): void {\n    this.entityName = this.entity?.name ?? '';\n    this.entitySubtitle = this.entity?.subtitle ?? '';\n  }\n\n  /**\n   * Update circle charts.\n   */\n  private _updateCircleCharts(): void {\n    this.circleCharts = [];\n    this._circleDelay = 0;\n    if (this.entity instanceof SkillEntity) {\n      this._circleChartsSkillEntity(this.entity);\n    }\n\n\n    if (this.entity != null) {\n      /** Add Happiness chart */\n      this.circleCharts.push({\n        label: 'Ma satisfaction',\n        value: this.entity.happiness,\n        delay: this._circleDelay\n      });\n      this._incrementCircleDelay();\n    }\n  }\n\n  /**\n   * Update circle chart for SkillEntity.\n   */\n  private _circleChartsSkillEntity(entity: SkillEntity): void {\n    /** Add Level chart */\n    this.circleCharts.push({\n      label: 'Mon niveau',\n      value: entity.level,\n      delay: this._circleDelay\n    });\n    this._incrementCircleDelay();\n    /** Add Experience chart */\n    this.circleCharts.push({\n      label: 'Mon expérience globale',\n      value: entity.experience,\n      delay: this._circleDelay\n    });\n    this._incrementCircleDelay();\n  }\n\n  /**\n   * Update gauge charts.\n   */\n  private _updateEntityLists(): void {\n    this.gaugeCharts = undefined;\n    this.donutChart = undefined;\n\n    if (this.entity instanceof WorkEntity) {\n      this.gaugeCharts = {\n        entityType: DATA_TYPE.PROJECT,\n        entities: this.entity.projects,\n        valueKey: DATA_FIELD.HAPPINESS\n      };\n      this.donutChart = {\n        items: ValueSkillEntitiesToList(this.entity.skillRatios)\n      };\n    } else if (this.entity instanceof ProjectEntity) {\n      this.gaugeCharts = {\n        entityType: DATA_TYPE.SKILL,\n        entities: this.entity.skills,\n        valueKey: DATA_FIELD.LEVEL\n      };\n      this.donutChart = {\n        // TODO: continue here (maybe something else than donut chart)\n      }\n    }\n  }\n\n  /**\n   * Increment circle delay.\n   */\n  private _incrementCircleDelay(): void {\n    this._circleDelay += this._delayIncrement;\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "@use 'mixins';\r\n@use 'functions' as fn;\r\n\r\n:host {\r\n  width: 100%;\r\n}\r\n.data-details {\r\n  &__content {\r\n    height: 300px;\r\n    ::ng-deep {\r\n      .list-chart-donut__wrapper {\r\n        //height: inherit;\r\n        //overflow: visible;\r\n      }\r\n    }\r\n\r\n    &__row {\r\n      max-height: 50%;\r\n      overflow: hidden;\r\n    }\r\n  }\r\n  &__blocks {\r\n    flex-basis: 200px;\r\n    padding: 15px;\r\n  }\r\n\r\n  &__subtitle {\r\n    width: 100%;\r\n  }\r\n\r\n  &__list {\r\n    flex-basis: 200px;\r\n    position: relative;\r\n    height: min-content;\r\n    cv-list-chart-gauge {\r\n      width: 100%;\r\n      height: 100%;\r\n      overflow: auto;\r\n    }\r\n  }\r\n\r\n  &__donut {\r\n    max-height: 50%;\r\n  }\r\n\r\n  &__list, &__blocks {\r\n    @include mixins.scroll-bar;\r\n    height: 100%;\r\n    overflow: auto;\r\n    position: relative;\r\n    border-left: 1px solid fn.get-color(accent, 500);\r\n    border-bottom: 1px solid fn.get-color(accent, 500);\r\n    margin-left: -1px;\r\n  }\r\n\r\n}\r\n\r\n\r\n",
+                    "data": "@use 'mixins';\r\n@use 'functions' as fn;\r\n\r\n:host {\r\n  width: 100%;\r\n  display: flex;\r\n}\r\n.data-details {\r\n  &__container {\r\n    height: 100%;\r\n    position: relative;\r\n  }\r\n  &__content {\r\n    height: 100%;\r\n    width: 100%;\r\n    position: absolute;\r\n    top: 0;\r\n    left: 0;\r\n    ::ng-deep {\r\n      .list-chart-donut__wrapper {\r\n        //height: inherit;\r\n        //overflow: visible;\r\n      }\r\n    }\r\n\r\n    &__row {\r\n      //max-height: 50%;\r\n      overflow: hidden;\r\n    }\r\n  }\r\n  &__blocks {\r\n    flex-basis: 200px;\r\n    padding: 15px;\r\n    gap: 25px;\r\n  }\r\n\r\n  &__subtitle {\r\n    width: 100%;\r\n  }\r\n\r\n  &__list {\r\n    flex-basis: 200px;\r\n    position: relative;\r\n    height: min-content;\r\n\r\n    cv-list-chart-gauge {\r\n      width: 100%;\r\n      height: 100%;\r\n    }\r\n\r\n    &__header {\r\n      padding: 10px 15px;\r\n    }\r\n  }\r\n\r\n  &__donut {\r\n    max-height: 50%;\r\n  }\r\n\r\n  &__list, &__blocks {\r\n    @include mixins.scroll-bar;\r\n    height: 100%;\r\n    overflow: auto;\r\n    position: relative;\r\n    border-left: 1px solid fn.get-color(accent, 500);\r\n    border-bottom: 1px solid fn.get-color(accent, 500);\r\n    margin-left: -1px;\r\n    top: 1px;\r\n  }\r\n\r\n}\r\n\r\n\r\n",
                     "styleUrl": "./data-details.component.scss"
                 }
             ],
@@ -8687,7 +8795,7 @@
                         "deprecationMessage": ""
                     }
                 ],
-                "line": 44,
+                "line": 51,
                 "rawdescription": "\n\n",
                 "modifierKind": [
                     123
@@ -8708,7 +8816,7 @@
                 "OnChanges",
                 "OnInit"
             ],
-            "templateData": "<cv-block [cvTitle]=\"entityName\"  maxHeight=\"100%\" [disablePadding]=\"true\">\n  <div class=\"data-details__container flex flex-wrap\">\n    <div class=\"data-details__content flex-column\">\n      <!--Circle charts blocks Container-->\n      <div class=\"data-details__content__row flex flex-grow\">\n        <div class=\"data-details__blocks chart-circle-blocks flex flex-grow flex-wrap\">\n          <div *ngIf=\"entitySubtitle\" class=\"data-details__subtitle\">\n            {{entitySubtitle}}\n          </div>\n          <div *ngFor=\"let block of circleCharts\" class=\"data-details__block flex-column\">\n            <div class=\"data-details__block__header flex-center\">\n              <div class=\"data-details__block-title h3 flex-center\">\n                {{block.label}}\n              </div>\n            </div>\n            <div class=\"data-details__block__content\">\n              <cv-chart-circle [value]=\"block.value\" [animationDelay]=\"block.delay\"\n                               [size]=\"90\" [weight]=\"5\"></cv-chart-circle>\n            </div>\n          </div>\n        </div>\n\n        <!--Gauge charts blocks Container-->\n        <cv-list-chart-gauge class=\"data-details__list flex-grow flex-column\" *ngIf=\"gaugeCharts\"\n                             [items]=\"gaugeCharts.items\"\n                             [entityType]=\"gaugeCharts.entityType\"\n                             [entities]=\"gaugeCharts.entities\"\n                             [valueKey]=\"gaugeCharts.valueKey\"\n        ></cv-list-chart-gauge>\n      </div>\n\n      <cv-list-chart-donut class=\"data-details__donut\" *ngIf=\"donutChart\"\n                           [items]=\"donutChart.items\"\n                           [entityType]=\"donutChart.entityType\"\n                           [entities]=\"donutChart.entities\"\n                           [valueKey]=\"donutChart.valueKey\"\n      ></cv-list-chart-donut>\n    </div>\n  </div>\n</cv-block>\n"
+            "templateData": "<cv-block [cvTitle]=\"entityName\"  maxHeight=\"100%\" [disablePadding]=\"true\">\n  <div class=\"data-details__container flex flex-wrap\">\n    <div class=\"data-details__content flex-column\">\n      <!--Circle charts blocks Container-->\n      <div class=\"data-details__content__row flex flex-grow\">\n        <div class=\"data-details__blocks chart-circle-blocks justify-center flex flex-grow flex-wrap\">\n          <div *ngIf=\"entitySubtitle\" class=\"data-details__subtitle\">\n            {{entitySubtitle}}\n          </div>\n          <div *ngFor=\"let block of circleCharts\" class=\"data-details__block flex-column justify-center\">\n            <div class=\"data-details__block__header flex-center\">\n              <div class=\"data-details__block-title h3 flex-center\">\n                {{block.label}}\n              </div>\n            </div>\n            <div class=\"data-details__block__content\">\n              <cv-chart-circle [value]=\"block.value\" [animationDelay]=\"block.delay\"\n                               [size]=\"circleCharts.length === 1 ? 140 : 90\" [weight]=\"circleCharts.length === 1 ? 15 : 5\"></cv-chart-circle>\n            </div>\n          </div>\n        </div>\n\n        <!--Gauge charts blocks Container-->\n        <div *ngIf=\"gaugeCharts\" class=\"data-details__list flex-column flex-grow\">\n          <div class=\"data-details__list__header flex label h3\">Stacks utilisées</div>\n          <cv-list-chart-gauge class=\"data-details__list-chart flex-grow flex-column\"\n                               [items]=\"gaugeCharts.items\"\n                               [entityType]=\"gaugeCharts.entityType\"\n                               [entities]=\"gaugeCharts.entities\"\n                               [valueKey]=\"gaugeCharts.valueKey\"\n          ></cv-list-chart-gauge>\n        </div>\n      </div>\n\n      <cv-list-chart-donut class=\"data-details__donut\" *ngIf=\"donutChart && donutChart.items\"\n                           [items]=\"donutChart.items\"\n                           [entityType]=\"donutChart.entityType\"\n                           [entities]=\"donutChart.entities\"\n                           [valueKey]=\"donutChart.valueKey\"\n      ></cv-list-chart-donut>\n    </div>\n  </div>\n</cv-block>\n"
         },
         {
             "name": "DrawCircleComponent",
@@ -10255,7 +10363,7 @@
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "@use 'functions' as fn;\r\n@use 'mixins';\r\n\r\n:host {\r\n  /*background: fn.get-color(contrast, 800);\r\n  background: url('/assets/img/bg.jpg');\r\n  background-attachment: fixed;\r\n  background-size: cover;\r\n  background-position: 50% 50%;\r\n  background-repeat: no-repeat;*/\r\n  display: flex;\r\n  flex-direction: column;\r\n  height: 100%;\r\n  width: 100%;\r\n  overflow: hidden;\r\n\r\n  > mat-tab-nav-panel {\r\n    height: 100%;\r\n    width: 100%;\r\n    display: flex;\r\n\r\n    > main {\r\n      display: flex;\r\n      flex-direction: column;\r\n      width: 100%;\r\n      overflow: auto;\r\n      @include mixins.scroll-bar(fn.get-color(primary));\r\n    }\r\n  }\r\n}\r\n\r\n.layout__background {\r\n  position: fixed;\r\n  top: 0;\r\n  left: 0;\r\n  width: 100%;\r\n  height: 100vh;\r\n\r\n  z-index: -1;\r\n  &-image {\r\n    @include mixins.transition(.75s);\r\n    position: relative;\r\n    margin-left: -30%;\r\n    width: 160%;\r\n    height: 100%;\r\n    background-color: fn.get-color(contrast, 800);\r\n    background-image: url('/assets/img/bg.jpg');\r\n    background-size: cover;\r\n    background-position-x: 50%;\r\n    background-position-y: 50%;\r\n    background-repeat: no-repeat;\r\n  }\r\n}\r\n\r\ncv-profile {\r\n  position: absolute;\r\n  bottom: 0;\r\n  left: 0;\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n}\r\n",
+                    "data": "@use 'functions' as fn;\r\n@use 'mixins';\r\n\r\n:host {\r\n  display: flex;\r\n  flex-direction: column;\r\n  height: 100%;\r\n  width: 100%;\r\n  overflow: hidden;\r\n\r\n  > mat-tab-nav-panel {\r\n    height: 100%;\r\n    width: 100%;\r\n    display: flex;\r\n\r\n    > main {\r\n      display: flex;\r\n      flex-direction: column;\r\n      width: 100%;\r\n      overflow: auto;\r\n      @include mixins.scroll-bar(fn.get-color(primary));\r\n    }\r\n  }\r\n}\r\n\r\n.layout__background {\r\n  position: fixed;\r\n  top: 0;\r\n  left: 0;\r\n  width: 100%;\r\n  height: 100vh;\r\n\r\n  z-index: -1;\r\n  &-image {\r\n    @include mixins.transition(.75s);\r\n    position: relative;\r\n    margin-left: -30%;\r\n    width: 160%;\r\n    height: 100%;\r\n    background-color: fn.get-color(contrast, 800);\r\n    background-image: url('/assets/img/bg.jpg');\r\n    background-size: cover;\r\n    background-position-x: 50%;\r\n    background-position-y: 50%;\r\n    background-repeat: no-repeat;\r\n  }\r\n}\r\n\r\ncv-profile {\r\n  position: absolute;\r\n  bottom: 0;\r\n  left: 0;\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n}\r\n",
                     "styleUrl": "./layout.component.scss"
                 }
             ],
@@ -10513,7 +10621,7 @@
                     "optional": false,
                     "returnType": "ListItem",
                     "typeParameters": [],
-                    "line": 134,
+                    "line": 154,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nEntityType to ListItem\n",
@@ -10587,7 +10695,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 107,
+                    "line": 127,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nGet entities from service\n",
@@ -10605,7 +10713,7 @@
                     "optional": false,
                     "returnType": "ListItem[]",
                     "typeParameters": [],
-                    "line": 123,
+                    "line": 143,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nGet items to render as List Items\n",
@@ -10630,7 +10738,7 @@
                     "optional": false,
                     "returnType": "number | null",
                     "typeParameters": [],
-                    "line": 149,
+                    "line": 169,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nGet Value from entity with given key\n",
@@ -10654,6 +10762,24 @@
                     }
                 },
                 {
+                    "name": "_renewItemsToRender",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 110,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nRenew items to render\n",
+                    "description": "<p>Renew items to render</p>\n",
+                    "modifierKind": [
+                        121
+                    ],
+                    "inheritance": {
+                        "file": "ListComponent"
+                    }
+                },
+                {
                     "name": "_setItemsToRender",
                     "args": [
                         {
@@ -10666,7 +10792,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 161,
+                    "line": 181,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nSet items to render\n",
@@ -10678,6 +10804,42 @@
                         {
                             "name": "items",
                             "type": "ListItem[]",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ],
+                    "inheritance": {
+                        "file": "ListComponent"
+                    }
+                },
+                {
+                    "name": "ngOnChanges",
+                    "args": [
+                        {
+                            "name": "changes",
+                            "type": "SimpleChanges",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 97,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\n",
+                    "description": "",
+                    "modifierKind": [
+                        123
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "changes",
+                            "type": "SimpleChanges",
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
@@ -10726,7 +10888,7 @@
             ],
             "stylesData": "",
             "extends": "ListComponent",
-            "templateData": "<div cvActiveSwitch class=\"list-chart-circle__container flex flex-wrap\">\n  <div matRipple cvActiveSwitchItem *ngFor=\"let item of itemsToRender\"\n       [cvSelectEntity]=\"item.id\"\n       class=\"list-chart-circle__item flex-column align-center flex-grow\"\n       [class.has-subtitle]=\"item.subtitle\"\n  >\n    <div class=\"list-chart-circle__item__header header flex-column align-center\">\n      <div class=\"list-chart-circle__item__header-title flex\">\n        <cv-svg-icon matListItemIcon *ngIf=\"item.icon != null\" [icon]=\"item.icon\"></cv-svg-icon>\n        <div class=\"list-chart-circle__item__header-title header-title subtitle-2\">{{item.title}}</div>\n      </div>\n      <div class=\"list-chart-circle__item__subtitle small\" *ngIf=\"item.subtitle != null && item.subtitle !== ''\">{{item.subtitle}}</div>\n    </div>\n    <cv-chart-circle class=\"list-chart-circle__content\" [size]=\"70\" [animationDelay]=\"item.delay ?? 0\"\n                     [value]=\"item.value\" [color]=\"item.color\">\n    </cv-chart-circle>\n  </div>\n</div>\n"
+            "templateData": "<div cvActiveSwitch class=\"list-chart-circle__container flex flex-wrap\">\n  <div matRipple cvActiveSwitchItem *ngFor=\"let item of itemsToRender\"\n       [cvSelectEntity]=\"item.id\"\n       class=\"list-chart-circle__item flex-column align-center flex-grow\"\n       [class.has-subtitle]=\"item.subtitle\"\n  >\n    <div class=\"list-chart-circle__item__header header flex-column align-center\">\n      <div class=\"list-chart-circle__item__header-title flex\">\n        <cv-svg-icon *ngIf=\"item.icon != null\" [icon]=\"item.icon\"></cv-svg-icon>\n        <div class=\"list-chart-circle__item__header-title header-title subtitle-2\">{{item.title}}</div>\n      </div>\n      <div class=\"list-chart-circle__item__subtitle small\" *ngIf=\"item.subtitle != null && item.subtitle !== ''\">{{item.subtitle}}</div>\n    </div>\n    <cv-chart-circle class=\"list-chart-circle__content\" [size]=\"70\" [animationDelay]=\"item.delay ?? 0\"\n                     [value]=\"item.value\" [color]=\"item.color\">\n    </cv-chart-circle>\n  </div>\n</div>\n"
         },
         {
             "name": "ListChartDonutComponent",
@@ -11047,7 +11209,7 @@
                     "optional": false,
                     "returnType": "ListItem",
                     "typeParameters": [],
-                    "line": 134,
+                    "line": 154,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nEntityType to ListItem\n",
@@ -11121,7 +11283,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 107,
+                    "line": 127,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nGet entities from service\n",
@@ -11139,7 +11301,7 @@
                     "optional": false,
                     "returnType": "ListItem[]",
                     "typeParameters": [],
-                    "line": 123,
+                    "line": 143,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nGet items to render as List Items\n",
@@ -11164,7 +11326,7 @@
                     "optional": false,
                     "returnType": "number | null",
                     "typeParameters": [],
-                    "line": 149,
+                    "line": 169,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nGet Value from entity with given key\n",
@@ -11176,6 +11338,60 @@
                         {
                             "name": "entity",
                             "type": "EntityType",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ],
+                    "inheritance": {
+                        "file": "ListComponent"
+                    }
+                },
+                {
+                    "name": "_renewItemsToRender",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 110,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nRenew items to render\n",
+                    "description": "<p>Renew items to render</p>\n",
+                    "modifierKind": [
+                        121
+                    ],
+                    "inheritance": {
+                        "file": "ListComponent"
+                    }
+                },
+                {
+                    "name": "ngOnChanges",
+                    "args": [
+                        {
+                            "name": "changes",
+                            "type": "SimpleChanges",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 97,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\n",
+                    "description": "",
+                    "modifierKind": [
+                        123
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "changes",
+                            "type": "SimpleChanges",
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
@@ -11413,7 +11629,7 @@
                     "optional": false,
                     "returnType": "ListItem",
                     "typeParameters": [],
-                    "line": 134,
+                    "line": 154,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nEntityType to ListItem\n",
@@ -11487,7 +11703,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 107,
+                    "line": 127,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nGet entities from service\n",
@@ -11505,7 +11721,7 @@
                     "optional": false,
                     "returnType": "ListItem[]",
                     "typeParameters": [],
-                    "line": 123,
+                    "line": 143,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nGet items to render as List Items\n",
@@ -11530,7 +11746,7 @@
                     "optional": false,
                     "returnType": "number | null",
                     "typeParameters": [],
-                    "line": 149,
+                    "line": 169,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nGet Value from entity with given key\n",
@@ -11554,6 +11770,24 @@
                     }
                 },
                 {
+                    "name": "_renewItemsToRender",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 110,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nRenew items to render\n",
+                    "description": "<p>Renew items to render</p>\n",
+                    "modifierKind": [
+                        121
+                    ],
+                    "inheritance": {
+                        "file": "ListComponent"
+                    }
+                },
+                {
                     "name": "_setItemsToRender",
                     "args": [
                         {
@@ -11566,7 +11800,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 161,
+                    "line": 181,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nSet items to render\n",
@@ -11578,6 +11812,42 @@
                         {
                             "name": "items",
                             "type": "ListItem[]",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ],
+                    "inheritance": {
+                        "file": "ListComponent"
+                    }
+                },
+                {
+                    "name": "ngOnChanges",
+                    "args": [
+                        {
+                            "name": "changes",
+                            "type": "SimpleChanges",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 97,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\n",
+                    "description": "",
+                    "modifierKind": [
+                        123
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "changes",
+                            "type": "SimpleChanges",
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
@@ -11626,11 +11896,11 @@
             ],
             "stylesData": "",
             "extends": "ListComponent",
-            "templateData": "<div cvActiveSwitch class=\"list-chart-gauge__container flex-grow flex-column flex-center flex-wrap\">\n  <div matRipple cvActiveSwitchItem *ngFor=\"let item of itemsToRender\"\n       class=\"list-chart-gauge__item flex\"\n       [class.has-subtitle]=\"item.subtitle\"\n  >\n    <cv-svg-icon matListItemIcon *ngIf=\"item.icon != null\" [icon]=\"item.icon\"></cv-svg-icon>\n    <div class=\"list-chart-donut__item__header header flex-grow flex-column\">\n      <div class=\"list-chart-donut__item__header-title flex\">\n        <div class=\"list-chart-donut__item__header-title header-title subtitle-2\">{{item.title}}</div>\n      </div>\n      <div class=\"list-chart-donut__item__subtitle small\" *ngIf=\"item.subtitle != null && item.subtitle !== ''\">{{item.subtitle}}</div>\n      <cv-chart-gauge class=\"list-chart-circle__content\" [animationDelay]=\"item.delay ?? 0\"\n                      [value]=\"item.value\" [color]=\"item.color\">\n      </cv-chart-gauge>\n    </div>\n  </div>\n</div>\n"
+            "templateData": "<div cvActiveSwitch class=\"list-chart-gauge__container flex-grow flex-column flex-center flex-wrap\">\n  <div matRipple cvActiveSwitchItem *ngFor=\"let item of itemsToRender\"\n       class=\"list-chart-gauge__item flex\"\n       [cvSelectEntity]=\"item.id\"\n       [class.has-subtitle]=\"item.subtitle\"\n  >\n    <cv-svg-icon *ngIf=\"item.icon != null\" [icon]=\"item.icon\"></cv-svg-icon>\n    <div class=\"list-chart-donut__item__header header flex-grow flex-column\">\n      <div class=\"list-chart-donut__item__header-title flex\">\n        <div class=\"list-chart-donut__item__header-title header-title subtitle-2\">{{item.title}}</div>\n      </div>\n      <div class=\"list-chart-donut__item__subtitle small\" *ngIf=\"item.subtitle != null && item.subtitle !== ''\">{{item.subtitle}}</div>\n      <cv-chart-gauge class=\"list-chart-circle__content\" [animationDelay]=\"item.delay ?? 0\"\n                      [value]=\"item.value\" [color]=\"item.color\">\n      </cv-chart-gauge>\n    </div>\n  </div>\n</div>\n"
         },
         {
             "name": "ListComponent",
-            "id": "component-ListComponent-2fae969549cb9eaefc634ded38b70cd7c8dca33ea4695a2f06dfc8130e7310bcdec5b91f55d39cc2632b0c5a840d5d787fa3ac2de3d811527427920a97eb414b",
+            "id": "component-ListComponent-80cd180e54940992b3232840c481e90d8e88bc553a9d78b5e62c7d2ed4ef251abeac76a2ab7ca32e72a1855b9b0f321d298b8715bc581248d66e52cadf614820",
             "file": "src/app/modules/main/components/list/list.component.ts",
             "encapsulation": [
                 "ViewEncapsulation.None"
@@ -11800,7 +12070,7 @@
                     "optional": false,
                     "returnType": "ListItem",
                     "typeParameters": [],
-                    "line": 134,
+                    "line": 154,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nEntityType to ListItem\n",
@@ -11868,7 +12138,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 107,
+                    "line": 127,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nGet entities from service\n",
@@ -11883,7 +12153,7 @@
                     "optional": false,
                     "returnType": "ListItem[]",
                     "typeParameters": [],
-                    "line": 123,
+                    "line": 143,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nGet items to render as List Items\n",
@@ -11905,7 +12175,7 @@
                     "optional": false,
                     "returnType": "number | null",
                     "typeParameters": [],
-                    "line": 149,
+                    "line": 169,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nGet Value from entity with given key\n",
@@ -11926,6 +12196,21 @@
                     ]
                 },
                 {
+                    "name": "_renewItemsToRender",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 110,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nRenew items to render\n",
+                    "description": "<p>Renew items to render</p>\n",
+                    "modifierKind": [
+                        121
+                    ]
+                },
+                {
                     "name": "_setItemsToRender",
                     "args": [
                         {
@@ -11938,7 +12223,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 161,
+                    "line": 181,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nSet items to render\n",
@@ -11950,6 +12235,39 @@
                         {
                             "name": "items",
                             "type": "ListItem[]",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "ngOnChanges",
+                    "args": [
+                        {
+                            "name": "changes",
+                            "type": "SimpleChanges",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 97,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\n",
+                    "description": "",
+                    "modifierKind": [
+                        123
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "changes",
+                            "type": "SimpleChanges",
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
@@ -11982,7 +12300,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';\nimport {ListItem} from './list-item.interface';\nimport {DATA_TYPE} from '../../../../enums/data.enum';\nimport {EntityListService} from '../../../../services/entity-list.service';\nimport {EntityType} from '../../../../types/entity.type';\nimport {QueryInterface} from '../../../../interfaces/query.interface';\nimport {ThemePalette} from '@angular/material/core';\nimport {BehaviorSubject} from 'rxjs';\nimport {PRE_MADE_QUERY} from '../../../../enums/premade-query.enum';\n\n@Component({\n  selector: 'cv-list',\n  templateUrl: './list.component.html',\n  styleUrls: ['./list.component.scss'],\n  encapsulation: ViewEncapsulation.None,\n})\nexport class ListComponent implements OnInit {\n  public color: ThemePalette = 'primary';\n\n  /**\n   * The list items.\n   */\n  @Input() items?: ListItem[];\n\n  /**\n   * Entity items\n   */\n  @Input() entities?: EntityType[];\n\n  /**\n   * Items to render\n   */\n  public itemsToRender: ListItem[] = [];\n\n  /**\n   * Query for entities\n   */\n  @Input() queryArgs?: QueryInterface | PRE_MADE_QUERY;\n\n  /**\n   * Data type - Choose what to display\n   */\n  @Input() public entityType?: DATA_TYPE;\n\n  /**\n   * Key for value\n   */\n  @Input() public valueKey?: string;\n\n  /**\n   * Delay in ms for animation\n   */\n  @Input() public delay = 0;\n\n  /**\n   * Delay increment between items in ms\n   */\n  @Input() public delayIncrement = 150;\n\n  /**\n   * Delay for animation\n   */\n  private _getDelay(index: number): number {\n    return this.delay + index * this.delayIncrement;\n  }\n\n  /**\n   * Behavior subject for entities to render ready\n   * (not used if {this.items} is set)\n   */\n  protected _entitiesReady = new BehaviorSubject<EntityType[]>([]);\n\n  /**\n   * Entities to work on\n   */\n  private _entities: EntityType[] = [];\n\n  /**\n   * @constructor\n   * @param _entityListService Entity list service\n   */\n  public constructor(\n    private readonly _entityListService: EntityListService,\n  ) {\n  }\n\n  /**\n   * @inheritDoc\n   */\n  public ngOnInit() {\n    if (this.items != null && this.items.length > 0) {\n      this._setItemsToRender(this.items);\n    } else {\n      if (this.entities != null && this.entities.length > 0) {\n        this._entities = this.entities;\n        this._entitiesReady.next(this._entities);\n      } else {\n        this._getEntities();\n      }\n      this.itemsToRender = this._getItemsToRender();\n    }\n  }\n\n  /**\n   * Get entities from service\n   */\n  private _getEntities(): void {\n    if (this.entityType != null) {\n      if (typeof this.queryArgs === 'string') {\n        this._entities = this._entityListService\n          .getPreMadeQuery(this.entityType, this.queryArgs)\n      } else {\n        this._entities = this._entityListService\n          .getFilteredCollection(this.entityType, this.queryArgs);\n      }\n      this._entitiesReady.next(this._entities);\n    }\n  }\n\n  /**\n   * Get items to render as List Items\n   */\n  private _getItemsToRender(): ListItem[] {\n    const itemsToRender: ListItem[] = [];\n    this._entities.forEach((entity: EntityType, key: number) => {\n      itemsToRender.push(this._entityToItem(entity, key));\n    });\n    return itemsToRender;\n  }\n\n  /**\n   * EntityType to ListItem\n   */\n  private _entityToItem(entity: EntityType, key: number): ListItem {\n    return {\n      id: entity.id,\n      title: entity.name,\n      subtitle: entity.subtitle,\n      icon: entity.icon,\n      value: this._getValueFromEntity(entity) ?? 0,\n      color: entity.color,\n      delay: this._getDelay(key),\n    };\n  }\n\n  /**\n   * Get Value from entity with given key\n   */\n  protected _getValueFromEntity(entity: EntityType): number | null {\n    if (this.valueKey != null) {\n      const entityT = entity as any; //TODO: Fix this\n      return entityT[this.valueKey];\n    } else {\n      return null;\n    }\n  }\n\n  /**\n   * Set items to render\n   */\n  protected _setItemsToRender(items: ListItem[]): void {\n    this.itemsToRender = items;\n  }\n}\n",
+            "sourceCode": "import {Component, Input, OnChanges, SimpleChanges, ViewEncapsulation} from '@angular/core';\nimport {ListItem} from './list-item.interface';\nimport {DATA_TYPE} from '../../../../enums/data.enum';\nimport {EntityListService} from '../../../../services/entity-list.service';\nimport {EntityType} from '../../../../types/entity.type';\nimport {QueryInterface} from '../../../../interfaces/query.interface';\nimport {ThemePalette} from '@angular/material/core';\nimport {BehaviorSubject} from 'rxjs';\nimport {PRE_MADE_QUERY} from '../../../../enums/premade-query.enum';\n\n@Component({\n  selector: 'cv-list',\n  templateUrl: './list.component.html',\n  styleUrls: ['./list.component.scss'],\n  encapsulation: ViewEncapsulation.None,\n})\nexport class ListComponent implements OnChanges {\n  public color: ThemePalette = 'primary';\n\n  /**\n   * The list items.\n   */\n  @Input() items?: ListItem[];\n\n  /**\n   * Entity items\n   */\n  @Input() entities?: EntityType[];\n\n  /**\n   * Items to render\n   */\n  public itemsToRender: ListItem[] = [];\n\n  /**\n   * Query for entities\n   */\n  @Input() queryArgs?: QueryInterface | PRE_MADE_QUERY;\n\n  /**\n   * Data type - Choose what to display\n   */\n  @Input() public entityType?: DATA_TYPE;\n\n  /**\n   * Key for value\n   */\n  @Input() public valueKey?: string;\n\n  /**\n   * Delay in ms for animation\n   */\n  @Input() public delay = 0;\n\n  /**\n   * Delay increment between items in ms\n   */\n  @Input() public delayIncrement = 150;\n\n  /**\n   * Delay for animation\n   */\n  private _getDelay(index: number): number {\n    return this.delay + index * this.delayIncrement;\n  }\n\n  /**\n   * Behavior subject for entities to render ready\n   * (not used if {this.items} is set)\n   */\n  protected _entitiesReady = new BehaviorSubject<EntityType[]>([]);\n\n  /**\n   * Entities to work on\n   */\n  private _entities: EntityType[] = [];\n\n  /**\n   * @constructor\n   * @param _entityListService Entity list service\n   */\n  public constructor(\n    private readonly _entityListService: EntityListService,\n  ) {\n  }\n\n  /**\n   * @inheritDoc\n   */\n  public ngOnInit() {\n\n  }\n\n  /**\n   * @inheritDoc\n   */\n  public ngOnChanges(changes: SimpleChanges): void {\n    if ('items' in changes ||\n      'entities' in changes ||\n      'queryArgs' in changes ||\n      'entityType' in changes ||\n      'valueKey' in changes) {\n      this._renewItemsToRender();\n    }\n  }\n\n  /**\n   * Renew items to render\n   */\n  private _renewItemsToRender(): void {\n    if (this.items != null && this.items.length > 0) {\n      this._setItemsToRender(this.items);\n    } else {\n      if (this.entities != null && this.entities.length > 0) {\n        this._entities = this.entities;\n        this._entitiesReady.next(this._entities);\n      } else {\n        this._getEntities();\n      }\n      this.itemsToRender = this._getItemsToRender();\n    }\n  }\n\n  /**\n   * Get entities from service\n   */\n  private _getEntities(): void {\n    if (this.entityType != null) {\n      if (typeof this.queryArgs === 'string') {\n        this._entities = this._entityListService\n          .getPreMadeQuery(this.entityType, this.queryArgs)\n      } else {\n        this._entities = this._entityListService\n          .getFilteredCollection(this.entityType, this.queryArgs);\n      }\n      this._entitiesReady.next(this._entities);\n    }\n  }\n\n  /**\n   * Get items to render as List Items\n   */\n  private _getItemsToRender(): ListItem[] {\n    const itemsToRender: ListItem[] = [];\n    this._entities.forEach((entity: EntityType, key: number) => {\n      itemsToRender.push(this._entityToItem(entity, key));\n    });\n    return itemsToRender;\n  }\n\n  /**\n   * EntityType to ListItem\n   */\n  private _entityToItem(entity: EntityType, key: number): ListItem {\n    return {\n      id: entity.id,\n      title: entity.name,\n      subtitle: entity.subtitle,\n      icon: entity.icon,\n      value: this._getValueFromEntity(entity) ?? 0,\n      color: entity.color,\n      delay: this._getDelay(key),\n    };\n  }\n\n  /**\n   * Get Value from entity with given key\n   */\n  protected _getValueFromEntity(entity: EntityType): number | null {\n    if (this.valueKey != null) {\n      const entityT = entity as any; //TODO: Fix this\n      return entityT[this.valueKey];\n    } else {\n      return null;\n    }\n  }\n\n  /**\n   * Set items to render\n   */\n  protected _setItemsToRender(items: ListItem[]): void {\n    this.itemsToRender = items;\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -12012,8 +12330,8 @@
                 "jsdoctags": [
                     {
                         "name": {
-                            "pos": 1850,
-                            "end": 1868,
+                            "pos": 1871,
+                            "end": 1889,
                             "flags": 4227072,
                             "modifierFlagsCache": 0,
                             "transformFlags": 0,
@@ -12024,8 +12342,8 @@
                         "deprecated": false,
                         "deprecationMessage": "",
                         "tagName": {
-                            "pos": 1844,
-                            "end": 1849,
+                            "pos": 1865,
+                            "end": 1870,
                             "flags": 4227072,
                             "modifierFlagsCache": 0,
                             "transformFlags": 0,
@@ -12037,7 +12355,7 @@
                 ]
             },
             "implements": [
-                "OnInit"
+                "OnChanges"
             ],
             "templateData": "<div cvActiveSwitch class=\"list-chart__container flex-grow flex-column flex-center flex-wrap\">\n  <div matRipple cvActiveSwitchItem *ngFor=\"let item of itemsToRender\"\n       class=\"list-chart__item flex\"\n       [class.has-subtitle]=\"item.subtitle\"\n  >\n    <cv-svg-icon matListItemIcon *ngIf=\"item.icon != null\" [icon]=\"item.icon\"></cv-svg-icon>\n    <div class=\"list-chart__item__header header flex-grow flex-column\">\n      <div class=\"list-chart__item__header-title flex\">\n        <div class=\"list-chart__item__header-title header-title subtitle-2\">{{item.title}}</div>\n      </div>\n      <div class=\"list-chart__item__subtitle small\" *ngIf=\"item.subtitle != null && item.subtitle !== ''\">{{item.subtitle}}</div>\n    </div>\n  </div>\n</div>\n"
         },
@@ -12478,7 +12796,7 @@
         },
         {
             "name": "PageHomeComponent",
-            "id": "component-PageHomeComponent-61bd15938b239c324a510386371a0a1bbd8a2ed91656b1c1bc1baa13827323b5abdcb9cecbbac87b8359b3603e153e3e71b419b0d97d9057d08c25bf87a45a35",
+            "id": "component-PageHomeComponent-7697dc5982b93b5c5109d383173fd4a390c6c05816006ec0b40cac50f8efaa95fb334a98d526e3d6b183ff711ccf11ccc6d665713f4846e8956da85a5189219a",
             "file": "src/app/modules/main/components/page-home/page-home.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -12499,7 +12817,7 @@
             "propertiesClass": [
                 {
                     "name": "blocks",
-                    "defaultValue": "{\n    favoriteStacks: {\n      title: 'Mes Stacks préférées',\n      valueKey: DATA_FIELD.EXPERIENCE,\n      query: PRE_MADE_QUERY.STACKS_BEST_FAVORITES\n    },\n    lastProjects: {\n      title: 'Mes derniers projets',\n      valueKey: DATA_FIELD.HAPPINESS,\n      type: DATA_TYPE.PROJECT,\n      query: PRE_MADE_QUERY.LAST_PROJECTS\n    }\n\n  }",
+                    "defaultValue": "{\n    favoriteStacks: {\n      title: 'Mes Stacks préférées',\n      valueKey: DATA_FIELD.EXPERIENCE,\n      type: DATA_TYPE.SKILL,\n      query: PRE_MADE_QUERY.STACKS_BEST_FAVORITES\n    },\n    lastProjects: {\n      title: 'Mes derniers projets',\n      valueKey: DATA_FIELD.HAPPINESS,\n      type: DATA_TYPE.PROJECT,\n      query: PRE_MADE_QUERY.LAST_PROJECTS\n    }\n\n  }",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "object",
@@ -12550,7 +12868,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import {Component, HostBinding} from '@angular/core';\nimport {DATA_FIELD, DATA_TYPE} from '../../../../enums/data.enum';\nimport {PRE_MADE_QUERY} from '../../../../enums/premade-query.enum';\n\n@Component({\n  selector: 'cv-page-home',\n  templateUrl: './page-home.component.html',\n  styleUrls: ['./page-home.component.scss']\n})\nexport class PageHomeComponent {\n\n  @HostBinding('class.cv-page') public readonly cvPageClass = true;\n\n  /**\n   * Blocks data\n   */\n  public blocks = {\n    favoriteStacks: {\n      title: 'Mes Stacks préférées',\n      valueKey: DATA_FIELD.EXPERIENCE,\n      query: PRE_MADE_QUERY.STACKS_BEST_FAVORITES\n    },\n    lastProjects: {\n      title: 'Mes derniers projets',\n      valueKey: DATA_FIELD.HAPPINESS,\n      type: DATA_TYPE.PROJECT,\n      query: PRE_MADE_QUERY.LAST_PROJECTS\n    }\n\n  };\n\n\n}\n",
+            "sourceCode": "import {Component, HostBinding} from '@angular/core';\nimport {DATA_FIELD, DATA_TYPE} from '../../../../enums/data.enum';\nimport {PRE_MADE_QUERY} from '../../../../enums/premade-query.enum';\n\n@Component({\n  selector: 'cv-page-home',\n  templateUrl: './page-home.component.html',\n  styleUrls: ['./page-home.component.scss']\n})\nexport class PageHomeComponent {\n\n  @HostBinding('class.cv-page') public readonly cvPageClass = true;\n\n  /**\n   * Blocks data\n   */\n  public blocks = {\n    favoriteStacks: {\n      title: 'Mes Stacks préférées',\n      valueKey: DATA_FIELD.EXPERIENCE,\n      type: DATA_TYPE.SKILL,\n      query: PRE_MADE_QUERY.STACKS_BEST_FAVORITES\n    },\n    lastProjects: {\n      title: 'Mes derniers projets',\n      valueKey: DATA_FIELD.HAPPINESS,\n      type: DATA_TYPE.PROJECT,\n      query: PRE_MADE_QUERY.LAST_PROJECTS\n    }\n\n  };\n\n\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -12559,7 +12877,185 @@
                 }
             ],
             "stylesData": "",
-            "templateData": "<cv-page-wrapper>\n  <cv-block left cvTitle=\"Qui suis-je ?\" maxHeight=\"150px\">\n    <p>\n      Je suis développeur web, spécialisé en front-end. Passioné par le développement web,\n      j'ai toujours été à la recherche de nouvelles techniques et d'innovations. Je suis un\n      autodidacte et j'aime apprendre sans cesse de nouvelles choses.\n    </p>\n    <p>\n      J'ai entièrement développé ce cv en ligne en utilisant le framework Angular 15. Seule l'utilisation\n      de Material Angular a été nécessaire pour la mise en forme.\n    </p>\n  </cv-block>\n\n  <cv-data-details center-top></cv-data-details>\n\n  <cv-block right [cvTitle]=\"blocks.favoriteStacks.title\" [disablePadding]=\"true\">\n    <cv-list [valueKey]=\"blocks.favoriteStacks.valueKey\"\n             [queryArgs]=\"blocks.favoriteStacks.query\"></cv-list>\n  </cv-block>\n\n  <cv-block center-bottom [cvTitle]=\"blocks.lastProjects.title\">\n    <cv-list-chart-circles [valueKey]=\"blocks.lastProjects.valueKey\"\n                           [entityType]=\"blocks.lastProjects.type\"\n                           [queryArgs]=\"blocks.lastProjects.query\"></cv-list-chart-circles>\n  </cv-block>\n\n  <cv-block right [cvTitle]=\"blocks.lastProjects.title\">\n    <cv-list-chart-circles [valueKey]=\"blocks.lastProjects.valueKey\"\n                           [entityType]=\"blocks.lastProjects.type\"\n                            [queryArgs]=\"blocks.lastProjects.query\"></cv-list-chart-circles>\n  </cv-block>\n\n  <cv-block right cvTitle=\"Mes défauts\">\n    Lorem ipsum dolor sit amet, consectetur adipisicing elit. A asperiores cumque ipsum maiores officia ratione similique voluptas voluptate! Accusamus cum eius est exercitationem impedit ipsum iste iure praesentium recusandae suscipit.\n  </cv-block>\n\n  <cv-block right cvTitle=\"Mes meilleurs projets\">\n    Lorem ipsum dolor sit amet, consectetur adipisicing elit. A asperiores cumque ipsum maiores officia ratione similique voluptas voluptate! Accusamus cum eius est exercitationem impedit ipsum iste iure praesentium recusandae suscipit.\n  </cv-block>\n\n</cv-page-wrapper>\n"
+            "templateData": "<cv-page-wrapper>\n  <cv-block left-top cvTitle=\"Qui suis-je ?\">\n    <p>\n      Je suis développeur web, spécialisé en front-end. Passioné par le développement web,\n      j'ai toujours été à la recherche de nouvelles techniques et d'innovations. Je suis un\n      autodidacte et j'aime apprendre sans cesse de nouvelles choses.\n    </p>\n    <p>\n      J'ai entièrement développé ce cv en ligne en utilisant le framework Angular 15. Seule l'utilisation\n      de Material Angular a été nécessaire pour la mise en forme.\n    </p>\n  </cv-block>\n\n  <cv-data-details center-top></cv-data-details>\n  <cv-block center-bottom [cvTitle]=\"blocks.lastProjects.title\">\n    <cv-list-chart-circles [valueKey]=\"blocks.lastProjects.valueKey\"\n                           [entityType]=\"blocks.lastProjects.type\"\n                           [queryArgs]=\"blocks.lastProjects.query\"></cv-list-chart-circles>\n  </cv-block>\n\n  <cv-block right-top [cvTitle]=\"blocks.favoriteStacks.title\" [disablePadding]=\"true\">\n    <cv-list-chart-gauge [valueKey]=\"blocks.favoriteStacks.valueKey\"\n                         [entityType]=\"blocks.favoriteStacks.type\"\n                         [queryArgs]=\"blocks.favoriteStacks.query\"></cv-list-chart-gauge>\n  </cv-block>\n\n  <cv-block right-bottom [cvTitle]=\"blocks.lastProjects.title\">\n    <cv-list-chart-circles [valueKey]=\"blocks.lastProjects.valueKey\"\n                           [entityType]=\"blocks.lastProjects.type\"\n                            [queryArgs]=\"blocks.lastProjects.query\"></cv-list-chart-circles>\n  </cv-block>\n\n</cv-page-wrapper>\n"
+        },
+        {
+            "name": "PageSkillsComponent",
+            "id": "component-PageSkillsComponent-13b6ce967a00c38c4561c8d63aeb7bb2d8ddc758a9198bcd05d986a00120c231f38a28485af1ca5f1ba3f795d08ec54d6169c2ff9a5bc3ec9846f4ca16bc3f25",
+            "file": "src/app/modules/main/components/page-skills/page-skills.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "cv-page-skills",
+            "styleUrls": [
+                "./page-skills.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./page-skills.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "allSkillsList",
+                    "defaultValue": "{\n    valueKey: DATA_FIELD.EXPERIENCE,\n    type: DATA_TYPE.SKILL,\n    query: PRE_MADE_QUERY.ALL_STACKS\n  }",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "object",
+                    "optional": false,
+                    "description": "",
+                    "line": 21,
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "bestSkills",
+                    "defaultValue": "[]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "SkillEntity[]",
+                    "optional": false,
+                    "description": "<p>Best skills to display</p>\n",
+                    "line": 19,
+                    "rawdescription": "\n\nBest skills to display\n",
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "cvPageClass",
+                    "defaultValue": "true",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 14,
+                    "decorators": [
+                        {
+                            "name": "HostBinding",
+                            "stringifiedArguments": "'class.cv-page'"
+                        }
+                    ],
+                    "modifierKind": [
+                        123,
+                        144
+                    ]
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "_requestBestSkills",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 46,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nRequest best skills\n",
+                    "description": "<p>Request best skills</p>\n",
+                    "modifierKind": [
+                        121
+                    ]
+                },
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 39,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\n",
+                    "description": "",
+                    "modifierKind": [
+                        123
+                    ],
+                    "jsdoctags": []
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [
+                {
+                    "name": "class.cv-page",
+                    "defaultValue": "true",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 14,
+                    "type": "true",
+                    "decorators": []
+                }
+            ],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import {Component, HostBinding, OnInit} from '@angular/core';\nimport {EntityListService} from '../../../../services/entity-list.service';\nimport {DATA_FIELD, DATA_TYPE} from '../../../../enums/data.enum';\nimport {PRE_MADE_QUERY} from '../../../../enums/premade-query.enum';\nimport {SkillEntity} from '../../../../models/skill-entity.model';\n\n@Component({\n  selector: 'cv-page-skills',\n  templateUrl: './page-skills.component.html',\n  styleUrls: ['./page-skills.component.scss']\n})\nexport class PageSkillsComponent implements OnInit {\n\n  @HostBinding('class.cv-page') public readonly cvPageClass = true;\n\n  /**\n   * Best skills to display\n   */\n  public bestSkills: SkillEntity[] = [];\n\n  public allSkillsList = {\n    valueKey: DATA_FIELD.EXPERIENCE,\n    type: DATA_TYPE.SKILL,\n    query: PRE_MADE_QUERY.ALL_STACKS\n  }\n\n  /**\n   * @constructor\n   * @param _entityListService Entity list service\n   */\n  public constructor(\n    private readonly _entityListService: EntityListService,\n  ) {\n  }\n\n  /**\n   * @inheritDoc\n   */\n  public ngOnInit(): void {\n    this._requestBestSkills()\n  }\n\n  /**\n   * Request best skills\n   */\n  private _requestBestSkills(): void {\n    this.bestSkills = this._entityListService.getPreMadeQuery(\n      DATA_TYPE.SKILL, PRE_MADE_QUERY.STACKS_BEST_FAVORITES\n    ) as SkillEntity[];\n  }\n\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "\r\n.zone {\r\n  &__top {\r\n    grid-column: 1 / span 12;\r\n    grid-row: 1 / span 4;\r\n    display: flex;\r\n    gap: 10px;\r\n  }\r\n  &__bottom {\r\n    grid-row: 5 / 13;\r\n\r\n    &-left {\r\n      grid-column: 5 / 9;\r\n    }\r\n\r\n    &-right {\r\n      grid-column: 9 / 13;\r\n    }\r\n  }\r\n}\r\n",
+                    "styleUrl": "./page-skills.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "_entityListService",
+                        "type": "EntityListService",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 25,
+                "rawdescription": "\n\n",
+                "modifierKind": [
+                    123
+                ],
+                "jsdoctags": [
+                    {
+                        "name": {
+                            "pos": 855,
+                            "end": 873,
+                            "flags": 4227072,
+                            "modifierFlagsCache": 0,
+                            "transformFlags": 0,
+                            "kind": 79,
+                            "escapedText": "_entityListService"
+                        },
+                        "type": "EntityListService",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "pos": 849,
+                            "end": 854,
+                            "flags": 4227072,
+                            "modifierFlagsCache": 0,
+                            "transformFlags": 0,
+                            "kind": 79,
+                            "escapedText": "param"
+                        },
+                        "comment": "<p>Entity list service</p>\n"
+                    }
+                ]
+            },
+            "implements": [
+                "OnInit"
+            ],
+            "templateData": "<cv-page-wrapper>\n  <div class=\"zone__top zone\">\n    <cv-block [centered]=\"true\"\n              [column]=\"true\"\n              *ngFor=\"let bestSkill of bestSkills; let index = index\"\n              class=\"block flex-column flex-grow flex-center\">\n      <div class=\"block__title h3\">{{bestSkill.name}}</div>\n      <cv-chart-circle [value]=\"bestSkill.level\" [color]=\"bestSkill.color\"\n                       [size]=\"140\"\n                       [animationDelay]=\"index * 100\"\n                       label=\"Niveau\"\n                       ></cv-chart-circle>\n      <div class=\"block__description\">{{bestSkill.subtitle}}</div>\n    </cv-block>\n  </div>\n\n  <div class=\"zone__bottom zone__bottom-left zone flex\">\n    <cv-block cvTitle=\"Liste de toutes mes stacks par niveau\">\n      <cv-list-chart-gauge [entityType]=\"allSkillsList.type\"\n        [queryArgs]=\"allSkillsList.query\" [valueKey]=\"allSkillsList.valueKey\"></cv-list-chart-gauge>\n    </cv-block>\n  </div>\n\n  <div class=\"zone__bottom zone__bottom-right zone flex\">\n    <cv-block cvTitle=\"Liste de toutes mes stacks par niveau\">\n      <cv-list-chart-gauge [entityType]=\"allSkillsList.type\"\n                           [queryArgs]=\"allSkillsList.query\" [valueKey]=\"allSkillsList.valueKey\"></cv-list-chart-gauge>\n    </cv-block>\n  </div>\n</cv-page-wrapper>\n\n"
         },
         {
             "name": "PageWrapperComponent",
@@ -12594,12 +13090,12 @@
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "@use 'functions' as fn;\r\n\r\n:host {\r\n  display: flex;\r\n  height: 100%;\r\n  padding: 30px;\r\n  gap: 10px;\r\n}\r\n\r\n.layout-gap {\r\n  &-200 {\r\n    width: 200px;\r\n  }\r\n}\r\n\r\n.zone {\r\n  border: 1px dashed fn.get-color(accent, 600);\r\n  &__left, &__right {\r\n    max-width: 300px;\r\n  }\r\n  &__center {\r\n    flex-grow: 1;\r\n    &__bottom {\r\n      align-items: flex-end;\r\n      display: flex;\r\n    }\r\n  }\r\n}\r\n",
+                    "data": "@use 'functions' as fn;\r\n\r\n:host {\r\n  display: grid;\r\n  width: 100%;\r\n  height: 100%;\r\n  grid-template-columns: repeat(12, 1fr);\r\n  grid-template-rows: repeat(12, 1fr);\r\n  padding: 30px;\r\n  gap: 10px;\r\n}\r\n\r\n.zone {\r\n  display: flex;\r\n  &__left {\r\n    &-top {\r\n      grid-column: 1 / span 2;\r\n      grid-row: 1 / span 4;\r\n    }\r\n  }\r\n\r\n  &__center {\r\n    &-top {\r\n      grid-column: 3 / span 8;\r\n      grid-row: 1 / span 6;\r\n    }\r\n\r\n    &-bottom {\r\n      grid-column: 5 / span 6;\r\n      grid-row: 7 / span 6;\r\n    }\r\n  }\r\n\r\n  &__right {\r\n    &-top {\r\n      grid-column: 11 / span 2;\r\n      grid-row: 1 / span 5;\r\n    }\r\n    &-bottom {\r\n      grid-column: 11 / span 2;\r\n      grid-row: 6 / span 7;\r\n    }\r\n  }\r\n}\r\n",
                     "styleUrl": "./page-wrapper.component.scss"
                 }
             ],
             "stylesData": "",
-            "templateData": "<div class=\"zone__left zone\">\n  <ng-content select=\"[left]\"></ng-content>\n</div>\n<div class=\"zone__center zone flex-column\">\n  <div class=\"zone__center__free zone\">\n    <ng-content select=\"[center]\"></ng-content>\n  </div>\n  <div class=\"zone__center__top zone flex-grow\">\n    <ng-content select=\"[center-top]\"></ng-content>\n  </div>\n  <div class=\"zone__center__bottom zone flex-grow\">\n    <div class=\"layout-gap-200\"></div>\n    <ng-content select=\"[center-bottom]\"></ng-content>\n  </div>\n</div>\n<div class=\"zone__right zone\">\n  <ng-content select=\"[right]\"></ng-content>\n</div>\n<ng-content></ng-content>\n"
+            "templateData": "<div class=\"zone__left-top zone\">\n  <ng-content select=\"[left-top]\"></ng-content>\n</div>\n\n<div class=\"zone__center-top zone\">\n  <ng-content select=\"[center-top]\"></ng-content>\n</div>\n<div class=\"zone__center-bottom zone\">\n  <ng-content select=\"[center-bottom]\"></ng-content>\n</div>\n\n<div class=\"zone__right-top zone\">\n  <ng-content select=\"[right-top]\"></ng-content>\n</div>\n\n<div class=\"zone__right-bottom zone\">\n  <ng-content select=\"[right-bottom]\"></ng-content>\n</div>\n<ng-content></ng-content>\n"
         },
         {
             "name": "ProfileComponent",
@@ -14174,13 +14670,13 @@
         },
         {
             "name": "AppRoutingModule",
-            "id": "module-AppRoutingModule-3d72550b69a194935138085a767eea1b9f579abf12ca06f71a8975c9e6a11a3bda8c0080c8a820dfe24a69398e99f35df09c3f85aec52111f604ecf1c165bef0",
+            "id": "module-AppRoutingModule-27031090e66ce59dbf6c6867e923e86b84b744296f3269e7e2ab028e79b9779ab01ee60353058954aceab689b25c86837566ee88d0ccc1fc7a227423d278e689",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "src/app/app-routing.module.ts",
             "methods": [],
-            "sourceCode": "import { NgModule } from '@angular/core';\nimport { RouterModule, Routes } from '@angular/router';\nimport {PageHomeComponent} from \"./modules/main/components/page-home/page-home.component\";\nimport {PageContactComponent} from \"./modules/main/components/page-contact/page-contact.component\";\n\nconst routes: Routes = [\n  {\n    path: '',\n    component: PageHomeComponent,\n    data: {\n      state: 'home',\n      menuItem: {\n        label: 'Soheil Saheb-Jamii',\n        index: 0\n      }\n    }\n  },\n  {\n    path: 'contact',\n    component: PageContactComponent,\n    data: {\n      state: 'contact',\n      menuItem: {\n        label: 'Contact',\n        index: 1\n      }\n    }\n  },\n  {\n    path: '**',\n    redirectTo: '',\n  }\n];\n\nexport const appRouting = RouterModule.forRoot(routes);\n\n@NgModule({\n  imports: [RouterModule.forRoot(routes)],\n  exports: [RouterModule]\n})\nexport class AppRoutingModule { }\n",
+            "sourceCode": "import {NgModule} from '@angular/core';\nimport {RouterModule, Routes} from '@angular/router';\nimport {PageHomeComponent} from \"./modules/main/components/page-home/page-home.component\";\nimport {PageContactComponent} from \"./modules/main/components/page-contact/page-contact.component\";\nimport {PageSkillsComponent} from './modules/main/components/page-skills/page-skills.component';\n\nconst routes: Routes = [\n  {\n    path: '',\n    component: PageHomeComponent,\n    data: {\n      state: 'home',\n      menuItem: {\n        label: 'Soheil Saheb-Jamii',\n        index: 0\n      }\n    }\n  },\n  {\n    path: 'skills',\n    component: PageSkillsComponent,\n    data: {\n      state: 'skills',\n      menuItem: {\n        label: 'Compétences',\n        index: 1\n      }\n    }\n  },\n  {\n    path: 'contact',\n    component: PageContactComponent,\n    data: {\n      state: 'contact',\n      menuItem: {\n        label: 'Contact',\n        index: 2\n      }\n    }\n  },\n  {\n    path: '**',\n    redirectTo: '',\n  }\n];\n\nexport const appRouting = RouterModule.forRoot(routes);\n\n@NgModule({\n  imports: [RouterModule.forRoot(routes)],\n  exports: [RouterModule]\n})\nexport class AppRoutingModule { }\n",
             "children": [
                 {
                     "type": "providers",
@@ -14533,13 +15029,13 @@
         },
         {
             "name": "MainModule",
-            "id": "module-MainModule-400b616a0e119152af95651ad3f9dc085dfed926a5b36f10e9e91a22bed98a040766e7a1669a484fcd220d96d6cd78f402be116eb212d68d8375bcc5e845bd14",
+            "id": "module-MainModule-7fee02078f81b60ac4182e53a9e75b313acf4ba2cd968f512488f61b3da68a34c0c66aa5fb28a71d333473c0cc644583edc46c2ebb84834836c6ddf8df38481b",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "src/app/modules/main/main.module.ts",
             "methods": [],
-            "sourceCode": "import {NgModule} from '@angular/core';\nimport {CommonModule} from '@angular/common';\nimport {MainComponent} from './components/main/main.component';\nimport {LayoutComponent} from \"./components/layout/layout.component\";\nimport {PageHomeComponent} from './components/page-home/page-home.component';\nimport {PageContactComponent} from './components/page-contact/page-contact.component';\nimport {RouterLink, RouterModule} from \"@angular/router\";\nimport {MatTabsModule} from \"@angular/material/tabs\";\nimport {HeaderComponent} from './components/header/header.component';\nimport {MatIconModule} from \"@angular/material/icon\";\nimport {MatToolbarModule} from \"@angular/material/toolbar\";\nimport {MatButtonModule} from \"@angular/material/button\";\nimport {MenuComponent} from './components/menu/menu.component';\nimport {ProfileComponent} from './components/profile/profile.component';\nimport {CircleModule} from \"../shared/circle/circle.module\";\nimport {InputCircleSliderModule} from \"../shared/input-circle-slider/input-circle-slider.module\";\nimport {DrawCircleModule} from \"../shared/draw-circle/draw-circle.module\";\nimport {CircleMenuItemComponent} from './components/circle-menu-item/circle-menu-item.component';\nimport {PageWrapperModule} from \"../shared/page-wrapper/page-wrapper.module\";\nimport {BlockComponent} from './components/block/block.component';\nimport {ListComponent} from './components/list/list.component';\nimport {MatListModule} from '@angular/material/list';\nimport {SvgIconModule} from '../shared/svg-icon/svg-icon.module';\nimport {ChartGaugeModule} from '../shared/chart-gauge/chart-gauge.module';\nimport {ChartCircleModule} from '../shared/chart-circle/chart-circle.module';\nimport {ListChartCirclesComponent} from './components/list-chart-circles/list-chart-circles.component';\nimport {ListChartDonutComponent} from './components/list-chart-donut/list-chart-donut.component';\nimport {ChartDonutModule} from '../shared/chart-donut/chart-donut.module';\nimport {MatRippleModule} from '@angular/material/core';\nimport {ActiveSwitchModule} from '../shared/active-switch/active-switch.module';\nimport {ListChartGaugeComponent} from './components/list-chart-gauge/list-chart-gauge.component';\nimport {DataDetailsComponent} from './components/data-details/data-details.component';\nimport {SelectEntityModule} from '../shared/select-entity/select-entity.module';\n\n\n@NgModule({\n    declarations: [\n        MainComponent,\n        LayoutComponent,\n        PageHomeComponent,\n        PageContactComponent,\n        HeaderComponent,\n        MenuComponent,\n        ProfileComponent,\n        CircleMenuItemComponent,\n        BlockComponent,\n        ListComponent,\n        ListChartCirclesComponent,\n        ListChartDonutComponent,\n        ListChartGaugeComponent,\n        DataDetailsComponent,\n    ],\n  imports: [\n    CommonModule,\n    RouterLink,\n    RouterModule,\n    MatTabsModule,\n    MatIconModule,\n    MatToolbarModule,\n    MatButtonModule,\n    CircleModule,\n    InputCircleSliderModule,\n    DrawCircleModule,\n    PageWrapperModule,\n    MatListModule,\n    SvgIconModule,\n    ChartGaugeModule,\n    ChartCircleModule,\n    ChartDonutModule,\n    MatRippleModule,\n    ActiveSwitchModule,\n    SelectEntityModule\n  ],\n  exports: [\n    MainComponent,\n    LayoutComponent\n  ],\n})\nexport class MainModule { }\n",
+            "sourceCode": "import {NgModule} from '@angular/core';\nimport {CommonModule} from '@angular/common';\nimport {MainComponent} from './components/main/main.component';\nimport {LayoutComponent} from \"./components/layout/layout.component\";\nimport {PageHomeComponent} from './components/page-home/page-home.component';\nimport {PageContactComponent} from './components/page-contact/page-contact.component';\nimport {RouterLink, RouterModule} from \"@angular/router\";\nimport {MatTabsModule} from \"@angular/material/tabs\";\nimport {HeaderComponent} from './components/header/header.component';\nimport {MatIconModule} from \"@angular/material/icon\";\nimport {MatToolbarModule} from \"@angular/material/toolbar\";\nimport {MatButtonModule} from \"@angular/material/button\";\nimport {MenuComponent} from './components/menu/menu.component';\nimport {ProfileComponent} from './components/profile/profile.component';\nimport {CircleModule} from \"../shared/circle/circle.module\";\nimport {InputCircleSliderModule} from \"../shared/input-circle-slider/input-circle-slider.module\";\nimport {DrawCircleModule} from \"../shared/draw-circle/draw-circle.module\";\nimport {CircleMenuItemComponent} from './components/circle-menu-item/circle-menu-item.component';\nimport {PageWrapperModule} from \"../shared/page-wrapper/page-wrapper.module\";\nimport {BlockComponent} from './components/block/block.component';\nimport {ListComponent} from './components/list/list.component';\nimport {MatListModule} from '@angular/material/list';\nimport {SvgIconModule} from '../shared/svg-icon/svg-icon.module';\nimport {ChartGaugeModule} from '../shared/chart-gauge/chart-gauge.module';\nimport {ChartCircleModule} from '../shared/chart-circle/chart-circle.module';\nimport {ListChartCirclesComponent} from './components/list-chart-circles/list-chart-circles.component';\nimport {ListChartDonutComponent} from './components/list-chart-donut/list-chart-donut.component';\nimport {ChartDonutModule} from '../shared/chart-donut/chart-donut.module';\nimport {MatRippleModule} from '@angular/material/core';\nimport {ActiveSwitchModule} from '../shared/active-switch/active-switch.module';\nimport {ListChartGaugeComponent} from './components/list-chart-gauge/list-chart-gauge.component';\nimport {DataDetailsComponent} from './components/data-details/data-details.component';\nimport {SelectEntityModule} from '../shared/select-entity/select-entity.module';\nimport { PageSkillsComponent } from './components/page-skills/page-skills.component';\n\n\n@NgModule({\n    declarations: [\n        MainComponent,\n        LayoutComponent,\n        PageHomeComponent,\n        PageContactComponent,\n        HeaderComponent,\n        MenuComponent,\n        ProfileComponent,\n        CircleMenuItemComponent,\n        BlockComponent,\n        ListComponent,\n        ListChartCirclesComponent,\n        ListChartDonutComponent,\n        ListChartGaugeComponent,\n        DataDetailsComponent,\n        PageSkillsComponent,\n    ],\n  imports: [\n    CommonModule,\n    RouterLink,\n    RouterModule,\n    MatTabsModule,\n    MatIconModule,\n    MatToolbarModule,\n    MatButtonModule,\n    CircleModule,\n    InputCircleSliderModule,\n    DrawCircleModule,\n    PageWrapperModule,\n    MatListModule,\n    SvgIconModule,\n    ChartGaugeModule,\n    ChartCircleModule,\n    ChartDonutModule,\n    MatRippleModule,\n    ActiveSwitchModule,\n    SelectEntityModule\n  ],\n  exports: [\n    MainComponent,\n    LayoutComponent\n  ],\n})\nexport class MainModule { }\n",
             "children": [
                 {
                     "type": "providers",
@@ -14586,6 +15082,9 @@
                         },
                         {
                             "name": "PageHomeComponent"
+                        },
+                        {
+                            "name": "PageSkillsComponent"
                         },
                         {
                             "name": "ProfileComponent"
@@ -14935,16 +15434,6 @@
                 "name": "AllStacks",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/modules/main/components/list-chart-donut/list-chart-donut.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "",
-                "defaultValue": "Template.bind({})"
-            },
-            {
-                "name": "AllStacks",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "src/app/modules/main/components/list/list.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -14956,6 +15445,16 @@
                 "ctype": "miscellaneous",
                 "subtype": "variable",
                 "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "AllStacks",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/modules/main/components/list-chart-donut/list-chart-donut.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -14997,16 +15496,6 @@
                 "name": "Best5Stacks",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/modules/main/components/list-chart-donut/list-chart-donut.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "",
-                "defaultValue": "Template.bind({})"
-            },
-            {
-                "name": "Best5Stacks",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "src/app/modules/main/components/list/list.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -15018,6 +15507,16 @@
                 "ctype": "miscellaneous",
                 "subtype": "variable",
                 "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "Best5Stacks",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/modules/main/components/list-chart-donut/list-chart-donut.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -15243,16 +15742,6 @@
                 "name": "EducationByDate",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/modules/main/components/list-chart-donut/list-chart-donut.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "",
-                "defaultValue": "Template.bind({})"
-            },
-            {
-                "name": "EducationByDate",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "src/app/modules/main/components/list/list.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -15264,6 +15753,16 @@
                 "ctype": "miscellaneous",
                 "subtype": "variable",
                 "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "EducationByDate",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/modules/main/components/list-chart-donut/list-chart-donut.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -15363,16 +15862,6 @@
                 "name": "LastProjects",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/modules/main/components/list-chart-donut/list-chart-donut.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "",
-                "defaultValue": "Template.bind({})"
-            },
-            {
-                "name": "LastProjects",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "src/app/modules/main/components/list/list.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -15384,6 +15873,16 @@
                 "ctype": "miscellaneous",
                 "subtype": "variable",
                 "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "LastProjects",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/modules/main/components/list-chart-donut/list-chart-donut.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -15427,7 +15926,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "object",
-                "defaultValue": "{\n  declarations: [\n    MainComponent,\n    LayoutComponent,\n    PageHomeComponent,\n    PageContactComponent,\n    HeaderComponent,\n    MenuComponent,\n    ProfileComponent,\n    CircleMenuItemComponent,\n    BlockComponent,\n    ListComponent,\n    ListChartCirclesComponent,\n    ListChartDonutComponent,\n    ListChartGaugeComponent,\n    DataDetailsComponent\n  ],\n  imports: [\n    appRouting,\n    BrowserAnimationsModule,\n    CircleModule,\n    CommonModule,\n    RouterLink,\n    RouterModule,\n    MatTabsModule,\n    MatIconModule,\n    MatToolbarModule,\n    MatButtonModule,\n    InputCircleSliderModule,\n    DrawCircleModule,\n    StorybookWrapperModule,\n    PageWrapperModule,\n    MatListModule,\n    SvgIconModule,\n    ChartGaugeModule,\n    ChartCircleModule,\n    ChartDonutModule,\n    MatRippleModule,\n    ActiveSwitchModule,\n    SelectEntityModule\n  ],\n  exports: [\n    MainComponent,\n    LayoutComponent,\n    HeaderComponent,\n    ProfileComponent,\n    CircleMenuItemComponent,\n    BlockComponent,\n    ListComponent,\n    ListChartCirclesComponent,\n    ListChartDonutComponent,\n    ListChartGaugeComponent,\n    DataDetailsComponent\n  ],\n}"
+                "defaultValue": "{\n  declarations: [\n    MainComponent,\n    LayoutComponent,\n    PageHomeComponent,\n    PageContactComponent,\n    HeaderComponent,\n    MenuComponent,\n    ProfileComponent,\n    CircleMenuItemComponent,\n    BlockComponent,\n    ListComponent,\n    ListChartCirclesComponent,\n    ListChartDonutComponent,\n    ListChartGaugeComponent,\n    DataDetailsComponent,\n    PageSkillsComponent\n  ],\n  imports: [\n    appRouting,\n    BrowserAnimationsModule,\n    CircleModule,\n    CommonModule,\n    RouterLink,\n    RouterModule,\n    MatTabsModule,\n    MatIconModule,\n    MatToolbarModule,\n    MatButtonModule,\n    InputCircleSliderModule,\n    DrawCircleModule,\n    StorybookWrapperModule,\n    PageWrapperModule,\n    MatListModule,\n    SvgIconModule,\n    ChartGaugeModule,\n    ChartCircleModule,\n    ChartDonutModule,\n    MatRippleModule,\n    ActiveSwitchModule,\n    SelectEntityModule,\n  ],\n  exports: [\n    MainComponent,\n    LayoutComponent,\n    HeaderComponent,\n    ProfileComponent,\n    CircleMenuItemComponent,\n    BlockComponent,\n    ListComponent,\n    ListChartCirclesComponent,\n    ListChartDonutComponent,\n    ListChartGaugeComponent,\n    DataDetailsComponent,\n    PageSkillsComponent\n  ],\n}"
             },
             {
                 "name": "Menu",
@@ -15477,7 +15976,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "object",
-                "defaultValue": "{\r\n  /**\r\n   * Graphical menu degree start.\r\n   */\r\n  MENU_DEGREE_START: {\r\n    [ProfileMode.SMALL]: -90,\r\n    [ProfileMode.LARGE]: 0,\r\n  },\r\n\r\n  /**\r\n   * Graphical menu degree end. (from 0 to 360)\r\n   *\r\n   * Will be relative to the MENU_DEGREE_START.\r\n   */\r\n  MENU_DEGREE_END: {\r\n    [ProfileMode.SMALL]: 90,\r\n    [ProfileMode.LARGE]: 270,\r\n  },\r\n\r\n  /**\r\n   * MENU_DATA\r\n   */\r\n  MENU_DATA: [\r\n    { // * About\r\n      routerLink: '/',\r\n      importance: 10,\r\n      circleMenuItem: {\r\n        title: 'À Propos',\r\n        description: '<p>Développeur Web Front-End</p><p>35 ans</p><p>Vit à Angoulême</p>',\r\n        size: 250,\r\n        weight: 50,\r\n        torque: 10,\r\n        contentOffset: 50,\r\n      },\r\n      drawCircleItem: {\r\n        size: 276,\r\n        weight: 4\r\n      },\r\n    },\r\n    // * Skills\r\n    {\r\n      importance: 40,\r\n      offset: 20,\r\n\r\n      circleMenuItem: {\r\n        title: 'Skills',\r\n        description: 'Lorem ipsum dolor sit amet',\r\n        size: 310,\r\n        weight: 55,\r\n        torque: -30,\r\n        contentOffset: 35,\r\n      },\r\n      drawCircleItem: {\r\n        size: 310,\r\n        weight: 17\r\n      },\r\n    },\r\n    // * Experience\r\n    {\r\n      importance: 20,\r\n      circleMenuItem: {\r\n        title: 'Experience',\r\n        description: 'Lorem ipsum dolor sit amet',\r\n        size: 310,\r\n        weight: 80,\r\n        torque: -25,\r\n        contentOffset: 10,\r\n      },\r\n      drawCircleItem: {\r\n        size: 310,\r\n        weight: 17\r\n      },\r\n    },\r\n    // * Education\r\n    {\r\n      importance: 10,\r\n      circleMenuItem: {\r\n        title: 'Education',\r\n        description: 'Lorem ipsum dolor sit amet',\r\n        size: 250,\r\n        contentOffset: 50,\r\n        weight: 80,\r\n      },\r\n      drawCircleItem: {\r\n        size: 276,\r\n        weight: 4\r\n      },\r\n    },\r\n    // * Contact\r\n    {\r\n      routerLink: '/contact',\r\n      importance: 10,\r\n      circleMenuItem: {\r\n        title: 'Contact',\r\n        description: 'Lorem ipsum dolor sit amet',\r\n        size: 250,\r\n        weight: 20,\r\n      },\r\n      drawCircleItem: {\r\n        size: 276,\r\n        weight: 4\r\n      },\r\n    },\r\n    ] as ProfileMenuItemData[]\r\n  }"
+                "defaultValue": "{\r\n  /**\r\n   * Graphical menu degree start.\r\n   */\r\n  MENU_DEGREE_START: {\r\n    [ProfileMode.SMALL]: -90,\r\n    [ProfileMode.LARGE]: 0,\r\n  },\r\n\r\n  /**\r\n   * Graphical menu degree end. (from 0 to 360)\r\n   *\r\n   * Will be relative to the MENU_DEGREE_START.\r\n   */\r\n  MENU_DEGREE_END: {\r\n    [ProfileMode.SMALL]: 90,\r\n    [ProfileMode.LARGE]: 270,\r\n  },\r\n\r\n  /**\r\n   * MENU_DATA\r\n   */\r\n  MENU_DATA: [\r\n    { // * About\r\n      routerLink: '/',\r\n      importance: 10,\r\n      circleMenuItem: {\r\n        title: 'À Propos',\r\n        description: '<p>Développeur Web Front-End</p><p>35 ans</p><p>Vit à Angoulême</p>',\r\n        size: 250,\r\n        weight: 50,\r\n        torque: 10,\r\n        contentOffset: 50,\r\n      },\r\n      drawCircleItem: {\r\n        size: 276,\r\n        weight: 4\r\n      },\r\n    },\r\n    // * Skills\r\n    {\r\n      routerLink: '/skills',\r\n      importance: 40,\r\n      offset: 20,\r\n\r\n      circleMenuItem: {\r\n        title: 'Compétences',\r\n        description: 'Liste de mes compétences',\r\n        size: 310,\r\n        weight: 55,\r\n        torque: -30,\r\n        contentOffset: 35,\r\n      },\r\n      drawCircleItem: {\r\n        size: 310,\r\n        weight: 17\r\n      },\r\n    },\r\n    // * Experience\r\n    {\r\n      importance: 20,\r\n      circleMenuItem: {\r\n        title: 'Experience',\r\n        description: 'Lorem ipsum dolor sit amet',\r\n        size: 310,\r\n        weight: 80,\r\n        torque: -25,\r\n        contentOffset: 10,\r\n      },\r\n      drawCircleItem: {\r\n        size: 310,\r\n        weight: 17\r\n      },\r\n    },\r\n    // * Education\r\n    {\r\n      importance: 10,\r\n      circleMenuItem: {\r\n        title: 'Education',\r\n        description: 'Lorem ipsum dolor sit amet',\r\n        size: 250,\r\n        contentOffset: 50,\r\n        weight: 80,\r\n      },\r\n      drawCircleItem: {\r\n        size: 276,\r\n        weight: 4\r\n      },\r\n    },\r\n    // * Contact\r\n    {\r\n      routerLink: '/contact',\r\n      importance: 10,\r\n      circleMenuItem: {\r\n        title: 'Contact',\r\n        description: 'Lorem ipsum dolor sit amet',\r\n        size: 250,\r\n        weight: 20,\r\n      },\r\n      drawCircleItem: {\r\n        size: 276,\r\n        weight: 4\r\n      },\r\n    },\r\n    ] as ProfileMenuItemData[]\r\n  }"
             },
             {
                 "name": "Project",
@@ -15528,6 +16027,16 @@
                 "ctype": "miscellaneous",
                 "subtype": "variable",
                 "file": "src/app/modules/main/components/data-details/data-details.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "Skills",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/modules/main/components/page-skills/page-skills.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -15611,11 +16120,11 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/modules/shared/chart-gauge/chart-gauge.stories.ts",
+                "file": "src/app/modules/shared/chart-donut/chart-donut.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Story<ChartGaugeComponent>",
-                "defaultValue": "(args: ChartGaugeComponent) => ({\r\n  props: args,\r\n})",
+                "type": "Story<ChartDonutComponent>",
+                "defaultValue": "(args: ChartDonutComponent) => ({\r\n  props: args,\r\n})",
                 "rawdescription": "Template of the component.",
                 "description": "<p>Template of the component.</p>\n"
             },
@@ -15623,11 +16132,11 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/modules/shared/chart-donut/chart-donut.stories.ts",
+                "file": "src/app/modules/shared/chart-gauge/chart-gauge.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Story<ChartDonutComponent>",
-                "defaultValue": "(args: ChartDonutComponent) => ({\r\n  props: args,\r\n})",
+                "type": "Story<ChartGaugeComponent>",
+                "defaultValue": "(args: ChartGaugeComponent) => ({\r\n  props: args,\r\n})",
                 "rawdescription": "Template of the component.",
                 "description": "<p>Template of the component.</p>\n"
             },
@@ -15659,18 +16168,6 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/modules/shared/input-circle-slider/input-circle-slider.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story<InputCircleSliderComponent>",
-                "defaultValue": "(args: InputCircleSliderComponent) => ({\r\n  props: args,\r\n})",
-                "rawdescription": "Template of the component.",
-                "description": "<p>Template of the component.</p>\n"
-            },
-            {
-                "name": "Template",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "src/app/modules/shared/grid/grid.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -15688,6 +16185,18 @@
                 "deprecationMessage": "",
                 "type": "Story<PageWrapperComponent>",
                 "defaultValue": "(args: PageWrapperComponent) => ({\r\n  props: args,\r\n})",
+                "rawdescription": "Template of the component.",
+                "description": "<p>Template of the component.</p>\n"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/modules/shared/input-circle-slider/input-circle-slider.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<InputCircleSliderComponent>",
+                "defaultValue": "(args: InputCircleSliderComponent) => ({\r\n  props: args,\r\n})",
                 "rawdescription": "Template of the component.",
                 "description": "<p>Template of the component.</p>\n"
             },
@@ -15719,11 +16228,11 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/modules/main/components/data-details/data-details.stories.ts",
+                "file": "src/app/modules/main/components/block/block.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Story<DataDetailsComponent>",
-                "defaultValue": "(args: DataDetailsComponent) => ({\n  props: args,\n})"
+                "type": "Story<BlockComponent>",
+                "defaultValue": "(args: BlockComponent) => ({\n  props: args,\n})"
             },
             {
                 "name": "Template",
@@ -15734,6 +16243,16 @@
                 "deprecationMessage": "",
                 "type": "Story<CircleMenuItemComponent>",
                 "defaultValue": "(args: CircleMenuItemComponent) => ({\n  props: args,\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/modules/main/components/data-details/data-details.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<DataDetailsComponent>",
+                "defaultValue": "(args: DataDetailsComponent) => ({\n  props: args,\n})"
             },
             {
                 "name": "Template",
@@ -15751,21 +16270,13 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/modules/main/components/block/block.stories.ts",
+                "file": "src/app/modules/main/components/layout/layout.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Story<BlockComponent>",
-                "defaultValue": "(args: BlockComponent) => ({\n  props: args,\n})"
-            },
-            {
-                "name": "Template",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/modules/main/components/list-chart-donut/list-chart-donut.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story<ListChartDonutComponent>",
-                "defaultValue": "(args: ListChartDonutComponent) => ({\n  props: args,\n})"
+                "type": "Story<LayoutComponent>",
+                "defaultValue": "(args: LayoutComponent) => ({\r\n  props: args,\r\n})",
+                "rawdescription": "Template of the component.",
+                "description": "<p>Template of the component.</p>\n"
             },
             {
                 "name": "Template",
@@ -15791,13 +16302,21 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/modules/main/components/layout/layout.stories.ts",
+                "file": "src/app/modules/main/components/list-chart-donut/list-chart-donut.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Story<LayoutComponent>",
-                "defaultValue": "(args: LayoutComponent) => ({\r\n  props: args,\r\n})",
-                "rawdescription": "Template of the component.",
-                "description": "<p>Template of the component.</p>\n"
+                "type": "Story<ListChartDonutComponent>",
+                "defaultValue": "(args: ListChartDonutComponent) => ({\n  props: args,\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/modules/main/components/list-chart-gauge/list-chart-gauge.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<ListChartGaugeComponent>",
+                "defaultValue": "(args: ListChartGaugeComponent) => ({\n  props: args,\n})"
             },
             {
                 "name": "Template",
@@ -15810,16 +16329,6 @@
                 "defaultValue": "(args: MainComponent) => ({\r\n  props: args,\r\n})",
                 "rawdescription": "Template of the component.",
                 "description": "<p>Template of the component.</p>\n"
-            },
-            {
-                "name": "Template",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/modules/main/components/list-chart-gauge/list-chart-gauge.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story<ListChartGaugeComponent>",
-                "defaultValue": "(args: ListChartGaugeComponent) => ({\n  props: args,\n})"
             },
             {
                 "name": "Template",
@@ -15842,6 +16351,18 @@
                 "deprecationMessage": "",
                 "type": "Story<PageHomeComponent>",
                 "defaultValue": "(args: PageHomeComponent) => ({\r\n  props: args,\r\n})",
+                "rawdescription": "Template of the component.",
+                "description": "<p>Template of the component.</p>\n"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/modules/main/components/page-skills/page-skills.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<PageSkillsComponent>",
+                "defaultValue": "(args: PageSkillsComponent) => ({\r\n  props: args,\r\n})",
                 "rawdescription": "Template of the component.",
                 "description": "<p>Template of the component.</p>\n"
             },
@@ -15905,16 +16426,6 @@
                 "name": "WorkByDate",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/modules/main/components/list-chart-donut/list-chart-donut.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "",
-                "defaultValue": "Template.bind({})"
-            },
-            {
-                "name": "WorkByDate",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "src/app/modules/main/components/list/list.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -15926,6 +16437,16 @@
                 "ctype": "miscellaneous",
                 "subtype": "variable",
                 "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "WorkByDate",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/modules/main/components/list-chart-donut/list-chart-donut.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -17302,68 +17823,6 @@
             }
         ],
         "groupedVariables": {
-            "src/app/modules/main/components/list-chart-donut/list-chart-donut.stories.ts": [
-                {
-                    "name": "AllStacks",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/modules/main/components/list-chart-donut/list-chart-donut.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "Best5Stacks",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/modules/main/components/list-chart-donut/list-chart-donut.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "EducationByDate",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/modules/main/components/list-chart-donut/list-chart-donut.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "LastProjects",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/modules/main/components/list-chart-donut/list-chart-donut.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "Template",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/modules/main/components/list-chart-donut/list-chart-donut.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story<ListChartDonutComponent>",
-                    "defaultValue": "(args: ListChartDonutComponent) => ({\n  props: args,\n})"
-                },
-                {
-                    "name": "WorkByDate",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/modules/main/components/list-chart-donut/list-chart-donut.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                }
-            ],
             "src/app/modules/main/components/list/list.stories.ts": [
                 {
                     "name": "AllStacks",
@@ -17482,6 +17941,68 @@
                     "ctype": "miscellaneous",
                     "subtype": "variable",
                     "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                }
+            ],
+            "src/app/modules/main/components/list-chart-donut/list-chart-donut.stories.ts": [
+                {
+                    "name": "AllStacks",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/modules/main/components/list-chart-donut/list-chart-donut.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Best5Stacks",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/modules/main/components/list-chart-donut/list-chart-donut.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "EducationByDate",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/modules/main/components/list-chart-donut/list-chart-donut.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "LastProjects",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/modules/main/components/list-chart-donut/list-chart-donut.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/modules/main/components/list-chart-donut/list-chart-donut.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<ListChartDonutComponent>",
+                    "defaultValue": "(args: ListChartDonutComponent) => ({\n  props: args,\n})"
+                },
+                {
+                    "name": "WorkByDate",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/modules/main/components/list-chart-donut/list-chart-donut.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
@@ -18167,7 +18688,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "object",
-                    "defaultValue": "{\n  declarations: [\n    MainComponent,\n    LayoutComponent,\n    PageHomeComponent,\n    PageContactComponent,\n    HeaderComponent,\n    MenuComponent,\n    ProfileComponent,\n    CircleMenuItemComponent,\n    BlockComponent,\n    ListComponent,\n    ListChartCirclesComponent,\n    ListChartDonutComponent,\n    ListChartGaugeComponent,\n    DataDetailsComponent\n  ],\n  imports: [\n    appRouting,\n    BrowserAnimationsModule,\n    CircleModule,\n    CommonModule,\n    RouterLink,\n    RouterModule,\n    MatTabsModule,\n    MatIconModule,\n    MatToolbarModule,\n    MatButtonModule,\n    InputCircleSliderModule,\n    DrawCircleModule,\n    StorybookWrapperModule,\n    PageWrapperModule,\n    MatListModule,\n    SvgIconModule,\n    ChartGaugeModule,\n    ChartCircleModule,\n    ChartDonutModule,\n    MatRippleModule,\n    ActiveSwitchModule,\n    SelectEntityModule\n  ],\n  exports: [\n    MainComponent,\n    LayoutComponent,\n    HeaderComponent,\n    ProfileComponent,\n    CircleMenuItemComponent,\n    BlockComponent,\n    ListComponent,\n    ListChartCirclesComponent,\n    ListChartDonutComponent,\n    ListChartGaugeComponent,\n    DataDetailsComponent\n  ],\n}"
+                    "defaultValue": "{\n  declarations: [\n    MainComponent,\n    LayoutComponent,\n    PageHomeComponent,\n    PageContactComponent,\n    HeaderComponent,\n    MenuComponent,\n    ProfileComponent,\n    CircleMenuItemComponent,\n    BlockComponent,\n    ListComponent,\n    ListChartCirclesComponent,\n    ListChartDonutComponent,\n    ListChartGaugeComponent,\n    DataDetailsComponent,\n    PageSkillsComponent\n  ],\n  imports: [\n    appRouting,\n    BrowserAnimationsModule,\n    CircleModule,\n    CommonModule,\n    RouterLink,\n    RouterModule,\n    MatTabsModule,\n    MatIconModule,\n    MatToolbarModule,\n    MatButtonModule,\n    InputCircleSliderModule,\n    DrawCircleModule,\n    StorybookWrapperModule,\n    PageWrapperModule,\n    MatListModule,\n    SvgIconModule,\n    ChartGaugeModule,\n    ChartCircleModule,\n    ChartDonutModule,\n    MatRippleModule,\n    ActiveSwitchModule,\n    SelectEntityModule,\n  ],\n  exports: [\n    MainComponent,\n    LayoutComponent,\n    HeaderComponent,\n    ProfileComponent,\n    CircleMenuItemComponent,\n    BlockComponent,\n    ListComponent,\n    ListChartCirclesComponent,\n    ListChartDonutComponent,\n    ListChartGaugeComponent,\n    DataDetailsComponent,\n    PageSkillsComponent\n  ],\n}"
                 }
             ],
             "src/app/modules/main/components/menu/menu.stories.ts": [
@@ -18263,7 +18784,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "object",
-                    "defaultValue": "{\r\n  /**\r\n   * Graphical menu degree start.\r\n   */\r\n  MENU_DEGREE_START: {\r\n    [ProfileMode.SMALL]: -90,\r\n    [ProfileMode.LARGE]: 0,\r\n  },\r\n\r\n  /**\r\n   * Graphical menu degree end. (from 0 to 360)\r\n   *\r\n   * Will be relative to the MENU_DEGREE_START.\r\n   */\r\n  MENU_DEGREE_END: {\r\n    [ProfileMode.SMALL]: 90,\r\n    [ProfileMode.LARGE]: 270,\r\n  },\r\n\r\n  /**\r\n   * MENU_DATA\r\n   */\r\n  MENU_DATA: [\r\n    { // * About\r\n      routerLink: '/',\r\n      importance: 10,\r\n      circleMenuItem: {\r\n        title: 'À Propos',\r\n        description: '<p>Développeur Web Front-End</p><p>35 ans</p><p>Vit à Angoulême</p>',\r\n        size: 250,\r\n        weight: 50,\r\n        torque: 10,\r\n        contentOffset: 50,\r\n      },\r\n      drawCircleItem: {\r\n        size: 276,\r\n        weight: 4\r\n      },\r\n    },\r\n    // * Skills\r\n    {\r\n      importance: 40,\r\n      offset: 20,\r\n\r\n      circleMenuItem: {\r\n        title: 'Skills',\r\n        description: 'Lorem ipsum dolor sit amet',\r\n        size: 310,\r\n        weight: 55,\r\n        torque: -30,\r\n        contentOffset: 35,\r\n      },\r\n      drawCircleItem: {\r\n        size: 310,\r\n        weight: 17\r\n      },\r\n    },\r\n    // * Experience\r\n    {\r\n      importance: 20,\r\n      circleMenuItem: {\r\n        title: 'Experience',\r\n        description: 'Lorem ipsum dolor sit amet',\r\n        size: 310,\r\n        weight: 80,\r\n        torque: -25,\r\n        contentOffset: 10,\r\n      },\r\n      drawCircleItem: {\r\n        size: 310,\r\n        weight: 17\r\n      },\r\n    },\r\n    // * Education\r\n    {\r\n      importance: 10,\r\n      circleMenuItem: {\r\n        title: 'Education',\r\n        description: 'Lorem ipsum dolor sit amet',\r\n        size: 250,\r\n        contentOffset: 50,\r\n        weight: 80,\r\n      },\r\n      drawCircleItem: {\r\n        size: 276,\r\n        weight: 4\r\n      },\r\n    },\r\n    // * Contact\r\n    {\r\n      routerLink: '/contact',\r\n      importance: 10,\r\n      circleMenuItem: {\r\n        title: 'Contact',\r\n        description: 'Lorem ipsum dolor sit amet',\r\n        size: 250,\r\n        weight: 20,\r\n      },\r\n      drawCircleItem: {\r\n        size: 276,\r\n        weight: 4\r\n      },\r\n    },\r\n    ] as ProfileMenuItemData[]\r\n  }"
+                    "defaultValue": "{\r\n  /**\r\n   * Graphical menu degree start.\r\n   */\r\n  MENU_DEGREE_START: {\r\n    [ProfileMode.SMALL]: -90,\r\n    [ProfileMode.LARGE]: 0,\r\n  },\r\n\r\n  /**\r\n   * Graphical menu degree end. (from 0 to 360)\r\n   *\r\n   * Will be relative to the MENU_DEGREE_START.\r\n   */\r\n  MENU_DEGREE_END: {\r\n    [ProfileMode.SMALL]: 90,\r\n    [ProfileMode.LARGE]: 270,\r\n  },\r\n\r\n  /**\r\n   * MENU_DATA\r\n   */\r\n  MENU_DATA: [\r\n    { // * About\r\n      routerLink: '/',\r\n      importance: 10,\r\n      circleMenuItem: {\r\n        title: 'À Propos',\r\n        description: '<p>Développeur Web Front-End</p><p>35 ans</p><p>Vit à Angoulême</p>',\r\n        size: 250,\r\n        weight: 50,\r\n        torque: 10,\r\n        contentOffset: 50,\r\n      },\r\n      drawCircleItem: {\r\n        size: 276,\r\n        weight: 4\r\n      },\r\n    },\r\n    // * Skills\r\n    {\r\n      routerLink: '/skills',\r\n      importance: 40,\r\n      offset: 20,\r\n\r\n      circleMenuItem: {\r\n        title: 'Compétences',\r\n        description: 'Liste de mes compétences',\r\n        size: 310,\r\n        weight: 55,\r\n        torque: -30,\r\n        contentOffset: 35,\r\n      },\r\n      drawCircleItem: {\r\n        size: 310,\r\n        weight: 17\r\n      },\r\n    },\r\n    // * Experience\r\n    {\r\n      importance: 20,\r\n      circleMenuItem: {\r\n        title: 'Experience',\r\n        description: 'Lorem ipsum dolor sit amet',\r\n        size: 310,\r\n        weight: 80,\r\n        torque: -25,\r\n        contentOffset: 10,\r\n      },\r\n      drawCircleItem: {\r\n        size: 310,\r\n        weight: 17\r\n      },\r\n    },\r\n    // * Education\r\n    {\r\n      importance: 10,\r\n      circleMenuItem: {\r\n        title: 'Education',\r\n        description: 'Lorem ipsum dolor sit amet',\r\n        size: 250,\r\n        contentOffset: 50,\r\n        weight: 80,\r\n      },\r\n      drawCircleItem: {\r\n        size: 276,\r\n        weight: 4\r\n      },\r\n    },\r\n    // * Contact\r\n    {\r\n      routerLink: '/contact',\r\n      importance: 10,\r\n      circleMenuItem: {\r\n        title: 'Contact',\r\n        description: 'Lorem ipsum dolor sit amet',\r\n        size: 250,\r\n        weight: 20,\r\n      },\r\n      drawCircleItem: {\r\n        size: 276,\r\n        weight: 4\r\n      },\r\n    },\r\n    ] as ProfileMenuItemData[]\r\n  }"
                 }
             ],
             "src/app/constants/router-transition.constant.ts": [
@@ -18290,6 +18811,30 @@
                     "defaultValue": "trigger('routerTransitionRtL', [\r\n  transition('* <=> *', [\r\n    /* order */\r\n    /* 1 */\r\n    query(':enter, :leave', style({ position: 'fixed', width:'100%' })\r\n      , { optional: true }),\r\n    /* 2 */\r\n    group([  // block executes in parallel\r\n      query(':enter', [\r\n        style({ transform: 'translateX(100%)' }),\r\n        animate('.5s ease-in-out', style({ transform: 'translateX(0%)' }))\r\n      ], { optional: true }),\r\n      query(':leave', [\r\n        style({ transform: 'translateX(0%)' }),\r\n        animate('.5s ease-in-out', style({ transform: 'translateX(-100%)' }))\r\n      ], { optional: true }),\r\n    ])\r\n  ])\r\n])",
                     "rawdescription": "Router transition constant.\r\nRight to left.",
                     "description": "<p>Router transition constant.\nRight to left.</p>\n"
+                }
+            ],
+            "src/app/modules/main/components/page-skills/page-skills.stories.ts": [
+                {
+                    "name": "Skills",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/modules/main/components/page-skills/page-skills.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/modules/main/components/page-skills/page-skills.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<PageSkillsComponent>",
+                    "defaultValue": "(args: PageSkillsComponent) => ({\r\n  props: args,\r\n})",
+                    "rawdescription": "Template of the component.",
+                    "description": "<p>Template of the component.</p>\n"
                 }
             ],
             "src/app/constants/storybook-range-control.constant.ts": [
@@ -19791,13 +20336,24 @@
                         }
                     },
                     {
+                        "path": "skills",
+                        "component": "PageSkillsComponent",
+                        "data": {
+                            "state": "skills",
+                            "menuItem": {
+                                "label": "Compétences",
+                                "index": "1"
+                            }
+                        }
+                    },
+                    {
                         "path": "contact",
                         "component": "PageContactComponent",
                         "data": {
                             "state": "contact",
                             "menuItem": {
                                 "label": "Contact",
-                                "index": "1"
+                                "index": "2"
                             }
                         }
                     },
@@ -20142,9 +20698,9 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "BlockComponent",
-                "coveragePercent": 75,
-                "coverageCount": "3/4",
-                "status": "good"
+                "coveragePercent": 83,
+                "coverageCount": "5/6",
+                "status": "very-good"
             },
             {
                 "filePath": "src/app/modules/main/components/block/block.stories.ts",
@@ -20209,9 +20765,9 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "DataDetailsComponent",
-                "coveragePercent": 69,
-                "coverageCount": "9/13",
-                "status": "good"
+                "coveragePercent": 76,
+                "coverageCount": "13/17",
+                "status": "very-good"
             },
             {
                 "filePath": "src/app/modules/main/components/data-details/data-details.stories.ts",
@@ -20356,8 +20912,8 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "ListChartCirclesComponent",
-                "coveragePercent": 84,
-                "coverageCount": "16/19",
+                "coveragePercent": 80,
+                "coverageCount": "17/21",
                 "status": "very-good"
             },
             {
@@ -20425,8 +20981,8 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "ListChartDonutComponent",
-                "coveragePercent": 80,
-                "coverageCount": "17/21",
+                "coveragePercent": 78,
+                "coverageCount": "18/23",
                 "status": "very-good"
             },
             {
@@ -20494,8 +21050,8 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "ListChartGaugeComponent",
-                "coveragePercent": 84,
-                "coverageCount": "16/19",
+                "coveragePercent": 80,
+                "coverageCount": "17/21",
                 "status": "very-good"
             },
             {
@@ -20572,8 +21128,8 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "ListComponent",
-                "coveragePercent": 80,
-                "coverageCount": "16/20",
+                "coveragePercent": 77,
+                "coverageCount": "17/22",
                 "status": "very-good"
             },
             {
@@ -20742,6 +21298,35 @@
                 "status": "very-good"
             },
             {
+                "filePath": "src/app/modules/main/components/page-skills/page-skills.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "PageSkillsComponent",
+                "coveragePercent": 25,
+                "coverageCount": "2/8",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/modules/main/components/page-skills/page-skills.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Skills",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/modules/main/components/page-skills/page-skills.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 100,
+                "coverageCount": "1/1",
+                "status": "very-good"
+            },
+            {
                 "filePath": "src/app/modules/main/components/profile/profile.component.model.ts",
                 "type": "class",
                 "linktype": "classe",
@@ -20831,8 +21416,8 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "ChartCircleComponent",
-                "coveragePercent": 85,
-                "coverageCount": "12/14",
+                "coveragePercent": 86,
+                "coverageCount": "13/15",
                 "status": "very-good"
             },
             {

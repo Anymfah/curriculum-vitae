@@ -1,0 +1,20 @@
+
+.zone {
+  &__top {
+    grid-column: 1 / span 12;
+    grid-row: 1 / span 4;
+    display: flex;
+    gap: 10px;
+  }
+  &__bottom {
+    grid-row: 5 / 13;
+
+    &-left {
+      grid-column: 5 / 9;
+    }
+
+    &-right {
+      grid-column: 9 / 13;
+    }
+  }
+}

@@ -60,6 +60,11 @@ export class ChartCircleComponent implements OnChanges {
   public calculatedValue: number = 0;
 
   /**
+   * Label to be displayed in the chart.
+   */
+  @Input() public label?: string;
+
+  /**
    * @inheritDoc
    * @todo put in abstract class
    */

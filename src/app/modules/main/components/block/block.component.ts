@@ -20,4 +20,14 @@ export class BlockComponent {
    * Disable padding
    */
   @Input() public disablePadding?: boolean = false;
+
+  /**
+   * Centered content
+   */
+  @Input() public centered?: boolean = false;
+
+  /**
+   * Column content
+   */
+  @Input() public column?: boolean = false;
 }

@@ -33,6 +33,7 @@ import {ActiveSwitchModule} from '../shared/active-switch/active-switch.module';
 import {ListChartGaugeComponent} from './components/list-chart-gauge/list-chart-gauge.component';
 import {DataDetailsComponent} from './components/data-details/data-details.component';
 import {SelectEntityModule} from '../shared/select-entity/select-entity.module';
+import {PageSkillsComponent} from './components/page-skills/page-skills.component';
 
 
 export const MainStorybookModuleConstant ={
@@ -50,7 +51,8 @@ export const MainStorybookModuleConstant ={
     ListChartCirclesComponent,
     ListChartDonutComponent,
     ListChartGaugeComponent,
-    DataDetailsComponent
+    DataDetailsComponent,
+    PageSkillsComponent
   ],
   imports: [
     appRouting,
@@ -74,7 +76,7 @@ export const MainStorybookModuleConstant ={
     ChartDonutModule,
     MatRippleModule,
     ActiveSwitchModule,
-    SelectEntityModule
+    SelectEntityModule,
   ],
   exports: [
     MainComponent,
@@ -87,6 +89,7 @@ export const MainStorybookModuleConstant ={
     ListChartCirclesComponent,
     ListChartDonutComponent,
     ListChartGaugeComponent,
-    DataDetailsComponent
+    DataDetailsComponent,
+    PageSkillsComponent
   ],
 };

@@ -3,11 +3,11 @@
     <div class="data-details__content flex-column">
       <!--Circle charts blocks Container-->
       <div class="data-details__content__row flex flex-grow">
-        <div class="data-details__blocks chart-circle-blocks flex flex-grow flex-wrap">
+        <div class="data-details__blocks chart-circle-blocks justify-center flex flex-grow flex-wrap">
           <div *ngIf="entitySubtitle" class="data-details__subtitle">
             {{entitySubtitle}}
           </div>
-          <div *ngFor="let block of circleCharts" class="data-details__block flex-column">
+          <div *ngFor="let block of circleCharts" class="data-details__block flex-column justify-center">
             <div class="data-details__block__header flex-center">
               <div class="data-details__block-title h3 flex-center">
                 {{block.label}}
@@ -15,7 +15,7 @@
             </div>
             <div class="data-details__block__content">
               <cv-chart-circle [value]="block.value" [animationDelay]="block.delay"
-                               [size]="90" [weight]="5"></cv-chart-circle>
+                               [size]="circleCharts.length === 1 ? 140 : 90" [weight]="circleCharts.length === 1 ? 15 : 5"></cv-chart-circle>
             </div>
           </div>
         </div>
@@ -32,7 +32,7 @@
         </div>
       </div>
 
-      <cv-list-chart-donut class="data-details__donut" *ngIf="donutChart"
+      <cv-list-chart-donut class="data-details__donut" *ngIf="donutChart && donutChart.items"
                            [items]="donutChart.items"
                            [entityType]="donutChart.entityType"
                            [entities]="donutChart.entities"

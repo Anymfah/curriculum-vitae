@@ -2,12 +2,6 @@
 @use 'mixins';
 
 :host {
-  /*background: fn.get-color(contrast, 800);
-  background: url('/assets/img/bg.jpg');
-  background-attachment: fixed;
-  background-size: cover;
-  background-position: 50% 50%;
-  background-repeat: no-repeat;*/
   display: flex;
   flex-direction: column;
   height: 100%;

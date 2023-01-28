@@ -8,7 +8,12 @@
                   [color]="color" [positionDegree]="startDegree"
                   [arcDegree]="calculatedValue">
   </cv-draw-circle>
-  <div class="chart-circle__value">
-    {{value}}%
+  <div class="chart-circle__content flex-column flex-center">
+    <div *ngIf="label" class="label small">
+      {{label}}
+    </div>
+    <div class="value" [ngClass]="size > 100 ? 'h1' : 'h3'">
+      {{value}}%
+    </div>
   </div>
 </div>

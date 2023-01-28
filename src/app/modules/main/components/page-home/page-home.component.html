@@ -1,5 +1,5 @@
 <cv-page-wrapper>
-  <cv-block left cvTitle="Qui suis-je ?" maxHeight="150px">
+  <cv-block left-top cvTitle="Qui suis-je ?">
     <p>
       Je suis développeur web, spécialisé en front-end. Passioné par le développement web,
       j'ai toujours été à la recherche de nouvelles techniques et d'innovations. Je suis un
@@ -12,30 +12,22 @@
   </cv-block>
 
   <cv-data-details center-top></cv-data-details>
-
-  <cv-block right [cvTitle]="blocks.favoriteStacks.title" [disablePadding]="true">
-    <cv-list [valueKey]="blocks.favoriteStacks.valueKey"
-             [queryArgs]="blocks.favoriteStacks.query"></cv-list>
-  </cv-block>
-
   <cv-block center-bottom [cvTitle]="blocks.lastProjects.title">
     <cv-list-chart-circles [valueKey]="blocks.lastProjects.valueKey"
                            [entityType]="blocks.lastProjects.type"
                            [queryArgs]="blocks.lastProjects.query"></cv-list-chart-circles>
   </cv-block>
 
-  <cv-block right [cvTitle]="blocks.lastProjects.title">
+  <cv-block right-top [cvTitle]="blocks.favoriteStacks.title" [disablePadding]="true">
+    <cv-list-chart-gauge [valueKey]="blocks.favoriteStacks.valueKey"
+                         [entityType]="blocks.favoriteStacks.type"
+                         [queryArgs]="blocks.favoriteStacks.query"></cv-list-chart-gauge>
+  </cv-block>
+
+  <cv-block right-bottom [cvTitle]="blocks.lastProjects.title">
     <cv-list-chart-circles [valueKey]="blocks.lastProjects.valueKey"
                            [entityType]="blocks.lastProjects.type"
                             [queryArgs]="blocks.lastProjects.query"></cv-list-chart-circles>
-  </cv-block>
-
-  <cv-block right cvTitle="Mes défauts">
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit. A asperiores cumque ipsum maiores officia ratione similique voluptas voluptate! Accusamus cum eius est exercitationem impedit ipsum iste iure praesentium recusandae suscipit.
-  </cv-block>
-
-  <cv-block right cvTitle="Mes meilleurs projets">
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit. A asperiores cumque ipsum maiores officia ratione similique voluptas voluptate! Accusamus cum eius est exercitationem impedit ipsum iste iure praesentium recusandae suscipit.
   </cv-block>
 
 </cv-page-wrapper>

@@ -1,0 +1,31 @@
+<cv-page-wrapper>
+  <div class="zone__top zone">
+    <cv-block [centered]="true"
+              [column]="true"
+              *ngFor="let bestSkill of bestSkills; let index = index"
+              class="block flex-column flex-grow flex-center">
+      <div class="block__title h3">{{bestSkill.name}}</div>
+      <cv-chart-circle [value]="bestSkill.level" [color]="bestSkill.color"
+                       [size]="140"
+                       [animationDelay]="index * 100"
+                       label="Niveau"
+                       ></cv-chart-circle>
+      <div class="block__description">{{bestSkill.subtitle}}</div>
+    </cv-block>
+  </div>
+
+  <div class="zone__bottom zone__bottom-left zone flex">
+    <cv-block cvTitle="Liste de toutes mes stacks par niveau">
+      <cv-list-chart-gauge [entityType]="allStackList.type"
+                           [queryArgs]="allStackList.query" [valueKey]="allStackList.valueKey"></cv-list-chart-gauge>
+    </cv-block>
+  </div>
+
+  <div class="zone__bottom zone__bottom-right zone flex">
+    <cv-block cvTitle="Mes autres compétences pour le développement">
+      <cv-list-chart-gauge [entityType]="othersList.type"
+                           [queryArgs]="othersList.query" [valueKey]="othersList.valueKey"></cv-list-chart-gauge>
+    </cv-block>
+  </div>
+</cv-page-wrapper>
+

@@ -84,7 +84,11 @@ export class SkillEntity extends AbstractEntity<SkillDataInterface> {
   public orderByField(order: OrderByInterface, compareWith: EntityType): number {
     switch (order.name) {
       case ORDER_FIELD.LEVEL:
-        return this.level;
+        if (compareWith instanceof SkillEntity) {
+          return compareWith.level - this.level;
+        } else {
+          return 0;
+        }
     }
     return 0;
   }

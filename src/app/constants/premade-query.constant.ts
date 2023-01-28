@@ -49,11 +49,24 @@ export const PRE_MADE_QUERY_CONSTANT = {
    */
   [PRE_MADE_QUERY.ALL_STACKS]: {
     filters: [
-      {name: DATA_FIELD.SKILL_CATEGORY, value: SKILL_CATEGORY.CODE_LANGUAGE},
-      {name: DATA_FIELD.SKILL_CATEGORY, value: SKILL_CATEGORY.FRAMEWORK},
-      {name: DATA_FIELD.SKILL_CATEGORY, value: SKILL_CATEGORY.LIBRARY},
+      {name: DATA_FIELD.SKILL_CATEGORY, value: SKILL_CATEGORY.STACK},
+    ],
+    orderBy: [
+      {name: ORDER_FIELD.LEVEL, direction: 'ASC'},
+    ],
+  } as QueryInterface,
+
+  /**
+   * Others skills
+   */
+  [PRE_MADE_QUERY.OTHERS_SKILLS]: {
+    filters: [
       {name: DATA_FIELD.SKILL_CATEGORY, value: SKILL_CATEGORY.DEVOPS},
-      {name: DATA_FIELD.SKILL_CATEGORY, value: SKILL_CATEGORY.DATABASE},
+      {name: DATA_FIELD.SKILL_CATEGORY, value: SKILL_CATEGORY.CMS},
+      {name: DATA_FIELD.SKILL_CATEGORY, value: SKILL_CATEGORY.OS},
+      {name: DATA_FIELD.SKILL_CATEGORY, value: SKILL_CATEGORY.TOOL},
+      {name: DATA_FIELD.SKILL_CATEGORY, value: SKILL_CATEGORY.E2E},
+      {name: DATA_FIELD.SKILL_CATEGORY, value: SKILL_CATEGORY.IDE},
     ],
     orderBy: [
       {name: ORDER_FIELD.LEVEL, direction: 'ASC'},

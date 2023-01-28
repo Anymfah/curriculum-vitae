@@ -1,13 +1,15 @@
-<div class="block__container body-2">
+<div class="block__container body-2 flex-column">
   <div class="block__header">
-    <div class="block__header-wrapper">
-      <div class="block__header-title h3">
+    <div *ngIf="cvTitle" class="block__header-wrapper">
+      <div *ngIf="cvTitle" class="block__header-title h3">
         {{ cvTitle }}
       </div>
     </div>
-    <div class="block__header-line"></div>
+    <div *ngIf="cvTitle" class="block__header-line"></div>
   </div>
-  <div class="block__content scroll-bar"
+  <div class="block__content scroll-bar flex-grow"
+       [class.flex-center]="centered"
+       [class.flex-column]="column"
        [class.has-padding]="!disablePadding"
        [style.max-height]="maxHeight">
     <ng-content></ng-content>
