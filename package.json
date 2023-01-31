@@ -27,7 +27,10 @@
     "@ngx-storybook/schematics": "^1.1.0",
     "@ngx-translate/core": "^9.1.1",
     "@ngx-translate/http-loader": "^7.0.0",
+    "@types/three": "^0.149.0",
+    "globe.gl": "^2.26.12",
     "rxjs": "~7.5.0",
+    "three": "^0.149.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
   },
