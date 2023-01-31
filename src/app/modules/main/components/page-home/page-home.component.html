@@ -24,10 +24,8 @@
                          [queryArgs]="blocks.favoriteStacks.query"></cv-list-chart-gauge>
   </cv-block>
 
-  <cv-block right-bottom [cvTitle]="blocks.lastProjects.title">
-    <cv-list-chart-circles [valueKey]="blocks.lastProjects.valueKey"
-                           [entityType]="blocks.lastProjects.type"
-                            [queryArgs]="blocks.lastProjects.query"></cv-list-chart-circles>
+  <cv-block right-bottom [cvTitle]="blocks.lastWorks.title">
+    <cv-list [entityType]="blocks.lastWorks.type" [queryArgs]="blocks.lastWorks.query"></cv-list>
   </cv-block>
 
 </cv-page-wrapper>

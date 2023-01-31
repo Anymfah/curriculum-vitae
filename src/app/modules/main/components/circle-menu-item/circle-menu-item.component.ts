@@ -169,14 +169,6 @@ export class CircleMenuItemComponent implements OnChanges, OnInit {
     }
   }
 
-  private _old_animateWeight(): void {
-    const from = this.active ? 0 : this.weight;
-    const to = this.active ? this.weight : 0;
-    animateValueUtil((value) => {
-      this.weightValue = value;
-    }, from, to, 300);
-  }
-
   private _animateWeight(): void {
     const from = this.active ? 0 : this.weight;
     const to = this.active ? this.weight : 0;

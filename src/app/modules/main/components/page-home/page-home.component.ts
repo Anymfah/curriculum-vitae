@@ -26,6 +26,11 @@ export class PageHomeComponent {
       valueKey: DATA_FIELD.HAPPINESS,
       type: DATA_TYPE.PROJECT,
       query: PRE_MADE_QUERY.LAST_PROJECTS
+    },
+    lastWorks: {
+      title: 'Mes derniers jobs',
+      type: DATA_TYPE.WORK,
+      query: PRE_MADE_QUERY.WORK_BY_DATE_ORDER
     }
 
   };

@@ -32,6 +32,8 @@ import {ListChartGaugeComponent} from './components/list-chart-gauge/list-chart-
 import {DataDetailsComponent} from './components/data-details/data-details.component';
 import {SelectEntityModule} from '../shared/select-entity/select-entity.module';
 import { PageSkillsComponent } from './components/page-skills/page-skills.component';
+import { PageEducationComponent } from './components/page-education/page-education.component';
+import { PageWorksComponent } from './components/page-works/page-works.component';
 
 
 @NgModule({
@@ -51,6 +53,8 @@ import { PageSkillsComponent } from './components/page-skills/page-skills.compon
         ListChartGaugeComponent,
         DataDetailsComponent,
         PageSkillsComponent,
+        PageEducationComponent,
+        PageWorksComponent,
     ],
   imports: [
     CommonModule,

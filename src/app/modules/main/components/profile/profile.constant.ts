@@ -62,9 +62,10 @@ export const PROFILE_CONSTANT = {
     // * Experience
     {
       importance: 20,
+      routerLink: '/works',
       circleMenuItem: {
-        title: 'Experience',
-        description: 'Lorem ipsum dolor sit amet',
+        title: 'Expériences',
+        description: 'Mon parcours professionnel',
         size: 310,
         weight: 80,
         torque: -25,
@@ -78,9 +79,10 @@ export const PROFILE_CONSTANT = {
     // * Education
     {
       importance: 10,
+      routerLink: '/education',
       circleMenuItem: {
-        title: 'Education',
-        description: 'Lorem ipsum dolor sit amet',
+        title: 'Formations',
+        description: 'Mon parcours scolaire',
         size: 250,
         contentOffset: 50,
         weight: 80,

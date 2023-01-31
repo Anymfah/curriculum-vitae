@@ -3382,12 +3382,12 @@
         },
         {
             "name": "EntityQueryModel",
-            "id": "class-EntityQueryModel-007d8cdc875b66cc53b974cc428153e761e4f8f8f4597e4e6f76b37d099c38b71c2a6c5c29b09d2d899e3b31a0c65e30984331f1cc3e5ecd41f8b436ab7eaf65",
+            "id": "class-EntityQueryModel-7ad7d703f127c6a699e1d31adc271d18a155e02f649920dd52875ad2f83370c5f37d7bd9540a5bad62d7475851e7488bdafde9b9708faa2f159311e6259e91df",
             "file": "src/app/models/entity-query.model.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "class",
-            "sourceCode": "import {EntityType} from '../types/entity.type';\r\nimport {OrderByInterface, QueryFilterInterface, QueryInterface} from '../interfaces/query.interface';\r\n\r\nexport class EntityQueryModel<T = EntityType> {\r\n\r\n  /**\r\n   * Collection origin\r\n   */\r\n  private readonly _collectionOrigin: EntityType[] = [];\r\n\r\n  /**\r\n   * Collection to work on\r\n   */\r\n  private _collection: EntityType[] = [];\r\n\r\n  /**\r\n   * Limit entities to a certain number - 0 for all\r\n   */\r\n  private readonly _limitNum?: number;\r\n\r\n  /**\r\n   * Order By Field\r\n   */\r\n  private readonly _orderBy?: OrderByInterface[];\r\n\r\n  /**\r\n   * Search in collection\r\n   */\r\n  private readonly _searchStr?: string;\r\n\r\n  /**\r\n   * Arguments to apply to the query\r\n   */\r\n  private readonly _filters?: QueryFilterInterface[];\r\n\r\n  /**\r\n   * @constructor\r\n   * @param collection Collection to work on\r\n   * @param args Arguments to apply to the query\r\n   */\r\n  public constructor(collection: EntityType[], args: QueryInterface) {\r\n    this._collectionOrigin = collection;\r\n    this._collection = collection;\r\n\r\n    this._limitNum = args.limit;\r\n    this._filters = args.filters;\r\n    this._orderBy = args.orderBy;\r\n    this._searchStr = args.search;\r\n\r\n    this._init();\r\n  }\r\n\r\n  private _init(): void {\r\n    /**\r\n     * Start with filter if fields are provided\r\n     */\r\n    if (this._filters != null && this._filters.length > 0) {\r\n      this._collection = this._filterCollection(this._collection, this._filters);\r\n    }\r\n\r\n    /**\r\n     * Order by if fields are provided\r\n     */\r\n    if (this._orderBy != null && this._orderBy.length > 0) {\r\n      this._collection = this._orderByCollection(this._collection, this._orderBy);\r\n    }\r\n\r\n    /**\r\n     * Search if search string is provided\r\n     */\r\n    if (this._searchStr != null && this._searchStr.length > 0) {\r\n      this._collection = this._search(this._collection, this._searchStr);\r\n    }\r\n\r\n    /**\r\n     * Limit if limit is provided\r\n     */\r\n    if (this._limitNum != null && this._limitNum > 0) {\r\n      this._collection = this._limit(this._collection, this._limitNum);\r\n    }\r\n\r\n  }\r\n\r\n  /**\r\n   * Filter Collection\r\n   * @param collection Collection to filter\r\n   * @param fields Fields to filter by\r\n   */\r\n  private _filterCollection(collection: EntityType[], fields: QueryFilterInterface[]): EntityType[] {\r\n    const conditionORCollection: EntityType[] = collection;\r\n    const conditionANDCollection: EntityType[] = [];\r\n\r\n    fields.forEach((field: QueryFilterInterface) => {\r\n\r\n        if (collection[0]?.hasOwnProperty(field.name)) {\r\n          const filteredCollection: EntityType[] = collection.filter((entity: EntityType) => {\r\n            return entity.filterByField(field);\r\n          });\r\n\r\n          if (field.condition === 'OR') {\r\n            conditionORCollection.push(...filteredCollection);\r\n          } else {\r\n            conditionANDCollection.push(...filteredCollection);\r\n          }\r\n        }\r\n    });\r\n\r\n    return conditionANDCollection.length > 0 ? conditionANDCollection : conditionORCollection;\r\n  }\r\n\r\n  /**\r\n   * Order collection by\r\n   * @param collection Collection to order\r\n   * @param fields Fields to order by\r\n   */\r\n  private _orderByCollection(collection: EntityType[], fields: OrderByInterface[]): EntityType[] {\r\n    fields.forEach((field: OrderByInterface) => {\r\n\r\n      if (collection[0]?.hasOwnProperty(field.name)) {\r\n        collection = collection.sort((a: EntityType, b: EntityType) => {\r\n          const order = field.direction === 'DESC' ? -1 : 1;\r\n          return a.orderByNativeField(field, b) * order;\r\n        });\r\n      }\r\n    });\r\n    return collection;\r\n  }\r\n\r\n  /**\r\n   * Search in collection\r\n   * @param collection Collection to search in\r\n   * @param search Search string\r\n   */\r\n  private _search(collection: EntityType[], search: string): EntityType[]{\r\n    return collection.filter((entity: EntityType) => {\r\n      return entity.search(search);\r\n    });\r\n  }\r\n\r\n  /**\r\n   * Limit entities to\r\n   * @param collection\r\n   * @param limit Number of entities to limit to\r\n   */\r\n  private _limit(collection: EntityType[], limit: number): EntityType[] {\r\n    return collection.slice(0, limit);\r\n  }\r\n\r\n  /**\r\n   * Get Collection\r\n   */\r\n  public getCollection(): EntityType[] {\r\n    return this._collection;\r\n  }\r\n}\r\n",
+            "sourceCode": "import {EntityType} from '../types/entity.type';\r\nimport {OrderByInterface, QueryFilterInterface, QueryInterface} from '../interfaces/query.interface';\r\n\r\nexport class EntityQueryModel<T = EntityType> {\r\n\r\n  /**\r\n   * Collection to work on\r\n   */\r\n  private _collection: EntityType[] = [];\r\n\r\n  /**\r\n   * Limit entities to a certain number - 0 for all\r\n   */\r\n  private readonly _limitNum?: number;\r\n\r\n  /**\r\n   * Order By Field\r\n   */\r\n  private readonly _orderBy?: OrderByInterface[];\r\n\r\n  /**\r\n   * Search in collection\r\n   */\r\n  private readonly _searchStr?: string;\r\n\r\n  /**\r\n   * Arguments to apply to the query\r\n   */\r\n  private readonly _filters?: QueryFilterInterface[];\r\n\r\n  /**\r\n   * @constructor\r\n   * @param collection Collection to work on\r\n   * @param args Arguments to apply to the query\r\n   */\r\n  public constructor(collection: EntityType[], args: QueryInterface) {\r\n    this._collection = collection;\r\n    this._limitNum = args.limit;\r\n    this._filters = args.filters;\r\n    this._orderBy = args.orderBy;\r\n    this._searchStr = args.search;\r\n\r\n    this._init();\r\n  }\r\n\r\n  private _init(): void {\r\n    /**\r\n     * Start with filter if fields are provided\r\n     */\r\n    if (this._filters != null && this._filters.length > 0) {\r\n      this._collection = this._filterCollection(this._collection, this._filters);\r\n    }\r\n\r\n    /**\r\n     * Order by if fields are provided\r\n     */\r\n    if (this._orderBy != null && this._orderBy.length > 0) {\r\n      this._collection = this._orderByCollection(this._collection, this._orderBy);\r\n    }\r\n\r\n    /**\r\n     * Search if search string is provided\r\n     */\r\n    if (this._searchStr != null && this._searchStr.length > 0) {\r\n      this._collection = this._search(this._collection, this._searchStr);\r\n    }\r\n\r\n    /**\r\n     * Limit if limit is provided\r\n     */\r\n    if (this._limitNum != null && this._limitNum > 0) {\r\n      this._collection = this._limit(this._collection, this._limitNum);\r\n    }\r\n\r\n  }\r\n\r\n  /**\r\n   * Filter Collection\r\n   * @param collection Collection to filter\r\n   * @param fields Fields to filter by\r\n   */\r\n  private _filterCollection(collection: EntityType[], fields: QueryFilterInterface[]): EntityType[] {\r\n    const conditionORCollection: EntityType[] = collection;\r\n    const conditionANDCollection: EntityType[] = [];\r\n\r\n    fields.forEach((field: QueryFilterInterface) => {\r\n\r\n        if (collection[0]?.hasOwnProperty(field.name)) {\r\n          const filteredCollection: EntityType[] = collection.filter((entity: EntityType) => {\r\n            return entity.filterByField(field);\r\n          });\r\n\r\n          if (field.condition === 'OR') {\r\n            conditionORCollection.push(...filteredCollection);\r\n          } else {\r\n            conditionANDCollection.push(...filteredCollection);\r\n          }\r\n        }\r\n    });\r\n\r\n    return conditionANDCollection.length > 0 ? conditionANDCollection : conditionORCollection;\r\n  }\r\n\r\n  /**\r\n   * Order collection by\r\n   * @param collection Collection to order\r\n   * @param fields Fields to order by\r\n   */\r\n  private _orderByCollection(collection: EntityType[], fields: OrderByInterface[]): EntityType[] {\r\n    console.log('ORDER BY', fields)\r\n    fields.forEach((field: OrderByInterface) => {\r\n\r\n      if (collection[0]?.hasOwnProperty(field.name)) {\r\n        console.log('ORDER BY FIELD', field.name, field.direction, collection)\r\n        collection = collection.sort((a: EntityType, b: EntityType) => {\r\n          const order = field.direction === 'DESC' ? -1 : 1;\r\n          return a.orderByNativeField(field, b) * order;\r\n        });\r\n      }\r\n    });\r\n    console.log('collection:', collection)\r\n    return collection;\r\n  }\r\n\r\n  /**\r\n   * Search in collection\r\n   * @param collection Collection to search in\r\n   * @param search Search string\r\n   */\r\n  private _search(collection: EntityType[], search: string): EntityType[]{\r\n    return collection.filter((entity: EntityType) => {\r\n      return entity.search(search);\r\n    });\r\n  }\r\n\r\n  /**\r\n   * Limit entities to\r\n   * @param collection\r\n   * @param limit Number of entities to limit to\r\n   */\r\n  private _limit(collection: EntityType[], limit: number): EntityType[] {\r\n    return collection.slice(0, limit);\r\n  }\r\n\r\n  /**\r\n   * Get Collection\r\n   */\r\n  public getCollection(): EntityType[] {\r\n    return this._collection;\r\n  }\r\n}\r\n",
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
@@ -3407,7 +3407,7 @@
                         "deprecationMessage": ""
                     }
                 ],
-                "line": 34,
+                "line": 29,
                 "rawdescription": "\n\n",
                 "modifierKind": [
                     123
@@ -3415,8 +3415,8 @@
                 "jsdoctags": [
                     {
                         "name": {
-                            "pos": 819,
-                            "end": 829,
+                            "pos": 721,
+                            "end": 731,
                             "flags": 4227072,
                             "modifierFlagsCache": 0,
                             "transformFlags": 0,
@@ -3427,8 +3427,8 @@
                         "deprecated": false,
                         "deprecationMessage": "",
                         "tagName": {
-                            "pos": 813,
-                            "end": 818,
+                            "pos": 715,
+                            "end": 720,
                             "flags": 4227072,
                             "modifierFlagsCache": 0,
                             "transformFlags": 0,
@@ -3439,8 +3439,8 @@
                     },
                     {
                         "name": {
-                            "pos": 865,
-                            "end": 869,
+                            "pos": 767,
+                            "end": 771,
                             "flags": 4227072,
                             "modifierFlagsCache": 0,
                             "transformFlags": 0,
@@ -3451,8 +3451,8 @@
                         "deprecated": false,
                         "deprecationMessage": "",
                         "tagName": {
-                            "pos": 859,
-                            "end": 864,
+                            "pos": 761,
+                            "end": 766,
                             "flags": 4227072,
                             "modifierFlagsCache": 0,
                             "transformFlags": 0,
@@ -3472,25 +3472,10 @@
                     "type": "EntityType[]",
                     "optional": false,
                     "description": "<p>Collection to work on</p>\n",
-                    "line": 14,
+                    "line": 9,
                     "rawdescription": "\n\nCollection to work on\n",
                     "modifierKind": [
                         121
-                    ]
-                },
-                {
-                    "name": "_collectionOrigin",
-                    "defaultValue": "[]",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "EntityType[]",
-                    "optional": false,
-                    "description": "<p>Collection origin</p>\n",
-                    "line": 9,
-                    "rawdescription": "\n\nCollection origin\n",
-                    "modifierKind": [
-                        121,
-                        144
                     ]
                 },
                 {
@@ -3500,7 +3485,7 @@
                     "type": "QueryFilterInterface[]",
                     "optional": true,
                     "description": "<p>Arguments to apply to the query</p>\n",
-                    "line": 34,
+                    "line": 29,
                     "rawdescription": "\n\nArguments to apply to the query\n",
                     "modifierKind": [
                         121,
@@ -3514,7 +3499,7 @@
                     "type": "number",
                     "optional": true,
                     "description": "<p>Limit entities to a certain number - 0 for all</p>\n",
-                    "line": 19,
+                    "line": 14,
                     "rawdescription": "\n\nLimit entities to a certain number - 0 for all\n",
                     "modifierKind": [
                         121,
@@ -3528,7 +3513,7 @@
                     "type": "OrderByInterface[]",
                     "optional": true,
                     "description": "<p>Order By Field</p>\n",
-                    "line": 24,
+                    "line": 19,
                     "rawdescription": "\n\nOrder By Field\n",
                     "modifierKind": [
                         121,
@@ -3542,7 +3527,7 @@
                     "type": "string",
                     "optional": true,
                     "description": "<p>Search in collection</p>\n",
-                    "line": 29,
+                    "line": 24,
                     "rawdescription": "\n\nSearch in collection\n",
                     "modifierKind": [
                         121,
@@ -3570,7 +3555,7 @@
                     "optional": false,
                     "returnType": "EntityType[]",
                     "typeParameters": [],
-                    "line": 89,
+                    "line": 82,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nFilter Collection\n",
@@ -3581,8 +3566,8 @@
                     "jsdoctags": [
                         {
                             "name": {
-                                "pos": 2145,
-                                "end": 2155,
+                                "pos": 2003,
+                                "end": 2013,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -3593,8 +3578,8 @@
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "pos": 2139,
-                                "end": 2144,
+                                "pos": 1997,
+                                "end": 2002,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -3605,8 +3590,8 @@
                         },
                         {
                             "name": {
-                                "pos": 2190,
-                                "end": 2196,
+                                "pos": 2048,
+                                "end": 2054,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -3617,8 +3602,8 @@
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "pos": 2184,
-                                "end": 2189,
+                                "pos": 2042,
+                                "end": 2047,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -3635,7 +3620,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 53,
+                    "line": 46,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -3661,7 +3646,7 @@
                     "optional": false,
                     "returnType": "EntityType[]",
                     "typeParameters": [],
-                    "line": 145,
+                    "line": 141,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nLimit entities to\n",
@@ -3672,8 +3657,8 @@
                     "jsdoctags": [
                         {
                             "name": {
-                                "pos": 3991,
-                                "end": 4001,
+                                "pos": 4010,
+                                "end": 4020,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -3684,8 +3669,8 @@
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "pos": 3985,
-                                "end": 3990,
+                                "pos": 4004,
+                                "end": 4009,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -3696,8 +3681,8 @@
                         },
                         {
                             "name": {
-                                "pos": 4015,
-                                "end": 4020,
+                                "pos": 4034,
+                                "end": 4039,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -3708,8 +3693,8 @@
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "pos": 4009,
-                                "end": 4014,
+                                "pos": 4028,
+                                "end": 4033,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -3739,7 +3724,7 @@
                     "optional": false,
                     "returnType": "EntityType[]",
                     "typeParameters": [],
-                    "line": 116,
+                    "line": 109,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nOrder collection by\n",
@@ -3750,8 +3735,8 @@
                     "jsdoctags": [
                         {
                             "name": {
-                                "pos": 3097,
-                                "end": 3107,
+                                "pos": 2955,
+                                "end": 2965,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -3762,8 +3747,8 @@
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "pos": 3091,
-                                "end": 3096,
+                                "pos": 2949,
+                                "end": 2954,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -3774,8 +3759,8 @@
                         },
                         {
                             "name": {
-                                "pos": 3141,
-                                "end": 3147,
+                                "pos": 2999,
+                                "end": 3005,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -3786,8 +3771,8 @@
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "pos": 3135,
-                                "end": 3140,
+                                "pos": 2993,
+                                "end": 2998,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -3817,7 +3802,7 @@
                     "optional": false,
                     "returnType": "EntityType[]",
                     "typeParameters": [],
-                    "line": 134,
+                    "line": 130,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nSearch in collection\n",
@@ -3828,8 +3813,8 @@
                     "jsdoctags": [
                         {
                             "name": {
-                                "pos": 3686,
-                                "end": 3696,
+                                "pos": 3705,
+                                "end": 3715,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -3840,8 +3825,8 @@
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "pos": 3680,
-                                "end": 3685,
+                                "pos": 3699,
+                                "end": 3704,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -3852,8 +3837,8 @@
                         },
                         {
                             "name": {
-                                "pos": 3734,
-                                "end": 3740,
+                                "pos": 3753,
+                                "end": 3759,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -3864,8 +3849,8 @@
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "pos": 3728,
-                                "end": 3733,
+                                "pos": 3747,
+                                "end": 3752,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -3882,7 +3867,7 @@
                     "optional": false,
                     "returnType": "EntityType[]",
                     "typeParameters": [],
-                    "line": 152,
+                    "line": 148,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nGet Collection\n",
@@ -4759,12 +4744,12 @@
         },
         {
             "name": "SkillEntity",
-            "id": "class-SkillEntity-b87523dc394ad3fa78fd8989dae782551e984e2ebf37ff24332c79e482a98efd1e407dc177c634219685b1a4ddab694eaa4d477e36b02e3637127eb6adac732e",
+            "id": "class-SkillEntity-331b81ca4d673e005645fb47441edf96adc2744a5048eaf1de570f2e44caa8e9fc2244e2b662d9e4374f782db9bf5535a2bbaae86a5fde0ffe7662836a82e07a",
             "file": "src/app/models/skill-entity.model.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "class",
-            "sourceCode": "import {AbstractEntity} from './abstract-entity.model';\r\nimport {SkillDataInterface} from '../interfaces/data.interface';\r\nimport {DATA_FIELD, ORDER_FIELD, SKILL_CATEGORY} from '../enums/data.enum';\r\nimport {OrderByInterface, QueryFilterInterface} from '../interfaces/query.interface';\r\nimport {compareValuesUtil} from '../utils/compare-values.util';\r\nimport {EntityType} from '../types/entity.type';\r\n\r\nexport class SkillEntity extends AbstractEntity<SkillDataInterface> {\r\n\r\n\r\n\r\n  /**\r\n   * Skill entity level.\r\n   */\r\n  public level: number = 0;\r\n\r\n  /**\r\n   * Skill entity category.\r\n   */\r\n  public skillCategory: SKILL_CATEGORY[];\r\n\r\n  /**\r\n   * Skill entity experience.\r\n   */\r\n  public experience: number = 0;\r\n\r\n  /**\r\n   * Skill entity favorite.\r\n   */\r\n  public favorite: boolean = false;\r\n\r\n  /**\r\n   * @constructor\r\n   * @param id Skill Entity ID.\r\n   * @param data Data to be used to populate the entity.\r\n   */\r\n  public constructor(id: number, data: SkillDataInterface) {\r\n    super(id, data);\r\n    this.level = data.level ?? 0;\r\n    this.skillCategory = data.category;\r\n    this.experience = data.experience ?? 0;\r\n    this.favorite = data.favorite ?? false;\r\n  }\r\n\r\n  /**\r\n   * @method filterByField Filter the entity.\r\n   * @param filter Filter to be applied.\r\n   */\r\n  public filterByField(filter: QueryFilterInterface): boolean {\r\n    switch (filter.name) {\r\n      case DATA_FIELD.LEVEL:\r\n        if (typeof filter.value === 'number') {\r\n          return compareValuesUtil(this.level, filter.operator ?? '==', filter.value);\r\n        }\r\n        break;\r\n      case DATA_FIELD.EXPERIENCE:\r\n        if (typeof filter.value === 'number') {\r\n          return compareValuesUtil(this.experience, filter.operator ?? '==', filter.value);\r\n        }\r\n        break;\r\n      case DATA_FIELD.FAVORITE:\r\n        if (typeof filter.value === 'boolean') {\r\n          return compareValuesUtil(this.favorite, filter.operator ?? '==', filter.value);\r\n        }\r\n        break;\r\n      case DATA_FIELD.SKILL_CATEGORY:\r\n        if (typeof filter.value === 'string') {\r\n          return compareValuesUtil(this.skillCategory, filter.operator ?? 'includes', filter.value);\r\n        }\r\n        break;\r\n      case DATA_FIELD.HAPPINESS:\r\n        if (typeof filter.value === 'number') {\r\n          return compareValuesUtil(this.happiness, filter.operator ?? '==', filter.value);\r\n        }\r\n    }\r\n    return false;\r\n  }\r\n\r\n  /**\r\n   * @method orderByField Order the entity.\r\n   * @param order Order to be applied.\r\n   * @param compareWith Entity to be compared with.\r\n   */\r\n  public orderByField(order: OrderByInterface, compareWith: EntityType): number {\r\n    switch (order.name) {\r\n      case ORDER_FIELD.LEVEL:\r\n        return this.level;\r\n    }\r\n    return 0;\r\n  }\r\n}\r\n",
+            "sourceCode": "import {AbstractEntity} from './abstract-entity.model';\r\nimport {SkillDataInterface} from '../interfaces/data.interface';\r\nimport {DATA_FIELD, ORDER_FIELD, SKILL_CATEGORY} from '../enums/data.enum';\r\nimport {OrderByInterface, QueryFilterInterface} from '../interfaces/query.interface';\r\nimport {compareValuesUtil} from '../utils/compare-values.util';\r\nimport {EntityType} from '../types/entity.type';\r\n\r\nexport class SkillEntity extends AbstractEntity<SkillDataInterface> {\r\n\r\n\r\n\r\n  /**\r\n   * Skill entity level.\r\n   */\r\n  public level: number = 0;\r\n\r\n  /**\r\n   * Skill entity category.\r\n   */\r\n  public skillCategory: SKILL_CATEGORY[];\r\n\r\n  /**\r\n   * Skill entity experience.\r\n   */\r\n  public experience: number = 0;\r\n\r\n  /**\r\n   * Skill entity favorite.\r\n   */\r\n  public favorite: boolean = false;\r\n\r\n  /**\r\n   * @constructor\r\n   * @param id Skill Entity ID.\r\n   * @param data Data to be used to populate the entity.\r\n   */\r\n  public constructor(id: number, data: SkillDataInterface) {\r\n    super(id, data);\r\n    this.level = data.level ?? 0;\r\n    this.skillCategory = data.category;\r\n    this.experience = data.experience ?? 0;\r\n    this.favorite = data.favorite ?? false;\r\n  }\r\n\r\n  /**\r\n   * @method filterByField Filter the entity.\r\n   * @param filter Filter to be applied.\r\n   */\r\n  public filterByField(filter: QueryFilterInterface): boolean {\r\n    switch (filter.name) {\r\n      case DATA_FIELD.LEVEL:\r\n        if (typeof filter.value === 'number') {\r\n          return compareValuesUtil(this.level, filter.operator ?? '==', filter.value);\r\n        }\r\n        break;\r\n      case DATA_FIELD.EXPERIENCE:\r\n        if (typeof filter.value === 'number') {\r\n          return compareValuesUtil(this.experience, filter.operator ?? '==', filter.value);\r\n        }\r\n        break;\r\n      case DATA_FIELD.FAVORITE:\r\n        if (typeof filter.value === 'boolean') {\r\n          return compareValuesUtil(this.favorite, filter.operator ?? '==', filter.value);\r\n        }\r\n        break;\r\n      case DATA_FIELD.SKILL_CATEGORY:\r\n        if (typeof filter.value === 'string') {\r\n          return compareValuesUtil(this.skillCategory, filter.operator ?? 'includes', filter.value);\r\n        }\r\n        break;\r\n      case DATA_FIELD.HAPPINESS:\r\n        if (typeof filter.value === 'number') {\r\n          return compareValuesUtil(this.happiness, filter.operator ?? '==', filter.value);\r\n        }\r\n    }\r\n    return false;\r\n  }\r\n\r\n  /**\r\n   * @method orderByField Order the entity.\r\n   * @param order Order to be applied.\r\n   * @param compareWith Entity to be compared with.\r\n   */\r\n  public orderByField(order: OrderByInterface, compareWith: EntityType): number {\r\n    switch (order.name) {\r\n      case ORDER_FIELD.LEVEL:\r\n        if (compareWith instanceof SkillEntity) {\r\n          return compareWith.level - this.level;\r\n        } else {\r\n          return 0;\r\n        }\r\n    }\r\n    return 0;\r\n  }\r\n}\r\n",
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
@@ -12881,7 +12866,7 @@
         },
         {
             "name": "PageSkillsComponent",
-            "id": "component-PageSkillsComponent-13b6ce967a00c38c4561c8d63aeb7bb2d8ddc758a9198bcd05d986a00120c231f38a28485af1ca5f1ba3f795d08ec54d6169c2ff9a5bc3ec9846f4ca16bc3f25",
+            "id": "component-PageSkillsComponent-16263ccd7b0b3879b0bf18d897e8a0f091af64e822d345634aa43faf026e6bfbfb510fbeb0e38736898b95b37385babe3bf537686a2ab7ffc5b3906f0c504cb9",
             "file": "src/app/modules/main/components/page-skills/page-skills.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -12901,14 +12886,15 @@
             "outputsClass": [],
             "propertiesClass": [
                 {
-                    "name": "allSkillsList",
-                    "defaultValue": "{\n    valueKey: DATA_FIELD.EXPERIENCE,\n    type: DATA_TYPE.SKILL,\n    query: PRE_MADE_QUERY.ALL_STACKS\n  }",
+                    "name": "allStackList",
+                    "defaultValue": "{\n    valueKey: DATA_FIELD.LEVEL,\n    type: DATA_TYPE.SKILL,\n    query: PRE_MADE_QUERY.ALL_STACKS\n  }",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "object",
                     "optional": false,
-                    "description": "",
-                    "line": 21,
+                    "description": "<p>All stacks to display</p>\n",
+                    "line": 24,
+                    "rawdescription": "\n\nAll stacks to display\n",
                     "modifierKind": [
                         123
                     ]
@@ -12946,6 +12932,20 @@
                         123,
                         144
                     ]
+                },
+                {
+                    "name": "othersList",
+                    "defaultValue": "{\n    valueKey: DATA_FIELD.LEVEL,\n    type: DATA_TYPE.SKILL,\n    query: PRE_MADE_QUERY.OTHERS_SKILLS\n  }",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "object",
+                    "optional": false,
+                    "description": "<p>Others skills to display</p>\n",
+                    "line": 33,
+                    "rawdescription": "\n\nOthers skills to display\n",
+                    "modifierKind": [
+                        123
+                    ]
                 }
             ],
             "methodsClass": [
@@ -12955,7 +12955,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 46,
+                    "line": 58,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nRequest best skills\n",
@@ -12970,7 +12970,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 39,
+                    "line": 51,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\n",
@@ -12998,7 +12998,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import {Component, HostBinding, OnInit} from '@angular/core';\nimport {EntityListService} from '../../../../services/entity-list.service';\nimport {DATA_FIELD, DATA_TYPE} from '../../../../enums/data.enum';\nimport {PRE_MADE_QUERY} from '../../../../enums/premade-query.enum';\nimport {SkillEntity} from '../../../../models/skill-entity.model';\n\n@Component({\n  selector: 'cv-page-skills',\n  templateUrl: './page-skills.component.html',\n  styleUrls: ['./page-skills.component.scss']\n})\nexport class PageSkillsComponent implements OnInit {\n\n  @HostBinding('class.cv-page') public readonly cvPageClass = true;\n\n  /**\n   * Best skills to display\n   */\n  public bestSkills: SkillEntity[] = [];\n\n  public allSkillsList = {\n    valueKey: DATA_FIELD.EXPERIENCE,\n    type: DATA_TYPE.SKILL,\n    query: PRE_MADE_QUERY.ALL_STACKS\n  }\n\n  /**\n   * @constructor\n   * @param _entityListService Entity list service\n   */\n  public constructor(\n    private readonly _entityListService: EntityListService,\n  ) {\n  }\n\n  /**\n   * @inheritDoc\n   */\n  public ngOnInit(): void {\n    this._requestBestSkills()\n  }\n\n  /**\n   * Request best skills\n   */\n  private _requestBestSkills(): void {\n    this.bestSkills = this._entityListService.getPreMadeQuery(\n      DATA_TYPE.SKILL, PRE_MADE_QUERY.STACKS_BEST_FAVORITES\n    ) as SkillEntity[];\n  }\n\n}\n",
+            "sourceCode": "import {Component, HostBinding, OnInit} from '@angular/core';\nimport {EntityListService} from '../../../../services/entity-list.service';\nimport {DATA_FIELD, DATA_TYPE} from '../../../../enums/data.enum';\nimport {PRE_MADE_QUERY} from '../../../../enums/premade-query.enum';\nimport {SkillEntity} from '../../../../models/skill-entity.model';\n\n@Component({\n  selector: 'cv-page-skills',\n  templateUrl: './page-skills.component.html',\n  styleUrls: ['./page-skills.component.scss']\n})\nexport class PageSkillsComponent implements OnInit {\n\n  @HostBinding('class.cv-page') public readonly cvPageClass = true;\n\n  /**\n   * Best skills to display\n   */\n  public bestSkills: SkillEntity[] = [];\n\n  /**\n   * All stacks to display\n   */\n  public allStackList = {\n    valueKey: DATA_FIELD.LEVEL,\n    type: DATA_TYPE.SKILL,\n    query: PRE_MADE_QUERY.ALL_STACKS\n  }\n\n  /**\n   * Others skills to display\n   */\n  public othersList = {\n    valueKey: DATA_FIELD.LEVEL,\n    type: DATA_TYPE.SKILL,\n    query: PRE_MADE_QUERY.OTHERS_SKILLS\n  }\n\n  /**\n   * @constructor\n   * @param _entityListService Entity list service\n   */\n  public constructor(\n    private readonly _entityListService: EntityListService,\n  ) {\n  }\n\n  /**\n   * @inheritDoc\n   */\n  public ngOnInit(): void {\n    this._requestBestSkills()\n  }\n\n  /**\n   * Request best skills\n   */\n  private _requestBestSkills(): void {\n    this.bestSkills = this._entityListService.getPreMadeQuery(\n      DATA_TYPE.SKILL, PRE_MADE_QUERY.STACKS_BEST_FAVORITES\n    ) as SkillEntity[];\n  }\n\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -13020,7 +13020,7 @@
                         "deprecationMessage": ""
                     }
                 ],
-                "line": 25,
+                "line": 37,
                 "rawdescription": "\n\n",
                 "modifierKind": [
                     123
@@ -13028,8 +13028,8 @@
                 "jsdoctags": [
                     {
                         "name": {
-                            "pos": 855,
-                            "end": 873,
+                            "pos": 1058,
+                            "end": 1076,
                             "flags": 4227072,
                             "modifierFlagsCache": 0,
                             "transformFlags": 0,
@@ -13040,8 +13040,8 @@
                         "deprecated": false,
                         "deprecationMessage": "",
                         "tagName": {
-                            "pos": 849,
-                            "end": 854,
+                            "pos": 1052,
+                            "end": 1057,
                             "flags": 4227072,
                             "modifierFlagsCache": 0,
                             "transformFlags": 0,
@@ -13055,7 +13055,7 @@
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<cv-page-wrapper>\n  <div class=\"zone__top zone\">\n    <cv-block [centered]=\"true\"\n              [column]=\"true\"\n              *ngFor=\"let bestSkill of bestSkills; let index = index\"\n              class=\"block flex-column flex-grow flex-center\">\n      <div class=\"block__title h3\">{{bestSkill.name}}</div>\n      <cv-chart-circle [value]=\"bestSkill.level\" [color]=\"bestSkill.color\"\n                       [size]=\"140\"\n                       [animationDelay]=\"index * 100\"\n                       label=\"Niveau\"\n                       ></cv-chart-circle>\n      <div class=\"block__description\">{{bestSkill.subtitle}}</div>\n    </cv-block>\n  </div>\n\n  <div class=\"zone__bottom zone__bottom-left zone flex\">\n    <cv-block cvTitle=\"Liste de toutes mes stacks par niveau\">\n      <cv-list-chart-gauge [entityType]=\"allSkillsList.type\"\n        [queryArgs]=\"allSkillsList.query\" [valueKey]=\"allSkillsList.valueKey\"></cv-list-chart-gauge>\n    </cv-block>\n  </div>\n\n  <div class=\"zone__bottom zone__bottom-right zone flex\">\n    <cv-block cvTitle=\"Liste de toutes mes stacks par niveau\">\n      <cv-list-chart-gauge [entityType]=\"allSkillsList.type\"\n                           [queryArgs]=\"allSkillsList.query\" [valueKey]=\"allSkillsList.valueKey\"></cv-list-chart-gauge>\n    </cv-block>\n  </div>\n</cv-page-wrapper>\n\n"
+            "templateData": "<cv-page-wrapper>\n  <div class=\"zone__top zone\">\n    <cv-block [centered]=\"true\"\n              [column]=\"true\"\n              *ngFor=\"let bestSkill of bestSkills; let index = index\"\n              class=\"block flex-column flex-grow flex-center\">\n      <div class=\"block__title h3\">{{bestSkill.name}}</div>\n      <cv-chart-circle [value]=\"bestSkill.level\" [color]=\"bestSkill.color\"\n                       [size]=\"140\"\n                       [animationDelay]=\"index * 100\"\n                       label=\"Niveau\"\n                       ></cv-chart-circle>\n      <div class=\"block__description\">{{bestSkill.subtitle}}</div>\n    </cv-block>\n  </div>\n\n  <div class=\"zone__bottom zone__bottom-left zone flex\">\n    <cv-block cvTitle=\"Liste de toutes mes stacks par niveau\">\n      <cv-list-chart-gauge [entityType]=\"allStackList.type\"\n                           [queryArgs]=\"allStackList.query\" [valueKey]=\"allStackList.valueKey\"></cv-list-chart-gauge>\n    </cv-block>\n  </div>\n\n  <div class=\"zone__bottom zone__bottom-right zone flex\">\n    <cv-block cvTitle=\"Mes autres compétences pour le développement\">\n      <cv-list-chart-gauge [entityType]=\"othersList.type\"\n                           [queryArgs]=\"othersList.query\" [valueKey]=\"othersList.valueKey\"></cv-list-chart-gauge>\n    </cv-block>\n  </div>\n</cv-page-wrapper>\n\n"
         },
         {
             "name": "PageWrapperComponent",
@@ -15434,7 +15434,7 @@
                 "name": "AllStacks",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/modules/main/components/list/list.stories.ts",
+                "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -15444,7 +15444,7 @@
                 "name": "AllStacks",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
+                "file": "src/app/modules/main/components/list/list.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -15496,7 +15496,7 @@
                 "name": "Best5Stacks",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/modules/main/components/list/list.stories.ts",
+                "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -15506,7 +15506,7 @@
                 "name": "Best5Stacks",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
+                "file": "src/app/modules/main/components/list/list.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -15640,7 +15640,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "SkillDataInterface[]",
-                "defaultValue": "[\r\n  {\r\n    title: SKILL_TITLE.HTML,\r\n    level: 100,\r\n    color: '#E34C26',\r\n    category: [SKILL_CATEGORY.FRONT_END, SKILL_CATEGORY.CODE_LANGUAGE],\r\n    happiness: 70,\r\n    experience: 100,\r\n    icon: 'html',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.CSS,\r\n    level: 100,\r\n    color: '#1572B6',\r\n    category: [\r\n      SKILL_CATEGORY.FRONT_END,\r\n      SKILL_CATEGORY.CODE_LANGUAGE,\r\n      SKILL_CATEGORY.DESIGN,\r\n    ],\r\n    happiness: 80,\r\n    experience: 100,\r\n    icon: 'css',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.SCSS,\r\n    level: 100,\r\n    color: '#CC6699',\r\n    category: [\r\n      SKILL_CATEGORY.FRONT_END,\r\n      SKILL_CATEGORY.CODE_LANGUAGE,\r\n      SKILL_CATEGORY.DESIGN,\r\n    ],\r\n    happiness: 100,\r\n    experience: 100,\r\n    favorite: true,\r\n    icon: 'scss',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.DART_SASS,\r\n    level: 100,\r\n    color: '#CC6699',\r\n    category: [\r\n      SKILL_CATEGORY.FRONT_END,\r\n      SKILL_CATEGORY.CODE_LANGUAGE,\r\n      SKILL_CATEGORY.DESIGN,\r\n    ],\r\n    happiness: 100,\r\n    experience: 100,\r\n    icon: 'scss',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.LESS,\r\n    level: 90,\r\n    color: '#1D365D',\r\n    category: [\r\n      SKILL_CATEGORY.FRONT_END,\r\n      SKILL_CATEGORY.CODE_LANGUAGE,\r\n      SKILL_CATEGORY.DESIGN,\r\n    ],\r\n    happiness: 80,\r\n    experience: 20,\r\n    icon: 'less',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.JAVASCRIPT,\r\n    level: 100,\r\n    color: '#F7DF1E',\r\n    category: [\r\n      SKILL_CATEGORY.FRONT_END,\r\n      SKILL_CATEGORY.BACK_END,\r\n      SKILL_CATEGORY.CODE_LANGUAGE,\r\n    ],\r\n    happiness: 100,\r\n    experience: 100,\r\n    favorite: true,\r\n    icon: 'javascript',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.NODE_JS,\r\n    level: 96,\r\n    color: '#339933',\r\n    category: [SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.CODE_LANGUAGE],\r\n    happiness: 100,\r\n    experience: 92,\r\n    favorite: true,\r\n    icon: 'node-js',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.TYPESCRIPT,\r\n    level: 98,\r\n    color: '#007ACC',\r\n    category: [SKILL_CATEGORY.FRONT_END, SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.CODE_LANGUAGE],\r\n    happiness: 100,\r\n    experience: 80,\r\n    favorite: true,\r\n    icon: 'typescript',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.ANGULAR,\r\n    level: 100,\r\n    color: '#DD0031',\r\n    category: [SKILL_CATEGORY.FRONT_END, SKILL_CATEGORY.FRAMEWORK],\r\n    happiness: 100,\r\n    experience: 92,\r\n    favorite: true,\r\n    icon: 'angular',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.REACT,\r\n    level: 35,\r\n    color: '#61DAFB',\r\n    category: [SKILL_CATEGORY.FRONT_END, SKILL_CATEGORY.LIBRARY],\r\n    happiness: 92,\r\n    experience: 10,\r\n    icon: 'react',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.VUE,\r\n    level: 20,\r\n    color: '#4FC08D',\r\n    category: [SKILL_CATEGORY.FRONT_END, SKILL_CATEGORY.FRAMEWORK],\r\n    happiness: 60,\r\n    experience: 10,\r\n    icon: 'vue',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.SYMFONY,\r\n    level: 60,\r\n    color: '#40ba2f',\r\n    category: [SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.FRAMEWORK],\r\n    happiness: 60,\r\n    experience: 40,\r\n    icon: 'symfony',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.ZEND,\r\n    level: 33,\r\n    color: '#40ba2f',\r\n    category: [SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.FRAMEWORK],\r\n    happiness: 15,\r\n    experience: 40,\r\n    icon: 'zend',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.LARAVEL,\r\n    color: '#FF2D20',\r\n    category: [SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.FRAMEWORK],\r\n    icon: 'laravel',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.PHP,\r\n    level: 96,\r\n    color: '#777BB4',\r\n    category: [SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.CODE_LANGUAGE],\r\n    happiness: 45,\r\n    experience: 100,\r\n    icon: 'php',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.JAVA,\r\n    color: '#007396',\r\n    category: [SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.CODE_LANGUAGE],\r\n    icon: 'java',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.C_SHARP,\r\n    color: '#239120',\r\n    category: [SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.CODE_LANGUAGE],\r\n    icon: 'c-sharp',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.C_PLUS_PLUS,\r\n    color: '#00599C',\r\n    category: [SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.CODE_LANGUAGE],\r\n    icon: 'c++',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.C,\r\n    color: '#A8B9CC',\r\n    category: [SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.CODE_LANGUAGE],\r\n    icon: 'c',\r\n  },\r\n  {\r\n    level: 20,\r\n    title: SKILL_TITLE.PYTHON,\r\n    color: '#3776AB',\r\n    category: [SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.CODE_LANGUAGE],\r\n    happiness: 45,\r\n    experience: 10,\r\n    icon: 'python',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.TWIG,\r\n    level: 94,\r\n    color: '#40ba2f',\r\n    category: [SKILL_CATEGORY.FRONT_END, SKILL_CATEGORY.CODE_LANGUAGE],\r\n    happiness: 90,\r\n    favorite: true,\r\n    icon: 'symfony',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.MONGODB,\r\n    level: 73,\r\n    color: '#47A248',\r\n    category: [SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.DATABASE],\r\n    happiness: 80,\r\n    icon: 'mongodb',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.MYSQL,\r\n    level: 88,\r\n    color: '#4479A1',\r\n    category: [SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.DATABASE],\r\n    happiness: 65,\r\n    icon: 'mysql',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.POSTGRESQL,\r\n    level: 65,\r\n    color: '#336791',\r\n    category: [SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.DATABASE],\r\n    happiness: 75,\r\n    icon: 'postgresql',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.REDIS,\r\n    color: '#DC382D',\r\n    category: [SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.DATABASE],\r\n    icon: 'redis',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.GIT,\r\n    level: 93,\r\n    color: '#F05032',\r\n    category: [SKILL_CATEGORY.DEVOPS, SKILL_CATEGORY.OTHERS],\r\n    happiness: 95,\r\n    experience: 100,\r\n    favorite: true,\r\n    icon: 'git',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.WEBPACK,\r\n    level: 85,\r\n    color: '#8DD6F9',\r\n    category: [SKILL_CATEGORY.DEVOPS],\r\n    happiness: 85,\r\n    experience: 70,\r\n    icon: 'webpack',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.GULP,\r\n    level: 95,\r\n    color: '#CF4647',\r\n    category: [SKILL_CATEGORY.DEVOPS],\r\n    happiness: 80,\r\n    experience: 80,\r\n    icon: 'gulp',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.BOOTSTRAP,\r\n    level: 70,\r\n    color: '#563D7C',\r\n    category: [SKILL_CATEGORY.FRONT_END, SKILL_CATEGORY.FRAMEWORK],\r\n    happiness: 45,\r\n    experience: 30,\r\n    icon: 'bootstrap',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.FOUNDATION,\r\n    level: 92,\r\n    color: '#7768AE',\r\n    category: [SKILL_CATEGORY.FRONT_END, SKILL_CATEGORY.FRAMEWORK],\r\n    happiness: 30,\r\n    experience: 90,\r\n    icon: 'foundation',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.ANGULAR_MATERIAL,\r\n    level: 95,\r\n    color: '#0081CB',\r\n    category: [SKILL_CATEGORY.FRONT_END, SKILL_CATEGORY.FRAMEWORK],\r\n    happiness: 96,\r\n    experience: 80,\r\n    favorite: true,\r\n    icon: 'angular',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.MATERIAL_UI,\r\n    level: 79,\r\n    color: '#0081CB',\r\n    category: [SKILL_CATEGORY.FRONT_END, SKILL_CATEGORY.FRAMEWORK],\r\n    happiness: 70,\r\n    experience: 40,\r\n    icon: 'material-ui',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.BULMA,\r\n    color: '#00D1B2',\r\n    category: [SKILL_CATEGORY.FRONT_END, SKILL_CATEGORY.FRAMEWORK],\r\n    icon: 'bulma',\r\n\r\n  },\r\n  {\r\n    title: SKILL_TITLE.TAILWIND_CSS,\r\n    level: 30,\r\n    color: '#38B2AC',\r\n    category: [SKILL_CATEGORY.FRONT_END, SKILL_CATEGORY.FRAMEWORK],\r\n    happiness: 75,\r\n    experience: 10,\r\n    icon: 'tailwind-css',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.JQUERY,\r\n    level: 100,\r\n    color: '#0769AD',\r\n    category: [SKILL_CATEGORY.FRONT_END, SKILL_CATEGORY.LIBRARY],\r\n    happiness: 68,\r\n    experience: 100,\r\n    icon: 'jquery',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.RXJS,\r\n    level: 80,\r\n    color: '#B7178C',\r\n    category: [SKILL_CATEGORY.FRONT_END, SKILL_CATEGORY.LIBRARY],\r\n    happiness: 100,\r\n    experience: 70,\r\n    icon: 'rxjs',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.NESTJS,\r\n    level: 90,\r\n    color: '#E0234E',\r\n    category: [SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.FRAMEWORK],\r\n    happiness: 90,\r\n    experience: 60,\r\n    icon: 'nestjs',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.EXPRESS,\r\n    level: 80,\r\n    color: '#73b22a',\r\n    category: [SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.FRAMEWORK],\r\n    happiness: 85,\r\n    experience: 40,\r\n    icon: 'node-js',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.JEST,\r\n    level: 50,\r\n    color: '#C21325',\r\n    category: [SKILL_CATEGORY.E2E],\r\n    happiness: 60,\r\n    experience: 5,\r\n    icon: 'jest',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.MOCHA,\r\n    color: '#8D6748',\r\n    category: [SKILL_CATEGORY.E2E],\r\n    icon: 'mocha',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.CYPRUS,\r\n    color: '#17202C',\r\n    category: [SKILL_CATEGORY.E2E],\r\n    icon: 'cyprus',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.JASMINE,\r\n    color: '#8A4182',\r\n    category: [SKILL_CATEGORY.E2E],\r\n    icon: 'jasmine',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.KARMA,\r\n    level: 40,\r\n    color: '#C32F27',\r\n    category: [SKILL_CATEGORY.E2E],\r\n    happiness: 40,\r\n    experience: 5,\r\n    icon: 'karma',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.PROTRACTOR,\r\n    color: '#E1583E',\r\n    category: [SKILL_CATEGORY.E2E],\r\n    icon: 'protractor',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.STORYBOOK,\r\n    level: 94,\r\n    color: '#FF4785',\r\n    category: [SKILL_CATEGORY.FRONT_END, SKILL_CATEGORY.OTHERS],\r\n    happiness: 95,\r\n    experience: 60,\r\n    favorite: true,\r\n    icon: 'storybook',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.DOCKER,\r\n    level: 65,\r\n    color: '#2496ED',\r\n    category: [SKILL_CATEGORY.DEVOPS, SKILL_CATEGORY.OTHERS],\r\n    happiness: 60,\r\n    experience: 60,\r\n    icon: 'docker',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.NGINX,\r\n    level: 30,\r\n    color: '#009639',\r\n    category: [SKILL_CATEGORY.DEVOPS],\r\n    happiness: 45,\r\n    experience: 10,\r\n    icon: 'nginx',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.APACHE,\r\n    level: 10,\r\n    color: '#D22128',\r\n    category: [SKILL_CATEGORY.DEVOPS],\r\n    icon: 'apache',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.AWS,\r\n    level: 20,\r\n    color: '#232F3E',\r\n    category: [SKILL_CATEGORY.DEVOPS],\r\n    happiness: 20,\r\n    experience: 10,\r\n    icon: 'aws',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.GITHUB,\r\n    level: 100,\r\n    color: '#181717',\r\n    category: [SKILL_CATEGORY.OTHERS, SKILL_CATEGORY.TOOL],\r\n    happiness: 95,\r\n    experience: 100,\r\n    icon: 'github',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.GITLAB,\r\n    level: 100,\r\n    color: '#FCA121',\r\n    category: [SKILL_CATEGORY.OTHERS, SKILL_CATEGORY.TOOL],\r\n    happiness: 94,\r\n    experience: 100,\r\n    icon: 'gitlab',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.JENKINS,\r\n    level: 60,\r\n    color: '#D24939',\r\n    category: [SKILL_CATEGORY.DEVOPS, SKILL_CATEGORY.TOOL],\r\n    happiness: 50,\r\n    experience: 80,\r\n    icon: 'jenkins',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.SONARQUBE,\r\n    level: 35,\r\n    color: '#4E9BCD',\r\n    category: [SKILL_CATEGORY.DEVOPS, SKILL_CATEGORY.TOOL],\r\n    happiness: 50,\r\n    experience: 40,\r\n    icon: 'sonarqube',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.BITBUCKET,\r\n    color: '#205081',\r\n    category: [SKILL_CATEGORY.OTHERS, SKILL_CATEGORY.TOOL],\r\n    icon: 'bitbucket',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.JIRA,\r\n    color: '#0052CC',\r\n    category: [SKILL_CATEGORY.OTHERS, SKILL_CATEGORY.TOOL],\r\n    icon: 'jira',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.CONFLUENCE,\r\n    color: '#172B4D',\r\n    category: [SKILL_CATEGORY.OTHERS, SKILL_CATEGORY.TOOL],\r\n    icon: 'confluence',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.POSTMAN,\r\n    level: 85,\r\n    color: '#FF6C37',\r\n    category: [SKILL_CATEGORY.OTHERS, SKILL_CATEGORY.TOOL],\r\n    happiness: 90,\r\n    experience: 80,\r\n    icon: 'postman',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.BASH,\r\n    level: 20,\r\n    color: '#4EAA25',\r\n    category: [SKILL_CATEGORY.DEVOPS],\r\n    icon: 'bash',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.LINUX,\r\n    level: 80,\r\n    color: '#FCC624',\r\n    category: [SKILL_CATEGORY.OS],\r\n    happiness: 60,\r\n    experience: 30,\r\n    icon: 'linux',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.WINDOWS,\r\n    level: 100,\r\n    color: '#0078D6',\r\n    category: [SKILL_CATEGORY.OS],\r\n    happiness: 90,\r\n    experience: 100,\r\n    icon: 'windows',\r\n  },\r\n\r\n  {\r\n    title: SKILL_TITLE.MAC_OS,\r\n    level: 90,\r\n    color: '#999999',\r\n    category: [SKILL_CATEGORY.OS],\r\n    happiness: 95,\r\n    experience: 90,\r\n    favorite: true,\r\n    icon: 'mac-os',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.FLASH,\r\n    level: 85,\r\n    color: '#FF0000',\r\n    category: [SKILL_CATEGORY.APPLICATION],\r\n    happiness: 65,\r\n    experience: 70,\r\n    icon: 'flash',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.TOON_BOOM_HARMONY,\r\n    level: 90,\r\n    color: '#bc5e66',\r\n    category: [SKILL_CATEGORY.APPLICATION],\r\n    happiness: 75,\r\n    experience: 80,\r\n    icon: 'toon-boom-harmony',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.MAYA3D,\r\n    level: 70,\r\n    color: '#0696D7',\r\n    category: [SKILL_CATEGORY.APPLICATION],\r\n    happiness: 65,\r\n    experience: 70,\r\n    icon: 'maya3d',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.BLENDER,\r\n    level: 50,\r\n    color: '#F5792A',\r\n    category: [SKILL_CATEGORY.APPLICATION],\r\n    happiness: 40,\r\n    experience: 20,\r\n    icon: 'blender',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.PHOTOSHOP,\r\n    level: 100,\r\n    color: '#31A8FF',\r\n    category: [\r\n      SKILL_CATEGORY.APPLICATION,\r\n      SKILL_CATEGORY.DESIGN\r\n    ],\r\n    happiness: 85,\r\n    experience: 100,\r\n    icon: 'photoshop',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.ILLUSTRATOR,\r\n    level: 90,\r\n    color: '#FF9A00',\r\n    category: [\r\n      SKILL_CATEGORY.APPLICATION,\r\n      SKILL_CATEGORY.DESIGN\r\n    ],\r\n    happiness: 80,\r\n    experience: 90,\r\n    icon: 'illustrator',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.FIGMA,\r\n    color: '#F24E1E',\r\n    category: [\r\n      SKILL_CATEGORY.APPLICATION,\r\n      SKILL_CATEGORY.DESIGN\r\n    ],\r\n    icon: 'figma',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.XD,\r\n    color: '#FF61F6',\r\n    category: [\r\n      SKILL_CATEGORY.APPLICATION,\r\n      SKILL_CATEGORY.DESIGN\r\n    ],\r\n    icon: 'xd',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.PREMIERE_PRO,\r\n    level: 100,\r\n    color: '#100d6a',\r\n    category: [\r\n      SKILL_CATEGORY.APPLICATION,\r\n      SKILL_CATEGORY.DESIGN\r\n    ],\r\n    happiness: 85,\r\n    experience: 80,\r\n    icon: 'premiere-pro',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.AFTER_EFFECTS,\r\n    level: 90,\r\n    color: '#100d6a',\r\n    category: [\r\n      SKILL_CATEGORY.APPLICATION,\r\n      SKILL_CATEGORY.DESIGN\r\n    ],\r\n    happiness: 85,\r\n    experience: 80,\r\n    icon: 'after-effects',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.INDESIGN,\r\n    level: 90,\r\n    color: '#820821',\r\n    category: [\r\n      SKILL_CATEGORY.APPLICATION,\r\n      SKILL_CATEGORY.DESIGN\r\n    ],\r\n    happiness: 75,\r\n    experience: 80,\r\n    icon: 'indesign',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.CUBASE,\r\n    level: 100,\r\n    color: '#970d0d',\r\n    category: [\r\n      SKILL_CATEGORY.APPLICATION,\r\n      SKILL_CATEGORY.MUSIC\r\n    ],\r\n    happiness: 90,\r\n    experience: 80,\r\n    icon: 'cubase',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.REAPER,\r\n    level: 80,\r\n    color: '#19da8a',\r\n    category: [\r\n      SKILL_CATEGORY.APPLICATION,\r\n      SKILL_CATEGORY.MUSIC\r\n    ],\r\n    happiness: 70,\r\n    experience: 60,\r\n    icon: 'mix',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.PRO_TOOLS,\r\n    level: 70,\r\n    color: '#6018bc',\r\n    category: [\r\n      SKILL_CATEGORY.APPLICATION,\r\n      SKILL_CATEGORY.MUSIC\r\n    ],\r\n    happiness: 60,\r\n    experience: 40,\r\n    icon: 'pro-tools',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.ABLETON_LIVE,\r\n    level: 65,\r\n    color: '#000000',\r\n    category: [\r\n      SKILL_CATEGORY.APPLICATION,\r\n      SKILL_CATEGORY.MUSIC\r\n    ],\r\n    happiness: 70,\r\n    experience: 80,\r\n    icon: 'ableton-live',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.WORDPRESS,\r\n    level: 100,\r\n    color: '#21759B',\r\n    category: [SKILL_CATEGORY.CMS],\r\n    happiness: 92,\r\n    experience: 100,\r\n    favorite: true,\r\n    icon: 'wordpress',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.JOOMLA,\r\n    level: 45,\r\n    color: '#5091CD',\r\n    category: [SKILL_CATEGORY.CMS],\r\n    happiness: 50,\r\n    experience: 10,\r\n    icon: 'joomla',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.DRUPAL,\r\n    level: 80,\r\n    color: '#0C76AB',\r\n    category: [SKILL_CATEGORY.CMS],\r\n    happiness: 30,\r\n    experience: 20,\r\n    icon: 'drupal',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.MAGENTO,\r\n    color: '#F26322',\r\n    category: [SKILL_CATEGORY.CMS],\r\n    icon: 'magento',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.SHOPIFY,\r\n    color: '#96BF48',\r\n    category: [SKILL_CATEGORY.CMS],\r\n    icon: 'shopify',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.WOOCOMMERCE,\r\n    level: 100,\r\n    color: '#96588A',\r\n    category: [SKILL_CATEGORY.CMS],\r\n    happiness: 90,\r\n    experience: 100,\r\n    icon: 'woocommerce',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.PRESTASHOP,\r\n    level: 25,\r\n    color: '#F05A22',\r\n    category: [SKILL_CATEGORY.CMS],\r\n    icon: 'prestashop',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.OPEN_CART,\r\n    color: '#E67E22',\r\n    category: [SKILL_CATEGORY.CMS],\r\n    icon: 'open-cart',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.WEBSTORM,\r\n    level: 100,\r\n    color: '#58e6cc',\r\n    category: [SKILL_CATEGORY.IDE],\r\n    happiness: 94,\r\n    experience: 85,\r\n    favorite: true,\r\n    icon: 'webstorm',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.VISUAL_STUDIO_CODE,\r\n    level: 100,\r\n    color: '#007ACC',\r\n    category: [SKILL_CATEGORY.IDE],\r\n    happiness: 80,\r\n    experience: 95,\r\n    icon: 'visual-studio-code',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.SUBLIME_TEXT,\r\n    level: 100,\r\n    color: '#FF9800',\r\n    category: [SKILL_CATEGORY.IDE],\r\n    happiness: 60,\r\n    experience: 95,\r\n    icon: 'sublime-text',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.ATOM,\r\n    level: 70,\r\n    color: '#66595C',\r\n    category: [SKILL_CATEGORY.IDE],\r\n    happiness: 50,\r\n    experience: 20,\r\n    icon: 'atom',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.BRACKETS,\r\n    level: 100,\r\n    color: '#F27405',\r\n    category: [SKILL_CATEGORY.IDE],\r\n    happiness: 50,\r\n    experience: 100,\r\n    icon: 'brackets.svg',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.PHP_STORM,\r\n    level: 100,\r\n    color: '#9b09e5',\r\n    category: [SKILL_CATEGORY.IDE],\r\n    happiness: 90,\r\n    experience: 80,\r\n    icon: 'php-storm',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.XCODE,\r\n    level: 60,\r\n    color: '#1575F9',\r\n    category: [SKILL_CATEGORY.IDE],\r\n    happiness: 80,\r\n    experience: 30,\r\n    icon: 'xcode',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.TRELLO,\r\n    level: 90,\r\n    color: '#0079BF',\r\n    category: [SKILL_CATEGORY.OTHERS, SKILL_CATEGORY.TOOL],\r\n    happiness: 70,\r\n    experience: 100,\r\n    icon: 'trello'\r\n  },\r\n  {\r\n    title: SKILL_TITLE.CLICK_UP,\r\n    level: 100,\r\n    color: '#7AC943',\r\n    category: [SKILL_CATEGORY.OTHERS, SKILL_CATEGORY.TOOL],\r\n    happiness: 85,\r\n    experience: 100,\r\n    icon: 'click-up'\r\n  },\r\n  {\r\n    title: SKILL_TITLE.WRIKE,\r\n    level: 95,\r\n    color: '#00AEEF',\r\n    category: [SKILL_CATEGORY.OTHERS, SKILL_CATEGORY.TOOL],\r\n    happiness: 60,\r\n    experience: 80,\r\n    icon: 'wrike'\r\n  },\r\n  {\r\n    title: SKILL_TITLE.SLACK,\r\n    level: 70,\r\n    color: '#4A154B',\r\n    category: [SKILL_CATEGORY.OTHERS, SKILL_CATEGORY.TOOL],\r\n    happiness: 70,\r\n    experience: 80,\r\n    icon: 'slack'\r\n  },\r\n  {\r\n    title: SKILL_TITLE.DISCORD,\r\n    level: 100,\r\n    color: '#7289DA',\r\n    category: [SKILL_CATEGORY.OTHERS, SKILL_CATEGORY.TOOL],\r\n    happiness: 95,\r\n    experience: 100,\r\n    icon: 'discord'\r\n  },\r\n  {\r\n    title: SKILL_TITLE.TECHNICAL_ENGLISH,\r\n    level: 100,\r\n    color: '#F5F5F5',\r\n    category: [SKILL_CATEGORY.OTHERS],\r\n    happiness: 95,\r\n    experience: 100,\r\n    icon: 'english'\r\n  },\r\n  {\r\n    title: SKILL_TITLE.FRENCH,\r\n    level: 100,\r\n    color: '#F5F5F5',\r\n    category: [SKILL_CATEGORY.OTHERS],\r\n    happiness: 95,\r\n    experience: 100,\r\n    icon: 'french'\r\n  },\r\n  {\r\n    title: SKILL_TITLE.AGILE,\r\n    level: 80,\r\n    color: '#F5F5F5',\r\n    category: [SKILL_CATEGORY.OTHERS],\r\n    happiness: 95,\r\n    experience: 75,\r\n    icon: 'agile'\r\n  },\r\n  {\r\n    title: SKILL_TITLE.MASTERING,\r\n    level: 85,\r\n    color: '#e84910',\r\n    category: [SKILL_CATEGORY.MUSIC],\r\n    happiness: 95,\r\n    experience: 70,\r\n    icon: 'mao',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.MIXING,\r\n    level: 90,\r\n    color: '#e89c10',\r\n    category: [SKILL_CATEGORY.MUSIC],\r\n    happiness: 95,\r\n    experience: 80,\r\n    icon: 'mao',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.RECORDING,\r\n    level: 95,\r\n    color: '#e8e310',\r\n    category: [SKILL_CATEGORY.MUSIC],\r\n    happiness: 95,\r\n    experience: 80,\r\n    icon: 'recording',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.MUSIC_THEORY,\r\n    level: 100,\r\n    color: '#10e8e3',\r\n    category: [SKILL_CATEGORY.MUSIC],\r\n    happiness: 95,\r\n    experience: 100,\r\n    icon: 'composition',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.MAO,\r\n    level: 80,\r\n    color: '#e81010',\r\n    category: [SKILL_CATEGORY.MUSIC],\r\n    happiness: 95,\r\n    experience: 70,\r\n    icon: 'mao',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.COMPOSITION,\r\n    level: 85,\r\n    color: '#10e8e3',\r\n    category: [SKILL_CATEGORY.MUSIC],\r\n    happiness: 90,\r\n    experience: 70,\r\n    icon: 'composition',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.VIOLIN,\r\n    level: 95,\r\n    color: '#e8e310',\r\n    category: [SKILL_CATEGORY.MUSIC],\r\n    happiness: 95,\r\n    experience: 100,\r\n    icon: 'violin',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.PIANO,\r\n    level: 40,\r\n    color: '#e8e310',\r\n    category: [SKILL_CATEGORY.MUSIC],\r\n    happiness: 80,\r\n    experience: 60,\r\n    icon: 'piano',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.GUITAR,\r\n    level: 30,\r\n    color: '#e8e310',\r\n    category: [SKILL_CATEGORY.MUSIC],\r\n    happiness: 70,\r\n    experience: 20,\r\n    icon: 'guitar',\r\n  }\r\n]",
+                "defaultValue": "[\r\n  {\r\n    title: SKILL_TITLE.HTML,\r\n    level: 100,\r\n    color: '#E34C26',\r\n    category: [SKILL_CATEGORY.FRONT_END, SKILL_CATEGORY.CODE_LANGUAGE, SKILL_CATEGORY.STACK],\r\n    happiness: 70,\r\n    experience: 100,\r\n    icon: 'html',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.CSS,\r\n    level: 100,\r\n    color: '#1572B6',\r\n    category: [\r\n      SKILL_CATEGORY.FRONT_END,\r\n      SKILL_CATEGORY.CODE_LANGUAGE,\r\n      SKILL_CATEGORY.DESIGN,\r\n      SKILL_CATEGORY.STACK\r\n    ],\r\n    happiness: 80,\r\n    experience: 100,\r\n    icon: 'css',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.SCSS,\r\n    level: 100,\r\n    color: '#CC6699',\r\n    category: [\r\n      SKILL_CATEGORY.FRONT_END,\r\n      SKILL_CATEGORY.CODE_LANGUAGE,\r\n      SKILL_CATEGORY.DESIGN,\r\n      SKILL_CATEGORY.STACK\r\n    ],\r\n    happiness: 100,\r\n    experience: 100,\r\n    favorite: true,\r\n    icon: 'scss',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.DART_SASS,\r\n    level: 100,\r\n    color: '#CC6699',\r\n    category: [\r\n      SKILL_CATEGORY.FRONT_END,\r\n      SKILL_CATEGORY.CODE_LANGUAGE,\r\n      SKILL_CATEGORY.DESIGN,\r\n      SKILL_CATEGORY.STACK\r\n    ],\r\n    happiness: 100,\r\n    experience: 100,\r\n    icon: 'scss',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.LESS,\r\n    level: 90,\r\n    color: '#1D365D',\r\n    category: [\r\n      SKILL_CATEGORY.FRONT_END,\r\n      SKILL_CATEGORY.CODE_LANGUAGE,\r\n      SKILL_CATEGORY.DESIGN,\r\n      SKILL_CATEGORY.STACK\r\n    ],\r\n    happiness: 80,\r\n    experience: 20,\r\n    icon: 'less',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.JAVASCRIPT,\r\n    level: 100,\r\n    color: '#F7DF1E',\r\n    category: [\r\n      SKILL_CATEGORY.FRONT_END,\r\n      SKILL_CATEGORY.BACK_END,\r\n      SKILL_CATEGORY.CODE_LANGUAGE,\r\n      SKILL_CATEGORY.STACK\r\n    ],\r\n    happiness: 100,\r\n    experience: 100,\r\n    favorite: true,\r\n    icon: 'javascript',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.NODE_JS,\r\n    level: 96,\r\n    color: '#339933',\r\n    category: [SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.CODE_LANGUAGE, SKILL_CATEGORY.STACK],\r\n    happiness: 100,\r\n    experience: 92,\r\n    favorite: true,\r\n    icon: 'node-js',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.TYPESCRIPT,\r\n    level: 98,\r\n    color: '#007ACC',\r\n    category: [SKILL_CATEGORY.FRONT_END, SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.CODE_LANGUAGE, SKILL_CATEGORY.STACK],\r\n    happiness: 100,\r\n    experience: 80,\r\n    favorite: true,\r\n    icon: 'typescript',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.ANGULAR,\r\n    level: 100,\r\n    color: '#DD0031',\r\n    category: [SKILL_CATEGORY.FRONT_END, SKILL_CATEGORY.FRAMEWORK, SKILL_CATEGORY.STACK],\r\n    happiness: 100,\r\n    experience: 92,\r\n    favorite: true,\r\n    icon: 'angular',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.REACT,\r\n    level: 35,\r\n    color: '#61DAFB',\r\n    category: [SKILL_CATEGORY.FRONT_END, SKILL_CATEGORY.LIBRARY, SKILL_CATEGORY.STACK],\r\n    happiness: 92,\r\n    experience: 10,\r\n    icon: 'react',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.VUE,\r\n    level: 20,\r\n    color: '#4FC08D',\r\n    category: [SKILL_CATEGORY.FRONT_END, SKILL_CATEGORY.FRAMEWORK, SKILL_CATEGORY.STACK],\r\n    happiness: 60,\r\n    experience: 10,\r\n    icon: 'vue',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.SYMFONY,\r\n    level: 60,\r\n    color: '#40ba2f',\r\n    category: [SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.FRAMEWORK, SKILL_CATEGORY.STACK],\r\n    happiness: 60,\r\n    experience: 40,\r\n    icon: 'symfony',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.ZEND,\r\n    level: 33,\r\n    color: '#40ba2f',\r\n    category: [SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.FRAMEWORK, SKILL_CATEGORY.STACK],\r\n    happiness: 15,\r\n    experience: 40,\r\n    icon: 'zend',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.LARAVEL,\r\n    color: '#FF2D20',\r\n    category: [SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.FRAMEWORK, SKILL_CATEGORY.STACK],\r\n    icon: 'laravel',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.PHP,\r\n    level: 96,\r\n    color: '#777BB4',\r\n    category: [SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.CODE_LANGUAGE, SKILL_CATEGORY.STACK],\r\n    happiness: 45,\r\n    experience: 100,\r\n    icon: 'php',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.JAVA,\r\n    color: '#007396',\r\n    category: [SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.CODE_LANGUAGE, SKILL_CATEGORY.STACK],\r\n    icon: 'java',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.C_SHARP,\r\n    color: '#239120',\r\n    category: [SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.CODE_LANGUAGE, SKILL_CATEGORY.STACK],\r\n    icon: 'c-sharp',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.C_PLUS_PLUS,\r\n    color: '#00599C',\r\n    category: [SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.CODE_LANGUAGE, SKILL_CATEGORY.STACK],\r\n    icon: 'c++',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.C,\r\n    color: '#A8B9CC',\r\n    category: [SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.CODE_LANGUAGE, SKILL_CATEGORY.STACK],\r\n    icon: 'c',\r\n  },\r\n  {\r\n    level: 20,\r\n    title: SKILL_TITLE.PYTHON,\r\n    color: '#3776AB',\r\n    category: [SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.CODE_LANGUAGE, SKILL_CATEGORY.STACK],\r\n    happiness: 45,\r\n    experience: 10,\r\n    icon: 'python',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.TWIG,\r\n    level: 94,\r\n    color: '#40ba2f',\r\n    category: [SKILL_CATEGORY.FRONT_END, SKILL_CATEGORY.CODE_LANGUAGE, SKILL_CATEGORY.STACK],\r\n    happiness: 90,\r\n    favorite: true,\r\n    icon: 'symfony',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.MONGODB,\r\n    level: 73,\r\n    color: '#47A248',\r\n    category: [SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.DATABASE,SKILL_CATEGORY.STACK],\r\n    happiness: 80,\r\n    icon: 'mongodb',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.MYSQL,\r\n    level: 88,\r\n    color: '#4479A1',\r\n    category: [SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.DATABASE, SKILL_CATEGORY.STACK],\r\n    happiness: 65,\r\n    icon: 'mysql',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.POSTGRESQL,\r\n    level: 65,\r\n    color: '#336791',\r\n    category: [SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.DATABASE, SKILL_CATEGORY.STACK],\r\n    happiness: 75,\r\n    icon: 'postgresql',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.REDIS,\r\n    color: '#DC382D',\r\n    category: [SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.DATABASE, SKILL_CATEGORY.STACK],\r\n    icon: 'redis',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.GIT,\r\n    level: 93,\r\n    color: '#F05032',\r\n    category: [SKILL_CATEGORY.DEVOPS, SKILL_CATEGORY.OTHERS],\r\n    happiness: 95,\r\n    experience: 100,\r\n    favorite: true,\r\n    icon: 'git',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.WEBPACK,\r\n    level: 85,\r\n    color: '#8DD6F9',\r\n    category: [SKILL_CATEGORY.DEVOPS],\r\n    happiness: 85,\r\n    experience: 70,\r\n    icon: 'webpack',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.GULP,\r\n    level: 95,\r\n    color: '#CF4647',\r\n    category: [SKILL_CATEGORY.DEVOPS],\r\n    happiness: 80,\r\n    experience: 80,\r\n    icon: 'gulp',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.BOOTSTRAP,\r\n    level: 70,\r\n    color: '#563D7C',\r\n    category: [SKILL_CATEGORY.FRONT_END, SKILL_CATEGORY.FRAMEWORK, SKILL_CATEGORY.STACK],\r\n    happiness: 45,\r\n    experience: 30,\r\n    icon: 'bootstrap',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.FOUNDATION,\r\n    level: 92,\r\n    color: '#7768AE',\r\n    category: [SKILL_CATEGORY.FRONT_END, SKILL_CATEGORY.FRAMEWORK, SKILL_CATEGORY.STACK],\r\n    happiness: 30,\r\n    experience: 90,\r\n    icon: 'foundation',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.ANGULAR_MATERIAL,\r\n    level: 95,\r\n    color: '#0081CB',\r\n    category: [SKILL_CATEGORY.FRONT_END, SKILL_CATEGORY.FRAMEWORK, SKILL_CATEGORY.STACK],\r\n    happiness: 96,\r\n    experience: 80,\r\n    favorite: true,\r\n    icon: 'angular',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.MATERIAL_UI,\r\n    level: 79,\r\n    color: '#0081CB',\r\n    category: [SKILL_CATEGORY.FRONT_END, SKILL_CATEGORY.FRAMEWORK, SKILL_CATEGORY.STACK],\r\n    happiness: 70,\r\n    experience: 40,\r\n    icon: 'material-ui',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.BULMA,\r\n    color: '#00D1B2',\r\n    category: [SKILL_CATEGORY.FRONT_END, SKILL_CATEGORY.FRAMEWORK, SKILL_CATEGORY.STACK],\r\n    icon: 'bulma',\r\n\r\n  },\r\n  {\r\n    title: SKILL_TITLE.TAILWIND_CSS,\r\n    level: 30,\r\n    color: '#38B2AC',\r\n    category: [SKILL_CATEGORY.FRONT_END, SKILL_CATEGORY.FRAMEWORK, SKILL_CATEGORY.STACK],\r\n    happiness: 75,\r\n    experience: 10,\r\n    icon: 'tailwind-css',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.JQUERY,\r\n    level: 100,\r\n    color: '#0769AD',\r\n    category: [SKILL_CATEGORY.FRONT_END, SKILL_CATEGORY.LIBRARY, SKILL_CATEGORY.STACK],\r\n    happiness: 68,\r\n    experience: 100,\r\n    icon: 'jquery',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.RXJS,\r\n    level: 80,\r\n    color: '#B7178C',\r\n    category: [SKILL_CATEGORY.FRONT_END, SKILL_CATEGORY.LIBRARY, SKILL_CATEGORY.STACK],\r\n    happiness: 100,\r\n    experience: 70,\r\n    icon: 'rxjs',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.NESTJS,\r\n    level: 90,\r\n    color: '#E0234E',\r\n    category: [SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.FRAMEWORK, SKILL_CATEGORY.STACK],\r\n    happiness: 90,\r\n    experience: 60,\r\n    icon: 'nestjs',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.EXPRESS,\r\n    level: 80,\r\n    color: '#73b22a',\r\n    category: [SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.FRAMEWORK, SKILL_CATEGORY.STACK],\r\n    happiness: 85,\r\n    experience: 40,\r\n    icon: 'node-js',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.JEST,\r\n    level: 50,\r\n    color: '#C21325',\r\n    category: [SKILL_CATEGORY.E2E],\r\n    happiness: 60,\r\n    experience: 5,\r\n    icon: 'jest',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.MOCHA,\r\n    color: '#8D6748',\r\n    category: [SKILL_CATEGORY.E2E],\r\n    icon: 'mocha',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.CYPRUS,\r\n    color: '#17202C',\r\n    category: [SKILL_CATEGORY.E2E],\r\n    icon: 'cyprus',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.JASMINE,\r\n    color: '#8A4182',\r\n    category: [SKILL_CATEGORY.E2E],\r\n    icon: 'jasmine',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.KARMA,\r\n    level: 40,\r\n    color: '#C32F27',\r\n    category: [SKILL_CATEGORY.E2E],\r\n    happiness: 40,\r\n    experience: 5,\r\n    icon: 'karma',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.PROTRACTOR,\r\n    color: '#E1583E',\r\n    category: [SKILL_CATEGORY.E2E],\r\n    icon: 'protractor',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.STORYBOOK,\r\n    level: 94,\r\n    color: '#FF4785',\r\n    category: [SKILL_CATEGORY.FRONT_END, SKILL_CATEGORY.OTHERS],\r\n    happiness: 95,\r\n    experience: 60,\r\n    favorite: true,\r\n    icon: 'storybook',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.DOCKER,\r\n    level: 65,\r\n    color: '#2496ED',\r\n    category: [SKILL_CATEGORY.DEVOPS, SKILL_CATEGORY.OTHERS],\r\n    happiness: 60,\r\n    experience: 60,\r\n    icon: 'docker',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.NGINX,\r\n    level: 30,\r\n    color: '#009639',\r\n    category: [SKILL_CATEGORY.DEVOPS],\r\n    happiness: 45,\r\n    experience: 10,\r\n    icon: 'nginx',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.APACHE,\r\n    level: 10,\r\n    color: '#D22128',\r\n    category: [SKILL_CATEGORY.DEVOPS],\r\n    icon: 'apache',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.AWS,\r\n    level: 20,\r\n    color: '#232F3E',\r\n    category: [SKILL_CATEGORY.DEVOPS],\r\n    happiness: 20,\r\n    experience: 10,\r\n    icon: 'aws',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.GITHUB,\r\n    level: 100,\r\n    color: '#181717',\r\n    category: [SKILL_CATEGORY.OTHERS, SKILL_CATEGORY.TOOL],\r\n    happiness: 95,\r\n    experience: 100,\r\n    icon: 'github',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.GITLAB,\r\n    level: 100,\r\n    color: '#FCA121',\r\n    category: [SKILL_CATEGORY.OTHERS, SKILL_CATEGORY.TOOL],\r\n    happiness: 94,\r\n    experience: 100,\r\n    icon: 'gitlab',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.JENKINS,\r\n    level: 60,\r\n    color: '#D24939',\r\n    category: [SKILL_CATEGORY.DEVOPS, SKILL_CATEGORY.TOOL],\r\n    happiness: 50,\r\n    experience: 80,\r\n    icon: 'jenkins',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.SONARQUBE,\r\n    level: 35,\r\n    color: '#4E9BCD',\r\n    category: [SKILL_CATEGORY.DEVOPS, SKILL_CATEGORY.TOOL],\r\n    happiness: 50,\r\n    experience: 40,\r\n    icon: 'sonarqube',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.BITBUCKET,\r\n    color: '#205081',\r\n    category: [SKILL_CATEGORY.OTHERS, SKILL_CATEGORY.TOOL],\r\n    icon: 'bitbucket',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.JIRA,\r\n    color: '#0052CC',\r\n    category: [SKILL_CATEGORY.OTHERS, SKILL_CATEGORY.TOOL],\r\n    icon: 'jira',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.CONFLUENCE,\r\n    color: '#172B4D',\r\n    category: [SKILL_CATEGORY.OTHERS, SKILL_CATEGORY.TOOL],\r\n    icon: 'confluence',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.POSTMAN,\r\n    level: 85,\r\n    color: '#FF6C37',\r\n    category: [SKILL_CATEGORY.OTHERS, SKILL_CATEGORY.TOOL],\r\n    happiness: 90,\r\n    experience: 80,\r\n    icon: 'postman',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.BASH,\r\n    level: 20,\r\n    color: '#4EAA25',\r\n    category: [SKILL_CATEGORY.DEVOPS],\r\n    icon: 'bash',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.LINUX,\r\n    level: 80,\r\n    color: '#FCC624',\r\n    category: [SKILL_CATEGORY.OS],\r\n    happiness: 60,\r\n    experience: 30,\r\n    icon: 'linux',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.WINDOWS,\r\n    level: 100,\r\n    color: '#0078D6',\r\n    category: [SKILL_CATEGORY.OS],\r\n    happiness: 90,\r\n    experience: 100,\r\n    icon: 'windows',\r\n  },\r\n\r\n  {\r\n    title: SKILL_TITLE.MAC_OS,\r\n    level: 90,\r\n    color: '#999999',\r\n    category: [SKILL_CATEGORY.OS],\r\n    happiness: 95,\r\n    experience: 90,\r\n    favorite: true,\r\n    icon: 'mac-os',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.FLASH,\r\n    level: 85,\r\n    color: '#FF0000',\r\n    category: [SKILL_CATEGORY.APPLICATION],\r\n    happiness: 65,\r\n    experience: 70,\r\n    icon: 'flash',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.TOON_BOOM_HARMONY,\r\n    level: 90,\r\n    color: '#bc5e66',\r\n    category: [SKILL_CATEGORY.APPLICATION],\r\n    happiness: 75,\r\n    experience: 80,\r\n    icon: 'toon-boom-harmony',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.MAYA3D,\r\n    level: 70,\r\n    color: '#0696D7',\r\n    category: [SKILL_CATEGORY.APPLICATION],\r\n    happiness: 65,\r\n    experience: 70,\r\n    icon: 'maya3d',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.BLENDER,\r\n    level: 50,\r\n    color: '#F5792A',\r\n    category: [SKILL_CATEGORY.APPLICATION],\r\n    happiness: 40,\r\n    experience: 20,\r\n    icon: 'blender',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.PHOTOSHOP,\r\n    level: 100,\r\n    color: '#31A8FF',\r\n    category: [\r\n      SKILL_CATEGORY.APPLICATION,\r\n      SKILL_CATEGORY.DESIGN\r\n    ],\r\n    happiness: 85,\r\n    experience: 100,\r\n    icon: 'photoshop',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.ILLUSTRATOR,\r\n    level: 90,\r\n    color: '#FF9A00',\r\n    category: [\r\n      SKILL_CATEGORY.APPLICATION,\r\n      SKILL_CATEGORY.DESIGN\r\n    ],\r\n    happiness: 80,\r\n    experience: 90,\r\n    icon: 'illustrator',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.FIGMA,\r\n    color: '#F24E1E',\r\n    category: [\r\n      SKILL_CATEGORY.APPLICATION,\r\n      SKILL_CATEGORY.DESIGN\r\n    ],\r\n    icon: 'figma',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.XD,\r\n    color: '#FF61F6',\r\n    category: [\r\n      SKILL_CATEGORY.APPLICATION,\r\n      SKILL_CATEGORY.DESIGN\r\n    ],\r\n    icon: 'xd',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.PREMIERE_PRO,\r\n    level: 100,\r\n    color: '#100d6a',\r\n    category: [\r\n      SKILL_CATEGORY.APPLICATION,\r\n      SKILL_CATEGORY.DESIGN\r\n    ],\r\n    happiness: 85,\r\n    experience: 80,\r\n    icon: 'premiere-pro',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.AFTER_EFFECTS,\r\n    level: 90,\r\n    color: '#100d6a',\r\n    category: [\r\n      SKILL_CATEGORY.APPLICATION,\r\n      SKILL_CATEGORY.DESIGN\r\n    ],\r\n    happiness: 85,\r\n    experience: 80,\r\n    icon: 'after-effects',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.INDESIGN,\r\n    level: 90,\r\n    color: '#820821',\r\n    category: [\r\n      SKILL_CATEGORY.APPLICATION,\r\n      SKILL_CATEGORY.DESIGN\r\n    ],\r\n    happiness: 75,\r\n    experience: 80,\r\n    icon: 'indesign',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.CUBASE,\r\n    level: 100,\r\n    color: '#970d0d',\r\n    category: [\r\n      SKILL_CATEGORY.APPLICATION,\r\n      SKILL_CATEGORY.MUSIC\r\n    ],\r\n    happiness: 90,\r\n    experience: 80,\r\n    icon: 'cubase',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.REAPER,\r\n    level: 80,\r\n    color: '#19da8a',\r\n    category: [\r\n      SKILL_CATEGORY.APPLICATION,\r\n      SKILL_CATEGORY.MUSIC\r\n    ],\r\n    happiness: 70,\r\n    experience: 60,\r\n    icon: 'mix',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.PRO_TOOLS,\r\n    level: 70,\r\n    color: '#6018bc',\r\n    category: [\r\n      SKILL_CATEGORY.APPLICATION,\r\n      SKILL_CATEGORY.MUSIC\r\n    ],\r\n    happiness: 60,\r\n    experience: 40,\r\n    icon: 'pro-tools',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.ABLETON_LIVE,\r\n    level: 65,\r\n    color: '#000000',\r\n    category: [\r\n      SKILL_CATEGORY.APPLICATION,\r\n      SKILL_CATEGORY.MUSIC\r\n    ],\r\n    happiness: 70,\r\n    experience: 80,\r\n    icon: 'ableton-live',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.WORDPRESS,\r\n    level: 100,\r\n    color: '#21759B',\r\n    category: [SKILL_CATEGORY.CMS],\r\n    happiness: 92,\r\n    experience: 100,\r\n    favorite: true,\r\n    icon: 'wordpress',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.JOOMLA,\r\n    level: 45,\r\n    color: '#5091CD',\r\n    category: [SKILL_CATEGORY.CMS],\r\n    happiness: 50,\r\n    experience: 10,\r\n    icon: 'joomla',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.DRUPAL,\r\n    level: 80,\r\n    color: '#0C76AB',\r\n    category: [SKILL_CATEGORY.CMS],\r\n    happiness: 30,\r\n    experience: 20,\r\n    icon: 'drupal',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.MAGENTO,\r\n    color: '#F26322',\r\n    category: [SKILL_CATEGORY.CMS],\r\n    icon: 'magento',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.SHOPIFY,\r\n    color: '#96BF48',\r\n    category: [SKILL_CATEGORY.CMS],\r\n    icon: 'shopify',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.WOOCOMMERCE,\r\n    level: 100,\r\n    color: '#96588A',\r\n    category: [SKILL_CATEGORY.CMS],\r\n    happiness: 90,\r\n    experience: 100,\r\n    icon: 'woocommerce',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.PRESTASHOP,\r\n    level: 25,\r\n    color: '#F05A22',\r\n    category: [SKILL_CATEGORY.CMS],\r\n    icon: 'prestashop',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.OPEN_CART,\r\n    color: '#E67E22',\r\n    category: [SKILL_CATEGORY.CMS],\r\n    icon: 'open-cart',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.WEBSTORM,\r\n    level: 100,\r\n    color: '#58e6cc',\r\n    category: [SKILL_CATEGORY.IDE],\r\n    happiness: 94,\r\n    experience: 85,\r\n    favorite: true,\r\n    icon: 'webstorm',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.VISUAL_STUDIO_CODE,\r\n    level: 100,\r\n    color: '#007ACC',\r\n    category: [SKILL_CATEGORY.IDE],\r\n    happiness: 80,\r\n    experience: 95,\r\n    icon: 'visual-studio-code',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.SUBLIME_TEXT,\r\n    level: 100,\r\n    color: '#FF9800',\r\n    category: [SKILL_CATEGORY.IDE],\r\n    happiness: 60,\r\n    experience: 95,\r\n    icon: 'sublime-text',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.ATOM,\r\n    level: 70,\r\n    color: '#66595C',\r\n    category: [SKILL_CATEGORY.IDE],\r\n    happiness: 50,\r\n    experience: 20,\r\n    icon: 'atom',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.BRACKETS,\r\n    level: 100,\r\n    color: '#F27405',\r\n    category: [SKILL_CATEGORY.IDE],\r\n    happiness: 50,\r\n    experience: 100,\r\n    icon: 'brackets.svg',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.PHP_STORM,\r\n    level: 100,\r\n    color: '#9b09e5',\r\n    category: [SKILL_CATEGORY.IDE],\r\n    happiness: 90,\r\n    experience: 80,\r\n    icon: 'php-storm',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.XCODE,\r\n    level: 60,\r\n    color: '#1575F9',\r\n    category: [SKILL_CATEGORY.IDE],\r\n    happiness: 80,\r\n    experience: 30,\r\n    icon: 'xcode',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.TRELLO,\r\n    level: 90,\r\n    color: '#0079BF',\r\n    category: [SKILL_CATEGORY.OTHERS, SKILL_CATEGORY.TOOL],\r\n    happiness: 70,\r\n    experience: 100,\r\n    icon: 'trello'\r\n  },\r\n  {\r\n    title: SKILL_TITLE.CLICK_UP,\r\n    level: 100,\r\n    color: '#7AC943',\r\n    category: [SKILL_CATEGORY.OTHERS, SKILL_CATEGORY.TOOL],\r\n    happiness: 85,\r\n    experience: 100,\r\n    icon: 'click-up'\r\n  },\r\n  {\r\n    title: SKILL_TITLE.WRIKE,\r\n    level: 95,\r\n    color: '#00AEEF',\r\n    category: [SKILL_CATEGORY.OTHERS, SKILL_CATEGORY.TOOL],\r\n    happiness: 60,\r\n    experience: 80,\r\n    icon: 'wrike'\r\n  },\r\n  {\r\n    title: SKILL_TITLE.SLACK,\r\n    level: 70,\r\n    color: '#4A154B',\r\n    category: [SKILL_CATEGORY.OTHERS, SKILL_CATEGORY.TOOL],\r\n    happiness: 70,\r\n    experience: 80,\r\n    icon: 'slack'\r\n  },\r\n  {\r\n    title: SKILL_TITLE.DISCORD,\r\n    level: 100,\r\n    color: '#7289DA',\r\n    category: [SKILL_CATEGORY.OTHERS, SKILL_CATEGORY.TOOL],\r\n    happiness: 95,\r\n    experience: 100,\r\n    icon: 'discord'\r\n  },\r\n  {\r\n    title: SKILL_TITLE.TECHNICAL_ENGLISH,\r\n    level: 100,\r\n    color: '#F5F5F5',\r\n    category: [SKILL_CATEGORY.OTHERS],\r\n    happiness: 95,\r\n    experience: 100,\r\n    icon: 'english'\r\n  },\r\n  {\r\n    title: SKILL_TITLE.FRENCH,\r\n    level: 100,\r\n    color: '#F5F5F5',\r\n    category: [SKILL_CATEGORY.OTHERS],\r\n    happiness: 95,\r\n    experience: 100,\r\n    icon: 'french'\r\n  },\r\n  {\r\n    title: SKILL_TITLE.AGILE,\r\n    level: 80,\r\n    color: '#F5F5F5',\r\n    category: [SKILL_CATEGORY.OTHERS],\r\n    happiness: 95,\r\n    experience: 75,\r\n    icon: 'agile'\r\n  },\r\n  {\r\n    title: SKILL_TITLE.MASTERING,\r\n    level: 85,\r\n    color: '#e84910',\r\n    category: [SKILL_CATEGORY.MUSIC],\r\n    happiness: 95,\r\n    experience: 70,\r\n    icon: 'mao',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.MIXING,\r\n    level: 90,\r\n    color: '#e89c10',\r\n    category: [SKILL_CATEGORY.MUSIC],\r\n    happiness: 95,\r\n    experience: 80,\r\n    icon: 'mao',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.RECORDING,\r\n    level: 95,\r\n    color: '#e8e310',\r\n    category: [SKILL_CATEGORY.MUSIC],\r\n    happiness: 95,\r\n    experience: 80,\r\n    icon: 'recording',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.MUSIC_THEORY,\r\n    level: 100,\r\n    color: '#10e8e3',\r\n    category: [SKILL_CATEGORY.MUSIC],\r\n    happiness: 95,\r\n    experience: 100,\r\n    icon: 'composition',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.MAO,\r\n    level: 80,\r\n    color: '#e81010',\r\n    category: [SKILL_CATEGORY.MUSIC],\r\n    happiness: 95,\r\n    experience: 70,\r\n    icon: 'mao',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.COMPOSITION,\r\n    level: 85,\r\n    color: '#10e8e3',\r\n    category: [SKILL_CATEGORY.MUSIC],\r\n    happiness: 90,\r\n    experience: 70,\r\n    icon: 'composition',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.VIOLIN,\r\n    level: 95,\r\n    color: '#e8e310',\r\n    category: [SKILL_CATEGORY.MUSIC],\r\n    happiness: 95,\r\n    experience: 100,\r\n    icon: 'violin',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.PIANO,\r\n    level: 40,\r\n    color: '#e8e310',\r\n    category: [SKILL_CATEGORY.MUSIC],\r\n    happiness: 80,\r\n    experience: 60,\r\n    icon: 'piano',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.GUITAR,\r\n    level: 30,\r\n    color: '#e8e310',\r\n    category: [SKILL_CATEGORY.MUSIC],\r\n    happiness: 70,\r\n    experience: 20,\r\n    icon: 'guitar',\r\n  }\r\n]",
                 "rawdescription": "Skills data",
                 "description": "<p>Skills data</p>\n"
             },
@@ -15742,7 +15742,7 @@
                 "name": "EducationByDate",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/modules/main/components/list/list.stories.ts",
+                "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -15752,7 +15752,7 @@
                 "name": "EducationByDate",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
+                "file": "src/app/modules/main/components/list/list.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -15862,7 +15862,7 @@
                 "name": "LastProjects",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/modules/main/components/list/list.stories.ts",
+                "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -15872,7 +15872,7 @@
                 "name": "LastProjects",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
+                "file": "src/app/modules/main/components/list/list.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -15956,7 +15956,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "object",
-                "defaultValue": "{\r\n  /**\r\n   * Best skills favorite.\r\n   * Happiness 100\r\n   * Order by happiness ASC\r\n   */\r\n  [PRE_MADE_QUERY.STACKS_BEST_FAVORITES]: {\r\n    limit: 5,\r\n    filters: [\r\n      {name: DATA_FIELD.FAVORITE, value: true},\r\n      {name: DATA_FIELD.HAPPINESS, value: 100},\r\n    ],\r\n    orderBy: [{name: ORDER_FIELD.HAPPINESS}],\r\n  } as QueryInterface,\r\n\r\n  /**\r\n   * Last 5 projects\r\n   * Order by date ASC\r\n   */\r\n  [PRE_MADE_QUERY.LAST_PROJECTS]: {\r\n    limit: 5,\r\n    orderBy: [{name: ORDER_FIELD.END_DATE, direction: 'ASC'}],\r\n  } as QueryInterface,\r\n\r\n  /**\r\n   * Education by date ASC\r\n   * Order by date ASC\r\n   */\r\n  [PRE_MADE_QUERY.EDUCATION_BY_DATE_ORDER]: {\r\n    orderBy: [{name: ORDER_FIELD.START_DATE, direction: 'ASC'}],\r\n  } as QueryInterface,\r\n\r\n\r\n  /**\r\n   * Work by date\r\n   * Order by date ASC\r\n   */\r\n  [PRE_MADE_QUERY.WORK_BY_DATE_ORDER]: {\r\n    orderBy: [{name: ORDER_FIELD.START_DATE, direction: 'ASC'}],\r\n  } as QueryInterface,\r\n\r\n  /**\r\n   * All stacks\r\n   */\r\n  [PRE_MADE_QUERY.ALL_STACKS]: {\r\n    filters: [\r\n      {name: DATA_FIELD.SKILL_CATEGORY, value: SKILL_CATEGORY.CODE_LANGUAGE},\r\n      {name: DATA_FIELD.SKILL_CATEGORY, value: SKILL_CATEGORY.FRAMEWORK},\r\n      {name: DATA_FIELD.SKILL_CATEGORY, value: SKILL_CATEGORY.LIBRARY},\r\n      {name: DATA_FIELD.SKILL_CATEGORY, value: SKILL_CATEGORY.DEVOPS},\r\n      {name: DATA_FIELD.SKILL_CATEGORY, value: SKILL_CATEGORY.DATABASE},\r\n    ],\r\n    orderBy: [\r\n      {name: ORDER_FIELD.LEVEL, direction: 'ASC'},\r\n    ],\r\n  } as QueryInterface,\r\n\r\n}"
+                "defaultValue": "{\r\n  /**\r\n   * Best skills favorite.\r\n   * Happiness 100\r\n   * Order by happiness ASC\r\n   */\r\n  [PRE_MADE_QUERY.STACKS_BEST_FAVORITES]: {\r\n    limit: 5,\r\n    filters: [\r\n      {name: DATA_FIELD.FAVORITE, value: true},\r\n      {name: DATA_FIELD.HAPPINESS, value: 100},\r\n    ],\r\n    orderBy: [{name: ORDER_FIELD.HAPPINESS}],\r\n  } as QueryInterface,\r\n\r\n  /**\r\n   * Last 5 projects\r\n   * Order by date ASC\r\n   */\r\n  [PRE_MADE_QUERY.LAST_PROJECTS]: {\r\n    limit: 5,\r\n    orderBy: [{name: ORDER_FIELD.END_DATE, direction: 'ASC'}],\r\n  } as QueryInterface,\r\n\r\n  /**\r\n   * Education by date ASC\r\n   * Order by date ASC\r\n   */\r\n  [PRE_MADE_QUERY.EDUCATION_BY_DATE_ORDER]: {\r\n    orderBy: [{name: ORDER_FIELD.START_DATE, direction: 'ASC'}],\r\n  } as QueryInterface,\r\n\r\n\r\n  /**\r\n   * Work by date\r\n   * Order by date ASC\r\n   */\r\n  [PRE_MADE_QUERY.WORK_BY_DATE_ORDER]: {\r\n    orderBy: [{name: ORDER_FIELD.START_DATE, direction: 'ASC'}],\r\n  } as QueryInterface,\r\n\r\n  /**\r\n   * All stacks\r\n   */\r\n  [PRE_MADE_QUERY.ALL_STACKS]: {\r\n    filters: [\r\n      {name: DATA_FIELD.SKILL_CATEGORY, value: SKILL_CATEGORY.STACK},\r\n    ],\r\n    orderBy: [\r\n      {name: ORDER_FIELD.LEVEL, direction: 'ASC'},\r\n    ],\r\n  } as QueryInterface,\r\n\r\n  /**\r\n   * Others skills\r\n   */\r\n  [PRE_MADE_QUERY.OTHERS_SKILLS]: {\r\n    filters: [\r\n      {name: DATA_FIELD.SKILL_CATEGORY, value: SKILL_CATEGORY.DEVOPS},\r\n      {name: DATA_FIELD.SKILL_CATEGORY, value: SKILL_CATEGORY.CMS},\r\n      {name: DATA_FIELD.SKILL_CATEGORY, value: SKILL_CATEGORY.OS},\r\n      {name: DATA_FIELD.SKILL_CATEGORY, value: SKILL_CATEGORY.TOOL},\r\n      {name: DATA_FIELD.SKILL_CATEGORY, value: SKILL_CATEGORY.E2E},\r\n      {name: DATA_FIELD.SKILL_CATEGORY, value: SKILL_CATEGORY.IDE},\r\n    ],\r\n    orderBy: [\r\n      {name: ORDER_FIELD.LEVEL, direction: 'ASC'},\r\n    ],\r\n  } as QueryInterface,\r\n\r\n}"
             },
             {
                 "name": "Profile",
@@ -16180,11 +16180,11 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/modules/shared/page-wrapper/page-wrapper.stories.ts",
+                "file": "src/app/modules/shared/input-circle-slider/input-circle-slider.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Story<PageWrapperComponent>",
-                "defaultValue": "(args: PageWrapperComponent) => ({\r\n  props: args,\r\n})",
+                "type": "Story<InputCircleSliderComponent>",
+                "defaultValue": "(args: InputCircleSliderComponent) => ({\r\n  props: args,\r\n})",
                 "rawdescription": "Template of the component.",
                 "description": "<p>Template of the component.</p>\n"
             },
@@ -16192,11 +16192,11 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/modules/shared/input-circle-slider/input-circle-slider.stories.ts",
+                "file": "src/app/modules/shared/page-wrapper/page-wrapper.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Story<InputCircleSliderComponent>",
-                "defaultValue": "(args: InputCircleSliderComponent) => ({\r\n  props: args,\r\n})",
+                "type": "Story<PageWrapperComponent>",
+                "defaultValue": "(args: PageWrapperComponent) => ({\r\n  props: args,\r\n})",
                 "rawdescription": "Template of the component.",
                 "description": "<p>Template of the component.</p>\n"
             },
@@ -16228,6 +16228,16 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "src/app/modules/main/components/data-details/data-details.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<DataDetailsComponent>",
+                "defaultValue": "(args: DataDetailsComponent) => ({\n  props: args,\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "src/app/modules/main/components/block/block.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -16243,16 +16253,6 @@
                 "deprecationMessage": "",
                 "type": "Story<CircleMenuItemComponent>",
                 "defaultValue": "(args: CircleMenuItemComponent) => ({\n  props: args,\n})"
-            },
-            {
-                "name": "Template",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/modules/main/components/data-details/data-details.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story<DataDetailsComponent>",
-                "defaultValue": "(args: DataDetailsComponent) => ({\n  props: args,\n})"
             },
             {
                 "name": "Template",
@@ -16282,21 +16282,21 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/modules/main/components/list/list.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story<ListComponent>",
-                "defaultValue": "(args: ListComponent) => ({\n  props: args,\n})"
-            },
-            {
-                "name": "Template",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story<ListChartCirclesComponent>",
                 "defaultValue": "(args: ListChartCirclesComponent) => ({\n  props: args,\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/modules/main/components/list/list.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<ListComponent>",
+                "defaultValue": "(args: ListComponent) => ({\n  props: args,\n})"
             },
             {
                 "name": "Template",
@@ -16358,11 +16358,11 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/modules/main/components/page-skills/page-skills.stories.ts",
+                "file": "src/app/modules/main/components/profile/profile.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Story<PageSkillsComponent>",
-                "defaultValue": "(args: PageSkillsComponent) => ({\r\n  props: args,\r\n})",
+                "type": "Story<ProfileComponent>",
+                "defaultValue": "(args: ProfileComponent) => ({\r\n  props: args,\r\n})",
                 "rawdescription": "Template of the component.",
                 "description": "<p>Template of the component.</p>\n"
             },
@@ -16370,11 +16370,11 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/modules/main/components/profile/profile.stories.ts",
+                "file": "src/app/modules/main/components/page-skills/page-skills.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Story<ProfileComponent>",
-                "defaultValue": "(args: ProfileComponent) => ({\r\n  props: args,\r\n})",
+                "type": "Story<PageSkillsComponent>",
+                "defaultValue": "(args: PageSkillsComponent) => ({\r\n  props: args,\r\n})",
                 "rawdescription": "Template of the component.",
                 "description": "<p>Template of the component.</p>\n"
             },
@@ -16426,7 +16426,7 @@
                 "name": "WorkByDate",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/modules/main/components/list/list.stories.ts",
+                "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -16436,7 +16436,7 @@
                 "name": "WorkByDate",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
+                "file": "src/app/modules/main/components/list/list.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -16887,6 +16887,12 @@
                         "deprecated": false,
                         "deprecationMessage": "",
                         "value": "allStacks"
+                    },
+                    {
+                        "name": "OTHERS_SKILLS",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "value": "othersSkills"
                     }
                 ],
                 "ctype": "miscellaneous",
@@ -17011,6 +17017,12 @@
                         "deprecated": false,
                         "deprecationMessage": "",
                         "value": "Design"
+                    },
+                    {
+                        "name": "STACK",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "value": "Stack"
                     },
                     {
                         "name": "OTHERS",
@@ -17823,68 +17835,6 @@
             }
         ],
         "groupedVariables": {
-            "src/app/modules/main/components/list/list.stories.ts": [
-                {
-                    "name": "AllStacks",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/modules/main/components/list/list.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "Best5Stacks",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/modules/main/components/list/list.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "EducationByDate",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/modules/main/components/list/list.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "LastProjects",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/modules/main/components/list/list.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "Template",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/modules/main/components/list/list.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story<ListComponent>",
-                    "defaultValue": "(args: ListComponent) => ({\n  props: args,\n})"
-                },
-                {
-                    "name": "WorkByDate",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/modules/main/components/list/list.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                }
-            ],
             "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts": [
                 {
                     "name": "AllStacks",
@@ -17941,6 +17891,68 @@
                     "ctype": "miscellaneous",
                     "subtype": "variable",
                     "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                }
+            ],
+            "src/app/modules/main/components/list/list.stories.ts": [
+                {
+                    "name": "AllStacks",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/modules/main/components/list/list.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Best5Stacks",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/modules/main/components/list/list.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "EducationByDate",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/modules/main/components/list/list.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "LastProjects",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/modules/main/components/list/list.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/modules/main/components/list/list.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<ListComponent>",
+                    "defaultValue": "(args: ListComponent) => ({\n  props: args,\n})"
+                },
+                {
+                    "name": "WorkByDate",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/modules/main/components/list/list.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
@@ -18318,7 +18330,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "SkillDataInterface[]",
-                    "defaultValue": "[\r\n  {\r\n    title: SKILL_TITLE.HTML,\r\n    level: 100,\r\n    color: '#E34C26',\r\n    category: [SKILL_CATEGORY.FRONT_END, SKILL_CATEGORY.CODE_LANGUAGE],\r\n    happiness: 70,\r\n    experience: 100,\r\n    icon: 'html',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.CSS,\r\n    level: 100,\r\n    color: '#1572B6',\r\n    category: [\r\n      SKILL_CATEGORY.FRONT_END,\r\n      SKILL_CATEGORY.CODE_LANGUAGE,\r\n      SKILL_CATEGORY.DESIGN,\r\n    ],\r\n    happiness: 80,\r\n    experience: 100,\r\n    icon: 'css',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.SCSS,\r\n    level: 100,\r\n    color: '#CC6699',\r\n    category: [\r\n      SKILL_CATEGORY.FRONT_END,\r\n      SKILL_CATEGORY.CODE_LANGUAGE,\r\n      SKILL_CATEGORY.DESIGN,\r\n    ],\r\n    happiness: 100,\r\n    experience: 100,\r\n    favorite: true,\r\n    icon: 'scss',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.DART_SASS,\r\n    level: 100,\r\n    color: '#CC6699',\r\n    category: [\r\n      SKILL_CATEGORY.FRONT_END,\r\n      SKILL_CATEGORY.CODE_LANGUAGE,\r\n      SKILL_CATEGORY.DESIGN,\r\n    ],\r\n    happiness: 100,\r\n    experience: 100,\r\n    icon: 'scss',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.LESS,\r\n    level: 90,\r\n    color: '#1D365D',\r\n    category: [\r\n      SKILL_CATEGORY.FRONT_END,\r\n      SKILL_CATEGORY.CODE_LANGUAGE,\r\n      SKILL_CATEGORY.DESIGN,\r\n    ],\r\n    happiness: 80,\r\n    experience: 20,\r\n    icon: 'less',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.JAVASCRIPT,\r\n    level: 100,\r\n    color: '#F7DF1E',\r\n    category: [\r\n      SKILL_CATEGORY.FRONT_END,\r\n      SKILL_CATEGORY.BACK_END,\r\n      SKILL_CATEGORY.CODE_LANGUAGE,\r\n    ],\r\n    happiness: 100,\r\n    experience: 100,\r\n    favorite: true,\r\n    icon: 'javascript',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.NODE_JS,\r\n    level: 96,\r\n    color: '#339933',\r\n    category: [SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.CODE_LANGUAGE],\r\n    happiness: 100,\r\n    experience: 92,\r\n    favorite: true,\r\n    icon: 'node-js',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.TYPESCRIPT,\r\n    level: 98,\r\n    color: '#007ACC',\r\n    category: [SKILL_CATEGORY.FRONT_END, SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.CODE_LANGUAGE],\r\n    happiness: 100,\r\n    experience: 80,\r\n    favorite: true,\r\n    icon: 'typescript',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.ANGULAR,\r\n    level: 100,\r\n    color: '#DD0031',\r\n    category: [SKILL_CATEGORY.FRONT_END, SKILL_CATEGORY.FRAMEWORK],\r\n    happiness: 100,\r\n    experience: 92,\r\n    favorite: true,\r\n    icon: 'angular',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.REACT,\r\n    level: 35,\r\n    color: '#61DAFB',\r\n    category: [SKILL_CATEGORY.FRONT_END, SKILL_CATEGORY.LIBRARY],\r\n    happiness: 92,\r\n    experience: 10,\r\n    icon: 'react',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.VUE,\r\n    level: 20,\r\n    color: '#4FC08D',\r\n    category: [SKILL_CATEGORY.FRONT_END, SKILL_CATEGORY.FRAMEWORK],\r\n    happiness: 60,\r\n    experience: 10,\r\n    icon: 'vue',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.SYMFONY,\r\n    level: 60,\r\n    color: '#40ba2f',\r\n    category: [SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.FRAMEWORK],\r\n    happiness: 60,\r\n    experience: 40,\r\n    icon: 'symfony',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.ZEND,\r\n    level: 33,\r\n    color: '#40ba2f',\r\n    category: [SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.FRAMEWORK],\r\n    happiness: 15,\r\n    experience: 40,\r\n    icon: 'zend',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.LARAVEL,\r\n    color: '#FF2D20',\r\n    category: [SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.FRAMEWORK],\r\n    icon: 'laravel',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.PHP,\r\n    level: 96,\r\n    color: '#777BB4',\r\n    category: [SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.CODE_LANGUAGE],\r\n    happiness: 45,\r\n    experience: 100,\r\n    icon: 'php',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.JAVA,\r\n    color: '#007396',\r\n    category: [SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.CODE_LANGUAGE],\r\n    icon: 'java',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.C_SHARP,\r\n    color: '#239120',\r\n    category: [SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.CODE_LANGUAGE],\r\n    icon: 'c-sharp',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.C_PLUS_PLUS,\r\n    color: '#00599C',\r\n    category: [SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.CODE_LANGUAGE],\r\n    icon: 'c++',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.C,\r\n    color: '#A8B9CC',\r\n    category: [SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.CODE_LANGUAGE],\r\n    icon: 'c',\r\n  },\r\n  {\r\n    level: 20,\r\n    title: SKILL_TITLE.PYTHON,\r\n    color: '#3776AB',\r\n    category: [SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.CODE_LANGUAGE],\r\n    happiness: 45,\r\n    experience: 10,\r\n    icon: 'python',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.TWIG,\r\n    level: 94,\r\n    color: '#40ba2f',\r\n    category: [SKILL_CATEGORY.FRONT_END, SKILL_CATEGORY.CODE_LANGUAGE],\r\n    happiness: 90,\r\n    favorite: true,\r\n    icon: 'symfony',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.MONGODB,\r\n    level: 73,\r\n    color: '#47A248',\r\n    category: [SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.DATABASE],\r\n    happiness: 80,\r\n    icon: 'mongodb',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.MYSQL,\r\n    level: 88,\r\n    color: '#4479A1',\r\n    category: [SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.DATABASE],\r\n    happiness: 65,\r\n    icon: 'mysql',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.POSTGRESQL,\r\n    level: 65,\r\n    color: '#336791',\r\n    category: [SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.DATABASE],\r\n    happiness: 75,\r\n    icon: 'postgresql',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.REDIS,\r\n    color: '#DC382D',\r\n    category: [SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.DATABASE],\r\n    icon: 'redis',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.GIT,\r\n    level: 93,\r\n    color: '#F05032',\r\n    category: [SKILL_CATEGORY.DEVOPS, SKILL_CATEGORY.OTHERS],\r\n    happiness: 95,\r\n    experience: 100,\r\n    favorite: true,\r\n    icon: 'git',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.WEBPACK,\r\n    level: 85,\r\n    color: '#8DD6F9',\r\n    category: [SKILL_CATEGORY.DEVOPS],\r\n    happiness: 85,\r\n    experience: 70,\r\n    icon: 'webpack',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.GULP,\r\n    level: 95,\r\n    color: '#CF4647',\r\n    category: [SKILL_CATEGORY.DEVOPS],\r\n    happiness: 80,\r\n    experience: 80,\r\n    icon: 'gulp',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.BOOTSTRAP,\r\n    level: 70,\r\n    color: '#563D7C',\r\n    category: [SKILL_CATEGORY.FRONT_END, SKILL_CATEGORY.FRAMEWORK],\r\n    happiness: 45,\r\n    experience: 30,\r\n    icon: 'bootstrap',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.FOUNDATION,\r\n    level: 92,\r\n    color: '#7768AE',\r\n    category: [SKILL_CATEGORY.FRONT_END, SKILL_CATEGORY.FRAMEWORK],\r\n    happiness: 30,\r\n    experience: 90,\r\n    icon: 'foundation',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.ANGULAR_MATERIAL,\r\n    level: 95,\r\n    color: '#0081CB',\r\n    category: [SKILL_CATEGORY.FRONT_END, SKILL_CATEGORY.FRAMEWORK],\r\n    happiness: 96,\r\n    experience: 80,\r\n    favorite: true,\r\n    icon: 'angular',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.MATERIAL_UI,\r\n    level: 79,\r\n    color: '#0081CB',\r\n    category: [SKILL_CATEGORY.FRONT_END, SKILL_CATEGORY.FRAMEWORK],\r\n    happiness: 70,\r\n    experience: 40,\r\n    icon: 'material-ui',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.BULMA,\r\n    color: '#00D1B2',\r\n    category: [SKILL_CATEGORY.FRONT_END, SKILL_CATEGORY.FRAMEWORK],\r\n    icon: 'bulma',\r\n\r\n  },\r\n  {\r\n    title: SKILL_TITLE.TAILWIND_CSS,\r\n    level: 30,\r\n    color: '#38B2AC',\r\n    category: [SKILL_CATEGORY.FRONT_END, SKILL_CATEGORY.FRAMEWORK],\r\n    happiness: 75,\r\n    experience: 10,\r\n    icon: 'tailwind-css',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.JQUERY,\r\n    level: 100,\r\n    color: '#0769AD',\r\n    category: [SKILL_CATEGORY.FRONT_END, SKILL_CATEGORY.LIBRARY],\r\n    happiness: 68,\r\n    experience: 100,\r\n    icon: 'jquery',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.RXJS,\r\n    level: 80,\r\n    color: '#B7178C',\r\n    category: [SKILL_CATEGORY.FRONT_END, SKILL_CATEGORY.LIBRARY],\r\n    happiness: 100,\r\n    experience: 70,\r\n    icon: 'rxjs',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.NESTJS,\r\n    level: 90,\r\n    color: '#E0234E',\r\n    category: [SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.FRAMEWORK],\r\n    happiness: 90,\r\n    experience: 60,\r\n    icon: 'nestjs',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.EXPRESS,\r\n    level: 80,\r\n    color: '#73b22a',\r\n    category: [SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.FRAMEWORK],\r\n    happiness: 85,\r\n    experience: 40,\r\n    icon: 'node-js',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.JEST,\r\n    level: 50,\r\n    color: '#C21325',\r\n    category: [SKILL_CATEGORY.E2E],\r\n    happiness: 60,\r\n    experience: 5,\r\n    icon: 'jest',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.MOCHA,\r\n    color: '#8D6748',\r\n    category: [SKILL_CATEGORY.E2E],\r\n    icon: 'mocha',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.CYPRUS,\r\n    color: '#17202C',\r\n    category: [SKILL_CATEGORY.E2E],\r\n    icon: 'cyprus',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.JASMINE,\r\n    color: '#8A4182',\r\n    category: [SKILL_CATEGORY.E2E],\r\n    icon: 'jasmine',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.KARMA,\r\n    level: 40,\r\n    color: '#C32F27',\r\n    category: [SKILL_CATEGORY.E2E],\r\n    happiness: 40,\r\n    experience: 5,\r\n    icon: 'karma',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.PROTRACTOR,\r\n    color: '#E1583E',\r\n    category: [SKILL_CATEGORY.E2E],\r\n    icon: 'protractor',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.STORYBOOK,\r\n    level: 94,\r\n    color: '#FF4785',\r\n    category: [SKILL_CATEGORY.FRONT_END, SKILL_CATEGORY.OTHERS],\r\n    happiness: 95,\r\n    experience: 60,\r\n    favorite: true,\r\n    icon: 'storybook',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.DOCKER,\r\n    level: 65,\r\n    color: '#2496ED',\r\n    category: [SKILL_CATEGORY.DEVOPS, SKILL_CATEGORY.OTHERS],\r\n    happiness: 60,\r\n    experience: 60,\r\n    icon: 'docker',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.NGINX,\r\n    level: 30,\r\n    color: '#009639',\r\n    category: [SKILL_CATEGORY.DEVOPS],\r\n    happiness: 45,\r\n    experience: 10,\r\n    icon: 'nginx',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.APACHE,\r\n    level: 10,\r\n    color: '#D22128',\r\n    category: [SKILL_CATEGORY.DEVOPS],\r\n    icon: 'apache',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.AWS,\r\n    level: 20,\r\n    color: '#232F3E',\r\n    category: [SKILL_CATEGORY.DEVOPS],\r\n    happiness: 20,\r\n    experience: 10,\r\n    icon: 'aws',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.GITHUB,\r\n    level: 100,\r\n    color: '#181717',\r\n    category: [SKILL_CATEGORY.OTHERS, SKILL_CATEGORY.TOOL],\r\n    happiness: 95,\r\n    experience: 100,\r\n    icon: 'github',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.GITLAB,\r\n    level: 100,\r\n    color: '#FCA121',\r\n    category: [SKILL_CATEGORY.OTHERS, SKILL_CATEGORY.TOOL],\r\n    happiness: 94,\r\n    experience: 100,\r\n    icon: 'gitlab',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.JENKINS,\r\n    level: 60,\r\n    color: '#D24939',\r\n    category: [SKILL_CATEGORY.DEVOPS, SKILL_CATEGORY.TOOL],\r\n    happiness: 50,\r\n    experience: 80,\r\n    icon: 'jenkins',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.SONARQUBE,\r\n    level: 35,\r\n    color: '#4E9BCD',\r\n    category: [SKILL_CATEGORY.DEVOPS, SKILL_CATEGORY.TOOL],\r\n    happiness: 50,\r\n    experience: 40,\r\n    icon: 'sonarqube',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.BITBUCKET,\r\n    color: '#205081',\r\n    category: [SKILL_CATEGORY.OTHERS, SKILL_CATEGORY.TOOL],\r\n    icon: 'bitbucket',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.JIRA,\r\n    color: '#0052CC',\r\n    category: [SKILL_CATEGORY.OTHERS, SKILL_CATEGORY.TOOL],\r\n    icon: 'jira',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.CONFLUENCE,\r\n    color: '#172B4D',\r\n    category: [SKILL_CATEGORY.OTHERS, SKILL_CATEGORY.TOOL],\r\n    icon: 'confluence',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.POSTMAN,\r\n    level: 85,\r\n    color: '#FF6C37',\r\n    category: [SKILL_CATEGORY.OTHERS, SKILL_CATEGORY.TOOL],\r\n    happiness: 90,\r\n    experience: 80,\r\n    icon: 'postman',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.BASH,\r\n    level: 20,\r\n    color: '#4EAA25',\r\n    category: [SKILL_CATEGORY.DEVOPS],\r\n    icon: 'bash',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.LINUX,\r\n    level: 80,\r\n    color: '#FCC624',\r\n    category: [SKILL_CATEGORY.OS],\r\n    happiness: 60,\r\n    experience: 30,\r\n    icon: 'linux',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.WINDOWS,\r\n    level: 100,\r\n    color: '#0078D6',\r\n    category: [SKILL_CATEGORY.OS],\r\n    happiness: 90,\r\n    experience: 100,\r\n    icon: 'windows',\r\n  },\r\n\r\n  {\r\n    title: SKILL_TITLE.MAC_OS,\r\n    level: 90,\r\n    color: '#999999',\r\n    category: [SKILL_CATEGORY.OS],\r\n    happiness: 95,\r\n    experience: 90,\r\n    favorite: true,\r\n    icon: 'mac-os',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.FLASH,\r\n    level: 85,\r\n    color: '#FF0000',\r\n    category: [SKILL_CATEGORY.APPLICATION],\r\n    happiness: 65,\r\n    experience: 70,\r\n    icon: 'flash',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.TOON_BOOM_HARMONY,\r\n    level: 90,\r\n    color: '#bc5e66',\r\n    category: [SKILL_CATEGORY.APPLICATION],\r\n    happiness: 75,\r\n    experience: 80,\r\n    icon: 'toon-boom-harmony',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.MAYA3D,\r\n    level: 70,\r\n    color: '#0696D7',\r\n    category: [SKILL_CATEGORY.APPLICATION],\r\n    happiness: 65,\r\n    experience: 70,\r\n    icon: 'maya3d',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.BLENDER,\r\n    level: 50,\r\n    color: '#F5792A',\r\n    category: [SKILL_CATEGORY.APPLICATION],\r\n    happiness: 40,\r\n    experience: 20,\r\n    icon: 'blender',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.PHOTOSHOP,\r\n    level: 100,\r\n    color: '#31A8FF',\r\n    category: [\r\n      SKILL_CATEGORY.APPLICATION,\r\n      SKILL_CATEGORY.DESIGN\r\n    ],\r\n    happiness: 85,\r\n    experience: 100,\r\n    icon: 'photoshop',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.ILLUSTRATOR,\r\n    level: 90,\r\n    color: '#FF9A00',\r\n    category: [\r\n      SKILL_CATEGORY.APPLICATION,\r\n      SKILL_CATEGORY.DESIGN\r\n    ],\r\n    happiness: 80,\r\n    experience: 90,\r\n    icon: 'illustrator',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.FIGMA,\r\n    color: '#F24E1E',\r\n    category: [\r\n      SKILL_CATEGORY.APPLICATION,\r\n      SKILL_CATEGORY.DESIGN\r\n    ],\r\n    icon: 'figma',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.XD,\r\n    color: '#FF61F6',\r\n    category: [\r\n      SKILL_CATEGORY.APPLICATION,\r\n      SKILL_CATEGORY.DESIGN\r\n    ],\r\n    icon: 'xd',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.PREMIERE_PRO,\r\n    level: 100,\r\n    color: '#100d6a',\r\n    category: [\r\n      SKILL_CATEGORY.APPLICATION,\r\n      SKILL_CATEGORY.DESIGN\r\n    ],\r\n    happiness: 85,\r\n    experience: 80,\r\n    icon: 'premiere-pro',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.AFTER_EFFECTS,\r\n    level: 90,\r\n    color: '#100d6a',\r\n    category: [\r\n      SKILL_CATEGORY.APPLICATION,\r\n      SKILL_CATEGORY.DESIGN\r\n    ],\r\n    happiness: 85,\r\n    experience: 80,\r\n    icon: 'after-effects',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.INDESIGN,\r\n    level: 90,\r\n    color: '#820821',\r\n    category: [\r\n      SKILL_CATEGORY.APPLICATION,\r\n      SKILL_CATEGORY.DESIGN\r\n    ],\r\n    happiness: 75,\r\n    experience: 80,\r\n    icon: 'indesign',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.CUBASE,\r\n    level: 100,\r\n    color: '#970d0d',\r\n    category: [\r\n      SKILL_CATEGORY.APPLICATION,\r\n      SKILL_CATEGORY.MUSIC\r\n    ],\r\n    happiness: 90,\r\n    experience: 80,\r\n    icon: 'cubase',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.REAPER,\r\n    level: 80,\r\n    color: '#19da8a',\r\n    category: [\r\n      SKILL_CATEGORY.APPLICATION,\r\n      SKILL_CATEGORY.MUSIC\r\n    ],\r\n    happiness: 70,\r\n    experience: 60,\r\n    icon: 'mix',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.PRO_TOOLS,\r\n    level: 70,\r\n    color: '#6018bc',\r\n    category: [\r\n      SKILL_CATEGORY.APPLICATION,\r\n      SKILL_CATEGORY.MUSIC\r\n    ],\r\n    happiness: 60,\r\n    experience: 40,\r\n    icon: 'pro-tools',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.ABLETON_LIVE,\r\n    level: 65,\r\n    color: '#000000',\r\n    category: [\r\n      SKILL_CATEGORY.APPLICATION,\r\n      SKILL_CATEGORY.MUSIC\r\n    ],\r\n    happiness: 70,\r\n    experience: 80,\r\n    icon: 'ableton-live',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.WORDPRESS,\r\n    level: 100,\r\n    color: '#21759B',\r\n    category: [SKILL_CATEGORY.CMS],\r\n    happiness: 92,\r\n    experience: 100,\r\n    favorite: true,\r\n    icon: 'wordpress',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.JOOMLA,\r\n    level: 45,\r\n    color: '#5091CD',\r\n    category: [SKILL_CATEGORY.CMS],\r\n    happiness: 50,\r\n    experience: 10,\r\n    icon: 'joomla',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.DRUPAL,\r\n    level: 80,\r\n    color: '#0C76AB',\r\n    category: [SKILL_CATEGORY.CMS],\r\n    happiness: 30,\r\n    experience: 20,\r\n    icon: 'drupal',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.MAGENTO,\r\n    color: '#F26322',\r\n    category: [SKILL_CATEGORY.CMS],\r\n    icon: 'magento',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.SHOPIFY,\r\n    color: '#96BF48',\r\n    category: [SKILL_CATEGORY.CMS],\r\n    icon: 'shopify',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.WOOCOMMERCE,\r\n    level: 100,\r\n    color: '#96588A',\r\n    category: [SKILL_CATEGORY.CMS],\r\n    happiness: 90,\r\n    experience: 100,\r\n    icon: 'woocommerce',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.PRESTASHOP,\r\n    level: 25,\r\n    color: '#F05A22',\r\n    category: [SKILL_CATEGORY.CMS],\r\n    icon: 'prestashop',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.OPEN_CART,\r\n    color: '#E67E22',\r\n    category: [SKILL_CATEGORY.CMS],\r\n    icon: 'open-cart',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.WEBSTORM,\r\n    level: 100,\r\n    color: '#58e6cc',\r\n    category: [SKILL_CATEGORY.IDE],\r\n    happiness: 94,\r\n    experience: 85,\r\n    favorite: true,\r\n    icon: 'webstorm',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.VISUAL_STUDIO_CODE,\r\n    level: 100,\r\n    color: '#007ACC',\r\n    category: [SKILL_CATEGORY.IDE],\r\n    happiness: 80,\r\n    experience: 95,\r\n    icon: 'visual-studio-code',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.SUBLIME_TEXT,\r\n    level: 100,\r\n    color: '#FF9800',\r\n    category: [SKILL_CATEGORY.IDE],\r\n    happiness: 60,\r\n    experience: 95,\r\n    icon: 'sublime-text',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.ATOM,\r\n    level: 70,\r\n    color: '#66595C',\r\n    category: [SKILL_CATEGORY.IDE],\r\n    happiness: 50,\r\n    experience: 20,\r\n    icon: 'atom',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.BRACKETS,\r\n    level: 100,\r\n    color: '#F27405',\r\n    category: [SKILL_CATEGORY.IDE],\r\n    happiness: 50,\r\n    experience: 100,\r\n    icon: 'brackets.svg',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.PHP_STORM,\r\n    level: 100,\r\n    color: '#9b09e5',\r\n    category: [SKILL_CATEGORY.IDE],\r\n    happiness: 90,\r\n    experience: 80,\r\n    icon: 'php-storm',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.XCODE,\r\n    level: 60,\r\n    color: '#1575F9',\r\n    category: [SKILL_CATEGORY.IDE],\r\n    happiness: 80,\r\n    experience: 30,\r\n    icon: 'xcode',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.TRELLO,\r\n    level: 90,\r\n    color: '#0079BF',\r\n    category: [SKILL_CATEGORY.OTHERS, SKILL_CATEGORY.TOOL],\r\n    happiness: 70,\r\n    experience: 100,\r\n    icon: 'trello'\r\n  },\r\n  {\r\n    title: SKILL_TITLE.CLICK_UP,\r\n    level: 100,\r\n    color: '#7AC943',\r\n    category: [SKILL_CATEGORY.OTHERS, SKILL_CATEGORY.TOOL],\r\n    happiness: 85,\r\n    experience: 100,\r\n    icon: 'click-up'\r\n  },\r\n  {\r\n    title: SKILL_TITLE.WRIKE,\r\n    level: 95,\r\n    color: '#00AEEF',\r\n    category: [SKILL_CATEGORY.OTHERS, SKILL_CATEGORY.TOOL],\r\n    happiness: 60,\r\n    experience: 80,\r\n    icon: 'wrike'\r\n  },\r\n  {\r\n    title: SKILL_TITLE.SLACK,\r\n    level: 70,\r\n    color: '#4A154B',\r\n    category: [SKILL_CATEGORY.OTHERS, SKILL_CATEGORY.TOOL],\r\n    happiness: 70,\r\n    experience: 80,\r\n    icon: 'slack'\r\n  },\r\n  {\r\n    title: SKILL_TITLE.DISCORD,\r\n    level: 100,\r\n    color: '#7289DA',\r\n    category: [SKILL_CATEGORY.OTHERS, SKILL_CATEGORY.TOOL],\r\n    happiness: 95,\r\n    experience: 100,\r\n    icon: 'discord'\r\n  },\r\n  {\r\n    title: SKILL_TITLE.TECHNICAL_ENGLISH,\r\n    level: 100,\r\n    color: '#F5F5F5',\r\n    category: [SKILL_CATEGORY.OTHERS],\r\n    happiness: 95,\r\n    experience: 100,\r\n    icon: 'english'\r\n  },\r\n  {\r\n    title: SKILL_TITLE.FRENCH,\r\n    level: 100,\r\n    color: '#F5F5F5',\r\n    category: [SKILL_CATEGORY.OTHERS],\r\n    happiness: 95,\r\n    experience: 100,\r\n    icon: 'french'\r\n  },\r\n  {\r\n    title: SKILL_TITLE.AGILE,\r\n    level: 80,\r\n    color: '#F5F5F5',\r\n    category: [SKILL_CATEGORY.OTHERS],\r\n    happiness: 95,\r\n    experience: 75,\r\n    icon: 'agile'\r\n  },\r\n  {\r\n    title: SKILL_TITLE.MASTERING,\r\n    level: 85,\r\n    color: '#e84910',\r\n    category: [SKILL_CATEGORY.MUSIC],\r\n    happiness: 95,\r\n    experience: 70,\r\n    icon: 'mao',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.MIXING,\r\n    level: 90,\r\n    color: '#e89c10',\r\n    category: [SKILL_CATEGORY.MUSIC],\r\n    happiness: 95,\r\n    experience: 80,\r\n    icon: 'mao',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.RECORDING,\r\n    level: 95,\r\n    color: '#e8e310',\r\n    category: [SKILL_CATEGORY.MUSIC],\r\n    happiness: 95,\r\n    experience: 80,\r\n    icon: 'recording',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.MUSIC_THEORY,\r\n    level: 100,\r\n    color: '#10e8e3',\r\n    category: [SKILL_CATEGORY.MUSIC],\r\n    happiness: 95,\r\n    experience: 100,\r\n    icon: 'composition',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.MAO,\r\n    level: 80,\r\n    color: '#e81010',\r\n    category: [SKILL_CATEGORY.MUSIC],\r\n    happiness: 95,\r\n    experience: 70,\r\n    icon: 'mao',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.COMPOSITION,\r\n    level: 85,\r\n    color: '#10e8e3',\r\n    category: [SKILL_CATEGORY.MUSIC],\r\n    happiness: 90,\r\n    experience: 70,\r\n    icon: 'composition',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.VIOLIN,\r\n    level: 95,\r\n    color: '#e8e310',\r\n    category: [SKILL_CATEGORY.MUSIC],\r\n    happiness: 95,\r\n    experience: 100,\r\n    icon: 'violin',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.PIANO,\r\n    level: 40,\r\n    color: '#e8e310',\r\n    category: [SKILL_CATEGORY.MUSIC],\r\n    happiness: 80,\r\n    experience: 60,\r\n    icon: 'piano',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.GUITAR,\r\n    level: 30,\r\n    color: '#e8e310',\r\n    category: [SKILL_CATEGORY.MUSIC],\r\n    happiness: 70,\r\n    experience: 20,\r\n    icon: 'guitar',\r\n  }\r\n]",
+                    "defaultValue": "[\r\n  {\r\n    title: SKILL_TITLE.HTML,\r\n    level: 100,\r\n    color: '#E34C26',\r\n    category: [SKILL_CATEGORY.FRONT_END, SKILL_CATEGORY.CODE_LANGUAGE, SKILL_CATEGORY.STACK],\r\n    happiness: 70,\r\n    experience: 100,\r\n    icon: 'html',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.CSS,\r\n    level: 100,\r\n    color: '#1572B6',\r\n    category: [\r\n      SKILL_CATEGORY.FRONT_END,\r\n      SKILL_CATEGORY.CODE_LANGUAGE,\r\n      SKILL_CATEGORY.DESIGN,\r\n      SKILL_CATEGORY.STACK\r\n    ],\r\n    happiness: 80,\r\n    experience: 100,\r\n    icon: 'css',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.SCSS,\r\n    level: 100,\r\n    color: '#CC6699',\r\n    category: [\r\n      SKILL_CATEGORY.FRONT_END,\r\n      SKILL_CATEGORY.CODE_LANGUAGE,\r\n      SKILL_CATEGORY.DESIGN,\r\n      SKILL_CATEGORY.STACK\r\n    ],\r\n    happiness: 100,\r\n    experience: 100,\r\n    favorite: true,\r\n    icon: 'scss',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.DART_SASS,\r\n    level: 100,\r\n    color: '#CC6699',\r\n    category: [\r\n      SKILL_CATEGORY.FRONT_END,\r\n      SKILL_CATEGORY.CODE_LANGUAGE,\r\n      SKILL_CATEGORY.DESIGN,\r\n      SKILL_CATEGORY.STACK\r\n    ],\r\n    happiness: 100,\r\n    experience: 100,\r\n    icon: 'scss',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.LESS,\r\n    level: 90,\r\n    color: '#1D365D',\r\n    category: [\r\n      SKILL_CATEGORY.FRONT_END,\r\n      SKILL_CATEGORY.CODE_LANGUAGE,\r\n      SKILL_CATEGORY.DESIGN,\r\n      SKILL_CATEGORY.STACK\r\n    ],\r\n    happiness: 80,\r\n    experience: 20,\r\n    icon: 'less',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.JAVASCRIPT,\r\n    level: 100,\r\n    color: '#F7DF1E',\r\n    category: [\r\n      SKILL_CATEGORY.FRONT_END,\r\n      SKILL_CATEGORY.BACK_END,\r\n      SKILL_CATEGORY.CODE_LANGUAGE,\r\n      SKILL_CATEGORY.STACK\r\n    ],\r\n    happiness: 100,\r\n    experience: 100,\r\n    favorite: true,\r\n    icon: 'javascript',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.NODE_JS,\r\n    level: 96,\r\n    color: '#339933',\r\n    category: [SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.CODE_LANGUAGE, SKILL_CATEGORY.STACK],\r\n    happiness: 100,\r\n    experience: 92,\r\n    favorite: true,\r\n    icon: 'node-js',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.TYPESCRIPT,\r\n    level: 98,\r\n    color: '#007ACC',\r\n    category: [SKILL_CATEGORY.FRONT_END, SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.CODE_LANGUAGE, SKILL_CATEGORY.STACK],\r\n    happiness: 100,\r\n    experience: 80,\r\n    favorite: true,\r\n    icon: 'typescript',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.ANGULAR,\r\n    level: 100,\r\n    color: '#DD0031',\r\n    category: [SKILL_CATEGORY.FRONT_END, SKILL_CATEGORY.FRAMEWORK, SKILL_CATEGORY.STACK],\r\n    happiness: 100,\r\n    experience: 92,\r\n    favorite: true,\r\n    icon: 'angular',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.REACT,\r\n    level: 35,\r\n    color: '#61DAFB',\r\n    category: [SKILL_CATEGORY.FRONT_END, SKILL_CATEGORY.LIBRARY, SKILL_CATEGORY.STACK],\r\n    happiness: 92,\r\n    experience: 10,\r\n    icon: 'react',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.VUE,\r\n    level: 20,\r\n    color: '#4FC08D',\r\n    category: [SKILL_CATEGORY.FRONT_END, SKILL_CATEGORY.FRAMEWORK, SKILL_CATEGORY.STACK],\r\n    happiness: 60,\r\n    experience: 10,\r\n    icon: 'vue',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.SYMFONY,\r\n    level: 60,\r\n    color: '#40ba2f',\r\n    category: [SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.FRAMEWORK, SKILL_CATEGORY.STACK],\r\n    happiness: 60,\r\n    experience: 40,\r\n    icon: 'symfony',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.ZEND,\r\n    level: 33,\r\n    color: '#40ba2f',\r\n    category: [SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.FRAMEWORK, SKILL_CATEGORY.STACK],\r\n    happiness: 15,\r\n    experience: 40,\r\n    icon: 'zend',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.LARAVEL,\r\n    color: '#FF2D20',\r\n    category: [SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.FRAMEWORK, SKILL_CATEGORY.STACK],\r\n    icon: 'laravel',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.PHP,\r\n    level: 96,\r\n    color: '#777BB4',\r\n    category: [SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.CODE_LANGUAGE, SKILL_CATEGORY.STACK],\r\n    happiness: 45,\r\n    experience: 100,\r\n    icon: 'php',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.JAVA,\r\n    color: '#007396',\r\n    category: [SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.CODE_LANGUAGE, SKILL_CATEGORY.STACK],\r\n    icon: 'java',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.C_SHARP,\r\n    color: '#239120',\r\n    category: [SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.CODE_LANGUAGE, SKILL_CATEGORY.STACK],\r\n    icon: 'c-sharp',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.C_PLUS_PLUS,\r\n    color: '#00599C',\r\n    category: [SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.CODE_LANGUAGE, SKILL_CATEGORY.STACK],\r\n    icon: 'c++',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.C,\r\n    color: '#A8B9CC',\r\n    category: [SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.CODE_LANGUAGE, SKILL_CATEGORY.STACK],\r\n    icon: 'c',\r\n  },\r\n  {\r\n    level: 20,\r\n    title: SKILL_TITLE.PYTHON,\r\n    color: '#3776AB',\r\n    category: [SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.CODE_LANGUAGE, SKILL_CATEGORY.STACK],\r\n    happiness: 45,\r\n    experience: 10,\r\n    icon: 'python',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.TWIG,\r\n    level: 94,\r\n    color: '#40ba2f',\r\n    category: [SKILL_CATEGORY.FRONT_END, SKILL_CATEGORY.CODE_LANGUAGE, SKILL_CATEGORY.STACK],\r\n    happiness: 90,\r\n    favorite: true,\r\n    icon: 'symfony',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.MONGODB,\r\n    level: 73,\r\n    color: '#47A248',\r\n    category: [SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.DATABASE,SKILL_CATEGORY.STACK],\r\n    happiness: 80,\r\n    icon: 'mongodb',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.MYSQL,\r\n    level: 88,\r\n    color: '#4479A1',\r\n    category: [SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.DATABASE, SKILL_CATEGORY.STACK],\r\n    happiness: 65,\r\n    icon: 'mysql',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.POSTGRESQL,\r\n    level: 65,\r\n    color: '#336791',\r\n    category: [SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.DATABASE, SKILL_CATEGORY.STACK],\r\n    happiness: 75,\r\n    icon: 'postgresql',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.REDIS,\r\n    color: '#DC382D',\r\n    category: [SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.DATABASE, SKILL_CATEGORY.STACK],\r\n    icon: 'redis',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.GIT,\r\n    level: 93,\r\n    color: '#F05032',\r\n    category: [SKILL_CATEGORY.DEVOPS, SKILL_CATEGORY.OTHERS],\r\n    happiness: 95,\r\n    experience: 100,\r\n    favorite: true,\r\n    icon: 'git',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.WEBPACK,\r\n    level: 85,\r\n    color: '#8DD6F9',\r\n    category: [SKILL_CATEGORY.DEVOPS],\r\n    happiness: 85,\r\n    experience: 70,\r\n    icon: 'webpack',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.GULP,\r\n    level: 95,\r\n    color: '#CF4647',\r\n    category: [SKILL_CATEGORY.DEVOPS],\r\n    happiness: 80,\r\n    experience: 80,\r\n    icon: 'gulp',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.BOOTSTRAP,\r\n    level: 70,\r\n    color: '#563D7C',\r\n    category: [SKILL_CATEGORY.FRONT_END, SKILL_CATEGORY.FRAMEWORK, SKILL_CATEGORY.STACK],\r\n    happiness: 45,\r\n    experience: 30,\r\n    icon: 'bootstrap',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.FOUNDATION,\r\n    level: 92,\r\n    color: '#7768AE',\r\n    category: [SKILL_CATEGORY.FRONT_END, SKILL_CATEGORY.FRAMEWORK, SKILL_CATEGORY.STACK],\r\n    happiness: 30,\r\n    experience: 90,\r\n    icon: 'foundation',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.ANGULAR_MATERIAL,\r\n    level: 95,\r\n    color: '#0081CB',\r\n    category: [SKILL_CATEGORY.FRONT_END, SKILL_CATEGORY.FRAMEWORK, SKILL_CATEGORY.STACK],\r\n    happiness: 96,\r\n    experience: 80,\r\n    favorite: true,\r\n    icon: 'angular',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.MATERIAL_UI,\r\n    level: 79,\r\n    color: '#0081CB',\r\n    category: [SKILL_CATEGORY.FRONT_END, SKILL_CATEGORY.FRAMEWORK, SKILL_CATEGORY.STACK],\r\n    happiness: 70,\r\n    experience: 40,\r\n    icon: 'material-ui',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.BULMA,\r\n    color: '#00D1B2',\r\n    category: [SKILL_CATEGORY.FRONT_END, SKILL_CATEGORY.FRAMEWORK, SKILL_CATEGORY.STACK],\r\n    icon: 'bulma',\r\n\r\n  },\r\n  {\r\n    title: SKILL_TITLE.TAILWIND_CSS,\r\n    level: 30,\r\n    color: '#38B2AC',\r\n    category: [SKILL_CATEGORY.FRONT_END, SKILL_CATEGORY.FRAMEWORK, SKILL_CATEGORY.STACK],\r\n    happiness: 75,\r\n    experience: 10,\r\n    icon: 'tailwind-css',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.JQUERY,\r\n    level: 100,\r\n    color: '#0769AD',\r\n    category: [SKILL_CATEGORY.FRONT_END, SKILL_CATEGORY.LIBRARY, SKILL_CATEGORY.STACK],\r\n    happiness: 68,\r\n    experience: 100,\r\n    icon: 'jquery',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.RXJS,\r\n    level: 80,\r\n    color: '#B7178C',\r\n    category: [SKILL_CATEGORY.FRONT_END, SKILL_CATEGORY.LIBRARY, SKILL_CATEGORY.STACK],\r\n    happiness: 100,\r\n    experience: 70,\r\n    icon: 'rxjs',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.NESTJS,\r\n    level: 90,\r\n    color: '#E0234E',\r\n    category: [SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.FRAMEWORK, SKILL_CATEGORY.STACK],\r\n    happiness: 90,\r\n    experience: 60,\r\n    icon: 'nestjs',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.EXPRESS,\r\n    level: 80,\r\n    color: '#73b22a',\r\n    category: [SKILL_CATEGORY.BACK_END, SKILL_CATEGORY.FRAMEWORK, SKILL_CATEGORY.STACK],\r\n    happiness: 85,\r\n    experience: 40,\r\n    icon: 'node-js',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.JEST,\r\n    level: 50,\r\n    color: '#C21325',\r\n    category: [SKILL_CATEGORY.E2E],\r\n    happiness: 60,\r\n    experience: 5,\r\n    icon: 'jest',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.MOCHA,\r\n    color: '#8D6748',\r\n    category: [SKILL_CATEGORY.E2E],\r\n    icon: 'mocha',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.CYPRUS,\r\n    color: '#17202C',\r\n    category: [SKILL_CATEGORY.E2E],\r\n    icon: 'cyprus',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.JASMINE,\r\n    color: '#8A4182',\r\n    category: [SKILL_CATEGORY.E2E],\r\n    icon: 'jasmine',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.KARMA,\r\n    level: 40,\r\n    color: '#C32F27',\r\n    category: [SKILL_CATEGORY.E2E],\r\n    happiness: 40,\r\n    experience: 5,\r\n    icon: 'karma',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.PROTRACTOR,\r\n    color: '#E1583E',\r\n    category: [SKILL_CATEGORY.E2E],\r\n    icon: 'protractor',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.STORYBOOK,\r\n    level: 94,\r\n    color: '#FF4785',\r\n    category: [SKILL_CATEGORY.FRONT_END, SKILL_CATEGORY.OTHERS],\r\n    happiness: 95,\r\n    experience: 60,\r\n    favorite: true,\r\n    icon: 'storybook',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.DOCKER,\r\n    level: 65,\r\n    color: '#2496ED',\r\n    category: [SKILL_CATEGORY.DEVOPS, SKILL_CATEGORY.OTHERS],\r\n    happiness: 60,\r\n    experience: 60,\r\n    icon: 'docker',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.NGINX,\r\n    level: 30,\r\n    color: '#009639',\r\n    category: [SKILL_CATEGORY.DEVOPS],\r\n    happiness: 45,\r\n    experience: 10,\r\n    icon: 'nginx',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.APACHE,\r\n    level: 10,\r\n    color: '#D22128',\r\n    category: [SKILL_CATEGORY.DEVOPS],\r\n    icon: 'apache',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.AWS,\r\n    level: 20,\r\n    color: '#232F3E',\r\n    category: [SKILL_CATEGORY.DEVOPS],\r\n    happiness: 20,\r\n    experience: 10,\r\n    icon: 'aws',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.GITHUB,\r\n    level: 100,\r\n    color: '#181717',\r\n    category: [SKILL_CATEGORY.OTHERS, SKILL_CATEGORY.TOOL],\r\n    happiness: 95,\r\n    experience: 100,\r\n    icon: 'github',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.GITLAB,\r\n    level: 100,\r\n    color: '#FCA121',\r\n    category: [SKILL_CATEGORY.OTHERS, SKILL_CATEGORY.TOOL],\r\n    happiness: 94,\r\n    experience: 100,\r\n    icon: 'gitlab',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.JENKINS,\r\n    level: 60,\r\n    color: '#D24939',\r\n    category: [SKILL_CATEGORY.DEVOPS, SKILL_CATEGORY.TOOL],\r\n    happiness: 50,\r\n    experience: 80,\r\n    icon: 'jenkins',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.SONARQUBE,\r\n    level: 35,\r\n    color: '#4E9BCD',\r\n    category: [SKILL_CATEGORY.DEVOPS, SKILL_CATEGORY.TOOL],\r\n    happiness: 50,\r\n    experience: 40,\r\n    icon: 'sonarqube',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.BITBUCKET,\r\n    color: '#205081',\r\n    category: [SKILL_CATEGORY.OTHERS, SKILL_CATEGORY.TOOL],\r\n    icon: 'bitbucket',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.JIRA,\r\n    color: '#0052CC',\r\n    category: [SKILL_CATEGORY.OTHERS, SKILL_CATEGORY.TOOL],\r\n    icon: 'jira',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.CONFLUENCE,\r\n    color: '#172B4D',\r\n    category: [SKILL_CATEGORY.OTHERS, SKILL_CATEGORY.TOOL],\r\n    icon: 'confluence',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.POSTMAN,\r\n    level: 85,\r\n    color: '#FF6C37',\r\n    category: [SKILL_CATEGORY.OTHERS, SKILL_CATEGORY.TOOL],\r\n    happiness: 90,\r\n    experience: 80,\r\n    icon: 'postman',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.BASH,\r\n    level: 20,\r\n    color: '#4EAA25',\r\n    category: [SKILL_CATEGORY.DEVOPS],\r\n    icon: 'bash',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.LINUX,\r\n    level: 80,\r\n    color: '#FCC624',\r\n    category: [SKILL_CATEGORY.OS],\r\n    happiness: 60,\r\n    experience: 30,\r\n    icon: 'linux',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.WINDOWS,\r\n    level: 100,\r\n    color: '#0078D6',\r\n    category: [SKILL_CATEGORY.OS],\r\n    happiness: 90,\r\n    experience: 100,\r\n    icon: 'windows',\r\n  },\r\n\r\n  {\r\n    title: SKILL_TITLE.MAC_OS,\r\n    level: 90,\r\n    color: '#999999',\r\n    category: [SKILL_CATEGORY.OS],\r\n    happiness: 95,\r\n    experience: 90,\r\n    favorite: true,\r\n    icon: 'mac-os',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.FLASH,\r\n    level: 85,\r\n    color: '#FF0000',\r\n    category: [SKILL_CATEGORY.APPLICATION],\r\n    happiness: 65,\r\n    experience: 70,\r\n    icon: 'flash',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.TOON_BOOM_HARMONY,\r\n    level: 90,\r\n    color: '#bc5e66',\r\n    category: [SKILL_CATEGORY.APPLICATION],\r\n    happiness: 75,\r\n    experience: 80,\r\n    icon: 'toon-boom-harmony',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.MAYA3D,\r\n    level: 70,\r\n    color: '#0696D7',\r\n    category: [SKILL_CATEGORY.APPLICATION],\r\n    happiness: 65,\r\n    experience: 70,\r\n    icon: 'maya3d',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.BLENDER,\r\n    level: 50,\r\n    color: '#F5792A',\r\n    category: [SKILL_CATEGORY.APPLICATION],\r\n    happiness: 40,\r\n    experience: 20,\r\n    icon: 'blender',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.PHOTOSHOP,\r\n    level: 100,\r\n    color: '#31A8FF',\r\n    category: [\r\n      SKILL_CATEGORY.APPLICATION,\r\n      SKILL_CATEGORY.DESIGN\r\n    ],\r\n    happiness: 85,\r\n    experience: 100,\r\n    icon: 'photoshop',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.ILLUSTRATOR,\r\n    level: 90,\r\n    color: '#FF9A00',\r\n    category: [\r\n      SKILL_CATEGORY.APPLICATION,\r\n      SKILL_CATEGORY.DESIGN\r\n    ],\r\n    happiness: 80,\r\n    experience: 90,\r\n    icon: 'illustrator',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.FIGMA,\r\n    color: '#F24E1E',\r\n    category: [\r\n      SKILL_CATEGORY.APPLICATION,\r\n      SKILL_CATEGORY.DESIGN\r\n    ],\r\n    icon: 'figma',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.XD,\r\n    color: '#FF61F6',\r\n    category: [\r\n      SKILL_CATEGORY.APPLICATION,\r\n      SKILL_CATEGORY.DESIGN\r\n    ],\r\n    icon: 'xd',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.PREMIERE_PRO,\r\n    level: 100,\r\n    color: '#100d6a',\r\n    category: [\r\n      SKILL_CATEGORY.APPLICATION,\r\n      SKILL_CATEGORY.DESIGN\r\n    ],\r\n    happiness: 85,\r\n    experience: 80,\r\n    icon: 'premiere-pro',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.AFTER_EFFECTS,\r\n    level: 90,\r\n    color: '#100d6a',\r\n    category: [\r\n      SKILL_CATEGORY.APPLICATION,\r\n      SKILL_CATEGORY.DESIGN\r\n    ],\r\n    happiness: 85,\r\n    experience: 80,\r\n    icon: 'after-effects',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.INDESIGN,\r\n    level: 90,\r\n    color: '#820821',\r\n    category: [\r\n      SKILL_CATEGORY.APPLICATION,\r\n      SKILL_CATEGORY.DESIGN\r\n    ],\r\n    happiness: 75,\r\n    experience: 80,\r\n    icon: 'indesign',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.CUBASE,\r\n    level: 100,\r\n    color: '#970d0d',\r\n    category: [\r\n      SKILL_CATEGORY.APPLICATION,\r\n      SKILL_CATEGORY.MUSIC\r\n    ],\r\n    happiness: 90,\r\n    experience: 80,\r\n    icon: 'cubase',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.REAPER,\r\n    level: 80,\r\n    color: '#19da8a',\r\n    category: [\r\n      SKILL_CATEGORY.APPLICATION,\r\n      SKILL_CATEGORY.MUSIC\r\n    ],\r\n    happiness: 70,\r\n    experience: 60,\r\n    icon: 'mix',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.PRO_TOOLS,\r\n    level: 70,\r\n    color: '#6018bc',\r\n    category: [\r\n      SKILL_CATEGORY.APPLICATION,\r\n      SKILL_CATEGORY.MUSIC\r\n    ],\r\n    happiness: 60,\r\n    experience: 40,\r\n    icon: 'pro-tools',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.ABLETON_LIVE,\r\n    level: 65,\r\n    color: '#000000',\r\n    category: [\r\n      SKILL_CATEGORY.APPLICATION,\r\n      SKILL_CATEGORY.MUSIC\r\n    ],\r\n    happiness: 70,\r\n    experience: 80,\r\n    icon: 'ableton-live',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.WORDPRESS,\r\n    level: 100,\r\n    color: '#21759B',\r\n    category: [SKILL_CATEGORY.CMS],\r\n    happiness: 92,\r\n    experience: 100,\r\n    favorite: true,\r\n    icon: 'wordpress',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.JOOMLA,\r\n    level: 45,\r\n    color: '#5091CD',\r\n    category: [SKILL_CATEGORY.CMS],\r\n    happiness: 50,\r\n    experience: 10,\r\n    icon: 'joomla',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.DRUPAL,\r\n    level: 80,\r\n    color: '#0C76AB',\r\n    category: [SKILL_CATEGORY.CMS],\r\n    happiness: 30,\r\n    experience: 20,\r\n    icon: 'drupal',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.MAGENTO,\r\n    color: '#F26322',\r\n    category: [SKILL_CATEGORY.CMS],\r\n    icon: 'magento',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.SHOPIFY,\r\n    color: '#96BF48',\r\n    category: [SKILL_CATEGORY.CMS],\r\n    icon: 'shopify',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.WOOCOMMERCE,\r\n    level: 100,\r\n    color: '#96588A',\r\n    category: [SKILL_CATEGORY.CMS],\r\n    happiness: 90,\r\n    experience: 100,\r\n    icon: 'woocommerce',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.PRESTASHOP,\r\n    level: 25,\r\n    color: '#F05A22',\r\n    category: [SKILL_CATEGORY.CMS],\r\n    icon: 'prestashop',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.OPEN_CART,\r\n    color: '#E67E22',\r\n    category: [SKILL_CATEGORY.CMS],\r\n    icon: 'open-cart',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.WEBSTORM,\r\n    level: 100,\r\n    color: '#58e6cc',\r\n    category: [SKILL_CATEGORY.IDE],\r\n    happiness: 94,\r\n    experience: 85,\r\n    favorite: true,\r\n    icon: 'webstorm',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.VISUAL_STUDIO_CODE,\r\n    level: 100,\r\n    color: '#007ACC',\r\n    category: [SKILL_CATEGORY.IDE],\r\n    happiness: 80,\r\n    experience: 95,\r\n    icon: 'visual-studio-code',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.SUBLIME_TEXT,\r\n    level: 100,\r\n    color: '#FF9800',\r\n    category: [SKILL_CATEGORY.IDE],\r\n    happiness: 60,\r\n    experience: 95,\r\n    icon: 'sublime-text',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.ATOM,\r\n    level: 70,\r\n    color: '#66595C',\r\n    category: [SKILL_CATEGORY.IDE],\r\n    happiness: 50,\r\n    experience: 20,\r\n    icon: 'atom',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.BRACKETS,\r\n    level: 100,\r\n    color: '#F27405',\r\n    category: [SKILL_CATEGORY.IDE],\r\n    happiness: 50,\r\n    experience: 100,\r\n    icon: 'brackets.svg',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.PHP_STORM,\r\n    level: 100,\r\n    color: '#9b09e5',\r\n    category: [SKILL_CATEGORY.IDE],\r\n    happiness: 90,\r\n    experience: 80,\r\n    icon: 'php-storm',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.XCODE,\r\n    level: 60,\r\n    color: '#1575F9',\r\n    category: [SKILL_CATEGORY.IDE],\r\n    happiness: 80,\r\n    experience: 30,\r\n    icon: 'xcode',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.TRELLO,\r\n    level: 90,\r\n    color: '#0079BF',\r\n    category: [SKILL_CATEGORY.OTHERS, SKILL_CATEGORY.TOOL],\r\n    happiness: 70,\r\n    experience: 100,\r\n    icon: 'trello'\r\n  },\r\n  {\r\n    title: SKILL_TITLE.CLICK_UP,\r\n    level: 100,\r\n    color: '#7AC943',\r\n    category: [SKILL_CATEGORY.OTHERS, SKILL_CATEGORY.TOOL],\r\n    happiness: 85,\r\n    experience: 100,\r\n    icon: 'click-up'\r\n  },\r\n  {\r\n    title: SKILL_TITLE.WRIKE,\r\n    level: 95,\r\n    color: '#00AEEF',\r\n    category: [SKILL_CATEGORY.OTHERS, SKILL_CATEGORY.TOOL],\r\n    happiness: 60,\r\n    experience: 80,\r\n    icon: 'wrike'\r\n  },\r\n  {\r\n    title: SKILL_TITLE.SLACK,\r\n    level: 70,\r\n    color: '#4A154B',\r\n    category: [SKILL_CATEGORY.OTHERS, SKILL_CATEGORY.TOOL],\r\n    happiness: 70,\r\n    experience: 80,\r\n    icon: 'slack'\r\n  },\r\n  {\r\n    title: SKILL_TITLE.DISCORD,\r\n    level: 100,\r\n    color: '#7289DA',\r\n    category: [SKILL_CATEGORY.OTHERS, SKILL_CATEGORY.TOOL],\r\n    happiness: 95,\r\n    experience: 100,\r\n    icon: 'discord'\r\n  },\r\n  {\r\n    title: SKILL_TITLE.TECHNICAL_ENGLISH,\r\n    level: 100,\r\n    color: '#F5F5F5',\r\n    category: [SKILL_CATEGORY.OTHERS],\r\n    happiness: 95,\r\n    experience: 100,\r\n    icon: 'english'\r\n  },\r\n  {\r\n    title: SKILL_TITLE.FRENCH,\r\n    level: 100,\r\n    color: '#F5F5F5',\r\n    category: [SKILL_CATEGORY.OTHERS],\r\n    happiness: 95,\r\n    experience: 100,\r\n    icon: 'french'\r\n  },\r\n  {\r\n    title: SKILL_TITLE.AGILE,\r\n    level: 80,\r\n    color: '#F5F5F5',\r\n    category: [SKILL_CATEGORY.OTHERS],\r\n    happiness: 95,\r\n    experience: 75,\r\n    icon: 'agile'\r\n  },\r\n  {\r\n    title: SKILL_TITLE.MASTERING,\r\n    level: 85,\r\n    color: '#e84910',\r\n    category: [SKILL_CATEGORY.MUSIC],\r\n    happiness: 95,\r\n    experience: 70,\r\n    icon: 'mao',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.MIXING,\r\n    level: 90,\r\n    color: '#e89c10',\r\n    category: [SKILL_CATEGORY.MUSIC],\r\n    happiness: 95,\r\n    experience: 80,\r\n    icon: 'mao',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.RECORDING,\r\n    level: 95,\r\n    color: '#e8e310',\r\n    category: [SKILL_CATEGORY.MUSIC],\r\n    happiness: 95,\r\n    experience: 80,\r\n    icon: 'recording',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.MUSIC_THEORY,\r\n    level: 100,\r\n    color: '#10e8e3',\r\n    category: [SKILL_CATEGORY.MUSIC],\r\n    happiness: 95,\r\n    experience: 100,\r\n    icon: 'composition',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.MAO,\r\n    level: 80,\r\n    color: '#e81010',\r\n    category: [SKILL_CATEGORY.MUSIC],\r\n    happiness: 95,\r\n    experience: 70,\r\n    icon: 'mao',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.COMPOSITION,\r\n    level: 85,\r\n    color: '#10e8e3',\r\n    category: [SKILL_CATEGORY.MUSIC],\r\n    happiness: 90,\r\n    experience: 70,\r\n    icon: 'composition',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.VIOLIN,\r\n    level: 95,\r\n    color: '#e8e310',\r\n    category: [SKILL_CATEGORY.MUSIC],\r\n    happiness: 95,\r\n    experience: 100,\r\n    icon: 'violin',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.PIANO,\r\n    level: 40,\r\n    color: '#e8e310',\r\n    category: [SKILL_CATEGORY.MUSIC],\r\n    happiness: 80,\r\n    experience: 60,\r\n    icon: 'piano',\r\n  },\r\n  {\r\n    title: SKILL_TITLE.GUITAR,\r\n    level: 30,\r\n    color: '#e8e310',\r\n    category: [SKILL_CATEGORY.MUSIC],\r\n    happiness: 70,\r\n    experience: 20,\r\n    icon: 'guitar',\r\n  }\r\n]",
                     "rawdescription": "Skills data",
                     "description": "<p>Skills data</p>\n"
                 }
@@ -18748,7 +18760,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "object",
-                    "defaultValue": "{\r\n  /**\r\n   * Best skills favorite.\r\n   * Happiness 100\r\n   * Order by happiness ASC\r\n   */\r\n  [PRE_MADE_QUERY.STACKS_BEST_FAVORITES]: {\r\n    limit: 5,\r\n    filters: [\r\n      {name: DATA_FIELD.FAVORITE, value: true},\r\n      {name: DATA_FIELD.HAPPINESS, value: 100},\r\n    ],\r\n    orderBy: [{name: ORDER_FIELD.HAPPINESS}],\r\n  } as QueryInterface,\r\n\r\n  /**\r\n   * Last 5 projects\r\n   * Order by date ASC\r\n   */\r\n  [PRE_MADE_QUERY.LAST_PROJECTS]: {\r\n    limit: 5,\r\n    orderBy: [{name: ORDER_FIELD.END_DATE, direction: 'ASC'}],\r\n  } as QueryInterface,\r\n\r\n  /**\r\n   * Education by date ASC\r\n   * Order by date ASC\r\n   */\r\n  [PRE_MADE_QUERY.EDUCATION_BY_DATE_ORDER]: {\r\n    orderBy: [{name: ORDER_FIELD.START_DATE, direction: 'ASC'}],\r\n  } as QueryInterface,\r\n\r\n\r\n  /**\r\n   * Work by date\r\n   * Order by date ASC\r\n   */\r\n  [PRE_MADE_QUERY.WORK_BY_DATE_ORDER]: {\r\n    orderBy: [{name: ORDER_FIELD.START_DATE, direction: 'ASC'}],\r\n  } as QueryInterface,\r\n\r\n  /**\r\n   * All stacks\r\n   */\r\n  [PRE_MADE_QUERY.ALL_STACKS]: {\r\n    filters: [\r\n      {name: DATA_FIELD.SKILL_CATEGORY, value: SKILL_CATEGORY.CODE_LANGUAGE},\r\n      {name: DATA_FIELD.SKILL_CATEGORY, value: SKILL_CATEGORY.FRAMEWORK},\r\n      {name: DATA_FIELD.SKILL_CATEGORY, value: SKILL_CATEGORY.LIBRARY},\r\n      {name: DATA_FIELD.SKILL_CATEGORY, value: SKILL_CATEGORY.DEVOPS},\r\n      {name: DATA_FIELD.SKILL_CATEGORY, value: SKILL_CATEGORY.DATABASE},\r\n    ],\r\n    orderBy: [\r\n      {name: ORDER_FIELD.LEVEL, direction: 'ASC'},\r\n    ],\r\n  } as QueryInterface,\r\n\r\n}"
+                    "defaultValue": "{\r\n  /**\r\n   * Best skills favorite.\r\n   * Happiness 100\r\n   * Order by happiness ASC\r\n   */\r\n  [PRE_MADE_QUERY.STACKS_BEST_FAVORITES]: {\r\n    limit: 5,\r\n    filters: [\r\n      {name: DATA_FIELD.FAVORITE, value: true},\r\n      {name: DATA_FIELD.HAPPINESS, value: 100},\r\n    ],\r\n    orderBy: [{name: ORDER_FIELD.HAPPINESS}],\r\n  } as QueryInterface,\r\n\r\n  /**\r\n   * Last 5 projects\r\n   * Order by date ASC\r\n   */\r\n  [PRE_MADE_QUERY.LAST_PROJECTS]: {\r\n    limit: 5,\r\n    orderBy: [{name: ORDER_FIELD.END_DATE, direction: 'ASC'}],\r\n  } as QueryInterface,\r\n\r\n  /**\r\n   * Education by date ASC\r\n   * Order by date ASC\r\n   */\r\n  [PRE_MADE_QUERY.EDUCATION_BY_DATE_ORDER]: {\r\n    orderBy: [{name: ORDER_FIELD.START_DATE, direction: 'ASC'}],\r\n  } as QueryInterface,\r\n\r\n\r\n  /**\r\n   * Work by date\r\n   * Order by date ASC\r\n   */\r\n  [PRE_MADE_QUERY.WORK_BY_DATE_ORDER]: {\r\n    orderBy: [{name: ORDER_FIELD.START_DATE, direction: 'ASC'}],\r\n  } as QueryInterface,\r\n\r\n  /**\r\n   * All stacks\r\n   */\r\n  [PRE_MADE_QUERY.ALL_STACKS]: {\r\n    filters: [\r\n      {name: DATA_FIELD.SKILL_CATEGORY, value: SKILL_CATEGORY.STACK},\r\n    ],\r\n    orderBy: [\r\n      {name: ORDER_FIELD.LEVEL, direction: 'ASC'},\r\n    ],\r\n  } as QueryInterface,\r\n\r\n  /**\r\n   * Others skills\r\n   */\r\n  [PRE_MADE_QUERY.OTHERS_SKILLS]: {\r\n    filters: [\r\n      {name: DATA_FIELD.SKILL_CATEGORY, value: SKILL_CATEGORY.DEVOPS},\r\n      {name: DATA_FIELD.SKILL_CATEGORY, value: SKILL_CATEGORY.CMS},\r\n      {name: DATA_FIELD.SKILL_CATEGORY, value: SKILL_CATEGORY.OS},\r\n      {name: DATA_FIELD.SKILL_CATEGORY, value: SKILL_CATEGORY.TOOL},\r\n      {name: DATA_FIELD.SKILL_CATEGORY, value: SKILL_CATEGORY.E2E},\r\n      {name: DATA_FIELD.SKILL_CATEGORY, value: SKILL_CATEGORY.IDE},\r\n    ],\r\n    orderBy: [\r\n      {name: ORDER_FIELD.LEVEL, direction: 'ASC'},\r\n    ],\r\n  } as QueryInterface,\r\n\r\n}"
                 }
             ],
             "src/app/modules/main/components/profile/profile.stories.ts": [
@@ -19333,6 +19345,12 @@
                             "deprecated": false,
                             "deprecationMessage": "",
                             "value": "Design"
+                        },
+                        {
+                            "name": "STACK",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "value": "Stack"
                         },
                         {
                             "name": "OTHERS",
@@ -20118,6 +20136,12 @@
                             "deprecated": false,
                             "deprecationMessage": "",
                             "value": "allStacks"
+                        },
+                        {
+                            "name": "OTHERS_SKILLS",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "value": "othersSkills"
                         }
                     ],
                     "ctype": "miscellaneous",
@@ -20367,7 +20391,7 @@
         ]
     },
     "coverage": {
-        "count": 34,
+        "count": 35,
         "status": "medium",
         "files": [
             {
@@ -20662,8 +20686,8 @@
                 "type": "class",
                 "linktype": "classe",
                 "name": "EntityQueryModel",
-                "coveragePercent": 78,
-                "coverageCount": "11/14",
+                "coveragePercent": 76,
+                "coverageCount": "10/13",
                 "status": "very-good"
             },
             {
@@ -21302,9 +21326,9 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "PageSkillsComponent",
-                "coveragePercent": 25,
-                "coverageCount": "2/8",
-                "status": "low"
+                "coveragePercent": 44,
+                "coverageCount": "4/9",
+                "status": "medium"
             },
             {
                 "filePath": "src/app/modules/main/components/page-skills/page-skills.stories.ts",
