@@ -8175,7 +8175,7 @@
         },
         {
             "name": "CircleMenuItemComponent",
-            "id": "component-CircleMenuItemComponent-77b501cf2006abb1ff2ad8aab86b475e9906d21689088989bb80495c0aeb0357cb27d2b376c33d011d1a46121e9e0939ef664dd2fc025031ab3ec97cb6dc7d90",
+            "id": "component-CircleMenuItemComponent-d7b4ddfd55f67079046d8cb0fd4cb8724f6756a11006f18a807b5e71ea5a8e6d6a1f18144ac6b6e5d742b16565b37bd3769f5e06b5f18e79a87d41e1b889035c",
             "file": "src/app/modules/main/components/circle-menu-item/circle-menu-item.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -8371,7 +8371,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 180,
+                    "line": 172,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -8389,19 +8389,6 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nCalculate the position points of the stroke\nline of the circle arc to the content box.\n",
                     "description": "<p>Calculate the position points of the stroke\nline of the circle arc to the content box.</p>\n",
-                    "modifierKind": [
-                        121
-                    ]
-                },
-                {
-                    "name": "_old_animateWeight",
-                    "args": [],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 172,
-                    "deprecated": false,
-                    "deprecationMessage": "",
                     "modifierKind": [
                         121
                     ]
@@ -8463,7 +8450,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import {Component, HostBinding, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';\nimport {animateValueUtil} from \"../../../../utils/animate-value.util\";\nimport {animate, state, style, transition, trigger} from \"@angular/animations\";\n\n@Component({\n  selector: 'cv-circle-menu-item',\n  templateUrl: './circle-menu-item.component.html',\n  styleUrls: ['./circle-menu-item.component.scss'],\n  animations: [\n    trigger('activeWidthAnimation',[\n      state('active',\n        style({\n        width: '{{width}}',\n        }),\n        {params: {width: '100px'}}\n      ),\n      state('inactive',\n        style({\n          width: 0,\n        }),\n      ),\n      transition('inactive => active', animate('200ms cubic-bezier(.28,0,0,1)')),\n      transition('active => inactive', animate('70ms 30ms cubic-bezier(.28,0,0,1)')),\n    ])\n  ]\n})\nexport class CircleMenuItemComponent implements OnChanges, OnInit {\n\n  /**\n   * Title of the menu item.\n   */\n  @Input() public title: string = 'Some Title';\n\n  /**\n   * Description of the menu item.\n   */\n  @Input() public description: string = 'Lorem ipsum dolor sit amet';\n\n  public weightValue = 0;\n\n  /**\n   * Size of the circle diameter.\n   */\n  @Input() public size = 310;\n\n  /**\n   * Fill percentage of the circle arc\n   */\n  @Input() public fillPercentage: number = 30;\n\n  /**\n   * Position of the circle arc.\n   */\n  @Input() public positionDegree: number = 0;\n\n  /**\n   * Max Weight\n   */\n  @Input() public weight: number = 80;\n\n  /**\n   * Torque in degrees of the starting point for the\n   * content box position.\n   * Default is 0. Range is -180 to 180.\n   */\n  @Input() public torque = 0;\n\n  /**\n   * Distance of the content box from the edge of the circle arc.\n   */\n  @Input() public contentOffset = 75;\n\n  /**\n   * Position in percentage from top left corner of the\n   * circle wrapper.\n   */\n  public svgWrapperPosition: { x: number, y: number } = {x: 0, y: 0};\n\n  /**\n   * Rotate angle of the svg wrapper.\n   */\n  public svgWrapperRotate: string = 'rotate(0deg)';\n\n  /**\n   * Activate the circle menu item\n   * add active class.\n   */\n  @HostBinding('class.active') @Input() public active = true;\n\n  /**\n   * Position of the content box.\n   * Same as swgWrapperPosition but with 50px offset.\n   */\n  public contentPosition : { x: number, y: number } = {x: 0, y: 0};\n\n  /**\n   * Add left or right class to the content box.\n   * left if the content box is on the left side of the circle arc.\n   * right if the content box is on the right side of the circle arc.\n   */\n  public contentSide: 'left' | 'right' = 'left';\n\n  /**\n   * @inheritDoc\n   */\n  public ngOnInit(): void {\n    this._calculateStrokesPoints();\n  }\n\n  /**\n   * Calculate the position points of the stroke\n   * line of the circle arc to the content box.\n   */\n  private _calculateStrokesPoints(): void {\n    const fillDegree = this.fillPercentage / 100 * 360;\n    const arcCenterAngle = (this.positionDegree + fillDegree / 2) - 90 + this.torque;\n    this.svgWrapperRotate = `rotate(${-arcCenterAngle - 180}deg)`;\n\n    /**\n     * Calculate svgWrapperPosition\n     * x is the distance in % between the left side of the\n     * circle wrapper and center of the circle arc.\n     * y is the distance in % between the top side of the\n     * circle wrapper and center of the circle arc.\n     */\n    /** Formula: x = cos(angle) * radius */\n    const x = Math.cos(arcCenterAngle * Math.PI / 180) * 50;\n    /** Formula: y = sin(angle) * radius */\n    const y = Math.sin(arcCenterAngle * Math.PI / 180) * 50;\n\n    // Reverse x and add 50% to x and y to get the position\n    this.svgWrapperPosition = {x:100 - (x + 50), y: y + 50};\n\n    /**\n     * Must calculate the offset radius to get the correct position of the content box.\n     * The size of the circle is in px and the contentOffset is in px.\n     * But the position of the content box is in %.\n     * So we need to calculate the offset radius in %.\n     * The offset radius is the radius of the circle arc + the contentOffset.\n     */\n    const halfSize = (this.size + this.weight) / 2;\n    const offsetRadius = (halfSize + this.contentOffset) / halfSize * 50;\n    const contentX = Math.cos(arcCenterAngle * Math.PI / 180) * offsetRadius;\n    const contentY = Math.sin(arcCenterAngle * Math.PI / 180) * offsetRadius;\n    this.contentPosition = {\n      x: 100 - (contentX + 50),\n      y: contentY + 50\n    }\n\n    /** Set the content side class. */\n    this.contentSide = arcCenterAngle > 90 && arcCenterAngle <= 270 ? 'right' : 'left';\n  }\n\n  /**\n   * @inheritDoc\n   */\n  public ngOnChanges(changes: SimpleChanges): void {\n    if ('active' in changes) {\n      this._animateWeight();\n    }\n\n    if ('maxWeight' in changes) {\n      this.weightValue = this.active ? this.weight : 0;\n    }\n\n    if ('positionDegree' in changes || 'fillPercentage' in changes\n      || 'torque' in changes  ||'contentOffset' in changes) {\n      this._calculateStrokesPoints();\n    }\n  }\n\n  private _old_animateWeight(): void {\n    const from = this.active ? 0 : this.weight;\n    const to = this.active ? this.weight : 0;\n    animateValueUtil((value) => {\n      this.weightValue = value;\n    }, from, to, 300);\n  }\n\n  private _animateWeight(): void {\n    const from = this.active ? 0 : this.weight;\n    const to = this.active ? this.weight : 0;\n    const ease = this.active ?\n      [.29,0,0,1] as [number, number, number, number]\n      : [.49,0,.85,.89] as [number, number, number, number];\n    animateValueUtil((value) => {\n      this.weightValue = value;\n    }, from, to, 300, ease);\n  }\n}\n",
+            "sourceCode": "import {Component, HostBinding, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';\nimport {animateValueUtil} from \"../../../../utils/animate-value.util\";\nimport {animate, state, style, transition, trigger} from \"@angular/animations\";\n\n@Component({\n  selector: 'cv-circle-menu-item',\n  templateUrl: './circle-menu-item.component.html',\n  styleUrls: ['./circle-menu-item.component.scss'],\n  animations: [\n    trigger('activeWidthAnimation',[\n      state('active',\n        style({\n        width: '{{width}}',\n        }),\n        {params: {width: '100px'}}\n      ),\n      state('inactive',\n        style({\n          width: 0,\n        }),\n      ),\n      transition('inactive => active', animate('200ms cubic-bezier(.28,0,0,1)')),\n      transition('active => inactive', animate('70ms 30ms cubic-bezier(.28,0,0,1)')),\n    ])\n  ]\n})\nexport class CircleMenuItemComponent implements OnChanges, OnInit {\n\n  /**\n   * Title of the menu item.\n   */\n  @Input() public title: string = 'Some Title';\n\n  /**\n   * Description of the menu item.\n   */\n  @Input() public description: string = 'Lorem ipsum dolor sit amet';\n\n  public weightValue = 0;\n\n  /**\n   * Size of the circle diameter.\n   */\n  @Input() public size = 310;\n\n  /**\n   * Fill percentage of the circle arc\n   */\n  @Input() public fillPercentage: number = 30;\n\n  /**\n   * Position of the circle arc.\n   */\n  @Input() public positionDegree: number = 0;\n\n  /**\n   * Max Weight\n   */\n  @Input() public weight: number = 80;\n\n  /**\n   * Torque in degrees of the starting point for the\n   * content box position.\n   * Default is 0. Range is -180 to 180.\n   */\n  @Input() public torque = 0;\n\n  /**\n   * Distance of the content box from the edge of the circle arc.\n   */\n  @Input() public contentOffset = 75;\n\n  /**\n   * Position in percentage from top left corner of the\n   * circle wrapper.\n   */\n  public svgWrapperPosition: { x: number, y: number } = {x: 0, y: 0};\n\n  /**\n   * Rotate angle of the svg wrapper.\n   */\n  public svgWrapperRotate: string = 'rotate(0deg)';\n\n  /**\n   * Activate the circle menu item\n   * add active class.\n   */\n  @HostBinding('class.active') @Input() public active = true;\n\n  /**\n   * Position of the content box.\n   * Same as swgWrapperPosition but with 50px offset.\n   */\n  public contentPosition : { x: number, y: number } = {x: 0, y: 0};\n\n  /**\n   * Add left or right class to the content box.\n   * left if the content box is on the left side of the circle arc.\n   * right if the content box is on the right side of the circle arc.\n   */\n  public contentSide: 'left' | 'right' = 'left';\n\n  /**\n   * @inheritDoc\n   */\n  public ngOnInit(): void {\n    this._calculateStrokesPoints();\n  }\n\n  /**\n   * Calculate the position points of the stroke\n   * line of the circle arc to the content box.\n   */\n  private _calculateStrokesPoints(): void {\n    const fillDegree = this.fillPercentage / 100 * 360;\n    const arcCenterAngle = (this.positionDegree + fillDegree / 2) - 90 + this.torque;\n    this.svgWrapperRotate = `rotate(${-arcCenterAngle - 180}deg)`;\n\n    /**\n     * Calculate svgWrapperPosition\n     * x is the distance in % between the left side of the\n     * circle wrapper and center of the circle arc.\n     * y is the distance in % between the top side of the\n     * circle wrapper and center of the circle arc.\n     */\n    /** Formula: x = cos(angle) * radius */\n    const x = Math.cos(arcCenterAngle * Math.PI / 180) * 50;\n    /** Formula: y = sin(angle) * radius */\n    const y = Math.sin(arcCenterAngle * Math.PI / 180) * 50;\n\n    // Reverse x and add 50% to x and y to get the position\n    this.svgWrapperPosition = {x:100 - (x + 50), y: y + 50};\n\n    /**\n     * Must calculate the offset radius to get the correct position of the content box.\n     * The size of the circle is in px and the contentOffset is in px.\n     * But the position of the content box is in %.\n     * So we need to calculate the offset radius in %.\n     * The offset radius is the radius of the circle arc + the contentOffset.\n     */\n    const halfSize = (this.size + this.weight) / 2;\n    const offsetRadius = (halfSize + this.contentOffset) / halfSize * 50;\n    const contentX = Math.cos(arcCenterAngle * Math.PI / 180) * offsetRadius;\n    const contentY = Math.sin(arcCenterAngle * Math.PI / 180) * offsetRadius;\n    this.contentPosition = {\n      x: 100 - (contentX + 50),\n      y: contentY + 50\n    }\n\n    /** Set the content side class. */\n    this.contentSide = arcCenterAngle > 90 && arcCenterAngle <= 270 ? 'right' : 'left';\n  }\n\n  /**\n   * @inheritDoc\n   */\n  public ngOnChanges(changes: SimpleChanges): void {\n    if ('active' in changes) {\n      this._animateWeight();\n    }\n\n    if ('maxWeight' in changes) {\n      this.weightValue = this.active ? this.weight : 0;\n    }\n\n    if ('positionDegree' in changes || 'fillPercentage' in changes\n      || 'torque' in changes  ||'contentOffset' in changes) {\n      this._calculateStrokesPoints();\n    }\n  }\n\n  private _animateWeight(): void {\n    const from = this.active ? 0 : this.weight;\n    const to = this.active ? this.weight : 0;\n    const ease = this.active ?\n      [.29,0,0,1] as [number, number, number, number]\n      : [.49,0,.85,.89] as [number, number, number, number];\n    animateValueUtil((value) => {\n      this.weightValue = value;\n    }, from, to, 300, ease);\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -12780,8 +12767,48 @@
             "templateData": "<p>page-contact works!</p>\n"
         },
         {
+            "name": "PageEducationComponent",
+            "id": "component-PageEducationComponent-0bfbb853d531c41c4e1e9e30d7b8714f18cac244bbb91d053913fba5826ac734bed8763724d01b475520fb7cbcc8d50dc06eb49d8c8185dfc23687f3bf997d55",
+            "file": "src/app/modules/main/components/page-education/page-education.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "cv-page-education",
+            "styleUrls": [
+                "./page-education.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./page-education.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'cv-page-education',\n  templateUrl: './page-education.component.html',\n  styleUrls: ['./page-education.component.scss']\n})\nexport class PageEducationComponent {\n\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "",
+                    "styleUrl": "./page-education.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "templateData": "<p>page-education works!</p>\n"
+        },
+        {
             "name": "PageHomeComponent",
-            "id": "component-PageHomeComponent-7697dc5982b93b5c5109d383173fd4a390c6c05816006ec0b40cac50f8efaa95fb334a98d526e3d6b183ff711ccf11ccc6d665713f4846e8956da85a5189219a",
+            "id": "component-PageHomeComponent-56821a8b1bdeeb5cdec635b8a1b93388e5ae1706f373dff67bebc0ea41cd3944639bbd8306f1203cfd4ee1058566f9efe5631faf9c8cccccdb48d40451201cc2",
             "file": "src/app/modules/main/components/page-home/page-home.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -12802,7 +12829,7 @@
             "propertiesClass": [
                 {
                     "name": "blocks",
-                    "defaultValue": "{\n    favoriteStacks: {\n      title: 'Mes Stacks préférées',\n      valueKey: DATA_FIELD.EXPERIENCE,\n      type: DATA_TYPE.SKILL,\n      query: PRE_MADE_QUERY.STACKS_BEST_FAVORITES\n    },\n    lastProjects: {\n      title: 'Mes derniers projets',\n      valueKey: DATA_FIELD.HAPPINESS,\n      type: DATA_TYPE.PROJECT,\n      query: PRE_MADE_QUERY.LAST_PROJECTS\n    }\n\n  }",
+                    "defaultValue": "{\n    favoriteStacks: {\n      title: 'Mes Stacks préférées',\n      valueKey: DATA_FIELD.EXPERIENCE,\n      type: DATA_TYPE.SKILL,\n      query: PRE_MADE_QUERY.STACKS_BEST_FAVORITES\n    },\n    lastProjects: {\n      title: 'Mes derniers projets',\n      valueKey: DATA_FIELD.HAPPINESS,\n      type: DATA_TYPE.PROJECT,\n      query: PRE_MADE_QUERY.LAST_PROJECTS\n    },\n    lastWorks: {\n      title: 'Mes derniers jobs',\n      type: DATA_TYPE.WORK,\n      query: PRE_MADE_QUERY.WORK_BY_DATE_ORDER\n    }\n\n  }",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "object",
@@ -12853,7 +12880,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import {Component, HostBinding} from '@angular/core';\nimport {DATA_FIELD, DATA_TYPE} from '../../../../enums/data.enum';\nimport {PRE_MADE_QUERY} from '../../../../enums/premade-query.enum';\n\n@Component({\n  selector: 'cv-page-home',\n  templateUrl: './page-home.component.html',\n  styleUrls: ['./page-home.component.scss']\n})\nexport class PageHomeComponent {\n\n  @HostBinding('class.cv-page') public readonly cvPageClass = true;\n\n  /**\n   * Blocks data\n   */\n  public blocks = {\n    favoriteStacks: {\n      title: 'Mes Stacks préférées',\n      valueKey: DATA_FIELD.EXPERIENCE,\n      type: DATA_TYPE.SKILL,\n      query: PRE_MADE_QUERY.STACKS_BEST_FAVORITES\n    },\n    lastProjects: {\n      title: 'Mes derniers projets',\n      valueKey: DATA_FIELD.HAPPINESS,\n      type: DATA_TYPE.PROJECT,\n      query: PRE_MADE_QUERY.LAST_PROJECTS\n    }\n\n  };\n\n\n}\n",
+            "sourceCode": "import {Component, HostBinding} from '@angular/core';\nimport {DATA_FIELD, DATA_TYPE} from '../../../../enums/data.enum';\nimport {PRE_MADE_QUERY} from '../../../../enums/premade-query.enum';\n\n@Component({\n  selector: 'cv-page-home',\n  templateUrl: './page-home.component.html',\n  styleUrls: ['./page-home.component.scss']\n})\nexport class PageHomeComponent {\n\n  @HostBinding('class.cv-page') public readonly cvPageClass = true;\n\n  /**\n   * Blocks data\n   */\n  public blocks = {\n    favoriteStacks: {\n      title: 'Mes Stacks préférées',\n      valueKey: DATA_FIELD.EXPERIENCE,\n      type: DATA_TYPE.SKILL,\n      query: PRE_MADE_QUERY.STACKS_BEST_FAVORITES\n    },\n    lastProjects: {\n      title: 'Mes derniers projets',\n      valueKey: DATA_FIELD.HAPPINESS,\n      type: DATA_TYPE.PROJECT,\n      query: PRE_MADE_QUERY.LAST_PROJECTS\n    },\n    lastWorks: {\n      title: 'Mes derniers jobs',\n      type: DATA_TYPE.WORK,\n      query: PRE_MADE_QUERY.WORK_BY_DATE_ORDER\n    }\n\n  };\n\n\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -12862,7 +12889,7 @@
                 }
             ],
             "stylesData": "",
-            "templateData": "<cv-page-wrapper>\n  <cv-block left-top cvTitle=\"Qui suis-je ?\">\n    <p>\n      Je suis développeur web, spécialisé en front-end. Passioné par le développement web,\n      j'ai toujours été à la recherche de nouvelles techniques et d'innovations. Je suis un\n      autodidacte et j'aime apprendre sans cesse de nouvelles choses.\n    </p>\n    <p>\n      J'ai entièrement développé ce cv en ligne en utilisant le framework Angular 15. Seule l'utilisation\n      de Material Angular a été nécessaire pour la mise en forme.\n    </p>\n  </cv-block>\n\n  <cv-data-details center-top></cv-data-details>\n  <cv-block center-bottom [cvTitle]=\"blocks.lastProjects.title\">\n    <cv-list-chart-circles [valueKey]=\"blocks.lastProjects.valueKey\"\n                           [entityType]=\"blocks.lastProjects.type\"\n                           [queryArgs]=\"blocks.lastProjects.query\"></cv-list-chart-circles>\n  </cv-block>\n\n  <cv-block right-top [cvTitle]=\"blocks.favoriteStacks.title\" [disablePadding]=\"true\">\n    <cv-list-chart-gauge [valueKey]=\"blocks.favoriteStacks.valueKey\"\n                         [entityType]=\"blocks.favoriteStacks.type\"\n                         [queryArgs]=\"blocks.favoriteStacks.query\"></cv-list-chart-gauge>\n  </cv-block>\n\n  <cv-block right-bottom [cvTitle]=\"blocks.lastProjects.title\">\n    <cv-list-chart-circles [valueKey]=\"blocks.lastProjects.valueKey\"\n                           [entityType]=\"blocks.lastProjects.type\"\n                            [queryArgs]=\"blocks.lastProjects.query\"></cv-list-chart-circles>\n  </cv-block>\n\n</cv-page-wrapper>\n"
+            "templateData": "<cv-page-wrapper>\n  <cv-block left-top cvTitle=\"Qui suis-je ?\">\n    <p>\n      Je suis développeur web, spécialisé en front-end. Passioné par le développement web,\n      j'ai toujours été à la recherche de nouvelles techniques et d'innovations. Je suis un\n      autodidacte et j'aime apprendre sans cesse de nouvelles choses.\n    </p>\n    <p>\n      J'ai entièrement développé ce cv en ligne en utilisant le framework Angular 15. Seule l'utilisation\n      de Material Angular a été nécessaire pour la mise en forme.\n    </p>\n  </cv-block>\n\n  <cv-data-details center-top></cv-data-details>\n  <cv-block center-bottom [cvTitle]=\"blocks.lastProjects.title\">\n    <cv-list-chart-circles [valueKey]=\"blocks.lastProjects.valueKey\"\n                           [entityType]=\"blocks.lastProjects.type\"\n                           [queryArgs]=\"blocks.lastProjects.query\"></cv-list-chart-circles>\n  </cv-block>\n\n  <cv-block right-top [cvTitle]=\"blocks.favoriteStacks.title\" [disablePadding]=\"true\">\n    <cv-list-chart-gauge [valueKey]=\"blocks.favoriteStacks.valueKey\"\n                         [entityType]=\"blocks.favoriteStacks.type\"\n                         [queryArgs]=\"blocks.favoriteStacks.query\"></cv-list-chart-gauge>\n  </cv-block>\n\n  <cv-block right-bottom [cvTitle]=\"blocks.lastWorks.title\">\n    <cv-list [entityType]=\"blocks.lastWorks.type\" [queryArgs]=\"blocks.lastWorks.query\"></cv-list>\n  </cv-block>\n\n</cv-page-wrapper>\n"
         },
         {
             "name": "PageSkillsComponent",
@@ -13058,6 +13085,46 @@
             "templateData": "<cv-page-wrapper>\n  <div class=\"zone__top zone\">\n    <cv-block [centered]=\"true\"\n              [column]=\"true\"\n              *ngFor=\"let bestSkill of bestSkills; let index = index\"\n              class=\"block flex-column flex-grow flex-center\">\n      <div class=\"block__title h3\">{{bestSkill.name}}</div>\n      <cv-chart-circle [value]=\"bestSkill.level\" [color]=\"bestSkill.color\"\n                       [size]=\"140\"\n                       [animationDelay]=\"index * 100\"\n                       label=\"Niveau\"\n                       ></cv-chart-circle>\n      <div class=\"block__description\">{{bestSkill.subtitle}}</div>\n    </cv-block>\n  </div>\n\n  <div class=\"zone__bottom zone__bottom-left zone flex\">\n    <cv-block cvTitle=\"Liste de toutes mes stacks par niveau\">\n      <cv-list-chart-gauge [entityType]=\"allStackList.type\"\n                           [queryArgs]=\"allStackList.query\" [valueKey]=\"allStackList.valueKey\"></cv-list-chart-gauge>\n    </cv-block>\n  </div>\n\n  <div class=\"zone__bottom zone__bottom-right zone flex\">\n    <cv-block cvTitle=\"Mes autres compétences pour le développement\">\n      <cv-list-chart-gauge [entityType]=\"othersList.type\"\n                           [queryArgs]=\"othersList.query\" [valueKey]=\"othersList.valueKey\"></cv-list-chart-gauge>\n    </cv-block>\n  </div>\n</cv-page-wrapper>\n\n"
         },
         {
+            "name": "PageWorksComponent",
+            "id": "component-PageWorksComponent-6b2d0bf8a8b36699bec4d03ad1fa846e7312d6bb591d61281328af1f54b644171e60a2ebf47358849814bcdc399f6fd928d069b746520de5c4061ee42d54ffdb",
+            "file": "src/app/modules/main/components/page-works/page-works.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "cv-page-works",
+            "styleUrls": [
+                "./page-works.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./page-works.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'cv-page-works',\n  templateUrl: './page-works.component.html',\n  styleUrls: ['./page-works.component.scss']\n})\nexport class PageWorksComponent {\n\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "",
+                    "styleUrl": "./page-works.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "templateData": "<p>page-works works!</p>\n"
+        },
+        {
             "name": "PageWrapperComponent",
             "id": "component-PageWrapperComponent-132027ae2ec285d4a137d86bd0f7f8c3c9415960c0aaebbf126ab60f4ed2160fd9a3581599c97f114d858935bfebbba50ff5a67fe92ea2e61936979db9836dff",
             "file": "src/app/modules/shared/page-wrapper/page-wrapper.component.ts",
@@ -13096,6 +13163,160 @@
             ],
             "stylesData": "",
             "templateData": "<div class=\"zone__left-top zone\">\n  <ng-content select=\"[left-top]\"></ng-content>\n</div>\n\n<div class=\"zone__center-top zone\">\n  <ng-content select=\"[center-top]\"></ng-content>\n</div>\n<div class=\"zone__center-bottom zone\">\n  <ng-content select=\"[center-bottom]\"></ng-content>\n</div>\n\n<div class=\"zone__right-top zone\">\n  <ng-content select=\"[right-top]\"></ng-content>\n</div>\n\n<div class=\"zone__right-bottom zone\">\n  <ng-content select=\"[right-bottom]\"></ng-content>\n</div>\n<ng-content></ng-content>\n"
+        },
+        {
+            "name": "PlanetComponent",
+            "id": "component-PlanetComponent-21be62a1e75cb4a958cecfbcc45953213b6d2f16a383ea9d2377e21c05254e05e05703d99811241835c7eaadf537ea0680e690164a6bee3cb9657d1df237fe75",
+            "file": "src/app/modules/planet/planet.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "cv-planet",
+            "styleUrls": [
+                "./planet.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./planet.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "globeWrapper",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "ElementRef",
+                    "optional": false,
+                    "description": "",
+                    "line": 14,
+                    "decorators": [
+                        {
+                            "name": "ViewChild",
+                            "stringifiedArguments": "'globeWrapper'"
+                        }
+                    ],
+                    "modifierKind": [
+                        123
+                    ]
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "_createGlobe",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 38,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        121
+                    ]
+                },
+                {
+                    "name": "ngAfterViewInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 28,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\n",
+                    "description": "",
+                    "modifierKind": [
+                        123
+                    ],
+                    "jsdoctags": []
+                },
+                {
+                    "name": "ngOnDestroy",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 35,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\n",
+                    "description": "",
+                    "modifierKind": [
+                        123
+                    ],
+                    "jsdoctags": []
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import {AfterViewInit, Component, ElementRef, OnDestroy, ViewChild} from '@angular/core';\nimport Globe from 'globe.gl';\nimport {Feature, FeatureCollection, GeoJsonObject, GeoJsonProperties, Geometry} from 'geojson';\nimport {HttpClient} from '@angular/common/http';\nimport * as THREE from 'three';\n\n@Component({\n  selector: 'cv-planet',\n  templateUrl: './planet.component.html',\n  styleUrls: ['./planet.component.scss']\n})\nexport class PlanetComponent implements AfterViewInit, OnDestroy {\n\n  @ViewChild('globeWrapper') public globeWrapper!: ElementRef;\n\n  /**\n   * @constructor\n   * @param _httpClient HTTP Client\n   */\n  public constructor(\n    private readonly _httpClient: HttpClient,\n  ) {\n  }\n\n  /**\n   * @inheritDoc\n   */\n  public ngAfterViewInit(): void {\n    this._createGlobe();\n  }\n\n  /**\n   * @inheritDoc\n   */\n  public ngOnDestroy(): void {\n  }\n\n  private _createGlobe(): void {\n    const world = Globe()\n      //.globeImageUrl('//unpkg.com/three-globe/example/img/earth-night.jpg')\n      .backgroundColor('rgba(0, 0, 0, 0)')\n      .showGlobe(true)\n      .showAtmosphere(true)\n      .atmosphereColor('#2c2346')\n      .atmosphereAltitude(0.1)\n      .globeMaterial(new THREE.MeshPhongMaterial({\n        color: '#1a1428',\n        emissive: '#020315',\n        emissiveIntensity: 0.5,\n        shininess: 0.1,\n        specular: '#5423e3',\n        transparent: false,\n        opacity: 1\n      }))\n      .polygonStrokeColor(() => '#613dc3')\n      (this.globeWrapper.nativeElement)\n\n    this._httpClient.get('assets/geo/110m_countries.geojson', {responseType: 'json'})\n      .subscribe((content) => {\n        if (content != null) {\n          const countriesData: FeatureCollection<Geometry, GeoJsonProperties> = (content as unknown) as FeatureCollection<Geometry, GeoJsonProperties>;\n\n          const countries = countriesData.features.filter(d => d.properties?.['ISO_A2'] !== 'AQ');\n          console.log('countries', countries);\n\n          this._httpClient.get('assets/fonts/rajdhani/Rajdhani SemiBold_Regular.json', {responseType: 'json'})\n            .subscribe((content) => {\n              console.log('rajdhani loaded', content)\n              world.labelTypeFace(content);\n            });\n          world\n            .polygonsData(countries)\n            .polygonCapMaterial(country => {\n              /**? country is a Feature<Geometry, GeoJsonProperties>\n               * @see GeoJsonObject */\n              const tCountry = country as Feature<Geometry, GeoJsonProperties>;\n              const meshLambertMaterial = new THREE.MeshPhongMaterial({\n                color: '#3e2d6f',\n                emissive: '#4b348d',\n                emissiveIntensity: 1,\n                shininess: 5,\n                specular: '#5016fa',\n                transparent: true,\n                blendDstAlpha: 1,\n                opacity: 0.95\n              });\n              if (tCountry.properties == null) {\n                return meshLambertMaterial;\n              }\n\n              if (tCountry.properties['BRK_NAME'] === 'France') {\n                console.log('country', tCountry.properties['ADMIN'], 'is France')\n                const color = new THREE.Color('#da0d4e');\n                meshLambertMaterial.color = color;\n                meshLambertMaterial.emissive = color;\n                meshLambertMaterial.specular = color;\n                meshLambertMaterial.shininess = 10;\n              }\n              return meshLambertMaterial;\n            })\n            .polygonAltitude(country => {\n              const tCountry = country as Feature<Geometry, GeoJsonProperties>;\n              if (tCountry.properties == null) {\n                return 0.01;\n              }\n              if (tCountry.properties['BRK_NAME'] === 'France') {\n                return 0.02;\n              }\n              return 0.01;\n            })\n            //.polygonSideColor(() => 'transparent')\n            .polygonSideMaterial(() => new THREE.MeshPhongMaterial({\n              color: '#3e2d6f',\n              emissive: '#4b348d',\n              emissiveIntensity: 0.2,\n              shininess: 0.2,\n              specular: '#5016fa',\n              transparent: true,\n              blendDstAlpha: 1,\n              opacity: 0.95\n            }))\n            .pointsData([\n              //{ lat: 45.648377, lng: 0.1562369, color: '#ffffff', value: 0.01, size: .01, label: 'Angoulême', tooltip: 'test', id: 'angouleme' },\n              { lat: 25.168282, lng: 55.250286, color: '#da0d4e', value: 0.02, size: .7, label: 'Dubaï', tooltip: 'test', id: 'dubai' },\n            ])\n            .pointLabel('label')\n            .pointColor('color')\n            .pointAltitude('value')\n            .pointRadius('size')\n            .pointResolution(5)\n\n            .labelsData([\n              { lat: 45.648377, lng: 0.1562369, color: '#ffffff', value: 0.03, size: 2, label: 'Angoulême', tooltip: 'test', id: 'angouleme' },\n              { lat: 25.168282, lng: 55.250286, color: '#da0d4e', value: 0.02, size: .7, label: 'Dubaï', tooltip: 'test', id: 'dubai' },\n            ])\n            .labelLat('lat')\n            .labelLng('lng')\n            .labelText('label')\n            .labelColor('color')\n            .labelAltitude('value')\n            .labelSize('size')\n            .labelDotRadius(label => (label as {size:number}).size * 0.2)\n            .labelResolution(5)\n        }\n      });\n  }\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "",
+                    "styleUrl": "./planet.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "_httpClient",
+                        "type": "HttpClient",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 14,
+                "rawdescription": "\n\n",
+                "modifierKind": [
+                    123
+                ],
+                "jsdoctags": [
+                    {
+                        "name": {
+                            "pos": 590,
+                            "end": 601,
+                            "flags": 4227072,
+                            "modifierFlagsCache": 0,
+                            "transformFlags": 0,
+                            "kind": 79,
+                            "escapedText": "_httpClient"
+                        },
+                        "type": "HttpClient",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "pos": 584,
+                            "end": 589,
+                            "flags": 4227072,
+                            "modifierFlagsCache": 0,
+                            "transformFlags": 0,
+                            "kind": 79,
+                            "escapedText": "param"
+                        },
+                        "comment": "<p>HTTP Client</p>\n"
+                    }
+                ]
+            },
+            "implements": [
+                "AfterViewInit",
+                "OnDestroy"
+            ],
+            "templateData": "<div #globeWrapper class=\"globe-wrapper\"></div>\n"
         },
         {
             "name": "ProfileComponent",
@@ -14670,13 +14891,13 @@
         },
         {
             "name": "AppRoutingModule",
-            "id": "module-AppRoutingModule-27031090e66ce59dbf6c6867e923e86b84b744296f3269e7e2ab028e79b9779ab01ee60353058954aceab689b25c86837566ee88d0ccc1fc7a227423d278e689",
+            "id": "module-AppRoutingModule-f686bbe49f7b32ce5131601d21175a17a925a33c4e3c70e11072c74a159b85283f98e8e0cd0fef943bfdd85a87718643ffdf21adaed5c96e0a0889f023c4cff3",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "src/app/app-routing.module.ts",
             "methods": [],
-            "sourceCode": "import {NgModule} from '@angular/core';\nimport {RouterModule, Routes} from '@angular/router';\nimport {PageHomeComponent} from \"./modules/main/components/page-home/page-home.component\";\nimport {PageContactComponent} from \"./modules/main/components/page-contact/page-contact.component\";\nimport {PageSkillsComponent} from './modules/main/components/page-skills/page-skills.component';\n\nconst routes: Routes = [\n  {\n    path: '',\n    component: PageHomeComponent,\n    data: {\n      state: 'home',\n      menuItem: {\n        label: 'Soheil Saheb-Jamii',\n        index: 0\n      }\n    }\n  },\n  {\n    path: 'skills',\n    component: PageSkillsComponent,\n    data: {\n      state: 'skills',\n      menuItem: {\n        label: 'Compétences',\n        index: 1\n      }\n    }\n  },\n  {\n    path: 'contact',\n    component: PageContactComponent,\n    data: {\n      state: 'contact',\n      menuItem: {\n        label: 'Contact',\n        index: 2\n      }\n    }\n  },\n  {\n    path: '**',\n    redirectTo: '',\n  }\n];\n\nexport const appRouting = RouterModule.forRoot(routes);\n\n@NgModule({\n  imports: [RouterModule.forRoot(routes)],\n  exports: [RouterModule]\n})\nexport class AppRoutingModule { }\n",
+            "sourceCode": "import {NgModule} from '@angular/core';\nimport {RouterModule, Routes} from '@angular/router';\nimport {PageHomeComponent} from \"./modules/main/components/page-home/page-home.component\";\nimport {PageContactComponent} from \"./modules/main/components/page-contact/page-contact.component\";\nimport {PageSkillsComponent} from './modules/main/components/page-skills/page-skills.component';\nimport {PageWorksComponent} from './modules/main/components/page-works/page-works.component';\nimport {PageEducationComponent} from './modules/main/components/page-education/page-education.component';\n\nconst routes: Routes = [\n  {\n    path: '',\n    component: PageHomeComponent,\n    data: {\n      state: 'home',\n      menuItem: {\n        label: 'Soheil Saheb-Jamii',\n        index: 0\n      }\n    }\n  },\n  {\n    path: 'skills',\n    component: PageSkillsComponent,\n    data: {\n      state: 'skills',\n      menuItem: {\n        label: 'Compétences',\n        index: 1\n      }\n    }\n  },\n  {\n    path: 'works',\n    component: PageWorksComponent,\n    data: {\n      state: 'works',\n      menuItem: {\n        label: 'Expériences',\n        index: 2\n      }\n    }\n  },\n  {\n    path: 'education',\n    component: PageEducationComponent,\n    data: {\n      state: 'education',\n      menuItem: {\n        label: 'Formations',\n        index: 3\n      }\n    }\n  },\n  {\n    path: 'contact',\n    component: PageContactComponent,\n    data: {\n      state: 'contact',\n      menuItem: {\n        label: 'Contact',\n        index: 4\n      }\n    }\n  },\n  {\n    path: '**',\n    redirectTo: '',\n  }\n];\n\nexport const appRouting = RouterModule.forRoot(routes);\n\n@NgModule({\n  imports: [RouterModule.forRoot(routes)],\n  exports: [RouterModule]\n})\nexport class AppRoutingModule { }\n",
             "children": [
                 {
                     "type": "providers",
@@ -15029,13 +15250,13 @@
         },
         {
             "name": "MainModule",
-            "id": "module-MainModule-7fee02078f81b60ac4182e53a9e75b313acf4ba2cd968f512488f61b3da68a34c0c66aa5fb28a71d333473c0cc644583edc46c2ebb84834836c6ddf8df38481b",
+            "id": "module-MainModule-5a0203d9e627ef84fb2338b7a9eda5d59fbd4ca726e4a61e4b3ae0d169fbaf3fb7352407efe189c5535f76657128ce4b8e0994881377205dc6f5774978bd7903",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "src/app/modules/main/main.module.ts",
             "methods": [],
-            "sourceCode": "import {NgModule} from '@angular/core';\nimport {CommonModule} from '@angular/common';\nimport {MainComponent} from './components/main/main.component';\nimport {LayoutComponent} from \"./components/layout/layout.component\";\nimport {PageHomeComponent} from './components/page-home/page-home.component';\nimport {PageContactComponent} from './components/page-contact/page-contact.component';\nimport {RouterLink, RouterModule} from \"@angular/router\";\nimport {MatTabsModule} from \"@angular/material/tabs\";\nimport {HeaderComponent} from './components/header/header.component';\nimport {MatIconModule} from \"@angular/material/icon\";\nimport {MatToolbarModule} from \"@angular/material/toolbar\";\nimport {MatButtonModule} from \"@angular/material/button\";\nimport {MenuComponent} from './components/menu/menu.component';\nimport {ProfileComponent} from './components/profile/profile.component';\nimport {CircleModule} from \"../shared/circle/circle.module\";\nimport {InputCircleSliderModule} from \"../shared/input-circle-slider/input-circle-slider.module\";\nimport {DrawCircleModule} from \"../shared/draw-circle/draw-circle.module\";\nimport {CircleMenuItemComponent} from './components/circle-menu-item/circle-menu-item.component';\nimport {PageWrapperModule} from \"../shared/page-wrapper/page-wrapper.module\";\nimport {BlockComponent} from './components/block/block.component';\nimport {ListComponent} from './components/list/list.component';\nimport {MatListModule} from '@angular/material/list';\nimport {SvgIconModule} from '../shared/svg-icon/svg-icon.module';\nimport {ChartGaugeModule} from '../shared/chart-gauge/chart-gauge.module';\nimport {ChartCircleModule} from '../shared/chart-circle/chart-circle.module';\nimport {ListChartCirclesComponent} from './components/list-chart-circles/list-chart-circles.component';\nimport {ListChartDonutComponent} from './components/list-chart-donut/list-chart-donut.component';\nimport {ChartDonutModule} from '../shared/chart-donut/chart-donut.module';\nimport {MatRippleModule} from '@angular/material/core';\nimport {ActiveSwitchModule} from '../shared/active-switch/active-switch.module';\nimport {ListChartGaugeComponent} from './components/list-chart-gauge/list-chart-gauge.component';\nimport {DataDetailsComponent} from './components/data-details/data-details.component';\nimport {SelectEntityModule} from '../shared/select-entity/select-entity.module';\nimport { PageSkillsComponent } from './components/page-skills/page-skills.component';\n\n\n@NgModule({\n    declarations: [\n        MainComponent,\n        LayoutComponent,\n        PageHomeComponent,\n        PageContactComponent,\n        HeaderComponent,\n        MenuComponent,\n        ProfileComponent,\n        CircleMenuItemComponent,\n        BlockComponent,\n        ListComponent,\n        ListChartCirclesComponent,\n        ListChartDonutComponent,\n        ListChartGaugeComponent,\n        DataDetailsComponent,\n        PageSkillsComponent,\n    ],\n  imports: [\n    CommonModule,\n    RouterLink,\n    RouterModule,\n    MatTabsModule,\n    MatIconModule,\n    MatToolbarModule,\n    MatButtonModule,\n    CircleModule,\n    InputCircleSliderModule,\n    DrawCircleModule,\n    PageWrapperModule,\n    MatListModule,\n    SvgIconModule,\n    ChartGaugeModule,\n    ChartCircleModule,\n    ChartDonutModule,\n    MatRippleModule,\n    ActiveSwitchModule,\n    SelectEntityModule\n  ],\n  exports: [\n    MainComponent,\n    LayoutComponent\n  ],\n})\nexport class MainModule { }\n",
+            "sourceCode": "import {NgModule} from '@angular/core';\nimport {CommonModule} from '@angular/common';\nimport {MainComponent} from './components/main/main.component';\nimport {LayoutComponent} from \"./components/layout/layout.component\";\nimport {PageHomeComponent} from './components/page-home/page-home.component';\nimport {PageContactComponent} from './components/page-contact/page-contact.component';\nimport {RouterLink, RouterModule} from \"@angular/router\";\nimport {MatTabsModule} from \"@angular/material/tabs\";\nimport {HeaderComponent} from './components/header/header.component';\nimport {MatIconModule} from \"@angular/material/icon\";\nimport {MatToolbarModule} from \"@angular/material/toolbar\";\nimport {MatButtonModule} from \"@angular/material/button\";\nimport {MenuComponent} from './components/menu/menu.component';\nimport {ProfileComponent} from './components/profile/profile.component';\nimport {CircleModule} from \"../shared/circle/circle.module\";\nimport {InputCircleSliderModule} from \"../shared/input-circle-slider/input-circle-slider.module\";\nimport {DrawCircleModule} from \"../shared/draw-circle/draw-circle.module\";\nimport {CircleMenuItemComponent} from './components/circle-menu-item/circle-menu-item.component';\nimport {PageWrapperModule} from \"../shared/page-wrapper/page-wrapper.module\";\nimport {BlockComponent} from './components/block/block.component';\nimport {ListComponent} from './components/list/list.component';\nimport {MatListModule} from '@angular/material/list';\nimport {SvgIconModule} from '../shared/svg-icon/svg-icon.module';\nimport {ChartGaugeModule} from '../shared/chart-gauge/chart-gauge.module';\nimport {ChartCircleModule} from '../shared/chart-circle/chart-circle.module';\nimport {ListChartCirclesComponent} from './components/list-chart-circles/list-chart-circles.component';\nimport {ListChartDonutComponent} from './components/list-chart-donut/list-chart-donut.component';\nimport {ChartDonutModule} from '../shared/chart-donut/chart-donut.module';\nimport {MatRippleModule} from '@angular/material/core';\nimport {ActiveSwitchModule} from '../shared/active-switch/active-switch.module';\nimport {ListChartGaugeComponent} from './components/list-chart-gauge/list-chart-gauge.component';\nimport {DataDetailsComponent} from './components/data-details/data-details.component';\nimport {SelectEntityModule} from '../shared/select-entity/select-entity.module';\nimport { PageSkillsComponent } from './components/page-skills/page-skills.component';\nimport { PageEducationComponent } from './components/page-education/page-education.component';\nimport { PageWorksComponent } from './components/page-works/page-works.component';\n\n\n@NgModule({\n    declarations: [\n        MainComponent,\n        LayoutComponent,\n        PageHomeComponent,\n        PageContactComponent,\n        HeaderComponent,\n        MenuComponent,\n        ProfileComponent,\n        CircleMenuItemComponent,\n        BlockComponent,\n        ListComponent,\n        ListChartCirclesComponent,\n        ListChartDonutComponent,\n        ListChartGaugeComponent,\n        DataDetailsComponent,\n        PageSkillsComponent,\n        PageEducationComponent,\n        PageWorksComponent,\n    ],\n  imports: [\n    CommonModule,\n    RouterLink,\n    RouterModule,\n    MatTabsModule,\n    MatIconModule,\n    MatToolbarModule,\n    MatButtonModule,\n    CircleModule,\n    InputCircleSliderModule,\n    DrawCircleModule,\n    PageWrapperModule,\n    MatListModule,\n    SvgIconModule,\n    ChartGaugeModule,\n    ChartCircleModule,\n    ChartDonutModule,\n    MatRippleModule,\n    ActiveSwitchModule,\n    SelectEntityModule\n  ],\n  exports: [\n    MainComponent,\n    LayoutComponent\n  ],\n})\nexport class MainModule { }\n",
             "children": [
                 {
                     "type": "providers",
@@ -15081,10 +15302,16 @@
                             "name": "PageContactComponent"
                         },
                         {
+                            "name": "PageEducationComponent"
+                        },
+                        {
                             "name": "PageHomeComponent"
                         },
                         {
                             "name": "PageSkillsComponent"
+                        },
+                        {
+                            "name": "PageWorksComponent"
                         },
                         {
                             "name": "ProfileComponent"
@@ -15181,6 +15408,50 @@
                     "elements": [
                         {
                             "name": "PageWrapperComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        },
+        {
+            "name": "PlanetModule",
+            "id": "module-PlanetModule-868c629d0a14236cda50a538cc180b18561f330d8e31dea04b4510bd8467cab1646b22cf63211fb3cb915fae4558a20ab1271485f6b7a092c49669192c0217dd",
+            "description": "",
+            "deprecationMessage": "",
+            "deprecated": false,
+            "file": "src/app/modules/planet/planet.module.ts",
+            "methods": [],
+            "sourceCode": "import {NgModule} from '@angular/core';\nimport {CommonModule} from '@angular/common';\nimport {PlanetComponent} from './planet.component';\n\n\n@NgModule({\n  declarations: [\n    PlanetComponent\n  ],\n  imports: [\n    CommonModule\n  ],\n  exports: [\n    PlanetComponent\n  ]\n})\nexport class PlanetModule { }\n",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": [
+                        {
+                            "name": "PlanetComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "imports",
+                    "elements": []
+                },
+                {
+                    "type": "exports",
+                    "elements": [
+                        {
+                            "name": "PlanetComponent"
                         }
                     ]
                 },
@@ -15434,7 +15705,7 @@
                 "name": "AllStacks",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
+                "file": "src/app/modules/main/components/list/list.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -15444,7 +15715,7 @@
                 "name": "AllStacks",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/modules/main/components/list/list.stories.ts",
+                "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -15496,7 +15767,7 @@
                 "name": "Best5Stacks",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
+                "file": "src/app/modules/main/components/list/list.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -15506,7 +15777,7 @@
                 "name": "Best5Stacks",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/modules/main/components/list/list.stories.ts",
+                "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -15742,7 +16013,7 @@
                 "name": "EducationByDate",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
+                "file": "src/app/modules/main/components/list/list.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -15752,7 +16023,7 @@
                 "name": "EducationByDate",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/modules/main/components/list/list.stories.ts",
+                "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -15849,10 +16120,10 @@
                 "defaultValue": "Template.bind({})"
             },
             {
-                "name": "Home",
+                "name": "LastProjects",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/modules/main/components/page-home/page-home.stories.ts",
+                "file": "src/app/modules/main/components/list/list.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -15863,16 +16134,6 @@
                 "ctype": "miscellaneous",
                 "subtype": "variable",
                 "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "",
-                "defaultValue": "Template.bind({})"
-            },
-            {
-                "name": "LastProjects",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/modules/main/components/list/list.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -15949,6 +16210,16 @@
                 "defaultValue": "Template.bind({})"
             },
             {
+                "name": "Planet",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/modules/planet/planet.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
                 "name": "PRE_MADE_QUERY_CONSTANT",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -15976,7 +16247,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "object",
-                "defaultValue": "{\r\n  /**\r\n   * Graphical menu degree start.\r\n   */\r\n  MENU_DEGREE_START: {\r\n    [ProfileMode.SMALL]: -90,\r\n    [ProfileMode.LARGE]: 0,\r\n  },\r\n\r\n  /**\r\n   * Graphical menu degree end. (from 0 to 360)\r\n   *\r\n   * Will be relative to the MENU_DEGREE_START.\r\n   */\r\n  MENU_DEGREE_END: {\r\n    [ProfileMode.SMALL]: 90,\r\n    [ProfileMode.LARGE]: 270,\r\n  },\r\n\r\n  /**\r\n   * MENU_DATA\r\n   */\r\n  MENU_DATA: [\r\n    { // * About\r\n      routerLink: '/',\r\n      importance: 10,\r\n      circleMenuItem: {\r\n        title: 'À Propos',\r\n        description: '<p>Développeur Web Front-End</p><p>35 ans</p><p>Vit à Angoulême</p>',\r\n        size: 250,\r\n        weight: 50,\r\n        torque: 10,\r\n        contentOffset: 50,\r\n      },\r\n      drawCircleItem: {\r\n        size: 276,\r\n        weight: 4\r\n      },\r\n    },\r\n    // * Skills\r\n    {\r\n      routerLink: '/skills',\r\n      importance: 40,\r\n      offset: 20,\r\n\r\n      circleMenuItem: {\r\n        title: 'Compétences',\r\n        description: 'Liste de mes compétences',\r\n        size: 310,\r\n        weight: 55,\r\n        torque: -30,\r\n        contentOffset: 35,\r\n      },\r\n      drawCircleItem: {\r\n        size: 310,\r\n        weight: 17\r\n      },\r\n    },\r\n    // * Experience\r\n    {\r\n      importance: 20,\r\n      circleMenuItem: {\r\n        title: 'Experience',\r\n        description: 'Lorem ipsum dolor sit amet',\r\n        size: 310,\r\n        weight: 80,\r\n        torque: -25,\r\n        contentOffset: 10,\r\n      },\r\n      drawCircleItem: {\r\n        size: 310,\r\n        weight: 17\r\n      },\r\n    },\r\n    // * Education\r\n    {\r\n      importance: 10,\r\n      circleMenuItem: {\r\n        title: 'Education',\r\n        description: 'Lorem ipsum dolor sit amet',\r\n        size: 250,\r\n        contentOffset: 50,\r\n        weight: 80,\r\n      },\r\n      drawCircleItem: {\r\n        size: 276,\r\n        weight: 4\r\n      },\r\n    },\r\n    // * Contact\r\n    {\r\n      routerLink: '/contact',\r\n      importance: 10,\r\n      circleMenuItem: {\r\n        title: 'Contact',\r\n        description: 'Lorem ipsum dolor sit amet',\r\n        size: 250,\r\n        weight: 20,\r\n      },\r\n      drawCircleItem: {\r\n        size: 276,\r\n        weight: 4\r\n      },\r\n    },\r\n    ] as ProfileMenuItemData[]\r\n  }"
+                "defaultValue": "{\r\n  /**\r\n   * Graphical menu degree start.\r\n   */\r\n  MENU_DEGREE_START: {\r\n    [ProfileMode.SMALL]: -90,\r\n    [ProfileMode.LARGE]: 0,\r\n  },\r\n\r\n  /**\r\n   * Graphical menu degree end. (from 0 to 360)\r\n   *\r\n   * Will be relative to the MENU_DEGREE_START.\r\n   */\r\n  MENU_DEGREE_END: {\r\n    [ProfileMode.SMALL]: 90,\r\n    [ProfileMode.LARGE]: 270,\r\n  },\r\n\r\n  /**\r\n   * MENU_DATA\r\n   */\r\n  MENU_DATA: [\r\n    { // * About\r\n      routerLink: '/',\r\n      importance: 10,\r\n      circleMenuItem: {\r\n        title: 'À Propos',\r\n        description: '<p>Développeur Web Front-End</p><p>35 ans</p><p>Vit à Angoulême</p>',\r\n        size: 250,\r\n        weight: 50,\r\n        torque: 10,\r\n        contentOffset: 50,\r\n      },\r\n      drawCircleItem: {\r\n        size: 276,\r\n        weight: 4\r\n      },\r\n    },\r\n    // * Skills\r\n    {\r\n      routerLink: '/skills',\r\n      importance: 40,\r\n      offset: 20,\r\n\r\n      circleMenuItem: {\r\n        title: 'Compétences',\r\n        description: 'Liste de mes compétences',\r\n        size: 310,\r\n        weight: 55,\r\n        torque: -30,\r\n        contentOffset: 35,\r\n      },\r\n      drawCircleItem: {\r\n        size: 310,\r\n        weight: 17\r\n      },\r\n    },\r\n    // * Experience\r\n    {\r\n      importance: 20,\r\n      routerLink: '/works',\r\n      circleMenuItem: {\r\n        title: 'Expériences',\r\n        description: 'Mon parcours professionnel',\r\n        size: 310,\r\n        weight: 80,\r\n        torque: -25,\r\n        contentOffset: 10,\r\n      },\r\n      drawCircleItem: {\r\n        size: 310,\r\n        weight: 17\r\n      },\r\n    },\r\n    // * Education\r\n    {\r\n      importance: 10,\r\n      routerLink: '/education',\r\n      circleMenuItem: {\r\n        title: 'Formations',\r\n        description: 'Mon parcours scolaire',\r\n        size: 250,\r\n        contentOffset: 50,\r\n        weight: 80,\r\n      },\r\n      drawCircleItem: {\r\n        size: 276,\r\n        weight: 4\r\n      },\r\n    },\r\n    // * Contact\r\n    {\r\n      routerLink: '/contact',\r\n      importance: 10,\r\n      circleMenuItem: {\r\n        title: 'Contact',\r\n        description: 'Lorem ipsum dolor sit amet',\r\n        size: 250,\r\n        weight: 20,\r\n      },\r\n      drawCircleItem: {\r\n        size: 276,\r\n        weight: 4\r\n      },\r\n    },\r\n    ] as ProfileMenuItemData[]\r\n  }"
             },
             {
                 "name": "Project",
@@ -16027,16 +16298,6 @@
                 "ctype": "miscellaneous",
                 "subtype": "variable",
                 "file": "src/app/modules/main/components/data-details/data-details.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "",
-                "defaultValue": "Template.bind({})"
-            },
-            {
-                "name": "Skills",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/modules/main/components/page-skills/page-skills.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -16108,11 +16369,11 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/modules/shared/chart-circle/chart-circle.stories.ts",
+                "file": "src/app/modules/planet/planet.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Story<ChartCircleComponent>",
-                "defaultValue": "(args: ChartCircleComponent) => ({\r\n  props: args,\r\n})",
+                "type": "Story<PlanetComponent>",
+                "defaultValue": "(args: PlanetComponent) => ({\r\n  props: args,\r\n})",
                 "rawdescription": "Template of the component.",
                 "description": "<p>Template of the component.</p>\n"
             },
@@ -16132,11 +16393,11 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/modules/shared/chart-gauge/chart-gauge.stories.ts",
+                "file": "src/app/modules/shared/chart-circle/chart-circle.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Story<ChartGaugeComponent>",
-                "defaultValue": "(args: ChartGaugeComponent) => ({\r\n  props: args,\r\n})",
+                "type": "Story<ChartCircleComponent>",
+                "defaultValue": "(args: ChartCircleComponent) => ({\r\n  props: args,\r\n})",
                 "rawdescription": "Template of the component.",
                 "description": "<p>Template of the component.</p>\n"
             },
@@ -16149,6 +16410,18 @@
                 "deprecationMessage": "",
                 "type": "Story<CircleComponent>",
                 "defaultValue": "(args: CircleComponent) => ({\r\n  props: args,\r\n})",
+                "rawdescription": "Template of the component.",
+                "description": "<p>Template of the component.</p>\n"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/modules/shared/chart-gauge/chart-gauge.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<ChartGaugeComponent>",
+                "defaultValue": "(args: ChartGaugeComponent) => ({\r\n  props: args,\r\n})",
                 "rawdescription": "Template of the component.",
                 "description": "<p>Template of the component.</p>\n"
             },
@@ -16180,11 +16453,11 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/modules/shared/input-circle-slider/input-circle-slider.stories.ts",
+                "file": "src/app/modules/shared/page-wrapper/page-wrapper.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Story<InputCircleSliderComponent>",
-                "defaultValue": "(args: InputCircleSliderComponent) => ({\r\n  props: args,\r\n})",
+                "type": "Story<PageWrapperComponent>",
+                "defaultValue": "(args: PageWrapperComponent) => ({\r\n  props: args,\r\n})",
                 "rawdescription": "Template of the component.",
                 "description": "<p>Template of the component.</p>\n"
             },
@@ -16192,11 +16465,11 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/modules/shared/page-wrapper/page-wrapper.stories.ts",
+                "file": "src/app/modules/shared/input-circle-slider/input-circle-slider.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Story<PageWrapperComponent>",
-                "defaultValue": "(args: PageWrapperComponent) => ({\r\n  props: args,\r\n})",
+                "type": "Story<InputCircleSliderComponent>",
+                "defaultValue": "(args: InputCircleSliderComponent) => ({\r\n  props: args,\r\n})",
                 "rawdescription": "Template of the component.",
                 "description": "<p>Template of the component.</p>\n"
             },
@@ -16223,16 +16496,6 @@
                 "defaultValue": "(args) => ({\r\n  props: args,\r\n  template: `\r\n    <button cvTooltip=\"Some Title\" cvTooltipPosition=\"${args['position']}\">\r\n      Test ${args['test']}\r\n    </button>\r\n  `,\r\n})",
                 "rawdescription": "Template of the component.",
                 "description": "<p>Template of the component.</p>\n"
-            },
-            {
-                "name": "Template",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/modules/main/components/data-details/data-details.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story<DataDetailsComponent>",
-                "defaultValue": "(args: DataDetailsComponent) => ({\n  props: args,\n})"
             },
             {
                 "name": "Template",
@@ -16270,6 +16533,16 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "src/app/modules/main/components/data-details/data-details.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<DataDetailsComponent>",
+                "defaultValue": "(args: DataDetailsComponent) => ({\n  props: args,\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "src/app/modules/main/components/layout/layout.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -16282,21 +16555,21 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story<ListChartCirclesComponent>",
-                "defaultValue": "(args: ListChartCirclesComponent) => ({\n  props: args,\n})"
-            },
-            {
-                "name": "Template",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "src/app/modules/main/components/list/list.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story<ListComponent>",
                 "defaultValue": "(args: ListComponent) => ({\n  props: args,\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<ListChartCirclesComponent>",
+                "defaultValue": "(args: ListChartCirclesComponent) => ({\n  props: args,\n})"
             },
             {
                 "name": "Template",
@@ -16346,35 +16619,11 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/modules/main/components/page-home/page-home.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story<PageHomeComponent>",
-                "defaultValue": "(args: PageHomeComponent) => ({\r\n  props: args,\r\n})",
-                "rawdescription": "Template of the component.",
-                "description": "<p>Template of the component.</p>\n"
-            },
-            {
-                "name": "Template",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "src/app/modules/main/components/profile/profile.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story<ProfileComponent>",
                 "defaultValue": "(args: ProfileComponent) => ({\r\n  props: args,\r\n})",
-                "rawdescription": "Template of the component.",
-                "description": "<p>Template of the component.</p>\n"
-            },
-            {
-                "name": "Template",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/modules/main/components/page-skills/page-skills.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story<PageSkillsComponent>",
-                "defaultValue": "(args: PageSkillsComponent) => ({\r\n  props: args,\r\n})",
                 "rawdescription": "Template of the component.",
                 "description": "<p>Template of the component.</p>\n"
             },
@@ -16426,7 +16675,7 @@
                 "name": "WorkByDate",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
+                "file": "src/app/modules/main/components/list/list.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -16436,7 +16685,7 @@
                 "name": "WorkByDate",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/modules/main/components/list/list.stories.ts",
+                "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -17835,68 +18084,6 @@
             }
         ],
         "groupedVariables": {
-            "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts": [
-                {
-                    "name": "AllStacks",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "Best5Stacks",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "EducationByDate",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "LastProjects",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "Template",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story<ListChartCirclesComponent>",
-                    "defaultValue": "(args: ListChartCirclesComponent) => ({\n  props: args,\n})"
-                },
-                {
-                    "name": "WorkByDate",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                }
-            ],
             "src/app/modules/main/components/list/list.stories.ts": [
                 {
                     "name": "AllStacks",
@@ -17953,6 +18140,68 @@
                     "ctype": "miscellaneous",
                     "subtype": "variable",
                     "file": "src/app/modules/main/components/list/list.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                }
+            ],
+            "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts": [
+                {
+                    "name": "AllStacks",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Best5Stacks",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "EducationByDate",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "LastProjects",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<ListChartCirclesComponent>",
+                    "defaultValue": "(args: ListChartCirclesComponent) => ({\n  props: args,\n})"
+                },
+                {
+                    "name": "WorkByDate",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
@@ -18619,30 +18868,6 @@
                     "description": "<p>Template of the component.</p>\n"
                 }
             ],
-            "src/app/modules/main/components/page-home/page-home.stories.ts": [
-                {
-                    "name": "Home",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/modules/main/components/page-home/page-home.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "Template",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/modules/main/components/page-home/page-home.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story<PageHomeComponent>",
-                    "defaultValue": "(args: PageHomeComponent) => ({\r\n  props: args,\r\n})",
-                    "rawdescription": "Template of the component.",
-                    "description": "<p>Template of the component.</p>\n"
-                }
-            ],
             "src/app/modules/main/components/layout/layout.stories.ts": [
                 {
                     "name": "Layout",
@@ -18751,6 +18976,30 @@
                     "description": "<p>Template of the component.</p>\n"
                 }
             ],
+            "src/app/modules/planet/planet.stories.ts": [
+                {
+                    "name": "Planet",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/modules/planet/planet.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/modules/planet/planet.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<PlanetComponent>",
+                    "defaultValue": "(args: PlanetComponent) => ({\r\n  props: args,\r\n})",
+                    "rawdescription": "Template of the component.",
+                    "description": "<p>Template of the component.</p>\n"
+                }
+            ],
             "src/app/constants/premade-query.constant.ts": [
                 {
                     "name": "PRE_MADE_QUERY_CONSTANT",
@@ -18796,7 +19045,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "object",
-                    "defaultValue": "{\r\n  /**\r\n   * Graphical menu degree start.\r\n   */\r\n  MENU_DEGREE_START: {\r\n    [ProfileMode.SMALL]: -90,\r\n    [ProfileMode.LARGE]: 0,\r\n  },\r\n\r\n  /**\r\n   * Graphical menu degree end. (from 0 to 360)\r\n   *\r\n   * Will be relative to the MENU_DEGREE_START.\r\n   */\r\n  MENU_DEGREE_END: {\r\n    [ProfileMode.SMALL]: 90,\r\n    [ProfileMode.LARGE]: 270,\r\n  },\r\n\r\n  /**\r\n   * MENU_DATA\r\n   */\r\n  MENU_DATA: [\r\n    { // * About\r\n      routerLink: '/',\r\n      importance: 10,\r\n      circleMenuItem: {\r\n        title: 'À Propos',\r\n        description: '<p>Développeur Web Front-End</p><p>35 ans</p><p>Vit à Angoulême</p>',\r\n        size: 250,\r\n        weight: 50,\r\n        torque: 10,\r\n        contentOffset: 50,\r\n      },\r\n      drawCircleItem: {\r\n        size: 276,\r\n        weight: 4\r\n      },\r\n    },\r\n    // * Skills\r\n    {\r\n      routerLink: '/skills',\r\n      importance: 40,\r\n      offset: 20,\r\n\r\n      circleMenuItem: {\r\n        title: 'Compétences',\r\n        description: 'Liste de mes compétences',\r\n        size: 310,\r\n        weight: 55,\r\n        torque: -30,\r\n        contentOffset: 35,\r\n      },\r\n      drawCircleItem: {\r\n        size: 310,\r\n        weight: 17\r\n      },\r\n    },\r\n    // * Experience\r\n    {\r\n      importance: 20,\r\n      circleMenuItem: {\r\n        title: 'Experience',\r\n        description: 'Lorem ipsum dolor sit amet',\r\n        size: 310,\r\n        weight: 80,\r\n        torque: -25,\r\n        contentOffset: 10,\r\n      },\r\n      drawCircleItem: {\r\n        size: 310,\r\n        weight: 17\r\n      },\r\n    },\r\n    // * Education\r\n    {\r\n      importance: 10,\r\n      circleMenuItem: {\r\n        title: 'Education',\r\n        description: 'Lorem ipsum dolor sit amet',\r\n        size: 250,\r\n        contentOffset: 50,\r\n        weight: 80,\r\n      },\r\n      drawCircleItem: {\r\n        size: 276,\r\n        weight: 4\r\n      },\r\n    },\r\n    // * Contact\r\n    {\r\n      routerLink: '/contact',\r\n      importance: 10,\r\n      circleMenuItem: {\r\n        title: 'Contact',\r\n        description: 'Lorem ipsum dolor sit amet',\r\n        size: 250,\r\n        weight: 20,\r\n      },\r\n      drawCircleItem: {\r\n        size: 276,\r\n        weight: 4\r\n      },\r\n    },\r\n    ] as ProfileMenuItemData[]\r\n  }"
+                    "defaultValue": "{\r\n  /**\r\n   * Graphical menu degree start.\r\n   */\r\n  MENU_DEGREE_START: {\r\n    [ProfileMode.SMALL]: -90,\r\n    [ProfileMode.LARGE]: 0,\r\n  },\r\n\r\n  /**\r\n   * Graphical menu degree end. (from 0 to 360)\r\n   *\r\n   * Will be relative to the MENU_DEGREE_START.\r\n   */\r\n  MENU_DEGREE_END: {\r\n    [ProfileMode.SMALL]: 90,\r\n    [ProfileMode.LARGE]: 270,\r\n  },\r\n\r\n  /**\r\n   * MENU_DATA\r\n   */\r\n  MENU_DATA: [\r\n    { // * About\r\n      routerLink: '/',\r\n      importance: 10,\r\n      circleMenuItem: {\r\n        title: 'À Propos',\r\n        description: '<p>Développeur Web Front-End</p><p>35 ans</p><p>Vit à Angoulême</p>',\r\n        size: 250,\r\n        weight: 50,\r\n        torque: 10,\r\n        contentOffset: 50,\r\n      },\r\n      drawCircleItem: {\r\n        size: 276,\r\n        weight: 4\r\n      },\r\n    },\r\n    // * Skills\r\n    {\r\n      routerLink: '/skills',\r\n      importance: 40,\r\n      offset: 20,\r\n\r\n      circleMenuItem: {\r\n        title: 'Compétences',\r\n        description: 'Liste de mes compétences',\r\n        size: 310,\r\n        weight: 55,\r\n        torque: -30,\r\n        contentOffset: 35,\r\n      },\r\n      drawCircleItem: {\r\n        size: 310,\r\n        weight: 17\r\n      },\r\n    },\r\n    // * Experience\r\n    {\r\n      importance: 20,\r\n      routerLink: '/works',\r\n      circleMenuItem: {\r\n        title: 'Expériences',\r\n        description: 'Mon parcours professionnel',\r\n        size: 310,\r\n        weight: 80,\r\n        torque: -25,\r\n        contentOffset: 10,\r\n      },\r\n      drawCircleItem: {\r\n        size: 310,\r\n        weight: 17\r\n      },\r\n    },\r\n    // * Education\r\n    {\r\n      importance: 10,\r\n      routerLink: '/education',\r\n      circleMenuItem: {\r\n        title: 'Formations',\r\n        description: 'Mon parcours scolaire',\r\n        size: 250,\r\n        contentOffset: 50,\r\n        weight: 80,\r\n      },\r\n      drawCircleItem: {\r\n        size: 276,\r\n        weight: 4\r\n      },\r\n    },\r\n    // * Contact\r\n    {\r\n      routerLink: '/contact',\r\n      importance: 10,\r\n      circleMenuItem: {\r\n        title: 'Contact',\r\n        description: 'Lorem ipsum dolor sit amet',\r\n        size: 250,\r\n        weight: 20,\r\n      },\r\n      drawCircleItem: {\r\n        size: 276,\r\n        weight: 4\r\n      },\r\n    },\r\n    ] as ProfileMenuItemData[]\r\n  }"
                 }
             ],
             "src/app/constants/router-transition.constant.ts": [
@@ -18823,30 +19072,6 @@
                     "defaultValue": "trigger('routerTransitionRtL', [\r\n  transition('* <=> *', [\r\n    /* order */\r\n    /* 1 */\r\n    query(':enter, :leave', style({ position: 'fixed', width:'100%' })\r\n      , { optional: true }),\r\n    /* 2 */\r\n    group([  // block executes in parallel\r\n      query(':enter', [\r\n        style({ transform: 'translateX(100%)' }),\r\n        animate('.5s ease-in-out', style({ transform: 'translateX(0%)' }))\r\n      ], { optional: true }),\r\n      query(':leave', [\r\n        style({ transform: 'translateX(0%)' }),\r\n        animate('.5s ease-in-out', style({ transform: 'translateX(-100%)' }))\r\n      ], { optional: true }),\r\n    ])\r\n  ])\r\n])",
                     "rawdescription": "Router transition constant.\r\nRight to left.",
                     "description": "<p>Router transition constant.\nRight to left.</p>\n"
-                }
-            ],
-            "src/app/modules/main/components/page-skills/page-skills.stories.ts": [
-                {
-                    "name": "Skills",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/modules/main/components/page-skills/page-skills.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "Template",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/modules/main/components/page-skills/page-skills.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story<PageSkillsComponent>",
-                    "defaultValue": "(args: PageSkillsComponent) => ({\r\n  props: args,\r\n})",
-                    "rawdescription": "Template of the component.",
-                    "description": "<p>Template of the component.</p>\n"
                 }
             ],
             "src/app/constants/storybook-range-control.constant.ts": [
@@ -20371,13 +20596,35 @@
                         }
                     },
                     {
+                        "path": "works",
+                        "component": "PageWorksComponent",
+                        "data": {
+                            "state": "works",
+                            "menuItem": {
+                                "label": "Expériences",
+                                "index": "2"
+                            }
+                        }
+                    },
+                    {
+                        "path": "education",
+                        "component": "PageEducationComponent",
+                        "data": {
+                            "state": "education",
+                            "menuItem": {
+                                "label": "Formations",
+                                "index": "3"
+                            }
+                        }
+                    },
+                    {
                         "path": "contact",
                         "component": "PageContactComponent",
                         "data": {
                             "state": "contact",
                             "menuItem": {
                                 "label": "Contact",
-                                "index": "2"
+                                "index": "4"
                             }
                         }
                     },
@@ -20391,7 +20638,7 @@
         ]
     },
     "coverage": {
-        "count": 35,
+        "count": 34,
         "status": "medium",
         "files": [
             {
@@ -20751,8 +20998,8 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "CircleMenuItemComponent",
-                "coveragePercent": 70,
-                "coverageCount": "14/20",
+                "coveragePercent": 73,
+                "coverageCount": "14/19",
                 "status": "good"
             },
             {
@@ -21293,6 +21540,15 @@
                 "status": "low"
             },
             {
+                "filePath": "src/app/modules/main/components/page-education/page-education.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "PageEducationComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
                 "filePath": "src/app/modules/main/components/page-home/page-home.component.ts",
                 "type": "component",
                 "linktype": "component",
@@ -21300,26 +21556,6 @@
                 "coveragePercent": 25,
                 "coverageCount": "1/4",
                 "status": "low"
-            },
-            {
-                "filePath": "src/app/modules/main/components/page-home/page-home.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Home",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/app/modules/main/components/page-home/page-home.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Template",
-                "coveragePercent": 100,
-                "coverageCount": "1/1",
-                "status": "very-good"
             },
             {
                 "filePath": "src/app/modules/main/components/page-skills/page-skills.component.ts",
@@ -21331,24 +21567,13 @@
                 "status": "medium"
             },
             {
-                "filePath": "src/app/modules/main/components/page-skills/page-skills.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Skills",
+                "filePath": "src/app/modules/main/components/page-works/page-works.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "PageWorksComponent",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
-            },
-            {
-                "filePath": "src/app/modules/main/components/page-skills/page-skills.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Template",
-                "coveragePercent": 100,
-                "coverageCount": "1/1",
-                "status": "very-good"
             },
             {
                 "filePath": "src/app/modules/main/components/profile/profile.component.model.ts",
@@ -21416,6 +21641,35 @@
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
+            },
+            {
+                "filePath": "src/app/modules/planet/planet.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "PlanetComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/6",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/modules/planet/planet.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Planet",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/modules/planet/planet.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 100,
+                "coverageCount": "1/1",
+                "status": "very-good"
             },
             {
                 "filePath": "src/app/modules/shared/active-switch/active-switch-item.directive.ts",

@@ -2,6 +2,7 @@ import {Meta, Story} from '@storybook/angular/types-6-0';
 import {PlanetComponent} from './planet.component';
 import {PlanetModule} from './planet.module';
 import {moduleMetadata} from '@storybook/angular';
+import {HttpClientModule} from '@angular/common/http';
 
 /**
  * Story for the Planet Component.
@@ -14,7 +15,7 @@ export default {
   },
   decorators: [
     moduleMetadata({
-      imports: [PlanetModule],
+      imports: [PlanetModule, HttpClientModule],
     })
   ],
 } as Meta;

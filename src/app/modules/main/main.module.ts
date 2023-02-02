@@ -31,9 +31,10 @@ import {ActiveSwitchModule} from '../shared/active-switch/active-switch.module';
 import {ListChartGaugeComponent} from './components/list-chart-gauge/list-chart-gauge.component';
 import {DataDetailsComponent} from './components/data-details/data-details.component';
 import {SelectEntityModule} from '../shared/select-entity/select-entity.module';
-import { PageSkillsComponent } from './components/page-skills/page-skills.component';
-import { PageEducationComponent } from './components/page-education/page-education.component';
-import { PageWorksComponent } from './components/page-works/page-works.component';
+import {PageSkillsComponent} from './components/page-skills/page-skills.component';
+import {PageEducationComponent} from './components/page-education/page-education.component';
+import {PageWorksComponent} from './components/page-works/page-works.component';
+import {PlanetModule} from '../planet/planet.module';
 
 
 @NgModule({
@@ -56,27 +57,28 @@ import { PageWorksComponent } from './components/page-works/page-works.component
         PageEducationComponent,
         PageWorksComponent,
     ],
-  imports: [
-    CommonModule,
-    RouterLink,
-    RouterModule,
-    MatTabsModule,
-    MatIconModule,
-    MatToolbarModule,
-    MatButtonModule,
-    CircleModule,
-    InputCircleSliderModule,
-    DrawCircleModule,
-    PageWrapperModule,
-    MatListModule,
-    SvgIconModule,
-    ChartGaugeModule,
-    ChartCircleModule,
-    ChartDonutModule,
-    MatRippleModule,
-    ActiveSwitchModule,
-    SelectEntityModule
-  ],
+    imports: [
+        CommonModule,
+        RouterLink,
+        RouterModule,
+        MatTabsModule,
+        MatIconModule,
+        MatToolbarModule,
+        MatButtonModule,
+        CircleModule,
+        InputCircleSliderModule,
+        DrawCircleModule,
+        PageWrapperModule,
+        MatListModule,
+        SvgIconModule,
+        ChartGaugeModule,
+        ChartCircleModule,
+        ChartDonutModule,
+        MatRippleModule,
+        ActiveSwitchModule,
+        SelectEntityModule,
+        PlanetModule
+    ],
   exports: [
     MainComponent,
     LayoutComponent

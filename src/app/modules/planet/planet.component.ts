@@ -1,5 +1,10 @@
-import {AfterViewInit, Component, ElementRef, Input, OnDestroy, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnDestroy, ViewChild} from '@angular/core';
+import Globe, {GlobeInstance} from 'globe.gl';
+import {Feature, FeatureCollection, GeoJsonObject, GeoJsonProperties, Geometry} from 'geojson';
+import {HttpClient} from '@angular/common/http';
 import * as THREE from 'three';
+import {PlaceService} from '../../services/place.service';
+import {Place} from '../../models/place.model';
 
 @Component({
   selector: 'cv-planet',
@@ -8,40 +13,32 @@ import * as THREE from 'three';
 })
 export class PlanetComponent implements AfterViewInit, OnDestroy {
 
-  @ViewChild('canvas') public canvasRef!: ElementRef;
+  /** Globe wrapper. */
+  @ViewChild('globeWrapper') public globeWrapper!: ElementRef;
 
-  @Input() public rotationSpeedX = 0.05;
-  @Input() public rotationSpeedY = 0.01;
-  @Input() public size = 200;
-  //@Input() public texture = 'assets/images/planet/earth.jpg';
+  /** Globe. (Generated only AfterViewInit) */
+  public world!: GlobeInstance;
 
-  //* Camera
-  @Input() public cameraZ = 400;
-  @Input() public fieldOfView = 1;
-  @Input('nearClipping') public nearClippingPlane = 1;
-  @Input('farClipping') public farClippingPlane = 1000;
-
-  //? Helper Properties (Private Properties)
-  private camera!: THREE.PerspectiveCamera;
-  private get canvas(): HTMLCanvasElement {
-    return this.canvasRef.nativeElement;
+  /**
+   * @constructor
+   * @param _httpClient HTTP Client
+   * @param _placeService Place Service
+   */
+  public constructor(
+    private readonly _httpClient: HttpClient,
+    private readonly _placeService: PlaceService
+  ) {
   }
-  private loader = new THREE.TextureLoader();
-  //private geometry = new THREE.SphereGeometry(this.size, 32, 32);
-  private geometry = new THREE.BoxGeometry(1, 1, 1);
-  //private material = new THREE.MeshBasicMaterial({map: this.loader.load('assets/images/planet/earth.jpg')});
-  private material = new THREE.MeshBasicMaterial({color: 0x00ff00});
-
-  private cube: THREE.Mesh = new THREE.Mesh(this.geometry, this.material);
-  private renderer!: THREE.WebGLRenderer;
-  private scene!: THREE.Scene;
 
   /**
    * @inheritDoc
    */
   public ngAfterViewInit(): void {
-    this._createScene();
-    this._startRenderingLoop();
+    this._createGlobe();
+    this._setControlsConfig();
+    this._addCountries();
+    this._addPlaces();
+    this._loadFont();
   }
 
   /**
@@ -51,48 +48,140 @@ export class PlanetComponent implements AfterViewInit, OnDestroy {
   }
 
   /**
-   * Creates the Scene and Camera.
+   * Create the main globe.
    */
-  private _createScene(): void {
-    //* Scene
-    this.scene = new THREE.Scene();
-    this.scene.background = new THREE.Color(0x000000);
-    this.scene.add(this.cube);
-
-    //* Camera
-    const aspectRatio = this.canvas.clientWidth / this.canvas.clientHeight;
-    this.camera = new THREE.PerspectiveCamera(
-      this.fieldOfView,
-      aspectRatio,
-      this.nearClippingPlane,
-      this.farClippingPlane
-    )
-    this.camera.position.z = this.cameraZ;
+  private _createGlobe(): void {
+    this.world = Globe()
+      .backgroundColor('rgba(0, 0, 0, 0)')
+      .showGlobe(true)
+      .showAtmosphere(true)
+      .atmosphereColor('#2c2346')
+      .atmosphereAltitude(0.3)
+      .globeMaterial(new THREE.MeshPhongMaterial({
+        color: '#1a1428',
+        emissive: '#020315',
+        emissiveIntensity: 0.5,
+        shininess: 0.1,
+        specular: '#5423e3',
+        transparent: false,
+        opacity: 1
+      }))
+      .polygonStrokeColor(() => '#613dc3')
+      (this.globeWrapper.nativeElement);
   }
 
   /**
-   * Animates the Planet.
+   * Change the controls configuration.
    */
-  private _animatePlanet(): void {
-    this.cube.rotation.x += this.rotationSpeedX;
-    this.cube.rotation.y += this.rotationSpeedY;
+  _setControlsConfig(): void {
+    // Bigger scroll zoom speed
+    this.world.controls().zoomSpeed = 2;
+    this.world.onZoom(() => {
+      this.world.controls().zoomSpeed = 2;
+    });
+
+    // Max zoom
+    this.world.controls().maxDistance = 600;
+    // Min zoom
+    this.world.controls().minDistance = 135;
+
+    // Auto rotate
+    this.world.controls().autoRotate = true;
+    this.world.controls().autoRotateSpeed = 0.5;
   }
 
   /**
-   * Start the rendering loop.
+   * Add countries to the globe.
    */
-  private _startRenderingLoop() {
-    //* Renderer
-    // Use canvas element in template
-    this.renderer = new THREE.WebGLRenderer({canvas: this.canvas});
-    this.renderer.setPixelRatio(devicePixelRatio);
-    this.renderer.setSize(this.canvas.clientWidth, this.canvas.clientHeight);
+  private _addCountries(): void {
+    this._httpClient.get('assets/geo/110m_countries.geojson', {responseType: 'json'})
+      .subscribe((content) => {
+        if (content != null) {
+          const countriesData: FeatureCollection<Geometry, GeoJsonProperties> = (content as unknown) as FeatureCollection<Geometry, GeoJsonProperties>;
 
-    const component: PlanetComponent = this;
-    (function render() {
-      requestAnimationFrame(render);
-      component._animatePlanet();
-      component.renderer.render(component.scene, component.camera);
-    }());
+          const countries = countriesData.features.filter(d => d.properties?.['ISO_A2'] !== 'AQ');
+          this.world
+            .polygonsData(countries)
+            .polygonCapMaterial(country => {
+              /**? country is a Feature<Geometry, GeoJsonProperties>
+               * @see GeoJsonObject */
+              const tCountry = country as Feature<Geometry, GeoJsonProperties>;
+              const meshLambertMaterial = new THREE.MeshPhongMaterial({
+                color: '#3e2d6f',
+                emissive: '#4b348d',
+                emissiveIntensity: 1,
+                shininess: 5,
+                specular: '#5016fa',
+                transparent: true,
+                blendDstAlpha: 1,
+                opacity: 0.95
+              });
+              if (tCountry.properties == null) {
+                return meshLambertMaterial;
+              }
+
+              if (tCountry.properties['BRK_NAME'] === 'France') {
+                console.log('country', tCountry.properties['ADMIN'], 'is France')
+                const color = new THREE.Color('#da0d4e');
+                meshLambertMaterial.color = color;
+                meshLambertMaterial.emissive = color;
+                meshLambertMaterial.specular = color;
+                meshLambertMaterial.shininess = 10;
+              }
+              return meshLambertMaterial;
+            })
+            .polygonAltitude(country => {
+              const tCountry = country as Feature<Geometry, GeoJsonProperties>;
+              if (tCountry.properties == null) {
+                return 0.01;
+              }
+              if (tCountry.properties['BRK_NAME'] === 'France') {
+                return 0.02;
+              }
+              return 0.01;
+            })
+            //.polygonSideColor(() => 'transparent')
+            .polygonSideMaterial(() => new THREE.MeshPhongMaterial({
+              color: '#3e2d6f',
+              emissive: '#4b348d',
+              emissiveIntensity: 0.2,
+              shininess: 0.2,
+              specular: '#5016fa',
+              transparent: true,
+              blendDstAlpha: 1,
+              opacity: 0.95
+            }))
+        }
+      });
+  }
+
+  /**
+   * Add places to the globe.
+   */
+  private _addPlaces(): void {
+    const collection: Place[] = this._placeService.getPlaceCollection().places;
+
+    this.world
+      .labelsData(collection)
+      .labelLat('latitude')
+      .labelLng('longitude')
+      .labelText('label')
+      .labelColor(() =>'rgba(255, 255, 255, 0.8)')
+      .labelAltitude(place => (place as Place).importance * 0.0001 + 0.02)
+      .labelSize(place => (place as Place).importance * 0.007)
+      .labelDotRadius(place => (place as Place).importance * 0.01)
+      .labelDotOrientation('labelPosition')
+      .labelResolution(10)
+
+  }
+
+  /**
+   * Load the font.
+   */
+  private _loadFont(): void {
+    this._httpClient.get('assets/fonts/rajdhani/Rajdhani SemiBold_Regular.json', {responseType: 'json'})
+      .subscribe((content) => {
+        this.world.labelTypeFace(content);
+      });
   }
 }

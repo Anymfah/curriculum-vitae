@@ -27,11 +27,16 @@
     "@ngx-storybook/schematics": "^1.1.0",
     "@ngx-translate/core": "^9.1.1",
     "@ngx-translate/http-loader": "^7.0.0",
+    "@types/geojson": "^7946.0.10",
     "@types/three": "^0.149.0",
+    "@types/topojson": "^3.2.3",
     "globe.gl": "^2.26.12",
     "rxjs": "~7.5.0",
     "three": "^0.149.0",
+    "topojson": "^3.0.2",
+    "topojson-client": "^3.1.0",
     "tslib": "^2.3.0",
+    "world-atlas": "^2.0.2",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {

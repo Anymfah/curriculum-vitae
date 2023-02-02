@@ -809,7 +809,7 @@ export const DATA_SKILLS: SkillDataInterface[] = [
     category: [SKILL_CATEGORY.IDE],
     happiness: 50,
     experience: 100,
-    icon: 'brackets.svg',
+    icon: 'brackets',
   },
   {
     title: SKILL_TITLE.PHP_STORM,
