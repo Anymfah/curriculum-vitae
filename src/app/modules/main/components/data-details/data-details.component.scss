@@ -6,6 +6,12 @@
   display: flex;
 }
 .data-details {
+  &__block {
+    animation-name: appear-bottom;
+    animation-duration: 0.3s;
+    animation-fill-mode: forwards;
+    animation-timing-function: cubic-bezier(0.28, 0, 0, 1);
+  }
   &__container {
     height: 100%;
     position: relative;

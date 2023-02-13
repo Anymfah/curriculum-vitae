@@ -25,7 +25,7 @@
     );
     //background: fn.get-color(contrast, 600, 0.5);
     background: fn.get-color(contrast, 500, 0.3);
-    backdrop-filter: blur(3px);
+    backdrop-filter: blur(10px);
     margin-bottom: 2px;
   }
   &__header {
@@ -40,6 +40,13 @@
 
     &-title {
       color: fn.get-color(contrast, 100);
+    }
+
+    &-tools {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 5px;
     }
 
     &-line {

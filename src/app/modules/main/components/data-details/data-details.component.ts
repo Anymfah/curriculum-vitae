@@ -167,4 +167,11 @@ export class DataDetailsComponent implements OnChanges, OnInit {
   private _incrementCircleDelay(): void {
     this._circleDelay += this._delayIncrement;
   }
+
+  /**
+   * Close the details block.
+   */
+  public close(): void {
+    this.entity = undefined;
+  }
 }

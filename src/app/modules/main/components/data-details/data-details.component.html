@@ -1,4 +1,7 @@
-<cv-block [cvTitle]="entityName"  maxHeight="100%" [disablePadding]="true">
+<cv-block class="data-details__block" *ngIf="entity != null" [cvTitle]="entityName"  maxHeight="100%" [disablePadding]="true">
+  <button mat-icon-button tool class="close-btn" (click)="close()">
+    <mat-icon>close</mat-icon>
+  </button>
   <div class="data-details__container flex flex-wrap">
     <div class="data-details__content flex-column">
       <!--Circle charts blocks Container-->

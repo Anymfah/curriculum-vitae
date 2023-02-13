@@ -66,7 +66,7 @@ export class PlanetComponent implements AfterViewInit, OnDestroy {
         transparent: false,
         opacity: 1
       }))
-      .polygonStrokeColor(() => '#613dc3')
+      .polygonStrokeColor(() => '#3b247d')
       (this.globeWrapper.nativeElement);
   }
 
@@ -87,7 +87,12 @@ export class PlanetComponent implements AfterViewInit, OnDestroy {
 
     // Auto rotate
     this.world.controls().autoRotate = true;
-    this.world.controls().autoRotateSpeed = 0.5;
+    this.world.controls().autoRotateSpeed = 0.2;
+
+    // Set zoom
+    this.world.pointOfView(
+      {lat: 45.649, lng: 0.156, altitude: 1.2},
+    )
   }
 
   /**
@@ -107,8 +112,8 @@ export class PlanetComponent implements AfterViewInit, OnDestroy {
                * @see GeoJsonObject */
               const tCountry = country as Feature<Geometry, GeoJsonProperties>;
               const meshLambertMaterial = new THREE.MeshPhongMaterial({
-                color: '#3e2d6f',
-                emissive: '#4b348d',
+                color: '#2b1e4f',
+                emissive: '#352668',
                 emissiveIntensity: 1,
                 shininess: 5,
                 specular: '#5016fa',
@@ -142,8 +147,8 @@ export class PlanetComponent implements AfterViewInit, OnDestroy {
             })
             //.polygonSideColor(() => 'transparent')
             .polygonSideMaterial(() => new THREE.MeshPhongMaterial({
-              color: '#3e2d6f',
-              emissive: '#4b348d',
+              color: '#241845',
+              emissive: '#2c1c5b',
               emissiveIntensity: 0.2,
               shininess: 0.2,
               specular: '#5016fa',
@@ -167,7 +172,8 @@ export class PlanetComponent implements AfterViewInit, OnDestroy {
       .labelLng('longitude')
       .labelText('label')
       .labelColor(() =>'rgba(255, 255, 255, 0.8)')
-      .labelAltitude(place => (place as Place).importance * 0.0001 + 0.02)
+      .labelAltitude(place => (place as Place).importance * 0.0001 + 0.018)
+      //.labelAltitude(0.021)
       .labelSize(place => (place as Place).importance * 0.007)
       .labelDotRadius(place => (place as Place).importance * 0.01)
       .labelDotOrientation('labelPosition')

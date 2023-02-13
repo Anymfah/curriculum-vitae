@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, HostBinding, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {SvgSpriteService} from '../svg-sprite/svg-sprite.service';
 import {SvgIconInterface} from './svg-icon.interface';
 
@@ -8,6 +8,11 @@ import {SvgIconInterface} from './svg-icon.interface';
   styleUrls: ['./svg-icon.component.scss']
 })
 export class SvgIconComponent implements OnInit, OnChanges {
+
+  /**
+   * Self class
+   */
+  @HostBinding('class') public readonly selfClass = 'cv-svg-icon';
 
   /**
    * svg icon name

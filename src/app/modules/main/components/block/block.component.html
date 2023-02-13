@@ -4,6 +4,9 @@
       <div *ngIf="cvTitle" class="block__header-title h3">
         {{ cvTitle }}
       </div>
+      <div class="block__header-tools">
+        <ng-content select="[tool]"></ng-content>
+      </div>
     </div>
     <div *ngIf="cvTitle" class="block__header-line"></div>
   </div>

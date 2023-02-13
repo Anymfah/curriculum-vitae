@@ -22,12 +22,12 @@
   &__center {
     &-top {
       grid-column: 3 / span 8;
-      grid-row: 1 / span 6;
+      grid-row: 1 / 8;
     }
 
     &-bottom {
       grid-column: 5 / span 6;
-      grid-row: 7 / span 6;
+      grid-row: 8 / 13;
     }
   }
 
