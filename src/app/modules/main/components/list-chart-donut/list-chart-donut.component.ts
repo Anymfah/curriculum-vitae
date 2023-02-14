@@ -24,7 +24,7 @@ export class ListChartDonutComponent extends ListComponent implements OnInit {
 
     /** Wait entities to be ready - Will run only if items not specified */
     if (this.items == null) {
-      this._entitiesReady.subscribe((items: EntityType[]) => {
+      this._subscribe(this._entitiesReady, (items: EntityType[]) => {
         this.chartValues = this._itemsToChartDonut(items);
       });
     }

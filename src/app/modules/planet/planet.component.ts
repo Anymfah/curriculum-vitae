@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, OnDestroy, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, ViewChild} from '@angular/core';
 import Globe, {GlobeInstance} from 'globe.gl';
 import {Feature, FeatureCollection, GeoJsonObject, GeoJsonProperties, Geometry} from 'geojson';
 import {HttpClient} from '@angular/common/http';
@@ -8,13 +8,14 @@ import {Place} from '../../models/place.model';
 import {PageService} from '../../services/page.service';
 import {PlanetInterface} from './planet.interface';
 import {animateValueUtil} from '../../utils/animate-value.util';
+import {BaseComponent} from '../shared/base/base.component';
 
 @Component({
   selector: 'cv-planet',
   templateUrl: './planet.component.html',
   styleUrls: ['./planet.component.scss']
 })
-export class PlanetComponent implements AfterViewInit, OnDestroy {
+export class PlanetComponent extends BaseComponent implements AfterViewInit {
 
   /** Globe wrapper. */
   @ViewChild('globeWrapper') public globeWrapper!: ElementRef;
@@ -33,6 +34,7 @@ export class PlanetComponent implements AfterViewInit, OnDestroy {
     private readonly _placeService: PlaceService,
     private readonly _pageService: PageService,
   ) {
+    super();
   }
 
   /**
@@ -46,15 +48,9 @@ export class PlanetComponent implements AfterViewInit, OnDestroy {
     this._loadFont();
 
     /** Get the direction of page change. */
-    this._pageService.planet$.subscribe(planetControls => {
+    this._subscribe(this._pageService.planet$, planetControls => {
       this._updateCameraPosition(planetControls);
-    });
-  }
-
-  /**
-   * @inheritDoc
-   */
-  public ngOnDestroy(): void {
+    })
   }
 
   /**

@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
 import {EntityType} from '../../../../types/entity.type';
 import {SkillEntity} from '../../../../models/skill-entity.model';
 import {WorkEntity} from '../../../../models/work-entity.model';
@@ -7,6 +7,7 @@ import {ValueSkillEntitiesToList} from '../../../../transformers/entity-list.tra
 import {ListItem} from '../list/list-item.interface';
 import {EntityListService} from '../../../../services/entity-list.service';
 import {ProjectEntity} from '../../../../models/project-entity.model';
+import {BaseComponent} from '../../../shared/base/base.component';
 
 type ChartEntityList = {
   entityType?: DATA_TYPE;
@@ -20,7 +21,7 @@ type ChartEntityList = {
   templateUrl: './data-details.component.html',
   styleUrls: ['./data-details.component.scss']
 })
-export class DataDetailsComponent implements OnChanges, OnInit {
+export class DataDetailsComponent extends BaseComponent implements OnChanges, OnInit, OnDestroy {
 
   /**
    * Entity to be displayed.
@@ -62,6 +63,7 @@ export class DataDetailsComponent implements OnChanges, OnInit {
   public constructor(
     private readonly _entityListService: EntityListService
   ) {
+    super();
   }
 
   /**
@@ -69,14 +71,15 @@ export class DataDetailsComponent implements OnChanges, OnInit {
    */
   public ngOnInit(): void {
     if (this.entity == null) {
-      this._entityListService.focused$.subscribe((entity: EntityType | undefined) => {
-        this.entity = entity;
-        this._updateEntity();
-        this._updateCircleCharts();
-        this._updateEntityLists();
-        this._insertEntityToHistory();
-        this._setLastHistoryEntity();
-      });
+      this._subscribe(this._entityListService.focused$,
+        (entity: EntityType | undefined) => {
+          this.entity = entity;
+          this._updateEntity();
+          this._updateCircleCharts();
+          this._updateEntityLists();
+          this._insertEntityToHistory();
+          this._setLastHistoryEntity();
+        });
     }
   }
 

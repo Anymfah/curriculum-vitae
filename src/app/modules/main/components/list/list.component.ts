@@ -7,6 +7,7 @@ import {QueryInterface} from '../../../../interfaces/query.interface';
 import {ThemePalette} from '@angular/material/core';
 import {BehaviorSubject} from 'rxjs';
 import {PRE_MADE_QUERY} from '../../../../enums/premade-query.enum';
+import {BaseComponent} from '../../../shared/base/base.component';
 
 @Component({
   selector: 'cv-list',
@@ -14,7 +15,7 @@ import {PRE_MADE_QUERY} from '../../../../enums/premade-query.enum';
   styleUrls: ['./list.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class ListComponent implements OnChanges {
+export class ListComponent extends BaseComponent implements OnChanges {
   public color: ThemePalette = 'primary';
 
   /**
@@ -82,6 +83,7 @@ export class ListComponent implements OnChanges {
   public constructor(
     private readonly _entityListService: EntityListService,
   ) {
+    super();
   }
 
   /**

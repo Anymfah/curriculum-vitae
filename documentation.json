@@ -1098,7 +1098,7 @@
     "injectables": [
         {
             "name": "EntityListService",
-            "id": "injectable-EntityListService-81b9d843f810e45d9f490e03f365896d2c5bda5b620b36ce8442107f455520ecfba7c9b3b40fe45d92174c6573f5a4de53966d427097458c9d70e7858a54e01d",
+            "id": "injectable-EntityListService-10715ffdb943a41c4702e83c9f0fd72b79c10f48cb0474e027c1058e6b6e6e68177af24e9aa4d8cf7d27d20de5258dff524ace383c6e0160161256beb2b4af3b",
             "file": "src/app/services/entity-list.service.ts",
             "properties": [
                 {
@@ -1572,7 +1572,7 @@
                     "optional": false,
                     "returnType": "EntityType | undefined",
                     "typeParameters": [],
-                    "line": 280,
+                    "line": 279,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\n",
@@ -1583,8 +1583,8 @@
                     "jsdoctags": [
                         {
                             "name": {
-                                "pos": 7867,
-                                "end": 7869,
+                                "pos": 7829,
+                                "end": 7831,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -1595,8 +1595,8 @@
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "pos": 7861,
-                                "end": 7866,
+                                "pos": 7823,
+                                "end": 7828,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -1772,7 +1772,7 @@
             "deprecationMessage": "",
             "description": "",
             "rawdescription": "\n",
-            "sourceCode": "import {Injectable} from '@angular/core';\nimport {BehaviorSubject} from 'rxjs';\nimport {SkillEntity} from '../models/skill-entity.model';\nimport {ProjectEntity} from '../models/project-entity.model';\nimport {EntityType} from '../types/entity.type';\nimport {EducationEntity} from '../models/education-entity.model';\nimport {WorkEntity} from '../models/work-entity.model';\nimport {DATA_SKILLS} from '../constants/data-skills.constant';\nimport {DATA_EDUCATION} from '../constants/data-education.constant';\nimport {\n  EducationDataInterface,\n  ProjectDataInterface,\n  SkillDataInterface,\n  WorkDataInterface\n} from '../interfaces/data.interface';\nimport {DATA_WORK} from '../constants/data-work.constant';\nimport {DATA_TYPE} from '../enums/data.enum';\nimport {QueryInterface} from '../interfaces/query.interface';\nimport {EntityQueryModel} from '../models/entity-query.model';\nimport {PRE_MADE_QUERY} from '../enums/premade-query.enum';\nimport {PRE_MADE_QUERY_CONSTANT} from '../constants/premade-query.constant';\n\n@Injectable({\n  providedIn: 'root'\n})\nexport class EntityListService {\n\n  /**\n   * ID of the last created entity.\n   */\n  private _id = 0;\n\n  /**\n   * Focus on a specific entity.\n   */\n  private _focused = new BehaviorSubject<EntityType | undefined>(undefined);\n\n  /**\n   * Focus on a specific entity as Observable.\n   */\n  public focused$ = this._focused.asObservable();\n\n  /**\n   * Entity collection as a behavior subject.\n   */\n  private _entityCollection: BehaviorSubject<EntityType[]> = new BehaviorSubject<EntityType[]>([]);\n\n  /**\n   * Entity collection as an observable.\n   */\n  public entityCollection$ = this._entityCollection.asObservable();\n\n  /**\n   * Skills entity collection as BehaviorSubject.\n   */\n  private _skills = new BehaviorSubject<SkillEntity[]>([]);\n\n  /**\n   * Skills entity collection as observable.\n   */\n  public skills$ = this._skills.asObservable();\n\n  /** Skills collection direct access. */\n  public get skills(): SkillEntity[] {\n    return this._skills.value;\n  }\n\n  /**\n   * Projects entity collection as BehaviorSubject.\n   */\n  private _projects = new BehaviorSubject<ProjectEntity[]>([]);\n\n  /**\n   * Get projects as observable.\n   */\n  public projects$ = this._projects.asObservable();\n\n  /** Projects collection direct access. */\n  public get projects(): ProjectEntity[] {\n    return this._projects.value;\n  }\n\n\n  /**\n   * Education entity collection as BehaviorSubject.\n   */\n  private _education = new BehaviorSubject<EducationEntity[]>([]);\n\n  /**\n   * Education entity collection as observable.\n   */\n  public education$ = this._education.asObservable();\n\n  /** Education collection direct access. */\n  public get education(): EducationEntity[] {\n    return this._education.value;\n  }\n\n  /**\n   * Work entity collection as BehaviorSubject.\n   */\n  private _work = new BehaviorSubject<WorkEntity[]>([]);\n\n  /**\n   * Work entity collection as observable.\n   */\n  public work$ = this._work.asObservable();\n\n  /** Work collection direct access. */\n  public get work(): WorkEntity[] {\n    return this._work.value;\n  }\n\n  /**\n   * @constructor\n   */\n  public constructor() {\n    const skillsCollection = this._getSkillCollection(DATA_SKILLS);\n    this._skills.next(skillsCollection);\n\n    const educationCollection = this._getEducationCollection(DATA_EDUCATION);\n    this._education.next(educationCollection);\n\n    const workCollection = this._getWorkCollection(DATA_WORK);\n    this._work.next(workCollection);\n\n    this._entityCollection.next([\n      ...skillsCollection,\n      ...educationCollection,\n      ...workCollection,\n      ...this._projects.value\n    ]);\n  }\n\n  /**\n   * Get the skill collection.\n   * @param data Data to be used to populate the collection.\n   */\n  private _getSkillCollection(data: SkillDataInterface[]): SkillEntity[] {\n    const skills: SkillEntity[] = [];\n    data.forEach((skill) => {\n      skills.push(new SkillEntity(this._id, skill));\n      this._id++;\n    });\n    return skills;\n  }\n\n  /**\n   * Get the education collection.\n   * @param data Data to be used to populate the collection.\n   */\n  private _getEducationCollection(data: EducationDataInterface[]): EducationEntity[] {\n    const education: EducationEntity[] = [];\n    data.forEach((educationItem) => {\n      education.push(new EducationEntity(this._id, educationItem));\n      this._id++;\n    });\n    return education;\n  }\n\n  /**\n   * Get the work collection.\n   * @param data Data to be used to populate the collection.\n   */\n  private _getWorkCollection(data: WorkDataInterface[]): WorkEntity[] {\n    const work: WorkEntity[] = [];\n    data.forEach((workItem) => {\n      const workEntity = new WorkEntity(this._id, workItem);\n      if (workItem.projects != null) {\n        // Fill the project entities.\n        workEntity.projects = this._getProjectCollection(workItem.projects);\n        this._projects.next([...this._projects.value, ...workEntity.projects]);\n      }\n      if (workItem.skills != null) {\n        // Fill the skill entities.\n        workEntity.skills = [];\n        workItem.skills.forEach((skill) => {\n          this._skills.value.forEach((skillEntity) => {\n            if (skillEntity.name === skill) {\n              workEntity.skills.push(skillEntity);\n            }\n          });\n        });\n      }\n      work.push(workEntity);\n      this._id++;\n    });\n    return work;\n  }\n\n  /**\n   * Get the project collection.\n   * @param data Data to be used to populate the collection.\n   * TODO: Missing projects, get from personal work or hobby...\n   */\n  private _getProjectCollection(data: ProjectDataInterface[]): ProjectEntity[] {\n    const projects: ProjectEntity[] = [];\n    data.forEach((project) => {\n      this._id++;\n      const projectEntity = new ProjectEntity(this._id, project);\n\n      // Insert the skill entities into the project entity collection.\n      if (project.skills != null) {\n        const skills: SkillEntity[] = [];\n        project.skills.forEach((skill) => {\n          this._skills.value.forEach((skillEntity) => {\n            if (skillEntity.name === skill) {\n              skills.push(skillEntity);\n            }\n          });\n        });\n        projectEntity.skills = skills;\n      }\n      projects.push(projectEntity);\n    });\n    return projects;\n  }\n\n  /**\n   * @method Get collection by type.\n   * @param type Type of collection to get.\n   */\n  public getCollectionByType(type: DATA_TYPE): EntityType[] {\n    switch (type) {\n      case DATA_TYPE.SKILL:\n        return this._skills.value;\n      case DATA_TYPE.EDUCATION:\n        return this._education.value;\n      case DATA_TYPE.WORK:\n        return this._work.value;\n      case DATA_TYPE.PROJECT:\n        return this._projects.value;\n      default:\n        return [];\n    }\n  }\n\n  /**\n   * @method Get Filtered Collection\n   * @param type Type of collection to get.\n   * @param args Filters/Ordering to apply to the collection.\n   */\n  public getFilteredCollection(\n    type: DATA_TYPE,\n    args?: QueryInterface): EntityType[] {\n    let collection = this.getCollectionByType(type);\n    if (args != null) {\n      const query = new EntityQueryModel(collection, args);\n      collection = query.getCollection();\n    }\n\n    return collection;\n  }\n\n  /**\n   * Get PreMade Query.\n   * @param type Type of collection to get.\n   * @param preMadeQuery PreMade query to apply to the collection.\n   */\n  public getPreMadeQuery(type: DATA_TYPE, preMadeQuery: PRE_MADE_QUERY): EntityType[] {\n    return this.getFilteredCollection(type, PRE_MADE_QUERY_CONSTANT[preMadeQuery]);\n  }\n\n  /**\n   * Focus on a specific entity.\n   */\n  public focusEntity(entity: number | EntityType | undefined): void {\n    if (typeof entity === 'number') {\n      this._focused.next(this.getEntityById(entity));\n    } else {\n      this._focused.next(entity);\n    }\n    console.log(this._focused.value);\n  }\n\n  /**\n   * @method Get Entity by ID.\n   * @param id\n   */\n  public getEntityById(id: number): EntityType | undefined {\n    return this._entityCollection.value.find((entity) => entity.id === id);\n  }\n}\n",
+            "sourceCode": "import {Injectable} from '@angular/core';\nimport {BehaviorSubject} from 'rxjs';\nimport {SkillEntity} from '../models/skill-entity.model';\nimport {ProjectEntity} from '../models/project-entity.model';\nimport {EntityType} from '../types/entity.type';\nimport {EducationEntity} from '../models/education-entity.model';\nimport {WorkEntity} from '../models/work-entity.model';\nimport {DATA_SKILLS} from '../constants/data-skills.constant';\nimport {DATA_EDUCATION} from '../constants/data-education.constant';\nimport {\n  EducationDataInterface,\n  ProjectDataInterface,\n  SkillDataInterface,\n  WorkDataInterface\n} from '../interfaces/data.interface';\nimport {DATA_WORK} from '../constants/data-work.constant';\nimport {DATA_TYPE} from '../enums/data.enum';\nimport {QueryInterface} from '../interfaces/query.interface';\nimport {EntityQueryModel} from '../models/entity-query.model';\nimport {PRE_MADE_QUERY} from '../enums/premade-query.enum';\nimport {PRE_MADE_QUERY_CONSTANT} from '../constants/premade-query.constant';\n\n@Injectable({\n  providedIn: 'root'\n})\nexport class EntityListService {\n\n  /**\n   * ID of the last created entity.\n   */\n  private _id = 0;\n\n  /**\n   * Focus on a specific entity.\n   */\n  private _focused = new BehaviorSubject<EntityType | undefined>(undefined);\n\n  /**\n   * Focus on a specific entity as Observable.\n   */\n  public focused$ = this._focused.asObservable();\n\n  /**\n   * Entity collection as a behavior subject.\n   */\n  private _entityCollection: BehaviorSubject<EntityType[]> = new BehaviorSubject<EntityType[]>([]);\n\n  /**\n   * Entity collection as an observable.\n   */\n  public entityCollection$ = this._entityCollection.asObservable();\n\n  /**\n   * Skills entity collection as BehaviorSubject.\n   */\n  private _skills = new BehaviorSubject<SkillEntity[]>([]);\n\n  /**\n   * Skills entity collection as observable.\n   */\n  public skills$ = this._skills.asObservable();\n\n  /** Skills collection direct access. */\n  public get skills(): SkillEntity[] {\n    return this._skills.value;\n  }\n\n  /**\n   * Projects entity collection as BehaviorSubject.\n   */\n  private _projects = new BehaviorSubject<ProjectEntity[]>([]);\n\n  /**\n   * Get projects as observable.\n   */\n  public projects$ = this._projects.asObservable();\n\n  /** Projects collection direct access. */\n  public get projects(): ProjectEntity[] {\n    return this._projects.value;\n  }\n\n\n  /**\n   * Education entity collection as BehaviorSubject.\n   */\n  private _education = new BehaviorSubject<EducationEntity[]>([]);\n\n  /**\n   * Education entity collection as observable.\n   */\n  public education$ = this._education.asObservable();\n\n  /** Education collection direct access. */\n  public get education(): EducationEntity[] {\n    return this._education.value;\n  }\n\n  /**\n   * Work entity collection as BehaviorSubject.\n   */\n  private _work = new BehaviorSubject<WorkEntity[]>([]);\n\n  /**\n   * Work entity collection as observable.\n   */\n  public work$ = this._work.asObservable();\n\n  /** Work collection direct access. */\n  public get work(): WorkEntity[] {\n    return this._work.value;\n  }\n\n  /**\n   * @constructor\n   */\n  public constructor() {\n    const skillsCollection = this._getSkillCollection(DATA_SKILLS);\n    this._skills.next(skillsCollection);\n\n    const educationCollection = this._getEducationCollection(DATA_EDUCATION);\n    this._education.next(educationCollection);\n\n    const workCollection = this._getWorkCollection(DATA_WORK);\n    this._work.next(workCollection);\n\n    this._entityCollection.next([\n      ...skillsCollection,\n      ...educationCollection,\n      ...workCollection,\n      ...this._projects.value\n    ]);\n  }\n\n  /**\n   * Get the skill collection.\n   * @param data Data to be used to populate the collection.\n   */\n  private _getSkillCollection(data: SkillDataInterface[]): SkillEntity[] {\n    const skills: SkillEntity[] = [];\n    data.forEach((skill) => {\n      skills.push(new SkillEntity(this._id, skill));\n      this._id++;\n    });\n    return skills;\n  }\n\n  /**\n   * Get the education collection.\n   * @param data Data to be used to populate the collection.\n   */\n  private _getEducationCollection(data: EducationDataInterface[]): EducationEntity[] {\n    const education: EducationEntity[] = [];\n    data.forEach((educationItem) => {\n      education.push(new EducationEntity(this._id, educationItem));\n      this._id++;\n    });\n    return education;\n  }\n\n  /**\n   * Get the work collection.\n   * @param data Data to be used to populate the collection.\n   */\n  private _getWorkCollection(data: WorkDataInterface[]): WorkEntity[] {\n    const work: WorkEntity[] = [];\n    data.forEach((workItem) => {\n      const workEntity = new WorkEntity(this._id, workItem);\n      if (workItem.projects != null) {\n        // Fill the project entities.\n        workEntity.projects = this._getProjectCollection(workItem.projects);\n        this._projects.next([...this._projects.value, ...workEntity.projects]);\n      }\n      if (workItem.skills != null) {\n        // Fill the skill entities.\n        workEntity.skills = [];\n        workItem.skills.forEach((skill) => {\n          this._skills.value.forEach((skillEntity) => {\n            if (skillEntity.name === skill) {\n              workEntity.skills.push(skillEntity);\n            }\n          });\n        });\n      }\n      work.push(workEntity);\n      this._id++;\n    });\n    return work;\n  }\n\n  /**\n   * Get the project collection.\n   * @param data Data to be used to populate the collection.\n   * TODO: Missing projects, get from personal work or hobby...\n   */\n  private _getProjectCollection(data: ProjectDataInterface[]): ProjectEntity[] {\n    const projects: ProjectEntity[] = [];\n    data.forEach((project) => {\n      this._id++;\n      const projectEntity = new ProjectEntity(this._id, project);\n\n      // Insert the skill entities into the project entity collection.\n      if (project.skills != null) {\n        const skills: SkillEntity[] = [];\n        project.skills.forEach((skill) => {\n          this._skills.value.forEach((skillEntity) => {\n            if (skillEntity.name === skill) {\n              skills.push(skillEntity);\n            }\n          });\n        });\n        projectEntity.skills = skills;\n      }\n      projects.push(projectEntity);\n    });\n    return projects;\n  }\n\n  /**\n   * @method Get collection by type.\n   * @param type Type of collection to get.\n   */\n  public getCollectionByType(type: DATA_TYPE): EntityType[] {\n    switch (type) {\n      case DATA_TYPE.SKILL:\n        return this._skills.value;\n      case DATA_TYPE.EDUCATION:\n        return this._education.value;\n      case DATA_TYPE.WORK:\n        return this._work.value;\n      case DATA_TYPE.PROJECT:\n        return this._projects.value;\n      default:\n        return [];\n    }\n  }\n\n  /**\n   * @method Get Filtered Collection\n   * @param type Type of collection to get.\n   * @param args Filters/Ordering to apply to the collection.\n   */\n  public getFilteredCollection(\n    type: DATA_TYPE,\n    args?: QueryInterface): EntityType[] {\n    let collection = this.getCollectionByType(type);\n    if (args != null) {\n      const query = new EntityQueryModel(collection, args);\n      collection = query.getCollection();\n    }\n\n    return collection;\n  }\n\n  /**\n   * Get PreMade Query.\n   * @param type Type of collection to get.\n   * @param preMadeQuery PreMade query to apply to the collection.\n   */\n  public getPreMadeQuery(type: DATA_TYPE, preMadeQuery: PRE_MADE_QUERY): EntityType[] {\n    return this.getFilteredCollection(type, PRE_MADE_QUERY_CONSTANT[preMadeQuery]);\n  }\n\n  /**\n   * Focus on a specific entity.\n   */\n  public focusEntity(entity: number | EntityType | undefined): void {\n    if (typeof entity === 'number') {\n      this._focused.next(this.getEntityById(entity));\n    } else {\n      this._focused.next(entity);\n    }\n  }\n\n  /**\n   * @method Get Entity by ID.\n   * @param id\n   */\n  public getEntityById(id: number): EntityType | undefined {\n    return this._entityCollection.value.find((entity) => entity.id === id);\n  }\n}\n",
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
@@ -6716,12 +6716,12 @@
         },
         {
             "name": "SelectEntityDirective",
-            "id": "directive-SelectEntityDirective-329ccad26b2f39b1e94c109c5f3d448dc7c7bf723c12322146c9d87b8b8e4344771e77b881c25200dac300b55707a7587eeb197104f97e2976acaaff048f6d74",
+            "id": "directive-SelectEntityDirective-70fd3227020d620a7fe23381a9204181f903a8707259ff7fdf2597296dc451156cf0c41174c4133b3317d79be11e39ee6582c004f4370b6b9a1013eda2d14fea",
             "file": "src/app/modules/shared/select-entity/select-entity.directive.ts",
             "type": "directive",
             "description": "",
             "rawdescription": "\n",
-            "sourceCode": "import {Directive, HostListener, Input} from '@angular/core';\nimport {EntityListService} from '../../../services/entity-list.service';\nimport {EntityType} from '../../../types/entity.type';\n\n@Directive({\n  selector: '[cvSelectEntity]'\n})\nexport class SelectEntityDirective {\n\n  /**\n   * Entity to focus\n   */\n  @Input() public cvSelectEntity: number | EntityType | undefined;\n\n  @HostListener('click', ['$event']) public onClick(event: MouseEvent): void {\n    console.log('click', this.cvSelectEntity);\n    this._entityListService.focusEntity(this.cvSelectEntity);\n  }\n\n  /**\n   * @constructor\n   * @param _entityListService Entity list service\n   */\n  public constructor(\n    private readonly _entityListService: EntityListService,\n  ) {}\n\n}\n",
+            "sourceCode": "import {Directive, HostListener, Input} from '@angular/core';\nimport {EntityListService} from '../../../services/entity-list.service';\nimport {EntityType} from '../../../types/entity.type';\n\n@Directive({\n  selector: '[cvSelectEntity]'\n})\nexport class SelectEntityDirective {\n\n  /**\n   * Entity to focus\n   */\n  @Input() public cvSelectEntity: number | EntityType | undefined;\n\n  @HostListener('click', ['$event']) public onClick(event: MouseEvent): void {\n    this._entityListService.focusEntity(this.cvSelectEntity);\n  }\n\n  /**\n   * @constructor\n   * @param _entityListService Entity list service\n   */\n  public constructor(\n    private readonly _entityListService: EntityListService,\n  ) {}\n\n}\n",
             "selector": "[cvSelectEntity]",
             "providers": [],
             "inputsClass": [
@@ -6812,7 +6812,7 @@
                         "deprecationMessage": ""
                     }
                 ],
-                "line": 18,
+                "line": 17,
                 "rawdescription": "\n\n",
                 "modifierKind": [
                     123
@@ -6820,8 +6820,8 @@
                 "jsdoctags": [
                     {
                         "name": {
-                            "pos": 606,
-                            "end": 624,
+                            "pos": 559,
+                            "end": 577,
                             "flags": 4227072,
                             "modifierFlagsCache": 0,
                             "transformFlags": 0,
@@ -6832,8 +6832,8 @@
                         "deprecated": false,
                         "deprecationMessage": "",
                         "tagName": {
-                            "pos": 600,
-                            "end": 605,
+                            "pos": 553,
+                            "end": 558,
                             "flags": 4227072,
                             "modifierFlagsCache": 0,
                             "transformFlags": 0,
@@ -9048,7 +9048,7 @@
         },
         {
             "name": "DataDetailsComponent",
-            "id": "component-DataDetailsComponent-4b8279ba4ce99c0ee02b029474412914f47d702ca4d5fc4163e7af4a8f4e5b03ca7f8b97432e1a837c07c06cad239811a5cb4843f0e27914e6db3841b5088a21",
+            "id": "component-DataDetailsComponent-d2e1f1bfe31de3cef87b43bbf374faf34af6d5f2bcb3eda12a89e559bf68a67df9e6200e32284bf5fce58f136824f68719fdbaf2121923340613a37267d798a7",
             "file": "src/app/modules/main/components/data-details/data-details.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -9086,7 +9086,7 @@
                     "type": "number",
                     "optional": false,
                     "description": "<p>Circle charts delay.</p>\n",
-                    "line": 51,
+                    "line": 49,
                     "rawdescription": "\nCircle charts delay.",
                     "modifierKind": [
                         121
@@ -9100,7 +9100,7 @@
                     "type": "number",
                     "optional": false,
                     "description": "<p>Global delay increment</p>\n",
-                    "line": 54,
+                    "line": 52,
                     "rawdescription": "\nGlobal delay increment",
                     "modifierKind": [
                         121
@@ -9128,7 +9128,7 @@
                     "type": "Array<literal type>",
                     "optional": false,
                     "description": "<p>Circle charts to show</p>\n",
-                    "line": 59,
+                    "line": 57,
                     "rawdescription": "\n\nCircle charts to show\n",
                     "modifierKind": [
                         123
@@ -9141,7 +9141,7 @@
                     "type": "ChartEntityList",
                     "optional": true,
                     "description": "<p>Donut chart entities.</p>\n",
-                    "line": 48,
+                    "line": 46,
                     "rawdescription": "\nDonut chart entities.",
                     "modifierKind": [
                         123
@@ -9155,7 +9155,7 @@
                     "type": "string",
                     "optional": false,
                     "description": "<p>Name of the entity.</p>\n",
-                    "line": 39,
+                    "line": 37,
                     "rawdescription": "\nName of the entity.",
                     "modifierKind": [
                         123
@@ -9169,7 +9169,7 @@
                     "type": "string",
                     "optional": false,
                     "description": "<p>Subtitle of the entity.</p>\n",
-                    "line": 42,
+                    "line": 40,
                     "rawdescription": "\nSubtitle of the entity.",
                     "modifierKind": [
                         123
@@ -9182,8 +9182,21 @@
                     "type": "ChartEntityList",
                     "optional": true,
                     "description": "<p>Side entities as gauge charts.</p>\n",
-                    "line": 45,
+                    "line": 43,
                     "rawdescription": "\nSide entities as gauge charts.",
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "lastHistoryEntity",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "EntityType | undefined",
+                    "optional": false,
+                    "description": "<p>Get last history entity.</p>\n",
+                    "line": 34,
+                    "rawdescription": "\nGet last history entity.",
                     "modifierKind": [
                         123
                     ]
@@ -9203,7 +9216,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 130,
+                    "line": 149,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nUpdate circle chart for SkillEntity.\n",
@@ -9229,11 +9242,41 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 178,
+                    "line": 197,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nIncrement circle delay.\n",
                     "description": "<p>Increment circle delay.</p>\n",
+                    "modifierKind": [
+                        121
+                    ]
+                },
+                {
+                    "name": "_insertEntityToHistory",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 107,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nInsert Entity to history.\n",
+                    "description": "<p>Insert Entity to history.</p>\n",
+                    "modifierKind": [
+                        121
+                    ]
+                },
+                {
+                    "name": "_setLastHistoryEntity",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 116,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nSet last history entity.\n",
+                    "description": "<p>Set last history entity.</p>\n",
                     "modifierKind": [
                         121
                     ]
@@ -9244,7 +9287,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 108,
+                    "line": 127,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nUpdate circle charts.\n",
@@ -9259,7 +9302,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 97,
+                    "line": 99,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nUpdate entity.\n",
@@ -9274,7 +9317,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 150,
+                    "line": 169,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nUpdate gauge charts.\n",
@@ -9289,11 +9332,26 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 185,
+                    "line": 204,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nClose the details block.\n",
                     "description": "<p>Close the details block.</p>\n",
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "goBack",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 212,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nGo back to the previous entity.\n",
+                    "description": "<p>Go back to the previous entity.</p>\n",
                     "modifierKind": [
                         123
                     ]
@@ -9337,7 +9395,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 72,
+                    "line": 70,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\n",
@@ -9355,7 +9413,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';\nimport {EntityType} from '../../../../types/entity.type';\nimport {SkillEntity} from '../../../../models/skill-entity.model';\nimport {WorkEntity} from '../../../../models/work-entity.model';\nimport {DATA_FIELD, DATA_TYPE} from '../../../../enums/data.enum';\nimport {ValueSkillEntitiesToList} from '../../../../transformers/entity-list.transformer';\nimport {ListItem} from '../list/list-item.interface';\nimport {EntityListService} from '../../../../services/entity-list.service';\nimport {ProjectEntity} from '../../../../models/project-entity.model';\n\ntype ChartEntityList = {\n  entityType?: DATA_TYPE;\n  entities?: EntityType[];\n  valueKey?: DATA_FIELD;\n  items?: ListItem[];\n}\n\n@Component({\n  selector: 'cv-data-details',\n  templateUrl: './data-details.component.html',\n  styleUrls: ['./data-details.component.scss']\n})\nexport class DataDetailsComponent implements OnChanges, OnInit {\n\n  /**\n   * Entity to be displayed.\n   */\n  @Input() public entity?: EntityType;\n\n  /** History entities. */\n  private _historyEntities: EntityType[] = [];\n\n  /** Get last history entity. */\n  public get lastHistoryEntity(): EntityType | undefined {\n    return this._historyEntities[this._historyEntities.length - 2];\n  }\n\n  /** Name of the entity. */\n  public entityName: string = '';\n\n  /** Subtitle of the entity. */\n  public entitySubtitle: string = '';\n\n  /** Side entities as gauge charts. */\n  public gaugeCharts?: ChartEntityList;\n\n  /** Donut chart entities. */\n  public donutChart?: ChartEntityList;\n\n  /** Circle charts delay. */\n  private _circleDelay = 0;\n\n  /** Global delay increment */\n  private _delayIncrement = 150;\n\n  /**\n   * Circle charts to show\n   */\n  public circleCharts: Array<{ label: string, value: number, delay: number }> = [];\n\n  /**\n   * @constructor\n   */\n  public constructor(\n    private readonly _entityListService: EntityListService\n  ) {\n  }\n\n  /**\n   * @inheritDoc\n   */\n  public ngOnInit(): void {\n    if (this.entity == null) {\n      this._entityListService.focused$.subscribe((entity: EntityType | undefined) => {\n        this.entity = entity;\n        this._updateEntity();\n        this._updateCircleCharts();\n        this._updateEntityLists();\n      });\n    }\n  }\n\n  /**\n   * @inheritDoc\n   */\n  public ngOnChanges(changes: SimpleChanges): void {\n    if ('entity' in changes) {\n      this._updateEntity();\n      this._updateCircleCharts();\n      this._updateEntityLists();\n    }\n  }\n\n  /**\n   * Update entity.\n   */\n  private _updateEntity(): void {\n    if (this.entity != null) {\n      this._historyEntities.push(this.entity);\n    }\n    this.entityName = this.entity?.name ?? '';\n    this.entitySubtitle = this.entity?.subtitle ?? '';\n  }\n\n  /**\n   * Update circle charts.\n   */\n  private _updateCircleCharts(): void {\n    this.circleCharts = [];\n    this._circleDelay = 0;\n    if (this.entity instanceof SkillEntity) {\n      this._circleChartsSkillEntity(this.entity);\n    }\n\n\n    if (this.entity != null) {\n      /** Add Happiness chart */\n      this.circleCharts.push({\n        label: 'Ma satisfaction',\n        value: this.entity.happiness,\n        delay: this._circleDelay\n      });\n      this._incrementCircleDelay();\n    }\n  }\n\n  /**\n   * Update circle chart for SkillEntity.\n   */\n  private _circleChartsSkillEntity(entity: SkillEntity): void {\n    /** Add Level chart */\n    this.circleCharts.push({\n      label: 'Mon niveau',\n      value: entity.level,\n      delay: this._circleDelay\n    });\n    this._incrementCircleDelay();\n    /** Add Experience chart */\n    this.circleCharts.push({\n      label: 'Mon expérience globale',\n      value: entity.experience,\n      delay: this._circleDelay\n    });\n    this._incrementCircleDelay();\n  }\n\n  /**\n   * Update gauge charts.\n   */\n  private _updateEntityLists(): void {\n    this.gaugeCharts = undefined;\n    this.donutChart = undefined;\n\n    if (this.entity instanceof WorkEntity) {\n      this.gaugeCharts = {\n        entityType: DATA_TYPE.PROJECT,\n        entities: this.entity.projects,\n        valueKey: DATA_FIELD.HAPPINESS\n      };\n      this.donutChart = {\n        items: ValueSkillEntitiesToList(this.entity.skillRatios)\n      };\n    } else if (this.entity instanceof ProjectEntity) {\n      this.gaugeCharts = {\n        entityType: DATA_TYPE.SKILL,\n        entities: this.entity.skills,\n        valueKey: DATA_FIELD.LEVEL\n      };\n      this.donutChart = {\n        // TODO: continue here (maybe something else than donut chart)\n      }\n    }\n  }\n\n  /**\n   * Increment circle delay.\n   */\n  private _incrementCircleDelay(): void {\n    this._circleDelay += this._delayIncrement;\n  }\n\n  /**\n   * Close the details block.\n   */\n  public close(): void {\n    this._historyEntities = [];\n    this.entity = undefined;\n  }\n}\n",
+            "sourceCode": "import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';\nimport {EntityType} from '../../../../types/entity.type';\nimport {SkillEntity} from '../../../../models/skill-entity.model';\nimport {WorkEntity} from '../../../../models/work-entity.model';\nimport {DATA_FIELD, DATA_TYPE} from '../../../../enums/data.enum';\nimport {ValueSkillEntitiesToList} from '../../../../transformers/entity-list.transformer';\nimport {ListItem} from '../list/list-item.interface';\nimport {EntityListService} from '../../../../services/entity-list.service';\nimport {ProjectEntity} from '../../../../models/project-entity.model';\n\ntype ChartEntityList = {\n  entityType?: DATA_TYPE;\n  entities?: EntityType[];\n  valueKey?: DATA_FIELD;\n  items?: ListItem[];\n}\n\n@Component({\n  selector: 'cv-data-details',\n  templateUrl: './data-details.component.html',\n  styleUrls: ['./data-details.component.scss']\n})\nexport class DataDetailsComponent implements OnChanges, OnInit {\n\n  /**\n   * Entity to be displayed.\n   */\n  @Input() public entity?: EntityType;\n\n  /** History entities. */\n  private _historyEntities: EntityType[] = [];\n\n  /** Get last history entity. */\n  public lastHistoryEntity: EntityType | undefined;\n\n  /** Name of the entity. */\n  public entityName: string = '';\n\n  /** Subtitle of the entity. */\n  public entitySubtitle: string = '';\n\n  /** Side entities as gauge charts. */\n  public gaugeCharts?: ChartEntityList;\n\n  /** Donut chart entities. */\n  public donutChart?: ChartEntityList;\n\n  /** Circle charts delay. */\n  private _circleDelay = 0;\n\n  /** Global delay increment */\n  private _delayIncrement = 150;\n\n  /**\n   * Circle charts to show\n   */\n  public circleCharts: Array<{ label: string, value: number, delay: number }> = [];\n\n  /**\n   * @constructor\n   */\n  public constructor(\n    private readonly _entityListService: EntityListService\n  ) {\n  }\n\n  /**\n   * @inheritDoc\n   */\n  public ngOnInit(): void {\n    if (this.entity == null) {\n      this._entityListService.focused$.subscribe((entity: EntityType | undefined) => {\n        this.entity = entity;\n        this._updateEntity();\n        this._updateCircleCharts();\n        this._updateEntityLists();\n        this._insertEntityToHistory();\n        this._setLastHistoryEntity();\n      });\n    }\n  }\n\n  /**\n   * @inheritDoc\n   */\n  public ngOnChanges(changes: SimpleChanges): void {\n    if ('entity' in changes) {\n      this._updateEntity();\n      this._updateCircleCharts();\n      this._updateEntityLists();\n      this._insertEntityToHistory();\n      this._setLastHistoryEntity();\n    }\n  }\n\n  /**\n   * Update entity.\n   */\n  private _updateEntity(): void {\n    this.entityName = this.entity?.name ?? '';\n    this.entitySubtitle = this.entity?.subtitle ?? '';\n  }\n\n  /**\n   * Insert Entity to history.\n   */\n  private _insertEntityToHistory(): void {\n    if (this.entity != null) {\n      this._historyEntities.push(this.entity);\n    }\n  }\n\n  /**\n   * Set last history entity.\n   */\n  private _setLastHistoryEntity(): void {\n    if (this._historyEntities.length > 1) {\n      this.lastHistoryEntity = this._historyEntities[this._historyEntities.length - 2];\n    } else {\n      this.lastHistoryEntity = undefined;\n    }\n  }\n\n  /**\n   * Update circle charts.\n   */\n  private _updateCircleCharts(): void {\n    this.circleCharts = [];\n    this._circleDelay = 0;\n    if (this.entity instanceof SkillEntity) {\n      this._circleChartsSkillEntity(this.entity);\n    }\n\n\n    if (this.entity != null) {\n      /** Add Happiness chart */\n      this.circleCharts.push({\n        label: 'Ma satisfaction',\n        value: this.entity.happiness,\n        delay: this._circleDelay\n      });\n      this._incrementCircleDelay();\n    }\n  }\n\n  /**\n   * Update circle chart for SkillEntity.\n   */\n  private _circleChartsSkillEntity(entity: SkillEntity): void {\n    /** Add Level chart */\n    this.circleCharts.push({\n      label: 'Mon niveau',\n      value: entity.level,\n      delay: this._circleDelay\n    });\n    this._incrementCircleDelay();\n    /** Add Experience chart */\n    this.circleCharts.push({\n      label: 'Mon expérience globale',\n      value: entity.experience,\n      delay: this._circleDelay\n    });\n    this._incrementCircleDelay();\n  }\n\n  /**\n   * Update gauge charts.\n   */\n  private _updateEntityLists(): void {\n    this.gaugeCharts = undefined;\n    this.donutChart = undefined;\n\n    if (this.entity instanceof WorkEntity) {\n      this.gaugeCharts = {\n        entityType: DATA_TYPE.PROJECT,\n        entities: this.entity.projects,\n        valueKey: DATA_FIELD.HAPPINESS\n      };\n      this.donutChart = {\n        items: ValueSkillEntitiesToList(this.entity.skillRatios)\n      };\n    } else if (this.entity instanceof ProjectEntity) {\n      this.gaugeCharts = {\n        entityType: DATA_TYPE.SKILL,\n        entities: this.entity.skills,\n        valueKey: DATA_FIELD.LEVEL\n      };\n      this.donutChart = {\n        // TODO: continue here (maybe something else than donut chart)\n      }\n    }\n  }\n\n  /**\n   * Increment circle delay.\n   */\n  private _incrementCircleDelay(): void {\n    this._circleDelay += this._delayIncrement;\n  }\n\n  /**\n   * Close the details block.\n   */\n  public close(): void {\n    this._historyEntities = [];\n    this.entity = undefined;\n  }\n\n  /**\n   * Go back to the previous entity.\n   */\n  public goBack(): void {\n    this.entity = this.lastHistoryEntity;\n    this._historyEntities.pop();\n    this._updateEntity();\n    this._updateCircleCharts();\n    this._updateEntityLists();\n    this._setLastHistoryEntity();\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -9377,7 +9435,7 @@
                         "deprecationMessage": ""
                     }
                 ],
-                "line": 59,
+                "line": 57,
                 "rawdescription": "\n\n",
                 "modifierKind": [
                     123
@@ -9398,20 +9456,7 @@
                 "OnChanges",
                 "OnInit"
             ],
-            "accessors": {
-                "lastHistoryEntity": {
-                    "name": "lastHistoryEntity",
-                    "getSignature": {
-                        "name": "lastHistoryEntity",
-                        "type": "",
-                        "returnType": "EntityType | undefined",
-                        "line": 34,
-                        "rawdescription": "\nGet last history entity.",
-                        "description": "<p>Get last history entity.</p>\n"
-                    }
-                }
-            },
-            "templateData": "<cv-block class=\"data-details__block\" *ngIf=\"entity != null\" [cvTitle]=\"entityName\"  maxHeight=\"100%\" [disablePadding]=\"true\">\n\n  <button *ngIf=\"lastHistoryEntity\" tool mat-button class=\"back-btn\">\n    <mat-icon>arrow_back</mat-icon>{{lastHistoryEntity.name}}\n  </button>\n  <button mat-icon-button tool class=\"close-btn\" (click)=\"close()\">\n    <mat-icon>close</mat-icon>\n  </button>\n  <div class=\"data-details__container flex flex-wrap\">\n    <div class=\"data-details__content flex-column\">\n      <!--Circle charts blocks Container-->\n      <div class=\"data-details__content__row flex flex-grow\">\n        <div class=\"data-details__blocks chart-circle-blocks justify-center flex flex-grow flex-wrap\">\n          <div *ngIf=\"entitySubtitle\" class=\"data-details__subtitle\">\n            {{entitySubtitle}}\n          </div>\n          <div *ngFor=\"let block of circleCharts\" class=\"data-details__block flex-column justify-center\">\n            <div class=\"data-details__block__header flex-center\">\n              <div class=\"data-details__block-title h3 flex-center\">\n                {{block.label}}\n              </div>\n            </div>\n            <div class=\"data-details__block__content\">\n              <cv-chart-circle [value]=\"block.value\" [animationDelay]=\"block.delay\"\n                               [size]=\"circleCharts.length === 1 ? 140 : 90\" [weight]=\"circleCharts.length === 1 ? 15 : 5\"></cv-chart-circle>\n            </div>\n          </div>\n        </div>\n\n        <!--Gauge charts blocks Container-->\n        <div *ngIf=\"gaugeCharts\" class=\"data-details__list flex-column flex-grow\">\n          <div class=\"data-details__list__header flex label h3\">Stacks utilisées</div>\n          <cv-list-chart-gauge class=\"data-details__list-chart flex-grow flex-column\"\n                               [items]=\"gaugeCharts.items\"\n                               [entityType]=\"gaugeCharts.entityType\"\n                               [entities]=\"gaugeCharts.entities\"\n                               [valueKey]=\"gaugeCharts.valueKey\"\n          ></cv-list-chart-gauge>\n        </div>\n      </div>\n\n      <cv-list-chart-donut class=\"data-details__donut\" *ngIf=\"donutChart && donutChart.items\"\n                           [items]=\"donutChart.items\"\n                           [entityType]=\"donutChart.entityType\"\n                           [entities]=\"donutChart.entities\"\n                           [valueKey]=\"donutChart.valueKey\"\n      ></cv-list-chart-donut>\n    </div>\n  </div>\n</cv-block>\n"
+            "templateData": "<cv-block class=\"data-details__block\" *ngIf=\"entity != null\" [cvTitle]=\"entityName\"  maxHeight=\"100%\" [disablePadding]=\"true\">\n\n  <button *ngIf=\"lastHistoryEntity\" tool mat-button class=\"back-btn\"\n          (click)=\"goBack()\">\n    <mat-icon>arrow_back</mat-icon>{{lastHistoryEntity.name}}\n  </button>\n  <button mat-icon-button tool class=\"close-btn\" (click)=\"close()\">\n    <mat-icon>close</mat-icon>\n  </button>\n  <div class=\"data-details__container flex flex-wrap\">\n    <div class=\"data-details__content flex-column\">\n      <!--Circle charts blocks Container-->\n      <div class=\"data-details__content__row flex flex-grow\">\n        <div class=\"data-details__blocks chart-circle-blocks justify-center flex flex-grow flex-wrap\">\n          <div *ngIf=\"entitySubtitle\" class=\"data-details__subtitle\">\n            {{entitySubtitle}}\n          </div>\n          <div *ngFor=\"let block of circleCharts\" class=\"data-details__block flex-column justify-center\">\n            <div class=\"data-details__block__header flex-center\">\n              <div class=\"data-details__block-title h3 flex-center\">\n                {{block.label}}\n              </div>\n            </div>\n            <div class=\"data-details__block__content\">\n              <cv-chart-circle [value]=\"block.value\" [animationDelay]=\"block.delay\"\n                               [size]=\"circleCharts.length === 1 ? 140 : 90\" [weight]=\"circleCharts.length === 1 ? 15 : 5\"></cv-chart-circle>\n            </div>\n          </div>\n        </div>\n\n        <!--Gauge charts blocks Container-->\n        <div *ngIf=\"gaugeCharts\" class=\"data-details__list flex-column flex-grow\">\n          <div class=\"data-details__list__header flex label h3\">Stacks utilisées</div>\n          <cv-list-chart-gauge class=\"data-details__list-chart flex-grow flex-column\"\n                               [items]=\"gaugeCharts.items\"\n                               [entityType]=\"gaugeCharts.entityType\"\n                               [entities]=\"gaugeCharts.entities\"\n                               [valueKey]=\"gaugeCharts.valueKey\"\n          ></cv-list-chart-gauge>\n        </div>\n      </div>\n\n      <cv-list-chart-donut class=\"data-details__donut\" *ngIf=\"donutChart && donutChart.items\"\n                           [items]=\"donutChart.items\"\n                           [entityType]=\"donutChart.entityType\"\n                           [entities]=\"donutChart.entities\"\n                           [valueKey]=\"donutChart.valueKey\"\n      ></cv-list-chart-donut>\n    </div>\n  </div>\n</cv-block>\n"
         },
         {
             "name": "DrawCircleComponent",
@@ -16445,6 +16490,16 @@
                 "name": "AllStacks",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "AllStacks",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "src/app/modules/main/components/list-chart-donut/list-chart-donut.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -16456,16 +16511,6 @@
                 "ctype": "miscellaneous",
                 "subtype": "variable",
                 "file": "src/app/modules/main/components/list-chart-gauge/list-chart-gauge.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "",
-                "defaultValue": "Template.bind({})"
-            },
-            {
-                "name": "AllStacks",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -16507,6 +16552,16 @@
                 "name": "Best5Stacks",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "Best5Stacks",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "src/app/modules/main/components/list-chart-donut/list-chart-donut.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -16518,16 +16573,6 @@
                 "ctype": "miscellaneous",
                 "subtype": "variable",
                 "file": "src/app/modules/main/components/list-chart-gauge/list-chart-gauge.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "",
-                "defaultValue": "Template.bind({})"
-            },
-            {
-                "name": "Best5Stacks",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -16763,6 +16808,16 @@
                 "name": "EducationByDate",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "EducationByDate",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "src/app/modules/main/components/list-chart-donut/list-chart-donut.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -16774,16 +16829,6 @@
                 "ctype": "miscellaneous",
                 "subtype": "variable",
                 "file": "src/app/modules/main/components/list-chart-gauge/list-chart-gauge.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "",
-                "defaultValue": "Template.bind({})"
-            },
-            {
-                "name": "EducationByDate",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -16873,6 +16918,16 @@
                 "name": "LastProjects",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "LastProjects",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "src/app/modules/main/components/list-chart-donut/list-chart-donut.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -16884,16 +16939,6 @@
                 "ctype": "miscellaneous",
                 "subtype": "variable",
                 "file": "src/app/modules/main/components/list-chart-gauge/list-chart-gauge.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "",
-                "defaultValue": "Template.bind({})"
-            },
-            {
-                "name": "LastProjects",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -17121,6 +17166,30 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "src/app/modules/shared/chart-donut/chart-donut.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<ChartDonutComponent>",
+                "defaultValue": "(args: ChartDonutComponent) => ({\r\n  props: args,\r\n})",
+                "rawdescription": "Template of the component.",
+                "description": "<p>Template of the component.</p>\n"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/modules/shared/chart-gauge/chart-gauge.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<ChartGaugeComponent>",
+                "defaultValue": "(args: ChartGaugeComponent) => ({\r\n  props: args,\r\n})",
+                "rawdescription": "Template of the component.",
+                "description": "<p>Template of the component.</p>\n"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "src/app/modules/shared/chart-circle/chart-circle.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -17145,18 +17214,6 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/modules/shared/chart-gauge/chart-gauge.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story<ChartGaugeComponent>",
-                "defaultValue": "(args: ChartGaugeComponent) => ({\r\n  props: args,\r\n})",
-                "rawdescription": "Template of the component.",
-                "description": "<p>Template of the component.</p>\n"
-            },
-            {
-                "name": "Template",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "src/app/modules/shared/draw-circle/draw-circle.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -17169,35 +17226,11 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/modules/shared/chart-donut/chart-donut.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story<ChartDonutComponent>",
-                "defaultValue": "(args: ChartDonutComponent) => ({\r\n  props: args,\r\n})",
-                "rawdescription": "Template of the component.",
-                "description": "<p>Template of the component.</p>\n"
-            },
-            {
-                "name": "Template",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "src/app/modules/shared/grid/grid.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story<GridComponent>",
                 "defaultValue": "(args: GridComponent) => ({\r\n  props: args,\r\n})",
-                "rawdescription": "Template of the component.",
-                "description": "<p>Template of the component.</p>\n"
-            },
-            {
-                "name": "Template",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/modules/shared/input-circle-slider/input-circle-slider.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story<InputCircleSliderComponent>",
-                "defaultValue": "(args: InputCircleSliderComponent) => ({\r\n  props: args,\r\n})",
                 "rawdescription": "Template of the component.",
                 "description": "<p>Template of the component.</p>\n"
             },
@@ -17229,6 +17262,18 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "src/app/modules/shared/input-circle-slider/input-circle-slider.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<InputCircleSliderComponent>",
+                "defaultValue": "(args: InputCircleSliderComponent) => ({\r\n  props: args,\r\n})",
+                "rawdescription": "Template of the component.",
+                "description": "<p>Template of the component.</p>\n"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "src/app/modules/shared/tooltip/tooltip.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -17236,6 +17281,16 @@
                 "defaultValue": "(args) => ({\r\n  props: args,\r\n  template: `\r\n    <button cvTooltip=\"Some Title\" cvTooltipPosition=\"${args['position']}\">\r\n      Test ${args['test']}\r\n    </button>\r\n  `,\r\n})",
                 "rawdescription": "Template of the component.",
                 "description": "<p>Template of the component.</p>\n"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/modules/main/components/block/block.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<BlockComponent>",
+                "defaultValue": "(args: BlockComponent) => ({\n  props: args,\n})"
             },
             {
                 "name": "Template",
@@ -17263,11 +17318,13 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/modules/main/components/block/block.stories.ts",
+                "file": "src/app/modules/main/components/layout/layout.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Story<BlockComponent>",
-                "defaultValue": "(args: BlockComponent) => ({\n  props: args,\n})"
+                "type": "Story<LayoutComponent>",
+                "defaultValue": "(args: LayoutComponent) => ({\r\n  props: args,\r\n})",
+                "rawdescription": "Template of the component.",
+                "description": "<p>Template of the component.</p>\n"
             },
             {
                 "name": "Template",
@@ -17283,13 +17340,11 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/modules/main/components/layout/layout.stories.ts",
+                "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Story<LayoutComponent>",
-                "defaultValue": "(args: LayoutComponent) => ({\r\n  props: args,\r\n})",
-                "rawdescription": "Template of the component.",
-                "description": "<p>Template of the component.</p>\n"
+                "type": "Story<ListChartCirclesComponent>",
+                "defaultValue": "(args: ListChartCirclesComponent) => ({\n  props: args,\n})"
             },
             {
                 "name": "Template",
@@ -17320,16 +17375,6 @@
                 "deprecationMessage": "",
                 "type": "Story<ListChartGaugeComponent>",
                 "defaultValue": "(args: ListChartGaugeComponent) => ({\n  props: args,\n})"
-            },
-            {
-                "name": "Template",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story<ListChartCirclesComponent>",
-                "defaultValue": "(args: ListChartCirclesComponent) => ({\n  props: args,\n})"
             },
             {
                 "name": "Template",
@@ -17425,6 +17470,16 @@
                 "name": "WorkByDate",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "WorkByDate",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "src/app/modules/main/components/list-chart-donut/list-chart-donut.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -17436,16 +17491,6 @@
                 "ctype": "miscellaneous",
                 "subtype": "variable",
                 "file": "src/app/modules/main/components/list-chart-gauge/list-chart-gauge.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "",
-                "defaultValue": "Template.bind({})"
-            },
-            {
-                "name": "WorkByDate",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -18886,6 +18931,68 @@
                     "defaultValue": "Template.bind({})"
                 }
             ],
+            "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts": [
+                {
+                    "name": "AllStacks",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Best5Stacks",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "EducationByDate",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "LastProjects",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<ListChartCirclesComponent>",
+                    "defaultValue": "(args: ListChartCirclesComponent) => ({\n  props: args,\n})"
+                },
+                {
+                    "name": "WorkByDate",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                }
+            ],
             "src/app/modules/main/components/list-chart-donut/list-chart-donut.stories.ts": [
                 {
                     "name": "AllStacks",
@@ -19004,68 +19111,6 @@
                     "ctype": "miscellaneous",
                     "subtype": "variable",
                     "file": "src/app/modules/main/components/list-chart-gauge/list-chart-gauge.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                }
-            ],
-            "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts": [
-                {
-                    "name": "AllStacks",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "Best5Stacks",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "EducationByDate",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "LastProjects",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "Template",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story<ListChartCirclesComponent>",
-                    "defaultValue": "(args: ListChartCirclesComponent) => ({\n  props: args,\n})"
-                },
-                {
-                    "name": "WorkByDate",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
@@ -21826,8 +21871,8 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "DataDetailsComponent",
-                "coveragePercent": 78,
-                "coverageCount": "15/19",
+                "coveragePercent": 82,
+                "coverageCount": "19/23",
                 "status": "very-good"
             },
             {

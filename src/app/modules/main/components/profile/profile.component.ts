@@ -1,11 +1,4 @@
-import {
-  AfterViewInit,
-  Component,
-  Input,
-  OnChanges,
-  OnInit,
-  SimpleChanges
-} from '@angular/core';
+import {AfterViewInit, Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {animateValueUtil} from "../../../../utils/animate-value.util";
 import {ProfileMenuItem} from "./profile.component.model";
 import {PROFILE_CONSTANT} from "./profile.constant";
@@ -13,13 +6,14 @@ import {ProfileMenuItemData} from "./profile.interface";
 import {ProfileMode} from "./profile.enum";
 import {PageService} from "../../../../services/page.service";
 import {Router} from "@angular/router";
+import {BaseComponent} from '../../../shared/base/base.component';
 
 @Component({
   selector: 'cv-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent implements OnInit, AfterViewInit, OnChanges {
+export class ProfileComponent extends BaseComponent implements OnInit, AfterViewInit, OnChanges {
 
   /**
    * ViewMode : Large or Small
@@ -68,7 +62,7 @@ export class ProfileComponent implements OnInit, AfterViewInit, OnChanges {
     private readonly _pageService: PageService,
     private readonly _router: Router,
   ) {
-
+    super();
   }
 
   /**
@@ -85,7 +79,7 @@ export class ProfileComponent implements OnInit, AfterViewInit, OnChanges {
     */
   public ngOnInit() {
     this._updateMode();
-    this._pageService.activeItem$.subscribe((activeItem) => {
+    this._subscribe(this._pageService.activeItem$, (activeItem) => {
       if (activeItem) {
         const item = this._getMenuItemByRouterLink(activeItem.link);
         if (item != null && this._isInitialized) {

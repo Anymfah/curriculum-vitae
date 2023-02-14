@@ -6,6 +6,7 @@ import {
 } from "../../../../constants/router-transition.constant";
 import {PageService} from "../../../../services/page.service";
 import {MatTabNavPanel} from "@angular/material/tabs";
+import {BaseComponent} from '../../../shared/base/base.component';
 
 @Component({
   selector: 'cv-layout',
@@ -13,7 +14,7 @@ import {MatTabNavPanel} from "@angular/material/tabs";
   styleUrls: ['./layout.component.scss'],
   animations: [ROUTER_RTL_TRANSITION_CONSTANT, ROUTER_LTR_TRANSITION_CONSTANT]
 })
-export class LayoutComponent implements OnInit {
+export class LayoutComponent extends BaseComponent implements OnInit {
 
   /**
    * Router outlet DOM Element.
@@ -43,7 +44,9 @@ export class LayoutComponent implements OnInit {
    */
   public constructor(
     private readonly _pageService: PageService,
-  ) {}
+  ) {
+    super();
+  }
 
   /**
    * @inheritDoc
@@ -55,7 +58,7 @@ export class LayoutComponent implements OnInit {
     }
 
     /** Get the direction of page change. */
-    this._pageService.pageDirection$.subscribe(direction => {
+    this._subscribe(this._pageService.pageDirection$,direction => {
       direction ? this.ltrState = !this.ltrState : this.rtlState = !this.rtlState;
     });
   }

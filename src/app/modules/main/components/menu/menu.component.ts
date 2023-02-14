@@ -3,13 +3,14 @@ import {MatTabNavPanel} from "@angular/material/tabs";
 import {PageService} from "../../../../services/page.service";
 import {Router} from "@angular/router";
 import {MenuItem} from "./menu.interface";
+import {BaseComponent} from '../../../shared/base/base.component';
 
 @Component({
   selector: 'cv-menu',
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss']
 })
-export class MenuComponent implements OnInit {
+export class MenuComponent extends BaseComponent implements OnInit {
 
   /**
    * Content Panel DOM Element.
@@ -37,7 +38,7 @@ export class MenuComponent implements OnInit {
     private readonly _router: Router,
     private readonly _ngZone: NgZone,
   ) {
-
+    super();
   }
 
   /**
@@ -47,7 +48,7 @@ export class MenuComponent implements OnInit {
     /**
      * Get the tab panel to show the pages.
      */
-    this._pageService.pagePanel$.subscribe(pagePanel => {
+    this._subscribe(this._pageService.pagePanel$, pagePanel => {
       if (pagePanel != null) {
         this.tabPanel = pagePanel;
       }
@@ -61,7 +62,7 @@ export class MenuComponent implements OnInit {
    * Listen to page service items$ and set the items.
    */
   private _setItemsFromPageService(): void {
-    this._pageService.items$.subscribe(items => {
+    this._subscribe(this._pageService.items$, items => {
       this.items = items;
       this._ngZone.run(() => {
         this.activeItem = this.items.find(item => item.link ===  this._router.url);
@@ -69,14 +70,14 @@ export class MenuComponent implements OnInit {
           this._activateItem(this.activeItem);
         }
       });
-    });
+    })
   }
 
   /**
    * Listen to page service activeItem$ and set the active item.
    */
   private _setActiveItemFromPageService(): void {
-    this._pageService.activeItem$.subscribe(item => {
+    this._subscribe(this._pageService.activeItem$, item => {
       if (item != null) {
         this.activeItem = item;
         this._activateItem(item);
