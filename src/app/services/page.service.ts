@@ -3,6 +3,7 @@ import {MatTabNavPanel} from "@angular/material/tabs";
 import {BehaviorSubject} from "rxjs";
 import {MenuItem} from "../modules/main/components/menu/menu.interface";
 import {NavigationEnd, Route, Router} from "@angular/router";
+import {PlanetInterface} from '../modules/planet/planet.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +29,20 @@ export class PageService {
    * The page direction as Observable.
    */
   public pageDirection$ = this._pageDirection.asObservable();
+
+  /**
+   * Planet position as BehaviorSubject.
+   */
+  private _planet = new BehaviorSubject<PlanetInterface>({camera:{
+      x: 0,
+      y: 0,
+      z: 0,
+    }});
+
+  /**
+   * Planet position as Observable.
+   */
+  public planet$ = this._planet.asObservable();
 
   /**
    * Reference to the menu items to be displayed. as BehaviorSubject.
@@ -98,6 +113,11 @@ export class PageService {
           label: route.data['menuItem'].label,
           link: '/' + route.path,
           index: route.data['menuItem'].index,
+          planet: route.data['menuItem'].planet ?? {camera: {
+              x: 0,
+              y: 0,
+              z: 0,
+            }},
         });
       }
     });
@@ -157,6 +177,8 @@ export class PageService {
       const direction = item.index < activeItemIndex;
       this.setPageDirection(direction);
       this._router.navigate([item.link]).then();
+
+      this._planet.next(item.planet);
     }
   }
 }

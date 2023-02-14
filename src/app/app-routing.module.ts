@@ -14,8 +14,13 @@ const routes: Routes = [
       state: 'home',
       menuItem: {
         label: 'Soheil Saheb-Jamii',
-        index: 0
-      }
+        index: 0,
+        planet: {
+          camera: {
+            x: 0,
+          },
+        }
+      },
     }
   },
   {
@@ -36,8 +41,13 @@ const routes: Routes = [
       state: 'works',
       menuItem: {
         label: 'Expériences',
-        index: 2
-      }
+        index: 2,
+        planet: {
+          camera: {
+            x: 1000,
+          },
+        }
+      },
     }
   },
   {

@@ -130,8 +130,6 @@ export class EntityListService {
       ...workCollection,
       ...this._projects.value
     ]);
-
-    console.log(this)
   }
 
   /**
@@ -272,7 +270,6 @@ export class EntityListService {
     } else {
       this._focused.next(entity);
     }
-    console.log(this._focused.value);
   }
 
   /**

@@ -27,6 +27,12 @@ export class DataDetailsComponent implements OnChanges, OnInit {
    */
   @Input() public entity?: EntityType;
 
+  /** History entities. */
+  private _historyEntities: EntityType[] = [];
+
+  /** Get last history entity. */
+  public lastHistoryEntity: EntityType | undefined;
+
   /** Name of the entity. */
   public entityName: string = '';
 
@@ -68,6 +74,8 @@ export class DataDetailsComponent implements OnChanges, OnInit {
         this._updateEntity();
         this._updateCircleCharts();
         this._updateEntityLists();
+        this._insertEntityToHistory();
+        this._setLastHistoryEntity();
       });
     }
   }
@@ -80,6 +88,8 @@ export class DataDetailsComponent implements OnChanges, OnInit {
       this._updateEntity();
       this._updateCircleCharts();
       this._updateEntityLists();
+      this._insertEntityToHistory();
+      this._setLastHistoryEntity();
     }
   }
 
@@ -89,6 +99,26 @@ export class DataDetailsComponent implements OnChanges, OnInit {
   private _updateEntity(): void {
     this.entityName = this.entity?.name ?? '';
     this.entitySubtitle = this.entity?.subtitle ?? '';
+  }
+
+  /**
+   * Insert Entity to history.
+   */
+  private _insertEntityToHistory(): void {
+    if (this.entity != null) {
+      this._historyEntities.push(this.entity);
+    }
+  }
+
+  /**
+   * Set last history entity.
+   */
+  private _setLastHistoryEntity(): void {
+    if (this._historyEntities.length > 1) {
+      this.lastHistoryEntity = this._historyEntities[this._historyEntities.length - 2];
+    } else {
+      this.lastHistoryEntity = undefined;
+    }
   }
 
   /**
@@ -172,6 +202,19 @@ export class DataDetailsComponent implements OnChanges, OnInit {
    * Close the details block.
    */
   public close(): void {
+    this._historyEntities = [];
     this.entity = undefined;
+  }
+
+  /**
+   * Go back to the previous entity.
+   */
+  public goBack(): void {
+    this.entity = this.lastHistoryEntity;
+    this._historyEntities.pop();
+    this._updateEntity();
+    this._updateCircleCharts();
+    this._updateEntityLists();
+    this._setLastHistoryEntity();
   }
 }

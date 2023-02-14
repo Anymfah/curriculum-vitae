@@ -1,4 +1,9 @@
 <cv-block class="data-details__block" *ngIf="entity != null" [cvTitle]="entityName"  maxHeight="100%" [disablePadding]="true">
+
+  <button *ngIf="lastHistoryEntity" tool mat-button class="back-btn"
+          (click)="goBack()">
+    <mat-icon>arrow_back</mat-icon>{{lastHistoryEntity.name}}
+  </button>
   <button mat-icon-button tool class="close-btn" (click)="close()">
     <mat-icon>close</mat-icon>
   </button>

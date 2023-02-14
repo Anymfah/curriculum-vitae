@@ -107,18 +107,15 @@ export class EntityQueryModel<T = EntityType> {
    * @param fields Fields to order by
    */
   private _orderByCollection(collection: EntityType[], fields: OrderByInterface[]): EntityType[] {
-    console.log('ORDER BY', fields)
     fields.forEach((field: OrderByInterface) => {
 
       if (collection[0]?.hasOwnProperty(field.name)) {
-        console.log('ORDER BY FIELD', field.name, field.direction, collection)
         collection = collection.sort((a: EntityType, b: EntityType) => {
           const order = field.direction === 'DESC' ? -1 : 1;
           return a.orderByNativeField(field, b) * order;
         });
       }
     });
-    console.log('collection:', collection)
     return collection;
   }
 

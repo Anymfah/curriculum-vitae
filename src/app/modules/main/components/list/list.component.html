@@ -1,5 +1,6 @@
 <div cvActiveSwitch class="list-chart__container flex-grow flex-column flex-center flex-wrap">
   <div matRipple cvActiveSwitchItem *ngFor="let item of itemsToRender"
+       [cvSelectEntity]="item.id"
        class="list-chart__item flex"
        [class.has-subtitle]="item.subtitle"
   >

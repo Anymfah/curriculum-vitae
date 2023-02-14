@@ -6,7 +6,6 @@ import {
 } from "../../../../constants/router-transition.constant";
 import {PageService} from "../../../../services/page.service";
 import {MatTabNavPanel} from "@angular/material/tabs";
-import {MenuItem} from "../menu/menu.interface";
 
 @Component({
   selector: 'cv-layout',
@@ -39,28 +38,6 @@ export class LayoutComponent implements OnInit {
   public imageDirection: number = 0;
 
   /**
-   * Menu items
-   * @todo: Move to routing module
-   */
-  public menu: MenuItem[] = [
-    {
-      label: 'Home',
-      link: '/',
-      index: 0,
-    },
-    {
-      label: 'About me',
-      link: '/about-me',
-      index: 1,
-    },
-    {
-      label: 'Contact',
-      link: '/contact',
-      index: 2,
-    },
-  ];
-
-  /**
    * @constructor
    * @param _pageService
    */
@@ -80,23 +57,7 @@ export class LayoutComponent implements OnInit {
     /** Get the direction of page change. */
     this._pageService.pageDirection$.subscribe(direction => {
       direction ? this.ltrState = !this.ltrState : this.rtlState = !this.rtlState;
-      this._animateBgImageDirection(direction);
     });
-  }
-
-  /**
-   * On page change, slide the image.
-   * @param direction
-   * @private
-   */
-  private _animateBgImageDirection(direction: boolean): void {
-    if (direction) {
-      this.imageDirection = this.imageDirection < 20 ? this.imageDirection + 10 :
-        this.imageDirection + (100 - this.imageDirection) / 10;
-    } else {
-      this.imageDirection = this.imageDirection > -20 ? this.imageDirection - 10 :
-        this.imageDirection - (100 + this.imageDirection) / 10;
-    }
   }
 
 }

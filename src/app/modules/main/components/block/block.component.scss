@@ -5,27 +5,28 @@
   flex-direction: column;
   width: 100%;
   pointer-events: auto;
+  backdrop-filter: blur(10px);
+  clip-path: polygon(
+      0 0,
+      80px 0%,
+      85px 5px,
+      calc(100% - 10px) 5px,
+      100% 16px,
+      100% 100%,
+      87px 100%,
+      82px calc(100% - 5px),
+      10px calc(100% - 5px),
+      0 calc(100% - 15px),
+  );
 }
 
 .block {
   &__container {
     height: 100%;
     width: 100%;
-    clip-path: polygon(
-        0 0,
-        80px 0%,
-        85px 5px,
-        calc(100% - 10px) 5px,
-        100% 16px,
-        100% 100%,
-        87px 100%,
-        82px calc(100% - 5px),
-        10px calc(100% - 5px),
-        0 calc(100% - 15px),
-    );
+
     //background: fn.get-color(contrast, 600, 0.5);
     background: fn.get-color(contrast, 500, 0.3);
-    backdrop-filter: blur(10px);
     margin-bottom: 2px;
   }
   &__header {

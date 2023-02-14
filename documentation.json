@@ -504,12 +504,12 @@
         },
         {
             "name": "MenuItem",
-            "id": "interface-MenuItem-8bf66f0501ede8df9df726ff1aad7a370c45bf8b8e8e84aa285fa2f768c0cded10adfd8b5f4715aa0eb0d672bab540351cac3d9b31070150acd96248cc6d0d98",
+            "id": "interface-MenuItem-8e24e5db746c0aaac9fc9a010ef9a70680c478b6cfd08d95eceafa99ab5963aeb9e93f0a4734faeb5b30985d60c51ae3a314ec1f97ee32192fef5f78e4dd4f90",
             "file": "src/app/modules/main/components/menu/menu.interface.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "interface",
-            "sourceCode": "export interface MenuItem {\n  label: string;\n  link: string;\n  index: number;\n  active?: boolean;\n}\n",
+            "sourceCode": "import {PlanetInterface} from '../../../planet/planet.interface';\n\n/**\n * Interface of Menu item\n */\nexport interface MenuItem {\n  label: string;\n  link: string;\n  index: number;\n  active?: boolean;\n  planet: PlanetInterface;\n}\n",
             "properties": [
                 {
                     "name": "active",
@@ -518,7 +518,7 @@
                     "type": "boolean",
                     "optional": true,
                     "description": "",
-                    "line": 8
+                    "line": 10
                 },
                 {
                     "name": "index",
@@ -527,7 +527,7 @@
                     "type": "number",
                     "optional": false,
                     "description": "",
-                    "line": 7
+                    "line": 9
                 },
                 {
                     "name": "label",
@@ -536,7 +536,7 @@
                     "type": "string",
                     "optional": false,
                     "description": "",
-                    "line": 5
+                    "line": 7
                 },
                 {
                     "name": "link",
@@ -545,7 +545,16 @@
                     "type": "string",
                     "optional": false,
                     "description": "",
-                    "line": 6
+                    "line": 8
+                },
+                {
+                    "name": "planet",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "PlanetInterface",
+                    "optional": false,
+                    "description": "",
+                    "line": 11
                 }
             ],
             "indexSignatures": [],
@@ -582,6 +591,29 @@
                     "description": "<p>Name of the field to be ordered.</p>\n",
                     "line": 42,
                     "rawdescription": "\n\nName of the field to be ordered.\n"
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 165,
+            "methods": []
+        },
+        {
+            "name": "PlanetInterface",
+            "id": "interface-PlanetInterface-9e5304b16027030bde8e1e60a0c5aa59daca8b535f8cf7de66bde2164d32d0d2cb75c8ed203bc8a5dd568e877387a12c18b3d8f09aadba11702e07d8c395a53b",
+            "file": "src/app/modules/planet/planet.interface.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "export interface PlanetInterface {\r\n  camera: {\r\n    x?: number;\r\n    y?: number;\r\n    z?: number;\r\n  };\r\n}\r\n",
+            "properties": [
+                {
+                    "name": "camera",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "literal type",
+                    "optional": false,
+                    "description": "",
+                    "line": 2
                 }
             ],
             "indexSignatures": [],
@@ -1066,7 +1098,7 @@
     "injectables": [
         {
             "name": "EntityListService",
-            "id": "injectable-EntityListService-bb364195fd529aebdab7198b5fe44c97b35a688dfa4206225b9e9193bda5c1e0274febf0d578cb0d9e20848269194edbbee018d1ce2f8a5aa60eb05b2e686cd7",
+            "id": "injectable-EntityListService-81b9d843f810e45d9f490e03f365896d2c5bda5b620b36ce8442107f455520ecfba7c9b3b40fe45d92174c6573f5a4de53966d427097458c9d70e7858a54e01d",
             "file": "src/app/services/entity-list.service.ts",
             "properties": [
                 {
@@ -1266,7 +1298,7 @@
                     "optional": false,
                     "returnType": "EducationEntity[]",
                     "typeParameters": [],
-                    "line": 154,
+                    "line": 152,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nGet the education collection.\n",
@@ -1277,8 +1309,8 @@
                     "jsdoctags": [
                         {
                             "name": {
-                                "pos": 4047,
-                                "end": 4051,
+                                "pos": 4024,
+                                "end": 4028,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -1289,8 +1321,8 @@
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "pos": 4041,
-                                "end": 4046,
+                                "pos": 4018,
+                                "end": 4023,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -1314,7 +1346,7 @@
                     "optional": false,
                     "returnType": "ProjectEntity[]",
                     "typeParameters": [],
-                    "line": 198,
+                    "line": 196,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nGet the project collection.\nTODO: Missing projects, get from personal work or hobby...\n",
@@ -1325,8 +1357,8 @@
                     "jsdoctags": [
                         {
                             "name": {
-                                "pos": 5418,
-                                "end": 5422,
+                                "pos": 5395,
+                                "end": 5399,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -1337,8 +1369,8 @@
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "pos": 5412,
-                                "end": 5417,
+                                "pos": 5389,
+                                "end": 5394,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -1362,7 +1394,7 @@
                     "optional": false,
                     "returnType": "SkillEntity[]",
                     "typeParameters": [],
-                    "line": 141,
+                    "line": 139,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nGet the skill collection.\n",
@@ -1373,8 +1405,8 @@
                     "jsdoctags": [
                         {
                             "name": {
-                                "pos": 3693,
-                                "end": 3697,
+                                "pos": 3670,
+                                "end": 3674,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -1385,8 +1417,8 @@
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "pos": 3687,
-                                "end": 3692,
+                                "pos": 3664,
+                                "end": 3669,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -1410,7 +1442,7 @@
                     "optional": false,
                     "returnType": "WorkEntity[]",
                     "typeParameters": [],
-                    "line": 167,
+                    "line": 165,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nGet the work collection.\n",
@@ -1421,8 +1453,8 @@
                     "jsdoctags": [
                         {
                             "name": {
-                                "pos": 4441,
-                                "end": 4445,
+                                "pos": 4418,
+                                "end": 4422,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -1433,8 +1465,8 @@
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "pos": 4435,
-                                "end": 4440,
+                                "pos": 4412,
+                                "end": 4417,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -1458,7 +1490,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 269,
+                    "line": 267,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nFocus on a specific entity.\n",
@@ -1491,7 +1523,7 @@
                     "optional": false,
                     "returnType": "EntityType[]",
                     "typeParameters": [],
-                    "line": 225,
+                    "line": 223,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\n",
@@ -1502,8 +1534,8 @@
                     "jsdoctags": [
                         {
                             "name": {
-                                "pos": 6324,
-                                "end": 6328,
+                                "pos": 6301,
+                                "end": 6305,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -1515,8 +1547,8 @@
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "pos": 6318,
-                                "end": 6323,
+                                "pos": 6295,
+                                "end": 6300,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -1540,7 +1572,7 @@
                     "optional": false,
                     "returnType": "EntityType | undefined",
                     "typeParameters": [],
-                    "line": 282,
+                    "line": 280,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\n",
@@ -1551,8 +1583,8 @@
                     "jsdoctags": [
                         {
                             "name": {
-                                "pos": 7890,
-                                "end": 7892,
+                                "pos": 7867,
+                                "end": 7869,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -1563,8 +1595,8 @@
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "pos": 7884,
-                                "end": 7889,
+                                "pos": 7861,
+                                "end": 7866,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -1595,7 +1627,7 @@
                     "optional": false,
                     "returnType": "EntityType[]",
                     "typeParameters": [],
-                    "line": 245,
+                    "line": 243,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\n",
@@ -1606,8 +1638,8 @@
                     "jsdoctags": [
                         {
                             "name": {
-                                "pos": 6804,
-                                "end": 6808,
+                                "pos": 6781,
+                                "end": 6785,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -1619,8 +1651,8 @@
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "pos": 6798,
-                                "end": 6803,
+                                "pos": 6775,
+                                "end": 6780,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -1631,8 +1663,8 @@
                         },
                         {
                             "name": {
-                                "pos": 6848,
-                                "end": 6852,
+                                "pos": 6825,
+                                "end": 6829,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -1644,8 +1676,8 @@
                             "deprecationMessage": "",
                             "optional": true,
                             "tagName": {
-                                "pos": 6842,
-                                "end": 6847,
+                                "pos": 6819,
+                                "end": 6824,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -1675,7 +1707,7 @@
                     "optional": false,
                     "returnType": "EntityType[]",
                     "typeParameters": [],
-                    "line": 262,
+                    "line": 260,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nGet PreMade Query.\n",
@@ -1686,8 +1718,8 @@
                     "jsdoctags": [
                         {
                             "name": {
-                                "pos": 7256,
-                                "end": 7260,
+                                "pos": 7233,
+                                "end": 7237,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -1699,8 +1731,8 @@
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "pos": 7250,
-                                "end": 7255,
+                                "pos": 7227,
+                                "end": 7232,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -1711,8 +1743,8 @@
                         },
                         {
                             "name": {
-                                "pos": 7300,
-                                "end": 7312,
+                                "pos": 7277,
+                                "end": 7289,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -1723,8 +1755,8 @@
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "pos": 7294,
-                                "end": 7299,
+                                "pos": 7271,
+                                "end": 7276,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -1740,7 +1772,7 @@
             "deprecationMessage": "",
             "description": "",
             "rawdescription": "\n",
-            "sourceCode": "import {Injectable} from '@angular/core';\nimport {BehaviorSubject} from 'rxjs';\nimport {SkillEntity} from '../models/skill-entity.model';\nimport {ProjectEntity} from '../models/project-entity.model';\nimport {EntityType} from '../types/entity.type';\nimport {EducationEntity} from '../models/education-entity.model';\nimport {WorkEntity} from '../models/work-entity.model';\nimport {DATA_SKILLS} from '../constants/data-skills.constant';\nimport {DATA_EDUCATION} from '../constants/data-education.constant';\nimport {\n  EducationDataInterface,\n  ProjectDataInterface,\n  SkillDataInterface,\n  WorkDataInterface\n} from '../interfaces/data.interface';\nimport {DATA_WORK} from '../constants/data-work.constant';\nimport {DATA_TYPE} from '../enums/data.enum';\nimport {QueryInterface} from '../interfaces/query.interface';\nimport {EntityQueryModel} from '../models/entity-query.model';\nimport {PRE_MADE_QUERY} from '../enums/premade-query.enum';\nimport {PRE_MADE_QUERY_CONSTANT} from '../constants/premade-query.constant';\n\n@Injectable({\n  providedIn: 'root'\n})\nexport class EntityListService {\n\n  /**\n   * ID of the last created entity.\n   */\n  private _id = 0;\n\n  /**\n   * Focus on a specific entity.\n   */\n  private _focused = new BehaviorSubject<EntityType | undefined>(undefined);\n\n  /**\n   * Focus on a specific entity as Observable.\n   */\n  public focused$ = this._focused.asObservable();\n\n  /**\n   * Entity collection as a behavior subject.\n   */\n  private _entityCollection: BehaviorSubject<EntityType[]> = new BehaviorSubject<EntityType[]>([]);\n\n  /**\n   * Entity collection as an observable.\n   */\n  public entityCollection$ = this._entityCollection.asObservable();\n\n  /**\n   * Skills entity collection as BehaviorSubject.\n   */\n  private _skills = new BehaviorSubject<SkillEntity[]>([]);\n\n  /**\n   * Skills entity collection as observable.\n   */\n  public skills$ = this._skills.asObservable();\n\n  /** Skills collection direct access. */\n  public get skills(): SkillEntity[] {\n    return this._skills.value;\n  }\n\n  /**\n   * Projects entity collection as BehaviorSubject.\n   */\n  private _projects = new BehaviorSubject<ProjectEntity[]>([]);\n\n  /**\n   * Get projects as observable.\n   */\n  public projects$ = this._projects.asObservable();\n\n  /** Projects collection direct access. */\n  public get projects(): ProjectEntity[] {\n    return this._projects.value;\n  }\n\n\n  /**\n   * Education entity collection as BehaviorSubject.\n   */\n  private _education = new BehaviorSubject<EducationEntity[]>([]);\n\n  /**\n   * Education entity collection as observable.\n   */\n  public education$ = this._education.asObservable();\n\n  /** Education collection direct access. */\n  public get education(): EducationEntity[] {\n    return this._education.value;\n  }\n\n  /**\n   * Work entity collection as BehaviorSubject.\n   */\n  private _work = new BehaviorSubject<WorkEntity[]>([]);\n\n  /**\n   * Work entity collection as observable.\n   */\n  public work$ = this._work.asObservable();\n\n  /** Work collection direct access. */\n  public get work(): WorkEntity[] {\n    return this._work.value;\n  }\n\n  /**\n   * @constructor\n   */\n  public constructor() {\n    const skillsCollection = this._getSkillCollection(DATA_SKILLS);\n    this._skills.next(skillsCollection);\n\n    const educationCollection = this._getEducationCollection(DATA_EDUCATION);\n    this._education.next(educationCollection);\n\n    const workCollection = this._getWorkCollection(DATA_WORK);\n    this._work.next(workCollection);\n\n    this._entityCollection.next([\n      ...skillsCollection,\n      ...educationCollection,\n      ...workCollection,\n      ...this._projects.value\n    ]);\n\n    console.log(this)\n  }\n\n  /**\n   * Get the skill collection.\n   * @param data Data to be used to populate the collection.\n   */\n  private _getSkillCollection(data: SkillDataInterface[]): SkillEntity[] {\n    const skills: SkillEntity[] = [];\n    data.forEach((skill) => {\n      skills.push(new SkillEntity(this._id, skill));\n      this._id++;\n    });\n    return skills;\n  }\n\n  /**\n   * Get the education collection.\n   * @param data Data to be used to populate the collection.\n   */\n  private _getEducationCollection(data: EducationDataInterface[]): EducationEntity[] {\n    const education: EducationEntity[] = [];\n    data.forEach((educationItem) => {\n      education.push(new EducationEntity(this._id, educationItem));\n      this._id++;\n    });\n    return education;\n  }\n\n  /**\n   * Get the work collection.\n   * @param data Data to be used to populate the collection.\n   */\n  private _getWorkCollection(data: WorkDataInterface[]): WorkEntity[] {\n    const work: WorkEntity[] = [];\n    data.forEach((workItem) => {\n      const workEntity = new WorkEntity(this._id, workItem);\n      if (workItem.projects != null) {\n        // Fill the project entities.\n        workEntity.projects = this._getProjectCollection(workItem.projects);\n        this._projects.next([...this._projects.value, ...workEntity.projects]);\n      }\n      if (workItem.skills != null) {\n        // Fill the skill entities.\n        workEntity.skills = [];\n        workItem.skills.forEach((skill) => {\n          this._skills.value.forEach((skillEntity) => {\n            if (skillEntity.name === skill) {\n              workEntity.skills.push(skillEntity);\n            }\n          });\n        });\n      }\n      work.push(workEntity);\n      this._id++;\n    });\n    return work;\n  }\n\n  /**\n   * Get the project collection.\n   * @param data Data to be used to populate the collection.\n   * TODO: Missing projects, get from personal work or hobby...\n   */\n  private _getProjectCollection(data: ProjectDataInterface[]): ProjectEntity[] {\n    const projects: ProjectEntity[] = [];\n    data.forEach((project) => {\n      this._id++;\n      const projectEntity = new ProjectEntity(this._id, project);\n\n      // Insert the skill entities into the project entity collection.\n      if (project.skills != null) {\n        const skills: SkillEntity[] = [];\n        project.skills.forEach((skill) => {\n          this._skills.value.forEach((skillEntity) => {\n            if (skillEntity.name === skill) {\n              skills.push(skillEntity);\n            }\n          });\n        });\n        projectEntity.skills = skills;\n      }\n      projects.push(projectEntity);\n    });\n    return projects;\n  }\n\n  /**\n   * @method Get collection by type.\n   * @param type Type of collection to get.\n   */\n  public getCollectionByType(type: DATA_TYPE): EntityType[] {\n    switch (type) {\n      case DATA_TYPE.SKILL:\n        return this._skills.value;\n      case DATA_TYPE.EDUCATION:\n        return this._education.value;\n      case DATA_TYPE.WORK:\n        return this._work.value;\n      case DATA_TYPE.PROJECT:\n        return this._projects.value;\n      default:\n        return [];\n    }\n  }\n\n  /**\n   * @method Get Filtered Collection\n   * @param type Type of collection to get.\n   * @param args Filters/Ordering to apply to the collection.\n   */\n  public getFilteredCollection(\n    type: DATA_TYPE,\n    args?: QueryInterface): EntityType[] {\n    let collection = this.getCollectionByType(type);\n    if (args != null) {\n      const query = new EntityQueryModel(collection, args);\n      collection = query.getCollection();\n    }\n\n    return collection;\n  }\n\n  /**\n   * Get PreMade Query.\n   * @param type Type of collection to get.\n   * @param preMadeQuery PreMade query to apply to the collection.\n   */\n  public getPreMadeQuery(type: DATA_TYPE, preMadeQuery: PRE_MADE_QUERY): EntityType[] {\n    return this.getFilteredCollection(type, PRE_MADE_QUERY_CONSTANT[preMadeQuery]);\n  }\n\n  /**\n   * Focus on a specific entity.\n   */\n  public focusEntity(entity: number | EntityType | undefined): void {\n    if (typeof entity === 'number') {\n      this._focused.next(this.getEntityById(entity));\n    } else {\n      this._focused.next(entity);\n    }\n    console.log(this._focused.value);\n  }\n\n  /**\n   * @method Get Entity by ID.\n   * @param id\n   */\n  public getEntityById(id: number): EntityType | undefined {\n    return this._entityCollection.value.find((entity) => entity.id === id);\n  }\n}\n",
+            "sourceCode": "import {Injectable} from '@angular/core';\nimport {BehaviorSubject} from 'rxjs';\nimport {SkillEntity} from '../models/skill-entity.model';\nimport {ProjectEntity} from '../models/project-entity.model';\nimport {EntityType} from '../types/entity.type';\nimport {EducationEntity} from '../models/education-entity.model';\nimport {WorkEntity} from '../models/work-entity.model';\nimport {DATA_SKILLS} from '../constants/data-skills.constant';\nimport {DATA_EDUCATION} from '../constants/data-education.constant';\nimport {\n  EducationDataInterface,\n  ProjectDataInterface,\n  SkillDataInterface,\n  WorkDataInterface\n} from '../interfaces/data.interface';\nimport {DATA_WORK} from '../constants/data-work.constant';\nimport {DATA_TYPE} from '../enums/data.enum';\nimport {QueryInterface} from '../interfaces/query.interface';\nimport {EntityQueryModel} from '../models/entity-query.model';\nimport {PRE_MADE_QUERY} from '../enums/premade-query.enum';\nimport {PRE_MADE_QUERY_CONSTANT} from '../constants/premade-query.constant';\n\n@Injectable({\n  providedIn: 'root'\n})\nexport class EntityListService {\n\n  /**\n   * ID of the last created entity.\n   */\n  private _id = 0;\n\n  /**\n   * Focus on a specific entity.\n   */\n  private _focused = new BehaviorSubject<EntityType | undefined>(undefined);\n\n  /**\n   * Focus on a specific entity as Observable.\n   */\n  public focused$ = this._focused.asObservable();\n\n  /**\n   * Entity collection as a behavior subject.\n   */\n  private _entityCollection: BehaviorSubject<EntityType[]> = new BehaviorSubject<EntityType[]>([]);\n\n  /**\n   * Entity collection as an observable.\n   */\n  public entityCollection$ = this._entityCollection.asObservable();\n\n  /**\n   * Skills entity collection as BehaviorSubject.\n   */\n  private _skills = new BehaviorSubject<SkillEntity[]>([]);\n\n  /**\n   * Skills entity collection as observable.\n   */\n  public skills$ = this._skills.asObservable();\n\n  /** Skills collection direct access. */\n  public get skills(): SkillEntity[] {\n    return this._skills.value;\n  }\n\n  /**\n   * Projects entity collection as BehaviorSubject.\n   */\n  private _projects = new BehaviorSubject<ProjectEntity[]>([]);\n\n  /**\n   * Get projects as observable.\n   */\n  public projects$ = this._projects.asObservable();\n\n  /** Projects collection direct access. */\n  public get projects(): ProjectEntity[] {\n    return this._projects.value;\n  }\n\n\n  /**\n   * Education entity collection as BehaviorSubject.\n   */\n  private _education = new BehaviorSubject<EducationEntity[]>([]);\n\n  /**\n   * Education entity collection as observable.\n   */\n  public education$ = this._education.asObservable();\n\n  /** Education collection direct access. */\n  public get education(): EducationEntity[] {\n    return this._education.value;\n  }\n\n  /**\n   * Work entity collection as BehaviorSubject.\n   */\n  private _work = new BehaviorSubject<WorkEntity[]>([]);\n\n  /**\n   * Work entity collection as observable.\n   */\n  public work$ = this._work.asObservable();\n\n  /** Work collection direct access. */\n  public get work(): WorkEntity[] {\n    return this._work.value;\n  }\n\n  /**\n   * @constructor\n   */\n  public constructor() {\n    const skillsCollection = this._getSkillCollection(DATA_SKILLS);\n    this._skills.next(skillsCollection);\n\n    const educationCollection = this._getEducationCollection(DATA_EDUCATION);\n    this._education.next(educationCollection);\n\n    const workCollection = this._getWorkCollection(DATA_WORK);\n    this._work.next(workCollection);\n\n    this._entityCollection.next([\n      ...skillsCollection,\n      ...educationCollection,\n      ...workCollection,\n      ...this._projects.value\n    ]);\n  }\n\n  /**\n   * Get the skill collection.\n   * @param data Data to be used to populate the collection.\n   */\n  private _getSkillCollection(data: SkillDataInterface[]): SkillEntity[] {\n    const skills: SkillEntity[] = [];\n    data.forEach((skill) => {\n      skills.push(new SkillEntity(this._id, skill));\n      this._id++;\n    });\n    return skills;\n  }\n\n  /**\n   * Get the education collection.\n   * @param data Data to be used to populate the collection.\n   */\n  private _getEducationCollection(data: EducationDataInterface[]): EducationEntity[] {\n    const education: EducationEntity[] = [];\n    data.forEach((educationItem) => {\n      education.push(new EducationEntity(this._id, educationItem));\n      this._id++;\n    });\n    return education;\n  }\n\n  /**\n   * Get the work collection.\n   * @param data Data to be used to populate the collection.\n   */\n  private _getWorkCollection(data: WorkDataInterface[]): WorkEntity[] {\n    const work: WorkEntity[] = [];\n    data.forEach((workItem) => {\n      const workEntity = new WorkEntity(this._id, workItem);\n      if (workItem.projects != null) {\n        // Fill the project entities.\n        workEntity.projects = this._getProjectCollection(workItem.projects);\n        this._projects.next([...this._projects.value, ...workEntity.projects]);\n      }\n      if (workItem.skills != null) {\n        // Fill the skill entities.\n        workEntity.skills = [];\n        workItem.skills.forEach((skill) => {\n          this._skills.value.forEach((skillEntity) => {\n            if (skillEntity.name === skill) {\n              workEntity.skills.push(skillEntity);\n            }\n          });\n        });\n      }\n      work.push(workEntity);\n      this._id++;\n    });\n    return work;\n  }\n\n  /**\n   * Get the project collection.\n   * @param data Data to be used to populate the collection.\n   * TODO: Missing projects, get from personal work or hobby...\n   */\n  private _getProjectCollection(data: ProjectDataInterface[]): ProjectEntity[] {\n    const projects: ProjectEntity[] = [];\n    data.forEach((project) => {\n      this._id++;\n      const projectEntity = new ProjectEntity(this._id, project);\n\n      // Insert the skill entities into the project entity collection.\n      if (project.skills != null) {\n        const skills: SkillEntity[] = [];\n        project.skills.forEach((skill) => {\n          this._skills.value.forEach((skillEntity) => {\n            if (skillEntity.name === skill) {\n              skills.push(skillEntity);\n            }\n          });\n        });\n        projectEntity.skills = skills;\n      }\n      projects.push(projectEntity);\n    });\n    return projects;\n  }\n\n  /**\n   * @method Get collection by type.\n   * @param type Type of collection to get.\n   */\n  public getCollectionByType(type: DATA_TYPE): EntityType[] {\n    switch (type) {\n      case DATA_TYPE.SKILL:\n        return this._skills.value;\n      case DATA_TYPE.EDUCATION:\n        return this._education.value;\n      case DATA_TYPE.WORK:\n        return this._work.value;\n      case DATA_TYPE.PROJECT:\n        return this._projects.value;\n      default:\n        return [];\n    }\n  }\n\n  /**\n   * @method Get Filtered Collection\n   * @param type Type of collection to get.\n   * @param args Filters/Ordering to apply to the collection.\n   */\n  public getFilteredCollection(\n    type: DATA_TYPE,\n    args?: QueryInterface): EntityType[] {\n    let collection = this.getCollectionByType(type);\n    if (args != null) {\n      const query = new EntityQueryModel(collection, args);\n      collection = query.getCollection();\n    }\n\n    return collection;\n  }\n\n  /**\n   * Get PreMade Query.\n   * @param type Type of collection to get.\n   * @param preMadeQuery PreMade query to apply to the collection.\n   */\n  public getPreMadeQuery(type: DATA_TYPE, preMadeQuery: PRE_MADE_QUERY): EntityType[] {\n    return this.getFilteredCollection(type, PRE_MADE_QUERY_CONSTANT[preMadeQuery]);\n  }\n\n  /**\n   * Focus on a specific entity.\n   */\n  public focusEntity(entity: number | EntityType | undefined): void {\n    if (typeof entity === 'number') {\n      this._focused.next(this.getEntityById(entity));\n    } else {\n      this._focused.next(entity);\n    }\n    console.log(this._focused.value);\n  }\n\n  /**\n   * @method Get Entity by ID.\n   * @param id\n   */\n  public getEntityById(id: number): EntityType | undefined {\n    return this._entityCollection.value.find((entity) => entity.id === id);\n  }\n}\n",
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
@@ -1804,7 +1836,7 @@
         },
         {
             "name": "PageService",
-            "id": "injectable-PageService-a1b6ce67995da4ff1461ee0c723a49b45fe98130a8ecbc4b17f59919378708de1dc3aff87ef4187f48a7009ad77d6c117f7fa80054992d6b60bcc9ca2c0ece11",
+            "id": "injectable-PageService-7389acc75cea3d819779c29838647d68c117e4be781868d278027cea3e59b097a83ac675fde783f81f9b3b558fd6cf44d425a192f0f96ed998ac823b0ebb4b35",
             "file": "src/app/services/page.service.ts",
             "properties": [
                 {
@@ -1815,7 +1847,7 @@
                     "type": "",
                     "optional": false,
                     "description": "<p>Current active menu item. as BehaviorSubject.</p>\n",
-                    "line": 45,
+                    "line": 60,
                     "rawdescription": "\n\nCurrent active menu item. as BehaviorSubject.\n",
                     "modifierKind": [
                         121
@@ -1829,7 +1861,7 @@
                     "type": "",
                     "optional": false,
                     "description": "<p>Reference to the menu items to be displayed. as BehaviorSubject.</p>\n",
-                    "line": 35,
+                    "line": 50,
                     "rawdescription": "\n\nReference to the menu items to be displayed. as BehaviorSubject.\n",
                     "modifierKind": [
                         121
@@ -1843,7 +1875,7 @@
                     "type": "",
                     "optional": false,
                     "description": "<p>The page direction</p>\n",
-                    "line": 25,
+                    "line": 26,
                     "rawdescription": "\n\nThe page direction\n",
                     "modifierKind": [
                         121
@@ -1857,8 +1889,22 @@
                     "type": "",
                     "optional": false,
                     "description": "<p>The tab panel to show the pages as BehaviorSubject.</p>\n",
-                    "line": 15,
+                    "line": 16,
                     "rawdescription": "\n\nThe tab panel to show the pages as BehaviorSubject.\n",
+                    "modifierKind": [
+                        121
+                    ]
+                },
+                {
+                    "name": "_planet",
+                    "defaultValue": "new BehaviorSubject<PlanetInterface>({camera:{\n      x: 0,\n      y: 0,\n      z: 0,\n    }})",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "<p>Planet position as BehaviorSubject.</p>\n",
+                    "line": 36,
+                    "rawdescription": "\n\nPlanet position as BehaviorSubject.\n",
                     "modifierKind": [
                         121
                     ]
@@ -1870,7 +1916,7 @@
                     "type": "MenuItem",
                     "optional": true,
                     "description": "<p>Current active menu item but as MenuItem.</p>\n",
-                    "line": 55,
+                    "line": 70,
                     "rawdescription": "\n\nCurrent active menu item but as MenuItem.\n",
                     "modifierKind": [
                         123
@@ -1884,7 +1930,7 @@
                     "type": "",
                     "optional": false,
                     "description": "<p>Current active menu item. as Observable.</p>\n",
-                    "line": 50,
+                    "line": 65,
                     "rawdescription": "\n\nCurrent active menu item. as Observable.\n",
                     "modifierKind": [
                         123
@@ -1898,7 +1944,7 @@
                     "type": "",
                     "optional": false,
                     "description": "<p>Reference to the menu items to be displayed. as Observable.</p>\n",
-                    "line": 40,
+                    "line": 55,
                     "rawdescription": "\n\nReference to the menu items to be displayed. as Observable.\n",
                     "modifierKind": [
                         123
@@ -1912,7 +1958,7 @@
                     "type": "",
                     "optional": false,
                     "description": "<p>The page direction as Observable.</p>\n",
-                    "line": 30,
+                    "line": 31,
                     "rawdescription": "\n\nThe page direction as Observable.\n",
                     "modifierKind": [
                         123
@@ -1926,8 +1972,22 @@
                     "type": "",
                     "optional": false,
                     "description": "<p>The tab panel to show the pages as Observable.</p>\n",
-                    "line": 20,
+                    "line": 21,
                     "rawdescription": "\n\nThe tab panel to show the pages as Observable.\n",
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "planet$",
+                    "defaultValue": "this._planet.asObservable()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "<p>Planet position as Observable.</p>\n",
+                    "line": 45,
+                    "rawdescription": "\n\nPlanet position as Observable.\n",
                     "modifierKind": [
                         123
                     ]
@@ -1947,7 +2007,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 80,
+                    "line": 95,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nSets the active item from the current url.\n",
@@ -1958,8 +2018,8 @@
                     "jsdoctags": [
                         {
                             "name": {
-                                "pos": 1893,
-                                "end": 1896,
+                                "pos": 2224,
+                                "end": 2227,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -1970,8 +2030,8 @@
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "pos": 1887,
-                                "end": 1892,
+                                "pos": 2218,
+                                "end": 2223,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -1988,7 +2048,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 93,
+                    "line": 108,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nSet Menu items from app routing\n",
@@ -2010,7 +2070,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 111,
+                    "line": 131,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\n",
@@ -2021,8 +2081,8 @@
                     "jsdoctags": [
                         {
                             "name": {
-                                "pos": 2763,
-                                "end": 2767,
+                                "pos": 3232,
+                                "end": 3236,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -2033,8 +2093,8 @@
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "pos": 2757,
-                                "end": 2762,
+                                "pos": 3226,
+                                "end": 3231,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -2051,7 +2111,7 @@
                     "optional": false,
                     "returnType": "MenuItem[]",
                     "typeParameters": [],
-                    "line": 138,
+                    "line": 158,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\n",
@@ -2074,7 +2134,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 147,
+                    "line": 167,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\n",
@@ -2085,8 +2145,8 @@
                     "jsdoctags": [
                         {
                             "name": {
-                                "pos": 3590,
-                                "end": 3594,
+                                "pos": 4059,
+                                "end": 4063,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -2097,8 +2157,8 @@
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "pos": 3584,
-                                "end": 3589,
+                                "pos": 4053,
+                                "end": 4058,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -2122,7 +2182,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 131,
+                    "line": 151,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nSets the page direction.\n",
@@ -2133,8 +2193,8 @@
                     "jsdoctags": [
                         {
                             "name": {
-                                "pos": 3217,
-                                "end": 3230,
+                                "pos": 3686,
+                                "end": 3699,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -2145,8 +2205,8 @@
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "pos": 3211,
-                                "end": 3216,
+                                "pos": 3680,
+                                "end": 3685,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -2170,7 +2230,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 123,
+                    "line": 143,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nSets the tab panel to show the pages.\n",
@@ -2181,8 +2241,8 @@
                     "jsdoctags": [
                         {
                             "name": {
-                                "pos": 3047,
-                                "end": 3056,
+                                "pos": 3516,
+                                "end": 3525,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -2193,8 +2253,8 @@
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "pos": 3041,
-                                "end": 3046,
+                                "pos": 3510,
+                                "end": 3515,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -2210,7 +2270,7 @@
             "deprecationMessage": "",
             "description": "",
             "rawdescription": "\n",
-            "sourceCode": "import {Injectable} from '@angular/core';\nimport {MatTabNavPanel} from \"@angular/material/tabs\";\nimport {BehaviorSubject} from \"rxjs\";\nimport {MenuItem} from \"../modules/main/components/menu/menu.interface\";\nimport {NavigationEnd, Route, Router} from \"@angular/router\";\n\n@Injectable({\n  providedIn: 'root'\n})\nexport class PageService {\n\n  /**\n   * The tab panel to show the pages as BehaviorSubject.\n   */\n  private _pagePanel = new BehaviorSubject<MatTabNavPanel | null>(null);\n\n  /**\n   * The tab panel to show the pages as Observable.\n   */\n  public pagePanel$ = this._pagePanel.asObservable();\n\n  /**\n   * The page direction\n   */\n  private _pageDirection = new BehaviorSubject<boolean>(false);\n\n  /**\n   * The page direction as Observable.\n   */\n  public pageDirection$ = this._pageDirection.asObservable();\n\n  /**\n   * Reference to the menu items to be displayed. as BehaviorSubject.\n   */\n  private _items = new BehaviorSubject<MenuItem[]>([]);\n\n  /**\n   * Reference to the menu items to be displayed. as Observable.\n   */\n  public items$ = this._items.asObservable();\n\n  /**\n   * Current active menu item. as BehaviorSubject.\n   */\n  private _activeItem = new BehaviorSubject<MenuItem | undefined>(undefined);\n\n  /**\n   * Current active menu item. as Observable.\n   */\n  public activeItem$ = this._activeItem.asObservable();\n\n  /**\n   * Current active menu item but as MenuItem.\n   */\n  public activeItem?: MenuItem;\n\n\n  /**\n   * @constructor\n   * @param _router\n   */\n  public constructor(\n    private readonly _router: Router,\n    ) {\n    this._setItemsFromRoutes();\n    /**\n     * Get route\n     */\n    const routerSub = this._router.events.subscribe((route: unknown) => {\n      const navigation = route as NavigationEnd;\n      this._setActiveItemFromUrl(navigation.url);\n      routerSub.unsubscribe();\n    });\n  }\n\n  /**\n   * Sets the active item from the current url.\n   * @param url If not given, the current url is used.\n   */\n  private _setActiveItemFromUrl(url: string | undefined): void {\n    const currentUrl = url ?? this._router.url;\n    const items = this._items.getValue();\n    items.forEach(item => {\n      if (currentUrl === item.link) {\n        this.activateItem(item);\n      }\n    });\n  }\n\n  /**\n   * Set Menu items from app routing\n   */\n  private _setItemsFromRoutes(): void {\n    const items: MenuItem[] = [];\n    this._router.config.forEach((route: Route) => {\n      if (route.data != null && route.data['menuItem'] != null) {\n        items.push({\n          label: route.data['menuItem'].label,\n          link: '/' + route.path,\n          index: route.data['menuItem'].index,\n        });\n      }\n    });\n    this._items.next(items);\n  }\n\n  /**\n   * @method Activate the given menu item. Deactivate all other menu items.\n   * @param item\n   */\n  public activateItem(item: MenuItem): void {\n    this._items.getValue().forEach(menuItem => {\n      menuItem.active = menuItem === item;\n    });\n    this._activeItem.next(item);\n    this.activeItem = item;\n  }\n\n  /**\n   * Sets the tab panel to show the pages.\n   * @param pagePanel\n   */\n  public setPagePanel(pagePanel: MatTabNavPanel | null): void {\n    this._pagePanel.next(pagePanel);\n  }\n\n  /**\n   * Sets the page direction.\n   * @param pageDirection true = the clicked item is after the current item.\n   */\n  public setPageDirection(pageDirection: boolean): void {\n    this._pageDirection.next(pageDirection);\n  }\n\n  /**\n   * @method Get Items\n   */\n  public getItems(): MenuItem[] {\n    return this._items.getValue();\n  }\n\n  /**\n   * @event click on menu item\n   * @method navigate - Page Change\n   * @param page menu item or link to navigate to\n   */\n  public navigate(page: MenuItem | string): void {\n    let item: MenuItem | undefined;\n    if (typeof page === 'string') {\n      item = this._items.getValue().find(menuItem => menuItem.link === page);\n    } else {\n      item = page;\n    }\n    if (item != null) {\n      const activeItemIndex = this._activeItem.getValue()?.index ?? 0;\n      this.activateItem(item);\n      const direction = item.index < activeItemIndex;\n      this.setPageDirection(direction);\n      this._router.navigate([item.link]).then();\n    }\n  }\n}\n",
+            "sourceCode": "import {Injectable} from '@angular/core';\nimport {MatTabNavPanel} from \"@angular/material/tabs\";\nimport {BehaviorSubject} from \"rxjs\";\nimport {MenuItem} from \"../modules/main/components/menu/menu.interface\";\nimport {NavigationEnd, Route, Router} from \"@angular/router\";\nimport {PlanetInterface} from '../modules/planet/planet.interface';\n\n@Injectable({\n  providedIn: 'root'\n})\nexport class PageService {\n\n  /**\n   * The tab panel to show the pages as BehaviorSubject.\n   */\n  private _pagePanel = new BehaviorSubject<MatTabNavPanel | null>(null);\n\n  /**\n   * The tab panel to show the pages as Observable.\n   */\n  public pagePanel$ = this._pagePanel.asObservable();\n\n  /**\n   * The page direction\n   */\n  private _pageDirection = new BehaviorSubject<boolean>(false);\n\n  /**\n   * The page direction as Observable.\n   */\n  public pageDirection$ = this._pageDirection.asObservable();\n\n  /**\n   * Planet position as BehaviorSubject.\n   */\n  private _planet = new BehaviorSubject<PlanetInterface>({camera:{\n      x: 0,\n      y: 0,\n      z: 0,\n    }});\n\n  /**\n   * Planet position as Observable.\n   */\n  public planet$ = this._planet.asObservable();\n\n  /**\n   * Reference to the menu items to be displayed. as BehaviorSubject.\n   */\n  private _items = new BehaviorSubject<MenuItem[]>([]);\n\n  /**\n   * Reference to the menu items to be displayed. as Observable.\n   */\n  public items$ = this._items.asObservable();\n\n  /**\n   * Current active menu item. as BehaviorSubject.\n   */\n  private _activeItem = new BehaviorSubject<MenuItem | undefined>(undefined);\n\n  /**\n   * Current active menu item. as Observable.\n   */\n  public activeItem$ = this._activeItem.asObservable();\n\n  /**\n   * Current active menu item but as MenuItem.\n   */\n  public activeItem?: MenuItem;\n\n\n  /**\n   * @constructor\n   * @param _router\n   */\n  public constructor(\n    private readonly _router: Router,\n    ) {\n    this._setItemsFromRoutes();\n    /**\n     * Get route\n     */\n    const routerSub = this._router.events.subscribe((route: unknown) => {\n      const navigation = route as NavigationEnd;\n      this._setActiveItemFromUrl(navigation.url);\n      routerSub.unsubscribe();\n    });\n  }\n\n  /**\n   * Sets the active item from the current url.\n   * @param url If not given, the current url is used.\n   */\n  private _setActiveItemFromUrl(url: string | undefined): void {\n    const currentUrl = url ?? this._router.url;\n    const items = this._items.getValue();\n    items.forEach(item => {\n      if (currentUrl === item.link) {\n        this.activateItem(item);\n      }\n    });\n  }\n\n  /**\n   * Set Menu items from app routing\n   */\n  private _setItemsFromRoutes(): void {\n    const items: MenuItem[] = [];\n    this._router.config.forEach((route: Route) => {\n      if (route.data != null && route.data['menuItem'] != null) {\n        items.push({\n          label: route.data['menuItem'].label,\n          link: '/' + route.path,\n          index: route.data['menuItem'].index,\n          planet: route.data['menuItem'].planet ?? {camera: {\n              x: 0,\n              y: 0,\n              z: 0,\n            }},\n        });\n      }\n    });\n    this._items.next(items);\n  }\n\n  /**\n   * @method Activate the given menu item. Deactivate all other menu items.\n   * @param item\n   */\n  public activateItem(item: MenuItem): void {\n    this._items.getValue().forEach(menuItem => {\n      menuItem.active = menuItem === item;\n    });\n    this._activeItem.next(item);\n    this.activeItem = item;\n  }\n\n  /**\n   * Sets the tab panel to show the pages.\n   * @param pagePanel\n   */\n  public setPagePanel(pagePanel: MatTabNavPanel | null): void {\n    this._pagePanel.next(pagePanel);\n  }\n\n  /**\n   * Sets the page direction.\n   * @param pageDirection true = the clicked item is after the current item.\n   */\n  public setPageDirection(pageDirection: boolean): void {\n    this._pageDirection.next(pageDirection);\n  }\n\n  /**\n   * @method Get Items\n   */\n  public getItems(): MenuItem[] {\n    return this._items.getValue();\n  }\n\n  /**\n   * @event click on menu item\n   * @method navigate - Page Change\n   * @param page menu item or link to navigate to\n   */\n  public navigate(page: MenuItem | string): void {\n    let item: MenuItem | undefined;\n    if (typeof page === 'string') {\n      item = this._items.getValue().find(menuItem => menuItem.link === page);\n    } else {\n      item = page;\n    }\n    if (item != null) {\n      const activeItemIndex = this._activeItem.getValue()?.index ?? 0;\n      this.activateItem(item);\n      const direction = item.index < activeItemIndex;\n      this.setPageDirection(direction);\n      this._router.navigate([item.link]).then();\n\n      this._planet.next(item.planet);\n    }\n  }\n}\n",
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
@@ -2224,7 +2284,7 @@
                         "deprecationMessage": ""
                     }
                 ],
-                "line": 55,
+                "line": 70,
                 "rawdescription": "\n\n",
                 "modifierKind": [
                     123
@@ -2232,8 +2292,8 @@
                 "jsdoctags": [
                     {
                         "name": {
-                            "pos": 1463,
-                            "end": 1470,
+                            "pos": 1794,
+                            "end": 1801,
                             "flags": 4227072,
                             "modifierFlagsCache": 0,
                             "transformFlags": 0,
@@ -2244,8 +2304,8 @@
                         "deprecated": false,
                         "deprecationMessage": "",
                         "tagName": {
-                            "pos": 1457,
-                            "end": 1462,
+                            "pos": 1788,
+                            "end": 1793,
                             "flags": 4227072,
                             "modifierFlagsCache": 0,
                             "transformFlags": 0,
@@ -3455,12 +3515,12 @@
         },
         {
             "name": "EntityQueryModel",
-            "id": "class-EntityQueryModel-7ad7d703f127c6a699e1d31adc271d18a155e02f649920dd52875ad2f83370c5f37d7bd9540a5bad62d7475851e7488bdafde9b9708faa2f159311e6259e91df",
+            "id": "class-EntityQueryModel-7eadd6df3ae7c22868e9d8f68b3a0f9a2da39e51a19c025ee5c36b098f9fa895276afc542e3e5fb6df0867ea74ff47d9b1272dc9ed9a248f8b22439c0792a688",
             "file": "src/app/models/entity-query.model.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "class",
-            "sourceCode": "import {EntityType} from '../types/entity.type';\r\nimport {OrderByInterface, QueryFilterInterface, QueryInterface} from '../interfaces/query.interface';\r\n\r\nexport class EntityQueryModel<T = EntityType> {\r\n\r\n  /**\r\n   * Collection to work on\r\n   */\r\n  private _collection: EntityType[] = [];\r\n\r\n  /**\r\n   * Limit entities to a certain number - 0 for all\r\n   */\r\n  private readonly _limitNum?: number;\r\n\r\n  /**\r\n   * Order By Field\r\n   */\r\n  private readonly _orderBy?: OrderByInterface[];\r\n\r\n  /**\r\n   * Search in collection\r\n   */\r\n  private readonly _searchStr?: string;\r\n\r\n  /**\r\n   * Arguments to apply to the query\r\n   */\r\n  private readonly _filters?: QueryFilterInterface[];\r\n\r\n  /**\r\n   * @constructor\r\n   * @param collection Collection to work on\r\n   * @param args Arguments to apply to the query\r\n   */\r\n  public constructor(collection: EntityType[], args: QueryInterface) {\r\n    this._collection = collection;\r\n    this._limitNum = args.limit;\r\n    this._filters = args.filters;\r\n    this._orderBy = args.orderBy;\r\n    this._searchStr = args.search;\r\n\r\n    this._init();\r\n  }\r\n\r\n  private _init(): void {\r\n    /**\r\n     * Start with filter if fields are provided\r\n     */\r\n    if (this._filters != null && this._filters.length > 0) {\r\n      this._collection = this._filterCollection(this._collection, this._filters);\r\n    }\r\n\r\n    /**\r\n     * Order by if fields are provided\r\n     */\r\n    if (this._orderBy != null && this._orderBy.length > 0) {\r\n      this._collection = this._orderByCollection(this._collection, this._orderBy);\r\n    }\r\n\r\n    /**\r\n     * Search if search string is provided\r\n     */\r\n    if (this._searchStr != null && this._searchStr.length > 0) {\r\n      this._collection = this._search(this._collection, this._searchStr);\r\n    }\r\n\r\n    /**\r\n     * Limit if limit is provided\r\n     */\r\n    if (this._limitNum != null && this._limitNum > 0) {\r\n      this._collection = this._limit(this._collection, this._limitNum);\r\n    }\r\n\r\n  }\r\n\r\n  /**\r\n   * Filter Collection\r\n   * @param collection Collection to filter\r\n   * @param fields Fields to filter by\r\n   */\r\n  private _filterCollection(collection: EntityType[], fields: QueryFilterInterface[]): EntityType[] {\r\n    const conditionORCollection: EntityType[] = collection;\r\n    const conditionANDCollection: EntityType[] = [];\r\n\r\n    fields.forEach((field: QueryFilterInterface) => {\r\n\r\n        if (collection[0]?.hasOwnProperty(field.name)) {\r\n          const filteredCollection: EntityType[] = collection.filter((entity: EntityType) => {\r\n            return entity.filterByField(field);\r\n          });\r\n\r\n          if (field.condition === 'OR') {\r\n            conditionORCollection.push(...filteredCollection);\r\n          } else {\r\n            conditionANDCollection.push(...filteredCollection);\r\n          }\r\n        }\r\n    });\r\n\r\n    return conditionANDCollection.length > 0 ? conditionANDCollection : conditionORCollection;\r\n  }\r\n\r\n  /**\r\n   * Order collection by\r\n   * @param collection Collection to order\r\n   * @param fields Fields to order by\r\n   */\r\n  private _orderByCollection(collection: EntityType[], fields: OrderByInterface[]): EntityType[] {\r\n    console.log('ORDER BY', fields)\r\n    fields.forEach((field: OrderByInterface) => {\r\n\r\n      if (collection[0]?.hasOwnProperty(field.name)) {\r\n        console.log('ORDER BY FIELD', field.name, field.direction, collection)\r\n        collection = collection.sort((a: EntityType, b: EntityType) => {\r\n          const order = field.direction === 'DESC' ? -1 : 1;\r\n          return a.orderByNativeField(field, b) * order;\r\n        });\r\n      }\r\n    });\r\n    console.log('collection:', collection)\r\n    return collection;\r\n  }\r\n\r\n  /**\r\n   * Search in collection\r\n   * @param collection Collection to search in\r\n   * @param search Search string\r\n   */\r\n  private _search(collection: EntityType[], search: string): EntityType[]{\r\n    return collection.filter((entity: EntityType) => {\r\n      return entity.search(search);\r\n    });\r\n  }\r\n\r\n  /**\r\n   * Limit entities to\r\n   * @param collection\r\n   * @param limit Number of entities to limit to\r\n   */\r\n  private _limit(collection: EntityType[], limit: number): EntityType[] {\r\n    return collection.slice(0, limit);\r\n  }\r\n\r\n  /**\r\n   * Get Collection\r\n   */\r\n  public getCollection(): EntityType[] {\r\n    return this._collection;\r\n  }\r\n}\r\n",
+            "sourceCode": "import {EntityType} from '../types/entity.type';\r\nimport {OrderByInterface, QueryFilterInterface, QueryInterface} from '../interfaces/query.interface';\r\n\r\nexport class EntityQueryModel<T = EntityType> {\r\n\r\n  /**\r\n   * Collection to work on\r\n   */\r\n  private _collection: EntityType[] = [];\r\n\r\n  /**\r\n   * Limit entities to a certain number - 0 for all\r\n   */\r\n  private readonly _limitNum?: number;\r\n\r\n  /**\r\n   * Order By Field\r\n   */\r\n  private readonly _orderBy?: OrderByInterface[];\r\n\r\n  /**\r\n   * Search in collection\r\n   */\r\n  private readonly _searchStr?: string;\r\n\r\n  /**\r\n   * Arguments to apply to the query\r\n   */\r\n  private readonly _filters?: QueryFilterInterface[];\r\n\r\n  /**\r\n   * @constructor\r\n   * @param collection Collection to work on\r\n   * @param args Arguments to apply to the query\r\n   */\r\n  public constructor(collection: EntityType[], args: QueryInterface) {\r\n    this._collection = collection;\r\n    this._limitNum = args.limit;\r\n    this._filters = args.filters;\r\n    this._orderBy = args.orderBy;\r\n    this._searchStr = args.search;\r\n\r\n    this._init();\r\n  }\r\n\r\n  private _init(): void {\r\n    /**\r\n     * Start with filter if fields are provided\r\n     */\r\n    if (this._filters != null && this._filters.length > 0) {\r\n      this._collection = this._filterCollection(this._collection, this._filters);\r\n    }\r\n\r\n    /**\r\n     * Order by if fields are provided\r\n     */\r\n    if (this._orderBy != null && this._orderBy.length > 0) {\r\n      this._collection = this._orderByCollection(this._collection, this._orderBy);\r\n    }\r\n\r\n    /**\r\n     * Search if search string is provided\r\n     */\r\n    if (this._searchStr != null && this._searchStr.length > 0) {\r\n      this._collection = this._search(this._collection, this._searchStr);\r\n    }\r\n\r\n    /**\r\n     * Limit if limit is provided\r\n     */\r\n    if (this._limitNum != null && this._limitNum > 0) {\r\n      this._collection = this._limit(this._collection, this._limitNum);\r\n    }\r\n\r\n  }\r\n\r\n  /**\r\n   * Filter Collection\r\n   * @param collection Collection to filter\r\n   * @param fields Fields to filter by\r\n   */\r\n  private _filterCollection(collection: EntityType[], fields: QueryFilterInterface[]): EntityType[] {\r\n    const conditionORCollection: EntityType[] = collection;\r\n    const conditionANDCollection: EntityType[] = [];\r\n\r\n    fields.forEach((field: QueryFilterInterface) => {\r\n\r\n        if (collection[0]?.hasOwnProperty(field.name)) {\r\n          const filteredCollection: EntityType[] = collection.filter((entity: EntityType) => {\r\n            return entity.filterByField(field);\r\n          });\r\n\r\n          if (field.condition === 'OR') {\r\n            conditionORCollection.push(...filteredCollection);\r\n          } else {\r\n            conditionANDCollection.push(...filteredCollection);\r\n          }\r\n        }\r\n    });\r\n\r\n    return conditionANDCollection.length > 0 ? conditionANDCollection : conditionORCollection;\r\n  }\r\n\r\n  /**\r\n   * Order collection by\r\n   * @param collection Collection to order\r\n   * @param fields Fields to order by\r\n   */\r\n  private _orderByCollection(collection: EntityType[], fields: OrderByInterface[]): EntityType[] {\r\n    fields.forEach((field: OrderByInterface) => {\r\n\r\n      if (collection[0]?.hasOwnProperty(field.name)) {\r\n        collection = collection.sort((a: EntityType, b: EntityType) => {\r\n          const order = field.direction === 'DESC' ? -1 : 1;\r\n          return a.orderByNativeField(field, b) * order;\r\n        });\r\n      }\r\n    });\r\n    return collection;\r\n  }\r\n\r\n  /**\r\n   * Search in collection\r\n   * @param collection Collection to search in\r\n   * @param search Search string\r\n   */\r\n  private _search(collection: EntityType[], search: string): EntityType[]{\r\n    return collection.filter((entity: EntityType) => {\r\n      return entity.search(search);\r\n    });\r\n  }\r\n\r\n  /**\r\n   * Limit entities to\r\n   * @param collection\r\n   * @param limit Number of entities to limit to\r\n   */\r\n  private _limit(collection: EntityType[], limit: number): EntityType[] {\r\n    return collection.slice(0, limit);\r\n  }\r\n\r\n  /**\r\n   * Get Collection\r\n   */\r\n  public getCollection(): EntityType[] {\r\n    return this._collection;\r\n  }\r\n}\r\n",
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
@@ -3719,7 +3779,7 @@
                     "optional": false,
                     "returnType": "EntityType[]",
                     "typeParameters": [],
-                    "line": 141,
+                    "line": 138,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nLimit entities to\n",
@@ -3730,8 +3790,8 @@
                     "jsdoctags": [
                         {
                             "name": {
-                                "pos": 4010,
-                                "end": 4020,
+                                "pos": 3849,
+                                "end": 3859,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -3742,8 +3802,8 @@
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "pos": 4004,
-                                "end": 4009,
+                                "pos": 3843,
+                                "end": 3848,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -3754,8 +3814,8 @@
                         },
                         {
                             "name": {
-                                "pos": 4034,
-                                "end": 4039,
+                                "pos": 3873,
+                                "end": 3878,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -3766,8 +3826,8 @@
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "pos": 4028,
-                                "end": 4033,
+                                "pos": 3867,
+                                "end": 3872,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -3875,7 +3935,7 @@
                     "optional": false,
                     "returnType": "EntityType[]",
                     "typeParameters": [],
-                    "line": 130,
+                    "line": 127,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nSearch in collection\n",
@@ -3886,8 +3946,8 @@
                     "jsdoctags": [
                         {
                             "name": {
-                                "pos": 3705,
-                                "end": 3715,
+                                "pos": 3544,
+                                "end": 3554,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -3898,8 +3958,8 @@
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "pos": 3699,
-                                "end": 3704,
+                                "pos": 3538,
+                                "end": 3543,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -3910,8 +3970,8 @@
                         },
                         {
                             "name": {
-                                "pos": 3753,
-                                "end": 3759,
+                                "pos": 3592,
+                                "end": 3598,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -3922,8 +3982,8 @@
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "pos": 3747,
-                                "end": 3752,
+                                "pos": 3586,
+                                "end": 3591,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -3940,7 +4000,7 @@
                     "optional": false,
                     "returnType": "EntityType[]",
                     "typeParameters": [],
-                    "line": 148,
+                    "line": 145,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nGet Collection\n",
@@ -7255,12 +7315,12 @@
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "@use 'functions' as fn;\r\n\r\n:host {\r\n  display: flex;\r\n  flex-direction: column;\r\n  width: 100%;\r\n  pointer-events: auto;\r\n}\r\n\r\n.block {\r\n  &__container {\r\n    height: 100%;\r\n    width: 100%;\r\n    clip-path: polygon(\r\n        0 0,\r\n        80px 0%,\r\n        85px 5px,\r\n        calc(100% - 10px) 5px,\r\n        100% 16px,\r\n        100% 100%,\r\n        87px 100%,\r\n        82px calc(100% - 5px),\r\n        10px calc(100% - 5px),\r\n        0 calc(100% - 15px),\r\n    );\r\n    //background: fn.get-color(contrast, 600, 0.5);\r\n    background: fn.get-color(contrast, 500, 0.3);\r\n    backdrop-filter: blur(3px);\r\n    margin-bottom: 2px;\r\n  }\r\n  &__header {\r\n    position: relative;\r\n\r\n    &-wrapper {\r\n      display: flex;\r\n      align-items: center;\r\n      justify-content: space-between;\r\n      padding: 10px 16px 8px;\r\n    }\r\n\r\n    &-title {\r\n      color: fn.get-color(contrast, 100);\r\n    }\r\n\r\n    &-line {\r\n      position: absolute;\r\n      bottom: 0;\r\n      left: 16px;\r\n      width: calc(100% - 16px);\r\n      height: 1px;\r\n      background-color: fn.get-color(contrast, 500);\r\n\r\n      &:after, &:before {\r\n        content: '';\r\n        position: absolute;\r\n        left: 0;\r\n      }\r\n\r\n      &:after {\r\n        top: 1px;\r\n        width: 50px;\r\n        height: 6px;\r\n        background-color: fn.get-color(contrast, 500);\r\n        clip-path: polygon(0 0, 100% 0, calc(100% - 6px) 100%, 3px 100%);\r\n      }\r\n\r\n      &:before {\r\n        bottom: 0;\r\n        width: 80px;\r\n        height: 3px;\r\n        background-color: fn.get-color(contrast, 400);\r\n        clip-path: polygon(3px 0, calc(100% - 3px) 0, 100% 100%, 0% 100%);\r\n      }\r\n    }\r\n  }\r\n\r\n  &__content {\r\n    overflow: auto;\r\n\r\n    &.has-padding {\r\n      padding: 5px 16px 12px;\r\n    }\r\n  }\r\n}\r\n",
+                    "data": "@use 'functions' as fn;\r\n\r\n:host {\r\n  display: flex;\r\n  flex-direction: column;\r\n  width: 100%;\r\n  pointer-events: auto;\r\n  backdrop-filter: blur(10px);\r\n  clip-path: polygon(\r\n      0 0,\r\n      80px 0%,\r\n      85px 5px,\r\n      calc(100% - 10px) 5px,\r\n      100% 16px,\r\n      100% 100%,\r\n      87px 100%,\r\n      82px calc(100% - 5px),\r\n      10px calc(100% - 5px),\r\n      0 calc(100% - 15px),\r\n  );\r\n}\r\n\r\n.block {\r\n  &__container {\r\n    height: 100%;\r\n    width: 100%;\r\n\r\n    //background: fn.get-color(contrast, 600, 0.5);\r\n    background: fn.get-color(contrast, 500, 0.3);\r\n    margin-bottom: 2px;\r\n  }\r\n  &__header {\r\n    position: relative;\r\n\r\n    &-wrapper {\r\n      display: flex;\r\n      align-items: center;\r\n      justify-content: space-between;\r\n      padding: 10px 16px 8px;\r\n    }\r\n\r\n    &-title {\r\n      color: fn.get-color(contrast, 100);\r\n    }\r\n\r\n    &-tools {\r\n      display: flex;\r\n      align-items: center;\r\n      justify-content: flex-end;\r\n      gap: 5px;\r\n    }\r\n\r\n    &-line {\r\n      position: absolute;\r\n      bottom: 0;\r\n      left: 16px;\r\n      width: calc(100% - 16px);\r\n      height: 1px;\r\n      background-color: fn.get-color(contrast, 500);\r\n\r\n      &:after, &:before {\r\n        content: '';\r\n        position: absolute;\r\n        left: 0;\r\n      }\r\n\r\n      &:after {\r\n        top: 1px;\r\n        width: 50px;\r\n        height: 6px;\r\n        background-color: fn.get-color(contrast, 500);\r\n        clip-path: polygon(0 0, 100% 0, calc(100% - 6px) 100%, 3px 100%);\r\n      }\r\n\r\n      &:before {\r\n        bottom: 0;\r\n        width: 80px;\r\n        height: 3px;\r\n        background-color: fn.get-color(contrast, 400);\r\n        clip-path: polygon(3px 0, calc(100% - 3px) 0, 100% 100%, 0% 100%);\r\n      }\r\n    }\r\n  }\r\n\r\n  &__content {\r\n    overflow: auto;\r\n\r\n    &.has-padding {\r\n      padding: 5px 16px 12px;\r\n    }\r\n  }\r\n}\r\n",
                     "styleUrl": "./block.component.scss"
                 }
             ],
             "stylesData": "",
-            "templateData": "<div class=\"block__container body-2 flex-column\">\n  <div class=\"block__header\">\n    <div *ngIf=\"cvTitle\" class=\"block__header-wrapper\">\n      <div *ngIf=\"cvTitle\" class=\"block__header-title h3\">\n        {{ cvTitle }}\n      </div>\n    </div>\n    <div *ngIf=\"cvTitle\" class=\"block__header-line\"></div>\n  </div>\n  <div class=\"block__content scroll-bar flex-grow\"\n       [class.flex-center]=\"centered\"\n       [class.flex-column]=\"column\"\n       [class.has-padding]=\"!disablePadding\"\n       [style.max-height]=\"maxHeight\">\n    <ng-content></ng-content>\n  </div>\n</div>\n\n"
+            "templateData": "<div class=\"block__container body-2 flex-column\">\n  <div class=\"block__header\">\n    <div *ngIf=\"cvTitle\" class=\"block__header-wrapper\">\n      <div *ngIf=\"cvTitle\" class=\"block__header-title h3\">\n        {{ cvTitle }}\n      </div>\n      <div class=\"block__header-tools\">\n        <ng-content select=\"[tool]\"></ng-content>\n      </div>\n    </div>\n    <div *ngIf=\"cvTitle\" class=\"block__header-line\"></div>\n  </div>\n  <div class=\"block__content scroll-bar flex-grow\"\n       [class.flex-center]=\"centered\"\n       [class.flex-column]=\"column\"\n       [class.has-padding]=\"!disablePadding\"\n       [style.max-height]=\"maxHeight\">\n    <ng-content></ng-content>\n  </div>\n</div>\n\n"
         },
         {
             "name": "ChartCircleComponent",
@@ -8988,7 +9048,7 @@
         },
         {
             "name": "DataDetailsComponent",
-            "id": "component-DataDetailsComponent-18f123facc91788ea3135abd9a2f684e63b2191d6d8954296aeb98b64128b596443a959acdc81970ac9126b13d87e5c76b7f50cad980eb87475cb53e8228a39e",
+            "id": "component-DataDetailsComponent-4b8279ba4ce99c0ee02b029474412914f47d702ca4d5fc4163e7af4a8f4e5b03ca7f8b97432e1a837c07c06cad239811a5cb4843f0e27914e6db3841b5088a21",
             "file": "src/app/modules/main/components/data-details/data-details.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -9026,7 +9086,7 @@
                     "type": "number",
                     "optional": false,
                     "description": "<p>Circle charts delay.</p>\n",
-                    "line": 43,
+                    "line": 51,
                     "rawdescription": "\nCircle charts delay.",
                     "modifierKind": [
                         121
@@ -9040,8 +9100,22 @@
                     "type": "number",
                     "optional": false,
                     "description": "<p>Global delay increment</p>\n",
-                    "line": 46,
+                    "line": 54,
                     "rawdescription": "\nGlobal delay increment",
+                    "modifierKind": [
+                        121
+                    ]
+                },
+                {
+                    "name": "_historyEntities",
+                    "defaultValue": "[]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "EntityType[]",
+                    "optional": false,
+                    "description": "<p>History entities.</p>\n",
+                    "line": 31,
+                    "rawdescription": "\nHistory entities.",
                     "modifierKind": [
                         121
                     ]
@@ -9054,7 +9128,7 @@
                     "type": "Array<literal type>",
                     "optional": false,
                     "description": "<p>Circle charts to show</p>\n",
-                    "line": 51,
+                    "line": 59,
                     "rawdescription": "\n\nCircle charts to show\n",
                     "modifierKind": [
                         123
@@ -9067,7 +9141,7 @@
                     "type": "ChartEntityList",
                     "optional": true,
                     "description": "<p>Donut chart entities.</p>\n",
-                    "line": 40,
+                    "line": 48,
                     "rawdescription": "\nDonut chart entities.",
                     "modifierKind": [
                         123
@@ -9081,7 +9155,7 @@
                     "type": "string",
                     "optional": false,
                     "description": "<p>Name of the entity.</p>\n",
-                    "line": 31,
+                    "line": 39,
                     "rawdescription": "\nName of the entity.",
                     "modifierKind": [
                         123
@@ -9095,7 +9169,7 @@
                     "type": "string",
                     "optional": false,
                     "description": "<p>Subtitle of the entity.</p>\n",
-                    "line": 34,
+                    "line": 42,
                     "rawdescription": "\nSubtitle of the entity.",
                     "modifierKind": [
                         123
@@ -9108,7 +9182,7 @@
                     "type": "ChartEntityList",
                     "optional": true,
                     "description": "<p>Side entities as gauge charts.</p>\n",
-                    "line": 37,
+                    "line": 45,
                     "rawdescription": "\nSide entities as gauge charts.",
                     "modifierKind": [
                         123
@@ -9129,7 +9203,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 119,
+                    "line": 130,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nUpdate circle chart for SkillEntity.\n",
@@ -9155,7 +9229,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 167,
+                    "line": 178,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nIncrement circle delay.\n",
@@ -9170,7 +9244,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 97,
+                    "line": 108,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nUpdate circle charts.\n",
@@ -9185,7 +9259,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 89,
+                    "line": 97,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nUpdate entity.\n",
@@ -9200,13 +9274,28 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 139,
+                    "line": 150,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nUpdate gauge charts.\n",
                     "description": "<p>Update gauge charts.</p>\n",
                     "modifierKind": [
                         121
+                    ]
+                },
+                {
+                    "name": "close",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 185,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nClose the details block.\n",
+                    "description": "<p>Close the details block.</p>\n",
+                    "modifierKind": [
+                        123
                     ]
                 },
                 {
@@ -9222,7 +9311,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 78,
+                    "line": 86,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\n",
@@ -9248,7 +9337,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 64,
+                    "line": 72,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\n",
@@ -9266,11 +9355,11 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';\nimport {EntityType} from '../../../../types/entity.type';\nimport {SkillEntity} from '../../../../models/skill-entity.model';\nimport {WorkEntity} from '../../../../models/work-entity.model';\nimport {DATA_FIELD, DATA_TYPE} from '../../../../enums/data.enum';\nimport {ValueSkillEntitiesToList} from '../../../../transformers/entity-list.transformer';\nimport {ListItem} from '../list/list-item.interface';\nimport {EntityListService} from '../../../../services/entity-list.service';\nimport {ProjectEntity} from '../../../../models/project-entity.model';\n\ntype ChartEntityList = {\n  entityType?: DATA_TYPE;\n  entities?: EntityType[];\n  valueKey?: DATA_FIELD;\n  items?: ListItem[];\n}\n\n@Component({\n  selector: 'cv-data-details',\n  templateUrl: './data-details.component.html',\n  styleUrls: ['./data-details.component.scss']\n})\nexport class DataDetailsComponent implements OnChanges, OnInit {\n\n  /**\n   * Entity to be displayed.\n   */\n  @Input() public entity?: EntityType;\n\n  /** Name of the entity. */\n  public entityName: string = '';\n\n  /** Subtitle of the entity. */\n  public entitySubtitle: string = '';\n\n  /** Side entities as gauge charts. */\n  public gaugeCharts?: ChartEntityList;\n\n  /** Donut chart entities. */\n  public donutChart?: ChartEntityList;\n\n  /** Circle charts delay. */\n  private _circleDelay = 0;\n\n  /** Global delay increment */\n  private _delayIncrement = 150;\n\n  /**\n   * Circle charts to show\n   */\n  public circleCharts: Array<{ label: string, value: number, delay: number }> = [];\n\n  /**\n   * @constructor\n   */\n  public constructor(\n    private readonly _entityListService: EntityListService\n  ) {\n  }\n\n  /**\n   * @inheritDoc\n   */\n  public ngOnInit(): void {\n    if (this.entity == null) {\n      this._entityListService.focused$.subscribe((entity: EntityType | undefined) => {\n        this.entity = entity;\n        this._updateEntity();\n        this._updateCircleCharts();\n        this._updateEntityLists();\n      });\n    }\n  }\n\n  /**\n   * @inheritDoc\n   */\n  public ngOnChanges(changes: SimpleChanges): void {\n    if ('entity' in changes) {\n      this._updateEntity();\n      this._updateCircleCharts();\n      this._updateEntityLists();\n    }\n  }\n\n  /**\n   * Update entity.\n   */\n  private _updateEntity(): void {\n    this.entityName = this.entity?.name ?? '';\n    this.entitySubtitle = this.entity?.subtitle ?? '';\n  }\n\n  /**\n   * Update circle charts.\n   */\n  private _updateCircleCharts(): void {\n    this.circleCharts = [];\n    this._circleDelay = 0;\n    if (this.entity instanceof SkillEntity) {\n      this._circleChartsSkillEntity(this.entity);\n    }\n\n\n    if (this.entity != null) {\n      /** Add Happiness chart */\n      this.circleCharts.push({\n        label: 'Ma satisfaction',\n        value: this.entity.happiness,\n        delay: this._circleDelay\n      });\n      this._incrementCircleDelay();\n    }\n  }\n\n  /**\n   * Update circle chart for SkillEntity.\n   */\n  private _circleChartsSkillEntity(entity: SkillEntity): void {\n    /** Add Level chart */\n    this.circleCharts.push({\n      label: 'Mon niveau',\n      value: entity.level,\n      delay: this._circleDelay\n    });\n    this._incrementCircleDelay();\n    /** Add Experience chart */\n    this.circleCharts.push({\n      label: 'Mon expérience globale',\n      value: entity.experience,\n      delay: this._circleDelay\n    });\n    this._incrementCircleDelay();\n  }\n\n  /**\n   * Update gauge charts.\n   */\n  private _updateEntityLists(): void {\n    this.gaugeCharts = undefined;\n    this.donutChart = undefined;\n\n    if (this.entity instanceof WorkEntity) {\n      this.gaugeCharts = {\n        entityType: DATA_TYPE.PROJECT,\n        entities: this.entity.projects,\n        valueKey: DATA_FIELD.HAPPINESS\n      };\n      this.donutChart = {\n        items: ValueSkillEntitiesToList(this.entity.skillRatios)\n      };\n    } else if (this.entity instanceof ProjectEntity) {\n      this.gaugeCharts = {\n        entityType: DATA_TYPE.SKILL,\n        entities: this.entity.skills,\n        valueKey: DATA_FIELD.LEVEL\n      };\n      this.donutChart = {\n        // TODO: continue here (maybe something else than donut chart)\n      }\n    }\n  }\n\n  /**\n   * Increment circle delay.\n   */\n  private _incrementCircleDelay(): void {\n    this._circleDelay += this._delayIncrement;\n  }\n}\n",
+            "sourceCode": "import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';\nimport {EntityType} from '../../../../types/entity.type';\nimport {SkillEntity} from '../../../../models/skill-entity.model';\nimport {WorkEntity} from '../../../../models/work-entity.model';\nimport {DATA_FIELD, DATA_TYPE} from '../../../../enums/data.enum';\nimport {ValueSkillEntitiesToList} from '../../../../transformers/entity-list.transformer';\nimport {ListItem} from '../list/list-item.interface';\nimport {EntityListService} from '../../../../services/entity-list.service';\nimport {ProjectEntity} from '../../../../models/project-entity.model';\n\ntype ChartEntityList = {\n  entityType?: DATA_TYPE;\n  entities?: EntityType[];\n  valueKey?: DATA_FIELD;\n  items?: ListItem[];\n}\n\n@Component({\n  selector: 'cv-data-details',\n  templateUrl: './data-details.component.html',\n  styleUrls: ['./data-details.component.scss']\n})\nexport class DataDetailsComponent implements OnChanges, OnInit {\n\n  /**\n   * Entity to be displayed.\n   */\n  @Input() public entity?: EntityType;\n\n  /** History entities. */\n  private _historyEntities: EntityType[] = [];\n\n  /** Get last history entity. */\n  public get lastHistoryEntity(): EntityType | undefined {\n    return this._historyEntities[this._historyEntities.length - 2];\n  }\n\n  /** Name of the entity. */\n  public entityName: string = '';\n\n  /** Subtitle of the entity. */\n  public entitySubtitle: string = '';\n\n  /** Side entities as gauge charts. */\n  public gaugeCharts?: ChartEntityList;\n\n  /** Donut chart entities. */\n  public donutChart?: ChartEntityList;\n\n  /** Circle charts delay. */\n  private _circleDelay = 0;\n\n  /** Global delay increment */\n  private _delayIncrement = 150;\n\n  /**\n   * Circle charts to show\n   */\n  public circleCharts: Array<{ label: string, value: number, delay: number }> = [];\n\n  /**\n   * @constructor\n   */\n  public constructor(\n    private readonly _entityListService: EntityListService\n  ) {\n  }\n\n  /**\n   * @inheritDoc\n   */\n  public ngOnInit(): void {\n    if (this.entity == null) {\n      this._entityListService.focused$.subscribe((entity: EntityType | undefined) => {\n        this.entity = entity;\n        this._updateEntity();\n        this._updateCircleCharts();\n        this._updateEntityLists();\n      });\n    }\n  }\n\n  /**\n   * @inheritDoc\n   */\n  public ngOnChanges(changes: SimpleChanges): void {\n    if ('entity' in changes) {\n      this._updateEntity();\n      this._updateCircleCharts();\n      this._updateEntityLists();\n    }\n  }\n\n  /**\n   * Update entity.\n   */\n  private _updateEntity(): void {\n    if (this.entity != null) {\n      this._historyEntities.push(this.entity);\n    }\n    this.entityName = this.entity?.name ?? '';\n    this.entitySubtitle = this.entity?.subtitle ?? '';\n  }\n\n  /**\n   * Update circle charts.\n   */\n  private _updateCircleCharts(): void {\n    this.circleCharts = [];\n    this._circleDelay = 0;\n    if (this.entity instanceof SkillEntity) {\n      this._circleChartsSkillEntity(this.entity);\n    }\n\n\n    if (this.entity != null) {\n      /** Add Happiness chart */\n      this.circleCharts.push({\n        label: 'Ma satisfaction',\n        value: this.entity.happiness,\n        delay: this._circleDelay\n      });\n      this._incrementCircleDelay();\n    }\n  }\n\n  /**\n   * Update circle chart for SkillEntity.\n   */\n  private _circleChartsSkillEntity(entity: SkillEntity): void {\n    /** Add Level chart */\n    this.circleCharts.push({\n      label: 'Mon niveau',\n      value: entity.level,\n      delay: this._circleDelay\n    });\n    this._incrementCircleDelay();\n    /** Add Experience chart */\n    this.circleCharts.push({\n      label: 'Mon expérience globale',\n      value: entity.experience,\n      delay: this._circleDelay\n    });\n    this._incrementCircleDelay();\n  }\n\n  /**\n   * Update gauge charts.\n   */\n  private _updateEntityLists(): void {\n    this.gaugeCharts = undefined;\n    this.donutChart = undefined;\n\n    if (this.entity instanceof WorkEntity) {\n      this.gaugeCharts = {\n        entityType: DATA_TYPE.PROJECT,\n        entities: this.entity.projects,\n        valueKey: DATA_FIELD.HAPPINESS\n      };\n      this.donutChart = {\n        items: ValueSkillEntitiesToList(this.entity.skillRatios)\n      };\n    } else if (this.entity instanceof ProjectEntity) {\n      this.gaugeCharts = {\n        entityType: DATA_TYPE.SKILL,\n        entities: this.entity.skills,\n        valueKey: DATA_FIELD.LEVEL\n      };\n      this.donutChart = {\n        // TODO: continue here (maybe something else than donut chart)\n      }\n    }\n  }\n\n  /**\n   * Increment circle delay.\n   */\n  private _incrementCircleDelay(): void {\n    this._circleDelay += this._delayIncrement;\n  }\n\n  /**\n   * Close the details block.\n   */\n  public close(): void {\n    this._historyEntities = [];\n    this.entity = undefined;\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "@use 'mixins';\r\n@use 'functions' as fn;\r\n\r\n:host {\r\n  width: 100%;\r\n  display: flex;\r\n}\r\n.data-details {\r\n  &__container {\r\n    height: 100%;\r\n    position: relative;\r\n  }\r\n  &__content {\r\n    height: 100%;\r\n    width: 100%;\r\n    position: absolute;\r\n    top: 0;\r\n    left: 0;\r\n    ::ng-deep {\r\n      .list-chart-donut__wrapper {\r\n        //height: inherit;\r\n        //overflow: visible;\r\n      }\r\n    }\r\n\r\n    &__row {\r\n      //max-height: 50%;\r\n      overflow: hidden;\r\n    }\r\n  }\r\n  &__blocks {\r\n    flex-basis: 200px;\r\n    padding: 15px;\r\n    gap: 25px;\r\n  }\r\n\r\n  &__subtitle {\r\n    width: 100%;\r\n  }\r\n\r\n  &__list {\r\n    flex-basis: 200px;\r\n    position: relative;\r\n    height: min-content;\r\n\r\n    cv-list-chart-gauge {\r\n      width: 100%;\r\n      height: 100%;\r\n    }\r\n\r\n    &__header {\r\n      padding: 10px 15px;\r\n    }\r\n  }\r\n\r\n  &__donut {\r\n    max-height: 50%;\r\n  }\r\n\r\n  &__list, &__blocks {\r\n    @include mixins.scroll-bar;\r\n    height: 100%;\r\n    overflow: auto;\r\n    position: relative;\r\n    border-left: 1px solid fn.get-color(accent, 500);\r\n    border-bottom: 1px solid fn.get-color(accent, 500);\r\n    margin-left: -1px;\r\n    top: 1px;\r\n  }\r\n\r\n}\r\n\r\n\r\n",
+                    "data": "@use 'mixins';\r\n@use 'functions' as fn;\r\n\r\n:host {\r\n  width: 100%;\r\n  display: flex;\r\n}\r\n.data-details {\r\n  &__block {\r\n    animation-name: appear-bottom;\r\n    animation-duration: 0.3s;\r\n    animation-fill-mode: forwards;\r\n    animation-timing-function: cubic-bezier(0.28, 0, 0, 1);\r\n  }\r\n  &__container {\r\n    height: 100%;\r\n    position: relative;\r\n  }\r\n  &__content {\r\n    height: 100%;\r\n    width: 100%;\r\n    position: absolute;\r\n    top: 0;\r\n    left: 0;\r\n    ::ng-deep {\r\n      .list-chart-donut__wrapper {\r\n        //height: inherit;\r\n        //overflow: visible;\r\n      }\r\n    }\r\n\r\n    &__row {\r\n      //max-height: 50%;\r\n      overflow: hidden;\r\n    }\r\n  }\r\n  &__blocks {\r\n    flex-basis: 200px;\r\n    padding: 15px;\r\n    gap: 25px;\r\n  }\r\n\r\n  &__subtitle {\r\n    width: 100%;\r\n  }\r\n\r\n  &__list {\r\n    flex-basis: 200px;\r\n    position: relative;\r\n    height: min-content;\r\n\r\n    cv-list-chart-gauge {\r\n      width: 100%;\r\n      height: 100%;\r\n    }\r\n\r\n    &__header {\r\n      padding: 10px 15px;\r\n    }\r\n  }\r\n\r\n  &__donut {\r\n    max-height: 50%;\r\n  }\r\n\r\n  &__list, &__blocks {\r\n    @include mixins.scroll-bar;\r\n    height: 100%;\r\n    overflow: auto;\r\n    position: relative;\r\n    border-left: 1px solid fn.get-color(accent, 500);\r\n    border-bottom: 1px solid fn.get-color(accent, 500);\r\n    margin-left: -1px;\r\n    top: 1px;\r\n  }\r\n\r\n  .back-btn {\r\n    color: fn.get-color(accent, 200);\r\n  }\r\n\r\n}\r\n\r\n\r\n",
                     "styleUrl": "./data-details.component.scss"
                 }
             ],
@@ -9288,7 +9377,7 @@
                         "deprecationMessage": ""
                     }
                 ],
-                "line": 51,
+                "line": 59,
                 "rawdescription": "\n\n",
                 "modifierKind": [
                     123
@@ -9309,7 +9398,20 @@
                 "OnChanges",
                 "OnInit"
             ],
-            "templateData": "<cv-block [cvTitle]=\"entityName\"  maxHeight=\"100%\" [disablePadding]=\"true\">\n  <div class=\"data-details__container flex flex-wrap\">\n    <div class=\"data-details__content flex-column\">\n      <!--Circle charts blocks Container-->\n      <div class=\"data-details__content__row flex flex-grow\">\n        <div class=\"data-details__blocks chart-circle-blocks justify-center flex flex-grow flex-wrap\">\n          <div *ngIf=\"entitySubtitle\" class=\"data-details__subtitle\">\n            {{entitySubtitle}}\n          </div>\n          <div *ngFor=\"let block of circleCharts\" class=\"data-details__block flex-column justify-center\">\n            <div class=\"data-details__block__header flex-center\">\n              <div class=\"data-details__block-title h3 flex-center\">\n                {{block.label}}\n              </div>\n            </div>\n            <div class=\"data-details__block__content\">\n              <cv-chart-circle [value]=\"block.value\" [animationDelay]=\"block.delay\"\n                               [size]=\"circleCharts.length === 1 ? 140 : 90\" [weight]=\"circleCharts.length === 1 ? 15 : 5\"></cv-chart-circle>\n            </div>\n          </div>\n        </div>\n\n        <!--Gauge charts blocks Container-->\n        <div *ngIf=\"gaugeCharts\" class=\"data-details__list flex-column flex-grow\">\n          <div class=\"data-details__list__header flex label h3\">Stacks utilisées</div>\n          <cv-list-chart-gauge class=\"data-details__list-chart flex-grow flex-column\"\n                               [items]=\"gaugeCharts.items\"\n                               [entityType]=\"gaugeCharts.entityType\"\n                               [entities]=\"gaugeCharts.entities\"\n                               [valueKey]=\"gaugeCharts.valueKey\"\n          ></cv-list-chart-gauge>\n        </div>\n      </div>\n\n      <cv-list-chart-donut class=\"data-details__donut\" *ngIf=\"donutChart && donutChart.items\"\n                           [items]=\"donutChart.items\"\n                           [entityType]=\"donutChart.entityType\"\n                           [entities]=\"donutChart.entities\"\n                           [valueKey]=\"donutChart.valueKey\"\n      ></cv-list-chart-donut>\n    </div>\n  </div>\n</cv-block>\n"
+            "accessors": {
+                "lastHistoryEntity": {
+                    "name": "lastHistoryEntity",
+                    "getSignature": {
+                        "name": "lastHistoryEntity",
+                        "type": "",
+                        "returnType": "EntityType | undefined",
+                        "line": 34,
+                        "rawdescription": "\nGet last history entity.",
+                        "description": "<p>Get last history entity.</p>\n"
+                    }
+                }
+            },
+            "templateData": "<cv-block class=\"data-details__block\" *ngIf=\"entity != null\" [cvTitle]=\"entityName\"  maxHeight=\"100%\" [disablePadding]=\"true\">\n\n  <button *ngIf=\"lastHistoryEntity\" tool mat-button class=\"back-btn\">\n    <mat-icon>arrow_back</mat-icon>{{lastHistoryEntity.name}}\n  </button>\n  <button mat-icon-button tool class=\"close-btn\" (click)=\"close()\">\n    <mat-icon>close</mat-icon>\n  </button>\n  <div class=\"data-details__container flex flex-wrap\">\n    <div class=\"data-details__content flex-column\">\n      <!--Circle charts blocks Container-->\n      <div class=\"data-details__content__row flex flex-grow\">\n        <div class=\"data-details__blocks chart-circle-blocks justify-center flex flex-grow flex-wrap\">\n          <div *ngIf=\"entitySubtitle\" class=\"data-details__subtitle\">\n            {{entitySubtitle}}\n          </div>\n          <div *ngFor=\"let block of circleCharts\" class=\"data-details__block flex-column justify-center\">\n            <div class=\"data-details__block__header flex-center\">\n              <div class=\"data-details__block-title h3 flex-center\">\n                {{block.label}}\n              </div>\n            </div>\n            <div class=\"data-details__block__content\">\n              <cv-chart-circle [value]=\"block.value\" [animationDelay]=\"block.delay\"\n                               [size]=\"circleCharts.length === 1 ? 140 : 90\" [weight]=\"circleCharts.length === 1 ? 15 : 5\"></cv-chart-circle>\n            </div>\n          </div>\n        </div>\n\n        <!--Gauge charts blocks Container-->\n        <div *ngIf=\"gaugeCharts\" class=\"data-details__list flex-column flex-grow\">\n          <div class=\"data-details__list__header flex label h3\">Stacks utilisées</div>\n          <cv-list-chart-gauge class=\"data-details__list-chart flex-grow flex-column\"\n                               [items]=\"gaugeCharts.items\"\n                               [entityType]=\"gaugeCharts.entityType\"\n                               [entities]=\"gaugeCharts.entities\"\n                               [valueKey]=\"gaugeCharts.valueKey\"\n          ></cv-list-chart-gauge>\n        </div>\n      </div>\n\n      <cv-list-chart-donut class=\"data-details__donut\" *ngIf=\"donutChart && donutChart.items\"\n                           [items]=\"donutChart.items\"\n                           [entityType]=\"donutChart.entityType\"\n                           [entities]=\"donutChart.entities\"\n                           [valueKey]=\"donutChart.valueKey\"\n      ></cv-list-chart-donut>\n    </div>\n  </div>\n</cv-block>\n"
         },
         {
             "name": "DrawCircleComponent",
@@ -9837,12 +9939,12 @@
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "@use 'config';\r\n:host {\r\n  height: config.$top-header--height;\r\n  > mat-toolbar {\r\n    padding: 0;\r\n    height: 100%;\r\n  }\r\n}\r\n",
+                    "data": "@use 'config';\r\n:host {\r\n  height: config.$top-header--height;\r\n  > mat-toolbar {\r\n    padding: 0;\r\n    height: 100%;\r\n    justify-content: space-between;\r\n  }\r\n}\r\n",
                     "styleUrl": "./header.component.scss"
                 }
             ],
             "stylesData": "",
-            "templateData": "<mat-toolbar class=\"bg-transparent\">\n  <cv-menu></cv-menu>\n  <button mat-icon-button class=\"example-icon favorite-icon\" aria-label=\"Example icon-button with heart icon\">\n    <mat-icon>favorite</mat-icon>\n  </button>\n  <button mat-icon-button class=\"example-icon\" aria-label=\"Example icon-button with share icon\">\n    <mat-icon>share</mat-icon>\n  </button>\n</mat-toolbar>\n"
+            "templateData": "<mat-toolbar class=\"bg-transparent\">\n  <cv-menu></cv-menu>\n  <div class=\"tools\">\n    <a mat-icon-button href=\"https://github.com/Anymfah/curriculum-vitae\"\n       target=\"_blank\"\n       aria-label=\"Voir le repository github\">\n      <cv-svg-icon icon=\"github\"></cv-svg-icon>\n    </a>\n    <a mat-icon-button href=\"https://www.storybook.anymbook.com\"\n       target=\"_blank\"\n       aria-label=\"Voir le storybook\">\n      <cv-svg-icon icon=\"storybook\"></cv-svg-icon>\n    </a>\n  </div>\n</mat-toolbar>\n"
         },
         {
             "name": "InputCircleSliderComponent",
@@ -10632,7 +10734,7 @@
         },
         {
             "name": "LayoutComponent",
-            "id": "component-LayoutComponent-f596ee28bc0a61ce5c998da473528b89ff5e1c381f4f2177d79158177cf8902aba4a1f3da1805082cb73979982bea26e32c2a3f6878726c64098869920db8ba0",
+            "id": "component-LayoutComponent-77f07aa880e50634ab580e274f32939668522c4a37ebeca4a90a11d9b7168b80359521113071c022a1b5df18e292df0ad2fafb96546bf1addbedbd7be0505f02",
             "file": "src/app/modules/main/components/layout/layout.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -10659,7 +10761,7 @@
                     "type": "number",
                     "optional": false,
                     "description": "<p>Direction value of the image\nMin : -30 , Max : 30</p>\n",
-                    "line": 39,
+                    "line": 38,
                     "rawdescription": "\n\nDirection value of the image\nMin : -30 , Max : 30\n",
                     "modifierKind": [
                         123
@@ -10673,44 +10775,10 @@
                     "type": "",
                     "optional": false,
                     "description": "<p>Left to right state (for animation).</p>\n",
-                    "line": 30,
+                    "line": 29,
                     "rawdescription": "\nLeft to right state (for animation).",
                     "modifierKind": [
                         123
-                    ]
-                },
-                {
-                    "name": "menu",
-                    "defaultValue": "[\n    {\n      label: 'Home',\n      link: '/',\n      index: 0,\n    },\n    {\n      label: 'About me',\n      link: '/about-me',\n      index: 1,\n    },\n    {\n      label: 'Contact',\n      link: '/contact',\n      index: 2,\n    },\n  ]",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "MenuItem[]",
-                    "optional": false,
-                    "description": "<p>Menu items</p>\n",
-                    "line": 45,
-                    "rawdescription": "\n\nMenu items\n",
-                    "modifierKind": [
-                        123
-                    ],
-                    "jsdoctags": [
-                        {
-                            "pos": 1157,
-                            "end": 1190,
-                            "flags": 4227072,
-                            "modifierFlagsCache": 0,
-                            "transformFlags": 0,
-                            "kind": 325,
-                            "tagName": {
-                                "pos": 1158,
-                                "end": 1162,
-                                "flags": 4227072,
-                                "modifierFlagsCache": 0,
-                                "transformFlags": 0,
-                                "kind": 79,
-                                "escapedText": "todo"
-                            },
-                            "comment": "<p>: Move to routing module</p>\n"
-                        }
                     ]
                 },
                 {
@@ -10720,7 +10788,7 @@
                     "type": "RouterOutlet",
                     "optional": true,
                     "description": "<p>Router outlet DOM Element.</p>\n",
-                    "line": 22,
+                    "line": 21,
                     "rawdescription": "\n\nRouter outlet DOM Element.\n",
                     "decorators": [
                         {
@@ -10740,7 +10808,7 @@
                     "type": "",
                     "optional": false,
                     "description": "<p>Right to left state (for animation).</p>\n",
-                    "line": 33,
+                    "line": 32,
                     "rawdescription": "\nRight to left state (for animation).",
                     "modifierKind": [
                         123
@@ -10753,7 +10821,7 @@
                     "type": "MatTabNavPanel",
                     "optional": true,
                     "description": "<p>Tab panel DOM Element.</p>\n",
-                    "line": 27,
+                    "line": 26,
                     "rawdescription": "\n\nTab panel DOM Element.\n",
                     "decorators": [
                         {
@@ -10768,73 +10836,12 @@
             ],
             "methodsClass": [
                 {
-                    "name": "_animateBgImageDirection",
-                    "args": [
-                        {
-                            "name": "direction",
-                            "type": "boolean",
-                            "deprecated": false,
-                            "deprecationMessage": ""
-                        }
-                    ],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 92,
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "rawdescription": "\n\nOn page change, slide the image.\n",
-                    "description": "<p>On page change, slide the image.</p>\n",
-                    "modifierKind": [
-                        121
-                    ],
-                    "jsdoctags": [
-                        {
-                            "name": {
-                                "pos": 2090,
-                                "end": 2099,
-                                "flags": 4227072,
-                                "modifierFlagsCache": 0,
-                                "transformFlags": 0,
-                                "kind": 79,
-                                "escapedText": "direction"
-                            },
-                            "type": "boolean",
-                            "deprecated": false,
-                            "deprecationMessage": "",
-                            "tagName": {
-                                "pos": 2084,
-                                "end": 2089,
-                                "flags": 4227072,
-                                "modifierFlagsCache": 0,
-                                "transformFlags": 0,
-                                "kind": 79,
-                                "escapedText": "param"
-                            },
-                            "comment": ""
-                        },
-                        {
-                            "tagName": {
-                                "pos": 2106,
-                                "end": 2113,
-                                "flags": 4227072,
-                                "modifierFlagsCache": 0,
-                                "transformFlags": 0,
-                                "kind": 79,
-                                "originalKeywordKind": 121,
-                                "escapedText": "private"
-                            },
-                            "comment": ""
-                        }
-                    ]
-                },
-                {
                     "name": "ngOnInit",
                     "args": [],
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 74,
+                    "line": 51,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\n",
@@ -10852,7 +10859,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import {Component, OnInit, ViewChild} from '@angular/core';\nimport {RouterOutlet} from \"@angular/router\";\nimport {\n  ROUTER_LTR_TRANSITION_CONSTANT,\n  ROUTER_RTL_TRANSITION_CONSTANT,\n} from \"../../../../constants/router-transition.constant\";\nimport {PageService} from \"../../../../services/page.service\";\nimport {MatTabNavPanel} from \"@angular/material/tabs\";\nimport {MenuItem} from \"../menu/menu.interface\";\n\n@Component({\n  selector: 'cv-layout',\n  templateUrl: './layout.component.html',\n  styleUrls: ['./layout.component.scss'],\n  animations: [ROUTER_RTL_TRANSITION_CONSTANT, ROUTER_LTR_TRANSITION_CONSTANT]\n})\nexport class LayoutComponent implements OnInit {\n\n  /**\n   * Router outlet DOM Element.\n   */\n  @ViewChild(RouterOutlet) public routerOutlet?: RouterOutlet;\n\n  /**\n   * Tab panel DOM Element.\n   */\n  @ViewChild('tabPanel') public tabPanel?: MatTabNavPanel;\n\n  /** Left to right state (for animation). */\n  public ltrState = false;\n\n  /** Right to left state (for animation). */\n  public rtlState = false;\n\n  /**\n   * Direction value of the image\n   * Min : -30 , Max : 30\n   */\n  public imageDirection: number = 0;\n\n  /**\n   * Menu items\n   * @todo: Move to routing module\n   */\n  public menu: MenuItem[] = [\n    {\n      label: 'Home',\n      link: '/',\n      index: 0,\n    },\n    {\n      label: 'About me',\n      link: '/about-me',\n      index: 1,\n    },\n    {\n      label: 'Contact',\n      link: '/contact',\n      index: 2,\n    },\n  ];\n\n  /**\n   * @constructor\n   * @param _pageService\n   */\n  public constructor(\n    private readonly _pageService: PageService,\n  ) {}\n\n  /**\n   * @inheritDoc\n   */\n  public ngOnInit(): void {\n    /** Set the tab panel to show the pages. */\n    if (this.tabPanel != null) {\n      this._pageService.setPagePanel(this.tabPanel);\n    }\n\n    /** Get the direction of page change. */\n    this._pageService.pageDirection$.subscribe(direction => {\n      direction ? this.ltrState = !this.ltrState : this.rtlState = !this.rtlState;\n      this._animateBgImageDirection(direction);\n    });\n  }\n\n  /**\n   * On page change, slide the image.\n   * @param direction\n   * @private\n   */\n  private _animateBgImageDirection(direction: boolean): void {\n    if (direction) {\n      this.imageDirection = this.imageDirection < 20 ? this.imageDirection + 10 :\n        this.imageDirection + (100 - this.imageDirection) / 10;\n    } else {\n      this.imageDirection = this.imageDirection > -20 ? this.imageDirection - 10 :\n        this.imageDirection - (100 + this.imageDirection) / 10;\n    }\n  }\n\n}\n",
+            "sourceCode": "import {Component, OnInit, ViewChild} from '@angular/core';\nimport {RouterOutlet} from \"@angular/router\";\nimport {\n  ROUTER_LTR_TRANSITION_CONSTANT,\n  ROUTER_RTL_TRANSITION_CONSTANT,\n} from \"../../../../constants/router-transition.constant\";\nimport {PageService} from \"../../../../services/page.service\";\nimport {MatTabNavPanel} from \"@angular/material/tabs\";\n\n@Component({\n  selector: 'cv-layout',\n  templateUrl: './layout.component.html',\n  styleUrls: ['./layout.component.scss'],\n  animations: [ROUTER_RTL_TRANSITION_CONSTANT, ROUTER_LTR_TRANSITION_CONSTANT]\n})\nexport class LayoutComponent implements OnInit {\n\n  /**\n   * Router outlet DOM Element.\n   */\n  @ViewChild(RouterOutlet) public routerOutlet?: RouterOutlet;\n\n  /**\n   * Tab panel DOM Element.\n   */\n  @ViewChild('tabPanel') public tabPanel?: MatTabNavPanel;\n\n  /** Left to right state (for animation). */\n  public ltrState = false;\n\n  /** Right to left state (for animation). */\n  public rtlState = false;\n\n  /**\n   * Direction value of the image\n   * Min : -30 , Max : 30\n   */\n  public imageDirection: number = 0;\n\n  /**\n   * @constructor\n   * @param _pageService\n   */\n  public constructor(\n    private readonly _pageService: PageService,\n  ) {}\n\n  /**\n   * @inheritDoc\n   */\n  public ngOnInit(): void {\n    /** Set the tab panel to show the pages. */\n    if (this.tabPanel != null) {\n      this._pageService.setPagePanel(this.tabPanel);\n    }\n\n    /** Get the direction of page change. */\n    this._pageService.pageDirection$.subscribe(direction => {\n      direction ? this.ltrState = !this.ltrState : this.rtlState = !this.rtlState;\n    });\n  }\n\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -10874,7 +10881,7 @@
                         "deprecationMessage": ""
                     }
                 ],
-                "line": 61,
+                "line": 38,
                 "rawdescription": "\n\n",
                 "modifierKind": [
                     123
@@ -10882,8 +10889,8 @@
                 "jsdoctags": [
                     {
                         "name": {
-                            "pos": 1488,
-                            "end": 1500,
+                            "pos": 1117,
+                            "end": 1129,
                             "flags": 4227072,
                             "modifierFlagsCache": 0,
                             "transformFlags": 0,
@@ -10894,8 +10901,8 @@
                         "deprecated": false,
                         "deprecationMessage": "",
                         "tagName": {
-                            "pos": 1482,
-                            "end": 1487,
+                            "pos": 1111,
+                            "end": 1116,
                             "flags": 4227072,
                             "modifierFlagsCache": 0,
                             "transformFlags": 0,
@@ -12850,7 +12857,7 @@
             "implements": [
                 "OnChanges"
             ],
-            "templateData": "<div cvActiveSwitch class=\"list-chart__container flex-grow flex-column flex-center flex-wrap\">\n  <div matRipple cvActiveSwitchItem *ngFor=\"let item of itemsToRender\"\n       class=\"list-chart__item flex\"\n       [class.has-subtitle]=\"item.subtitle\"\n  >\n    <cv-svg-icon matListItemIcon *ngIf=\"item.icon != null\" [icon]=\"item.icon\"></cv-svg-icon>\n    <div class=\"list-chart__item__header header flex-grow flex-column\">\n      <div class=\"list-chart__item__header-title flex\">\n        <div class=\"list-chart__item__header-title header-title subtitle-2\">{{item.title}}</div>\n      </div>\n      <div class=\"list-chart__item__subtitle small\" *ngIf=\"item.subtitle != null && item.subtitle !== ''\">{{item.subtitle}}</div>\n    </div>\n  </div>\n</div>\n"
+            "templateData": "<div cvActiveSwitch class=\"list-chart__container flex-grow flex-column flex-center flex-wrap\">\n  <div matRipple cvActiveSwitchItem *ngFor=\"let item of itemsToRender\"\n       [cvSelectEntity]=\"item.id\"\n       class=\"list-chart__item flex\"\n       [class.has-subtitle]=\"item.subtitle\"\n  >\n    <cv-svg-icon matListItemIcon *ngIf=\"item.icon != null\" [icon]=\"item.icon\"></cv-svg-icon>\n    <div class=\"list-chart__item__header header flex-grow flex-column\">\n      <div class=\"list-chart__item__header-title flex\">\n        <div class=\"list-chart__item__header-title header-title subtitle-2\">{{item.title}}</div>\n      </div>\n      <div class=\"list-chart__item__subtitle small\" *ngIf=\"item.subtitle != null && item.subtitle !== ''\">{{item.subtitle}}</div>\n    </div>\n  </div>\n</div>\n"
         },
         {
             "name": "MainComponent",
@@ -13678,7 +13685,7 @@
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "@use 'functions' as fn;\r\n\r\n:host {\r\n  display: grid;\r\n  width: 100%;\r\n  height: 100%;\r\n  grid-template-columns: repeat(12, 1fr);\r\n  grid-template-rows: repeat(12, 1fr);\r\n  padding: 30px;\r\n  gap: 10px;\r\n}\r\n\r\n.zone {\r\n  display: flex;\r\n  &__left {\r\n    &-top {\r\n      grid-column: 1 / span 2;\r\n      grid-row: 1 / span 4;\r\n    }\r\n  }\r\n\r\n  &__center {\r\n    &-top {\r\n      grid-column: 3 / span 8;\r\n      grid-row: 1 / span 6;\r\n    }\r\n\r\n    &-bottom {\r\n      grid-column: 5 / span 6;\r\n      grid-row: 7 / span 6;\r\n    }\r\n  }\r\n\r\n  &__right {\r\n    &-top {\r\n      grid-column: 11 / span 2;\r\n      grid-row: 1 / span 5;\r\n    }\r\n    &-bottom {\r\n      grid-column: 11 / span 2;\r\n      grid-row: 6 / span 7;\r\n    }\r\n  }\r\n}\r\n",
+                    "data": "@use 'functions' as fn;\r\n\r\n:host {\r\n  display: grid;\r\n  width: 100%;\r\n  height: 100%;\r\n  grid-template-columns: repeat(12, 1fr);\r\n  grid-template-rows: repeat(12, 1fr);\r\n  padding: 30px;\r\n  gap: 10px;\r\n}\r\n\r\n.zone {\r\n  display: flex;\r\n  &__left {\r\n    &-top {\r\n      grid-column: 1 / span 2;\r\n      grid-row: 1 / span 4;\r\n    }\r\n  }\r\n\r\n  &__center {\r\n    &-top {\r\n      grid-column: 3 / span 8;\r\n      grid-row: 1 / 8;\r\n    }\r\n\r\n    &-bottom {\r\n      grid-column: 5 / span 6;\r\n      grid-row: 8 / 13;\r\n    }\r\n  }\r\n\r\n  &__right {\r\n    &-top {\r\n      grid-column: 11 / span 2;\r\n      grid-row: 1 / span 5;\r\n    }\r\n    &-bottom {\r\n      grid-column: 11 / span 2;\r\n      grid-row: 6 / span 7;\r\n    }\r\n  }\r\n}\r\n",
                     "styleUrl": "./page-wrapper.component.scss"
                 }
             ],
@@ -13687,7 +13694,7 @@
         },
         {
             "name": "PlanetComponent",
-            "id": "component-PlanetComponent-1b80dcd0116dfdcaca5ea73f502661b45dc504ce5f776c97644d9cd1959c6286db136f31410f3c8c0c648c4424d51f61391e03db5c626f9f03829aaeacf65131",
+            "id": "component-PlanetComponent-3cd2fda227f2c6c151f463da86b2516c066283ebac0c861ee49bff3ff4e50587f28ebbcb973eefecfb214f104c7ee9f6ae7afc6be5e0a23d3a55edd9d907746a",
             "file": "src/app/modules/planet/planet.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -13713,7 +13720,7 @@
                     "type": "ElementRef",
                     "optional": false,
                     "description": "<p>Globe wrapper.</p>\n",
-                    "line": 17,
+                    "line": 20,
                     "rawdescription": "\nGlobe wrapper.",
                     "decorators": [
                         {
@@ -13732,7 +13739,7 @@
                     "type": "GlobeInstance",
                     "optional": false,
                     "description": "<p>Globe. (Generated only AfterViewInit)</p>\n",
-                    "line": 20,
+                    "line": 23,
                     "rawdescription": "\nGlobe. (Generated only AfterViewInit)",
                     "modifierKind": [
                         123
@@ -13746,7 +13753,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 96,
+                    "line": 158,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nAdd countries to the globe.\n",
@@ -13761,7 +13768,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 161,
+                    "line": 222,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nAdd places to the globe.\n",
@@ -13776,7 +13783,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 53,
+                    "line": 110,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nCreate the main globe.\n",
@@ -13791,7 +13798,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 181,
+                    "line": 243,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nLoad the font.\n",
@@ -13806,11 +13813,44 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 76,
+                    "line": 133,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nChange the controls configuration.\n",
                     "description": "<p>Change the controls configuration.</p>\n"
+                },
+                {
+                    "name": "_updateCameraPosition",
+                    "args": [
+                        {
+                            "name": "planetControls",
+                            "type": "PlanetInterface",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 63,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nUpdate the globe camera position.\n",
+                    "description": "<p>Update the globe camera position.</p>\n",
+                    "modifierKind": [
+                        121
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "planetControls",
+                            "type": "PlanetInterface",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
                 },
                 {
                     "name": "ngAfterViewInit",
@@ -13818,7 +13858,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 36,
+                    "line": 41,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\n",
@@ -13834,7 +13874,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 47,
+                    "line": 57,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\n",
@@ -13852,7 +13892,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import {AfterViewInit, Component, ElementRef, OnDestroy, ViewChild} from '@angular/core';\nimport Globe, {GlobeInstance} from 'globe.gl';\nimport {Feature, FeatureCollection, GeoJsonObject, GeoJsonProperties, Geometry} from 'geojson';\nimport {HttpClient} from '@angular/common/http';\nimport * as THREE from 'three';\nimport {PlaceService} from '../../services/place.service';\nimport {Place} from '../../models/place.model';\n\n@Component({\n  selector: 'cv-planet',\n  templateUrl: './planet.component.html',\n  styleUrls: ['./planet.component.scss']\n})\nexport class PlanetComponent implements AfterViewInit, OnDestroy {\n\n  /** Globe wrapper. */\n  @ViewChild('globeWrapper') public globeWrapper!: ElementRef;\n\n  /** Globe. (Generated only AfterViewInit) */\n  public world!: GlobeInstance;\n\n  /**\n   * @constructor\n   * @param _httpClient HTTP Client\n   * @param _placeService Place Service\n   */\n  public constructor(\n    private readonly _httpClient: HttpClient,\n    private readonly _placeService: PlaceService\n  ) {\n  }\n\n  /**\n   * @inheritDoc\n   */\n  public ngAfterViewInit(): void {\n    this._createGlobe();\n    this._setControlsConfig();\n    this._addCountries();\n    this._addPlaces();\n    this._loadFont();\n  }\n\n  /**\n   * @inheritDoc\n   */\n  public ngOnDestroy(): void {\n  }\n\n  /**\n   * Create the main globe.\n   */\n  private _createGlobe(): void {\n    this.world = Globe()\n      .backgroundColor('rgba(0, 0, 0, 0)')\n      .showGlobe(true)\n      .showAtmosphere(true)\n      .atmosphereColor('#2c2346')\n      .atmosphereAltitude(0.3)\n      .globeMaterial(new THREE.MeshPhongMaterial({\n        color: '#1a1428',\n        emissive: '#020315',\n        emissiveIntensity: 0.5,\n        shininess: 0.1,\n        specular: '#5423e3',\n        transparent: false,\n        opacity: 1\n      }))\n      .polygonStrokeColor(() => '#613dc3')\n      (this.globeWrapper.nativeElement);\n  }\n\n  /**\n   * Change the controls configuration.\n   */\n  _setControlsConfig(): void {\n    // Bigger scroll zoom speed\n    this.world.controls().zoomSpeed = 2;\n    this.world.onZoom(() => {\n      this.world.controls().zoomSpeed = 2;\n    });\n\n    // Max zoom\n    this.world.controls().maxDistance = 600;\n    // Min zoom\n    this.world.controls().minDistance = 135;\n\n    // Auto rotate\n    this.world.controls().autoRotate = true;\n    this.world.controls().autoRotateSpeed = 0.5;\n  }\n\n  /**\n   * Add countries to the globe.\n   */\n  private _addCountries(): void {\n    this._httpClient.get('assets/geo/110m_countries.geojson', {responseType: 'json'})\n      .subscribe((content) => {\n        if (content != null) {\n          const countriesData: FeatureCollection<Geometry, GeoJsonProperties> = (content as unknown) as FeatureCollection<Geometry, GeoJsonProperties>;\n\n          const countries = countriesData.features.filter(d => d.properties?.['ISO_A2'] !== 'AQ');\n          this.world\n            .polygonsData(countries)\n            .polygonCapMaterial(country => {\n              /**? country is a Feature<Geometry, GeoJsonProperties>\n               * @see GeoJsonObject */\n              const tCountry = country as Feature<Geometry, GeoJsonProperties>;\n              const meshLambertMaterial = new THREE.MeshPhongMaterial({\n                color: '#3e2d6f',\n                emissive: '#4b348d',\n                emissiveIntensity: 1,\n                shininess: 5,\n                specular: '#5016fa',\n                transparent: true,\n                blendDstAlpha: 1,\n                opacity: 0.95\n              });\n              if (tCountry.properties == null) {\n                return meshLambertMaterial;\n              }\n\n              if (tCountry.properties['BRK_NAME'] === 'France') {\n                console.log('country', tCountry.properties['ADMIN'], 'is France')\n                const color = new THREE.Color('#da0d4e');\n                meshLambertMaterial.color = color;\n                meshLambertMaterial.emissive = color;\n                meshLambertMaterial.specular = color;\n                meshLambertMaterial.shininess = 10;\n              }\n              return meshLambertMaterial;\n            })\n            .polygonAltitude(country => {\n              const tCountry = country as Feature<Geometry, GeoJsonProperties>;\n              if (tCountry.properties == null) {\n                return 0.01;\n              }\n              if (tCountry.properties['BRK_NAME'] === 'France') {\n                return 0.02;\n              }\n              return 0.01;\n            })\n            //.polygonSideColor(() => 'transparent')\n            .polygonSideMaterial(() => new THREE.MeshPhongMaterial({\n              color: '#3e2d6f',\n              emissive: '#4b348d',\n              emissiveIntensity: 0.2,\n              shininess: 0.2,\n              specular: '#5016fa',\n              transparent: true,\n              blendDstAlpha: 1,\n              opacity: 0.95\n            }))\n        }\n      });\n  }\n\n  /**\n   * Add places to the globe.\n   */\n  private _addPlaces(): void {\n    const collection: Place[] = this._placeService.getPlaceCollection().places;\n\n    this.world\n      .labelsData(collection)\n      .labelLat('latitude')\n      .labelLng('longitude')\n      .labelText('label')\n      .labelColor(() =>'rgba(255, 255, 255, 0.8)')\n      .labelAltitude(place => (place as Place).importance * 0.0001 + 0.02)\n      .labelSize(place => (place as Place).importance * 0.007)\n      .labelDotRadius(place => (place as Place).importance * 0.01)\n      .labelDotOrientation('labelPosition')\n      .labelResolution(10)\n\n  }\n\n  /**\n   * Load the font.\n   */\n  private _loadFont(): void {\n    this._httpClient.get('assets/fonts/rajdhani/Rajdhani SemiBold_Regular.json', {responseType: 'json'})\n      .subscribe((content) => {\n        this.world.labelTypeFace(content);\n      });\n  }\n}\n",
+            "sourceCode": "import {AfterViewInit, Component, ElementRef, OnDestroy, ViewChild} from '@angular/core';\nimport Globe, {GlobeInstance} from 'globe.gl';\nimport {Feature, FeatureCollection, GeoJsonObject, GeoJsonProperties, Geometry} from 'geojson';\nimport {HttpClient} from '@angular/common/http';\nimport * as THREE from 'three';\nimport {PlaceService} from '../../services/place.service';\nimport {Place} from '../../models/place.model';\nimport {PageService} from '../../services/page.service';\nimport {PlanetInterface} from './planet.interface';\nimport {animateValueUtil} from '../../utils/animate-value.util';\n\n@Component({\n  selector: 'cv-planet',\n  templateUrl: './planet.component.html',\n  styleUrls: ['./planet.component.scss']\n})\nexport class PlanetComponent implements AfterViewInit, OnDestroy {\n\n  /** Globe wrapper. */\n  @ViewChild('globeWrapper') public globeWrapper!: ElementRef;\n\n  /** Globe. (Generated only AfterViewInit) */\n  public world!: GlobeInstance;\n\n  /**\n   * @constructor\n   * @param _httpClient HTTP Client\n   * @param _placeService Place Service\n   * @param _pageService Page Service\n   */\n  public constructor(\n    private readonly _httpClient: HttpClient,\n    private readonly _placeService: PlaceService,\n    private readonly _pageService: PageService,\n  ) {\n  }\n\n  /**\n   * @inheritDoc\n   */\n  public ngAfterViewInit(): void {\n    this._createGlobe();\n    this._setControlsConfig();\n    this._addCountries();\n    this._addPlaces();\n    this._loadFont();\n\n    /** Get the direction of page change. */\n    this._pageService.planet$.subscribe(planetControls => {\n      this._updateCameraPosition(planetControls);\n    });\n  }\n\n  /**\n   * @inheritDoc\n   */\n  public ngOnDestroy(): void {\n  }\n\n  /**\n   * Update the globe camera position.\n   */\n  private _updateCameraPosition(planetControls: PlanetInterface): void {\n    const currentCameraPosition = this.world.controls().target;\n    const camera = {\n      x: planetControls.camera.x ?? 0,\n      y: planetControls.camera.y ?? 0,\n      z: planetControls.camera.z ?? 0,\n    }\n\n    if (camera.x !== 0 || camera.y !== 0 || camera.z !== 0) {\n      // Disable the controls.\n      this.world.controls().enabled = false;\n    } else {\n      // Enable the controls.\n      this.world.controls().enabled = true;\n    }\n\n    const animate = (start: number = 0, end : number, to: string) => {\n      animateValueUtil(\n        (value: number) => {\n          switch (to) {\n            case 'x': currentCameraPosition.x = value; break;\n            case 'y': currentCameraPosition.y = value; break;\n            case 'z': currentCameraPosition.z = value; break;\n          }\n          this.world.controls().update();\n        },\n        start,\n        end,\n        1000,\n      )\n    }\n\n    if (currentCameraPosition.x !== camera.x) {\n      animate(currentCameraPosition.x, camera.x, 'x');\n    }\n    if (currentCameraPosition.y !== camera.y) {\n      animate(currentCameraPosition.y, camera.y, 'y');\n    }\n    if (currentCameraPosition.z !== camera.z) {\n      animate(currentCameraPosition.z, camera.z, 'z');\n    }\n\n  }\n\n  /**\n   * Create the main globe.\n   */\n  private _createGlobe(): void {\n    this.world = Globe()\n      .backgroundColor('rgba(0, 0, 0, 0)')\n      .showGlobe(true)\n      .showAtmosphere(true)\n      .atmosphereColor('#2c2346')\n      .atmosphereAltitude(0.3)\n      .globeMaterial(new THREE.MeshPhongMaterial({\n        color: '#1a1428',\n        emissive: '#020315',\n        emissiveIntensity: 0.5,\n        shininess: 0.1,\n        specular: '#5423e3',\n        transparent: false,\n        opacity: 1\n      }))\n      .polygonStrokeColor(() => '#3b247d')\n      (this.globeWrapper.nativeElement);\n  }\n\n  /**\n   * Change the controls configuration.\n   */\n  _setControlsConfig(): void {\n    // Bigger scroll zoom speed\n    this.world.controls().zoomSpeed = 2;\n    this.world.onZoom(() => {\n      this.world.controls().zoomSpeed = 2;\n    });\n\n    // Max zoom\n    this.world.controls().maxDistance = 600;\n    // Min zoom\n    this.world.controls().minDistance = 135;\n\n    // Auto rotate\n    this.world.controls().autoRotate = true;\n    this.world.controls().autoRotateSpeed = 0.2;\n\n    // Set zoom\n    this.world.pointOfView(\n      {lat: 45.649, lng: 0.156, altitude: 1.2},\n    )\n  }\n\n  /**\n   * Add countries to the globe.\n   */\n  private _addCountries(): void {\n    this._httpClient.get('assets/geo/110m_countries.geojson', {responseType: 'json'})\n      .subscribe((content) => {\n        if (content != null) {\n          const countriesData: FeatureCollection<Geometry, GeoJsonProperties> = (content as unknown) as FeatureCollection<Geometry, GeoJsonProperties>;\n\n          const countries = countriesData.features.filter(d => d.properties?.['ISO_A2'] !== 'AQ');\n          this.world\n            .polygonsData(countries)\n            .polygonCapMaterial(country => {\n              /**? country is a Feature<Geometry, GeoJsonProperties>\n               * @see GeoJsonObject */\n              const tCountry = country as Feature<Geometry, GeoJsonProperties>;\n              const meshLambertMaterial = new THREE.MeshPhongMaterial({\n                color: '#2b1e4f',\n                emissive: '#352668',\n                emissiveIntensity: 1,\n                shininess: 5,\n                specular: '#5016fa',\n                transparent: true,\n                blendDstAlpha: 1,\n                opacity: 0.95\n              });\n              if (tCountry.properties == null) {\n                return meshLambertMaterial;\n              }\n\n              if (tCountry.properties['BRK_NAME'] === 'France') {\n                const color = new THREE.Color('#da0d4e');\n                meshLambertMaterial.color = color;\n                meshLambertMaterial.emissive = color;\n                meshLambertMaterial.specular = color;\n                meshLambertMaterial.shininess = 10;\n              }\n              return meshLambertMaterial;\n            })\n            .polygonAltitude(country => {\n              const tCountry = country as Feature<Geometry, GeoJsonProperties>;\n              if (tCountry.properties == null) {\n                return 0.01;\n              }\n              if (tCountry.properties['BRK_NAME'] === 'France') {\n                return 0.02;\n              }\n              return 0.01;\n            })\n            //.polygonSideColor(() => 'transparent')\n            .polygonSideMaterial(() => new THREE.MeshPhongMaterial({\n              color: '#241845',\n              emissive: '#2c1c5b',\n              emissiveIntensity: 0.2,\n              shininess: 0.2,\n              specular: '#5016fa',\n              transparent: true,\n              blendDstAlpha: 1,\n              opacity: 0.95\n            }))\n        }\n      });\n  }\n\n  /**\n   * Add places to the globe.\n   */\n  private _addPlaces(): void {\n    const collection: Place[] = this._placeService.getPlaceCollection().places;\n\n    this.world\n      .labelsData(collection)\n      .labelLat('latitude')\n      .labelLng('longitude')\n      .labelText('label')\n      .labelColor(() =>'rgba(255, 255, 255, 0.8)')\n      .labelAltitude(place => (place as Place).importance * 0.0001 + 0.018)\n      //.labelAltitude(0.021)\n      .labelSize(place => (place as Place).importance * 0.007)\n      .labelDotRadius(place => (place as Place).importance * 0.01)\n      .labelDotOrientation('labelPosition')\n      .labelResolution(10)\n\n  }\n\n  /**\n   * Load the font.\n   */\n  private _loadFont(): void {\n    this._httpClient.get('assets/fonts/rajdhani/Rajdhani SemiBold_Regular.json', {responseType: 'json'})\n      .subscribe((content) => {\n        this.world.labelTypeFace(content);\n      });\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -13878,9 +13918,15 @@
                         "type": "PlaceService",
                         "deprecated": false,
                         "deprecationMessage": ""
+                    },
+                    {
+                        "name": "_pageService",
+                        "type": "PageService",
+                        "deprecated": false,
+                        "deprecationMessage": ""
                     }
                 ],
-                "line": 20,
+                "line": 23,
                 "rawdescription": "\n\n",
                 "modifierKind": [
                     123
@@ -13888,8 +13934,8 @@
                 "jsdoctags": [
                     {
                         "name": {
-                            "pos": 818,
-                            "end": 829,
+                            "pos": 992,
+                            "end": 1003,
                             "flags": 4227072,
                             "modifierFlagsCache": 0,
                             "transformFlags": 0,
@@ -13900,8 +13946,8 @@
                         "deprecated": false,
                         "deprecationMessage": "",
                         "tagName": {
-                            "pos": 812,
-                            "end": 817,
+                            "pos": 986,
+                            "end": 991,
                             "flags": 4227072,
                             "modifierFlagsCache": 0,
                             "transformFlags": 0,
@@ -13912,8 +13958,8 @@
                     },
                     {
                         "name": {
-                            "pos": 854,
-                            "end": 867,
+                            "pos": 1028,
+                            "end": 1041,
                             "flags": 4227072,
                             "modifierFlagsCache": 0,
                             "transformFlags": 0,
@@ -13924,8 +13970,8 @@
                         "deprecated": false,
                         "deprecationMessage": "",
                         "tagName": {
-                            "pos": 848,
-                            "end": 853,
+                            "pos": 1022,
+                            "end": 1027,
                             "flags": 4227072,
                             "modifierFlagsCache": 0,
                             "transformFlags": 0,
@@ -13933,6 +13979,30 @@
                             "escapedText": "param"
                         },
                         "comment": "<p>Place Service</p>\n"
+                    },
+                    {
+                        "name": {
+                            "pos": 1068,
+                            "end": 1080,
+                            "flags": 4227072,
+                            "modifierFlagsCache": 0,
+                            "transformFlags": 0,
+                            "kind": 79,
+                            "escapedText": "_pageService"
+                        },
+                        "type": "PageService",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "pos": 1062,
+                            "end": 1067,
+                            "flags": 4227072,
+                            "modifierFlagsCache": 0,
+                            "transformFlags": 0,
+                            "kind": 79,
+                            "escapedText": "param"
+                        },
+                        "comment": "<p>Page Service</p>\n"
                     }
                 ]
             },
@@ -14715,7 +14785,7 @@
         },
         {
             "name": "SvgIconComponent",
-            "id": "component-SvgIconComponent-8c62b84b52d1e0983b7f2db62a7063ad215df02ea9206bbb3d5c06d81a0425c5f8b791d84f3f58b6aba4b3ee7d730131e3b7e4ceb56f7a569f304a0e330bedda",
+            "id": "component-SvgIconComponent-6f1aac7f687cd546623972b9596ec647e1bfa604428bc2898d130a973b6f294b9581ea418674edfc213e2a2da6140f04078be6631e0e36d666ce2501825d5d1c",
             "file": "src/app/modules/shared/svg-icon/svg-icon.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -14738,7 +14808,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\n\nsvg icon name\n",
                     "description": "<p>svg icon name</p>\n",
-                    "line": 15,
+                    "line": 20,
                     "type": "string",
                     "decorators": []
                 }
@@ -14746,13 +14816,34 @@
             "outputsClass": [],
             "propertiesClass": [
                 {
+                    "name": "selfClass",
+                    "defaultValue": "'cv-svg-icon'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "<p>Self class</p>\n",
+                    "line": 15,
+                    "rawdescription": "\n\nSelf class\n",
+                    "decorators": [
+                        {
+                            "name": "HostBinding",
+                            "stringifiedArguments": "'class'"
+                        }
+                    ],
+                    "modifierKind": [
+                        123,
+                        144
+                    ]
+                },
+                {
                     "name": "svgIcon",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "SvgIconInterface",
                     "optional": true,
                     "description": "<p>Icon</p>\n",
-                    "line": 20,
+                    "line": 25,
                     "rawdescription": "\n\nIcon\n",
                     "modifierKind": [
                         123
@@ -14766,7 +14857,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 50,
+                    "line": 55,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\n",
@@ -14789,7 +14880,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 41,
+                    "line": 46,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\n",
@@ -14800,8 +14891,8 @@
                     "jsdoctags": [
                         {
                             "name": {
-                                "pos": 809,
-                                "end": 816,
+                                "pos": 918,
+                                "end": 925,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -14812,8 +14903,8 @@
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "pos": 803,
-                                "end": 808,
+                                "pos": 912,
+                                "end": 917,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -14830,7 +14921,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 33,
+                    "line": 38,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\n",
@@ -14843,12 +14934,24 @@
             ],
             "deprecated": false,
             "deprecationMessage": "",
-            "hostBindings": [],
+            "hostBindings": [
+                {
+                    "name": "class",
+                    "defaultValue": "'cv-svg-icon'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nSelf class\n",
+                    "description": "<p>Self class</p>\n",
+                    "line": 15,
+                    "type": "\"cv-svg-icon\"",
+                    "decorators": []
+                }
+            ],
             "hostListeners": [],
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';\nimport {SvgSpriteService} from '../svg-sprite/svg-sprite.service';\nimport {SvgIconInterface} from './svg-icon.interface';\n\n@Component({\n  selector: 'cv-svg-icon',\n  templateUrl: './svg-icon.component.html',\n  styleUrls: ['./svg-icon.component.scss']\n})\nexport class SvgIconComponent implements OnInit, OnChanges {\n\n  /**\n   * svg icon name\n   */\n  @Input() public icon?: string;\n\n  /**\n   * Icon\n   */\n  public svgIcon?: SvgIconInterface;\n\n  /**\n   * @constructor\n   * @param _svgSpriteService SVG Sprite Service\n   */\n  public constructor(\n    private readonly _svgSpriteService: SvgSpriteService\n  ) {}\n\n  /**\n   * @inheritDoc\n   */\n  public ngOnInit(): void {\n    this._getSvgIcon();\n  }\n\n  /**\n   * @inheritDoc\n   * @param changes\n   */\n  public ngOnChanges(changes: SimpleChanges): void {\n    if ('icon' in changes && this.icon != null) {\n      this._getSvgIcon();\n    }\n  }\n\n  /**\n   * @method Get SVG Icon\n   */\n  private _getSvgIcon(): void {\n    if (this.icon != null) {\n      const sub = this._svgSpriteService.load(this.icon)\n        .subscribe((svgIcon) => {\n          if (svgIcon != null) {\n            this.svgIcon = svgIcon;\n          }\n        });\n    }\n  }\n}\n",
+            "sourceCode": "import {Component, HostBinding, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';\nimport {SvgSpriteService} from '../svg-sprite/svg-sprite.service';\nimport {SvgIconInterface} from './svg-icon.interface';\n\n@Component({\n  selector: 'cv-svg-icon',\n  templateUrl: './svg-icon.component.html',\n  styleUrls: ['./svg-icon.component.scss']\n})\nexport class SvgIconComponent implements OnInit, OnChanges {\n\n  /**\n   * Self class\n   */\n  @HostBinding('class') public readonly selfClass = 'cv-svg-icon';\n\n  /**\n   * svg icon name\n   */\n  @Input() public icon?: string;\n\n  /**\n   * Icon\n   */\n  public svgIcon?: SvgIconInterface;\n\n  /**\n   * @constructor\n   * @param _svgSpriteService SVG Sprite Service\n   */\n  public constructor(\n    private readonly _svgSpriteService: SvgSpriteService\n  ) {}\n\n  /**\n   * @inheritDoc\n   */\n  public ngOnInit(): void {\n    this._getSvgIcon();\n  }\n\n  /**\n   * @inheritDoc\n   * @param changes\n   */\n  public ngOnChanges(changes: SimpleChanges): void {\n    if ('icon' in changes && this.icon != null) {\n      this._getSvgIcon();\n    }\n  }\n\n  /**\n   * @method Get SVG Icon\n   */\n  private _getSvgIcon(): void {\n    if (this.icon != null) {\n      const sub = this._svgSpriteService.load(this.icon)\n        .subscribe((svgIcon) => {\n          if (svgIcon != null) {\n            this.svgIcon = svgIcon;\n          }\n        });\n    }\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -14870,7 +14973,7 @@
                         "deprecationMessage": ""
                     }
                 ],
-                "line": 20,
+                "line": 25,
                 "rawdescription": "\n\n",
                 "modifierKind": [
                     123
@@ -14878,8 +14981,8 @@
                 "jsdoctags": [
                     {
                         "name": {
-                            "pos": 558,
-                            "end": 575,
+                            "pos": 667,
+                            "end": 684,
                             "flags": 4227072,
                             "modifierFlagsCache": 0,
                             "transformFlags": 0,
@@ -14890,8 +14993,8 @@
                         "deprecated": false,
                         "deprecationMessage": "",
                         "tagName": {
-                            "pos": 552,
-                            "end": 557,
+                            "pos": 661,
+                            "end": 666,
                             "flags": 4227072,
                             "modifierFlagsCache": 0,
                             "transformFlags": 0,
@@ -15515,13 +15618,13 @@
         },
         {
             "name": "AppRoutingModule",
-            "id": "module-AppRoutingModule-f686bbe49f7b32ce5131601d21175a17a925a33c4e3c70e11072c74a159b85283f98e8e0cd0fef943bfdd85a87718643ffdf21adaed5c96e0a0889f023c4cff3",
+            "id": "module-AppRoutingModule-af4dfb8685badf452f564905961701b17b76e6682ea740fee423acbefc6f6de1023443d4627a67001d8c283dbfe5ce21e666fb0a1e632555559e63f0650b169c",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "src/app/app-routing.module.ts",
             "methods": [],
-            "sourceCode": "import {NgModule} from '@angular/core';\nimport {RouterModule, Routes} from '@angular/router';\nimport {PageHomeComponent} from \"./modules/main/components/page-home/page-home.component\";\nimport {PageContactComponent} from \"./modules/main/components/page-contact/page-contact.component\";\nimport {PageSkillsComponent} from './modules/main/components/page-skills/page-skills.component';\nimport {PageWorksComponent} from './modules/main/components/page-works/page-works.component';\nimport {PageEducationComponent} from './modules/main/components/page-education/page-education.component';\n\nconst routes: Routes = [\n  {\n    path: '',\n    component: PageHomeComponent,\n    data: {\n      state: 'home',\n      menuItem: {\n        label: 'Soheil Saheb-Jamii',\n        index: 0\n      }\n    }\n  },\n  {\n    path: 'skills',\n    component: PageSkillsComponent,\n    data: {\n      state: 'skills',\n      menuItem: {\n        label: 'Compétences',\n        index: 1\n      }\n    }\n  },\n  {\n    path: 'works',\n    component: PageWorksComponent,\n    data: {\n      state: 'works',\n      menuItem: {\n        label: 'Expériences',\n        index: 2\n      }\n    }\n  },\n  {\n    path: 'education',\n    component: PageEducationComponent,\n    data: {\n      state: 'education',\n      menuItem: {\n        label: 'Formations',\n        index: 3\n      }\n    }\n  },\n  {\n    path: 'contact',\n    component: PageContactComponent,\n    data: {\n      state: 'contact',\n      menuItem: {\n        label: 'Contact',\n        index: 4\n      }\n    }\n  },\n  {\n    path: '**',\n    redirectTo: '',\n  }\n];\n\nexport const appRouting = RouterModule.forRoot(routes);\n\n@NgModule({\n  imports: [RouterModule.forRoot(routes)],\n  exports: [RouterModule]\n})\nexport class AppRoutingModule { }\n",
+            "sourceCode": "import {NgModule} from '@angular/core';\nimport {RouterModule, Routes} from '@angular/router';\nimport {PageHomeComponent} from \"./modules/main/components/page-home/page-home.component\";\nimport {PageContactComponent} from \"./modules/main/components/page-contact/page-contact.component\";\nimport {PageSkillsComponent} from './modules/main/components/page-skills/page-skills.component';\nimport {PageWorksComponent} from './modules/main/components/page-works/page-works.component';\nimport {PageEducationComponent} from './modules/main/components/page-education/page-education.component';\n\nconst routes: Routes = [\n  {\n    path: '',\n    component: PageHomeComponent,\n    data: {\n      state: 'home',\n      menuItem: {\n        label: 'Soheil Saheb-Jamii',\n        index: 0,\n        planet: {\n          camera: {\n            x: 0,\n          },\n        }\n      },\n    }\n  },\n  {\n    path: 'skills',\n    component: PageSkillsComponent,\n    data: {\n      state: 'skills',\n      menuItem: {\n        label: 'Compétences',\n        index: 1\n      }\n    }\n  },\n  {\n    path: 'works',\n    component: PageWorksComponent,\n    data: {\n      state: 'works',\n      menuItem: {\n        label: 'Expériences',\n        index: 2,\n        planet: {\n          camera: {\n            x: 1000,\n          },\n        }\n      },\n    }\n  },\n  {\n    path: 'education',\n    component: PageEducationComponent,\n    data: {\n      state: 'education',\n      menuItem: {\n        label: 'Formations',\n        index: 3\n      }\n    }\n  },\n  {\n    path: 'contact',\n    component: PageContactComponent,\n    data: {\n      state: 'contact',\n      menuItem: {\n        label: 'Contact',\n        index: 4\n      }\n    }\n  },\n  {\n    path: '**',\n    redirectTo: '',\n  }\n];\n\nexport const appRouting = RouterModule.forRoot(routes);\n\n@NgModule({\n  imports: [RouterModule.forRoot(routes)],\n  exports: [RouterModule]\n})\nexport class AppRoutingModule { }\n",
             "children": [
                 {
                     "type": "providers",
@@ -16342,7 +16445,7 @@
                 "name": "AllStacks",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
+                "file": "src/app/modules/main/components/list-chart-donut/list-chart-donut.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -16362,7 +16465,7 @@
                 "name": "AllStacks",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/modules/main/components/list-chart-donut/list-chart-donut.stories.ts",
+                "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -16404,7 +16507,7 @@
                 "name": "Best5Stacks",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
+                "file": "src/app/modules/main/components/list-chart-donut/list-chart-donut.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -16424,7 +16527,7 @@
                 "name": "Best5Stacks",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/modules/main/components/list-chart-donut/list-chart-donut.stories.ts",
+                "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -16660,7 +16763,7 @@
                 "name": "EducationByDate",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
+                "file": "src/app/modules/main/components/list-chart-donut/list-chart-donut.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -16680,7 +16783,7 @@
                 "name": "EducationByDate",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/modules/main/components/list-chart-donut/list-chart-donut.stories.ts",
+                "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -16770,7 +16873,7 @@
                 "name": "LastProjects",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
+                "file": "src/app/modules/main/components/list-chart-donut/list-chart-donut.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -16790,7 +16893,7 @@
                 "name": "LastProjects",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/modules/main/components/list-chart-donut/list-chart-donut.stories.ts",
+                "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -17030,11 +17133,11 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/modules/shared/chart-donut/chart-donut.stories.ts",
+                "file": "src/app/modules/shared/circle/circle.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Story<ChartDonutComponent>",
-                "defaultValue": "(args: ChartDonutComponent) => ({\r\n  props: args,\r\n})",
+                "type": "Story<CircleComponent>",
+                "defaultValue": "(args: CircleComponent) => ({\r\n  props: args,\r\n})",
                 "rawdescription": "Template of the component.",
                 "description": "<p>Template of the component.</p>\n"
             },
@@ -17066,11 +17169,11 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/modules/shared/input-circle-slider/input-circle-slider.stories.ts",
+                "file": "src/app/modules/shared/chart-donut/chart-donut.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Story<InputCircleSliderComponent>",
-                "defaultValue": "(args: InputCircleSliderComponent) => ({\r\n  props: args,\r\n})",
+                "type": "Story<ChartDonutComponent>",
+                "defaultValue": "(args: ChartDonutComponent) => ({\r\n  props: args,\r\n})",
                 "rawdescription": "Template of the component.",
                 "description": "<p>Template of the component.</p>\n"
             },
@@ -17090,11 +17193,11 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/modules/shared/page-wrapper/page-wrapper.stories.ts",
+                "file": "src/app/modules/shared/input-circle-slider/input-circle-slider.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Story<PageWrapperComponent>",
-                "defaultValue": "(args: PageWrapperComponent) => ({\r\n  props: args,\r\n})",
+                "type": "Story<InputCircleSliderComponent>",
+                "defaultValue": "(args: InputCircleSliderComponent) => ({\r\n  props: args,\r\n})",
                 "rawdescription": "Template of the component.",
                 "description": "<p>Template of the component.</p>\n"
             },
@@ -17102,11 +17205,11 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/modules/shared/circle/circle.stories.ts",
+                "file": "src/app/modules/shared/page-wrapper/page-wrapper.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Story<CircleComponent>",
-                "defaultValue": "(args: CircleComponent) => ({\r\n  props: args,\r\n})",
+                "type": "Story<PageWrapperComponent>",
+                "defaultValue": "(args: PageWrapperComponent) => ({\r\n  props: args,\r\n})",
                 "rawdescription": "Template of the component.",
                 "description": "<p>Template of the component.</p>\n"
             },
@@ -17138,21 +17241,13 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/modules/main/components/block/block.stories.ts",
+                "file": "src/app/modules/main/components/header/header.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Story<BlockComponent>",
-                "defaultValue": "(args: BlockComponent) => ({\n  props: args,\n})"
-            },
-            {
-                "name": "Template",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/modules/main/components/data-details/data-details.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story<DataDetailsComponent>",
-                "defaultValue": "(args: DataDetailsComponent) => ({\n  props: args,\n})"
+                "type": "Story<HeaderComponent>",
+                "defaultValue": "(args: HeaderComponent) => ({\r\n  props: args,\r\n})",
+                "rawdescription": "Template of the component.",
+                "description": "<p>Template of the component.</p>\n"
             },
             {
                 "name": "Template",
@@ -17168,13 +17263,21 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/modules/main/components/header/header.stories.ts",
+                "file": "src/app/modules/main/components/block/block.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Story<HeaderComponent>",
-                "defaultValue": "(args: HeaderComponent) => ({\r\n  props: args,\r\n})",
-                "rawdescription": "Template of the component.",
-                "description": "<p>Template of the component.</p>\n"
+                "type": "Story<BlockComponent>",
+                "defaultValue": "(args: BlockComponent) => ({\n  props: args,\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/modules/main/components/list/list.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<ListComponent>",
+                "defaultValue": "(args: ListComponent) => ({\n  props: args,\n})"
             },
             {
                 "name": "Template",
@@ -17192,21 +17295,21 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/modules/main/components/list/list.stories.ts",
+                "file": "src/app/modules/main/components/data-details/data-details.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Story<ListComponent>",
-                "defaultValue": "(args: ListComponent) => ({\n  props: args,\n})"
+                "type": "Story<DataDetailsComponent>",
+                "defaultValue": "(args: DataDetailsComponent) => ({\n  props: args,\n})"
             },
             {
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
+                "file": "src/app/modules/main/components/list-chart-donut/list-chart-donut.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Story<ListChartCirclesComponent>",
-                "defaultValue": "(args: ListChartCirclesComponent) => ({\n  props: args,\n})"
+                "type": "Story<ListChartDonutComponent>",
+                "defaultValue": "(args: ListChartDonutComponent) => ({\n  props: args,\n})"
             },
             {
                 "name": "Template",
@@ -17217,6 +17320,16 @@
                 "deprecationMessage": "",
                 "type": "Story<ListChartGaugeComponent>",
                 "defaultValue": "(args: ListChartGaugeComponent) => ({\n  props: args,\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<ListChartCirclesComponent>",
+                "defaultValue": "(args: ListChartCirclesComponent) => ({\n  props: args,\n})"
             },
             {
                 "name": "Template",
@@ -17253,16 +17366,6 @@
                 "defaultValue": "(args: ProfileComponent) => ({\r\n  props: args,\r\n})",
                 "rawdescription": "Template of the component.",
                 "description": "<p>Template of the component.</p>\n"
-            },
-            {
-                "name": "Template",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/modules/main/components/list-chart-donut/list-chart-donut.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story<ListChartDonutComponent>",
-                "defaultValue": "(args: ListChartDonutComponent) => ({\n  props: args,\n})"
             },
             {
                 "name": "Tooltip",
@@ -17322,7 +17425,7 @@
                 "name": "WorkByDate",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
+                "file": "src/app/modules/main/components/list-chart-donut/list-chart-donut.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -17342,7 +17445,7 @@
                 "name": "WorkByDate",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/modules/main/components/list-chart-donut/list-chart-donut.stories.ts",
+                "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -18783,12 +18886,12 @@
                     "defaultValue": "Template.bind({})"
                 }
             ],
-            "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts": [
+            "src/app/modules/main/components/list-chart-donut/list-chart-donut.stories.ts": [
                 {
                     "name": "AllStacks",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
+                    "file": "src/app/modules/main/components/list-chart-donut/list-chart-donut.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
@@ -18798,7 +18901,7 @@
                     "name": "Best5Stacks",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
+                    "file": "src/app/modules/main/components/list-chart-donut/list-chart-donut.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
@@ -18808,7 +18911,7 @@
                     "name": "EducationByDate",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
+                    "file": "src/app/modules/main/components/list-chart-donut/list-chart-donut.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
@@ -18818,7 +18921,7 @@
                     "name": "LastProjects",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
+                    "file": "src/app/modules/main/components/list-chart-donut/list-chart-donut.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
@@ -18828,17 +18931,17 @@
                     "name": "Template",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
+                    "file": "src/app/modules/main/components/list-chart-donut/list-chart-donut.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "Story<ListChartCirclesComponent>",
-                    "defaultValue": "(args: ListChartCirclesComponent) => ({\n  props: args,\n})"
+                    "type": "Story<ListChartDonutComponent>",
+                    "defaultValue": "(args: ListChartDonutComponent) => ({\n  props: args,\n})"
                 },
                 {
                     "name": "WorkByDate",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
+                    "file": "src/app/modules/main/components/list-chart-donut/list-chart-donut.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
@@ -18907,12 +19010,12 @@
                     "defaultValue": "Template.bind({})"
                 }
             ],
-            "src/app/modules/main/components/list-chart-donut/list-chart-donut.stories.ts": [
+            "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts": [
                 {
                     "name": "AllStacks",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "src/app/modules/main/components/list-chart-donut/list-chart-donut.stories.ts",
+                    "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
@@ -18922,7 +19025,7 @@
                     "name": "Best5Stacks",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "src/app/modules/main/components/list-chart-donut/list-chart-donut.stories.ts",
+                    "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
@@ -18932,7 +19035,7 @@
                     "name": "EducationByDate",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "src/app/modules/main/components/list-chart-donut/list-chart-donut.stories.ts",
+                    "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
@@ -18942,7 +19045,7 @@
                     "name": "LastProjects",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "src/app/modules/main/components/list-chart-donut/list-chart-donut.stories.ts",
+                    "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
@@ -18952,17 +19055,17 @@
                     "name": "Template",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "src/app/modules/main/components/list-chart-donut/list-chart-donut.stories.ts",
+                    "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "Story<ListChartDonutComponent>",
-                    "defaultValue": "(args: ListChartDonutComponent) => ({\n  props: args,\n})"
+                    "type": "Story<ListChartCirclesComponent>",
+                    "defaultValue": "(args: ListChartCirclesComponent) => ({\n  props: args,\n})"
                 },
                 {
                     "name": "WorkByDate",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "src/app/modules/main/components/list-chart-donut/list-chart-donut.stories.ts",
+                    "file": "src/app/modules/main/components/list-chart-circles/list-chart-circles.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
@@ -21229,7 +21332,12 @@
                             "state": "home",
                             "menuItem": {
                                 "label": "SoheilSaheb-Jamii",
-                                "index": "0"
+                                "index": "0",
+                                "planet": {
+                                    "camera": {
+                                        "x": "0"
+                                    }
+                                }
                             }
                         }
                     },
@@ -21251,7 +21359,12 @@
                             "state": "works",
                             "menuItem": {
                                 "label": "Expériences",
-                                "index": "2"
+                                "index": "2",
+                                "planet": {
+                                    "camera": {
+                                        "x": "1000"
+                                    }
+                                }
                             }
                         }
                     },
@@ -21713,8 +21826,8 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "DataDetailsComponent",
-                "coveragePercent": 76,
-                "coverageCount": "13/17",
+                "coveragePercent": 78,
+                "coverageCount": "15/19",
                 "status": "very-good"
             },
             {
@@ -21831,8 +21944,8 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "LayoutComponent",
-                "coveragePercent": 70,
-                "coverageCount": "7/10",
+                "coveragePercent": 62,
+                "coverageCount": "5/8",
                 "status": "good"
             },
             {
@@ -22183,8 +22296,8 @@
                 "type": "interface",
                 "linktype": "interface",
                 "name": "MenuItem",
-                "coveragePercent": 20,
-                "coverageCount": "1/5",
+                "coveragePercent": 16,
+                "coverageCount": "1/6",
                 "status": "low"
             },
             {
@@ -22324,9 +22437,18 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "PlanetComponent",
-                "coveragePercent": 63,
-                "coverageCount": "7/11",
+                "coveragePercent": 66,
+                "coverageCount": "8/12",
                 "status": "good"
+            },
+            {
+                "filePath": "src/app/modules/planet/planet.interface.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "PlanetInterface",
+                "coveragePercent": 0,
+                "coverageCount": "0/2",
+                "status": "low"
             },
             {
                 "filePath": "src/app/modules/planet/planet.stories.ts",
@@ -22657,8 +22779,8 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "SvgIconComponent",
-                "coveragePercent": 28,
-                "coverageCount": "2/7",
+                "coveragePercent": 44,
+                "coverageCount": "4/9",
                 "status": "medium"
             },
             {
@@ -22760,8 +22882,8 @@
                 "type": "injectable",
                 "linktype": "injectable",
                 "name": "PageService",
-                "coveragePercent": 72,
-                "coverageCount": "13/18",
+                "coveragePercent": 75,
+                "coverageCount": "15/20",
                 "status": "good"
             },
             {

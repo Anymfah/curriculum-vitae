@@ -13,7 +13,6 @@ export class SelectEntityDirective {
   @Input() public cvSelectEntity: number | EntityType | undefined;
 
   @HostListener('click', ['$event']) public onClick(event: MouseEvent): void {
-    console.log('click', this.cvSelectEntity);
     this._entityListService.focusEntity(this.cvSelectEntity);
   }
 

@@ -5,6 +5,9 @@ import {HttpClient} from '@angular/common/http';
 import * as THREE from 'three';
 import {PlaceService} from '../../services/place.service';
 import {Place} from '../../models/place.model';
+import {PageService} from '../../services/page.service';
+import {PlanetInterface} from './planet.interface';
+import {animateValueUtil} from '../../utils/animate-value.util';
 
 @Component({
   selector: 'cv-planet',
@@ -23,10 +26,12 @@ export class PlanetComponent implements AfterViewInit, OnDestroy {
    * @constructor
    * @param _httpClient HTTP Client
    * @param _placeService Place Service
+   * @param _pageService Page Service
    */
   public constructor(
     private readonly _httpClient: HttpClient,
-    private readonly _placeService: PlaceService
+    private readonly _placeService: PlaceService,
+    private readonly _pageService: PageService,
   ) {
   }
 
@@ -39,12 +44,64 @@ export class PlanetComponent implements AfterViewInit, OnDestroy {
     this._addCountries();
     this._addPlaces();
     this._loadFont();
+
+    /** Get the direction of page change. */
+    this._pageService.planet$.subscribe(planetControls => {
+      this._updateCameraPosition(planetControls);
+    });
   }
 
   /**
    * @inheritDoc
    */
   public ngOnDestroy(): void {
+  }
+
+  /**
+   * Update the globe camera position.
+   */
+  private _updateCameraPosition(planetControls: PlanetInterface): void {
+    const currentCameraPosition = this.world.controls().target;
+    const camera = {
+      x: planetControls.camera.x ?? 0,
+      y: planetControls.camera.y ?? 0,
+      z: planetControls.camera.z ?? 0,
+    }
+
+    if (camera.x !== 0 || camera.y !== 0 || camera.z !== 0) {
+      // Disable the controls.
+      this.world.controls().enabled = false;
+    } else {
+      // Enable the controls.
+      this.world.controls().enabled = true;
+    }
+
+    const animate = (start: number = 0, end : number, to: string) => {
+      animateValueUtil(
+        (value: number) => {
+          switch (to) {
+            case 'x': currentCameraPosition.x = value; break;
+            case 'y': currentCameraPosition.y = value; break;
+            case 'z': currentCameraPosition.z = value; break;
+          }
+          this.world.controls().update();
+        },
+        start,
+        end,
+        1000,
+      )
+    }
+
+    if (currentCameraPosition.x !== camera.x) {
+      animate(currentCameraPosition.x, camera.x, 'x');
+    }
+    if (currentCameraPosition.y !== camera.y) {
+      animate(currentCameraPosition.y, camera.y, 'y');
+    }
+    if (currentCameraPosition.z !== camera.z) {
+      animate(currentCameraPosition.z, camera.z, 'z');
+    }
+
   }
 
   /**
@@ -126,7 +183,6 @@ export class PlanetComponent implements AfterViewInit, OnDestroy {
               }
 
               if (tCountry.properties['BRK_NAME'] === 'France') {
-                console.log('country', tCountry.properties['ADMIN'], 'is France')
                 const color = new THREE.Color('#da0d4e');
                 meshLambertMaterial.color = color;
                 meshLambertMaterial.emissive = color;
