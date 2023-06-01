@@ -1,0 +1,33 @@
+@use 'functions' as fn;
+@use 'mixins';
+
+:host {
+  height: 100%;
+}
+
+.chart-timeline-item {
+  &__container {
+    height: 100%;
+  }
+  &__wrapper {
+    width: 1px;
+    background-color: fn.get-color(primary, 900, .6);
+    position: relative;
+  }
+  &__circle {
+    position: absolute;
+    bottom: calc(100% - 5px);
+    left: -5px;
+    height: 11px;
+    width: 11px;
+    border-radius: 50%;
+    border: 2px solid fn.get-color(primary, 500);
+    background: fn.get-color(accent, 800);
+    cursor: pointer;
+    @include mixins.transition;
+    &:hover {
+      background: fn.get-color(primary, 500);
+      transform: scale(1.4);
+    }
+  }
+}

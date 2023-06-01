@@ -1,0 +1,82 @@
+@use 'functions' as fn;
+@use 'mixins';
+
+:host {
+  width: 100%;
+  height: 100%;
+}
+
+.chart-line {
+  &__container {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    display: grid;
+    grid-template-areas:
+      'ordinal wrapper'
+      'empty abscissa'
+  ;
+    grid-template-columns: 80px 1fr;
+    grid-template-rows: 1fr 80px;
+  }
+  &__ordinate {
+    grid-area: ordinal;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 0 10px;
+    font-size: 12px;
+    color: fn.get-color(primary, 900, .6);
+  }
+  &__abscissa {
+    grid-area: abscissa;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 0 10px;
+    font-size: 12px;
+    color: fn.get-color(primary, 900, .6);
+  }
+  &__wrapper {
+    grid-area: wrapper;
+    position: relative;
+    overflow: hidden;
+    border-width: 0 0 1px 1px;
+    border-style: solid;
+    border-color: fn.get-color(primary, 900, .2);
+    height: 100%;
+    width: 100%;
+  }
+  &__main {
+    height: 100%;
+    min-width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+  }
+  &__svg {
+    height: 100%;
+    width: 100%;
+    @include mixins.transition(0.2s);
+  }
+  &__item {
+    position: absolute;
+    pointer-events: auto;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    margin-left: -5px;
+    margin-bottom: -5px;
+    background: fn.get-color(primary, 900);
+    cursor: pointer;
+    @include mixins.transition(0.2s);
+    z-index: 1;
+    &:hover {
+      transform: scale(1.2);
+      z-index: 2;
+    }
+  }
+}

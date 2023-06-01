@@ -19,6 +19,7 @@ import {QueryInterface} from '../interfaces/query.interface';
 import {EntityQueryModel} from '../models/entity-query.model';
 import {PRE_MADE_QUERY} from '../enums/premade-query.enum';
 import {PRE_MADE_QUERY_CONSTANT} from '../constants/premade-query.constant';
+import {CachedQueries} from '../models/cached-queries.model';
 
 @Injectable({
   providedIn: 'root'
@@ -110,6 +111,11 @@ export class EntityListService {
   public get work(): WorkEntity[] {
     return this._work.value;
   }
+
+  /**
+   * Store queries in a cache, so they can be reused.
+   */
+  public cachedQueries = new CachedQueries();
 
   /**
    * @constructor
@@ -243,10 +249,21 @@ export class EntityListService {
   public getFilteredCollection(
     type: DATA_TYPE,
     args?: QueryInterface): EntityType[] {
-    let collection = this.getCollectionByType(type);
+    let collection: EntityType[] = [];
     if (args != null) {
-      const query = new EntityQueryModel(collection, args);
-      collection = query.getCollection();
+      const cachedQuery = this.cachedQueries.get(type, args);
+
+      if (cachedQuery != null) {
+        return cachedQuery.result;
+      } else {
+        collection = this.getCollectionByType(type);
+        const query = new EntityQueryModel(collection, args);
+        collection = query.getCollection();
+        this.cachedQueries.add(type, args, collection);
+        console.log('Querying...', type, args, collection, '...Done!');
+      }
+    } else {
+      collection = this.getCollectionByType(type);
     }
 
     return collection;

@@ -35,6 +35,7 @@ import {PageSkillsComponent} from './components/page-skills/page-skills.componen
 import {PageEducationComponent} from './components/page-education/page-education.component';
 import {PageWorksComponent} from './components/page-works/page-works.component';
 import {PlanetModule} from '../planet/planet.module';
+import { ListTimelineComponent } from './components/list-timeline/list-timeline.component';
 
 
 @NgModule({
@@ -56,6 +57,7 @@ import {PlanetModule} from '../planet/planet.module';
         PageSkillsComponent,
         PageEducationComponent,
         PageWorksComponent,
+        ListTimelineComponent,
     ],
     imports: [
         CommonModule,

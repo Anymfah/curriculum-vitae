@@ -3,14 +3,10 @@
 @use '../config/material' as material;
 
 /// Include material core styles.
-@layer utilities {
-  @include mat.core();
-}
+@include mat.core();
 
 /// Include material component themes.
-@layer utilities {
-  @include mat.all-component-themes(material.$curriculum-vitae-dark-theme);
-}
+@include mat.all-component-themes(material.$curriculum-vitae-dark-theme);
 
 
 .cv-page {

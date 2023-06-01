@@ -34,6 +34,7 @@ import {ListChartGaugeComponent} from './components/list-chart-gauge/list-chart-
 import {DataDetailsComponent} from './components/data-details/data-details.component';
 import {SelectEntityModule} from '../shared/select-entity/select-entity.module';
 import {PageSkillsComponent} from './components/page-skills/page-skills.component';
+import {ListTimelineComponent} from './components/list-timeline/list-timeline.component';
 
 
 export const MainStorybookModuleConstant ={
@@ -52,7 +53,8 @@ export const MainStorybookModuleConstant ={
     ListChartDonutComponent,
     ListChartGaugeComponent,
     DataDetailsComponent,
-    PageSkillsComponent
+    PageSkillsComponent,
+    ListTimelineComponent
   ],
   imports: [
     appRouting,
@@ -90,6 +92,7 @@ export const MainStorybookModuleConstant ={
     ListChartDonutComponent,
     ListChartGaugeComponent,
     DataDetailsComponent,
-    PageSkillsComponent
+    PageSkillsComponent,
+    ListTimelineComponent
   ],
 };

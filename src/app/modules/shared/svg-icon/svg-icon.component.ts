@@ -1,13 +1,14 @@
 import {Component, HostBinding, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {SvgSpriteService} from '../svg-sprite/svg-sprite.service';
 import {SvgIconInterface} from './svg-icon.interface';
+import {BaseComponent} from '../base/base.component';
 
 @Component({
   selector: 'cv-svg-icon',
   templateUrl: './svg-icon.component.html',
   styleUrls: ['./svg-icon.component.scss']
 })
-export class SvgIconComponent implements OnInit, OnChanges {
+export class SvgIconComponent extends BaseComponent implements OnInit, OnChanges {
 
   /**
    * Self class
@@ -30,7 +31,9 @@ export class SvgIconComponent implements OnInit, OnChanges {
    */
   public constructor(
     private readonly _svgSpriteService: SvgSpriteService
-  ) {}
+  ) {
+    super();
+  }
 
   /**
    * @inheritDoc
@@ -54,8 +57,8 @@ export class SvgIconComponent implements OnInit, OnChanges {
    */
   private _getSvgIcon(): void {
     if (this.icon != null) {
-      const sub = this._svgSpriteService.load(this.icon)
-        .subscribe((svgIcon) => {
+      this._subscribe(this._svgSpriteService.load(this.icon),
+        (svgIcon: SvgIconInterface) => {
           if (svgIcon != null) {
             this.svgIcon = svgIcon;
           }

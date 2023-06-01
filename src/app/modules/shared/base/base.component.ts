@@ -30,7 +30,7 @@ export class BaseComponent implements OnDestroy {
    * @constructor
    * @protected
    */
-  protected constructor() {}
+  public constructor() {}
 
   /**
    * Subscribe to an observable.

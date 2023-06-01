@@ -9,6 +9,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatTabsModule} from "@angular/material/tabs";
 import {SvgSpriteModule} from './modules/shared/svg-sprite/svg-sprite.module';
 import {HttpClientModule} from '@angular/common/http';
+import { ChartComponent } from './modules/shared/abstracts/chart/chart.component';
 
 /*
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
@@ -23,6 +24,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 @NgModule({
   declarations: [
     AppComponent,
+    ChartComponent,
   ],
     imports: [
       BrowserModule,

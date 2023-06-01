@@ -1,0 +1,22 @@
+<div class="chart-line__container">
+  <div class="chart-line__ordinate"></div>
+  <div class="chart-line__abscissa"></div>
+  <div #wrapper class="chart-line__wrapper">
+    <div class="chart-line__main" [style.width.px]="size.x"
+         [style.height.px]="size.y" [style.left.px]="xScrollPosition">
+      <svg preserveAspectRatio="none" class="chart-line__svg"
+            [style.width.px]="size.x"
+            [style.height.px]="size.y"
+           [attr.viewBox]="'0 0 ' + size.x + ' ' + size.y"
+      >
+        <path stroke="red" *ngFor="let curve of curves" class="chart-line__path" [attr.d]="curve"></path>
+        <circle *ngFor="let point of controlPoints1" [attr.cx]="point.x" [attr.cy]="point.y" r="2" fill="green"></circle>
+        <circle *ngFor="let point of controlPoints2" [attr.cx]="point.x" [attr.cy]="point.y" r="2" fill="purple"></circle>
+      </svg>
+      <div *ngFor="let item of items; trackBy:identify" class="chart-line__item"
+           [style.left.px]="item.x"
+           [style.bottom.px]="item.y"
+      ></div>
+    </div>
+  </div>
+</div>
